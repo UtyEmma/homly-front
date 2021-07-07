@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +69,28 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+=======
+# homlyFrontEnd
+A system that eases the process of finding real estate properties, ranging from lodgings, flats, land...
+
+## Description
+The project has three sections or user types. 
+This includes sections  for Agents, Administrators, and Users. 
+Each of these sections have features peculiar to them, and features that every user can perform; 
+access is restricted accordingly.
+
+## Installation
+* Clone the repo
+* Create the DB required in the .env file
+* Open the cli in the root folder, and run
+`php artisan migrate`
+
+## Contributions
+You are welcome to contribute, or suggest changes to this project. Just send an Email to this address _okorieebube1@gmail.com_ , for immediate response.
+
+## Languages
+* Javascript
+* Php
+* ReactJS
+
+>>>>>>> 0aecf4fd48ea156c4e45c35df093fb9723f3c6ab
