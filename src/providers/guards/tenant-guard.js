@@ -3,7 +3,7 @@ import { Redirect, Route } from "react-router-dom";
 
 function TenantRoute({ component: Component, ...restOfProps }) {
   const isAuthenticated = localStorage.getItem("isAuthenticated");
-  const userType = sessionStorage.getItem('type');
+  const userType = localStorage.getItem('type');
 
   return (
     <Route

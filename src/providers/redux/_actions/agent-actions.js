@@ -1,11 +1,11 @@
-import { useState } from 'react';
 import { AgentService } from '../../services';
 import { AgentConstants } from '../_contants/agent-constants';
 
 const {
 
     SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE, 
-    LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE 
+    LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE,
+    UPDATE_REQUEST, UPDATE_SUCCESS, UPDATE_FAILURE 
 
 } = AgentConstants;
 
@@ -41,10 +41,10 @@ export const AgentLogin = (data) => (dispatch) => {
     AgentService.login(data)
             .then(response => {
                 let res = response.data;
-                sessionStorage.setItem('token', res.data.token);
-                sessionStorage.setItem('user', JSON.stringify(res.data.user));
-                sessionStorage.setItem('isAuthenticated', true);
-                sessionStorage.setItem('type', 'agent');
+                localStorage.setItem('token', res.data.token);
+                localStorage.setItem('user', JSON.stringify(res.data.user));
+                localStorage.setItem('isAuthenticated', true);
+                localStorage.setItem('type', 'agent');
                 dispatch({
                     type: LOGIN_SUCCESS,
                     payload: {
@@ -62,6 +62,29 @@ export const AgentLogin = (data) => (dispatch) => {
 }
 
 export const GetCurrentAgent = () => () => {
-    let user = sessionStorage.getItem('user');
-    
+    let user = sessionStorage.getItem('user');   
+}
+
+export const UpdateAgentProfile = (data) => (dispatch) => {
+    console.log('updating_data')
+
+    dispatch({
+        type: UPDATE_REQUEST
+    })
+
+    AgentService.update(data)
+                .then((response) => {
+                    dispatch({
+                        type: UPDATE_SUCCESS,
+                        payload: response.data
+                    })
+                })
+                .catch((error) => {
+                    dispatch({
+                        type: UPDATE_FAILURE,
+                        payload: error.response
+                    })
+                })
+
+
 }

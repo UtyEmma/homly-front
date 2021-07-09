@@ -4,6 +4,8 @@ const { STORE_LISTING, NEW_LISTING_REQUEST, NEW_LISTING_SUCCESS,
         NEW_LISTING_FAILURE, GETLISTINGS_REQUEST, GETLISTINGS_SUCCESS,
         GETLISTINGS_FAILURE } = ListingConstants;
 
+
+
 export function StoreListingReducer (state = {}, actions){
     switch (actions.type) {
         case STORE_LISTING:

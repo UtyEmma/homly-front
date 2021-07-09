@@ -4,16 +4,14 @@ import Sidebar from '../shared/sidebar'
 import Header from '../shared/header'
 import AddListingForm from '../layouts/listings/add-listing-form'
 
-export default class NewListing extends Component {
-    render(){
-
+const NewListing = ({agent}) => {
         return (
             <div className="wrapper dashboard-wrapper">
                 <div className="d-flex flex-wrap flex-xl-nowrap">
                     <Sidebar />
     
                     <div className="page-content">
-                        <Header />
+                        <Header agent={agent}/>
     
                         <main id="content" className="bg-gray-01">
                             <div className="px-3 px-lg-6 px-xxl-13 py-5 py-lg-10 my-profile">
@@ -50,6 +48,6 @@ export default class NewListing extends Component {
                 </div>
             </div>
         )
-
-    }
 }
+
+export default NewListing;

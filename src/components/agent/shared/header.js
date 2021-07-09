@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Header() {
+export default function Header({agent}) {
     return (
         <header className="main-header shadow-none shadow-lg-xs-1 bg-white position-relative d-none d-xl-block">
             <div className="container-fluid">
@@ -22,11 +22,11 @@ export default function Header() {
                             <img src="images/testimonial-5.jpg" alt="Ronald Hunter" className="rounded-circle" />
                             </div>
                             <div className="fs-13 font-weight-500 lh-1">
-                            Ronald Hunter
+                            {agent.firstname} {agent.lastname}
                             </div>
                         </a>
                         <div className="dropdown-menu dropdown-menu-right w-100">
-                            <a className="dropdown-item" href="dashboard-my-profiles.html">My Profile</a>
+                            <a className="dropdown-item" href="/agent-profile">My Profile</a>
                             <a className="dropdown-item" href="#">Logout</a>
                         </div>
                         </div>

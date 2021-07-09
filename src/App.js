@@ -19,13 +19,15 @@ import Agents from './components/agents';
 import Listing from './components/listings';
 
 // Agent Routes
-import AgentLogin from './components/dashboard/agent/auth/agent-login';
-import AgentSignup from './components/dashboard/agent/auth/agent-signup';
-import AgentDashboard from './components/dashboard/agent/dashboard';
-import AgentProfile from './components/dashboard/agent/profile/profile';
-import NewListing from './components/dashboard/agent/listings/add-listing';
-import PasswordRecovery from './components/dashboard/agent/auth/password-recovery';
-import AgentsListings from './components/dashboard/agent/listings/agents-listings';
+import AgentLogin from './components/agent/auth/agent-login';
+import AgentSignup from './components/agent/auth/agent-signup';
+import AgentDashboard from './components/agent/dashboard';
+import AgentProfile from './components/agent/profile';
+import NewListing from './components/agent/listings/add-listing';
+import PasswordRecovery from './components/agent/auth/password-recovery';
+import AgentsListings from './components/agent/listings/agents-listings';
+
+// Admin Routes
 
 function App(props) {
   return (

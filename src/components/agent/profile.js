@@ -1,18 +1,35 @@
-import React, {Component} from 'react'
+import React, {Component, createRef, useRef} from 'react'
 
-import Sidebar from '../shared/sidebar'
-import Header from '../shared/header'
+import Sidebar from './shared/sidebar'
+import Header from './shared/header'
+import { useDispatch } from 'react-redux';
+import { UpdateAgentProfile } from '../../../providers/redux/_actions/agent-actions';
 
 const AgentProfile = (props) => {
         const agent = props.agent;
+        const dispatch = useDispatch()
+        const profileImage = createRef();
+        let imageFile = "";
 
+        const updateUserData = (e) => {
+            e.preventDefault()
+            let formData = new FormData(e.target);
+            dispatch(UpdateAgentProfile(formData))
+        }
+
+        const changeProfileImagePreview = (e) => {
+            imageFile = e.target.files[0]; 
+            profileImage.current.src = URL.createObjectURL(e.target.files[0]) 
+        }
+
+        
         return (
             <div className="wrapper dashboard-wrapper">
                 <div className="d-flex flex-wrap flex-xl-nowrap">
                     <Sidebar />
 
                     <div className="page-content">
-                        <Header />
+                        <Header agent={agent}/>
 
                         <main id="content" className="bg-gray-01">
                             <div className="px-3 px-lg-6 px-xxl-13 py-5 py-lg-10">
@@ -21,7 +38,7 @@ const AgentProfile = (props) => {
                                 </h2>
                                 <p className="mb-1">Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse suscipit</p>
                                 </div>
-                                <form>
+                                <form onSubmit={updateUserData} id="profile-form">
                                 <div className="row mb-6">
                                     <div className="col-lg-6">
                                     <div className="card mb-6">
@@ -32,9 +49,9 @@ const AgentProfile = (props) => {
                                             <p className="card-text">Upload your profile photo.</p>
                                             </div>
                                             <div className="col-sm-8 col-xl-12 col-xxl-5">
-                                            <img src="images/my-profile.png" alt="My Profile" className="w-100" />
-                                            <div className="custom-file mt-4 h-auto">
-                                                <input type="file" className="custom-file-input" hidden id="customFile" name="file" />
+                                            <img src="images/my-profile.png" alt="My Profile" ref={profileImage} id="profile-image" className="w-100" />
+                                            <div className="custom-file mt-4 h-auto" >
+                                                <input type="file" name="avatar[]" className="custom-file-input" onChange={changeProfileImagePreview} id="customFile" />
                                                 <label className="btn btn-secondary btn-lg btn-block" htmlFor="customFile">
                                                 <span className="d-inline-block mr-1"><i className="fal fa-cloud-upload" /></span>Upload
                                                 profile image</label>
@@ -53,17 +70,17 @@ const AgentProfile = (props) => {
                                         <div className="form-row mx-n4">
                                             <div className="form-group col-md-6 px-4">
                                             <label htmlFor="firstName" className="text-heading">First name</label>
-                                            <input type="text" className="form-control form-control-lg border-0" id="firstName" name="firsName" value={agent.firstname}/>
+                                            <input type="text" className="form-control form-control-lg border-0" id="firstName" name="firstname" defaultValue={agent.firstname}/>
                                             </div>
                                             <div className="form-group col-md-6 px-4">
                                             <label htmlFor="lastName" className="text-heading">Last name</label>
-                                            <input type="text" className="form-control form-control-lg border-0" id="lastName" name="lastname" value={agent.lastname}/>
+                                            <input type="text" className="form-control form-control-lg border-0" id="lastName" name="lastname" defaultValue={agent.lastname}/>
                                             </div>
                                         </div>
                                         <div className="form-row mx-n4">
                                             <div className="form-group col-md-6 px-4">
                                             <label htmlFor="phone" className="text-heading">Phone</label>
-                                            <input type="text" className="form-control form-control-lg border-0" id="phone" name="phone" />
+                                            <input type="text" className="form-control form-control-lg border-0" defaultValue={agent.phone} id="phone" name="phone" />
                                             </div>
                                             <div className="form-group col-md-6 px-4">
                                             <label htmlFor="mobile" className="text-heading">Mobile</label>
@@ -73,7 +90,7 @@ const AgentProfile = (props) => {
                                         <div className="form-row mx-n4">
                                             <div className="form-group col-md-6 px-4 mb-md-0">
                                             <label htmlFor="email" className="text-heading">Email</label>
-                                            <input type="email" className="form-control form-control-lg border-0" id="email" name="email" />
+                                            <input type="email" className="form-control form-control-lg border-0" id="email" name="email" defaultValue={agent.email} />
                                             </div>
                                             <div className="form-group col-md-6 px-4 mb-md-0">
                                             <label htmlFor="skype" className="text-heading">Skype</label>

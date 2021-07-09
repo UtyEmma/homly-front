@@ -6,7 +6,7 @@ const { NEW_LISTING_REQUEST, NEW_LISTING_SUCCESS, NEW_LISTING_FAILURE,
 
 export const StoreListing = (data) => (dispatch) => {
     let values = JSON.stringify(data);
-    sessionStorage.setItem('listingData', values);
+    localStorage.setItem('listingData', values);
 
     dispatch({
         type: STORE_LISTING,
@@ -46,17 +46,16 @@ export const GetAgentListings = () => (dispatch) => {
 
     ListingService.getAgentListings()
                     .then(response => {
-                        dispatch({
+                        return dispatch({
                             type: GETLISTINGS_SUCCESS,
-                            payload: response
+                            payload: response.data
                         })
                     })
                     .catch(error => {
-                        dispatch({
+                        return dispatch({
                             type: GETLISTINGS_FAILURE,
                             payload: error.response
                         })
                     })
-
 
 }

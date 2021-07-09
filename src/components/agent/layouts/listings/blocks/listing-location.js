@@ -14,7 +14,7 @@ export default function ListingLocation() {
     const dispatch = useDispatch();
      
     const [mapData, setmapData] = useState({
-        address: "Kenyatta Street, Enugu",
+        address: "Techocra ICT, Kenyatta Enugu",
         city: '',
         country: '',
         area: '',
@@ -29,7 +29,18 @@ export default function ListingLocation() {
         }
     })
 
-    const [address, setaddress] = useState("Kenyatta Street, Enugu")
+    const listing = useSelector((state) => state.store_listing.store);
+
+    const compileData = (e) => {
+        dispatch(StoreListing({
+                        ...listing,
+                        [e.target.name] : e.target.value
+                    }))
+    }
+
+    // useEffect(() => {
+    //     getLoadLocation()
+    // }, [listing])
 
     const getLoadLocation = () => {
         Geocode.fromAddress(mapData.address).then(
@@ -54,16 +65,6 @@ export default function ListingLocation() {
             [e.target.name] : e.target.value
         })
     }
-
-    const listing = useSelector((state) => state.store_listing.store);
-
-    const compileData = (e) => {
-        dispatch(StoreListing({
-                        ...listing,
-                        [e.target.name] : e.target.value
-                    }))
-    }
-
 
     return (
         <div className="tab-pane tab-pane-parent fade px-0" id="location" role="tabpanel" aria-labelledby="location-tab">
@@ -131,8 +132,8 @@ export default function ListingLocation() {
                             loadingElement={<div style={{ height: `100%` }} />}
                             containerElement={<div style={{ height: `400px` }} />}
                             mapElement={<div style={{ height: `100%` }} />}
-                            latitude={6.459964}
-                            longitude={7.548949}
+                            latitude={mapData.mapPosition.lat}
+                            longitude={mapData.mapPosition.long}
                             isMarkerShown={true}
                         />
 
@@ -140,13 +141,13 @@ export default function ListingLocation() {
                         <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
                             <div className="form-group mb-md-0">
                             <label htmlFor="latitude" className="text-heading">Latitude </label>
-                            <input type="text" className="form-control form-control-lg border-0" id="latitude" name="latitude" onChange={compileData} disabled/>
+                            <input type="text" defaultValue={mapData.mapPosition.lat} className="form-control form-control-lg border-0" id="latitude" name="latitude" onChange={compileData} disabled/>
                             </div>
                         </div>
                         <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
                             <div className="form-group mb-md-0">
                             <label htmlFor="longitude" className="text-heading">Longitude</label>
-                            <input type="text" className="form-control form-control-lg border-0" id="longitude" name="longitude" onChange={compileData} disabled/>
+                            <input type="text" defaultValue={mapData.mapPosition.lat} className="form-control form-control-lg border-0" id="longitude" name="longitude" onChange={compileData} disabled/>
                             </div>
                         </div>
                         </div>

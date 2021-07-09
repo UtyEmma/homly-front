@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Dropzone from 'react-dropzone';
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreListing } from '../../../../../../providers/redux/_actions/listing/listing-actions';
 
@@ -6,6 +7,8 @@ export default function ListingMedia(props) {
 
     const dispatch = useDispatch();
     const listing = useSelector((state) => state.store_listing.store);
+
+    const [images, setImages] = useState([])
 
     const compileMedia = (e) => {
         dispatch(StoreListing({
@@ -34,19 +37,21 @@ export default function ListingMedia(props) {
                             of your property</h3>
                             <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
                             adipiscing elit</p>
-                            <div className="dropzone upload-file text-center py-5" data-uploader="true" id="myDropzone" data-uploader-url="./new-listing">
-                            <div className="dz-default dz-message">
-                                <span className="upload-icon lh-1 d-inline-block mb-4"><i className="fal fa-cloud-upload-alt" /></span>
-                                <p className="text-heading fs-22 lh-15 mb-4">Drag and drop image
-                                or</p>
-                                <button className="btn btn-indigo px-7 mb-2" type="button">
-                                Browse file
-                                </button>
-                                <input type="file" name="images[]" onChange={compileMedia} hidden />
-                                <p>Photos must be JPEG or PNG format and least
-                                1024x768</p>
-                            </div>
-                            </div>
+                            {/* <Dropzone> */}
+                                <div className="dropzone upload-file text-center py-5" id="myDropzone" >
+                                    <div className="dz-default dz-message">
+                                    <span className="upload-icon lh-1 d-inline-block mb-4"><i className="fal fa-cloud-upload-alt" /></span>
+                                    <p className="text-heading fs-22 lh-15 mb-4">Drag and drop image
+                                    or</p>
+                                    <button className="btn btn-indigo px-7 mb-2" type="button">
+                                    Browse file
+                                    </button>
+                                    <input type="file" name="images[]" onChange={compileMedia} hidden />
+                                    <p>Photos must be JPEG or PNG format and least
+                                    1024x768</p>
+                                    </div>
+                                </div>
+                            {/* </Dropzone> */}
                         </div>
                         </div>
                     </div>

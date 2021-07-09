@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, useEffect} from 'react'
 
 import Sidebar from '../shared/sidebar'
 import Header from '../shared/header'
@@ -6,26 +6,29 @@ import { useDispatch, useSelector } from 'react-redux'
 import { GetAgentListings } from '../../../../providers/redux/_actions/listing/listing-actions'
 import AgentListingItem from './components/agent-listing-item'
 
-const AgentsListings = () => {
+const AgentsListings = (props) => {
     
     const dispatch = useDispatch();
 
     const listingState = useSelector((state) => state.agents_listings);
     const {loading, agents_listings, get_listing_failure} = listingState;
 
-    dispatch(GetAgentListings());
-
-    let display;
     
-    if(agents_listings){
-        display = agents_listings.map((listing) => 
-            <AgentListingItem listing={listing}/> 
-        );
-    }else{
-        display = <div className="spinner-border text-white" role="status">
-                        <span className="sr-only">Loading...</span>
-                    </div>  
+    const loadListings = () => {
+        dispatch(GetAgentListings())
     }
+
+    useEffect(() => {
+        if(!agents_listings){
+            loadListings()
+        }
+    }, [agents_listings])
+    // console.log("Agent Listing is", agents_listings)
+    // if(!agents_listings){
+    //     loadListings()
+    //     console.log("Loading True true true")
+    // }
+
 
     return (
         <div className="wrapper dashboard-wrapper">
@@ -33,7 +36,7 @@ const AgentsListings = () => {
                 <Sidebar />
 
                 <div className="page-content">
-                    <Header />
+                    <Header agent={props.agent}/>
 
                     <main id="content" className="bg-gray-01">
                         <div className="px-3 px-lg-6 px-xxl-13 py-5 py-lg-10">
@@ -80,7 +83,19 @@ const AgentsListings = () => {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    {display}                                
+                                    {agents_listings ? agents_listings.data.map((listing) =>(        
+                                            <AgentListingItem listing={listing} key={listing.unique_id}/>
+                                        )) 
+                                        
+                                        :
+                                        <tr>
+                                            <td colSpan="5" className="d-flex justify-content-center">
+                                                <div className="spinner-border text-gray-lighter" role="status">
+                                                    <span className="sr-only">Loading...</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                             </div>

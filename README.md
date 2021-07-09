@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -69,7 +68,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-=======
 # homlyFrontEnd
 A system that eases the process of finding real estate properties, ranging from lodgings, flats, land...
 
@@ -93,4 +91,3 @@ You are welcome to contribute, or suggest changes to this project. Just send an 
 * Php
 * ReactJS
 
->>>>>>> 0aecf4fd48ea156c4e45c35df093fb9723f3c6ab
