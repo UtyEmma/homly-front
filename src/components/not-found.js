@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import Footer from '../shared/layouts/footer'
+import Footer from './layouts/shared/footer'
 
 export default class NotFound extends Component {
 

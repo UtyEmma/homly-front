@@ -9,7 +9,7 @@ import TenantRoute from './providers/guards/tenant-guard';
 import Home from './components/home'
 import About from './components/about'
 import Map from './components/map'
-import NotFound from './components/error/not-found'
+import NotFound from './components/not-found'
 
 // User Routes
 import UserLogin from './components/login';

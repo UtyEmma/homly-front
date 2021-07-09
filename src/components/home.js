@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 import HeroSection from './layouts/home/hero-section'
 import PopularSection from './layouts/home/popular-section'
-import NavBar from './shared/layouts/nav-bar'
-import Footer from './shared/layouts/footer'
+import NavBar from './layouts/shared/layouts/nav-bar'
+import Footer from './layouts/shared/footer'
 
 
 export default class Home extends Component {
