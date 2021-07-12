@@ -52,7 +52,7 @@ const UserLoginForm = () =>  {
                 <div className="card-body px-8">
                 <h2 className="card-title fs-30 font-weight-600 text-dark lh-16 mb-2">Log In</h2>
                 <p className="mb-4">Don’t have an account yet?  
-                    <a href="#" className="text-heading hover-primary">
+                    <a href="./signup" className="text-heading hover-primary">
                         <u> Sign up for free?</u>
                     </a>
                 </p>

@@ -1,9 +1,9 @@
 import React, {Component, useEffect} from 'react'
 
-import Sidebar from '../shared/sidebar'
-import Header from '../shared/header'
+import Sidebar from '../layouts/shared/sidebar'
+import Header from '../layouts/shared/header'
 import { useDispatch, useSelector } from 'react-redux'
-import { GetAgentListings } from '../../../../providers/redux/_actions/listing/listing-actions'
+import { GetAgentListings } from '../../../providers/redux/_actions/listing/listing-actions'
 import AgentListingItem from './components/agent-listing-item'
 
 const AgentsListings = (props) => {
@@ -23,11 +23,6 @@ const AgentsListings = (props) => {
             loadListings()
         }
     }, [agents_listings])
-    // console.log("Agent Listing is", agents_listings)
-    // if(!agents_listings){
-    //     loadListings()
-    //     console.log("Loading True true true")
-    // }
 
 
     return (

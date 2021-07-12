@@ -1,16 +1,27 @@
 import { combineReducers } from "redux";
 import {loginReducer, signupReducer} from "../_reducers/user.reducer";
-import { AgentLoginReducer, AgentSignupReducer } from "./agent-reducer";
-import { AgentsListingsReducer, NewListingReducer, StoreListingReducer } from "./listing-reducer";
+import { AgentLoginReducer, AgentSignupReducer, UpdateAgentProfileReducer, 
+        ShowAvailableAgentsReducer } from "./agent-reducer";
+
+import { AgentsListingsReducer, NewListingReducer, StoreListingReducer,
+         ActiveListingsReducer } from "./listing-reducer";
 
 const rootReducer = combineReducers({
     signup: signupReducer,
     login: loginReducer,
+
+
     agent_login: AgentLoginReducer,
     agent_signup: AgentSignupReducer,
+    agents_listings: AgentsListingsReducer,
+    update_agent_profile: UpdateAgentProfileReducer,
+    available_agents: ShowAvailableAgentsReducer,
+
+
     store_listing: StoreListingReducer,
     new_listing: NewListingReducer,
-    agents_listings: AgentsListingsReducer
+    active_listings: ActiveListingsReducer
+    
 })
 
 export default rootReducer;

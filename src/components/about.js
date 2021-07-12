@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import NavBar from './layouts/shared/layouts/nav-bar';
+import NavBar from './layouts/shared/nav-bar';
 import Footer from './layouts/shared/footer';
 
 export default class About extends Component {

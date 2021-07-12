@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AgentLoginForm from './layouts/login-form';
-import NavBar from '../../../shared/layouts/nav-bar';
-import Footer from '../../../shared/layouts/footer'
+import NavBar from '../../layouts/shared/nav-bar';
+import Footer from '../../layouts/shared/footer';
 
 
 const AgentLogin  =  () => {

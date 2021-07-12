@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import Dropzone from 'react-dropzone';
 import { useDispatch, useSelector } from 'react-redux';
-import { StoreListing } from '../../../../../../providers/redux/_actions/listing/listing-actions';
+import { StoreListing } from '../../../../../providers/redux/_actions/listing/listing-actions';
 
-export default function ListingMedia(props) {
+export default function ListingMedia() {
 
     const dispatch = useDispatch();
     const listing = useSelector((state) => state.store_listing.store);

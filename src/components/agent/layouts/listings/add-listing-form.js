@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { CreateListing, StoreListing } from '../../../../../providers/redux/_actions/listing/listing-actions';
+import { CreateListing, StoreListing } from '../../../../providers/redux/_actions/listing/listing-actions';
 import ListingLocation from './blocks/listing-location'
 import ListingDescription from './blocks/listing-description'
 import ListingMedia from './blocks/listing-media'

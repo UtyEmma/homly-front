@@ -3,7 +3,7 @@ import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "reac
 import Geocode from 'react-geocode'
 import {MapDisplay, MapAutoComplete} from './map/map-display'
 import { useDispatch, useSelector } from 'react-redux';
-import { StoreListing } from '../../../../../../providers/redux/_actions/listing/listing-actions';
+import { StoreListing } from '../../../../../providers/redux/_actions/listing/listing-actions';
 
 Geocode.setApiKey( "AIzaSyBBYmJujloM3zNdxMpokW1G_Qo5Qo_05_A" )
 Geocode.setRegion("es");

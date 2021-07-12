@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import UserLoginForm from "./layouts/auth/login-form";
-import NavBar from './layouts/shared/layouts/nav-bar';
-import Footer from './layouts/shared/footer';
+import UserLoginForm from "../../layouts/auth/login-form";
+import NavBar from '../../layouts/shared/nav-bar';
+import Footer from '../../layouts/shared/footer';
 
 export default class UserLogin extends Component {
     render() {

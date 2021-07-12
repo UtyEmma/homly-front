@@ -1,7 +1,17 @@
 import { Request } from "./api/http";
 
 export const AgentService = {
-    signup, login, update 
+    signup, login, update, show 
+}
+
+const auth_config = {
+    config: { 
+        headers: {
+            'Accept': 'application/json', 
+            'Content-Type': 'application/json', 
+            'Authorization' : `Bearer ${sessionStorage.getItem('token')}` 
+        }
+    }
 }
 
 const options = {
@@ -28,17 +38,16 @@ async function login(data){
     return await Request.post('agent/login', request)
 }
 
+
 async function update(data){
     const request = {
-        config: { 
-            headers: {
-                'Accept': 'application/json', 
-                'Content-Type': 'application/json', 
-                'Authorization' : `Bearer ${sessionStorage.getItem('token')}` 
-            }
-        },
+        ...auth_config,
         payload: data
     }
     console.log(request)
     return await Request.post('agent/update', request)
+}
+
+async function show() {
+    return await Request.get('agent/all', auth_config)
 }

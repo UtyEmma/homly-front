@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import store from '../../../../../../providers/redux/store';
-import { StoreListing } from '../../../../../../providers/redux/_actions/listing/listing-actions';
+import { StoreListing } from '../../../../../providers/redux/_actions/listing/listing-actions';
 
 export default function ListingDetails() {
     const dispatch = useDispatch();

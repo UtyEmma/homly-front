@@ -1,9 +1,9 @@
 import React, {Component, createRef, useRef} from 'react'
 
-import Sidebar from './shared/sidebar'
-import Header from './shared/header'
+import Sidebar from './layouts/shared/sidebar'
+import Header from './layouts/shared/header'
 import { useDispatch } from 'react-redux';
-import { UpdateAgentProfile } from '../../../providers/redux/_actions/agent-actions';
+import { UpdateAgentProfile } from '../../providers/redux/_actions/agent-actions';
 
 const AgentProfile = (props) => {
         const agent = props.agent;

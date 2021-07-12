@@ -6,7 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom';
-import { AgentLogin } from '../../../../../providers/redux/_actions/agent-actions';
+import { AgentLogin } from '../../../../providers/redux/_actions/agent-actions';
 import { Redirect, Route } from 'react-router';
 import { render } from '@testing-library/react';
 

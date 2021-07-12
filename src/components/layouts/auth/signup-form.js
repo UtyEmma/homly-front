@@ -1,32 +1,23 @@
 import React, {Component, useEffect, useState} from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux'
 import { signup } from '../../../providers/redux/_actions/user-actions';
 import { useHistory } from 'react-router-dom';
+import { userSignupSchema } from '../../../libraries/validators/user-validator';
 
-const schema = yup.object().shape({
-    firstname : yup.string().required('First Name is Required'),
-    lastname : yup.string().required('Last Name is Required'),
-    email: yup.string().email('Email Address is invalid').required('Email Address is Required'),
-    phone: yup.number().required("Phone Number is Required"),
-    password: yup.string().required('Password is Required'),
-    confirm_password: yup.string().required("Password is Required"),
-});
 
 const SignUpForm = () =>  {
+    const dispatch = useDispatch()
+    const history = useHistory()
 
     const userSignup = useSelector((state) => state.signup);
     const {loading, error, success} = userSignup;
 
-    const dispatch = useDispatch()
-    const history = useHistory()
-
     const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema)
+        resolver: yupResolver(userSignupSchema)
     });
 
     const handleSignup = (data) => {
@@ -42,11 +33,11 @@ const SignUpForm = () =>  {
         }
     }, [success, error])
 
+
     const handleServerError = (res) => {
-        console.log(res)
         toast.error(res.data.message)
     }
-
+    
     const handleErrors = () => {
         toast.error("Invalid Input Data")
     }
@@ -57,7 +48,7 @@ const SignUpForm = () =>  {
             <div className="card border-0 shadow-xxs-2">
                 <div className="card-body px-6 py-6">
                 <h2 className="card-title fs-30 font-weight-600 text-dark lh-16 mb-2">Sign Up</h2>
-                <p className="mb-4">Already have an account? <a href="#" className="text-heading hover-primary"><u>Log in</u></a></p>
+                <p className="mb-4">Already have an account? <a href="./login" className="text-heading hover-primary"><u>Log in</u></a></p>
                 <form className="form" id="signupForm" onSubmit={handleSubmit(handleSignup, handleErrors)}>
                     <div className="form-row mx-n2">
                     <div className="col-sm-6 px-2">

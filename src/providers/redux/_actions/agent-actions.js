@@ -2,12 +2,12 @@ import { AgentService } from '../../services';
 import { AgentConstants } from '../_contants/agent-constants';
 
 const {
-
     SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE, 
     LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE,
-    UPDATE_REQUEST, UPDATE_SUCCESS, UPDATE_FAILURE 
-
+    UPDATE_REQUEST, UPDATE_SUCCESS, UPDATE_FAILURE,
+    SHOW_AGENTS_REQUEST, SHOW_AGENTS_SUCCESS, SHOW_AGENTS_FAILURE 
 } = AgentConstants;
+
 
 export const AgentSignup = (data) => (dispatch) => {
     console.log("signing_up")
@@ -61,10 +61,6 @@ export const AgentLogin = (data) => (dispatch) => {
             })
 }
 
-export const GetCurrentAgent = () => () => {
-    let user = sessionStorage.getItem('user');   
-}
-
 export const UpdateAgentProfile = (data) => (dispatch) => {
     console.log('updating_data')
 
@@ -85,6 +81,26 @@ export const UpdateAgentProfile = (data) => (dispatch) => {
                         payload: error.response
                     })
                 })
+}
 
+export const ShowAllAgents = () => (dispatch) => {
+    console.log('Fetching_Agents')
 
+    dispatch({
+        type: SHOW_AGENTS_REQUEST
+    })
+
+    AgentService.show()
+            .then((response) => {
+                dispatch({
+                    type: SHOW_AGENTS_SUCCESS,
+                    payload: response.data
+                })
+            })
+            .catch((error) => {
+                dispatch({
+                    type: SHOW_AGENTS_FAILURE,
+                    payload: error.response
+                })
+            })
 }

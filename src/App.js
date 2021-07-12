@@ -47,8 +47,7 @@ function App(props) {
           <Route path="/listings" user component={Listing} exact/>
           <Route path="/agents" user type="user" component={Agents} exact/>
           <Route path="/agent-detail" user type="user" component={AgentDetails} exact/>
-          <Route path="/map-grid" user component={Map} exact/>
-          <Route path="/listing/:id" user component={Listing} exact/>
+          <Route path="/listing/:id" user component={Map} exact/>
 
 
           {/* Agent Routes */}

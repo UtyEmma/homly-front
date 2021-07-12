@@ -1,9 +1,8 @@
 import React, { Component, useState } from 'react'
 
-import SignUpForm from './layouts/auth/signup-form';
-import NavBar from './layouts/shared/layouts/nav-bar';
-import Footer from './layouts/shared/footer';
-import { signup } from '../providers/redux/_actions/user-actions';
+import SignUpForm from '../../layouts/auth/signup-form';
+import NavBar from '../../layouts/shared/nav-bar';
+import Footer from '../../layouts/shared/footer';
 
 export default function UserSignup () {
 

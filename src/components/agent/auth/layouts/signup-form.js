@@ -6,7 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom';
-import { AgentSignup } from '../../../../../providers/redux/_actions/agent-actions';
+import { AgentSignup } from '../../../../providers/redux/_actions/agent-actions';
 
 const schema = yup.object().shape({
     firstname : yup.string().required('First Name is Required'),
