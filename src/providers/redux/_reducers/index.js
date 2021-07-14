@@ -6,10 +6,13 @@ import { AgentLoginReducer, AgentSignupReducer, UpdateAgentProfileReducer,
 import { AgentsListingsReducer, NewListingReducer, StoreListingReducer,
          ActiveListingsReducer } from "./listing-reducer";
 
+import { CreateWishlistReducer } from "./wishlist-reducer";
+
 const rootReducer = combineReducers({
     signup: signupReducer,
     login: loginReducer,
 
+    wishlist : CreateWishlistReducer,
 
     agent_login: AgentLoginReducer,
     agent_signup: AgentSignupReducer,
@@ -20,7 +23,7 @@ const rootReducer = combineReducers({
 
     store_listing: StoreListingReducer,
     new_listing: NewListingReducer,
-    active_listings: ActiveListingsReducer
+    active_listings: ActiveListingsReducer,
     
 })
 

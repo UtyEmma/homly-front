@@ -9,7 +9,7 @@ function TenantRoute({ component: Component, ...restOfProps }) {
     <Route
       {...restOfProps}
       render={(props) =>
-          isAuthenticated && userType === 'user' 
+          isAuthenticated && userType === 'tenant' 
                         ? <Component {...props} /> : <Redirect to="/login" />
       }
     />

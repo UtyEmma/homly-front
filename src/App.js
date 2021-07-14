@@ -2,32 +2,31 @@ import React from 'react';
 import {  Switch, Route } from 'react-router-dom';
 
 // Route Guards
-import AgentRoute from './providers/guards/agent-guard';
-import TenantRoute from './providers/guards/tenant-guard';
+import AgentRoute from 'providers/guards/agent-guard';
+import TenantRoute from 'providers/guards/tenant-guard';
 
-// Unguarded Routes
-import Home from './components/home'
-import About from './components/about'
-import Map from './components/map'
-import NotFound from './components/not-found'
+// Front Pages
+import About from 'views/about';
+import Home from 'views/home';
+import NotFound from './views/not-found';
 
-// User Routes
-import UserLogin from './components/login';
-import UserSignup from './components/signup';
-import AgentDetails from './components/agent-details'
-import Agents from './components/agents';
-import Listing from './components/listings';
+// Tenant Pages
+import UserLogin from 'views/tenants/auth/login';
+import UserSignup from 'views/tenants/auth/signup';
+import Listing from './views/tenants/listings/listings';
+import ListingDetails from './views/tenants/listings/listing-details';
+import Agents from './views/tenants/agents/agents';
+import AgentDetails from './views/tenants/agents/agent-details';
 
-// Agent Routes
-import AgentLogin from './components/agent/auth/agent-login';
-import AgentSignup from './components/agent/auth/agent-signup';
-import AgentDashboard from './components/agent/dashboard';
-import AgentProfile from './components/agent/profile';
-import NewListing from './components/agent/listings/add-listing';
-import PasswordRecovery from './components/agent/auth/password-recovery';
-import AgentsListings from './components/agent/listings/agents-listings';
-
-// Admin Routes
+// Agent Imports
+import AgentLogin from './views/agent/auth/agent-login';
+import AgentSignup from './views/agent/auth/agent-signup';
+import AgentDashboard from './views/agent/dashboard';
+import NewListing from './views/agent/listings/add-listing';
+import AgentsListings from './views/agent/listings/agents-listings';
+import AgentProfile from './views/agent/profile';
+import PasswordRecovery from './views/agent/auth/password-recovery';
+import Wishlist from 'views/tenants/wishlist/wishlist';
 
 function App(props) {
   return (
@@ -37,18 +36,17 @@ function App(props) {
           <Route path="/" component={Home} exact/>
           <Route path="/about" component={About} exact />
 
-
           {/* Common Routes */}
           <Route path="/recover-password" component={PasswordRecovery} exact/>
 
           {/* User Routes */}
           <Route path="/login" component={UserLogin} exact/>
           <Route path="/signup" component={UserSignup} exact/>
-          <Route path="/listings" user component={Listing} exact/>
-          <Route path="/agents" user type="user" component={Agents} exact/>
-          <Route path="/agent-detail" user type="user" component={AgentDetails} exact/>
-          <Route path="/listing/:id" user component={Map} exact/>
-
+          <TenantRoute path="/listings" user component={Listing} exact/>
+          <TenantRoute path="/agents" user type="user" component={Agents} exact/>
+          <TenantRoute path="/agents/:id" user type="user" component={AgentDetails} exact/>
+          <TenantRoute path="/listing/:id" user component={ListingDetails} exact/>
+          <TenantRoute path="/wishlist" user component={Wishlist} exact/>
 
           {/* Agent Routes */}
           <Route path="/agent-login" type="agent" component={AgentLogin} exact/>
