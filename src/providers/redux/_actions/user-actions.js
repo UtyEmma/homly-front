@@ -26,7 +26,7 @@ export const signup = (data) => (dispatch) => {
             .catch(error => {
                 dispatch({
                     type: SIGNUP_FAILURE,
-                    payload: error.response
+                    payload: error.response.data.message
                 })
             })  
             
@@ -41,11 +41,12 @@ export const login = (data) => (dispatch) => {
     userService.login(data)
             .then(response => {
                 let res = response.data;
-                sessionStorage.setItem('token', res.data.token);
-                sessionStorage.setItem('user', JSON.stringify(res.data.user));
-                sessionStorage.setItem('isAuthenticated', true);
-                sessionStorage.setItem('type', 'agent');
-                dispatch({
+                localStorage.setItem('token', res.data.token);
+                localStorage.setItem('user', JSON.stringify(res.data.user));
+                localStorage.setItem('isAuthenticated', true);
+                localStorage.setItem('type', 'tenant');
+
+                return dispatch({
                     type: LOGIN_SUCCESS,
                     payload: response.data
                 })
@@ -53,7 +54,7 @@ export const login = (data) => (dispatch) => {
             .catch(error => {
                 dispatch({
                     type: LOGIN_FAILURE,
-                    payload: error.response
+                    payload: error.response.data.message
                 })
             })
 }

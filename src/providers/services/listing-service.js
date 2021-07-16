@@ -1,13 +1,13 @@
 import { Request } from "./api/http";
 
 export const ListingService = {
-    newListing, getAgentListings
+    newListing, getAgentListings, loadActiveListings, fetchListingDetails
 }
 
 const options = {
     'Accept' : 'application/json',
     'Content-Type' : 'application/json',
-    'Authorization' : `Bearer ${sessionStorage.getItem('token')}`
+    'Authorization' : `Bearer ${localStorage.getItem('token')}`
 }
 
 async function newListing (data) {
@@ -18,7 +18,7 @@ async function newListing (data) {
         payload: data
     }
 
-    return await Request.post('listing/create', params)
+    return await Request.post('agent/listing/create', params)
 }
 
 async function getAgentListings(){
@@ -26,5 +26,21 @@ async function getAgentListings(){
         headers: options
     }
 
-    return await Request.get('listing/get-listings', params)
+    return await Request.get('agent/listing/agents-listings', params)
+}
+
+async function loadActiveListings(){
+    const params = {
+        headers: options
+    }
+
+    return await Request.get('agent/listing/active', params)
+}
+
+// Fetch Listing Features/Amenities
+async function fetchListingDetails(){
+    const params = {
+        headers: options
+    }
+    return await Request.get('tenant/listings/details', params);
 }
