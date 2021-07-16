@@ -27,14 +27,15 @@ import AgentsListings from './views/agent/listings/agents-listings';
 import AgentProfile from './views/agent/profile';
 import PasswordRecovery from './views/agent/auth/password-recovery';
 import Wishlist from 'views/tenants/wishlist/wishlist';
+import UserRoute from 'providers/guards/user-guard';
 
 function App(props) {
   return (
     <div className="App">
       <Switch>
           {/* Unguarded Routes */}
-          <Route path="/" component={Home} exact/>
-          <Route path="/about" component={About} exact />
+          <UserRoute path="/" component={Home} exact/>
+          <UserRoute path="/about" component={About} exact />
 
           {/* Common Routes */}
           <Route path="/recover-password" component={PasswordRecovery} exact/>
@@ -42,10 +43,11 @@ function App(props) {
           {/* User Routes */}
           <Route path="/login" component={UserLogin} exact/>
           <Route path="/signup" component={UserSignup} exact/>
-          <TenantRoute path="/listings" user component={Listing} exact/>
-          <TenantRoute path="/agents" user type="user" component={Agents} exact/>
-          <TenantRoute path="/agents/:id" user type="user" component={AgentDetails} exact/>
-          <TenantRoute path="/listing/:id" user component={ListingDetails} exact/>
+          <UserRoute path="/listings" user component={Listing} exact/>
+          {/* <TenantRoute path="/profile" user component={TenantProfile} exact/> */}
+          <UserRoute path="/agents" user type="user" component={Agents} exact/>
+          <UserRoute path="/agents/:id" user type="user" component={AgentDetails} exact/>
+          <UserRoute path="/listing/:id" user component={ListingDetails} exact/>
           <TenantRoute path="/wishlist" user component={Wishlist} exact/>
 
           {/* Agent Routes */}

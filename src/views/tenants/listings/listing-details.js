@@ -1,14 +1,14 @@
 import React, {Component} from 'react'
 
-import NavBar from '../../layouts/shared/nav-bar'
-import Footer from '../../layouts/shared/footer'
+import NavBar from '../../layouts/nav-bar'
+import Footer from '../../layouts/footer'
 
 
-const ListingDetails = () => {
+const ListingDetails = ({isLoggedIn, user}) => {
     
     return (
         <div>
-            <NavBar />
+            <NavBar isloggedIn={isLoggedIn} user={user}/>
 
             <main id="content">
                 <section className="bg-secondary">

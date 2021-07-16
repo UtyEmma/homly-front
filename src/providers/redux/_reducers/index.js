@@ -4,7 +4,7 @@ import { AgentLoginReducer, AgentSignupReducer, UpdateAgentProfileReducer,
         ShowAvailableAgentsReducer } from "./agent-reducer";
 
 import { AgentsListingsReducer, NewListingReducer, StoreListingReducer,
-         ActiveListingsReducer } from "./listing-reducer";
+         ActiveListingsReducer, FetchListingDetails} from "./listing-reducer";
 
 import { CreateWishlistReducer } from "./wishlist-reducer";
 
@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
     store_listing: StoreListingReducer,
     new_listing: NewListingReducer,
     active_listings: ActiveListingsReducer,
-    
+    fetch_details : FetchListingDetails
 })
 
 export default rootReducer;

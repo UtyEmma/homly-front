@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreListing } from '../../../../../providers/redux/_actions/listing/listing-actions';
 
-export default function ListingDescription() {
+export default function ListingDescription({formData}) {
 
     // const [description, setDescription] = useState({});
     const dispatch = useDispatch();
@@ -13,6 +13,8 @@ export default function ListingDescription() {
                         ...listing,
                         [e.target.name] : e.target.value
                     }))
+
+        formData.append(e.target.name, e.target.value);
     }
 
 

@@ -8,7 +8,7 @@ export function CreateWishlistReducer(state = {}, action){
         case CREATE_WISHLIST_REQUEST:
             return {...state, loading : true}
         case CREATE_WISHLIST_SUCCESS:
-            return {...state, loading: false, wishlist: actions.payload}
+            return {...state, loading: false, wishlist: action.payload}
         default:
             return {state};
     }

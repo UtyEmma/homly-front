@@ -12,24 +12,26 @@ function AddListingForm() {
 
     const listing = useSelector((state) => state.store_listing);
     const {store, listing_failure, listing_success} = listing;
+    // const [files, setFiles] = useState([]); 
+    let formData = new FormData();
 
     const handleFormData = (e) => {
         e.preventDefault()
-        dispatch(CreateListing(store))
+        dispatch(CreateListing(formData))
     }
 
     return (
-        <form id="listing-form" onSubmit={handleFormData} >
+        <form id="listing-form" onSubmit={handleFormData} encType="multipart/form-data" >
             <div id="collapse-tabs-accordion">
-                <ListingDescription />
+                <ListingDescription formData={formData}/>
 
-                <ListingMedia />
+                <ListingMedia formData={formData}/>
 
-                <ListingLocation />
+                <ListingLocation formData={formData}/>
 
-                <ListingDetails />
+                <ListingDetails formData={formData}/>
 
-                <ListingFeatures />
+                <ListingFeatures formData={formData}/>
             </div>
         </form>
     )

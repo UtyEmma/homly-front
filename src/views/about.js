@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import NavBar from './layouts/shared/nav-bar';
-import Footer from './layouts/shared/footer';
+import NavBar from './layouts/nav-bar';
+import Footer from './layouts/footer';
 
-const About = () => {
+const About = ({isLoggedIn, user}) => {
     return (
         <div>
-            <NavBar />
+            <NavBar isloggedIn={isLoggedIn} user={user}/>
 
             <Footer />
         </div>

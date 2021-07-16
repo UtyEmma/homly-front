@@ -1,11 +1,11 @@
 import React, {Component, useEffect} from 'react'
-import NavBar from '../../layouts/shared/nav-bar'
-import Footer from '../../layouts/shared/footer'
+import NavBar from 'views/layouts/nav-bar'
+import Footer from 'views/layouts/footer'
 import AgentCard from './components/agent-card'
 import { useDispatch, useSelector } from 'react-redux'
 import { ShowAllAgents } from '../../../providers/redux/_actions/agent-actions'
 
-const Agents = () => {
+const Agents = ({isLoggedIn, user}) => {
 
     const dispatch = useDispatch();
     const agents_listing = useSelector((state) => state.available_agents)
@@ -23,7 +23,7 @@ const Agents = () => {
 
     return (
         <div>
-            <NavBar />
+            <NavBar isloggedIn={isLoggedIn} user={user}/>
 
             <main id="content">
                 <section className="position-relative pb-15 pt-2 page-title bg-patten bg-secondary">

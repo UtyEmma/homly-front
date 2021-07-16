@@ -1,14 +1,14 @@
 import React, { Component, useEffect } from 'react'
 
-import NavBar from '../../layouts/shared/nav-bar';
-import Footer from '../../layouts/shared/footer';
+import NavBar from '../../layouts/nav-bar';
+import Footer from '../../layouts/footer';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { ShowActiveListings } from 'providers/redux/_actions/listing/listing-actions';
 import ListingCard from './components/listing-card';
 
 
-const Listing = () => {
+const Listing = ({isLoggedIn, user}) => {
         const dispatch = useDispatch();
         const listings = useSelector((state) => state.active_listings);
         const {loading, active_listings, active_listings_failed} = listings;
@@ -25,7 +25,7 @@ const Listing = () => {
 
         return (
             <div>
-                <NavBar />
+                <NavBar isloggedIn={isLoggedIn} user={user}/>
     
                 <main id="content">
                     <section className="pb-4 page-title shadow">

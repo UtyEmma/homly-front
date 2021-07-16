@@ -5,13 +5,13 @@ import Tags from '@yaireo/tagify/dist/react.tagify'
 
 const Tagify = ({value, suggestions, name}) => {
     const baseTagifySettings = {
-        blacklist: ["xxx", "yyy", "zzz"],
+        blacklist: [],
         whitelist: suggestions,
         maxTags: 6,
-        //backspace: "edit",
-        placeholder: "type something",
+        backspace: "edit",
+        placeholder: "Type Feature",
         dropdown: {
-          enabled: 0 // a;ways show suggestions dropdown
+          enabled: 0
         }
     }
       

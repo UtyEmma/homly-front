@@ -1,7 +1,7 @@
 import { Request } from "./api/http";
 
 export const ListingService = {
-    newListing, getAgentListings, loadActiveListings
+    newListing, getAgentListings, loadActiveListings, fetchListingDetails
 }
 
 const options = {
@@ -18,7 +18,7 @@ async function newListing (data) {
         payload: data
     }
 
-    return await Request.post('listing/create', params)
+    return await Request.post('agent/listing/create', params)
 }
 
 async function getAgentListings(){
@@ -26,7 +26,7 @@ async function getAgentListings(){
         headers: options
     }
 
-    return await Request.get('listing/agents-listings', params)
+    return await Request.get('agent/listing/agents-listings', params)
 }
 
 async function loadActiveListings(){
@@ -34,5 +34,13 @@ async function loadActiveListings(){
         headers: options
     }
 
-    return await Request.get('listing/active', params)
+    return await Request.get('agent/listing/active', params)
+}
+
+// Fetch Listing Features/Amenities
+async function fetchListingDetails(){
+    const params = {
+        headers: options
+    }
+    return await Request.get('tenant/listings/details', params);
 }

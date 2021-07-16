@@ -1,13 +1,13 @@
 import React from 'react'
 import { MapDisplay } from 'views/agent/layouts/listings/blocks/map/map-display'
-import Footer from 'views/layouts/shared/footer'
-import NavBar from 'views/layouts/shared/nav-bar'
+import Footer from 'views/layouts/footer'
+import NavBar from 'views/layouts/nav-bar'
 import WishlistForm from './components/wishlist-form'
 
-export default function Wishlist () {
+const Wishlist = ({isLoggedIn, user}) => {
     return (
         <div>
-            <NavBar/>
+            <NavBar isloggedIn={isLoggedIn} user={user}/>
 
             <main id="content">
                 <section className="bg-secondary">
@@ -452,8 +452,8 @@ export default function Wishlist () {
                                 containerElement={<div style={{ height: `100%` }} />}
                                 mapElement={<div style={{ height: `100%` }} />}
                                 style={{height: "100%"}}
-                                // latitude={mapData.mapPosition.lat}
-                                // longitude={mapData.mapPosition.long}
+                                latitude={36.778259}
+                                longitude={-119.417931}
                                 isMarkerShown={true}
                             />
                             </div>
@@ -793,3 +793,5 @@ export default function Wishlist () {
         </div>
     )
 }
+
+export default Wishlist;
