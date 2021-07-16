@@ -20,3 +20,7 @@ You are welcome to contribute, or suggest changes to this project. Just send an 
 * Javascript
 * Php
 * ReactJS
+<<<<<<< HEAD
+
+=======
+>>>>>>> 2591d2a24539faf96977f29b3541185ead7f1e5d

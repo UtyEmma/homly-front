@@ -1,12 +1,18 @@
 import { Request } from "./api/http";
 
 export const userService = {
-    signup, login 
+    signup, login, getTenant, updateTenantData, tenantResendEmail 
 }
 
 const options = {
     'Accept' : 'application/json',
     'Content-Type' : 'application/json'
+}
+
+const authHeaders = {
+    'Accept' : 'application/json',
+    'Content-Type' : 'application/json',
+    'Authorization' : `Bearer ${sessionStorage.getItem('token')}`
 }
 
 const tenant_data = JSON.parse(sessionStorage.getItem('user'));
@@ -33,10 +39,10 @@ async function login(data) {
 async function getTenant(){
     const request = {
         config: {
-            headers: {...options, 'Authorization' : `Bearer ${sessionStorage.getItem('token')}`},    
+            headers: authHeaders,    
         }
     }
-    return await Request.get('tenant/auth_user')
+    return await Request.get('tenant/auth_user', request)
 }
 
 async function updateTenantData(data) {

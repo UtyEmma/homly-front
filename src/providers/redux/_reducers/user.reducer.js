@@ -23,9 +23,9 @@ export function loginReducer (state = {}, action){
         case LOGIN_REQUEST:
             return {...state, loading: true}
         case LOGIN_SUCCESS:
-            return {...state, success: action.payload}
+            return {...state, loading:false, success: action.payload}
         case LOGIN_FAILURE:
-            return {...state, error: action.payload}
+            return {...state, loading:false, error: action.payload}
         default:
             return state;
     }
