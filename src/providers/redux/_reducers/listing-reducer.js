@@ -5,6 +5,7 @@ const { STORE_LISTING,
         GETLISTINGS_REQUEST, GETLISTINGS_SUCCESS, GETLISTINGS_FAILURE,
         ACTIVE_LISTINGS_REQUEST, ACTIVE_LISTINGS_SUCCESS, ACTIVE_LISTINGS_FAILURE,
         FETCH_LISTING_DETAILS_REQUEST, FETCH_LISTING_DETAILS_SUCCESS, FETCH_LISTING_DETAILS_FAILURE,
+        FETCH_SINGLE_LISTING_REQUEST, FETCH_SINGLE_LISTING_SUCCESS, FETCH_SINGLE_LISTING_FAILURE
     } = ListingConstants;
 
 
@@ -67,6 +68,20 @@ export function FetchListingDetails(state={}, actions){
                     amenities: actions.payload.amenities, 
                     features : actions.payload.features}
         case FETCH_LISTING_DETAILS_FAILURE:
+            return {...state, loading: false, error: actions.payload }
+        default:
+            return state
+    }
+}
+
+export function FetchSingleListing(state={}, actions){
+    switch(actions.type){
+        case FETCH_SINGLE_LISTING_REQUEST: 
+            return {...state, loading: true}
+        case FETCH_SINGLE_LISTING_SUCCESS:
+            return {...state, loading: false, 
+                    listing: actions.payload}
+        case FETCH_SINGLE_LISTING_FAILURE:
             return {...state, loading: false, error: actions.payload }
         default:
             return state

@@ -13,9 +13,8 @@ const AgentsListings = (props) => {
     const listingState = useSelector((state) => state.agents_listings);
     const {loading, agents_listings, get_listing_failure} = listingState;
 
-    
     const loadListings = () => {
-        dispatch(GetAgentListings())
+        dispatch(GetAgentListings());
     }
 
     useEffect(() => {
@@ -79,7 +78,7 @@ const AgentsListings = (props) => {
                                 </thead>
                                 <tbody>
                                     {agents_listings ? agents_listings.data.map((listing) =>(        
-                                            <AgentListingItem listing={listing} key={listing.unique_id}/>
+                                            <AgentListingItem  listing={listing} key={listing.unique_id}/>
                                         )) 
                                         
                                         :

@@ -3,9 +3,9 @@ import React from 'react'
 export default function ListingCard({listing}) {
     return (
         <div className="col-md-6 mb-6">
-            <div className="card border-0" data-animate="fadeInUp">
+            <div className="card border-0" >
                 <div className="position-relative hover-change-image bg-hover-overlay rounded-lg card-img">
-                <img src="images/properties-grid-35.jpg" alt="Home in Metric Way" />
+                <img src={listing.images.[0].url} alt={listing.title} />
                 <div className="card-img-overlay d-flex flex-column">
                     <div><span className="badge badge-primary">For Sale</span></div>
                     <div className="mt-auto d-flex hover-image">
@@ -37,11 +37,11 @@ export default function ListingCard({listing}) {
                 </div>
                 </div>
                 <div className="card-body pt-3 px-0 pb-1">
-                <h2 className="fs-16 mb-1"><a href="single-property-1.html" className="text-dark hover-primary">{listing.title}</a>
+                <h2 className="fs-16 mb-1"><a href={`listings/${listing.slug}`} className="text-dark hover-primary">{listing.title}</a>
                 </h2>
                 <p className="font-weight-500 text-gray-light mb-0">1421 San Pedro St, Los Angeles</p>
                 <p className="fs-17 font-weight-bold text-heading mb-0 lh-16">
-                    $1.250.000
+                    $ {listing.initial_price}
                 </p>
                 </div>
                 <div className="card-footer bg-transparent px-0 pb-0 pt-2">

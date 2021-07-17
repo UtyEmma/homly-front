@@ -1,7 +1,7 @@
 import { Request } from "./api/http";
 
 export const ListingService = {
-    newListing, getAgentListings, loadActiveListings, fetchListingDetails
+    newListing, getAgentListings, loadActiveListings, fetchListingDetails, fetchSingleListing
 }
 
 const options = {
@@ -43,4 +43,11 @@ async function fetchListingDetails(){
         headers: options
     }
     return await Request.get('tenant/listings/details', params);
+}
+
+async function fetchSingleListing(slug){
+    const params = {
+        headers: options
+    }
+    return await Request.get(`listings/${slug}`, params);
 }
