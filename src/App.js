@@ -4,6 +4,7 @@ import {  Switch, Route } from 'react-router-dom';
 // Route Guards
 import AgentRoute from 'providers/guards/agent-guard';
 import TenantRoute from 'providers/guards/tenant-guard';
+import UserRoute from 'providers/guards/user-guard';
 
 // Front Pages
 import About from 'views/about';
@@ -26,8 +27,8 @@ import NewListing from './views/agent/listings/add-listing';
 import AgentsListings from './views/agent/listings/agents-listings';
 import AgentProfile from './views/agent/profile';
 import PasswordRecovery from './views/agent/auth/password-recovery';
+import AddWishlist from 'views/tenants/wishlist/add-wishlist';
 import Wishlist from 'views/tenants/wishlist/wishlist';
-import UserRoute from 'providers/guards/user-guard';
 
 function App(props) {
   return (
@@ -47,7 +48,8 @@ function App(props) {
           {/* <TenantRoute path="/profile" user component={TenantProfile} exact/> */}
           <UserRoute path="/agents" user type="user" component={Agents} exact/>
           <UserRoute path="/agents/:id" user type="user" component={AgentDetails} exact/>
-          <UserRoute path="/listing/:id" user component={ListingDetails} exact/>
+          <UserRoute path="/listings/:slug" user component={ListingDetails} exact/>
+          <TenantRoute path="/add-wishlist" user component={AddWishlist} exact/>
           <TenantRoute path="/wishlist" user component={Wishlist} exact/>
 
           {/* Agent Routes */}

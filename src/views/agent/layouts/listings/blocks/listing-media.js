@@ -15,11 +15,6 @@ export default function ListingMedia() {
         }))
     }
 
-    const compileFile = (e) => {
-        console.log(e)
-        console.log(e.target)
-    }
-
     return (
         <div className="tab-pane tab-pane-parent fade px-0" id="media" role="tabpanel" aria-labelledby="media-tab">
             <div className="card bg-transparent border-0">
@@ -40,22 +35,7 @@ export default function ListingMedia() {
                             of your property</h3>
                             <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
                             adipiscing elit</p>
-                            <div className="dropzone upload-file text-center py-5" 
-                                    data-uploader="true"
-                                    id="myDropzone"
-                                    data-uploader-url="./dashboard-add-new-property.html">
-                                <div className="dz-default dz-message">
-                                <span className="upload-icon lh-1 d-inline-block mb-4"><i className="fal fa-cloud-upload-alt" /></span>
-                                <p className="text-heading fs-22 lh-15 mb-4">Drag and drop image
-                                or</p>
-                                <button className="btn btn-indigo px-7 mb-2" type="button">
-                                Browse file
-                                </button>
-                                <input type="file" onChange={compileFile} hidden multiple/>
-                                <p>Photos must be JPEG or PNG format and least
-                                1024x768</p>
-                                </div>
-                            </div>
+                           <input type="file" name="images[]" />
                         </div>
                         </div>
                     </div>
@@ -69,7 +49,7 @@ export default function ListingMedia() {
                                 <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
                                     <div className="form-group mb-md-0">
                                     <label htmlFor="embed-video-id"  className="text-heading">Upload Video File</label>
-                                    <input type="text" name="video_link" onChange={compileMedia} className="form-control form-control-lg border-0" id="embed-video-id" />
+                                    <input type="text" name="video_links" onChange={compileMedia} className="form-control form-control-lg border-0" id="embed-video-id" />
                                     </div>
                                 </div>
                             </div>

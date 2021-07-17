@@ -1,4 +1,4 @@
-function CustomInput () {
+export function FileInput () {
     return (
         <div className="dropzone upload-file text-center py-5" data-uploader="true"
             id="myDropzone" data-uploader-url="./dashboard-add-new-property.html">

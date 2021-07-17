@@ -4,10 +4,12 @@ import { ListingConstants } from "../../_contants/listing-constants";
 const { NEW_LISTING_REQUEST, NEW_LISTING_SUCCESS, NEW_LISTING_FAILURE, 
         GETLISTINGS_SUCCESS, GETLISTINGS_FAILURE, GETLISTINGS_REQUEST,
         ACTIVE_LISTINGS_REQUEST, ACTIVE_LISTINGS_SUCCESS, ACTIVE_LISTINGS_FAILURE,
-        FETCH_LISTING_DETAILS_REQUEST, FETCH_LISTING_DETAILS_SUCCESS, FETCH_LISTING_DETAILS_FAILURE, 
+        FETCH_LISTING_DETAILS_REQUEST, FETCH_LISTING_DETAILS_SUCCESS, FETCH_LISTING_DETAILS_FAILURE,
+        FETCH_SINGLE_LISTING_REQUEST, FETCH_SINGLE_LISTING_SUCCESS, FETCH_SINGLE_LISTING_FAILURE, 
         STORE_LISTING, 
     } = ListingConstants
 
+    
 export const StoreListing = (data) => (dispatch) => {
     let values = JSON.stringify(data);
     console.log(values)
@@ -105,6 +107,30 @@ export const FetchListingDetails = () => (dispatch) => {
                     .catch(error => {
                         return dispatch({
                             type : FETCH_LISTING_DETAILS_FAILURE,
+                            payload : error.response
+                        });
+                    })
+
+}
+
+
+export const FetchSingleListing = (slug) => (dispatch) => {
+    console.log('fetching...');
+    
+    dispatch({
+        type: FETCH_SINGLE_LISTING_REQUEST
+    });
+
+    ListingService.fetchSingleListing(slug)
+                    .then(response => {
+                        return dispatch({
+                            type : FETCH_SINGLE_LISTING_SUCCESS,
+                            payload : response.data.data
+                        });
+                    })
+                    .catch(error => {
+                        return dispatch({
+                            type : FETCH_SINGLE_LISTING_FAILURE,
                             payload : error.response
                         });
                     })

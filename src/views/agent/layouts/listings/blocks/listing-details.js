@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreListing } from '../../../../../providers/redux/_actions/listing/listing-actions';
 
-export default function ListingDetails(formData) {
+export default function ListingDetails() {
     const dispatch = useDispatch();
     const listing = useSelector((state) => state.store_listing.store);
 
@@ -14,7 +14,6 @@ export default function ListingDetails(formData) {
                 [e.target.name] : e.target.value
             }
         }))
-        formData.set('amenities', listing.details)
     }
 
     return (
@@ -38,7 +37,7 @@ export default function ListingDetails(formData) {
                         <div className="col-lg-4">
                             <div className="form-group">
                             <label htmlFor="size-in-ft" className="text-heading">Number of Bedrooms <span className="text-muted">(only numbers)</span></label>
-                            <select className="form-control border-0 shadow-none form-control-lg selectpicker" title="Select" data-style="btn-lg py-2 h-52" id="category" onChange={compileDetails} name="no-of-bedrooms">
+                            <select className="form-control border-0 shadow-none form-control-lg selectpicker" title="Select" data-style="btn-lg py-2 h-52" id="category" onChange={compileDetails} name="no_of_bedrooms">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -53,7 +52,7 @@ export default function ListingDetails(formData) {
                         <div className="col-lg-4">
                             <div className="form-group">
                             <label htmlFor="number-of-bathrooms" className="text-heading">Number of Bathrooms <span className="text-muted">(only numbers)</span></label>
-                            <input type="text" onChange={compileDetails} className="form-control form-control-lg border-0" id="number-of-bathrooms" name="number-of-bathrooms" />
+                            <input type="text" onChange={compileDetails} className="form-control form-control-lg border-0" id="number-of-bathrooms" name="no_of_bathrooms" />
                             </div>
                         </div>
                         <div className="col-lg-4">
@@ -67,7 +66,7 @@ export default function ListingDetails(formData) {
                         <div className="col-lg-12">
                             <div className="form-group">
                             <label htmlFor="extra-details" className="text-heading">Extra details</label>
-                            <textarea className="form-control border-0" rows={5} id="extra-details" name="extra-details" onChange={compileDetails} defaultValue={""} />
+                            <textarea className="form-control border-0" rows={5} id="extra_details" name="extra-details" onChange={compileDetails} defaultValue={""} />
                             </div>
                         </div>
                         </div>

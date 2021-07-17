@@ -12,7 +12,7 @@ export default function AgentListingItem({listing}) {
             <div className="media">
                 <div className="w-120px mr-4 position-relative">
                 <a href="single-property-1.html">
-                    <img src="images/my-properties-03.jpg" alt="Explore Old Barcelon" />
+                    <img src={listing.images.[0].url} alt="Explore Old Barcelon" />
                 </a>
                 <span className="badge badge-indigo position-absolute pos-fixed-top">for rent</span>
                 </div>
@@ -20,7 +20,7 @@ export default function AgentListingItem({listing}) {
                 <a href="single-property-1.html" className="text-dark hover-primary">
                     <h5 className="fs-16 mb-0 lh-18">{listing.title}</h5>
                 </a>
-                <p className="mb-1 font-weight-500">1421 San Pedro St, Los Angeles</p>
+                <p className="mb-1 font-weight-500">{listing.description}</p>
                 <span className="text-heading lh-15 font-weight-bold fs-17">N {listing.initial_price}</span>
                 <span className="text-gray-light">/month</span>
                 </div>
