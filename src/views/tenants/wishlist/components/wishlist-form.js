@@ -1,7 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { LocalGovt, State } from 'libraries/city-state/city-state';
 import Tagify from 'libraries/tagify/tagify'
+import { ERROR } from 'libraries/toastify/toastify';
 import { __createwishlist } from 'libraries/validation';
-import { FetchListingDetails } from 'providers/redux/_actions/listing/listing-actions';
+import naijaStateLocalGovernment from 'naija-state-local-government';
+import { CreateWishlist } from 'providers/redux/_actions/wishlist-actions';
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,13 +12,11 @@ import { useDispatch, useSelector } from 'react-redux';
 const WishlistForm = () => {
 
     const dispatch = useDispatch();
+    const states = naijaStateLocalGovernment.states();
+    const [selectedState, setSelectedState] = useState("Enugu");
 
-    const details = useSelector(state => state.fetch_details);
-    const {error, loading, amenities, features} = details;
-
-    useEffect(() => {
-        dispatch(FetchListingDetails());
-    }, [])
+    const wishlist = useSelector(state => state.wishlist);
+    const {error, loading, amenities, features} = wishlist;
 
     const listingFeatures = ['features'];
 
@@ -26,29 +27,26 @@ const WishlistForm = () => {
         resolver: yupResolver(__createwishlist)
     });
 
-    const handleSignup = () => {
-
+    const handleSuccess = (data) => {
+        dispatch(CreateWishlist(data))
     }
 
     const handleErrors = () => {
-
+        ERROR("Invalid Input")
     }
     
     return (
         <div className="card border-0 col-12">
-            <div className="col-12 px-2">
-                <h3>Create a Wishlist</h3>
-            </div>
             <div className="card-body">
-                <form className="form" onSubmit={handleSubmit(handleSignup, handleErrors)}>
+                <form className="form" onSubmit={handleSubmit(handleSuccess, handleErrors)}>
                     <div className="row mx-n2">
-                        <div className="col-12 px-4">
+                        <div className="col-12">
                             <p className="font-weight-bold">Accomodation Specifications</p>
                         </div>
     
                         <div className="col-sm-6 px-2">
                             <div className="form-group">
-                                <label htmlFor="category" className="text-heading">What type of accomodation are you looking for?</label>
+                                <label htmlFor="category" className="text-heading">Accomodation Type</label>
                                 <select className="form-control border-0 shadow-none form-control-lg selectpicker" {...register('category')} title="Select" data-style="btn-lg py-2 h-52" id="type" name="category">
                                     <option>Select</option>
                                     <option>Self-Contained</option>
@@ -77,7 +75,7 @@ const WishlistForm = () => {
                         <div className="col-md-12 px-2">
                             <div className="form-group">
                                 <label htmlFor="features" className="text-heading">Select Features</label>
-                                <Tagify suggestions={listingFeatures} {...register('features')}  name="features" label="Features" />
+                                <Tagify suggestions={listingFeatures} {...register('features')} className="form-control form-control-lg border-0"  name="features[]" />
                                 <p className="text-danger fs-14">{errors.features?.message}</p>
                             </div>
                         </div>
@@ -86,7 +84,7 @@ const WishlistForm = () => {
                         <div className="col-md-12 px-2">
                             <div className="form-group">
                                 <label htmlFor="amenities" className="text-heading">Select Amenities</label>
-                                <Tagify suggestions={listingAmenities} {...register('amenities')} name="amenities" label="Amenities" />
+                                <Tagify suggestions={listingAmenities} {...register('amenities')} name="amenities[]" label="Amenities" />
                                 <p className="text-danger fs-14">{errors.amenities?.message}</p>
                             </div>
                         </div>
@@ -108,8 +106,8 @@ const WishlistForm = () => {
 
                         <div className="col-sm-6 px-2">
                             <div className="form-group">
-                                <label htmlFor="lastName" className="text-heading">Custom Budget</label>
-                                <input type="number" name="lastname" className="form-control form-control-lg border-0" id="lastName" placeholder="Doe" />
+                                <label htmlFor="budget" className="text-heading">Custom Budget</label>
+                                <input type="number" name="lastname" className="form-control form-control-lg border-0" id="budget" placeholder="Doe" />
                                 <p className="text-danger fs-14"></p>
                             </div>
                         </div>
@@ -121,21 +119,15 @@ const WishlistForm = () => {
                         <div className="col-sm-6 px-2">
                             <div className="form-group">
                                 <label htmlFor="state" className="text-heading">State</label>
-                                <select className="form-control border-0 shadow-none form-control-lg selectpicker" default title="Select State" data-style="btn-lg py-2 h-52" id="type" {...register('state')} name="state">
-                                    <option>Enugu</option>
-                                    <option>Flat</option>
-                                </select>
+                                <State setSelectedState={setSelectedState} name="state" />
                                 <p className="text-danger fs-14">{errors.state?.message}</p>
                             </div>
                         </div>
 
                         <div className="col-sm-6 px-2">
                             <div className="form-group">
-                                <label htmlFor="state" className="text-heading">Local Government</label>
-                                <select className="form-control border-0 shadow-none form-control-lg selectpicker" title="Select LGA" data-style="btn-lg py-2 h-52" id="type" {...register('lga')} name="lga">
-                                    <option>Self-Contained</option>
-                                    <option>Flat</option>
-                                </select>
+                                <label htmlFor="lga" className="text-heading">Local Government</label>
+                                <LocalGovt name="lga" selectedState={selectedState}/>
                                 <p className="text-danger fs-14">{errors.lga?.message}</p>
                             </div>
                         </div>

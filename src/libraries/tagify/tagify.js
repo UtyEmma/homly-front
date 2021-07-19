@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useRef} from 'react'
+import React from 'react'
 import "@yaireo/tagify/dist/tagify.css"
 import Tags from '@yaireo/tagify/dist/react.tagify'
 
@@ -15,17 +15,16 @@ const Tagify = ({value, suggestions, name}) => {
         }
     }
       
-  const onChange = useCallback(e => {
-    console.log("CHANGED:", e.detail.value)
-  }, [])
+  // const onChange = useCallback(e => {
+  //   console.log("CHANGED:", e.detail.value)
+  // }, [])
 
   return (
     <>
       <Tags
         settings={baseTagifySettings}
         defaultValue={value}
-        onChange={onChange}
-        className="form-control"
+        // onChange={onChange}
         name={name}
       />
     </>

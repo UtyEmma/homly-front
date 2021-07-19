@@ -2,10 +2,10 @@ import React from 'react'
 import Footer from 'views/layouts/footer'
 import NavBar from 'views/layouts/nav-bar'
 
-const Wishlist = () => {
+const Wishlist = ({isLoggedIn, user}) => {
     return (
-        <>
-            <NavBar/>
+        <div>
+            <NavBar isloggedIn={isLoggedIn} user={user}/>
 
             <main id="content">
                 <section classnamename="pb-4 page-title shadow">
@@ -983,7 +983,7 @@ const Wishlist = () => {
 
 
             <Footer />
-        </>
+        </div>
     )
 }
 

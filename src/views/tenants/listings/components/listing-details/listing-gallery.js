@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ListingGallery({images}) {
+export default function ListingGallery({images, title}) {
     return (
         <section className="bg-white shadow-5 pb-1">
             <div className="container">
@@ -12,7 +12,7 @@ export default function ListingGallery({images}) {
                 <li className="breadcrumb-item fs-12 letter-spacing-087">
                     <a href="listing-grid-with-left-filter.html">Listing</a>
                 </li>
-                <li className="breadcrumb-item fs-12 letter-spacing-087 active">Villa on Hollywood Boulevard</li>
+                <li className="breadcrumb-item fs-12 letter-spacing-087 active">{title}</li>
                 </ol>
             </nav>
             <div className="galleries position-relative" data-animate="zoomIn">
@@ -56,7 +56,7 @@ export default function ListingGallery({images}) {
                 <div className="box">
                     <div className="item item-size-3-2">
                     <div className="card p-0 hover-change-image">
-                        <a href="images/single-property-lg-1.jpg" className="card-img" data-gtf-mfp="true" data-gallery-id="02" style={{backgroundImage: `url("${images.[0].url}")`}}>
+                        <a href={images.[0].url} className="card-img" data-gtf-mfp="true" data-gallery-id="02" style={{backgroundImage: `url(${images.[0].url})`}}>
                         </a>
                     </div>
                     </div>

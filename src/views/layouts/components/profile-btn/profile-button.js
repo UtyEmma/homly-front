@@ -42,9 +42,8 @@ function loggedOut(params) {
     return (           
         <ul className="navbar-nav flex-row justify-content-lg-end d-flex flex-wrap text-body py-2">
             <li className="nav-item">
-            <a className="nav-link  px-2" data-toggle="modal" href="#login-register-modal">SIGN UP</a>
+            <a className="nav-link px-2" href="/signup">SIGN UP</a>
             </li>
         </ul>
     )
-
 }

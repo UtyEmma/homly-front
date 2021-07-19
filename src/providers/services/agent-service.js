@@ -5,11 +5,11 @@ export const AgentService = {
 }
 
 const auth_config = {
-    config: { 
+    config: {
         headers: {
             'Accept': 'application/json', 
             'Content-Type': 'application/json', 
-            'Authorization' : `Bearer ${sessionStorage.getItem('token')}` 
+            'Authorization' : `Bearer ${localStorage.getItem('token')}` 
         }
     }
 }
@@ -44,7 +44,6 @@ async function update(data){
         ...auth_config,
         payload: data
     }
-    console.log(request)
     return await Request.post('agent/update', request)
 }
 

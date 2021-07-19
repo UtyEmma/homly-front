@@ -1,4 +1,5 @@
 import React from 'react'
+import { ToastContainer } from 'react-toastify'
 import { MapDisplay } from 'views/agent/layouts/listings/blocks/map/map-display'
 import Footer from 'views/layouts/footer'
 import NavBar from 'views/layouts/nav-bar'
@@ -10,6 +11,7 @@ const AddWishlist = ({isLoggedIn, user}) => {
             <NavBar isloggedIn={isLoggedIn} user={user}/>
 
             <main id="content">
+            <ToastContainer position="bottom-right"/>
                 <section className="bg-secondary">
                     <div className="container">
                     <form className="property-search d-none d-lg-block">
@@ -446,7 +448,7 @@ const AddWishlist = ({isLoggedIn, user}) => {
                             <div className="col-xl-6 col-xxl-7 primary-map map-sticky" id="map-sticky">
                             <div className="primary-map-inner">
 
-                            <MapDisplay 
+                            {/* <MapDisplay 
                                 googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBYmJujloM3zNdxMpokW1G_Qo5Qo_05_A&libraries=geometry,drawing,places&v=weekly"
                                 loadingElement={<div style={{ height: `100%` }} />}
                                 containerElement={<div style={{ height: `100%` }} />}
@@ -455,7 +457,7 @@ const AddWishlist = ({isLoggedIn, user}) => {
                                 latitude={36.778259}
                                 longitude={-119.417931}
                                 isMarkerShown={true}
-                            />
+                            /> */}
                             </div>
                             </div>
                             <div className="col-xl-6  pt-7 pb-11">
