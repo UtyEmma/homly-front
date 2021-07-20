@@ -1,3 +1,4 @@
+import { ERROR } from 'libraries/toastify/toastify';
 import { AgentService } from '../../services';
 import { AgentConstants } from '../_contants/agent-constants';
 
@@ -28,7 +29,6 @@ export const AgentSignup = (data) => (dispatch) => {
                     payload: error.response
                 })
             })  
-            
 }
 
 export const AgentLogin = (data) => (dispatch) => {
@@ -63,19 +63,21 @@ export const AgentLogin = (data) => (dispatch) => {
 
 export const UpdateAgentProfile = (data) => (dispatch) => {
     console.log('updating_data')
-
     dispatch({
         type: UPDATE_REQUEST
     })
 
     AgentService.update(data)
                 .then((response) => {
+                    let res = response.data;
+                    localStorage.setItem('user', JSON.stringify(res.data.agent));
                     dispatch({
                         type: UPDATE_SUCCESS,
-                        payload: response.data
+                        payload: res
                     })
                 })
                 .catch((error) => {
+                    ERROR(error.response.data.message)
                     dispatch({
                         type: UPDATE_FAILURE,
                         payload: error.response
@@ -94,7 +96,7 @@ export const ShowAllAgents = () => (dispatch) => {
             .then((response) => {
                 dispatch({
                     type: SHOW_AGENTS_SUCCESS,
-                    payload: response.data
+                    payload: response.data.data
                 })
             })
             .catch((error) => {

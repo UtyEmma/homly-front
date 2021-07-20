@@ -5,12 +5,12 @@ const { CREATE_WISHLIST_REQUEST, CREATE_WISHLIST_SUCCESS, CREATE_WISHLIST_FAILUR
         FETCH_WISHLIST_REQUEST, FETCH_WISHLIST_SUCCESS, FETCH_WISHLIST_FAILURE } = WISHLIST;
 
 
-const createwishlist = (data) => (dispatch) => {
+export const CreateWishlist = (data) => (dispatch) => {
     console.log('creating_wishlist');
 
     dispatch({
         type: CREATE_WISHLIST_REQUEST
-    })
+    });
     
     WishlistService.create(data)
                 .then(response => {

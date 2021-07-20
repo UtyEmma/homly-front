@@ -28,8 +28,8 @@ export default function AgentCard({agent}) {
                 </ul>
                 </div>
                 <div className="card-body text-center pt-2  px-0">
-                <a href="mailto:oliverbeddows@homeid.com" className="text-body">oliverbeddows@homeid.com</a>
-                <a href="tel:123-900-68668" className="text-heading font-weight-600 d-block mb-3">123 900 68668</a>
+                <a href="mailto:oliverbeddows@homeid.com" className="text-body">{agent.email}</a>
+                <a href="tel:123-900-68668" className="text-heading font-weight-600 d-block mb-3">{agent.phone}</a>
                 <ul className="list-inline mb-0">
                     <li className="list-inline-item fs-13 text-heading font-weight-500">4.8/5</li>
                     <li className="list-inline-item fs-13 text-heading font-weight-500 mr-1">
@@ -56,7 +56,7 @@ export default function AgentCard({agent}) {
                 </div>
                 <div className="card-footer px-0 text-center hover-image border-0">
                 <a href="listing-with-left-sidebar.html" className="d-flex align-items-center justify-content-center text-heading">
-                    <span className="badge badge-white badge-circle border fs-13 font-weight-bold mr-2 lh-12">5</span>
+                    <span className="badge badge-white badge-circle border fs-13 font-weight-bold mr-2 lh-12">{agent.no_of_listings}</span>
                     <span className="font-weight-500 mr-2">Listed Properties</span>
                     <span className="text-primary fs-16 icon"><i className="far fa-long-arrow-right" /></span>
                 </a>

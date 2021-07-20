@@ -119,15 +119,15 @@ const ListingDetails = ({isLoggedIn, user}) => {
                 {
                     listing ? 
                     <>
-                        <ListingGallery images={listing.images}/>
+                        <ListingGallery title={listing.title} images={listing.images}/>
 
                         <div className="primary-content bg-gray-01 pt-7 pb-12">
                             <div className="container">
                             <div className="row">
                                 <article className="col-lg-8">
-                                    <ListingComponents/>
+                                    <ListingComponents listing={listing} />
                                 </article>
-                                
+
                                 <ListingAction/>
                             </div>
                             </div>

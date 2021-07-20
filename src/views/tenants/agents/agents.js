@@ -128,7 +128,7 @@ const Agents = ({isLoggedIn, user}) => {
                     <div className="container">
                     <div className="row align-items-sm-center mb-6">
                         <div className="col-sm-6 mb-6 mb-sm-0">
-                        <h2 className="fs-15 text-dark mb-0">We found <span className="text-primary">45</span> agents available for
+                        <h2 className="fs-15 text-dark mb-0">We found <span className="text-primary">{agents_data && agents_data.count}</span> agents available for
                             you
                         </h2>
                         </div>
@@ -156,7 +156,7 @@ const Agents = ({isLoggedIn, user}) => {
                         </div>
                     </div>
                     <div className="row">
-                        {agents_data ? agents_data.data.map((agent) =>(        
+                        {agents_data ? agents_data.agents.map((agent) =>(        
                             <AgentCard agent={agent} key={agent.unique_id}/> )) 
                                         
                             :

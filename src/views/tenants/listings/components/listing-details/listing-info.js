@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ListingInfo() {
+export default function ListingInfo({listing}) {
     return (
         <>
             <section className="pb-8 px-6 pt-6 bg-white rounded-lg">
@@ -12,22 +12,17 @@ export default function ListingInfo() {
                 </ul>
                 <div className="d-sm-flex justify-content-sm-between">
                 <div>
-                    <h2 className="fs-35 font-weight-600 lh-15 text-heading">Villa on Hollywood Boulevard</h2>
-                    <p className="mb-0"><i className="fal fa-map-marker-alt mr-2" />398 Pete Pascale Pl, New York</p>
+                    <h2 className="fs-35 font-weight-600 lh-15 text-heading">{listing.title}</h2>
+                    <p className="mb-0"><i className="fal fa-map-marker-alt mr-2" />
+                            {listing.address}, {listing.city}, {listing.state}</p>
                 </div>
                 <div className="mt-2 text-lg-right">
-                    <p className="fs-22 text-heading font-weight-bold mb-0">$1.250.000</p>
-                    <p className="mb-0">$9350/SqFt</p>
+                    <p className="fs-22 text-heading font-weight-bold mb-0">N {listing.initial_price}</p>
+                    <p className="mb-0">{listing.tenure}</p>
                 </div>
                 </div>
                 <h4 className="fs-22 text-heading mt-6 mb-2">Description</h4>
-                <p className="mb-0 lh-214">Massa tempor nec feugiat nisl pretium. Egestas fringilla phasellus faucibus
-                scelerisque eleifend donec.
-                Porta nibh venenatis cras sed felis eget velit aliquet. Neque volutpat ac tincidunt vitae semper
-                quis lectus. Turpis in eu mi bibendum neque
-                egestas congue quisque. Sed elementum tempus egestas sed sed risus pretium quam. Dignissim sodales
-                ut eu sem. Nibh mauris cursus mattis molestie a
-                iaculis at erat pellentesque. Id interdum velit laoreet id donec ultrices tincidunt.</p>
+                <p className="mb-0 lh-214">{listing.description}</p>
             </section>
             <section className="mt-2 pb-3 px-6 pt-5 bg-white rounded-lg">
                 <h4 className="fs-22 text-heading mb-6">Facts and Features</h4>
@@ -131,11 +126,11 @@ export default function ListingInfo() {
                 </dl>
                 <dl className="col-sm-6 mb-0 d-flex">
                     <dt className="w-110px fs-14 font-weight-500 text-heading pr-2">Price</dt>
-                    <dd>$890.000</dd>
+                    <dd>$ {listing.initial_price}</dd>
                 </dl>
                 <dl className="col-sm-6 mb-0 d-flex">
                     <dt className="w-110px fs-14 font-weight-500 text-heading pr-2">Property type</dt>
-                    <dd>Apartment, bar, cafe, villa</dd>
+                    <dd>{listing.type}</dd>
                 </dl>
                 <dl className="col-sm-6 mb-0 d-flex">
                     <dt className="w-110px fs-14 font-weight-500 text-heading pr-2">Property status</dt>
@@ -158,16 +153,8 @@ export default function ListingInfo() {
                     <dd>2</dd>
                 </dl>
                 <dl className="col-sm-6 mb-0 d-flex">
-                    <dt className="w-110px fs-14 font-weight-500 text-heading pr-2">Garage</dt>
-                    <dd>1</dd>
-                </dl>
-                <dl className="col-sm-6 mb-0 d-flex">
                     <dt className="w-110px fs-14 font-weight-500 text-heading pr-2">Bathrooms</dt>
                     <dd>2000 SqFt</dd>
-                </dl>
-                <dl className="col-sm-6 mb-0 d-flex">
-                    <dt className="w-110px fs-14 font-weight-500 text-heading pr-2">Garage size</dt>
-                    <dd>50 SqFt</dd>
                 </dl>
                 <dl className="col-sm-6 mb-0 d-flex">
                     <dt className="w-110px fs-14 font-weight-500 text-heading pr-2">Year build</dt>

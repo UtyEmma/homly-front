@@ -67,6 +67,28 @@ export const GetAgentListings = () => (dispatch) => {
 
 }
 
+export const ShowAllListings = (params) => (dispatch) => {
+    console.log('All Listings...')
+
+    dispatch({
+        type: ACTIVE_LISTINGS_REQUEST
+    })
+
+    ListingService.fetchAllListings(params)
+                    .then(response => {
+                        return dispatch({
+                            type: ACTIVE_LISTINGS_SUCCESS,
+                            payload: response.data.data
+                        })
+                    })
+                    .catch(error => {
+                        return dispatch({
+                            type: ACTIVE_LISTINGS_FAILURE,
+                            payload: error.response
+                        })
+                    })
+}
+
 
 export const ShowActiveListings = () => (dispatch) => {
     console.log('loading_listings')
