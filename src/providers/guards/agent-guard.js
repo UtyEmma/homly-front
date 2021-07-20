@@ -14,7 +14,8 @@ function AgentRoute({ component: Component, ...restOfProps }) {
     <Route
       {...restOfProps}
       render={(props) =>
-          auth ? <Component {...props} agent={agent_object} /> : <Redirect to="/agent-login" />
+        isAuthenticated && user === 'agent' 
+          ? <Component {...props} agent={agent_object} /> : <Redirect to="/agent-login" />
       }
     />
   );
