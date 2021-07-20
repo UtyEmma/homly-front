@@ -60,6 +60,7 @@ export default function ListingFilter({params, setParams}) {
                         <option selected>Self Contained</option>
                         <option>Duplex</option>
                         <option>motel</option>
+                        <option>Utibe</option>
                     </select>
                     </div>
                     <div className="form-group p-1">
