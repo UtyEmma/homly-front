@@ -9,7 +9,6 @@ const { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE,
 
 
 export function AgentSignupReducer (state = {}, action) {
-
     switch (action.type) {
         case SIGNUP_REQUEST:
             return { ...state, loading: true }

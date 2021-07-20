@@ -12,10 +12,10 @@ const options = {
 const authHeaders = {
     'Accept' : 'application/json',
     'Content-Type' : 'application/json',
-    'Authorization' : `Bearer ${sessionStorage.getItem('token')}`
+    'Authorization' : `Bearer ${localStorage.getItem('token')}`
 }
 
-const tenant_data = JSON.parse(sessionStorage.getItem('user'));
+const tenant_data = JSON.parse(localStorage.getItem('user'));
 
 async function signup(data) {
     const request = {
@@ -48,7 +48,7 @@ async function getTenant(){
 async function updateTenantData(data) {
     const request = {
         config: {
-            headers: {...options, 'Authorization' : `Bearer ${sessionStorage.getItem('token')}`},
+            headers: {...options, 'Authorization' : `Bearer ${localStorage.getItem('token')}`},
         },
         payload: data
     }
@@ -59,7 +59,7 @@ async function updateTenantData(data) {
 async function tenantResendEmail(data) {
     const request = {
         config: {
-            headers: {...options, 'Authorization' : `Bearer ${sessionStorage.getItem('token')}`},
+            headers: {...options, 'Authorization' : `Bearer ${localStorage.getItem('token')}`},
         },
         payload: data
     }

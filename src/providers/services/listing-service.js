@@ -1,7 +1,8 @@
 import { Request } from "./api/http";
 
 export const ListingService = {
-    newListing, getAgentListings, loadActiveListings, fetchListingDetails, fetchSingleListing
+    newListing, getAgentListings, loadActiveListings, 
+    fetchListingDetails, fetchSingleListing, fetchAllListings
 }
 
 const options = {
@@ -31,13 +32,25 @@ async function getAgentListings(){
 
 async function loadActiveListings(){
     const params = {
-        headers: options
+        'Accept' : 'application/json',
+        'Content-Type' : 'application/json'
     }
 
-    return await Request.get('agent/listing/active', params)
+    return await Request.get('listings/active', params)
 }
 
-// Fetch Listing Features/Amenities
+async function fetchAllListings(query){
+    const options = {
+        headers: {
+            'Accept' : 'application/json',
+            'Content-Type' : 'application/json'
+        },
+        params: query
+    }
+
+    return await Request.get('listings', options)
+}
+
 async function fetchListingDetails(){
     const params = {
         headers: options

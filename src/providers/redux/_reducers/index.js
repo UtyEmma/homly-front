@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import {loginReducer, signupReducer} from "../_reducers/user.reducer";
 import { AgentLoginReducer, AgentSignupReducer, UpdateAgentProfileReducer, 
         ShowAvailableAgentsReducer } from "./agent-reducer";
+import { FetchCategoriesReducer } from "./category-reducer";
 
 import { AgentsListingsReducer, NewListingReducer, StoreListingReducer,
          ActiveListingsReducer, FetchListingDetails, FetchSingleListing} from "./listing-reducer";
@@ -25,7 +26,9 @@ const rootReducer = combineReducers({
     new_listing: NewListingReducer,
     active_listings: ActiveListingsReducer,
     fetch_details : FetchListingDetails,
-    listing : FetchSingleListing
+    listing : FetchSingleListing,
+
+    categories: FetchCategoriesReducer
 })
 
 export default rootReducer;

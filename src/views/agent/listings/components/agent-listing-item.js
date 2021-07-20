@@ -17,7 +17,7 @@ export default function AgentListingItem({listing}) {
                 <span className="badge badge-indigo position-absolute pos-fixed-top">for rent</span>
                 </div>
                 <div className="media-body">
-                <a href="single-property-1.html" className="text-dark hover-primary">
+                <a href={`listings/${listing.slug}`} className="text-dark hover-primary">
                     <h5 className="fs-16 mb-0 lh-18">{listing.title}</h5>
                 </a>
                 <p className="mb-1 font-weight-500">{listing.description}</p>

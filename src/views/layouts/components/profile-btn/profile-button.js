@@ -11,12 +11,14 @@ export default function ProfileButton({isloggedIn, user}) {
 
 function loggedIn(user) {
     return (           
-        <ul className="navbar-nav flex-row justify-content-lg-end align-items-center d-flex flex-wrap text-body py-2">
+        <ul className="navbar-nav flex-row justify-content-lg-end align-items-center d-flex flex-wrap text-body py-2">            
             <li className="nav-item mr-4">
-                <a className="nav-link mr-md-2 pr-2 pl-0 pl-lg-2" href="wishlist" >
-                    My Wishlist
+                <a className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" href="wishlist">
+                    <i className="fal fa-heart fs-large-4" />
+                    <span className="badge badge-primary badge-circle badge-absolute">1</span>
                 </a>
             </li>
+
             <li className="nav-item mr-2 d-flex hover bg-hover-overlay-gradient-2 hover-primary rounded p-1">
                 <div className="w-46px">
                     <img src="images/testimonial-5.jpg" alt="" className="rounded-circle" />
@@ -27,12 +29,6 @@ function loggedIn(user) {
                     <a className="dropdown-item" href="#">Logout</a>
                 </div>
             </li>
-            {/* <li className="nav-item">
-            <a className="nav-link px-2 position-relative" href="#">
-                <i className="fal fa-heart fs-large-4" />
-                <span className="badge badge-primary badge-circle badge-absolute">1</span>
-            </a>
-            </li> */}
         </ul>
     )
 
@@ -40,11 +36,15 @@ function loggedIn(user) {
 
 function loggedOut(params) {
     return (           
-        <ul className="navbar-nav flex-row justify-content-lg-end d-flex flex-wrap text-body py-2">
-            <li className="nav-item">
-            <a className="nav-link  px-2" data-toggle="modal" href="#login-register-modal">SIGN UP</a>
+        <ul className="navbar-nav flex-row justify-content-lg-end align-items-center d-flex flex-wrap text-body py-2">
+            <li class="nav-item ">
+                <a class="nav-link pl-3 pr-2 mr-2" href="/login">Login</a>
+            </li>
+            <li className="nav-item ml-auto w-100 w-sm-auto">
+                <a className="btn btn-primary" href="/signup">
+                    Create Account
+                </a>
             </li>
         </ul>
     )
-
 }

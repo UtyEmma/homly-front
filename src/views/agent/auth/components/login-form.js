@@ -47,7 +47,7 @@ const AgentLoginForm = () =>  {
                 <ToastContainer position={"bottom-left"}/>
                 <div className="card border-0 shadow-xxs-2 mb-6">
                     <div className="card-body px-8">
-                    <h2 className="card-title fs-30 font-weight-600 text-dark lh-16 mb-2">Log In</h2>
+                    <h2 className="card-title fs-30 font-weight-600 text-dark lh-16 mb-2">Log In as Agent</h2>
                     <p className="mb-4">Want to become an Agent? <Link to='/agent-signup' className="text-heading hover-primary"><u>Sign Up</u></Link></p>
                     <form className="form" onSubmit={handleSubmit(handleLogin, handleErrors)}>
                         <div className="form-group mb-4">
