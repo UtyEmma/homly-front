@@ -96,7 +96,7 @@ export const ShowAllAgents = () => (dispatch) => {
             .then((response) => {
                 dispatch({
                     type: SHOW_AGENTS_SUCCESS,
-                    payload: response.data
+                    payload: response.data.data
                 })
             })
             .catch((error) => {

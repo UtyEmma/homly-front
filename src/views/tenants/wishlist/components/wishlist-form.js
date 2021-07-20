@@ -14,29 +14,35 @@ const WishlistForm = () => {
     const dispatch = useDispatch();
     const states = naijaStateLocalGovernment.states();
     const [selectedState, setSelectedState] = useState("Enugu");
+    const [features, setFeatures] = useState([]);
+    const [amenities, setAmenities] = useState([]);
 
     const wishlist = useSelector(state => state.wishlist);
-    const {error, loading, amenities, features} = wishlist;
+    const {error, loading, success} = wishlist;
 
-    const listingFeatures = ['features'];
-
-    const listingAmenities = [ "apple", "banana", "cucumber", "dewberries", "elderberry", "farkleberry",
-        "grapes", "hackberry", "imbe", "jambolan"];
+    const listingFeatures = ['features', 'natural', 'sample'];
+    const listingAmenities = [ "apple", "banana", "cucumber"];
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(__createwishlist)
     });
 
     const handleSuccess = (data) => {
-        dispatch(CreateWishlist(data))
-    }
+
+        console.log(features)
+        console.log(amenities)
+        dispatch(CreateWishlist({...data, 
+            'features': features,
+            'amenities': amenities
+        }))
+    }   
 
     const handleErrors = () => {
         ERROR("Invalid Input")
     }
     
     return (
-        <div className="card border-0 col-12">
+        <div className="card border-0 col-6">
             <div className="card-body">
                 <form className="form" onSubmit={handleSubmit(handleSuccess, handleErrors)}>
                     <div className="row mx-n2">
@@ -47,7 +53,7 @@ const WishlistForm = () => {
                         <div className="col-sm-6 px-2">
                             <div className="form-group">
                                 <label htmlFor="category" className="text-heading">Accomodation Type</label>
-                                <select className="form-control border-0 shadow-none form-control-lg selectpicker" {...register('category')} title="Select" data-style="btn-lg py-2 h-52" id="type" name="category">
+                                <select className="form-control border-0 shadow-none form-control-lg selectpicker" {...register('category')} title="Select" data-style="btn-lg py-2 h-52" id="category" name="category">
                                     <option>Select</option>
                                     <option>Self-Contained</option>
                                     <option>Flat</option>
@@ -56,18 +62,10 @@ const WishlistForm = () => {
                             </div>
                         </div>
 
-                        {/* <div className="col-sm-6 px-2">
-                            <div className="form-group">
-                                <label htmlFor="lastName" className="text-heading">Custom</label>
-                                <input type="text" name="lastname" className="form-control form-control-lg border-0" id="lastName" placeholder="Doe" />
-                                <p className="text-danger fs-14"></p>
-                            </div>
-                        </div> */}
-
                         <div className="col-md-6 px-2">
                             <div className="form-group">
-                                <label htmlFor="firstName" className="text-heading">Number of Rooms</label>
-                                <input type="number" {...register('no_of_rooms')} name="no_of_rooms" className="form-control form-control-lg border-0" id="lastName" placeholder="Doe" />
+                                <label htmlFor="no_of_rooms" className="text-heading">Number of Rooms</label>
+                                <input type="number" {...register('no_of_rooms')} name="no_of_rooms" className="form-control form-control-lg border-0" id="no_of_rooms" placeholder="0" />
                                 <p className="text-danger fs-14">{errors.no_of_rooms?.message}</p>
                             </div>
                         </div>
@@ -75,7 +73,7 @@ const WishlistForm = () => {
                         <div className="col-md-12 px-2">
                             <div className="form-group">
                                 <label htmlFor="features" className="text-heading">Select Features</label>
-                                <Tagify suggestions={listingFeatures} {...register('features')} className="form-control form-control-lg border-0"  name="features[]" />
+                                <Tagify suggestions={listingFeatures} message="Type Features" {...register('features')} val={features} setValue={setFeatures}  id="features"  name="features[]" />
                                 <p className="text-danger fs-14">{errors.features?.message}</p>
                             </div>
                         </div>
@@ -84,30 +82,15 @@ const WishlistForm = () => {
                         <div className="col-md-12 px-2">
                             <div className="form-group">
                                 <label htmlFor="amenities" className="text-heading">Select Amenities</label>
-                                <Tagify suggestions={listingAmenities} {...register('amenities')} name="amenities[]" label="Amenities" />
+                                <Tagify suggestions={listingAmenities} {...register('amenities')} message="Type Amenities" name="amenities[]" val={amenities} setValue={setAmenities} label="Amenities" />   
                                 <p className="text-danger fs-14">{errors.amenities?.message}</p>
                             </div>
                         </div>
 
                         <div className="col-sm-6 px-2">
                             <div className="form-group">
-                                <div className="form-group slider-range slider-range-secondary">
-                                    <label for="price" className="mb-4 text-gray-light">Budget Range</label>
-                                    <div data-slider="true" data-slider-options='{"min":0,"max":8000000,"values":[1000000,5000000],"type":"currency"}'></div>
-                                    <div className="text-center mt-2">
-                                    <input id="price" {...register('budget')} type="text" readonly name="budget" className="border-0 amount text-center text-body font-weight-500"/>
-                                    <p className="text-danger fs-14">{errors.budget?.message}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p className="text-danger fs-14"></p>
-                        </div>
-
-
-                        <div className="col-sm-6 px-2">
-                            <div className="form-group">
-                                <label htmlFor="budget" className="text-heading">Custom Budget</label>
-                                <input type="number" name="lastname" className="form-control form-control-lg border-0" id="budget" placeholder="Doe" />
+                                <label htmlFor="budget" className="text-heading">Budget</label>
+                                <input type="number" name="budget" className="form-control form-control-lg border-0" id="budget" placeholder="10000" />
                                 <p className="text-danger fs-14"></p>
                             </div>
                         </div>
@@ -135,7 +118,7 @@ const WishlistForm = () => {
                         <div className="col-sm-6 px-2">
                             <div className="form-group">
                                 <label htmlFor="area" className="text-heading">Area</label>
-                                <input type="text" name="custom" {...register('area')} className="form-control form-control-lg border-0" id="area" placeholder="Independence Layout" name="area"/>
+                                <input type="text" name="area" {...register('area')} className="form-control form-control-lg border-0" id="area" placeholder="Independence Layout" name="area"/>
                                 <p className="text-danger fs-14">{errors.area?.message}</p>
                             </div>
                         </div>
@@ -157,7 +140,7 @@ const WishlistForm = () => {
                         </div>
 
                         <div className="col-sm-6">
-                            <button type="submit" className="btn btn-primary btn-lg btn-block">Submit Wishlist</button>
+                            <button type="submit" className="btn btn-primary btn-lg btn-block">Send Wishlist</button>
                         </div>
                     </div>
                 </form>

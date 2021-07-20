@@ -7,7 +7,7 @@ export default function NavBar(props) {
             <div className="sticky-area">
                 <div className="container">
                     <nav className="navbar navbar-expand-lg px-0">
-                        <a className="navbar-brand" href="index.html">
+                        <a className="navbar-brand" href="/">
                         <img src="images/logo.png" alt="HomeID" className="d-none d-lg-inline-block" />
                         <img src="images/logo-white.png" alt="HomeID" className="d-inline-block d-lg-none" />
                         </a>
@@ -33,11 +33,11 @@ export default function NavBar(props) {
                                 </li>
                                 <li id="navbar-item-property" className="nav-item py-2 py-lg-5 px-0 px-lg-4">
                                 <a className="nav-link p-0" href="listings">
-                                    Properties</a>
+                                    Find a Property</a>
                                 </li>
                                 <li id="navbar-item-dashboard"className="nav-item py-2 py-lg-5 px-0 px-lg-4">
                                     <a className="nav-link p-0" href="agents">
-                                        Agents
+                                        Find an Agent
                                     </a>
                                 </li>                     
                             </ul>

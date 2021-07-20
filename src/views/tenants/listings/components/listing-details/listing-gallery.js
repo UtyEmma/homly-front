@@ -15,7 +15,7 @@ export default function ListingGallery({images, title}) {
                 <li className="breadcrumb-item fs-12 letter-spacing-087 active">{title}</li>
                 </ol>
             </nav>
-            <div className="galleries position-relative" data-animate="zoomIn">
+            <div className="galleries position-relative" >
                 <div className="position-absolute pos-fixed-top-right z-index-3">
                 <ul className="list-inline pt-4 pr-5">
                     <li className="list-inline-item mr-2">

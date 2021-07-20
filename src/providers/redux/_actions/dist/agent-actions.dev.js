@@ -114,7 +114,7 @@ var ShowAllAgents = function ShowAllAgents() {
     _services.AgentService.show().then(function (response) {
       dispatch({
         type: SHOW_AGENTS_SUCCESS,
-        payload: response.data
+        payload: response.data.data
       });
     })["catch"](function (error) {
       dispatch({

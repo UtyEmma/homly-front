@@ -4,8 +4,8 @@ export default function ListingCard({listing}) {
     return (
         <div className="col-md-6 mb-6">
             <div className="card border-0" >
-                <div className="position-relative hover-change-image bg-hover-overlay rounded-lg card-img">
-                <img src={listing.images.[0].url} alt={listing.title} />
+                <div className="position-relative hover-change-image bg-hover-overlay rounded-lg card-img listing-image-container">
+                <img className="listing-image" src={listing.images.[0].url} alt={listing.title} />
                 <div className="card-img-overlay d-flex flex-column">
                     <div><span className="badge badge-primary">For Sale</span></div>
                     <div className="mt-auto d-flex hover-image">

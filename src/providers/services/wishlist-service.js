@@ -9,7 +9,7 @@ export const WishlistService = {
 const options = {
     'Accept' : 'application/json',
     'Content-Type' : 'application/json',
-    'Authorization' : `Bearer ${sessionStorage.getItem('token')}`
+    'Authorization' : `Bearer ${localStorage.getItem('token')}`
 }
 
 async function create(data){
@@ -20,7 +20,7 @@ async function create(data){
         payload : data
     }
 
-    return await Request.post('wishlist/create', request);
+    return await Request.post('tenant/wishlist/create', request);
 }
 
 async function fetchTenantWishlist(){

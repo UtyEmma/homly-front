@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import naijaStateLocalGovernment from 'naija-state-local-government'
+import $ from 'jquery';
 
 export function State({name, title, setSelectedState}){
     const states = naijaStateLocalGovernment.states();
@@ -9,9 +10,9 @@ export function State({name, title, setSelectedState}){
 
     return (
         <>
-            <select className="form-control border-0 shadow-none form-control-lg selectpicker" default title="Select State" data-style="btn-lg py-2 h-52" data-live-search="true" onChange={setState} id="type"  name="state">
+            <select className="form-control border-0 shadow-none form-control-lg selectpicker" default title="Select State" data-style="btn-lg py-2 h-52" data-live-search="true" onChange={setState} id="type"  name={name}>
                 {states ? states.map((state, i) => (
-                    <option key={i}>{state}</option>
+                    <option key={i} value={state}>{state}</option>
                 )) : <option>Select State</option>}
             </select>
         </>
@@ -24,9 +25,9 @@ export function LocalGovt({selectedState, name}){
 
     return (
         <>
-            <select className="form-control border-0 shadow-none form-control-lg selectpicker" data-live-search="true" default title="Select Local Govt" data-style="btn-lg py-2 h-52" id="type"  name={name}>
+            <select className="form-control border-0 shadow-none form-control-lg selectpicker" data-live-search="true" default title="Select Local Govt" data-style="btn-lg py-2 h-52" id="lga" name={name}>
                 {lgas ? lgas.map((lga, i) => (
-                    <option key={i}>{lga}</option>
+                    <option key={i} value={lga}>{lga}</option>
                 )) : <option>Select LGA</option>}
             </select>
         </>
