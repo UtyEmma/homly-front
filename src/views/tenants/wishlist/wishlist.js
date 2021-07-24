@@ -7,11 +7,29 @@ import AddWishlistBtn from './components/add-wishlist-btn'
 import WishlistItem from './components/wishlist-item'
 import WishlistForm from './components/wishlist-form'
 import './css/wishlist.css'
+import { ToastContainer } from 'react-toastify'
+import { FetchWishlist } from 'providers/redux/_actions/wishlist-actions'
+import { useDispatch, useSelector } from 'react-redux'
+import WishlistPlaceholder from './components/wishlist-placeholder'
 
 const Wishlist = ({isLoggedIn, user}) => {
 
+    const dispatch = useDispatch();
+    const fetchWishlist = useSelector((state) => state.wishlists)
+    const {loading, wishlists} = fetchWishlist
+
+    const loadWishlists = () => {
+        dispatch(FetchWishlist())
+    }
+
+    useEffect(() => {
+        !wishlists && loadWishlists()
+    }, [wishlists])
+
     return (
         <div>
+            <ToastContainer />
+
             <NavBar isloggedIn={isLoggedIn} user={user}/>
 
             <main id="content">
@@ -21,15 +39,34 @@ const Wishlist = ({isLoggedIn, user}) => {
                     <div className="container container-xxl">
                     <div className="row align-items-sm-center">
                         <div className="col-md-6">
-                            <h2 className="fs-15 text-dark mb-0">We found <span className="text-primary">45</span> items in your wishlist</h2>
+                            <h2 className="fs-15 text-dark mb-0">
+                                We found 
+                                <span className="text-primary"> {wishlists ? wishlists.wishlists.length : 0} </span> 
+                                items in your wishlist
+                            </h2>
                         </div>
                     </div>
                     </div>
                 </section>
                 <section className="pb-11">
                     <div className="container container-xxl">
-                        <div className="row">        
-                            <WishlistItem />
+                        <div className="row"> 
+                            {
+                                wishlists 
+                                
+                                ?
+
+                                wishlists.wishlists.map((wishlist) => (
+                                    <WishlistItem item={wishlist} />
+                                ))
+
+                                :
+
+                                loading ?                                     
+                                <div className="spinner-border text-gray-lighter" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>  : <WishlistPlaceholder/>
+                            }       
                             <AddWishlistBtn />
                         </div>
                     </div>

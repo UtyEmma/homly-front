@@ -29,6 +29,7 @@ import AgentsListings from './views/agent/listings/agents-listings';
 import AgentProfile from './views/agent/profile';
 import PasswordRecovery from './views/agent/auth/password-recovery';
 import Wishlist from 'views/tenants/wishlist/wishlist';
+import { ToastContainer } from 'react-toastify';
 
 
 function App(props) {

@@ -1,6 +1,7 @@
 import React from 'react'
 import { createRef } from 'react'
 import { useDispatch } from 'react-redux'
+import { ToastContainer } from 'react-toastify'
 import Searchbar from 'views/layouts/components/search/searchbar'
 import Footer from 'views/layouts/footer'
 import NavBar from 'views/layouts/nav-bar'
@@ -22,6 +23,7 @@ const Profile = ({isLoggedIn, user}) => {
 
     return (
         <div>
+            <ToastContainer />
             <NavBar isloggedIn={isLoggedIn} user={user}/>
 
             <Searchbar/>

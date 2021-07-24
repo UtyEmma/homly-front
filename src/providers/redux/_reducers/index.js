@@ -11,13 +11,14 @@ import { FetchDetailsReducer } from "./details-reducer";
 import { AgentsListingsReducer, NewListingReducer, StoreListingReducer,
          ActiveListingsReducer, FetchListingDetails, FetchSingleListing} from "./listing-reducer";
 
-import { CreateWishlistReducer } from "./wishlist-reducer";
+import { CreateWishlistReducer, FetchWishlistReducer } from "./wishlist-reducer";
 
 const rootReducer = combineReducers({
     signup: signupReducer,
     login: loginReducer,
 
     wishlist : CreateWishlistReducer,
+    wishlists: FetchWishlistReducer,
 
     agent_login: AgentLoginReducer,
     agent_signup: AgentSignupReducer,
@@ -34,7 +35,9 @@ const rootReducer = combineReducers({
 
     categories: FetchCategoriesReducer,
 
-    details: FetchDetailsReducer
+    details: FetchDetailsReducer,
+
+
 })
 
 export default rootReducer;

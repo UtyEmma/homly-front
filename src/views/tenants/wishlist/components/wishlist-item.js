@@ -1,14 +1,14 @@
 import React from 'react'
 
-const  WishlistItem = () => {
+const  WishlistItem = ({item}) => {
     return (
-        <div className="col-xxl-3 col-lg-4 col-md-6 px-2 h-100">
+        <div className="col-xxl-3 col-lg-4 col-md-6 px-2 h-100 mb-2">
             <div className="card p-2 border">
                 <div className="card-body">
-                <h2 className="fs-16 mb-1">Self Contained</h2>
-                <p className="font-weight-500 text-gray-light mb-1">Independence Layout, Enugu North, Enugu</p>
+                <h2 className="fs-16 mb-1">{item.category}</h2>
+                <p className="font-weight-500 text-gray-light mb-1">{item.area} {item.lga} {item.state} </p>
                 <p className="fs-17 font-weight-bold text-heading mb-1">
-                    <i className="fa"></i> $1.250.000
+                    <i className="fa"></i> &#8358; {item.budget}.00
                 </p>
                 <ul className="list-inline mb-0">
                     <li className="list-inline-item text-gray font-weight-500 fs-13 mr-sm-4" data-toggle="tooltip" title="3 Bedroom">

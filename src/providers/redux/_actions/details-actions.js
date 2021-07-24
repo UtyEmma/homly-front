@@ -1,14 +1,15 @@
+import Response from "libraries/response/response";
 import { DetailService } from "providers/services/details-service";
 import { DetailsConstants } from "../_contants/details-constants";
 
-const { FETCH_DETAILS_REQUEST, FETCH_DETAILS_SUCCESS, FETCH_DETAILS_FAILURE} = DetailsConstants;
+const { FETCH_DETAILS_REQUEST, FETCH_DETAILS_SUCCESS, FETCH_DETAILS_FAILURE,
+        FETCH_CATEGORY_REQUEST, FETCH_CATEGORY_SUCCESS, FETCH_CATEGORY_FAILURE
+        } = DetailsConstants;
 
 export const FetchDetails = () => (dispatch) => {
-    console.log('fetching_details...')
+    console.log('Fetching Details...')
 
-    dispatch({
-        type: FETCH_DETAILS_REQUEST
-    })
+    dispatch({ type: FETCH_DETAILS_REQUEST })
 
     DetailService.fetchDetails()
                     .then((response) => {
@@ -18,9 +19,11 @@ export const FetchDetails = () => (dispatch) => {
                         })
                     })
                     .catch((error) => {
+                        Response.error(error.response)
                         dispatch({
                             type: FETCH_DETAILS_FAILURE,
                             payload: error.response
                         })
                     })
 }
+

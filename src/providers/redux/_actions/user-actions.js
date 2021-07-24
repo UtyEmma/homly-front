@@ -1,20 +1,14 @@
+import Response from 'libraries/response/response';
 import { userService } from '../../services';
 import { userConstants } from '../_contants/user-constants';
 
-const {
-
-    SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE, 
-    LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE 
-
-} = userConstants;
-
-
+const { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE, 
+        LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE 
+        } = userConstants;
 
 export const signup = (data) => (dispatch) => {
-    console.log("signing_up")
-    dispatch({
-        type: SIGNUP_REQUEST
-    });
+    console.log("Signing Up...")
+    dispatch({ type: SIGNUP_REQUEST });
 
     userService.signup(data)
             .then(response => {
@@ -24,6 +18,7 @@ export const signup = (data) => (dispatch) => {
                 })
             })
             .catch(error => {
+                Response.error(error.response)
                 dispatch({
                     type: SIGNUP_FAILURE,
                     payload: error.response.data.message
@@ -33,10 +28,8 @@ export const signup = (data) => (dispatch) => {
 }
 
 export const login = (data) => (dispatch) => {
-    console.log("logging_in")
-    dispatch({
-        type: LOGIN_REQUEST
-    });
+    console.log("Logging In...")
+    dispatch({ type: LOGIN_REQUEST });
 
     userService.login(data)
             .then(response => {
@@ -52,9 +45,24 @@ export const login = (data) => (dispatch) => {
                 })
             })
             .catch(error => {
+                Response.error(error.response)
                 dispatch({
                     type: LOGIN_FAILURE,
                     payload: error.response.data.message
                 })
+            })
+}
+
+export const TenantLogout = () => {
+    userService.logout()
+            .then((res) => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                localStorage.removeItem('isAuthenticated');
+                localStorage.removeItem('type');
+                return window.location.href = '/login?msg=Logout Successful'
+            })
+            .catch((error) => {
+                return Response.error(error.response)
             })
 }

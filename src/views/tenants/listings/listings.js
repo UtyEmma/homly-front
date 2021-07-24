@@ -32,7 +32,7 @@ const Listing = ({isLoggedIn, user}) => {
 
         return (
             <div>
-                <ToastContainer/>
+                <ToastContainer />
 
                 <NavBar isloggedIn={isLoggedIn} user={user}/>
     
@@ -45,7 +45,7 @@ const Listing = ({isLoggedIn, user}) => {
                             <div className="col-lg-8 mb-8 mb-lg-0">
                             <div className="row align-items-sm-center mb-6">
                                 <div className="col-md-6">
-                                <h2 className="fs-15 text-dark mb-0">We found <span className="text-primary">{active_listings && active_listings.count}</span> properties
+                                <h2 className="fs-15 text-dark mb-0">We found <span className="text-primary">{active_listings ? active_listings.count : 0}</span> properties
                                     available for
                                     you
                                 </h2>

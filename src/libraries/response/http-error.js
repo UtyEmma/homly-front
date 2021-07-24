@@ -13,8 +13,8 @@ export default function Error(err) {
     } 
 }
 
-function handleServerError(err){
-    return toast.error(`Server Error: ${err.message}`)
+function handleServerError(data){
+    return toast.error(`Server Error: ${data.message}`)
 }
 
 function handleFormError(err){
