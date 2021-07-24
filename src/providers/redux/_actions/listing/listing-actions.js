@@ -1,3 +1,6 @@
+
+import Errors from "libraries/response/error-handler";
+import { toast } from "react-toastify";
 import { ListingService } from "../../../services/listing-service";
 import { ListingConstants } from "../../_contants/listing-constants";
 
@@ -37,6 +40,7 @@ export const CreateListing = (data) => (dispatch) =>{
                     })
                 })
                 .catch(error => {
+                    Errors(error, 'http')
                     dispatch({
                         type: NEW_LISTING_FAILURE,
                         payload: error.response
@@ -53,12 +57,14 @@ export const GetAgentListings = () => (dispatch) => {
 
     ListingService.getAgentListings()
                     .then(response => {
+                        toast.success(response.data.data.message);
                         return dispatch({
                             type: GETLISTINGS_SUCCESS,
                             payload: response.data
                         })
                     })
                     .catch(error => {
+                        Errors(error, 'http')
                         return dispatch({
                             type: GETLISTINGS_FAILURE,
                             payload: error.response
@@ -82,9 +88,10 @@ export const ShowAllListings = (params) => (dispatch) => {
                         })
                     })
                     .catch(error => {
+                        Errors(error, 'http')
                         return dispatch({
                             type: ACTIVE_LISTINGS_FAILURE,
-                            payload: error.response
+                            payload: error
                         })
                     })
 }

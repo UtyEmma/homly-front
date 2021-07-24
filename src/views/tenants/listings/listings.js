@@ -5,8 +5,10 @@ import Footer from '../../layouts/footer';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { ShowActiveListings, ShowAllListings } from 'providers/redux/_actions/listing/listing-actions';
-import ListingCard from './components/listing-card';
+import ListingGrid from './components/listing-grid';
+import ListingList from './components/listing-list';
 import ListingFilter from './components/listing-filter';
+import { ToastContainer } from 'react-toastify';
 
 
 const Listing = ({isLoggedIn, user}) => {
@@ -14,10 +16,7 @@ const Listing = ({isLoggedIn, user}) => {
         const listings = useSelector((state) => state.active_listings);
         const {loading, active_listings, active_listings_failed} = listings;
         const [params, setParams] = useState({})
-
-        const fetchActiveListings = () => {
-            dispatch(ShowActiveListings())
-        }
+        const [grid, setGrid] = useState(true)
     
         useEffect(() => {
             fetchListings()
@@ -26,9 +25,15 @@ const Listing = ({isLoggedIn, user}) => {
         const fetchListings = () => {
             dispatch(ShowAllListings(params))
         }
+        
+        const toggleListing = () => {
+            grid ? setGrid(false) : setGrid(true)
+        }
 
         return (
             <div>
+                <ToastContainer/>
+
                 <NavBar isloggedIn={isLoggedIn} user={user}/>
     
                 <main id="content">
@@ -57,10 +62,10 @@ const Listing = ({isLoggedIn, user}) => {
                                     </select>
                                     </div>
                                     <div className="d-none d-md-block">
-                                    <a className="fs-sm-18 text-dark opacity-2" href="listing-with-right-sidebar.html">
+                                    <a className="fs-sm-18 text-dark opacity-2" onClick={toggleListing}>
                                         <i className="fas fa-list" />
                                     </a>
-                                    <a className="fs-sm-18 text-dark ml-5" href="#">
+                                    <a className="fs-sm-18 text-dark ml-5" onClick={toggleListing}>
                                         <i className="fa fa-th-large" />
                                     </a>
                                     </div>
@@ -72,7 +77,8 @@ const Listing = ({isLoggedIn, user}) => {
                                     active_listings
                                         ? 
                                     active_listings.listings.map((listing) => (
-                                        <ListingCard listing={listing} key={listing.unique_id}/>
+                                       grid ? <ListingGrid listing={listing} key={listing.unique_id}/> : 
+                                                <ListingList listing={listing} key={listing.unique_id}/>
                                     ))
                                         : 
                                     <div className="spinner-border text-gray-lighter" role="status">

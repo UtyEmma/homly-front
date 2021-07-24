@@ -1,0 +1,36 @@
+.bs-stepper-item{
+    width: 10px;
+    padding: 3px;
+    border-radius: 10px;
+}
+
+.step .bs-stepper-trigger{
+    padding: 10px !important;
+}
+
+.step.active .bs-stepper-trigger{
+    padding: 10px;
+}
+
+.active .bs-stepper-item{
+    width: 30px;
+    padding: 3px;
+    border-radius: 10px;
+}
+
+.row.display-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row.display-flex > [class*='col-'] {
+    flex-grow: 1;
+}
+
+.wishlist_btn{
+    position: relative;
+}
+
+.wishlist_btn button{
+    height: 100%;
+}

@@ -25,7 +25,7 @@ export function LocalGovt({selectedState, name}){
 
     return (
         <>
-            <select className="form-control border-0 shadow-none form-control-lg selectpicker" data-live-search="true" default title="Select Local Govt" data-style="btn-lg py-2 h-52" id="lga" name={name}>
+            <select className="form-control border-0 shadow-none form-control-lg" data-live-search="true" default title="Select Local Govt" data-style="btn-lg py-2 h-52" id="lga" name={name}>
                 {lgas ? lgas.map((lga, i) => (
                     <option key={i} value={lga}>{lga}</option>
                 )) : <option>Select LGA</option>}
