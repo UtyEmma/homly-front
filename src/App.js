@@ -18,6 +18,7 @@ import Listing from './views/tenants/listings/listings';
 import ListingDetails from './views/tenants/listings/listing-details';
 import Agents from './views/tenants/agents/agents';
 import AgentDetails from './views/tenants/agents/agent-details';
+import Profile from 'views/tenants/profile/profile';
 
 // Agent Imports
 import AgentLogin from './views/agent/auth/agent-login';
@@ -27,8 +28,8 @@ import NewListing from './views/agent/listings/add-listing';
 import AgentsListings from './views/agent/listings/agents-listings';
 import AgentProfile from './views/agent/profile';
 import PasswordRecovery from './views/agent/auth/password-recovery';
-import AddWishlist from 'views/tenants/wishlist/add-wishlist';
 import Wishlist from 'views/tenants/wishlist/wishlist';
+
 
 function App(props) {
   return (
@@ -45,11 +46,10 @@ function App(props) {
           <Route path="/login" component={UserLogin} exact/>
           <Route path="/signup" component={UserSignup} exact/>
           <UserRoute path="/listings" user component={Listing} exact/>
-          {/* <TenantRoute path="/profile" user component={TenantProfile} exact/> */}
           <UserRoute path="/agents" user type="user" component={Agents} exact/>
           <UserRoute path="/agents/:id" user type="user" component={AgentDetails} exact/>
           <UserRoute path="/listings/:slug" user component={ListingDetails} exact/>
-          <TenantRoute path="/add-wishlist" user component={AddWishlist} exact/>
+          <TenantRoute path="/profile" user component={Profile} exact/>
           <TenantRoute path="/wishlist" user component={Wishlist} exact/>
 
           {/* Agent Routes */}

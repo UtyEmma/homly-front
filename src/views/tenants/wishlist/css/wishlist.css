@@ -2,14 +2,21 @@
     width: 10px;
     padding: 3px;
     border-radius: 10px;
+    transition: width 0.7s ease-in-out;
 }
 
 .step .bs-stepper-trigger{
     padding: 10px !important;
+    font-weight: 500 !important;
+}
+
+.step .bs-stepper-trigger:focus{
+    color: #6c757d !important;
 }
 
 .step.active .bs-stepper-trigger{
     padding: 10px;
+    font-weight: 700 !important;
 }
 
 .active .bs-stepper-item{

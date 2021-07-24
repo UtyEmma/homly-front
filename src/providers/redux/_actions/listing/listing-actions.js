@@ -1,6 +1,4 @@
-
-import Errors from "libraries/response/error-handler";
-import { toast } from "react-toastify";
+import Response from "libraries/response/response";
 import { ListingService } from "../../../services/listing-service";
 import { ListingConstants } from "../../_contants/listing-constants";
 
@@ -15,14 +13,11 @@ const { NEW_LISTING_REQUEST, NEW_LISTING_SUCCESS, NEW_LISTING_FAILURE,
     
 export const StoreListing = (data) => (dispatch) => {
     let values = JSON.stringify(data);
-    console.log(values)
     localStorage.setItem('listingData', values);
-
     dispatch({
         type: STORE_LISTING,
         payload: data
     })
-
 }
 
 export const CreateListing = (data) => (dispatch) =>{
@@ -40,7 +35,7 @@ export const CreateListing = (data) => (dispatch) =>{
                     })
                 })
                 .catch(error => {
-                    Errors(error, 'http')
+                    Response.error(error.response)
                     dispatch({
                         type: NEW_LISTING_FAILURE,
                         payload: error.response
@@ -57,14 +52,13 @@ export const GetAgentListings = () => (dispatch) => {
 
     ListingService.getAgentListings()
                     .then(response => {
-                        toast.success(response.data.data.message);
                         return dispatch({
                             type: GETLISTINGS_SUCCESS,
                             payload: response.data
                         })
                     })
                     .catch(error => {
-                        Errors(error, 'http')
+                        Response.error(error.response)
                         return dispatch({
                             type: GETLISTINGS_FAILURE,
                             payload: error.response
@@ -88,7 +82,7 @@ export const ShowAllListings = (params) => (dispatch) => {
                         })
                     })
                     .catch(error => {
-                        Errors(error, 'http')
+                        Response.error(error.response)
                         return dispatch({
                             type: ACTIVE_LISTINGS_FAILURE,
                             payload: error
@@ -112,6 +106,7 @@ export const ShowActiveListings = () => (dispatch) => {
                         })
                     })
                     .catch(error => {
+                        Response.error(error.response)
                         return dispatch({
                             type: ACTIVE_LISTINGS_FAILURE,
                             payload: error.response
@@ -134,6 +129,7 @@ export const FetchListingDetails = () => (dispatch) => {
                         });
                     })
                     .catch(error => {
+                        Response.error(error.response)
                         return dispatch({
                             type : FETCH_LISTING_DETAILS_FAILURE,
                             payload : error.response
@@ -158,6 +154,7 @@ export const FetchSingleListing = (slug) => (dispatch) => {
                         });
                     })
                     .catch(error => {
+                        Response.error(error.response)
                         return dispatch({
                             type : FETCH_SINGLE_LISTING_FAILURE,
                             payload : error.response

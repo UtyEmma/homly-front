@@ -77,7 +77,7 @@ const AgentsListings = (props) => {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    {agents_listings ? agents_listings.data.map((listing) =>(        
+                                    {agents_listings ? agents_listings.data.map((listing) => (        
                                             <AgentListingItem  listing={listing} key={listing.unique_id}/>
                                         )) 
                                         

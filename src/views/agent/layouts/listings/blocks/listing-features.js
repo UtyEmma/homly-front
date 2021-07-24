@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import { FetchDetails } from 'providers/redux/_actions/details-actions';
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreListing } from '../../../../../providers/redux/_actions/listing/listing-actions';
 
-export default function ListingFeatures() {
+export default function ListingFeatures({amenities}) {
 
     const dispatch = useDispatch();
     const listing = useSelector((state) => state.store_listing.store);
@@ -37,30 +38,25 @@ export default function ListingFeatures() {
                         <div className="col-lg-12">
                             <ul className="list-group list-group-no-border">
                                 <div className="row">
-                                    <div className="col-sm-6 col-lg-3">
-                                        <li className="list-group-item px-0 pt-0 pb-2">
-                                            <div className="custom-control custom-checkbox">
-                                            <input type="checkbox" className="custom-control-input" onChange={compileFeatures} name="kitchen" id="kitchen" />
-                                            <label className="custom-control-label" htmlFor="kitchen" >Kitchen</label>
-                                            </div>
-                                        </li>
-                                    </div>
-                                    <div className="col-sm-6  col-lg-3">
-                                        <li className="list-group-item px-0 pt-0 pb-2">
-                                            <div className="custom-control custom-checkbox">
-                                            <input type="checkbox" className="custom-control-input" onChange={compileFeatures} name="water" id="water" />
-                                            <label className="custom-control-label" htmlFor="water" >Water</label>
-                                            </div>
-                                        </li>
-                                    </div>
-                                    <div className="col-sm-6  col-lg-3">
-                                        <li className="list-group-item px-0 pt-0 pb-2">
-                                            <div className="custom-control custom-checkbox">
-                                            <input type="checkbox" className="custom-control-input" onChange={compileFeatures} name="furnished" id="furnished" />
-                                            <label className="custom-control-label" htmlFor="furnished" >Furnished</label>
-                                            </div>
-                                        </li>
-                                    </div> 
+                                    {
+
+                                    amenities 
+                                    
+                                    && 
+
+                                    amenities.map(item => (
+                                        <div className="col-sm-6 col-lg-3">
+                                            <li className="list-group-item px-0 pt-0 pb-2">
+                                                <div className="custom-control custom-checkbox">
+                                                    <input type="checkbox" className="custom-control-input" onChange={compileFeatures} name={item.toLowerCase().replace(/ /g,'-')} id={item} />
+                                                    <label className="custom-control-label" htmlFor={item} >{item}</label>
+                                                </div>
+                                            </li>
+                                        </div>
+                                    )) 
+                                    
+                                    }
+
                                 </div>
                             </ul>
                         </div>

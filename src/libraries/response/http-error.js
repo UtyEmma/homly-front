@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 
-export default function HttpError(err) {
+export default function Error(err) {
     switch (err.status) {
         case 500:
             return handleServerError(err.data)
@@ -9,7 +9,7 @@ export default function HttpError(err) {
         case 401: 
             return handleUnauthorizedError(err.data)
         default:
-            break;
+            return handleServerError(err.data);
     } 
 }
 

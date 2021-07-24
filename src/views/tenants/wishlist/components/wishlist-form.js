@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import 'bs-stepper/dist/css/bs-stepper.min.css'
 import Stepper from 'bs-stepper'
 import { useRef } from 'react';
+import { TagifyFeatures } from 'views/layouts/components/details/features';
+import { TagifyAmenities } from 'views/layouts/components/details/amenities';
 
 const WishlistForm = () => {
     const dispatch = useDispatch();
@@ -153,7 +155,7 @@ const WishlistForm = () => {
                                 <div className="col-md-12 px-2">
                                     <div className="form-group">
                                         <label htmlFor="features" className="text-heading">Select Features</label>
-                                        <Tagify suggestions={listingFeatures} message="Type Features" {...register('features')} val={features} setValue={setFeatures}  id="features"  name="features[]" />
+                                        <TagifyFeatures message="Type Features" validate={{...register('features')}} val={features} setValue={setFeatures}  id="features"  name="features[]"/>
                                         <p className="text-danger fs-14">{errors.features?.message}</p>
                                     </div>
                                 </div>
@@ -161,7 +163,7 @@ const WishlistForm = () => {
                                 <div className="col-md-12 px-2">
                                     <div className="form-group">
                                         <label htmlFor="amenities" className="text-heading">Select Amenities</label>
-                                        <Tagify suggestions={listingAmenities} {...register('amenities')} message="Type Amenities" name="amenities[]" val={amenities} setValue={setAmenities} label="Amenities" />   
+                                        <TagifyAmenities validate={{...register('amenities')}} message="Type Amenities" name="amenities[]" val={amenities} setValue={setAmenities} label="Amenities" />   
                                         <p className="text-danger fs-14">{errors.amenities?.message}</p>
                                     </div>
                                 </div>

@@ -1,7 +1,9 @@
 import { toast } from "react-toastify"
-import { Errors } from "./error-handler"
+import Error from "./http-error"
 
-const Response = (data) => {
-    data.type === 'success' && toast.success(data.message)
-    data.type === 'error' && Errors(data)
+const Response = {
+    success : (data) => { toast.success(data.message) },
+    error: (data)=>{ Error(data) }
 }
+
+export default Response;

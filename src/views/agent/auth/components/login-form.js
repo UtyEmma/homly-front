@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom';
 import { AgentLogin } from '../../../../providers/redux/_actions/agent-actions';
 import { AgentLoginSchema } from '../schema';
+import GoogleAuth from '../socialite/google-auth';
 
 
 const AgentLoginForm = () =>  {
@@ -98,10 +99,11 @@ const AgentLoginForm = () =>  {
                         </a>
                         </div>
                         <div className="col-sm-6 px-2 mb-4">
-                        <a href="#" className="btn btn-lg btn-block text-heading border px-0 bg-hover-accent">
+                        {/* <a href="#" className="btn btn-lg btn-block text-heading border px-0 bg-hover-accent">
                             <img src="images/google.png" alt="Google" className="mr-2"/>
                             Google
-                        </a>
+                        </a> */}
+                        <GoogleAuth />
                         </div>
                     </div>
                     </div>

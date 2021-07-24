@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreListing } from '../../../../../providers/redux/_actions/listing/listing-actions';
 
-export default function ListingDetails() {
+export default function ListingDetails({features}) {
     const dispatch = useDispatch();
     const listing = useSelector((state) => state.store_listing.store);
 
@@ -34,34 +34,23 @@ export default function ListingDetails() {
                         <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
                         adipiscing elit</p>
                         <div className="row">
-                        <div className="col-lg-4">
-                            <div className="form-group">
-                            <label htmlFor="size-in-ft" className="text-heading">Number of Bedrooms <span className="text-muted">(only numbers)</span></label>
-                            <select className="form-control border-0 shadow-none form-control-lg selectpicker" title="Select" data-style="btn-lg py-2 h-52" id="category" onChange={compileDetails} name="no_of_bedrooms">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">Above 10</option>
-                            </select>
-                            </div>
+                            {
+                                features
+
+                                &&
+
+                                features.map((item) => (
+                                    <div className="col-lg-4">
+                                        <div className="form-group">
+                                        <label htmlFor="number-of-bathrooms" className="text-heading">{item}<span className="text-muted">(only numbers)</span></label>
+                                        <input type="text" onChange={compileDetails} className="form-control form-control-lg border-0" id="number-of-bathrooms" name={item.toLowerCase().replace(/ /g,'-')} />
+                                        </div>
+                                    </div>
+                                ))
+                            }
+
                         </div>
-                        <div className="col-lg-4">
-                            <div className="form-group">
-                            <label htmlFor="number-of-bathrooms" className="text-heading">Number of Bathrooms <span className="text-muted">(only numbers)</span></label>
-                            <input type="text" onChange={compileDetails} className="form-control form-control-lg border-0" id="number-of-bathrooms" name="no_of_bathrooms" />
-                            </div>
-                        </div>
-                        <div className="col-lg-4">
-                            <div className="form-group">
-                            <label htmlFor="room" className="text-heading">Average Room Size</label>
-                            <input type="text" className="form-control form-control-lg border-0" onChange={compileDetails} id="room" name="rooms" />
-                            </div>
-                        </div>
-                        </div>
+
                         <div className="row">
                         <div className="col-lg-12">
                             <div className="form-group">
