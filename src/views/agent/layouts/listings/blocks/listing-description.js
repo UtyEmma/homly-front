@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import SelectListingCategory from 'views/layouts/components/details/categories';
 import { StoreListing } from '../../../../../providers/redux/_actions/listing/listing-actions';
 
 export default function ListingDescription() {
@@ -42,6 +43,10 @@ export default function ListingDescription() {
                             </div>
                             <div className="form-group mb-0">
                                 <label htmlFor="category" className="text-heading">Type</label>
+                                <SelectListingCategory 
+                                    name='type'
+                                    onChange={compileData}
+                                />
                                 <input type="text" className="form-control form-control-lg border-0" id="type" onChange={compileData} name="type" />
                             </div>
                             <div className="form-group mb-0">

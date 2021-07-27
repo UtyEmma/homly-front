@@ -1,7 +1,7 @@
 import { Request } from "./api/http";
 
 export const userService = {
-    signup, login, getTenant, updateTenantData, tenantResendEmail 
+    signup, login, getTenant, updateTenantData, tenantResendEmail , logout
 }
 
 const options = {
@@ -43,6 +43,16 @@ async function getTenant(){
         }
     }
     return await Request.get('tenant/auth_user', request)
+}
+
+async function logout(){
+    const request = {
+        config: {
+            headers: authHeaders
+        }
+    }
+
+    return await Request.get('tenant/logout', request)
 }
 
 async function updateTenantData(data) {

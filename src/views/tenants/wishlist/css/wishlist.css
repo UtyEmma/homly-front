@@ -1,0 +1,43 @@
+.bs-stepper-item{
+    width: 10px;
+    padding: 3px;
+    border-radius: 10px;
+    transition: width 0.7s ease-in-out;
+}
+
+.step .bs-stepper-trigger{
+    padding: 10px !important;
+    font-weight: 500 !important;
+}
+
+.step .bs-stepper-trigger:focus{
+    color: #6c757d !important;
+}
+
+.step.active .bs-stepper-trigger{
+    padding: 10px;
+    font-weight: 700 !important;
+}
+
+.active .bs-stepper-item{
+    width: 30px;
+    padding: 3px;
+    border-radius: 10px;
+}
+
+.row.display-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row.display-flex > [class*='col-'] {
+    flex-grow: 1;
+}
+
+.wishlist_btn{
+    position: relative;
+}
+
+.wishlist_btn button{
+    height: 100%;
+}

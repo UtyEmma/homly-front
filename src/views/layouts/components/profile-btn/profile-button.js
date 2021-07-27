@@ -25,8 +25,8 @@ function loggedIn(user) {
                 </div>
                 <a href="" className="nav-link px-2 dropdown-toggle" data-toggle="dropdown">{user.firstname} {user.lastname}</a>
                 <div className="dropdown-menu dropdown-menu-right">
-                    <a className="dropdown-item" href="/agent-profile">My Profile</a>
-                    <a className="dropdown-item" href="#">Logout</a>
+                    <a className="dropdown-item" href="/profile">My Profile</a>
+                    <a className="dropdown-item" href="/logout">Logout</a>
                 </div>
             </li>
         </ul>

@@ -7,6 +7,7 @@ import ListingMedia from './blocks/listing-media'
 import ListingFeatures from './blocks/listing-features'
 import ListingDetails from './blocks/listing-details'
 import { toast } from 'react-toastify';
+import { FetchDetails } from 'providers/redux/_actions/details-actions';
 
 function AddListingForm() {
     const dispatch = useDispatch();
@@ -14,27 +15,35 @@ function AddListingForm() {
     const listing = useSelector((state) => state.store_listing);
     const {store, listing_failure, listing_success} = listing;
 
+    const fetchDetails = useSelector(state => state.details)
+    const {loading, details, error} = fetchDetails
+
+    const loadDetails = () => { dispatch(FetchDetails()) }
+    let features = [];
+
     useEffect(() => {
-        if(listing_success){
-            toast.success(listing_success.data.message);
-        }
-        if(listing_failure){
-            toast.error(listing_failure.data.message)
-        }
+        !details && loadDetails()
+        listing_success && toast.success(listing_success.data.message)        
+        listing_failure && toast.error(listing_failure.data.message)
     }, [listing_success, listing_failure])
 
     const handleFormData = (e) => {
         e.preventDefault()
         let formData = new FormData(e.target);
-        formData.set('features', JSON.stringify(store.features))
-        formData.set('details', JSON.stringify(store.details))
-        formData.delete('no-of-bedrooms')
-        formData.delete('number-of-bathrooms')
-        formData.delete('rooms')
-        formData.delete('kitchen')
-        formData.delete('extra-details')
-        formData.delete('water')
-        formData.delete('furnished')
+        if (store) {
+            formData.set('features', JSON.stringify(store.features))
+            details.features.map((feature) => (
+                formData.delete(feature.toLowerCase().replace(/ /g,'-'))
+            ))
+        }
+
+        if (store) {
+            details.amenities.map((amenity) => (
+                formData.delete(amenity.toLowerCase().replace(/ /g,'-'))
+            ))
+            formData.set('details', JSON.stringify(store.details))
+        }
+
         dispatch(CreateListing(formData))
     }
 
@@ -47,9 +56,9 @@ function AddListingForm() {
 
                 <ListingLocation />
 
-                <ListingDetails />
+                <ListingDetails features={details && details.features} />
 
-                <ListingFeatures />
+                <ListingFeatures amenities={details && details.amenities}/>
             </div>
         </form>
     )

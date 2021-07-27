@@ -1,4 +1,4 @@
-import { ERROR } from 'libraries/toastify/toastify';
+import Response from 'libraries/response/response';
 import { AgentService } from '../../services';
 import { AgentConstants } from '../_contants/agent-constants';
 
@@ -11,10 +11,8 @@ const {
 
 
 export const AgentSignup = (data) => (dispatch) => {
-    console.log("signing_up")
-    dispatch({
-        type: SIGNUP_REQUEST
-    });
+    console.log("Signing up...")
+    dispatch({ type: SIGNUP_REQUEST });
 
     AgentService.signup(data)
             .then(response => {
@@ -24,6 +22,7 @@ export const AgentSignup = (data) => (dispatch) => {
                 })
             })
             .catch(error => {
+                Response.error(error.response)
                 dispatch({
                     type: SIGNUP_FAILURE,
                     payload: error.response
@@ -32,11 +31,8 @@ export const AgentSignup = (data) => (dispatch) => {
 }
 
 export const AgentLogin = (data) => (dispatch) => {
-    console.log("logging_in")
-
-    dispatch({
-        type: LOGIN_REQUEST
-    });
+    console.log("Logging in...")
+    dispatch({ type: LOGIN_REQUEST });
 
     AgentService.login(data)
             .then(response => {
@@ -54,6 +50,7 @@ export const AgentLogin = (data) => (dispatch) => {
                 })
             })
             .catch(error => {
+                Response.error(error.response)
                 dispatch({
                     type: LOGIN_FAILURE,
                     payload: error.response
@@ -62,10 +59,8 @@ export const AgentLogin = (data) => (dispatch) => {
 }
 
 export const UpdateAgentProfile = (data) => (dispatch) => {
-    console.log('updating_data')
-    dispatch({
-        type: UPDATE_REQUEST
-    })
+    console.log('Updating Data...')
+    dispatch({ type: UPDATE_REQUEST })
 
     AgentService.update(data)
                 .then((response) => {
@@ -77,7 +72,7 @@ export const UpdateAgentProfile = (data) => (dispatch) => {
                     })
                 })
                 .catch((error) => {
-                    ERROR(error.response.data.message)
+                    Response.error(error.response)
                     dispatch({
                         type: UPDATE_FAILURE,
                         payload: error.response
@@ -86,11 +81,9 @@ export const UpdateAgentProfile = (data) => (dispatch) => {
 }
 
 export const ShowAllAgents = () => (dispatch) => {
-    console.log('Fetching_Agents')
+    console.log('Fetching Agents...')
 
-    dispatch({
-        type: SHOW_AGENTS_REQUEST
-    })
+    dispatch({ type: SHOW_AGENTS_REQUEST })
 
     AgentService.show()
             .then((response) => {
@@ -100,6 +93,7 @@ export const ShowAllAgents = () => (dispatch) => {
                 })
             })
             .catch((error) => {
+                Response.error(error.response)
                 dispatch({
                     type: SHOW_AGENTS_FAILURE,
                     payload: error.response

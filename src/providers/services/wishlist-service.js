@@ -14,9 +14,7 @@ const options = {
 
 async function create(data){
     const request = {
-        config : {
-            headers : options
-        },
+        config : { headers : options },
         payload : data
     }
 
@@ -24,24 +22,16 @@ async function create(data){
 }
 
 async function fetchTenantWishlist(){
-    const request = {
-        config : { headers : options }
-    }
-
-    return await Request.get('wishlist/fetch', request);
+    const config = { headers : options }
+    return await Request.get('tenant/wishlist/get-wishlist', config);
 }
 
 async function fetchSingleWishlist($id){
-    const request = {
-        config : { headers : options }
-    }
-
-    return await Request.get(`wishlist/${$id}`, request);
+    const config = { headers : options }
+    return await Request.get(`tenant/wishlist/${$id}`, config);
 }
 
 async function fetchWishlistForAgent(){
-    const request = {
-        config : { headers : options }
-    }
-    return await Request.get('wishlist/agent', request);
+    const config = { headers : options }
+    return await Request.get('wishlist/agent', config);
 }
