@@ -1,6 +1,10 @@
 import { toast } from "react-toastify";
 
 export default function Error(err) {
+    if(!err){
+        return toast.error("Server Error: The Server is Down")
+    }
+
     switch (err.status) {
         case 500:
             return handleServerError(err.data)

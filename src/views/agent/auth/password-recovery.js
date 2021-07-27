@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-
-import NavBar from 'views/layouts/nav-bar';
-import Footer from 'views/layouts/footer';
+import Footer from 'components/shared/footer';
+import NavBar from 'components/shared/nav-bar';
 
 export default class PasswordRecovery extends Component {
     render() {

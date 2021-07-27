@@ -1,7 +1,5 @@
 import React, {Component, useEffect} from 'react'
 
-import NavBar from '../../layouts/nav-bar'
-import Footer from '../../layouts/footer'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { FetchSingleListing } from 'providers/redux/_actions/listing/listing-actions'
@@ -10,6 +8,10 @@ import ListingGallery from './components/listing-details/listing-gallery'
 import ListingComponents from './components/listing-details'
 import ListingAction from './components/listing-action-card'
 import Searchbar from 'views/layouts/components/search/searchbar'
+import Preloader from 'components/preloader/preloader'
+
+import NavBar from 'components/shared/nav-bar'
+import Footer from 'components/shared/footer'
 
 
 const ListingDetails = ({isLoggedIn, user}) => {
@@ -29,6 +31,7 @@ const ListingDetails = ({isLoggedIn, user}) => {
 
     return (
         <div>
+            <Preloader loading={loading}/>
             <ToastContainer />
             <NavBar isloggedIn={isLoggedIn} user={user}/>
 
@@ -107,10 +110,7 @@ const ListingDetails = ({isLoggedIn, user}) => {
                 </section>
                 </main>
 
-
-
-
-            <Footer/>
+            <Footer />
         </div>
     )
 

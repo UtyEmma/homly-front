@@ -42,8 +42,8 @@ export default function ListingDetails({features}) {
                                 features.map((item) => (
                                     <div className="col-lg-4">
                                         <div className="form-group">
-                                        <label htmlFor="number-of-bathrooms" className="text-heading">{item}<span className="text-muted">(only numbers)</span></label>
-                                        <input type="text" onChange={compileDetails} className="form-control form-control-lg border-0" id="number-of-bathrooms" name={item.toLowerCase().replace(/ /g,'-')} />
+                                        <label htmlFor={item.toLowerCase().replace(/ /g,'-')} className="text-heading">{item}<span className="text-muted">(only numbers)</span></label>
+                                        <input type="text" onChange={compileDetails} className="form-control form-control-lg border-0" id={item.toLowerCase().replace(/ /g,'-')} name={item.toLowerCase().replace(/ /g,'-')} />
                                         </div>
                                     </div>
                                 ))
@@ -55,7 +55,7 @@ export default function ListingDetails({features}) {
                         <div className="col-lg-12">
                             <div className="form-group">
                             <label htmlFor="extra-details" className="text-heading">Extra details</label>
-                            <textarea className="form-control border-0" rows={5} id="extra_details" name="extra-details" onChange={compileDetails} defaultValue={""} />
+                                <textarea className="form-control border-0" rows={5} id="extra_details" name="extra-details" onChange={compileDetails} />
                             </div>
                         </div>
                         </div>

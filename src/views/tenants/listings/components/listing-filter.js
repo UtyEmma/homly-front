@@ -1,6 +1,8 @@
+import { LocalGovt, State } from 'components/city-state/city-state';
 import { ShowAllListings } from 'providers/redux/_actions/listing/listing-actions';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
+import SelectListingCategory from 'views/layouts/components/details/categories';
 
 export default function ListingFilter({params, setParams}) {
 
@@ -11,40 +13,22 @@ export default function ListingFilter({params, setParams}) {
         });
     }
 
+    const [selectedState, setSelectedState] = useState("Enugu");
+
     return (
-        <section className="pb-4 page-title shadow">
+        <section className="py-4 page-title shadow">
             <div className="container">
             <nav aria-label="breadcrumb">
-                <ol className="breadcrumb pt-6 pt-lg-2 lh-15 pb-5">
-                <li className="breadcrumb-item"><a href="#">Home</a></li>
-                <li className="breadcrumb-item active" aria-current="page">Listing</li>
-                </ol>
-                <h1 className="fs-30 lh-1 mb-0 text-heading font-weight-600">Available Properties</h1>
+                {/* <h1 className="fs-30 lh-1 mb-0 text-heading font-weight-600">Available Properties</h1> */}
                 <div className="mt-6 form-search-01">
                 <form className="form-inline mx-n1" id="accordion-5">
                     <div className="form-group p-1">
-                    <label htmlFor="location" className="sr-only">State</label>
-                    <select className="form-control border-0 shadow-xxs-1 bg-transparent font-weight-600 selectpicker" title="State" name="state" onChange={parseQueryParams} data-style="bg-white" id="location">
-                        <option>Austin</option>
-                        <option>Boston</option>
-                        <option>Chicago</option>
-                        <option>Denver</option>
-                        <option>Los Angeles</option>
-                        <option>New York</option>
-                        <option>San Francisco</option>
-                    </select>
+                        <label htmlFor="location"  className="sr-only">State</label>
+                        <State setSelectedState={setSelectedState} name="state"/>
                     </div>
                     <div className="form-group p-1">
-                        <label htmlFor="lga" className="sr-only">Local Govt</label>
-                        <select className="form-control border-0 shadow-xxs-1 bg-transparent font-weight-600 selectpicker" title="Local Govt" onChange={parseQueryParams} name="lga"  data-style="bg-white" id="lga">
-                            <option>Austin</option>
-                            <option>Boston</option>
-                            <option>Chicago</option>
-                            <option>Denver</option>
-                            <option>Los Angeles</option>
-                            <option>New York</option>
-                            <option>San Francisco</option>
-                        </select>
+                        <label htmlFor="lga"  className="sr-only">Local Govt</label>
+                        <LocalGovt name="lga" selectedState={selectedState}/>
                     </div>
                     <div className="form-group p-1">
                     <label htmlFor="any-price" className="sr-only">Any Price</label>
@@ -55,25 +39,7 @@ export default function ListingFilter({params, setParams}) {
                     </select>
                     </div>
                     <div className="form-group p-1">
-                    <label htmlFor="type" className="sr-only">Type</label>
-                    <select className="form-control border-0 shadow-xxs-1 bg-transparent font-weight-600 selectpicker" title="Type" data-style="bg-white" onChange={parseQueryParams} name="type" id="type">
-                        <option selected>Self Contained</option>
-                        <option>Duplex</option>
-                        <option>motel</option>
-                        <option>Utibe</option>
-                    </select>
-                    </div>
-                    <div className="form-group p-1">
-                    <label htmlFor="area" className="sr-only">Area</label>
-                    <select className="form-control border-0 shadow-xxs-1 bg-transparent font-weight-600 selectpicker" title="Area" data-style="bg-white" onChange={parseQueryParams} name="area" id="area">
-                        <option>Albany Park</option>
-                        <option>Altgeld Gardens</option>
-                        <option>Andersonville</option>
-                        <option>Beverly</option>
-                        <option>Brickel</option>
-                        <option>Brooklyn</option>
-                        <option>Brookside</option>
-                    </select>
+                        <SelectListingCategory name="type" onChange={parseQueryParams} id="type"/>
                     </div>
                     <div className="form-group p-1">
                     <label htmlFor="room" className="sr-only">Room</label>

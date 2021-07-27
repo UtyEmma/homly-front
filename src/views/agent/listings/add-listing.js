@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 
-import Sidebar from '../layouts/shared/sidebar'
-import Header from '../layouts/shared/header'
 import AddListingForm from '../layouts/listings/add-listing-form'
+import Header from '../layouts/shared/header';
+import Sidebar from '../layouts/shared/sidebar';
 
 const NewListing = ({agent}) => {
         return (

@@ -38,11 +38,6 @@ const UserLoginForm = () =>  {
             <div className="card border-0 shadow-xxs-2 mb-6">
                 <div className="card-body px-8">
                 <h2 className="card-title fs-30 font-weight-600 text-dark lh-16 mb-2">Log In</h2>
-                <p className="mb-4">Don’t have an account yet?  
-                    <a href="./signup" className="text-heading hover-primary">
-                        <u> Sign up for free?</u>
-                    </a>
-                </p>
 
                 <form className="form" id="loginForm" onSubmit={handleSubmit(handleSignup, handleErrors)}>
                     <div className="form-group mb-4">
@@ -100,6 +95,13 @@ const UserLoginForm = () =>  {
                     </a> */}
                         <GoogleAuth/>
                     </div>
+                </div>
+                <div className="text-center my-4">
+                    <p className="mb-4">Don’t have an account yet?  
+                        <a href="./signup" className="text-heading hover-primary">
+                            <u> Sign up here</u>
+                        </a>
+                    </p>
                 </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState } from 'react'
 
-import NavBar from '../../layouts/nav-bar';
-import Footer from '../../layouts/footer';
+import NavBar from 'components/shared/nav-bar';
+import Footer from 'components/shared/footer';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { ShowActiveListings, ShowAllListings } from 'providers/redux/_actions/listing/listing-actions';
@@ -9,39 +9,55 @@ import ListingGrid from './components/listing-grid';
 import ListingList from './components/listing-list';
 import ListingFilter from './components/listing-filter';
 import { ToastContainer } from 'react-toastify';
+import Preloader from 'components/preloader/preloader';
+import Searchbar from 'views/layouts/components/search/searchbar';
+import ListingNotFound from 'views/layouts/components/404/404-listing';
 
 
-const Listing = ({isLoggedIn, user}) => {
+const Listing = ({isLoggedIn, user, results}) => {
         const dispatch = useDispatch();
         const listings = useSelector((state) => state.active_listings);
-        const {loading, active_listings, active_listings_failed} = listings;
+        const {loading, active_listings} = listings;
         const [params, setParams] = useState({})
         const [grid, setGrid] = useState(true)
-    
+
         useEffect(() => {
-            fetchListings()
+            if(!active_listings && !results) {
+                fetchListings()
+            } 
         }, [params])
 
         const fetchListings = () => {
             dispatch(ShowAllListings(params))
         }
         
-        const toggleListing = () => {
-            grid ? setGrid(false) : setGrid(true)
+        const toggleGrid = () => {
+            if(!grid){
+                setGrid(true)
+            }
         }
 
+        const toggleList = () => {
+            if(grid){
+                setGrid(false)
+            }
+        }
+
+        
         return (
             <div>
+                
+                <Preloader loading={loading}/>
                 <ToastContainer />
-
                 <NavBar isloggedIn={isLoggedIn} user={user}/>
     
                 <main id="content">
+                    <Searchbar />
                     <ListingFilter params={params} setParams={setParams}/>
 
                     <section className="pt-8 pb-11">
                         <div className="container">
-                        <div className="row">
+                        <div className="row gx-4">
                             <div className="col-lg-8 mb-8 mb-lg-0">
                             <div className="row align-items-sm-center mb-6">
                                 <div className="col-md-6">
@@ -62,47 +78,62 @@ const Listing = ({isLoggedIn, user}) => {
                                     </select>
                                     </div>
                                     <div className="d-none d-md-block">
-                                    <a className="fs-sm-18 text-dark opacity-2" onClick={toggleListing}>
+                                    <button className="btn fs-sm-18 px-2 py-0 text-dark opacity-2" onClick={toggleList}>
                                         <i className="fas fa-list" />
-                                    </a>
-                                    <a className="fs-sm-18 text-dark ml-5" onClick={toggleListing}>
+                                    </button>
+                                    <button className="btn fs-sm-18 px-2 py-0 text-dark ml-5" onClick={toggleGrid}>
                                         <i className="fa fa-th-large" />
-                                    </a>
+                                    </button>
                                     </div>
                                 </div>
                                 </div>
                             </div>
                             <div className="row">
                                 {
-                                    active_listings
+                                    active_listings && active_listings.length > 0
                                         ? 
-                                    active_listings.listings.map((listing) => (
-                                       grid ? <ListingGrid listing={listing} key={listing.unique_id}/> : 
-                                                <ListingList listing={listing} key={listing.unique_id}/>
+                                    active_listings.listings.map((listing, index) => (
+                                       grid ? <ListingGrid listing={listing} key={index}/> : 
+                                                <ListingList listing={listing} key={index}/>
                                     ))
                                         : 
+
+                                        loading ?
                                     <div className="spinner-border text-gray-lighter" role="status">
                                         <span className="sr-only">Loading...</span>
                                     </div> 
+
+                                    :
+
+                                    <ListingNotFound/>
                                 }   
                             </div>
-                            <nav className="pt-6">
-                                <ul className="pagination rounded-active justify-content-center mb-0">
-                                <li className="page-item"><a className="page-link" href="#"><i className="far fa-angle-double-left" /></a>
-                                </li>
-                                <li className="page-item"><a className="page-link" href="#">1</a></li>
-                                <li className="page-item active"><a className="page-link" href="#">2</a></li>
-                                <li className="page-item d-none d-sm-block"><a className="page-link" href="#">3</a></li>
-                                <li className="page-item">...</li>
-                                <li className="page-item"><a className="page-link" href="#">6</a></li>
-                                <li className="page-item"><a className="page-link" href="#"><i className="far fa-angle-double-right" /></a></li>
-                                </ul>
-                            </nav>
+
+                            {
+                                active_listings && active_listings.length > 0
+
+                                &&
+
+                                <nav className="pt-6">
+                                    <ul className="pagination rounded-active justify-content-center mb-0">
+                                    <li className="page-item"><a className="page-link" href="#"><i className="far fa-angle-double-left" /></a>
+                                    </li>
+                                    <li className="page-item"><a className="page-link" href="#">1</a></li>
+                                    <li className="page-item active"><a className="page-link" href="#">2</a></li>
+                                    <li className="page-item d-none d-sm-block"><a className="page-link" href="#">3</a></li>
+                                    <li className="page-item">...</li>
+                                    <li className="page-item"><a className="page-link" href="#">6</a></li>
+                                    <li className="page-item"><a className="page-link" href="#"><i className="far fa-angle-double-right" /></a></li>
+                                    </ul>
+                                </nav>
+
+                            }
                             </div>
+
                             <div className="col-lg-4 primary-sidebar sidebar-sticky" id="sidebar">
                             <div className="primary-sidebar-inner">
                                 <div className="card border-0 mb-6 mt-2">
-                                <div className="card-body px-0 pl-lg-6 pr-0 py-0">
+                                <div className="card-body">
                                     <h4 className="card-title fs-16 lh-2 text-dark mb-1">Newsletter Sign Up</h4>
                                     <p className="card-text mb-5">Subscribe to new letter to receive exclusive offer and the latest
                                     news</p>
@@ -116,6 +147,15 @@ const Listing = ({isLoggedIn, user}) => {
                                     </button>
                                     </form>
                                 </div>
+                                </div>
+                                <div className="card border-0 mt-2">
+                                    <div className="card-body text-center py-5 px-0">
+                                        <img src="images/contact-widget.jpg" alt="Want to become an Estate Agent ?" />
+                                        <div className="text-dark mb-6 mt-n2 font-weight-500">Want to become an
+                                        <p className="mb-0 fs-18">Estate Agent?</p>
+                                        </div>
+                                        <a href="agent-signup" class="btn btn-primary">Register</a>
+                                    </div>
                                 </div>
                                 <div className="card border-0 city-widget mb-9">
                                 <div className="card-body px-0 pl-lg-6 py-0">
@@ -359,8 +399,8 @@ const Listing = ({isLoggedIn, user}) => {
     
                 
                 <Footer />
-    
             </div>
+
         )
 }
 

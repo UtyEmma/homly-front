@@ -12,24 +12,12 @@ export default function PopularSection() {
                 </div>
                 <div className="col-lg-7 col-xxl-6">
                     <ul className="nav nav-pills mt-lg-4 justify-content-lg-end mb-lg-0 mb-6" role="tablist">
-                    <li className="nav-item pl-lg-3 pr-3 pr-lg-0 mb-3">
-                        <a className="pointer nav-link active fs-13 letter-spacing-087 text-secondary text-uppercase px-4 bg-gray-01 text-active-white bg-active-primary rounded-lg" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true">all</a>
-                    </li>
-                    <li className="nav-item pl-lg-3 pr-3 pr-lg-0 mb-3">
-                        <a className="pointer nav-link  fs-13 letter-spacing-087 text-secondary text-uppercase px-4 bg-gray-01 text-active-white bg-active-primary rounded-lg" id="pills-apartment-tab" data-toggle="pill" href="#pills-apartment" role="tab" aria-controls="pills-apartment" aria-selected="true">apartment</a>
-                    </li>
-                    <li className="nav-item pl-lg-3 pr-3 pr-lg-0 mb-3">
-                        <a className="pointer nav-link  fs-13 letter-spacing-087 text-secondary text-uppercase px-4 bg-gray-01 text-active-white bg-active-primary rounded-lg" id="pills-house-tab" data-toggle="pill" href="#pills-house" role="tab" aria-controls="pills-house" aria-selected="true">house</a>
-                    </li>
-                    <li className="nav-item pl-lg-3 pr-3 pr-lg-0 mb-3">
-                        <a className="pointer nav-link  fs-13 letter-spacing-087 text-secondary text-uppercase px-4 bg-gray-01 text-active-white bg-active-primary rounded-lg" id="pills-office-tab" data-toggle="pill" href="#pills-office" role="tab" aria-controls="pills-office" aria-selected="true">office</a>
-                    </li>
-                    <li className="nav-item pl-lg-3 pr-3 pr-lg-0 mb-3">
-                        <a className="pointer nav-link  fs-13 letter-spacing-087 text-secondary text-uppercase px-4 bg-gray-01 text-active-white bg-active-primary rounded-lg" id="pills-homes-tab" data-toggle="pill" href="#pills-homes" role="tab" aria-controls="pills-homes" aria-selected="true">homes</a>
-                    </li>
-                    <li className="nav-item pl-lg-3 pr-3 pr-lg-0 mb-3">
-                        <a className="pointer nav-link  fs-13 letter-spacing-087 text-secondary text-uppercase px-4 bg-gray-01 text-active-white bg-active-primary rounded-lg" id="pills-villa-tab" data-toggle="pill" href="#pills-villa" role="tab" aria-controls="pills-villa" aria-selected="true">villa</a>
-                    </li>
+                        <li className="nav-item pl-lg-3 pr-3 pr-lg-0 mb-3">
+                            <a className="pointer nav-link active fs-13 letter-spacing-087 text-secondary text-uppercase px-4 bg-gray-01 text-active-white bg-active-primary rounded-lg" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true">all</a>
+                        </li>
+                        <li className="nav-item pl-lg-3 pr-3 pr-lg-0 mb-3">
+                            <a className="pointer nav-link fs-13 letter-spacing-087 text-secondary text-uppercase px-4 bg-gray-01 text-active-white bg-active-primary rounded-lg" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true">all</a>
+                        </li>
                     </ul>
                 </div>
                 </div>

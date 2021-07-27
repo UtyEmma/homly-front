@@ -1,5 +1,4 @@
 import React from 'react'
-import '../css/listing.css'
 
 export default function ListingGrid({listing}) {
     return (

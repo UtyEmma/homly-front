@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
 
-import NavBar from 'views/layouts/nav-bar'
-import Footer from 'views/layouts/footer'
+import NavBar from 'components/shared/nav-bar'
+import Footer from 'components/shared/footer'
+import Preloader from 'components/preloader/preloader'
 
 const AgentDetails = ({isLoggedIn, user}) => {
     return (
         <div>
+            {/* <Preloader loading={loading} /> */}
             <NavBar isloggedIn={isLoggedIn} user={user}/>
 
             <main id="content">
@@ -1736,8 +1738,6 @@ const AgentDetails = ({isLoggedIn, user}) => {
                 </div>
             </div>
             </main>
-
-
 
             <Footer/>
         </div>

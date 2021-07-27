@@ -29,7 +29,7 @@ const SignUpForm = () =>  {
     return (
         <div className="col-lg-7">
             <ToastContainer position="bottom-right"/>
-            <div className="card border-0 shadow-xxs-2">
+            <div className="card border-0 shadow-xxs-2 h-100">
                 <div className="card-body px-6 py-6">
                 <h2 className="card-title fs-30 font-weight-600 text-dark lh-16 mb-2">Sign Up</h2>
                 <p className="mb-4">Already have an account? <a href="./login" className="text-heading hover-primary"><u>Log in</u></a></p>

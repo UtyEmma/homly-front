@@ -1,15 +1,39 @@
-import React from 'react'
+import { ShowAllListings } from 'providers/redux/_actions/listing/listing-actions'
+import { SearchListings } from 'providers/redux/_actions/search-actions'
+import React, { useEffect, useState } from 'react'
+import { render } from 'react-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Redirect, useHistory } from 'react-router-dom'
+import { SearchbarSelectListing } from '../details/categories'
 
 export default function Searchbar() {
+    const dispatch = useDispatch()
+    const history = useHistory()
+
+    const [query, setQuery] = useState({});
+    const results = useSelector((state) => state.search)
+    const {loading, result} = results
+
+    const compileSearchQuery = (e) => {
+        setQuery({ ...query, [e.target.name] : e.target.value });
+    }
+
+    const search = (e) => {
+        e.preventDefault(); 
+        dispatch(SearchListings(query));
+    }
+
     return (
         <>
+        {result && <Redirect to='/s' results={result}/>}
+        
          <section className="bg-secondary">
             <div className="container">
-            <form className="property-search d-none d-lg-block">
+            <form className="property-search d-none d-lg-block" onSubmit={search}>
                 <div className="row align-items-lg-center" id="accordion-2">
                 <div className="col-xl-2 col-lg-3 col-md-4">
                     <div className="property-search-status-tab d-flex flex-row">
-                    <input className="search-field" type="hidden" name="status" defaultValue="for-rent" data-default-value />
+                    <input className="search-field" type="hidden" defaultValue="for-rent" data-default-value />
                     <button type="button" data-value="for-rent" className="btn shadow-none btn-active-primary text-white rounded-0 hover-white text-uppercase h-lg-80 border-right-0 border-top-0 border-bottom-0 border-left border-white-opacity-03 active flex-md-1">
                         Rent
                     </button>
@@ -19,14 +43,9 @@ export default function Searchbar() {
                     </div>
                 </div>
                 <div className="col-xl-8 col-lg-7 d-md-flex">
-                    <select className="form-control shadow-none form-control-lg selectpicker rounded-right-md-0 rounded-md-top-left-0 rounded-lg-top-left flex-md-1 mt-3 mt-md-0" title="All Types" data-style="btn-lg py-2 h-52 border-right bg-white" id="type-1" name="type">
-                    <option>Condominium</option>
-                    <option>Single-Family Home</option>
-                    <option>Townhouse</option>
-                    <option>Multi-Family Home</option>
-                    </select>
+                    <SearchbarSelectListing onChange={compileSearchQuery}/>
                     <div className="form-group mb-0 position-relative flex-md-3 mt-3 mt-md-0">
-                    <input type="text" className="form-control form-control-lg border-0 shadow-none rounded-left-md-0 pr-8 bg-white placeholder-muted" id="key-word-1" name="key-word" placeholder="Enter an address, neighbourhood..." />
+                    <input type="text" className="form-control form-control-lg border-0 shadow-none rounded-left-md-0 pr-8 bg-white placeholder-muted" onChange={compileSearchQuery} id="key-word-1" name="keyword" placeholder="Enter an address, neighbourhood..." />
                     <button type="submit" className="btn position-absolute pos-fixed-right-center p-0 text-heading fs-20 mr-4 shadow-none">
                         <i className="far fa-search" />
                     </button>
@@ -40,14 +59,7 @@ export default function Searchbar() {
                 <div id="advanced-search-filters-2" className="col-12 pb-6 pt-lg-2 collapse" data-parent="#accordion-2">
                     <div className="row mx-n2">
                     <div className="col-sm-6 col-md-4 col-lg-3 pt-4 px-2">
-                        <select className="form-control border-0 shadow-none form-control-lg selectpicker bg-white" name="status" title="Status" data-style="btn-lg py-2 h-52 bg-white">
-                        <option>All status</option>
-                        <option>For Rent</option>
-                        <option>For Sale</option>
-                        </select>
-                    </div>
-                    <div className="col-sm-6 col-md-4 col-lg-3 pt-4 px-2">
-                        <select className="form-control border-0 shadow-none form-control-lg selectpicker bg-white" name="bedroom" title="Bedrooms" data-style="btn-lg py-2 h-52 bg-white">
+                        <select className="form-control border-0 shadow-none form-control-lg selectpicker bg-white" name="bedroom" title="Bedrooms" onChange={compileSearchQuery} data-style="btn-lg py-2 h-52 bg-white">
                         <option>All Bedrooms</option>
                         <option>1</option>
                         <option>2</option>
@@ -62,7 +74,7 @@ export default function Searchbar() {
                         </select>
                     </div>
                     <div className="col-sm-6 col-md-4 col-lg-3 pt-4 px-2">
-                        <select className="form-control border-0 shadow-none form-control-lg selectpicker bg-white" name="bathrooms" title="Bathrooms" data-style="btn-lg py-2 h-52 bg-white">
+                        <select className="form-control border-0 shadow-none form-control-lg selectpicker bg-white" name="bathrooms" title="Bathrooms" onChange={compileSearchQuery} data-style="btn-lg py-2 h-52 bg-white">
                         <option>All Bathrooms</option>
                         <option>1</option>
                         <option>2</option>
@@ -77,7 +89,7 @@ export default function Searchbar() {
                         </select>
                     </div>
                     <div className="col-sm-6 col-md-4 col-lg-3 pt-4 px-2">
-                        <select className="form-control border-0 shadow-none form-control-lg selectpicker bg-white" title="All Cities" data-style="btn-lg py-2 h-52 bg-white" name="city">
+                        <select className="form-control border-0 shadow-none form-control-lg selectpicker bg-white" title="All Cities" data-style="btn-lg py-2 h-52 bg-white" onChange={compileSearchQuery} name="city">
                         <option>All Cities</option>
                         <option>New York</option>
                         <option>Los Angeles</option>
@@ -89,35 +101,13 @@ export default function Searchbar() {
                         <option>Atlanta</option>
                         </select>
                     </div>
-                    <div className="col-sm-6 col-md-4 col-lg-3 pt-4 px-2">
-                        <select className="form-control border-0 shadow-none form-control-lg selectpicker bg-white" name="areas" title="All Areas" data-style="btn-lg py-2 h-52 bg-white">
-                        <option>All Areas</option>
-                        <option>Albany Park</option>
-                        <option>Altgeld Gardens</option>
-                        <option>Andersonville</option>
-                        <option>Beverly</option>
-                        <option>Brickel</option>
-                        <option>Central City</option>
-                        <option>Coconut Grove</option>
-                        </select>
-                    </div>
-                    <div className="col-sm-6 col-md-4 col-lg-3 pt-4 px-2">
-                        <input type="text" className="form-control form-control-lg border-0 shadow-none bg-white" placeholder="Property ID" name="property-id" />
-                    </div>
                     </div>
                     <div className="row">
                     <div className="col-md-6 col-lg-5 pt-6 slider-range slider-range-primary">
                         <label htmlFor="price-2" className="mb-4 text-white">Price Range</label>
                         <div data-slider="true" data-slider-options="{&quot;min&quot;:0,&quot;max&quot;:1000000,&quot;values&quot;:[100000,700000],&quot;type&quot;:&quot;currency&quot;}" />
                         <div className="text-center mt-2">
-                        <input id="price-2" type="text" readOnly className="border-0 amount text-center text-white bg-transparent font-weight-500" name="price" />
-                        </div>
-                    </div>
-                    <div className="col-md-6 col-lg-5 pt-6 slider-range slider-range-primary offset-lg-1">
-                        <label htmlFor="area-size-2" className="mb-4 text-white">Area Size</label>
-                        <div data-slider="true" data-slider-options="{&quot;min&quot;:0,&quot;max&quot;:15000,&quot;values&quot;:[0,12000],&quot;type&quot;:&quot;currency&quot;}" />
-                        <div className="text-center mt-2">
-                        <input id="area-size-2" type="text" readOnly className="border-0 amount text-center text-white bg-transparent font-weight-500" name="area" />
+                        <input id="price-2" type="text" readOnly className="border-0 amount text-center text-white bg-transparent font-weight-500" onChange={compileSearchQuery} name="price" />
                         </div>
                     </div>
                     <div className="col-12 pt-4 pb-2">
@@ -127,96 +117,10 @@ export default function Searchbar() {
                     </div>
                     <div className="collapse row mx-0" id="other-feature-2">
                         <div className="col-sm-6 col-md-4 col-lg-3 py-2">
-                        <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" id="check1-2" name="feature[]" />
-                            <label className="custom-control-label text-white" htmlFor="check1-2">Air
-                            Conditioning</label>
-                        </div>
                         </div>
                         <div className="col-sm-6 col-md-4 col-lg-3 py-2">
                         <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" id="check2-2" name="feature[]" />
-                            <label className="custom-control-label text-white" htmlFor="check2-2">Laundry</label>
-                        </div>
-                        </div>
-                        <div className="col-sm-6 col-md-4 col-lg-3 py-2">
-                        <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" id="check4-2" name="feature[]" />
-                            <label className="custom-control-label text-white" htmlFor="check4-2">Washer</label>
-                        </div>
-                        </div>
-                        <div className="col-sm-6 col-md-4 col-lg-3 py-2">
-                        <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" id="check5-2" name="feature[]" />
-                            <label className="custom-control-label text-white" htmlFor="check5-2">Barbeque</label>
-                        </div>
-                        </div>
-                        <div className="col-sm-6 col-md-4 col-lg-3 py-2">
-                        <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" id="check6-2" name="feature[]" />
-                            <label className="custom-control-label text-white" htmlFor="check6-2">Lawn</label>
-                        </div>
-                        </div>
-                        <div className="col-sm-6 col-md-4 col-lg-3 py-2">
-                        <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" id="check7-2" name="feature[]" />
-                            <label className="custom-control-label text-white" htmlFor="check7-2">Sauna</label>
-                        </div>
-                        </div>
-                        <div className="col-sm-6 col-md-4 col-lg-3 py-2">
-                        <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" id="check8-2" name="feature[]" />
-                            <label className="custom-control-label text-white" htmlFor="check8-2">WiFi</label>
-                        </div>
-                        </div>
-                        <div className="col-sm-6 col-md-4 col-lg-3 py-2">
-                        <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" id="check9-2" name="feature[]" />
-                            <label className="custom-control-label text-white" htmlFor="check9-2">Dryer</label>
-                        </div>
-                        </div>
-                        <div className="col-sm-6 col-md-4 col-lg-3 py-2">
-                        <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" id="check10-2" name="feature[]" />
-                            <label className="custom-control-label text-white" htmlFor="check10-2">Microwave</label>
-                        </div>
-                        </div>
-                        <div className="col-sm-6 col-md-4 col-lg-3 py-2">
-                        <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" id="check11-2" name="feature[]" />
-                            <label className="custom-control-label text-white" htmlFor="check11-2">Swimming
-                            Pool</label>
-                        </div>
-                        </div>
-                        <div className="col-sm-6 col-md-4 col-lg-3 py-2">
-                        <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" id="check12-2" name="feature[]" />
-                            <label className="custom-control-label text-white" htmlFor="check12-2">Window
-                            Coverings</label>
-                        </div>
-                        </div>
-                        <div className="col-sm-6 col-md-4 col-lg-3 py-2">
-                        <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" id="check13-2" name="feature[]" />
-                            <label className="custom-control-label text-white" htmlFor="check13-2">Gym</label>
-                        </div>
-                        </div>
-                        <div className="col-sm-6 col-md-4 col-lg-3 py-2">
-                        <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" id="check14-2" name="feature[]" />
-                            <label className="custom-control-label text-white" htmlFor="check14-2">Outdoor
-                            Shower</label>
-                        </div>
-                        </div>
-                        <div className="col-sm-6 col-md-4 col-lg-3 py-2">
-                        <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" id="check15-2" name="feature[]" />
-                            <label className="custom-control-label text-white" htmlFor="check15-2">TV Cable</label>
-                        </div>
-                        </div>
-                        <div className="col-sm-6 col-md-4 col-lg-3 py-2">
-                        <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" id="check16-2" name="feature[]" />
+                            <input type="checkbox" className="custom-control-input" id="check16-2" onChange={compileSearchQuery} name="feature[]" />
                             <label className="custom-control-label text-white" htmlFor="check16-2">Refrigerator</label>
                         </div>
                         </div>

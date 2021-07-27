@@ -1,10 +1,11 @@
 import React, {Component, useEffect} from 'react'
-import NavBar from 'views/layouts/nav-bar'
-import Footer from 'views/layouts/footer'
+import NavBar from 'components/shared/nav-bar'
+import Footer from 'components/shared/footer'
 import AgentCard from './components/agent-card'
 import { useDispatch, useSelector } from 'react-redux'
 import { ShowAllAgents } from '../../../providers/redux/_actions/agent-actions'
 import Searchbar from 'views/layouts/components/search/searchbar'
+import Preloader from 'components/preloader/preloader'
 
 const Agents = ({isLoggedIn, user}) => {
 
@@ -24,6 +25,8 @@ const Agents = ({isLoggedIn, user}) => {
 
     return (
         <div>
+            <Preloader loading={loading}/>
+            
             <NavBar isloggedIn={isLoggedIn} user={user}/>
 
             <main id="content">
