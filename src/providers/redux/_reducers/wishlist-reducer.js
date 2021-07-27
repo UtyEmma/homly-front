@@ -15,3 +15,17 @@ export function CreateWishlistReducer(state = {}, action){
             return {state};
     }
 }
+
+export function FetchWishlistReducer(state = {}, action){
+    switch (action.type) {
+        case FETCH_WISHLIST_REQUEST:
+            return {...state, loading : true}
+        case FETCH_WISHLIST_SUCCESS:
+            return {...state, loading: false, wishlists: action.payload}
+        case FETCH_WISHLIST_FAILURE:
+            return {...state, loading: false, error: action.payload}
+        default:
+            return {state};
+    }
+}
+

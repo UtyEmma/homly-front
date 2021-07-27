@@ -1,7 +1,7 @@
 import React from 'react'
 import ProfileButton from './components/profile-btn/profile-button'
 
-export default function NavBar(props) {
+export default function NavBar({user, isloggedIn}) {
     return (
         <header className="main-header navbar-light header-sticky header-sticky-smart header-mobile-lg">
             <div className="sticky-area">
@@ -43,7 +43,7 @@ export default function NavBar(props) {
                             </ul>
                         </div>
                         <div className="d-none d-lg-block">
-                            <ProfileButton isloggedIn={props.isloggedIn} user={props.user} />
+                            <ProfileButton isloggedIn={isloggedIn} user={user} />
                         </div>
                     </nav>
                 </div>

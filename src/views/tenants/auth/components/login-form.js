@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { login } from '../../../../providers/redux/_actions/user-actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { __tenantlogin } from 'libraries/validation/schema/tenant-schema';
+import GoogleAuth from 'views/agent/auth/socialite/google-auth';
 
 const UserLoginForm = () =>  {    
     const dispatch = useDispatch()
@@ -93,10 +94,11 @@ const UserLoginForm = () =>  {
                     </a>
                     </div>
                     <div className="col-sm-6 px-2 mb-4">
-                    <a href="#" className="btn btn-lg btn-block text-heading border px-0 bg-hover-accent">
+                    {/* <a href="#" className="btn btn-lg btn-block text-heading border px-0 bg-hover-accent">
                         <img src="images/google.png" alt="Google" className="mr-2" />
                         Google
-                    </a>
+                    </a> */}
+                        <GoogleAuth/>
                     </div>
                 </div>
                 </div>

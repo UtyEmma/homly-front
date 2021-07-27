@@ -17,5 +17,5 @@ const auth_config = {
 }
 
 async function FetchAll(){
-    return Request.post('fetch-categories', auth_config)
+    return Request.get('details/categories', auth_config)
 } 

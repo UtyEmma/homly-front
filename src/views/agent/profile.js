@@ -89,7 +89,7 @@ const AgentProfile = ({agent}) => {
                                     </div>
                                     <div className="d-flex justify-content-end flex-wrap">
                                         <button className="btn btn-lg bg-hover-white border rounded-lg mb-3">Delete Profile</button>
-                                        <button className="btn btn-lg btn-primary ml-4 mb-3">Update Profile</button>
+                                        <button type="submit" className="btn btn-lg btn-primary ml-4 mb-3">Update Profile</button>
                                     </div>
                                     </div>
                                 </div>

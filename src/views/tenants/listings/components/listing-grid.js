@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ListingCard({listing}) {
+export default function ListingGrid({listing}) {
     return (
         <div className="col-md-6 mb-6">
             <div className="card border-0" >

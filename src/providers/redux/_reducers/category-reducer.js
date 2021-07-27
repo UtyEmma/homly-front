@@ -1,6 +1,10 @@
-import { CategoryConstants } from "../_contants/dist/category-constants.dev";
+import { CategoryConstants } from "../_contants/category-constants";
 
-const { FETCH_CATEGORY_REQUEST, FETCH_CATEGORY_SUCCESS, FETCH_CATEGORY_FAILURE } = CategoryConstants;
+
+const { FETCH_CATEGORY_REQUEST,
+        FETCH_CATEGORY_SUCCESS,
+        FETCH_CATEGORY_FAILURE
+        } = CategoryConstants;
 
 export function FetchCategoriesReducer (state = {}, action){
     switch (action.type) {
