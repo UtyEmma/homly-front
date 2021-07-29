@@ -44,8 +44,8 @@ export default function ListingFeatures({amenities}) {
                                     
                                     && 
 
-                                    amenities.map(item => (
-                                        <div className="col-sm-6 col-lg-3">
+                                    amenities.map((item, index) => (
+                                        <div key={index} className="col-sm-6 col-lg-3">
                                             <li className="list-group-item px-0 pt-0 pb-2">
                                                 <div className="custom-control custom-checkbox">
                                                     <input type="checkbox" className="custom-control-input" onChange={compileFeatures} name={item.toLowerCase().replace(/ /g,'-')} id={item} />

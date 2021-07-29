@@ -27,9 +27,10 @@ export const CreateListing = (data) => (dispatch) =>{
 
     ListingService.newListing(data)
                 .then(response => {
+                    Response.success(response.data)
                     dispatch({
                         type: NEW_LISTING_SUCCESS,
-                        payload: response
+                        payload: response.data
                     })
                 })
                 .catch(error => {

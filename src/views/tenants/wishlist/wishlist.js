@@ -46,7 +46,7 @@ const Wishlist = ({isLoggedIn, user}) => {
                         <div className="col-md-6">
                             <h2 className="fs-15 text-dark mb-0">
                                 We found 
-                                <span className="text-primary"> {wishlists ? wishlists.wishlists.length : 0} </span> 
+                                <span className="text-primary"> {wishlists && wishlists.wishlists ? wishlists.wishlists.length : 0} </span> 
                                 items in your wishlist
                             </h2>
                         </div>
@@ -57,7 +57,7 @@ const Wishlist = ({isLoggedIn, user}) => {
                     <div className="container container-xxl">
                         <div className="row"> 
                             {
-                                wishlists 
+                                wishlists && wishlists.wishlists.length > 0
                                 
                                 ?
 

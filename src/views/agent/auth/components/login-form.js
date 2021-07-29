@@ -8,11 +8,12 @@ import { Link, useHistory } from 'react-router-dom';
 import { AgentLogin } from '../../../../providers/redux/_actions/agent-actions';
 import { AgentLoginSchema } from '../schema';
 import GoogleAuth from '../socialite/google-auth';
+import { togglePassword } from 'libraries/forms/toggle-password';
 
 
 const AgentLoginForm = () =>  {
     const agentLogin = useSelector((state) => state.agent_login);
-    const {loading, agent_error, agent_success} = agentLogin;
+    const {loading, agent_success} = agentLogin;
 
     const dispatch = useDispatch()
     const history = useHistory()
@@ -29,15 +30,7 @@ const AgentLoginForm = () =>  {
         if(agent_success){
             history.push('/dashboard')
         }
-        if(agent_error) {
-            handleServerError(agent_error)
-        }
-    }, [agent_success, agent_error, history])
-
-    const handleServerError = (res) => {
-        console.log(res)
-        toast.error(res.data.message)
-    }
+    }, [agent_success])
 
     const handleErrors = () => {
         toast.error("Invalid Input Data")
@@ -45,7 +38,7 @@ const AgentLoginForm = () =>  {
 
         return (
             <div className="col-lg-7">
-                <ToastContainer position={"bottom-left"}/>
+                <ToastContainer />
                 <div className="card border-0 shadow-xxs-2 mb-6">
                     <div className="card-body px-8">
                     <h2 className="card-title fs-30 font-weight-600 text-dark lh-16 mb-2">Log In as Agent</h2>
@@ -61,9 +54,9 @@ const AgentLoginForm = () =>  {
                         <div className="input-group input-group-lg">
                         <input type="password" {...register("password")} className="form-control border-0 shadow-none" id="password" name="password" placeholder="**********" />
                             <div className="input-group-append">
-                            <span className="input-group-text bg-gray-01 border-0 text-body fs-18">
+                            <button onClick={togglePassword} className="input-group-text bg-gray-01 border-0 text-body fs-18">
                                 <i className="far fa-eye-slash" />
-                            </span>
+                            </button>
                             </div>
                         </div>
                         <p className="text-danger fs-14">{errors.password?.message}</p>

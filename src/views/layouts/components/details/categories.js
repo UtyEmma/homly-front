@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // import $ from 'jquery'
 // import 'bootstrap-select'
 
-export default function SelectListingCategory({title, register, formError, name, id, onChange}) {
+export default function SelectListingCategory({title, register, formError, name, id, onChange, classes, styles}) {
     const dispatch = useDispatch();
     const fetchCategories = useSelector(state => state.categories)
     const {loading, categories, error} = fetchCategories
@@ -26,15 +26,47 @@ export default function SelectListingCategory({title, register, formError, name,
                 
                 &&  
                 
-                <select className="form-control border-0 shadow-none form-control-lg" {...register} title="Select" data-style="btn-lg py-2 h-52" id={id} onChange={onChange} name={name}>
+                <select className={classes}  {...register} title="Select" data-style={styles} id={id} onChange={onChange} name={name}>
+                    <option value="">Type</option>
                     {categories.map((category, index) => (
-                        <option key={index}>{category.category_title}</option>
+                        <option value={category.category_title} key={index}>{category.category_title}</option>
                     ))}
                 </select>
 
             }
             <p className="text-danger fs-14">{error}</p>
         </div>
+    )
+}
+
+export function SelectTypes ({id, classes, register, styles, onChange, name}){
+    const dispatch = useDispatch();
+    const fetchCategories = useSelector(state => state.categories)
+    const {loading, categories, error} = fetchCategories
+
+    const loadCategories = () => { dispatch(FetchCategories()) }
+
+    useEffect(() => {
+        if(!categories){
+            loadCategories()
+        }
+    }, [categories])
+
+    return (
+        <>
+            {
+                categories 
+                
+                &&
+
+                <select className={classes}  {...register} title="Select" data-style={styles} id={id} onChange={onChange} name={name}>
+                    <option value="">Type</option>
+                    {categories.map((category, index) => (
+                        <option value={category.category_title} key={index}>{category.category_title}</option>
+                    ))}
+                </select>
+            }
+        </>
     )
 }
 

@@ -16,7 +16,7 @@ const AgentDashboard = ({agent}) => {
                         <div className="px-3 px-lg-6 px-xxl-13 py-5 py-lg-10">
                             <div className="d-flex flex-wrap flex-md-nowrap mb-6">
                             <div className="mr-0 mr-md-auto">
-                                <h2 className="mb-0 text-heading fs-22 lh-15">Welcome back, Ronald Hunter!</h2>
+                                <h2 className="mb-0 text-heading fs-22 lh-15">Welcome back, {agent.firstname} {agent.lastname}!</h2>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At iusto, laboriosam. Atque</p>
                             </div>
                             <div>
@@ -38,7 +38,7 @@ const AgentDashboard = ({agent}) => {
                                     </span>
                                     </div>
                                     <div className="col-7 text-center">
-                                    <p className="fs-42 lh-12 mb-0 counterup" data-start={0} data-end={29} data-decimals={0} data-duration={0} data-separator>29</p>
+                                    <p className="fs-42 lh-12 mb-0 counterup" data-start={0} data-end={agent.no_of_listings} data-decimals={0} data-duration={0} data-separator>{agent.no_of_listings}</p>
                                     <p>Properties</p>
                                     </div>
                                 </div>

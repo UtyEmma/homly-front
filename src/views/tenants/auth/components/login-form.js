@@ -7,12 +7,16 @@ import { login } from '../../../../providers/redux/_actions/user-actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { __tenantlogin } from 'libraries/validation/schema/tenant-schema';
 import GoogleAuth from 'views/agent/auth/socialite/google-auth';
+import { useParams } from 'react-router-dom';
+import { useQuery } from 'libraries/http/query';
 
 const UserLoginForm = () =>  {    
     const dispatch = useDispatch()
 
+    const query = useQuery()
+
     const user_login = useSelector(state => state.login)
-    const {loading, success, error} = user_login;
+    const {loading, success} = user_login;
     
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(__tenantlogin)
@@ -23,9 +27,8 @@ const UserLoginForm = () =>  {
     }
 
     useEffect(() => {
-        if(success){window.location.href = '/'} 
-        error && toast.error(error)
-    }, [success, error])
+        if(success){window.location.href = '/'}
+    }, [success])
 
     const handleErrors = () => {
         toast.error("Invalid Input Data");
@@ -38,6 +41,16 @@ const UserLoginForm = () =>  {
             <div className="card border-0 shadow-xxs-2 mb-6">
                 <div className="card-body px-8">
                 <h2 className="card-title fs-30 font-weight-600 text-dark lh-16 mb-2">Log In</h2>
+
+                {
+                    query.get('msg') 
+                
+                    && 
+                    
+                    <div className="alert alert-danger text-center">
+                        {query.get('msg')}
+                    </div> 
+                }
 
                 <form className="form" id="loginForm" onSubmit={handleSubmit(handleSignup, handleErrors)}>
                     <div className="form-group mb-4">

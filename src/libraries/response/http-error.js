@@ -26,9 +26,10 @@ function handleFormError(err){
 }
 
 function handleUnauthorizedError(){
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    localStorage.removeItem('isAuthenticated');
-    localStorage.removeItem('type');
-    return window.location.href = '/login?msg=Session Expired! Please login.'
+    return toast.error("Unauthorized Error")
+    // localStorage.removeItem('token');
+    // localStorage.removeItem('user');
+    // localStorage.removeItem('isAuthenticated');
+    // localStorage.removeItem('type');
+    // return window.location.href = '/login?msg=Session Expired! Please login.'
 }

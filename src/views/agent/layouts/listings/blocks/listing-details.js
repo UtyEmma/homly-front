@@ -39,8 +39,8 @@ export default function ListingDetails({features}) {
 
                                 &&
 
-                                features.map((item) => (
-                                    <div className="col-lg-4">
+                                features.map((item, index) => (
+                                    <div className="col-lg-4" key={index}>
                                         <div className="form-group">
                                         <label htmlFor={item.toLowerCase().replace(/ /g,'-')} className="text-heading">{item}<span className="text-muted">(only numbers)</span></label>
                                         <input type="text" onChange={compileDetails} className="form-control form-control-lg border-0" id={item.toLowerCase().replace(/ /g,'-')} name={item.toLowerCase().replace(/ /g,'-')} />

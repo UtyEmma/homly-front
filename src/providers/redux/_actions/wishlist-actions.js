@@ -37,17 +37,16 @@ export const FetchWishlist = () => (dispatch) => {
 
     WishlistService.fetchTenantWishlist()
                 .then((response) => {
-                    console.log(response.data.data)
                     return dispatch({
                         type: FETCH_WISHLIST_SUCCESS,
                         payload: response.data.data
                     })
                 })  
                 .catch((error) => {
+                    Response.error(error.response)
                     dispatch({
                         type: FETCH_WISHLIST_FAILURE,
                         payload: error.response
                     })
-                    return Response.error(error.response)
                 })  
 }

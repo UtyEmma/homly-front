@@ -1,12 +1,18 @@
-import React, {Component} from 'react'
+import Preloader from 'components/preloader/preloader';
+import React, {Component, useState} from 'react'
+import { ToastContainer } from 'react-toastify';
 
 import AddListingForm from '../layouts/listings/add-listing-form'
 import Header from '../layouts/shared/header';
 import Sidebar from '../layouts/shared/sidebar';
 
 const NewListing = ({agent}) => {
+        const [isLoading, setIsLoading] = useState(false)
+    
         return (
             <div className="wrapper dashboard-wrapper">
+                <ToastContainer />
+                <Preloader loading={isLoading} />
                 <div className="d-flex flex-wrap flex-xl-nowrap">
                     <Sidebar />
     
@@ -39,7 +45,7 @@ const NewListing = ({agent}) => {
                                     </li>
                                 </ul>
                                 <div className="tab-content shadow-none p-0">
-                                    <AddListingForm />
+                                    <AddListingForm setIsLoading={setIsLoading}/>
                                 </div>
                                 </div>
                             </div>
