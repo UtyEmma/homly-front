@@ -3,19 +3,16 @@ import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "reac
 import Geocode from 'react-geocode'
 import {MapDisplay, MapAutoComplete} from './map/map-display'
 import { useDispatch, useSelector } from 'react-redux';
-import { StoreListing } from '../../../../../providers/redux/_actions/listing/listing-actions';
-
-Geocode.setApiKey( "AIzaSyBBYmJujloM3zNdxMpokW1G_Qo5Qo_05_A" )
-Geocode.setRegion("es");
-Geocode.setLocationType("ROOFTOP");
-Geocode.enableDebug();
+import { StoreListing } from 'providers/redux/_actions/listing/listing-actions';
+import InputAddress from './map/map-address-search';
+import MapContainer from './map/display'
 
 export default function ListingLocation() {
     const dispatch = useDispatch();
      
     const [mapData, setmapData] = useState({
-        address: "Techocra ICT, Kenyatta Enugu",
-        city: '',
+        address: "",
+        city: 'Enugu',
         country: '',
         area: '',
         state: '',
@@ -39,6 +36,10 @@ export default function ListingLocation() {
     }
 
     const getLoadLocation = () => {
+        // Geocode.setApiKey( "AIzaSyBBYmJujloM3zNdxMpokW1G_Qo5Qo_05_A" )
+        // Geocode.setRegion("ng");
+        // Geocode.setLocationType("ROOFTOP");
+        // Geocode.enableDebug();
         Geocode.fromAddress(mapData.address).then(
             (response) => {
                 let latitude = response.results.[0].geometry.location.lat;
@@ -82,10 +83,6 @@ export default function ListingLocation() {
                         Location</h3>
                         <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
                         adipiscing elit</p>
-                        <div className="form-group">
-                        <label htmlFor="address" className="text-heading">Address</label>
-                        <input type="text" onChange={compileData} className="form-control form-control-lg border-0" id="address" name="address"/>
-                        </div>
                         <div className="form-row mx-n2">
                         <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
                             <div className="form-group">
@@ -99,21 +96,22 @@ export default function ListingLocation() {
                             <input type="text" onChange={compileData} className="form-control form-control-lg border-0" id="city" name="city" />
                             </div>
                         </div>
+                        <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
+                            <div className="form-group">
+                            <label htmlFor="address" className="text-heading">Address</label>
+                            <input type="text" onChange={compileData} className="form-control form-control-lg border-0" id="address" name="address"/>
+                            </div>
+                        </div>
                         </div>
                         <div className="form-row mx-n2">
                         <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
                             <div className="form-group">
                             <label htmlFor="landmark" className="text-heading">Landmark / Nearest Bus Stop</label>
+                            <InputAddress mapData={mapData} setMapData={setmapData} compileData={compileData}/>
                             <input type="text" onChange={compileData} className="form-control form-control-lg border-0" id="landmark" name="landmark" />
                             </div>
                         </div>
                         </div>
-
-                        <div className="form-group mb-md-0">
-                        <label htmlFor="landmark" className="text-heading">Land Mark </label>
-                        <MapAutoComplete/>
-                        </div>
-
                     </div>
                     </div>
                 </div>
@@ -124,26 +122,23 @@ export default function ListingLocation() {
                         listing pin on the map</h3>
                         
                         <MapDisplay 
-                            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBYmJujloM3zNdxMpokW1G_Qo5Qo_05_A&libraries=geometry,drawing,places&v=weekly"
-                            loadingElement={<div style={{ height: `100%` }} />}
-                            containerElement={<div style={{ height: `400px` }} />}
-                            mapElement={<div style={{ height: `100%` }} />}
                             latitude={mapData.mapPosition.lat}
                             longitude={mapData.mapPosition.long}
-                            isMarkerShown={true}
+                            mapData={mapData}
+                            setMapData={setmapData}
                         />
 
                         <div className="form-row mx-n2">
                         <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
                             <div className="form-group mb-md-0">
                             <label htmlFor="latitude" className="text-heading">Latitude </label>
-                            <input type="text" defaultValue={mapData.mapPosition.lat} className="form-control form-control-lg border-0" id="latitude" name="latitude" onChange={compileData} disabled/>
+                            <input type="text" value={mapData.mapPosition.lat} className="form-control form-control-lg border-0" id="latitude" name="latitude" onChange={compileData} disabled/>
                             </div>
                         </div>
                         <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
                             <div className="form-group mb-md-0">
                             <label htmlFor="longitude" className="text-heading">Longitude</label>
-                            <input type="text" defaultValue={mapData.mapPosition.lat} className="form-control form-control-lg border-0" id="longitude" name="longitude" onChange={compileData} disabled/>
+                            <input type="text" value={mapData.mapPosition.lat} className="form-control form-control-lg border-0" id="longitude" name="longitude" onChange={compileData} disabled/>
                             </div>
                         </div>
                         </div>

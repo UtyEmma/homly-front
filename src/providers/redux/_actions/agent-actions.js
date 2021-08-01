@@ -1,5 +1,5 @@
 import Response from 'libraries/response/response';
-import { AgentService } from '../../services';
+import { AgentService } from 'providers/services';
 import { AgentConstants } from '../_contants/agent-constants';
 
 const {
