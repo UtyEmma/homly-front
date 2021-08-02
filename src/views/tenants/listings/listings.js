@@ -11,7 +11,6 @@ import Preloader from 'components/preloader/preloader';
 import Searchbar from 'views/layouts/components/search/searchbar';
 import ListingNotFound from 'components/404/404-listing';
 import ListingContainer from './components/listing-container';
-import ListingFilter1 from './components/listing-filter-1';
 
 
 const Listing = ({isLoggedIn, user}) => {

@@ -3,7 +3,7 @@ import Error from "./http-error"
 
 const Response = {
     success : (data) => { 
-        toast.success(`Success: ${data.message}`)
+        toast.success(data.message)
     },
     error: (data)=>{ Error(data) }
 }

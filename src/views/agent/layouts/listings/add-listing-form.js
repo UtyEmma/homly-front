@@ -62,7 +62,7 @@ function AddListingForm({setIsLoading}) {
     return (
         <form id="listing-form" onSubmit={handleFormData} encType="multipart/form-data" >
             <div id="collapse-tabs-accordion">
-                <ListingDescription />
+                <ListingDescription setIsLoading={setIsLoading}/>
 
                 <ListingMedia files={files} setFiles={setFiles} />
 

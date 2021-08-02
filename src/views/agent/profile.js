@@ -1,13 +1,22 @@
-import React, {Component, createRef, useRef} from 'react'
+import React, {Component, createRef, useEffect, useState} from 'react'
 
 import Sidebar from './layouts/shared/sidebar'
 import Header from './layouts/shared/header'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { UpdateAgentProfile } from '../../providers/redux/_actions/agent-actions';
+import { ToastContainer } from 'react-toastify';
+import Preloader from 'components/preloader/preloader';
 
 const AgentProfile = ({agent}) => {
         const dispatch = useDispatch()
         const profileImage = createRef()
+
+        const {loading, success} = useSelector(state => (state.update_agent_profile))
+        // const [agentData, setAgentData] = useState(agent)
+
+        useEffect(() => {
+            // setAgentData(localStorage.getItem('user'))
+        }, [success])
 
         const updateUserData = (e) => {
             e.preventDefault()
@@ -21,6 +30,8 @@ const AgentProfile = ({agent}) => {
         
         return (
             <div className="wrapper dashboard-wrapper">
+                <Preloader loading={loading}/>
+                <ToastContainer />
                 <div className="d-flex flex-wrap flex-xl-nowrap">
                     <Sidebar />
 
@@ -45,7 +56,7 @@ const AgentProfile = ({agent}) => {
                                             <p className="card-text">Upload your profile photo.</p>
                                             </div>
                                             <div className="col-sm-8 col-xl-12 col-xxl-5">
-                                            <img src="images/my-profile.png" alt="My Profile" ref={profileImage} id="profile-image" className="w-100" />
+                                            <img src={agent.avatar ? agent.avatar : "images/my-profile.png"} alt="My Profile" id="profile-image" ref={profileImage} className="w-100" />
                                             <div className="custom-file mt-2 h-auto" >
                                                 <input type="file" name="avatar" className="custom-file-input" onChange={changeProfileImagePreview} id="customFile" />
                                                 <label className="btn btn-secondary btn-lg btn-block" htmlFor="customFile">
@@ -82,7 +93,7 @@ const AgentProfile = ({agent}) => {
                                             </div>
                                             <div className="form-group col-md-6 px-4">
                                             <label htmlFor="phone" className="text-heading">Phone Number</label>
-                                            <input type="text" className="form-control form-control-lg border-0" defaultValue={agent.phone} id="phone" name="phone_number" />
+                                            <input type="text" className="form-control form-control-lg border-0" defaultValue={agent.phone_number} id="phone" name="phone_number" />
                                             </div>
                                         </div>
                                         </div>

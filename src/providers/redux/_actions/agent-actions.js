@@ -65,6 +65,10 @@ export const UpdateAgentProfile = (data) => (dispatch) => {
     AgentService.update(data)
                 .then((response) => {
                     let res = response.data;
+                    console.log(res)
+                    Response.success(res)
+                    localStorage.removeItem('user');
+                    localStorage.setItem('user', JSON.stringify(res.data.user));
                     localStorage.setItem('user', JSON.stringify(res.data.agent));
                     dispatch({
                         type: UPDATE_SUCCESS,

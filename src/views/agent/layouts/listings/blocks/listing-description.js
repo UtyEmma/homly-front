@@ -3,11 +3,10 @@ import React, {useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { SelectPicker } from 'rsuite';
 import SelectListingCategory from 'views/layouts/components/details/categories';
-import { StoreListing } from '../../../../../providers/redux/_actions/listing/listing-actions';
+import { StoreListing } from 'providers/redux/_actions/listing/listing-actions';
 
-export default function ListingDescription() {
+export default function ListingDescription({setIsLoading}) {
 
-    // const [description, setDescription] = useState({});
     const dispatch = useDispatch();
     const listing = useSelector((state) => state.store_listing.store);
 
@@ -17,24 +16,6 @@ export default function ListingDescription() {
                         [e.target.name] : e.target.value
                     }))
     }
-
-    const data = [
-        {
-          "label": "Louisa",
-          "value": "Louisa",
-          "role": "Master"
-        },
-        {
-          "label": "Marty",
-          "value": "Marty",
-          "role": "Master"
-        },
-        {
-          "label": "Kenya",
-          "value": "Kenya",
-          "role": "Master"
-        }
-    ]
 
 
     return (

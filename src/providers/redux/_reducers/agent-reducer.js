@@ -39,9 +39,9 @@ export function UpdateAgentProfileReducer(state={}, action) {
         case UPDATE_REQUEST:
             return {...state, loading: true}
         case UPDATE_SUCCESS:
-            return {...state, agent_success: action.payload, loading: false}
+            return {...state, success: action.payload, loading: false}
         case UPDATE_FAILURE:
-            return {...state, agent_error: action.payload, loading: false}
+            return {...state, error: action.payload, loading: false}
         default:
             return state;
     }

@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
 export const MapDisplay = ({longitude, latitude, setMapData, mapData}) => {
-    let long = longitude;
-    let lat = latitude;
+    const googleMapMarker = useRef()
+
     useEffect(() => {
-        long = longitude;
-        lat = latitude;
     }, [mapData])
 
     return (
@@ -16,24 +13,33 @@ export const MapDisplay = ({longitude, latitude, setMapData, mapData}) => {
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: `400px` }} />}
         mapElement={<div style={{ height: `100%` }} />}
-        longitude={long} 
-        latitude={lat} 
+        longitude={longitude} 
+        latitude={latitude} 
         isMarkerShown={true}
-        setMapData={setMapData} />
+        setMapData={setMapData}
+        markerRef={googleMapMarker}
+        zoom={mapData.zoom}
+        />
     )
 }
 
-const handlePositionChanged = (e) => {
-    console.log(e)
+const handleDragEnd = (e) => {
+    const position = {
+        lat: e.latLng.lat(),
+        long: e.latLng.lng()
+    }
+    console.log(position)
 }
 
-const Map = withScriptjs(withGoogleMap(({longitude, latitude, isMarkerShown, setMapData}) => 
+const Map = withScriptjs(withGoogleMap(({longitude, latitude, isMarkerShown, zoom}) =>     
+
     <GoogleMap
-        defaultZoom={8}
+        defaultZoom={zoom}
+        zoom={zoom}
         defaultCenter={{ lat: latitude, lng: longitude }}
         center={{ lat: latitude, lng: longitude } }
         >            
             {isMarkerShown && 
-                <Marker position={{ lat: latitude, lng: longitude }} animation onPositionChanged={handlePositionChanged} draggable/>}
+                <Marker onDragEnd={handleDragEnd} position={{ lat: latitude, lng: longitude }} animation  draggable/>}
     </GoogleMap>
 ))
