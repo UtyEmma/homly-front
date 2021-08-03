@@ -1,11 +1,12 @@
+import CustomSelect from 'libraries/forms/select/custom-select';
 import React, {useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { SelectPicker } from 'rsuite';
 import SelectListingCategory from 'views/layouts/components/details/categories';
-import { StoreListing } from '../../../../../providers/redux/_actions/listing/listing-actions';
+import { StoreListing } from 'providers/redux/_actions/listing/listing-actions';
 
-export default function ListingDescription() {
+export default function ListingDescription({setIsLoading}) {
 
-    // const [description, setDescription] = useState({});
     const dispatch = useDispatch();
     const listing = useSelector((state) => state.store_listing.store);
 
@@ -42,12 +43,13 @@ export default function ListingDescription() {
                             <input type="text" className="form-control form-control-lg border-0" onChange={compileData} id="title" name="title" />
                             </div>
                             <div className="form-group mb-0">
-                                <label htmlFor="category" className="text-heading">Type</label>
+                                <label htmlFor="category" className="text-heading mb-0">Type</label>
                                 <SelectListingCategory 
-                                    name='type'
+                                    className="mt-0"
+                                    classes="form-control border-0 shadow-none mt-n3 form-control-lg"
                                     onChange={compileData}
+                                    name="type" 
                                 />
-                                <input type="text" className="form-control form-control-lg border-0" id="type" onChange={compileData} name="type" />
                             </div>
                             <div className="form-group mb-0">
                             <label htmlFor="description-01" className="text-heading">Description</label>

@@ -16,14 +16,14 @@ export function SelectAmenities({features, setFeatures, name, validate, message}
     }, [details])
     return (
         <>
-            {/* <div className="col-sm-6 col-lg-3">
+            <div className="col-sm-6 col-lg-3">
                 <li className="list-group-item px-0 pt-0 pb-2">
                     <div className="custom-control custom-checkbox">
-                    <input type="checkbox" className="custom-control-input" onChange={compileFeatures} name="kitchen" id="kitchen" />
-                    <label className="custom-control-label" htmlFor="kitchen" >Kitchen</label>
+                    <input type="checkbox" className="custom-control-input" name="kitchen" id="kitchen" />
+                    <label className="custom-control-label" htmlFor={name} >{}</label>
                     </div>
                 </li>                      
-            </div> */}
+            </div>
         </>
     )
 }

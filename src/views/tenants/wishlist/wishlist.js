@@ -1,16 +1,19 @@
 import React, { useEffect } from 'react'
 import ModalOne from 'views/layouts/components/modals/modal-one'
 import Searchbar from 'views/layouts/components/search/searchbar'
-import Footer from 'views/layouts/footer'
-import NavBar from 'views/layouts/nav-bar'
+import Footer from 'components/shared/footer'
+import NavBar from 'components/shared/nav-bar'
+
 import AddWishlistBtn from './components/add-wishlist-btn'
 import WishlistItem from './components/wishlist-item'
 import WishlistForm from './components/wishlist-form'
 import './css/wishlist.css'
+
 import { ToastContainer } from 'react-toastify'
 import { FetchWishlist } from 'providers/redux/_actions/wishlist-actions'
 import { useDispatch, useSelector } from 'react-redux'
 import WishlistPlaceholder from './components/wishlist-placeholder'
+import Preloader from 'components/preloader/preloader'
 
 const Wishlist = ({isLoggedIn, user}) => {
 
@@ -28,6 +31,8 @@ const Wishlist = ({isLoggedIn, user}) => {
 
     return (
         <div>
+            <Preloader loading={loading}/>
+            
             <ToastContainer />
 
             <NavBar isloggedIn={isLoggedIn} user={user}/>
@@ -41,7 +46,7 @@ const Wishlist = ({isLoggedIn, user}) => {
                         <div className="col-md-6">
                             <h2 className="fs-15 text-dark mb-0">
                                 We found 
-                                <span className="text-primary"> {wishlists ? wishlists.wishlists.length : 0} </span> 
+                                <span className="text-primary"> {wishlists && wishlists.wishlists ? wishlists.wishlists.length : 0} </span> 
                                 items in your wishlist
                             </h2>
                         </div>
@@ -52,20 +57,17 @@ const Wishlist = ({isLoggedIn, user}) => {
                     <div className="container container-xxl">
                         <div className="row"> 
                             {
-                                wishlists 
+                                wishlists && wishlists.wishlists.length > 0
                                 
                                 ?
 
-                                wishlists.wishlists.map((wishlist) => (
-                                    <WishlistItem item={wishlist} />
+                                wishlists.wishlists.map((wishlist, index) => (
+                                    <WishlistItem item={wishlist} key={index} />
                                 ))
 
                                 :
-
-                                loading ?                                     
-                                <div className="spinner-border text-gray-lighter" role="status">
-                                    <span className="sr-only">Loading...</span>
-                                </div>  : <WishlistPlaceholder/>
+                                
+                                <WishlistPlaceholder/>
                             }       
                             <AddWishlistBtn />
                         </div>

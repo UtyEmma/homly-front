@@ -1,9 +1,9 @@
 import React, {Component, useEffect} from 'react'
 
-import Sidebar from '../layouts/shared/sidebar'
-import Header from '../layouts/shared/header'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetAgentListings } from '../../../providers/redux/_actions/listing/listing-actions'
+import Header from '../layouts/shared/header'
+import Sidebar from '../layouts/shared/sidebar'
 import AgentListingItem from './components/agent-listing-item'
 
 const AgentsListings = (props) => {

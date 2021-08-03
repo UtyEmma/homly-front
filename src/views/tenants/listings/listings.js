@@ -1,177 +1,75 @@
 import React, { Component, useEffect, useState } from 'react'
 
-import NavBar from '../../layouts/nav-bar';
-import Footer from '../../layouts/footer';
+import NavBar from 'components/shared/nav-bar';
+import Footer from 'components/shared/footer';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { ShowActiveListings, ShowAllListings } from 'providers/redux/_actions/listing/listing-actions';
-import ListingGrid from './components/listing-grid';
-import ListingList from './components/listing-list';
+import { ShowAllListings } from 'providers/redux/_actions/listing/listing-actions';
 import ListingFilter from './components/listing-filter';
 import { ToastContainer } from 'react-toastify';
+import Preloader from 'components/preloader/preloader';
+import Searchbar from 'views/layouts/components/search/searchbar';
+import ListingNotFound from 'components/404/404-listing';
+import ListingContainer from './components/listing-container';
 
 
 const Listing = ({isLoggedIn, user}) => {
         const dispatch = useDispatch();
         const listings = useSelector((state) => state.active_listings);
-        const {loading, active_listings, active_listings_failed} = listings;
+        const {loading, active_listings} = listings;
         const [params, setParams] = useState({})
-        const [grid, setGrid] = useState(true)
-    
+
         useEffect(() => {
-            fetchListings()
+            if(!active_listings || params) {
+                fetchListings()
+            }
         }, [params])
 
         const fetchListings = () => {
             dispatch(ShowAllListings(params))
         }
         
-        const toggleListing = () => {
-            grid ? setGrid(false) : setGrid(true)
-        }
-
         return (
             <div>
+                
+                <Preloader loading={loading}/>
                 <ToastContainer />
 
                 <NavBar isloggedIn={isLoggedIn} user={user}/>
     
                 <main id="content">
-                    <ListingFilter params={params} setParams={setParams}/>
+                    <Searchbar />
+
+                    <div className="bg-gray-03 py-3">
+                        <div className="container px-6 px-lg-0">
+                            <div className="row d-flex align-items-center">
+                                <div className="col-md-3">
+                                    <div className="agent-header">
+                                        <span><a href="/">Home</a> / Properties</span>
+                                        <h3>Available Properties</h3>
+                                    </div>
+                                </div>
+
+                                <div className="col-md-9 d-flex justify-content-end">
+                                    <ListingFilter params={params} setParams={setParams}/> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <section className="pt-8 pb-11">
                         <div className="container">
-                        <div className="row">
+                        <div className="row gx-4">
                             <div className="col-lg-8 mb-8 mb-lg-0">
-                            <div className="row align-items-sm-center mb-6">
-                                <div className="col-md-6">
-                                <h2 className="fs-15 text-dark mb-0">We found <span className="text-primary">{active_listings ? active_listings.count : 0}</span> properties
-                                    available for
-                                    you
-                                </h2>
-                                </div>
-                                <div className="col-md-6 mt-6 mt-md-0">
-                                <div className="d-flex justify-content-md-end align-items-center">
-                                    <div className="input-group border rounded input-group-lg w-auto bg-white mr-3">
-                                    <label className="input-group-text bg-transparent border-0 text-uppercase letter-spacing-093 pr-1 pl-3" htmlFor="inputGroupSelect01"><i className="fas fa-align-left fs-16 pr-2" />Sortby:</label>
-                                    <select className="form-control border-0 bg-transparent shadow-none p-0 selectpicker sortby" data-style="bg-transparent border-0 font-weight-600 btn-lg pl-0 pr-3" id="inputGroupSelect01" name="sortby">
-                                        <option selected>Top Selling</option>
-                                        <option value={1}>Most Viewed</option>
-                                        <option value={2}>Price(low to high)</option>
-                                        <option value={3}>Price(high to low)</option>
-                                    </select>
-                                    </div>
-                                    <div className="d-none d-md-block">
-                                    <a className="fs-sm-18 text-dark opacity-2" onClick={toggleListing}>
-                                        <i className="fas fa-list" />
-                                    </a>
-                                    <a className="fs-sm-18 text-dark ml-5" onClick={toggleListing}>
-                                        <i className="fa fa-th-large" />
-                                    </a>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                            <div className="row">
                                 {
-                                    active_listings
-                                        ? 
-                                    active_listings.listings.map((listing) => (
-                                       grid ? <ListingGrid listing={listing} key={listing.unique_id}/> : 
-                                                <ListingList listing={listing} key={listing.unique_id}/>
-                                    ))
-                                        : 
-                                    <div className="spinner-border text-gray-lighter" role="status">
-                                        <span className="sr-only">Loading...</span>
-                                    </div> 
-                                }   
+                                    active_listings && active_listings.listings.length > 0 
+                                        ? <ListingContainer listings={active_listings.listings} count={active_listings.count}/> : <ListingNotFound/>
+                                }  
                             </div>
-                            <nav className="pt-6">
-                                <ul className="pagination rounded-active justify-content-center mb-0">
-                                <li className="page-item"><a className="page-link" href="#"><i className="far fa-angle-double-left" /></a>
-                                </li>
-                                <li className="page-item"><a className="page-link" href="#">1</a></li>
-                                <li className="page-item active"><a className="page-link" href="#">2</a></li>
-                                <li className="page-item d-none d-sm-block"><a className="page-link" href="#">3</a></li>
-                                <li className="page-item">...</li>
-                                <li className="page-item"><a className="page-link" href="#">6</a></li>
-                                <li className="page-item"><a className="page-link" href="#"><i className="far fa-angle-double-right" /></a></li>
-                                </ul>
-                            </nav>
-                            </div>
+
                             <div className="col-lg-4 primary-sidebar sidebar-sticky" id="sidebar">
-                            <div className="primary-sidebar-inner">
-                                <div className="card border-0 mb-6 mt-2">
-                                <div className="card-body px-0 pl-lg-6 pr-0 py-0">
-                                    <h4 className="card-title fs-16 lh-2 text-dark mb-1">Newsletter Sign Up</h4>
-                                    <p className="card-text mb-5">Subscribe to new letter to receive exclusive offer and the latest
-                                    news</p>
-                                    <form>
-                                    <div className="form-group mb-3">
-                                        <label htmlFor="name" className="sr-only">Email</label>
-                                        <input type="text" className="form-control form-control-lg border-0 shadow-none" id="name" name="email" placeholder="Enter your email" />
-                                    </div>
-                                    <button type="submit" className="btn btn-primary btn-lg btn-block shadow-none mb-2">
-                                        Subscribe
-                                    </button>
-                                    </form>
-                                </div>
-                                </div>
-                                <div className="card border-0 city-widget mb-9">
-                                <div className="card-body px-0 pl-lg-6 py-0">
-                                    <h4 className="card-title fs-16 lh-2 text-dark mb-3">Destinations</h4>
-                                    <div className="row no-gutters m-n1">
-                                    <div className="col-6 p-1">
-                                        <a href="listing-with-left-sidebar.html" className="card hover-zoom-in">
-                                        <div className="card-img bg-img" style={{backgroundImage: 'url("images/small-los-angeles.jpg")', backgroundSize: 'cover', backgroundPosition: 'center'}} />
-                                        <div className="card-img-overlay bg-gradient-3 rounded-lg d-flex align-items-end">
-                                            <p className="card-text font-weight-500 lh-1 text-white">Los Angeles</p>
-                                        </div>
-                                        </a>
-                                    </div>
-                                    <div className="col-6 p-1">
-                                        <a href="listing-with-left-sidebar.html" className="card hover-zoom-in">
-                                        <div className="card-img bg-img" style={{backgroundImage: 'url("images/small-south-florida.jpg")', backgroundSize: 'cover', backgroundPosition: 'center'}} />
-                                        <div className="card-img-overlay bg-gradient-3 rounded-lg d-flex align-items-end">
-                                            <p className="card-text font-weight-500 lh-1 text-white">South Florida</p>
-                                        </div>
-                                        </a>
-                                    </div>
-                                    <div className="col-6 p-1">
-                                        <a href="listing-with-left-sidebar.html" className="card hover-zoom-in">
-                                        <div className="card-img bg-img" style={{backgroundImage: 'url("images/small-the-hamptons.jpg")', backgroundSize: 'cover', backgroundPosition: 'center'}} />
-                                        <div className="card-img-overlay bg-gradient-3 rounded-lg d-flex align-items-end">
-                                            <p className="card-text font-weight-500 lh-1 text-white">The Hamptons</p>
-                                        </div>
-                                        </a>
-                                    </div>
-                                    <div className="col-6 p-1">
-                                        <a href="listing-with-left-sidebar.html" className="card hover-zoom-in">
-                                        <div className="card-img bg-img" style={{backgroundImage: 'url("images/small-greater-boston.jpg")', backgroundSize: 'cover', backgroundPosition: 'center'}} />
-                                        <div className="card-img-overlay bg-gradient-3 rounded-lg d-flex align-items-end">
-                                            <p className="card-text font-weight-500 lh-1 text-white">Greater Boston</p>
-                                        </div>
-                                        </a>
-                                    </div>
-                                    <div className="col-6 p-1">
-                                        <a href="listing-with-left-sidebar.html" className="card hover-zoom-in">
-                                        <div className="card-img bg-img" style={{backgroundImage: 'url("images/small-new-mexico.jpg")', backgroundSize: 'cover', backgroundPosition: 'center'}} />
-                                        <div className="card-img-overlay bg-gradient-3 rounded-lg d-flex align-items-end">
-                                            <p className="card-text font-weight-500 lh-1 text-white">New Mexico</p>
-                                        </div>
-                                        </a>
-                                    </div>
-                                    <div className="col-6 p-1">
-                                        <a href="listing-with-left-sidebar.html" className="card hover-zoom-in">
-                                        <div className="card-img bg-img" style={{backgroundImage: 'url("images/small-los-angeles.jpg")', backgroundSize: 'cover', backgroundPosition: 'center'}} />
-                                        <div className="card-img-overlay bg-gradient-3 rounded-lg d-flex align-items-end">
-                                            <p className="card-text font-weight-500 lh-1 text-white">Los Angeles</p>
-                                        </div>
-                                        </a>
-                                    </div>
-                                    </div>
-                                </div>
-                                </div>
+                                <div className="primary-sidebar-inner">
+                                
                                 <div className="card border-0 property-widget mb-6">
                                 <div className="card-body px-0 pl-lg-6 py-0">
                                     <h4 className="card-title fs-16 lh-2 text-dark mb-3">Featured Properties</h4>
@@ -359,8 +257,8 @@ const Listing = ({isLoggedIn, user}) => {
     
                 
                 <Footer />
-    
             </div>
+
         )
 }
 

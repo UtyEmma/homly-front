@@ -7,7 +7,7 @@ export default function Sidebar() {
                 <nav className="navbar navbar-expand-xl navbar-light d-block px-0 position-fixed dashboard-nav py-0">
                     <div className="sticky-area shadow-xs-1 py-3">
                         <div className="d-flex px-3 px-xl-6 w-100">
-                        <a className="navbar-brand" href="index.html">
+                        <a className="navbar-brand" href="/">
                             <img src="images/logo.png" alt="HomeID" />
                         </a>
                         <div className="ml-auto d-flex align-items-center ">
@@ -58,7 +58,7 @@ export default function Sidebar() {
                             <h5 className="fs-13 letter-spacing-087 text-muted mb-3 text-uppercase px-3">Main</h5>
                             <ul className="list-group list-group-no-border rounded-lg">
                                 <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
-                                <a href="dashboard.html" className="text-heading lh-1 sidebar-link">
+                                <a href="/dashboard" className="text-heading lh-1 sidebar-link">
                                     <span className="sidebar-item-icon d-inline-block mr-3 fs-20"><i className="fal fa-cog" /></span>
                                     <span className="sidebar-item-text">Dashboard</span>
                                 </a>

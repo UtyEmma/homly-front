@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { LocalGovt, State } from 'libraries/city-state/city-state';
+import { LocalGovt, State } from 'components/city-state/city-state';
 import Tagify from 'libraries/tagify/tagify'
 import { ERROR } from 'libraries/toastify/toastify';
 import { __createwishlist } from 'libraries/validation';
@@ -181,7 +181,7 @@ const WishlistForm = () => {
                                         <div className="spinner-border text-white fs-22" role="status">
                                             <span className="sr-only">Loading...</span>
                                         </div>
-                                    : "Send Wishlist"}
+                                    : "Submit"}
                                 </button>
                             </div>
                         </div>

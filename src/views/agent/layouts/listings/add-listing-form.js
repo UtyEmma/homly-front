@@ -9,23 +9,28 @@ import ListingDetails from './blocks/listing-details'
 import { toast } from 'react-toastify';
 import { FetchDetails } from 'providers/redux/_actions/details-actions';
 
-function AddListingForm() {
+function AddListingForm({setIsLoading}) {
     const dispatch = useDispatch();
 
-    const listing = useSelector((state) => state.store_listing);
-    const {store, listing_failure, listing_success} = listing;
+    const [files, setFiles] = useState([]) 
+
+    const store_listing = useSelector((state) => state.store_listing);
+    const {store} = store_listing;
+
+    const listing = useSelector((state) => state.new_listing);
+    const {loading, listing_success} = listing
+    
 
     const fetchDetails = useSelector(state => state.details)
-    const {loading, details, error} = fetchDetails
+    const {details} = fetchDetails
 
     const loadDetails = () => { dispatch(FetchDetails()) }
-    let features = [];
 
     useEffect(() => {
         !details && loadDetails()
-        listing_success && toast.success(listing_success.data.message)        
-        listing_failure && toast.error(listing_failure.data.message)
-    }, [listing_success, listing_failure])
+        listing_success && toast.success(listing_success.data.message)
+        setIsLoading(loading)
+    }, [listing_success, loading])
 
     const handleFormData = (e) => {
         e.preventDefault()
@@ -44,15 +49,22 @@ function AddListingForm() {
             formData.set('details', JSON.stringify(store.details))
         }
 
+        formData.delete('undefined')
+        formData.delete('images')
+        formData.delete('extra-details')
+        formData.delete('filepond')
+        files.map(file => formData.append('images[]', file))
+
+
         dispatch(CreateListing(formData))
     }
 
     return (
         <form id="listing-form" onSubmit={handleFormData} encType="multipart/form-data" >
             <div id="collapse-tabs-accordion">
-                <ListingDescription />
+                <ListingDescription setIsLoading={setIsLoading}/>
 
-                <ListingMedia />
+                <ListingMedia files={files} setFiles={setFiles} />
 
                 <ListingLocation />
 

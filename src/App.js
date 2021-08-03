@@ -29,7 +29,7 @@ import AgentsListings from './views/agent/listings/agents-listings';
 import AgentProfile from './views/agent/profile';
 import PasswordRecovery from './views/agent/auth/password-recovery';
 import Wishlist from 'views/tenants/wishlist/wishlist';
-import { ToastContainer } from 'react-toastify';
+import Search from 'views/search';
 
 
 function App(props) {
@@ -46,6 +46,7 @@ function App(props) {
           {/* User Routes */}
           <Route path="/login" component={UserLogin} exact/>
           <Route path="/signup" component={UserSignup} exact/>
+          <UserRoute path="/s" user component={Search} exact/>
           <UserRoute path="/listings" user component={Listing} exact/>
           <UserRoute path="/agents" user type="user" component={Agents} exact/>
           <UserRoute path="/agents/:id" user type="user" component={AgentDetails} exact/>

@@ -1,12 +1,13 @@
+import { FileInput } from 'libraries/forms/files/custom-file-input';
 import React, { useState } from 'react'
-import Dropzone from 'react-dropzone';
 import { useDispatch, useSelector } from 'react-redux';
-import { StoreListing } from '../../../../../providers/redux/_actions/listing/listing-actions';
+import { StoreListing } from 'providers/redux/_actions/listing/listing-actions';
 
-export default function ListingMedia() {
+export default function ListingMedia({files, setFiles}) {
 
     const dispatch = useDispatch();
     const listing = useSelector((state) => state.store_listing.store);
+    
 
     const compileMedia = (e) => {
         dispatch(StoreListing({
@@ -35,7 +36,7 @@ export default function ListingMedia() {
                             of your property</h3>
                             <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
                             adipiscing elit</p>
-                           <input type="file" name="images[]" />
+                           <FileInput files={files} setFiles={setFiles}/>
                         </div>
                         </div>
                     </div>
@@ -49,7 +50,7 @@ export default function ListingMedia() {
                                 <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
                                     <div className="form-group mb-md-0">
                                     <label htmlFor="embed-video-id"  className="text-heading">Upload Video File</label>
-                                    <input type="text" name="video_links" onChange={compileMedia} className="form-control form-control-lg border-0" id="embed-video-id" />
+                                    <input type="text" name="video_links" onChange={compileMedia} className="form-control form-control-lg border-0" placeholder="Youtube, Vimeo or any link to your Video" id="embed-video-id" />
                                     </div>
                                 </div>
                             </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import ProfileButton from './components/profile-btn/profile-button'
+import ProfileButton from './profile-btn/profile-button'
 
 export default function NavBar({user, isloggedIn}) {
     return (

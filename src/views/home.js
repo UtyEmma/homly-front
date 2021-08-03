@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 import HeroSection from './layouts/home/hero-section'
 import PopularSection from './layouts/home/popular-section'
-import NavBar from './layouts/nav-bar'
-import Footer from './layouts/footer'
+import NavBar from 'components/shared/nav-bar'
+import Footer from 'components/shared/footer'
 
 const Home = ({isLoggedIn, user}) => {
     

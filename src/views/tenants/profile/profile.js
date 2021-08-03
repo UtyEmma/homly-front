@@ -1,20 +1,24 @@
-import React from 'react'
+import Preloader from 'components/preloader/preloader'
+import React, { useEffect, useState } from 'react'
 import { createRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import Searchbar from 'views/layouts/components/search/searchbar'
-import Footer from 'views/layouts/footer'
-import NavBar from 'views/layouts/nav-bar'
+import Footer from 'components/shared/footer'
+import NavBar from 'components/shared/nav-bar'
 
 const Profile = ({isLoggedIn, user}) => {
     const dispatch = useDispatch()
     const profileImage = createRef()
+    const [loading, setLoading] = useState(false)
 
     const updateUserData = (e) => {
         e.preventDefault()
         let formData = new FormData(e.target);
         // dispatch(UpdateUserProfile(formData))
     }
+
+    // useEffect(() => setLoading(true), [])
 
     const changeProfileImagePreview = (e) => { 
         profileImage.current.src = URL.createObjectURL(e.target.files[0]) 
@@ -23,6 +27,7 @@ const Profile = ({isLoggedIn, user}) => {
 
     return (
         <div>
+            <Preloader loading={loading} />
             <ToastContainer />
             <NavBar isloggedIn={isLoggedIn} user={user}/>
 

@@ -1,15 +1,14 @@
 import { combineReducers } from "redux";
 import {loginReducer, signupReducer} from "../_reducers/user.reducer";
-import {
-    AgentLoginReducer, 
-    AgentSignupReducer,
-    UpdateAgentProfileReducer, 
-    ShowAvailableAgentsReducer } from "./agent-reducer";
+import { AgentLoginReducer, AgentSignupReducer,
+        UpdateAgentProfileReducer, ShowAvailableAgentsReducer } from "./agent-reducer";
 import { FetchCategoriesReducer } from "./category-reducer";
 import { FetchDetailsReducer } from "./details-reducer";
 
 import { AgentsListingsReducer, NewListingReducer, StoreListingReducer,
          ActiveListingsReducer, FetchListingDetails, FetchSingleListing} from "./listing-reducer";
+import { searchForLocationReducer } from "./location-reducer";
+import { SearchListingsReducer } from "./search-reducer";
 
 import { CreateWishlistReducer, FetchWishlistReducer } from "./wishlist-reducer";
 
@@ -35,7 +34,11 @@ const rootReducer = combineReducers({
 
     categories: FetchCategoriesReducer,
 
+    search: SearchListingsReducer,
+
     details: FetchDetailsReducer,
+
+    searchGoogleMaps : searchForLocationReducer
 
 
 })

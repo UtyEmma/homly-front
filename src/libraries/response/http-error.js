@@ -1,6 +1,10 @@
 import { toast } from "react-toastify";
 
 export default function Error(err) {
+    if(!err){
+        return toast.error("Server Error: The Server is Down")
+    }
+
     switch (err.status) {
         case 500:
             return handleServerError(err.data)
@@ -22,9 +26,10 @@ function handleFormError(err){
 }
 
 function handleUnauthorizedError(){
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    localStorage.removeItem('isAuthenticated');
-    localStorage.removeItem('type');
-    return window.location.href = '/login?msg=Session Expired! Please login.'
+    return toast.error("Unauthorized Error")
+    // localStorage.removeItem('token');
+    // localStorage.removeItem('user');
+    // localStorage.removeItem('isAuthenticated');
+    // localStorage.removeItem('type');
+    // return window.location.href = '/login?msg=Session Expired! Please login.'
 }

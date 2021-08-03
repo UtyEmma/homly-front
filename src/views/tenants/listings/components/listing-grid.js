@@ -1,8 +1,9 @@
 import React from 'react'
+import '../css/listing.css'
 
 export default function ListingGrid({listing}) {
     return (
-        <div className="col-md-6 mb-6">
+        <div className="col-md-6 mb-6 listing-grid">
             <div className="card border-0" >
                 <div className="position-relative hover-change-image bg-hover-overlay rounded-lg card-img listing-image-container">
                 <img className="listing-image" src={listing.images.[0].url} alt={listing.title} />
@@ -39,9 +40,9 @@ export default function ListingGrid({listing}) {
                 <div className="card-body pt-3 px-0 pb-1">
                 <h2 className="fs-16 mb-1"><a href={`listings/${listing.slug}`} className="text-dark hover-primary">{listing.title}</a>
                 </h2>
-                <p className="font-weight-500 text-gray-light mb-0">1421 San Pedro St, Los Angeles</p>
+                <p className="font-weight-500 text-gray-light mb-0">{listing.address}, {listing.city}, {listing.state}</p>
                 <p className="fs-17 font-weight-bold text-heading mb-0 lh-16">
-                    $ {listing.initial_price}
+                    &#8358; {listing.initial_price}
                 </p>
                 </div>
                 <div className="card-footer bg-transparent px-0 pb-0 pt-2">
@@ -50,19 +51,13 @@ export default function ListingGrid({listing}) {
                     <svg className="icon icon-bedroom fs-18 text-primary mr-1">
                         <use xlinkHref="#icon-bedroom" />
                     </svg>
-                    3 Br
+                    {listing.details['rooms']} Br
                     </li>
                     <li className="list-inline-item text-gray font-weight-500 fs-13 mr-sm-7" data-toggle="tooltip" title="3 Bathrooms">
                     <svg className="icon icon-shower fs-18 text-primary mr-1">
                         <use xlinkHref="#icon-shower" />
                     </svg>
-                    3 Ba
-                    </li>
-                    <li className="list-inline-item text-gray font-weight-500 fs-13" data-toggle="tooltip" title="Size">
-                    <svg className="icon icon-square fs-18 text-primary mr-1">
-                        <use xlinkHref="#icon-square" />
-                    </svg>
-                    2300 Sq.Ft
+                    {listing.details['number-of-bathrooms']} Ba
                     </li>
                 </ul>
                 </div>

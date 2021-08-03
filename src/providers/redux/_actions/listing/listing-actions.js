@@ -27,9 +27,10 @@ export const CreateListing = (data) => (dispatch) =>{
 
     ListingService.newListing(data)
                 .then(response => {
+                    Response.success(response.data)
                     dispatch({
                         type: NEW_LISTING_SUCCESS,
-                        payload: response
+                        payload: response.data
                     })
                 })
                 .catch(error => {
@@ -76,6 +77,7 @@ export const ShowAllListings = (params) => (dispatch) => {
                         })
                     })
                     .catch(error => {
+                        !error && Response.error("");
                         Response.error(error.response)
                         return dispatch({
                             type: ACTIVE_LISTINGS_FAILURE,
@@ -98,6 +100,7 @@ export const ShowActiveListings = () => (dispatch) => {
                         })
                     })
                     .catch(error => {
+                        !error && Response.error("");
                         Response.error(error.response)
                         return dispatch({
                             type: ACTIVE_LISTINGS_FAILURE,
@@ -119,6 +122,7 @@ export const FetchListingDetails = () => (dispatch) => {
                         });
                     })
                     .catch(error => {
+                        !error && Response.error("");
                         Response.error(error.response)
                         return dispatch({
                             type : FETCH_LISTING_DETAILS_FAILURE,
