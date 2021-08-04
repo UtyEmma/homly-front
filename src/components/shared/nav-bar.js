@@ -8,8 +8,8 @@ export default function NavBar({user, isloggedIn}) {
                 <div className="container">
                     <nav className="navbar navbar-expand-lg px-0">
                         <a className="navbar-brand" href="/">
-                        <img src="images/logo.png" alt="HomeID" className="d-none d-lg-inline-block" />
-                        <img src="images/logo-white.png" alt="HomeID" className="d-inline-block d-lg-none" />
+                        <img src="images/logo/main.png" width="156px" height="40px" alt="HomeID" className="d-none d-lg-inline-block" />
+                        <img src="images/logo/white.png" width="156px" height="40px" alt="HomeID" className="d-inline-block d-lg-none" />
                         </a>
                         <div className="d-flex d-lg-none ml-auto">
                         <a className="mr-4 position-relative text-white p-2" href="#">
