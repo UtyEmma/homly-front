@@ -11,7 +11,7 @@ export default function ListingComponents({listing}) {
         <>
             <ListingInfo listing={listing}/>
             <ListingVideo video={listing.video_link}/>
-            <ListingReviews/>
+            <ListingReviews listing_id={listing.unique_id}/>
             <ListingStats/>
             <ListingMap/>
             <SimilarListings/>

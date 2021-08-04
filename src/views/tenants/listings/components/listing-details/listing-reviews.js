@@ -2,18 +2,15 @@ import { SubmitReview } from 'providers/redux/_actions/review-actions'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-export default function ListingReviews() {
+export default function ListingReviews({listing_id}) {
     const dispatch = useDispatch()
     const {loading, reviews} = useSelector(state => state.submit_review)
 
     const submitPropertyReview = (e) => {
         e.preventDefault()
         let formData = new FormData(e.target)
-        dispatch(SubmitReview(formData))    
+        dispatch(SubmitReview(formData, listing_id))    
     }
-
-
-
 
     return (
         <>
@@ -377,23 +374,23 @@ export default function ListingReviews() {
                     <form onSubmit={submitPropertyReview}>
                     <div className="form-group mb-4 d-flex justify-content-start">
                         <div className="rate-input">
-                        <input type="radio" id="star5" name="rate" defaultValue={5} />
+                        <input type="radio" id="star5" name="rating" defaultValue={5} />
                         <label htmlFor="star5" title="text" className="mb-0 mr-1 lh-1">
                             <i className="fas fa-star" />
                         </label>
-                        <input type="radio" id="star4" name="rate" defaultValue={4} />
+                        <input type="radio" id="star4" name="rating" defaultValue={4} />
                         <label htmlFor="star4" title="text" className="mb-0 mr-1 lh-1">
                             <i className="fas fa-star" />
                         </label>
-                        <input type="radio" id="star3" name="rate" defaultValue={3} />
+                        <input type="radio" id="star3" name="rating" defaultValue={3} />
                         <label htmlFor="star3" title="text" className="mb-0 mr-1 lh-1">
                             <i className="fas fa-star" />
                         </label>
-                        <input type="radio" id="star2" name="rate" defaultValue={2} />
+                        <input type="radio" id="star2" name="rating" defaultValue={2} />
                         <label htmlFor="star2" title="text" className="mb-0 mr-1 lh-1">
                             <i className="fas fa-star" />
                         </label>
-                        <input type="radio" id="star1" name="rate" defaultValue={1} />
+                        <input type="radio" id="star1" name="rating" defaultValue={1} />
                         <label htmlFor="star1" title="text" className="mb-0 mr-1 lh-1">
                             <i className="fas fa-star" />
                         </label>

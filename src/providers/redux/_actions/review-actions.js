@@ -6,11 +6,11 @@ const {
     SUBMIT_REVIEW_REQUEST, SUBMIT_REVIEW_SUCCESS, SUBMIT_REVIEW_FAILURE
 } = _REVIEWS
 
-export const SubmitReview = (data) => (dispatch) => {
+export const SubmitReview = (data, id) => (dispatch) => {
     console.log("Submiting Reviews...")
     dispatch({ type: SUBMIT_REVIEW_REQUEST })
 
-    ReviewsService.submitReview(data)
+    ReviewsService.submitReview(data, id)
                     .then((response) => {
                         Response.success(response.data.data)
                         dispatch({

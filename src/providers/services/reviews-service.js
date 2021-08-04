@@ -7,14 +7,14 @@ const options = {
 }
 
 export const ReviewsService = {
-    submitReview : (data) => {
+    submitReview : (data, id) => {
         const option = {
             config: {
                 headers: options
             },
             payload: data
         }
-        return Request.post('tenant/reviews/create', option);
+        return Request.post(`tenant/reviews/create/${id}`, option);
     },
 
     agentReviews : () => {
