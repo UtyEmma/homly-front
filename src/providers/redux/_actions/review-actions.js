@@ -12,7 +12,7 @@ export const SubmitReview = (data, id) => (dispatch) => {
 
     ReviewsService.submitReview(data, id)
                     .then((response) => {
-                        Response.success(response.data.data)
+                        Response.success(response.data)
                         dispatch({
                             type: SUBMIT_REVIEW_SUCCESS,
                             payload: response.data.data

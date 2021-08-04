@@ -409,7 +409,7 @@ export default function ListingReviews({listing_id}) {
                         </div>
                     </div>
                     <div className="form-group mb-6">
-                        <textarea className="form-control form-control-lg border-0" placeholder="Your Review" name="message" rows={5} defaultValue={""} />
+                        <textarea className="form-control form-control-lg border-0" placeholder="Your Review" name="review" rows={5} defaultValue={""} />
                     </div>
                     <button type="submit" className="btn btn-lg btn-primary px-10">Submit</button>
                     </form>
