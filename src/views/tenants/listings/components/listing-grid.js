@@ -41,6 +41,7 @@ export default function ListingGrid({listing}) {
                 <h2 className="fs-16 mb-1"><a href={`listings/${listing.slug}`} className="text-dark hover-primary">{listing.title}</a>
                 </h2>
                 <p className="font-weight-500 text-gray-light mb-0">{listing.address}, {listing.city}, {listing.state}</p>
+                <p className="card-text mb-2 ml-0" style={{textOverflow: 'ellipsis'}} >{listing.description}</p>
                 <p className="fs-17 font-weight-bold text-heading mb-0 lh-16">
                     &#8358; {listing.initial_price}
                 </p>
@@ -51,13 +52,13 @@ export default function ListingGrid({listing}) {
                     <svg className="icon icon-bedroom fs-18 text-primary mr-1">
                         <use xlinkHref="#icon-bedroom" />
                     </svg>
-                    {listing.details['rooms']} Br
+                    {listing.details['bedrooms']} Br
                     </li>
                     <li className="list-inline-item text-gray font-weight-500 fs-13 mr-sm-7" data-toggle="tooltip" title="3 Bathrooms">
                     <svg className="icon icon-shower fs-18 text-primary mr-1">
                         <use xlinkHref="#icon-shower" />
                     </svg>
-                    {listing.details['number-of-bathrooms']} Ba
+                    {listing.details['bathrooms']} Ba
                     </li>
                 </ul>
                 </div>

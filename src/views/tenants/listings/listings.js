@@ -33,7 +33,6 @@ const Listing = ({isLoggedIn, user}) => {
             <div>
                 
                 <Preloader loading={loading}/>
-                <ToastContainer />
 
                 <NavBar isloggedIn={isLoggedIn} user={user}/>
     

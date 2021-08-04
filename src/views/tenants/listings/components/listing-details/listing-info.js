@@ -7,8 +7,8 @@ export default function ListingInfo({listing}) {
                 <ul className="list-inline d-sm-flex align-items-sm-center mb-2">
                 <li className="list-inline-item badge badge-orange mr-2">Featured</li>
                 <li className="list-inline-item badge badge-primary mr-3">For Sale</li>
-                <li className="list-inline-item mr-2 mt-2 mt-sm-0"><i className="fal fa-clock mr-1" />2 months ago</li>
-                <li className="list-inline-item mt-2 mt-sm-0"><i className="fal fa-eye mr-1" />1039 views</li>
+                <li className="list-inline-item mr-2 mt-2 mt-sm-0"><i className="fal fa-clock mr-1" />{listing.period}</li>
+                <li className="list-inline-item mt-2 mt-sm-0"><i className="fal fa-eye mr-1" />{listing.views} views</li>
                 </ul>
                 <div className="d-sm-flex justify-content-sm-between">
                 <div>
@@ -17,7 +17,7 @@ export default function ListingInfo({listing}) {
                             {listing.address}, {listing.city}, {listing.state}</p>
                 </div>
                 <div className="mt-2 text-lg-right">
-                    <p className="fs-22 text-heading font-weight-bold mb-0">N {listing.initial_price}</p>
+                    <p className="fs-22 text-heading font-weight-bold mb-0">&#8358; {listing.initial_price}</p>
                     <p className="mb-0">{listing.tenure}</p>
                 </div>
                 </div>
@@ -27,6 +27,13 @@ export default function ListingInfo({listing}) {
             <section className="mt-2 pb-3 px-6 pt-5 bg-white rounded-lg">
                 <h4 className="fs-22 text-heading mb-6">Facts and Features</h4>
                 <div className="row">
+                    {
+                        // listing.details
+
+                        // && 
+
+                        // listing.details.bedrooms
+                    }
                 <div className="col-lg-3 col-sm-4 mb-6">
                     <div className="media">
                     <div className="p-2 shadow-xxs-1 rounded-lg mr-2">
@@ -121,10 +128,6 @@ export default function ListingInfo({listing}) {
                 <h4 className="fs-22 text-heading mb-4">Additional Details</h4>
                 <div className="row">
                 <dl className="col-sm-6 mb-0 d-flex">
-                    <dt className="w-110px fs-14 font-weight-500 text-heading pr-2">Property ID</dt>
-                    <dd>AD-2910</dd>
-                </dl>
-                <dl className="col-sm-6 mb-0 d-flex">
                     <dt className="w-110px fs-14 font-weight-500 text-heading pr-2">Price</dt>
                     <dd>$ {listing.initial_price}</dd>
                 </dl>
@@ -169,18 +172,19 @@ export default function ListingInfo({listing}) {
             <section className="mt-2 pb-7 px-6 pt-5 bg-white rounded-lg">
                 <h4 className="fs-22 text-heading mb-4">Offices Amenities</h4>
                 <ul className="list-unstyled mb-0 row no-gutters">
-                <li className="col-sm-3 col-6 mb-2"><i className="far fa-check mr-2 text-primary" />Balcony</li>
-                <li className="col-sm-3 col-6 mb-2"><i className="far fa-check mr-2 text-primary" />Fireplace</li>
-                <li className="col-sm-3 col-6 mb-2"><i className="far fa-check mr-2 text-primary" />Balcony</li>
-                <li className="col-sm-3 col-6 mb-2"><i className="far fa-check mr-2 text-primary" />Fireplace</li>
-                <li className="col-sm-3 col-6 mb-2"><i className="far fa-check mr-2 text-primary" />Basement</li>
-                <li className="col-sm-3 col-6 mb-2"><i className="far fa-check mr-2 text-primary" />Cooling</li>
-                <li className="col-sm-3 col-6 mb-2"><i className="far fa-check mr-2 text-primary" />Basement</li>
-                <li className="col-sm-3 col-6 mb-2"><i className="far fa-check mr-2 text-primary" />Cooling</li>
-                <li className="col-sm-3 col-6 mb-2"><i className="far fa-check mr-2 text-primary" />Dining room</li>
-                <li className="col-sm-3 col-6 mb-2"><i className="far fa-check mr-2 text-primary" />Dishwasher</li>
-                <li className="col-sm-3 col-6 mb-2"><i className="far fa-check mr-2 text-primary" />Dining room</li>
-                <li className="col-sm-3 col-6 mb-2"><i className="far fa-check mr-2 text-primary" />Dishwasher</li>
+                    {/* {
+                        listing.details 
+
+                        ?
+
+                        listing.details.map((detail) => {
+                            <li className="col-sm-3 col-6 mb-2"><i className="far fa-check mr-2 text-primary" />{detail}</li>
+                        })
+                        
+                        :
+
+                        <div></div>
+                    } */}
                 </ul>
             </section>  
         </>

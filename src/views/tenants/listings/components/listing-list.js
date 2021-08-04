@@ -44,39 +44,27 @@ export default function ListingList({listing}) {
             <div className="card-body p-0">
                 <h2 className="card-title my-0"><a href={`listings/${listing.slug}`} className="fs-16 lh-2 text-dark hover-primary d-block">{listing.title}</a>
                 </h2>
-                <p className="card-text mb-1 font-weight-500 text-gray-light">1421 San Pedro St, Los Angeles</p>
-                <p className="card-text mb-2 ml-0">Lorem ipsum dolor sit amet, sectetur cing elit uspe ndisse suscorem ipsum dolor sitorem sit amet, sectetur cing elit uspe ndisse suscorem</p>
+                <p className="card-text mb-1 font-weight-500 text-gray-light">{listing.address}, {listing.city}, {listing.state}</p>
+                <p className="card-text mb-2 ml-0" style={{textOverflow: 'ellipsis'}}>{listing.description}</p>
                 <p className="card-text fs-17 font-weight-bold text-heading mb-3">
                 $ {listing.initial_price}
                 <span className="fs-14 font-weight-500 text-gray-light"> /month</span>
                 </p>
             </div>
             <div className="card-footer pt-3 bg-transparent px-0 pb-0">
-                <ul className="list-inline d-flex mb-0 flex-wrap justify-content-between mr-n2">
-                <li className="list-inline-item text-gray font-weight-500 fs-13 d-flex align-items-center mr-2" data-toggle="tooltip" title="3 Bedroom">
-                    <svg className="icon icon-bedroom fs-18 text-primary mr-1">
-                    <use xlinkHref="#icon-bedroom" />
-                    </svg>
-                    3 Br
-                </li>
-                <li className="list-inline-item text-gray font-weight-500 fs-13 d-flex align-items-center mr-2" data-toggle="tooltip" title="3 Bathrooms">
-                    <svg className="icon icon-shower fs-18 text-primary mr-1">
-                    <use xlinkHref="#icon-shower" />
-                    </svg>
-                    3 Ba
-                </li>
-                <li className="list-inline-item text-gray font-weight-500 fs-13 d-flex align-items-center mr-2" data-toggle="tooltip" title="Size">
-                    <svg className="icon icon-square fs-18 text-primary mr-1">
-                    <use xlinkHref="#icon-square" />
-                    </svg>
-                    2300 Sq.Ft
-                </li>
-                <li className="list-inline-item text-gray font-weight-500 fs-13 d-flex align-items-center mr-2" data-toggle="tooltip" title="1 Garage">
-                    <svg className="icon icon-Garage fs-18 text-primary mr-1">
-                    <use xlinkHref="#icon-Garage" />
-                    </svg>
-                    1 Gr
-                </li>
+                <ul className="list-inline d-flex mb-0 flex-wrap mr-n2">
+                    <li className="list-inline-item text-gray font-weight-500 fs-13 d-flex align-items-center mr-2" data-toggle="tooltip" title="3 Bedroom">
+                        <svg className="icon icon-bedroom fs-18 text-primary mr-1">
+                        <use xlinkHref="#icon-bedroom" />
+                        </svg>
+                        {listing.details['bedrooms']} Br
+                    </li>
+                    <li className="list-inline-item text-gray font-weight-500 fs-13 d-flex align-items-center mr-2" data-toggle="tooltip" title="3 Bathrooms">
+                        <svg className="icon icon-shower fs-18 text-primary mr-1">
+                        <use xlinkHref="#icon-shower" />
+                        </svg>
+                        {listing.details['bathrooms']} Ba
+                    </li>
                 </ul>
             </div>
             </div>

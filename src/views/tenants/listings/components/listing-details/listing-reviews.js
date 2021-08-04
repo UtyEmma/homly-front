@@ -1,6 +1,20 @@
+import { SubmitReview } from 'providers/redux/_actions/review-actions'
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function ListingReviews() {
+    const dispatch = useDispatch()
+    const {loading, reviews} = useSelector(state => state.submit_review)
+
+    const submitPropertyReview = (e) => {
+        e.preventDefault()
+        let formData = new FormData(e.target)
+        dispatch(SubmitReview(formData))    
+    }
+
+
+
+
     return (
         <>
         <section className="mt-2 pb-7 px-6 pt-6 bg-white rounded-lg">
@@ -360,7 +374,7 @@ export default function ListingReviews() {
                 <div className="card border-0">
                 <div className="card-body p-0">
                     <h3 className="fs-16 lh-2 text-heading mb-4">Write A Review</h3>
-                    <form>
+                    <form onSubmit={submitPropertyReview}>
                     <div className="form-group mb-4 d-flex justify-content-start">
                         <div className="rate-input">
                         <input type="radio" id="star5" name="rate" defaultValue={5} />

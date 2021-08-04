@@ -21,7 +21,7 @@ function loggedIn(user) {
 
             <li className="nav-item mr-2 d-flex hover bg-hover-overlay-gradient-2 hover-primary rounded p-1">
                 <div className="w-46px">
-                    <img src="images/testimonial-5.jpg" alt={user.firstname} className="rounded-circle" />
+                    <img src={user.avatar ? user.avatar : "images/testimonial-5.jpg"} alt={user.firstname} className="rounded-circle" />
                 </div>
                 <a href="" className="nav-link px-2 dropdown-toggle " data-toggle="dropdown">{user.firstname} {user.lastname}</a>
                 <div className="dropdown-menu px-3 dropdown-menu-right dropdown-menu-lg">

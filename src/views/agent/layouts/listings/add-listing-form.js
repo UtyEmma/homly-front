@@ -28,7 +28,7 @@ function AddListingForm({setIsLoading}) {
 
     useEffect(() => {
         !details && loadDetails()
-        listing_success && toast.success(listing_success.data.message)
+        listing_success && document.getElementById('listing-form').reset()
         setIsLoading(loading)
     }, [listing_success, loading])
 

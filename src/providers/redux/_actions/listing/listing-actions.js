@@ -43,15 +43,14 @@ export const CreateListing = (data) => (dispatch) =>{
 }
 
 export const GetAgentListings = () => (dispatch) => {
-    console.log('get_listings')
+    console.log("Fetching Agent's Listings...")
 
-    dispatch({ type: GETLISTINGS_REQUEST })
-
+    dispatch({ type : GETLISTINGS_REQUEST })
     ListingService.getAgentListings()
                     .then(response => {
                         return dispatch({
                             type: GETLISTINGS_SUCCESS,
-                            payload: response.data
+                            payload: response.data.data
                         })
                     })
                     .catch(error => {
@@ -154,3 +153,4 @@ export const FetchSingleListing = (slug) => (dispatch) => {
                     })
 
 }
+

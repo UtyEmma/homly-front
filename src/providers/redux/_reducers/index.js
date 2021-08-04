@@ -1,13 +1,14 @@
 import { combineReducers } from "redux";
 import {loginReducer, signupReducer} from "../_reducers/user.reducer";
 import { AgentLoginReducer, AgentSignupReducer,
-        UpdateAgentProfileReducer, ShowAvailableAgentsReducer } from "./agent-reducer";
+        UpdateAgentProfileReducer, ShowAvailableAgentsReducer, DeleteListingReducer, RemoveListingReducer } from "./agent-reducer";
 import { FetchCategoriesReducer } from "./category-reducer";
 import { FetchDetailsReducer } from "./details-reducer";
 
 import { AgentsListingsReducer, NewListingReducer, StoreListingReducer,
-         ActiveListingsReducer, FetchListingDetails, FetchSingleListing} from "./listing-reducer";
+         ActiveListingsReducer, FetchListingDetails, FetchSingleListing } from "./listing-reducer";
 import { searchForLocationReducer } from "./location-reducer";
+import { SubmitReviewReducer } from "./review-reducers";
 import { SearchListingsReducer } from "./search-reducer";
 
 import { CreateWishlistReducer, FetchWishlistReducer } from "./wishlist-reducer";
@@ -31,6 +32,8 @@ const rootReducer = combineReducers({
     active_listings: ActiveListingsReducer,
     fetch_details : FetchListingDetails,
     listing : FetchSingleListing,
+    delete_listing: DeleteListingReducer,
+    remove_listing: RemoveListingReducer,
 
     categories: FetchCategoriesReducer,
 
@@ -38,7 +41,9 @@ const rootReducer = combineReducers({
 
     details: FetchDetailsReducer,
 
-    searchGoogleMaps : searchForLocationReducer
+    searchGoogleMaps : searchForLocationReducer,
+
+    submit_review: SubmitReviewReducer
 
 
 })

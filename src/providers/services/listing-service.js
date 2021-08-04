@@ -11,6 +11,10 @@ const options = {
     'Authorization' : `Bearer ${localStorage.getItem('token')}`
 }
 
+const params = {
+    headers: options
+}
+
 async function newListing (data) {
     const params = {
         config: {
@@ -23,10 +27,7 @@ async function newListing (data) {
 }
 
 async function getAgentListings(){
-    const params = {
-        headers: options
-    }
-
+    const params = { headers: options }
     return await Request.get('agent/listing/agents-listings', params)
 }
 
@@ -52,15 +53,9 @@ async function fetchAllListings(query){
 }
 
 async function fetchListingDetails(){
-    const params = {
-        headers: options
-    }
     return await Request.get('tenant/listings/details', params);
 }
 
 async function fetchSingleListing(slug){
-    const params = {
-        headers: options
-    }
     return await Request.get(`listings/${slug}`, params);
 }

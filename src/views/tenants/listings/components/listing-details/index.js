@@ -10,7 +10,7 @@ export default function ListingComponents({listing}) {
     return (
         <>
             <ListingInfo listing={listing}/>
-            <ListingVideo/>
+            <ListingVideo video={listing.video_link}/>
             <ListingReviews/>
             <ListingStats/>
             <ListingMap/>

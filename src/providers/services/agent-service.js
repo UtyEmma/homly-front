@@ -1,7 +1,7 @@
 import { Request } from "./api/http";
 
 export const AgentService = {
-    signup, login, update, show 
+    signup, login, update, show, logout, removeListing, deleteListing 
 }
 
 const auth_config = {
@@ -49,4 +49,16 @@ async function update(data){
 
 async function show() {
     return await Request.get('agent/all', auth_config)
+}
+
+async function logout(){
+    return await Request.get('agent/logout', auth_config)
+}
+
+async function deleteListing(id){
+    return await Request.get(`agent/listing/delete/${id}`, auth_config);
+}
+
+async function removeListing(id){
+    return await Request.get(`agent/listing/remove/${id}`, auth_config.config);
 }

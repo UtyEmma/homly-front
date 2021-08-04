@@ -36,7 +36,6 @@ const UserLoginForm = () =>  {
 
     return (
         <div className="col-lg-7">
-            <ToastContainer position="bottom-right"/>
 
             <div className="card border-0 shadow-xxs-2 mb-6">
                 <div className="card-body px-8">
