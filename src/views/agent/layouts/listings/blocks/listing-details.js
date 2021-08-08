@@ -2,19 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreListing } from '../../../../../providers/redux/_actions/listing/listing-actions';
 
-export default function ListingDetails({features}) {
+export default function ListingDetails() {
     const dispatch = useDispatch();
     const listing = useSelector((state) => state.store_listing.store);
-
-    const compileDetails = (e) => {
-        dispatch(StoreListing({
-            ...listing,
-            details: {
-                ...listing.details,
-                [e.target.name] : e.target.value
-            }
-        }))
-    }
 
     return (
         <div className="tab-pane tab-pane-parent fade px-0" id="detail" role="tabpanel" aria-labelledby="detail-tab">
@@ -34,28 +24,32 @@ export default function ListingDetails({features}) {
                         <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
                         adipiscing elit</p>
                         <div className="row">
-                            {
-                                features
+                            <div className="col-lg-4">
+                                <div className="form-group">
+                                    <label for="bedrooms" class="text-heading">Number of Bedrooms</label>
+                                        <input type="number" class="form-control form-control-lg border-0" id="bedrooms" min="1" name="no_bedrooms"></input>
+                                </div>
+                            </div>
 
-                                &&
+                            <div className="col-lg-4">
+                                <div className="form-group">
+                                    <label for="bedrooms" class="text-heading">Number of Bathrooms</label>
+                                        <input type="number" class="form-control form-control-lg border-0" id="bathrooms" min="1" name="no_bathrooms"></input>
+                                </div>
+                            </div>
 
-                                features.map((item, index) => (
-                                    <div className="col-lg-4" key={index}>
-                                        <div className="form-group">
-                                        <label htmlFor={item.toLowerCase().replace(/ /g,'-')} className="text-heading">{item}<span className="text-muted">(only numbers)</span></label>
-                                        <input type="text" onChange={compileDetails} className="form-control form-control-lg border-0" id={item.toLowerCase().replace(/ /g,'-')} name={item.toLowerCase().replace(/ /g,'-')} />
-                                        </div>
-                                    </div>
-                                ))
-                            }
-
+                            <div className="col-lg-4">
+                                <div className="form-group">
+                                    <label for="bedrooms" class="text-heading">Floor Number</label>
+                                        <input type="number" class="form-control form-control-lg border-0" id="floors" name="no_floors" min="1"></input>
+                                </div>
+                            </div>
                         </div>
-
                         <div className="row">
                         <div className="col-lg-12">
                             <div className="form-group">
                             <label htmlFor="extra-details" className="text-heading">Extra details</label>
-                                <textarea className="form-control border-0" rows={5} id="extra_details" name="extra-details" onChange={compileDetails} />
+                                <textarea className="form-control border-0" rows={5} id="extra_info" name="extra_info" />
                             </div>
                         </div>
                         </div>

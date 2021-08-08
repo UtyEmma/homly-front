@@ -7,7 +7,7 @@ export default function Footer() {
             <div className="container">
                 <div className="row">
                     <div className="col-md-6 col-lg-4 mb-6 mb-md-0">
-                        <a className="d-block mb-2" href="#">
+                        <a className="d-block mb-2" href="/">
                             <img src="images/logo-white-primary.png" alt="HomeID" />
                         </a>
                         <div className="lh-26 font-weight-500">
@@ -22,17 +22,17 @@ export default function Footer() {
                         
                         <ul className="list-group list-group-flush list-group-no-border">
                             <li className="list-group-item bg-transparent p-0">
-                                <a href="#" className="text-muted lh-26 font-weight-500 hover-white">Apartment for Rent</a>
+                                <a href="/listings" className="text-muted lh-26 font-weight-500 hover-white">Apartment for Rent</a>
                             </li>
                             <li className="list-group-item bg-transparent p-0">
-                                <a href="#" className="text-muted lh-26 font-weight-500 hover-white">Apartment Low to
+                                <a href="/listings" className="text-muted lh-26 font-weight-500 hover-white">Apartment Low to
                                 hide</a>
                             </li>
                             <li className="list-group-item bg-transparent p-0">
-                                <a href="#" className="text-muted lh-26 font-weight-500 hover-white">Offices for Buy</a>
+                                <a href="/listings" className="text-muted lh-26 font-weight-500 hover-white">Offices for Buy</a>
                             </li>
                             <li className="list-group-item bg-transparent p-0">
-                                <a href="#" className="text-muted lh-26 font-weight-500 hover-white">Offices for Rent</a>
+                                <a href="/listings" className="text-muted lh-26 font-weight-500 hover-white">Offices for Rent</a>
                             </li>
                         </ul>
                     </div>

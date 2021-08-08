@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ListingGrid from './listing-grid'
 import ListingList from './listing-list'
 
-export default function ListingContainer({listings, count}) {
+export default function ListingContainer({listings}) {
     const [grid, setGrid] = useState(true)
 
     const toggleGrid = () => {
@@ -21,7 +21,7 @@ export default function ListingContainer({listings, count}) {
         <>
             <div className="row align-items-sm-center mb-6">    
                 <div className="col-md-6">
-                    <h2 className="fs-15 text-dark mb-0">We found <span className="text-primary">{count > 0 ? count : 0}</span> properties
+                    <h2 className="fs-15 text-dark mb-0">We found <span className="text-primary">{listings.length > 0 ? listings.length : 0}</span> properties
                         available for
                         you
                     </h2>

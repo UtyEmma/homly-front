@@ -6,7 +6,7 @@ export default function AgentContainer({agents}) {
         <>
             <div className="row align-items-sm-center mb-6">
                 <div className="col-sm-6 mb-6 mb-sm-0">
-                    <h2 className="fs-15 text-dark mb-0">We found <span className="text-primary">{agents && agents.count}</span> agents available for
+                    <h2 className="fs-15 text-dark mb-0">We found <span className="text-primary">{agents && `${agents.length}`}</span> agents available for
                         you
                     </h2>
                 </div>
@@ -36,7 +36,7 @@ export default function AgentContainer({agents}) {
             <div className="row">
                         {
                         
-                        agents.agents.map((agent, index) =>(        
+                        agents.map((agent, index) =>(        
                             <AgentCard agent={agent} key={index}/> )) 
                         
                         }

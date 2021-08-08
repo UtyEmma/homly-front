@@ -11,7 +11,6 @@ const NewListing = ({agent}) => {
     
         return (
             <div className="wrapper dashboard-wrapper">
-                <ToastContainer />
                 <Preloader loading={isLoading} />
                 <div className="d-flex flex-wrap flex-xl-nowrap">
                     <Sidebar />

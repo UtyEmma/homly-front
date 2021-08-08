@@ -9,6 +9,7 @@ const {
     SHOW_AGENTS_REQUEST, SHOW_AGENTS_SUCCESS, SHOW_AGENTS_FAILURE,
     DELETE_LISTING_REQUEST, DELETE_LISTING_SUCCESS, DELETE_LISTING_FAILURE,
     REMOVE_LISTING_REQUEST, REMOVE_LISTING_SUCCESS, REMOVE_LISTING_FAILURE,
+    FETCH_SINGLE_AGENT_REQUEST, FETCH_SINGLE_AGENT_SUCCESS, FETCH_SINGLE_AGENT_FAILURE,
     AGENT_LOGOUT 
 } = AgentConstants;
 
@@ -119,9 +120,7 @@ export const AgentLogout = () => (dispatch) => {
                     localStorage.removeItem('type');
                     return window.location.href = '/agent-login'
                 })
-                .catch((error) => {
-                    
-                })
+                .catch((error) => {})
 }
 
 
@@ -163,6 +162,26 @@ export const RemoveListing = (id) => (dispatch) => {
                     Response.error(error.response)
                     return dispatch({
                         type: REMOVE_LISTING_FAILURE,
+                        payload: error.response
+                    })
+                })
+}
+
+export const FetchAgentDetails = (id) => (dispatch) => {
+    console.log("Fetching Details...")
+
+    dispatch({type: FETCH_SINGLE_AGENT_REQUEST})
+
+    AgentService.fetchSingleAgent(id)
+                .then((response) => {
+                    return dispatch({
+                        type: FETCH_SINGLE_AGENT_SUCCESS,
+                        payload: response.data.data
+                    })
+                })
+                .catch((error) => {
+                    return dispatch({
+                        type: FETCH_SINGLE_AGENT_FAILURE,
                         payload: error.response
                     })
                 })

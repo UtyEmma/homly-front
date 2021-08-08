@@ -11,7 +11,7 @@ export default function ListingLocation() {
     const [city, setCity] = useState()
     const [state, setState] = useState()
     const [address, setAddress] = useState()
-    const [landmark, setLandmark] = useState()
+    const [landmark, setLandmark] = useState('')
     const [mapData, setmapData] = useState({
         address: "",
         city: '',
@@ -131,7 +131,8 @@ export default function ListingLocation() {
                         <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
                             <div className="form-group">
                             <label htmlFor="landmark" className="text-heading">Landmark / Nearest Bus Stop</label>
-                            <InputAddress mapData={mapData} setMapData={setmapData} setLatLong={setLatLong} compileData={compileData} id="landmark" name="landmark"/>
+                            <InputAddress mapData={mapData} setMapData={setmapData} setLandmark={setLandmark} setLatLong={setLatLong} id="landmark"/>
+                            <input hidden name="landmark" value={landmark} type="text"/>
                             </div>
                         </div>
                         </div>
@@ -155,13 +156,13 @@ export default function ListingLocation() {
                         <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
                             <div className="form-group mb-md-0">
                             <label htmlFor="latitude" className="text-heading">Latitude </label>
-                            <input type="text" value={mapData.mapPosition.lat} className="form-control form-control-lg border-0" id="latitude" name="latitude" onChange={compileData} disabled/>
+                            <input type="text" value={mapData.mapPosition.lat} className="form-control form-control-lg border-0" id="latitude" name="latitude" readOnly />
                             </div>
                         </div>
                         <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
                             <div className="form-group mb-md-0">
                             <label htmlFor="longitude" className="text-heading">Longitude</label>
-                            <input type="text" value={mapData.mapPosition.lat} className="form-control form-control-lg border-0" id="longitude" name="longitude" onChange={compileData} disabled/>
+                            <input type="text" value={mapData.mapPosition.lat} className="form-control form-control-lg border-0" id="longitude" name="longitude" readOnly/>
                             </div>
                         </div>
                         </div>

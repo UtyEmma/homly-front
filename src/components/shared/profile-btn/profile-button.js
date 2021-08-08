@@ -15,13 +15,28 @@ function loggedIn(user) {
             <li className="nav-item mr-4">
                 <a className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" href="wishlist">
                     <i className="fal fa-heart fs-large-4" />
-                    <span className="badge badge-primary badge-circle badge-absolute">1</span>
+                    {
+                        user.wishlists 
+                        
+                        &&
+
+                        <span className="badge badge-primary badge-circle badge-absolute">{user.wishlists}</span>   
+                    }
                 </a>
             </li>
 
             <li className="nav-item mr-2 d-flex hover bg-hover-overlay-gradient-2 hover-primary rounded p-1">
                 <div className="w-46px">
-                    <img src={user.avatar ? user.avatar : "images/testimonial-5.jpg"} alt={user.firstname} className="rounded-circle" />
+                    {   user.avatar 
+                        ? 
+                        <div className="rounded-circle w-120px h-120 overflow-hidden">
+                            <img src={user.avatar} className="w-120px h-120" style={{objectFit: 'cover'}} alt={`${user.firstname} ${user.lastname}`} />
+                        </div> 
+                        : 
+                        <div className="d-inline-block mb-2 w-46px h-46 mr-2 bg-gray-01 rounded-circle fs-18 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
+                            {`${user.firstname.charAt(0).toUpperCase()}${user.lastname.charAt(0).toUpperCase()}`}
+                        </div>
+                    }
                 </div>
                 <a href="" className="nav-link px-2 dropdown-toggle " data-toggle="dropdown">{user.firstname} {user.lastname}</a>
                 <div className="dropdown-menu px-3 dropdown-menu-right dropdown-menu-lg">

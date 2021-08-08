@@ -1,7 +1,7 @@
 import { Request } from "./api/http";
 
 export const AgentService = {
-    signup, login, update, show, logout, removeListing, deleteListing 
+    signup, login, update, show, logout, removeListing, deleteListing, fetchSingleAgent 
 }
 
 const auth_config = {
@@ -21,9 +21,7 @@ const options = {
 
 async function signup(data){
     const request = {
-        config: {
-            headers : options
-        },
+        config: { headers: options },
         payload: data
     }
     return await Request.post('agent/signup', request)
@@ -52,13 +50,22 @@ async function show() {
 }
 
 async function logout(){
-    return await Request.get('agent/logout', auth_config)
+    return await Request.get('agent/logout', auth_config.config)
 }
 
 async function deleteListing(id){
-    return await Request.get(`agent/listing/delete/${id}`, auth_config);
+    return await Request.get(`agent/listing/delete/${id}`, auth_config.config);
 }
 
 async function removeListing(id){
     return await Request.get(`agent/listing/remove/${id}`, auth_config.config);
+}
+
+async function fetchSingleAgent(id){
+    const request = {
+        config: {
+            headers : options
+        }
+    }
+    return await Request.get(`agent/${id}`, request)
 }

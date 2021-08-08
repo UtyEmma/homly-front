@@ -1,10 +1,5 @@
 import { Request } from "./api/http";
 
-export const ListingService = {
-    newListing, getAgentListings, loadActiveListings, 
-    fetchListingDetails, fetchSingleListing, fetchAllListings
-}
-
 const options = {
     'Accept' : 'application/json',
     'Content-Type' : 'application/json',
@@ -15,47 +10,50 @@ const params = {
     headers: options
 }
 
-async function newListing (data) {
-    const params = {
-        config: {
-            headers: options
-        },
-        payload: data
-    }
 
-    return await Request.post('agent/listing/create', params)
-}
+export const ListingService = {
 
-async function getAgentListings(){
-    const params = { headers: options }
-    return await Request.get('agent/listing/agents-listings', params)
-}
+    newListing : async (data) => {
+        const params = {
+            config: {
+                headers: options
+            },
+            payload: data
+        }
+        return await Request.post('agent/listing/create', params)
+    },
 
-async function loadActiveListings(){
-    const params = {
-        'Accept' : 'application/json',
-        'Content-Type' : 'application/json'
-    }
+    getAgentListings : async () => {
+        const params = { headers: options }
+        return await Request.get('agent/listing/agents-listings', params)
+    },
 
-    return await Request.get('listings/active', params)
-}
-
-async function fetchAllListings(query){
-    const options = {
-        headers: {
+    loadActiveListings : async () => {
+        const params = {
             'Accept' : 'application/json',
             'Content-Type' : 'application/json'
-        },
-        params: query
+        }
+        return await Request.get('listings', params)
+    },
+
+    fetchAllListings : async (query) => {
+        const config = {
+                headers: options, 
+                params: query
+            }
+        return await Request.get('listings', {...config})
+    },
+
+    fetchListingDetails : async () => {
+        return await Request.get('tenant/listings/details', params);
+    },
+    
+    fetchSingleListing : async (slug) => {
+        return await Request.get(`listings/${slug}`, params);
+    },
+
+    fetchPopularListings: async () => {
+        return await Request.get(`listings/popular`, params)
     }
 
-    return await Request.get('listings', options)
-}
-
-async function fetchListingDetails(){
-    return await Request.get('tenant/listings/details', params);
-}
-
-async function fetchSingleListing(slug){
-    return await Request.get(`listings/${slug}`, params);
 }

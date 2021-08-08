@@ -19,7 +19,7 @@ export default function Header({agent}) {
                         <div className="dropdown border-md-right border-0 py-3 text-right">
                         <a href="#" className="dropdown-toggle text-heading pr-3 pr-sm-6 d-flex align-items-center justify-content-end" data-toggle="dropdown">
                             <div className="mr-4 w-48px">
-                            <img src="images/testimonial-5.jpg" alt="Ronald Hunter" className="rounded-circle" />
+                            <img src={agent.avatar ? agent.avatar : "images/my-profile.png"} alt={`${agent.firstname} ${agent.lastname}`} className="rounded-circle img-circle img-fluid" />
                             </div>
                             <div className="fs-13 font-weight-500 lh-1">
                             {agent.firstname} {agent.lastname}

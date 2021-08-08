@@ -4,7 +4,7 @@ import { CreateListing, StoreListing } from '../../../../providers/redux/_action
 import ListingLocation from './blocks/listing-location'
 import ListingDescription from './blocks/listing-description'
 import ListingMedia from './blocks/listing-media'
-import ListingFeatures from './blocks/listing-features'
+import ListingAmenities from './blocks/listing-amenities'
 import ListingDetails from './blocks/listing-details'
 import { toast } from 'react-toastify';
 import { FetchDetails } from 'providers/redux/_actions/details-actions';
@@ -12,22 +12,22 @@ import { FetchDetails } from 'providers/redux/_actions/details-actions';
 function AddListingForm({setIsLoading}) {
     const dispatch = useDispatch();
 
-    const [files, setFiles] = useState([]) 
+    const [files, setFiles] = useState([]) //Set Files
 
     const store_listing = useSelector((state) => state.store_listing);
-    const {store} = store_listing;
+    const {store} = store_listing; 
 
     const listing = useSelector((state) => state.new_listing);
     const {loading, listing_success} = listing
     
 
     const fetchDetails = useSelector(state => state.details)
-    const {details} = fetchDetails
+    const {amenities} = fetchDetails
 
-    const loadDetails = () => { dispatch(FetchDetails()) }
+    const loadAmenities = () => { dispatch(FetchDetails()) }
 
     useEffect(() => {
-        !details && loadDetails()
+        !amenities && loadAmenities()
         listing_success && document.getElementById('listing-form').reset()
         setIsLoading(loading)
     }, [listing_success, loading])
@@ -35,26 +35,11 @@ function AddListingForm({setIsLoading}) {
     const handleFormData = (e) => {
         e.preventDefault()
         let formData = new FormData(e.target);
-        if (store) {
-            formData.set('features', JSON.stringify(store.features))
-            details.features.map((feature) => (
-                formData.delete(feature.toLowerCase().replace(/ /g,'-'))
-            ))
-        }
-
-        if (store) {
-            details.amenities.map((amenity) => (
-                formData.delete(amenity.toLowerCase().replace(/ /g,'-'))
-            ))
-            formData.set('details', JSON.stringify(store.details))
-        }
 
         formData.delete('undefined')
         formData.delete('images')
-        formData.delete('extra-details')
         formData.delete('filepond')
         files.map(file => formData.append('images[]', file))
-
 
         dispatch(CreateListing(formData))
     }
@@ -68,9 +53,9 @@ function AddListingForm({setIsLoading}) {
 
                 <ListingLocation />
 
-                <ListingDetails features={details && details.features} />
+                <ListingDetails />
 
-                <ListingFeatures amenities={details && details.amenities}/>
+                <ListingAmenities amenities={amenities}/>
             </div>
         </form>
     )

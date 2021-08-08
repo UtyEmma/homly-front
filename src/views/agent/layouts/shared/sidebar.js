@@ -1,7 +1,6 @@
 import { AgentLogout } from 'providers/redux/_actions/agent-actions'
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
 
 export default function Sidebar() {
     const dispatch = useDispatch()
@@ -92,7 +91,7 @@ export default function Sidebar() {
                                     </a>
                                 </li>
                                 <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
-                                    <a href="dashboard-reviews.html" className="text-heading lh-1 sidebar-link d-flex align-items-center">
+                                    <a href="/reviews" className="text-heading lh-1 sidebar-link d-flex align-items-center">
                                         <span className="sidebar-item-icon d-inline-block mr-3 text-muted fs-20">
                                         <svg className="icon icon-review"><use xlinkHref="#icon-review" /></svg>
                                         </span>

@@ -13,7 +13,7 @@ import NavBar from 'components/shared/nav-bar'
 import Footer from 'components/shared/footer'
 
 
-const ListingDetails = ({isLoggedIn, user}) => {
+const ListingDetails = ({isLoggedIn, user, status}) => {
     const {slug} = useParams();
     const dispatch = useDispatch()
 
@@ -48,7 +48,7 @@ const ListingDetails = ({isLoggedIn, user}) => {
                             <div className="container">
                             <div className="row">
                                 <article className="col-lg-8">
-                                    <ListingComponents listing={listing} />
+                                    <ListingComponents listing={listing} status={status} />
                                 </article>
 
                                 <ListingAction/>

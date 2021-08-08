@@ -44,7 +44,7 @@ export default function ListingFilter({params, setParams}) {
                     <div className="form-group p-1">
                     <label htmlFor="room" className="sr-only">Room</label>
                     <select className="form-control border-0 shadow-xxs-1 bg-transparent font-weight-600 selectpicker" title="Rooms" data-style="bg-white" onChange={parseQueryParams} name="rooms" id="room">
-                        <option selected>2+ Beds</option>
+                        <option defaultValue="2" >2+ Beds</option>
                         <option>3+ Beds</option>
                     </select>
                     </div>

@@ -1,7 +1,5 @@
-import CustomSelect from 'libraries/forms/select/custom-select';
-import React, {useState} from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { SelectPicker } from 'rsuite';
 import SelectListingCategory from 'views/layouts/components/details/categories';
 import { StoreListing } from 'providers/redux/_actions/listing/listing-actions';
 
@@ -16,7 +14,6 @@ export default function ListingDescription({setIsLoading}) {
                         [e.target.name] : e.target.value
                     }))
     }
-
 
     return (
         <div className="tab-pane tab-pane-parent fade show active px-0" id="description" role="tabpanel" aria-labelledby="description-tab">
@@ -36,8 +33,7 @@ export default function ListingDescription({setIsLoading}) {
                         <div className="card-body p-6">
                             <h3 className="card-title mb-0 text-heading fs-22 lh-15">Property
                             Description</h3>
-                            <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit</p>
+                            <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
                             <div className="form-group">
                             <label htmlFor="title" className="text-heading">Title <span className="text-muted">(mandatory)</span></label>
                             <input type="text" className="form-control form-control-lg border-0" onChange={compileData} id="title" name="title" />
@@ -56,9 +52,10 @@ export default function ListingDescription({setIsLoading}) {
                             <textarea className="form-control border-0" rows={5} name="description" id="description-01" onChange={compileData} />
                             </div>
                         </div>
-                        </div>
-                        
-                        <div className="card mb-6">
+                    </div>
+                </div>
+                <div className="col-lg-6">
+                    <div className="card mb-6">
                             <div className="card-body p-6">
                                 <h3 className="card-title mb-0 text-heading fs-22 lh-15">Rent Details</h3>
                                 <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
@@ -78,42 +75,26 @@ export default function ListingDescription({setIsLoading}) {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="col-lg-6">
                     <div className="card mb-6">
                     <div className="card-body p-6">
-                        <h3 className="card-title mb-0 text-heading fs-22 lh-15">Property
-                        Price/Fees</h3>
+                        <h3 className="card-title mb-0 text-heading fs-22 lh-15">Property Fees</h3>
                         <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
                         adipiscing elit</p>
                         <div className="form-row mx-n2">
-                        <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
-                            <div className="form-group">
-                            <label htmlFor="price" className="text-heading">Total Initial Rent in $ <span className="text-muted">(only numbers)</span></label>
-                            <input type="text" className="form-control form-control-lg border-0" onChange={compileData} id="price" name="initial_price" />
+                            <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
+                                <div className="form-group">
+                                <label htmlFor="rent" className="text-heading">Total Rent in &#8358; </label>
+                                <input type="text" className="form-control form-control-lg border-0" onChange={compileData} id="rent" name="rent" />
+                                </div>
                             </div>
-                        </div>
-                        <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
-                            <div className="form-group">
-                            <label htmlFor="agency_fees" className="text-heading">Agency Fees</label>
-                            <input type="text" name="agency_fees" onChange={compileData} className="form-control form-control-lg border-0" id="agency_fees" />
-                            </div>
-                        </div>
                         </div>
                         <div className="form-row mx-n2">
-                        <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
-                            <div className="form-group">
-                            <label htmlFor="legal_fees" className="text-heading">Legal Fees <span className="text-muted">(monthly)</span></label>
-                            <input type="text" className="form-control form-control-lg border-0" onChange={compileData} id="legal_fees" name="legal_fees" />
+                            <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
+                                <div className="form-group">
+                                <label htmlFor="extra_fees" className="text-heading">Extra Fees in &#8358; </label>
+                                <input type="text" className="form-control form-control-lg border-0" onChange={compileData} id="extra_fees" name="extra_fees" />
+                                </div>
                             </div>
-                        </div>
-                        <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
-                            <div className="form-group">
-                            <label htmlFor="caution_fees" className="text-heading">Caution Fees <span className="text-muted">( ex: /month)</span>
-                            </label>
-                            <input type="text" className="form-control form-control-lg border-0" onChange={compileData} id="caution_fees" name="caution_fees" />
-                            </div>
-                        </div>
                         </div>
                     </div>
                     </div>

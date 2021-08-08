@@ -7,22 +7,25 @@ import Searchbar from 'views/layouts/components/search/searchbar'
 import Preloader from 'components/preloader/preloader'
 import AgentContainer from './components/agent-container'
 import AgentNotFound from 'components/404/404-agents'
+import AgentDetails from './agent-details'
+import UserRoute from 'providers/guards/user-guard'
 
-const Agents = ({isLoggedIn, user}) => {
+const Agents = ({isLoggedIn, user, match}) => {
 
     const dispatch = useDispatch();
     const agents_listing = useSelector((state) => state.available_agents)
-    const {loading, agents_data} = agents_listing;
+    const {loading, agents} = agents_listing;
 
     const loadAgents = () => {
         dispatch(ShowAllAgents())
     }
 
     useEffect(() => {
-        if(!agents_data){
+        if(!agents){
             loadAgents()
         }
-    }, [agents_data])
+        console.log(agents)
+    }, [agents])
 
     return (
         <div>
@@ -43,7 +46,7 @@ const Agents = ({isLoggedIn, user}) => {
                 <section className="pt-5 pb-13">
                     <div className="container">
                         {
-                            agents_data && agents_data.agents > 0 ? <AgentContainer /> : <AgentNotFound />
+                            agents && agents.length > 0 ? <AgentContainer agents={agents} /> : <AgentNotFound />
                         }
                     </div>
                 </section>

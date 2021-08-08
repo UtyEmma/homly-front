@@ -1,41 +1,36 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LocalGovt, State } from 'components/city-state/city-state';
-import Tagify from 'libraries/tagify/tagify'
-import { ERROR } from 'libraries/toastify/toastify';
 import { __createwishlist } from 'libraries/validation';
-import naijaStateLocalGovernment from 'naija-state-local-government';
 import { CreateWishlist } from 'providers/redux/_actions/wishlist-actions';
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import 'bs-stepper/dist/css/bs-stepper.min.css'
 import Stepper from 'bs-stepper'
-import { useRef } from 'react';
-import { TagifyFeatures } from 'views/layouts/components/details/features';
 import { TagifyAmenities } from 'views/layouts/components/details/amenities';
 import SelectListingCategory from 'views/layouts/components/details/categories';
 import Error from 'libraries/response/http-error';
 
 const WishlistForm = () => {
     const dispatch = useDispatch();
-    const states = naijaStateLocalGovernment.states();
     const [selectedState, setSelectedState] = useState("Enugu");
-    const [features, setFeatures] = useState([]);
-    const [amenities, setAmenities] = useState([]);
+    const [amenity, setAmenity] = useState([]);
     const [stepper, setStepper] = useState();
 
     const wishlist = useSelector(state => state.wishlist);
-    const {error, loading, success} = wishlist;
+    const {loading} = wishlist;
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(__createwishlist)
     });
 
-    const handleSuccess = (data) => {
-        dispatch(CreateWishlist({...data, 
-            'features': features,
-            'amenities': amenities
-        }))
+    const handleSuccess = () => {
+        const form = document.getElementById("create_wishlist_form")
+        let formData = new FormData(form)
+        formData.append('amenities', amenity)
+        formData.append('state', selectedState)
+        
+        dispatch(CreateWishlist(formData))
     }  
     
     const handleErrors = () => {
@@ -76,9 +71,17 @@ const WishlistForm = () => {
                     </div>
                 </div>
                 <div className="bs-stepper-content">
-                    <form className="form" onSubmit={handleSubmit(handleSuccess, handleErrors)} id="create-wishlist-form">
+                    <form className="form" onSubmit={handleSubmit(handleSuccess, handleErrors)} id="create_wishlist_form">
                         <div id="property-info" className="content p-0" role="tabpanel" aria-labelledby="property-info-trigger" >
                             <div className="row p-0">
+                                
+                                <div className="col-sm-12 px-2">
+                                    <div className="form-group">
+                                        <label htmlFor="desc">I am looking for...</label>
+                                        <input className="form-control border-0" name="desc" register={{...register('desc')}} id="desc" type="text" placeholder="What you are looking for?" />
+                                    </div>
+                                </div>
+
                                 <div className="col-sm-12 px-2">
                                     <div className="form-group">
                                         <SelectListingCategory 
@@ -87,30 +90,33 @@ const WishlistForm = () => {
                                             name="category"
                                             formError={errors.category?.message}
                                             id="category"
+                                            classes="form-control border-0"
                                         />
                                     </div>
                                 </div>
 
-                                <div className="col-md-12 px-2">
+                                <div className="col-md-6 px-2">
                                     <div className="form-group">
-                                        <label htmlFor="no_of_rooms" className="text-heading">Number of Rooms</label>
-                                        <input type="number" {...register('no_rooms')} name="no_rooms" className="form-control form-control-lg border-0" id="no_of_rooms" placeholder="0" />
-                                        <p className="text-danger fs-14">{errors.no_rooms?.message}</p>
+                                        <label htmlFor="no_bedrooms" className="text-heading">Number of Rooms</label>
+                                        <input type="number" {...register('no_bedrooms')} name="no_bedrooms" className="form-control  border-0" id="no_bedrooms" placeholder="0" />
+                                        <p className="text-danger fs-14">{errors.no_bedrooms?.message}</p>
                                     </div>
                                 </div>
 
-                                <div className="col-sm-12 px-2">
+                                <div className="col-md-6 px-2">
                                     <div className="form-group">
-                                        <label htmlFor="budget" className="text-heading">Budget</label>
-                                        <input type="number" name="budget" {...register('budget')} className="form-control form-control-lg border-0" id="budget" placeholder="10000" />
-                                        <p className="text-danger fs-14">{errors.budget?.message}</p>
+                                        <label htmlFor="no_bathrooms" className="text-heading">Number of Bathrooms</label>
+                                        <input type="number" {...register('no_bathrooms')} name="no_bathrooms" className="form-control  border-0" id="no_bathrooms" placeholder="0" />
+                                        <p className="text-danger fs-14">{errors.no_bathrooms?.message}</p>
                                     </div>
                                 </div>
-                                </div>
+                                    
+                            </div>
 
-                                <div className='row d-flex justify-content-end'>
-                                     <button type="button" onClick={() => {stepper.next()}} className="btn btn-primary">Next</button>
-                                </div>
+
+                            <div className='row d-flex justify-content-end'>
+                                    <button type="button" onClick={() => {stepper.next()}} className="btn btn-primary">Next</button>
+                            </div>
                         </div>
 
                         <div id="location-info" className="content" role="tabpanel" aria-labelledby="location-info-trigger">
@@ -119,15 +125,15 @@ const WishlistForm = () => {
                                 <div className="col-sm-12 px-2">
                                     <div className="form-group">
                                         <label htmlFor="state" className="text-heading">State</label>
-                                        <State setSelectedState={setSelectedState} register={{...register('state')}} name="state" />
+                                        <State setSelectedState={setSelectedState} classes="form-control  border-0 selectpicker" register={{...register('state')}} name="state" />
                                         <p className="text-danger fs-14">{errors.state?.message}</p>
                                     </div>
                                 </div>
 
                                 <div className="col-sm-12 px-2">
                                     <div className="form-group">
-                                        <label htmlFor="lga" className="text-heading">Local Government</label>
-                                        <LocalGovt name="lga" selectedState={selectedState} register={{...register('state')}}/>
+                                        <label htmlFor="city" className="text-heading">Local Government</label>
+                                        <LocalGovt name="city" selectedState={selectedState} register={{...register('city')}} classes="form-control  border-0" />
                                         <p className="text-danger fs-14">{errors.lga?.message}</p>
                                     </div>
                                 </div>
@@ -135,7 +141,7 @@ const WishlistForm = () => {
                                 <div className="col-sm-12 px-2">
                                     <div className="form-group">
                                         <label htmlFor="area" className="text-heading">Area</label>
-                                        <input type="text" name="area" {...register('area')} className="form-control form-control-lg border-0" id="area" placeholder="Independence Layout" name="area"/>
+                                        <input type="text" name="area" {...register('area')} className="form-control  border-0" id="area" placeholder="Independence Layout" name="area"/>
                                         <p className="text-danger fs-14">{errors.area?.message}</p>
                                     </div>
                                 </div>
@@ -149,18 +155,18 @@ const WishlistForm = () => {
 
                         <div id="extra-details" className="content" role="tabpanel" aria-labelledby="extra-details-trigger">
                             <div className="row">
-                                <div className="col-md-12 px-2">
+                                <div className="col-sm-12 px-2">
                                     <div className="form-group">
-                                        <label htmlFor="features" className="text-heading">Select Features</label>
-                                        <TagifyFeatures message="Type Features" validate={{...register('features')}} val={features} setValue={setFeatures}  id="features"  name="features[]"/>
-                                        <p className="text-danger fs-14">{errors.features?.message}</p>
+                                        <label htmlFor="budget" className="text-heading">Budget</label>
+                                        <input type="number" name="budget" {...register('budget')} className="form-control  border-0" id="budget" placeholder="10000" />
+                                        <p className="text-danger fs-14">{errors.budget?.message}</p>
                                     </div>
                                 </div>
 
                                 <div className="col-md-12 px-2">
                                     <div className="form-group">
                                         <label htmlFor="amenities" className="text-heading">Select Amenities</label>
-                                        <TagifyAmenities validate={{...register('amenities')}} message="Type Amenities" name="amenities[]" val={amenities} setValue={setAmenities} label="Amenities" />   
+                                        <TagifyAmenities validate={{...register('amenities')}} message="Type Amenities" name="amenities[]" val={amenity} setValue={setAmenity} label="Amenities" />   
                                         <p className="text-danger fs-14">{errors.amenities?.message}</p>
                                     </div>
                                 </div>

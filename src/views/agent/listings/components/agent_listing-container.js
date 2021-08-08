@@ -7,7 +7,7 @@ export default function AgentListingContainer({listings}) {
             <div className="d-flex flex-wrap flex-md-nowrap mb-6">
 
             <div className="mr-0 mr-md-auto">
-                    <h2 className="mb-0 text-heading fs-22 lh-15">My Properties<span className="badge badge-white badge-pill text-primary fs-18 font-weight-bold ml-2">{listings.count}</span></h2>
+                    <h2 className="mb-0 text-heading fs-22 lh-15">My Properties<span className="badge badge-white badge-pill text-primary fs-18 font-weight-bold ml-2">{listings.length}</span></h2>
                     <p>Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse suscipit</p>
             </div>
             <div className="form-inline justify-content-md-end mx-n2">
@@ -24,7 +24,7 @@ export default function AgentListingContainer({listings}) {
                         <div className="input-group-prepend">
                             <span className="input-group-text bg-transparent letter-spacing-093 border-0 pr-0"><i className="far fa-align-left mr-2" ></i> Sort by:</span>
                         </div>
-                        <select className="form-control bg-transparent pl-0 selectpicker d-flex align-items-center sortby" name="sort-by" data-style="bg-transparent px-1 py-0 lh-1 font-weight-600 text-body" value="" id="status" >
+                        <select className="form-control bg-transparent pl-0 selectpicker d-flex align-items-center sortby" name="sort-by" data-style="bg-transparent px-1 py-0 lh-1 font-weight-600 text-body" id="status" >
                             <option>Alphabet</option>
                             <option>Price - Low to High</option>
                             <option>Price - High to Low</option>
@@ -48,8 +48,8 @@ export default function AgentListingContainer({listings}) {
                     </thead>
                     <tbody>
                         {               
-                            listings.listings.map((listing, index) => (        
-                                    <AgentListingItem listing_item={listing} key={index}/>
+                            listings.map((listing, index) => (        
+                                <AgentListingItem listing_item={listing} key={index}/>
                             ))
                         }
                     </tbody>

@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import NavBar from 'components/shared/nav-bar';
 import Footer from 'components/shared/footer';
@@ -6,21 +6,22 @@ import Footer from 'components/shared/footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { ShowAllListings } from 'providers/redux/_actions/listing/listing-actions';
 import ListingFilter from './components/listing-filter';
-import { ToastContainer } from 'react-toastify';
 import Preloader from 'components/preloader/preloader';
 import Searchbar from 'views/layouts/components/search/searchbar';
 import ListingNotFound from 'components/404/404-listing';
 import ListingContainer from './components/listing-container';
+import FeaturedListings from './components/featured-listings/featured-listings';
 
 
 const Listing = ({isLoggedIn, user}) => {
         const dispatch = useDispatch();
-        const listings = useSelector((state) => state.active_listings);
-        const {loading, active_listings} = listings;
+        const state = useSelector((state) => state.active_listings);
+        const {loading, listings, featured} = state;
+
         const [params, setParams] = useState({})
 
         useEffect(() => {
-            if(!active_listings || params) {
+            if(!listings || params) {
                 fetchListings()
             }
         }, [params])
@@ -61,8 +62,8 @@ const Listing = ({isLoggedIn, user}) => {
                         <div className="row gx-4">
                             <div className="col-lg-8 mb-8 mb-lg-0">
                                 {
-                                    active_listings && active_listings.listings.length > 0 
-                                        ? <ListingContainer listings={active_listings.listings} count={active_listings.count}/> : <ListingNotFound/>
+                                    listings && listings.length > 0 
+                                        ? <ListingContainer listings={listings} /> : <ListingNotFound/>
                                 }  
                             </div>
 
@@ -72,71 +73,17 @@ const Listing = ({isLoggedIn, user}) => {
                                 <div className="card border-0 property-widget mb-6">
                                 <div className="card-body px-0 pl-lg-6 py-0">
                                     <h4 className="card-title fs-16 lh-2 text-dark mb-3">Featured Properties</h4>
-                                    <div className="slick-slider mx-0" data-slick-options="{&quot;slidesToShow&quot;: 1, &quot;autoplay&quot;:true}">
-                                    <div className="box px-0">
-                                        <div className="card border-0">
-                                        <img src="images/feature-property-01.jpg" className="card-img" alt="Villa on Hollywood Boulevard" />
-                                        <div className="card-img-overlay d-flex flex-column bg-gradient-3 rounded-lg">
-                                            <div className="d-flex mb-auto">
-                                            <a href="#" className="mr-1 badge badge-orange">featured</a>
-                                            <a href="#" className="badge badge-indigo">for Rent</a>
-                                            </div>
-                                            <div className="px-2 pb-2">
-                                            <a href="single-property-1.html" className="text-white"><h5 className="card-title fs-16 lh-2 mb-0">Villa on Hollywood
-                                                Boulevard</h5>
-                                            </a>
-                                            <p className="card-text text-gray-light mb-0 font-weight-500">1421 San
-                                                Predro
-                                                St, Los Angeles</p>
-                                            <p className="text-white mb-0"><span className="fs-17 font-weight-bold">$2500 </span>/month
-                                            </p>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    <div className="box px-0">
-                                        <div className="card border-0">
-                                        <img src="images/feature-property-01.jpg" className="card-img" alt="Villa on Hollywood Boulevard" />
-                                        <div className="card-img-overlay d-flex flex-column bg-gradient-3 rounded-lg">
-                                            <div className="d-flex mb-auto">
-                                            <a href="#" className="mr-1 badge badge-orange">featured</a>
-                                            <a href="#" className="badge badge-indigo">for Rent</a>
-                                            </div>
-                                            <div className="px-2 pb-2">
-                                            <a href="single-property-1.html" className="text-white"><h5 className="card-title fs-16 lh-2 mb-0">Villa on Hollywood
-                                                Boulevard</h5>
-                                            </a>
-                                            <p className="card-text text-gray-light mb-0 font-weight-500">1421 San
-                                                Predro
-                                                St, Los Angeles</p>
-                                            <p className="text-white mb-0"><span className="fs-17 font-weight-bold">$2500 </span>/month
-                                            </p>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    <div className="box px-0">
-                                        <div className="card border-0">
-                                        <img src="images/feature-property-01.jpg" className="card-img" alt="Villa on Hollywood Boulevard" />
-                                        <div className="card-img-overlay d-flex flex-column bg-gradient-3 rounded-lg">
-                                            <div className="d-flex mb-auto">
-                                            <a href="#" className="mr-1 badge badge-orange">featured</a>
-                                            <a href="#" className="badge badge-indigo">for Rent</a>
-                                            </div>
-                                            <div className="px-2 pb-2">
-                                            <a href="single-property-1.html" className="text-white"><h5 className="card-title fs-16 lh-2 mb-0">Villa on Hollywood
-                                                Boulevard</h5>
-                                            </a>
-                                            <p className="card-text text-gray-light mb-0 font-weight-500">1421 San
-                                                Predro
-                                                St, Los Angeles</p>
-                                            <p className="text-white mb-0"><span className="fs-17 font-weight-bold">$2500 </span>/month
-                                            </p>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
+                                    {
+                                        featured && featured.length > 0
+
+                                        ? 
+
+                                        <FeaturedListings listings={featured} />
+
+                                        :
+
+                                        <div></div>
+                                    }
                                 </div>
                                 </div>
                                 <div className="card border-0">

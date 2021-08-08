@@ -36,8 +36,8 @@ export default function AgentListingItem({listing_item}) {
                         <h5 className="fs-16 mb-0 lh-18">{listing_item.title}</h5>
                     </a>
                     <p className="mb-1 font-weight-500" style={{textOverflow: 'ellipsis'}}>{listing_item.description}</p>
-                    <span className="text-heading lh-15 font-weight-bold fs-17">&#8358; {listing_item.initial_price}</span>
-                    <span className="text-gray-light">/month</span>
+                    <span className="text-heading lh-15 font-weight-bold fs-17">&#8358; {listing_item.initial_fees}</span>
+                    <span className="text-gray-light">/{listing_item.tenure}</span>
                 </div>
             </div>
             </td>

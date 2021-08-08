@@ -7,24 +7,31 @@ const options = {
 }
 
 export const ReviewsService = {
-    submitReview : (data, id) => {
+    submitReview : async (data, id) => {
         const option = {
             config: {
                 headers: options
             },
             payload: data
         }
-        return Request.post(`tenant/reviews/create/${id}`, option);
+        return await Request.post(`tenant/reviews/create/${id}`, option);
     },
 
-    agentReviews : () => {
+    agentReviews : async () => {
         const option = {
             config: {
                 headers: options
             }
         }
 
-        return Request.get('reviews/agent', option);
+        return await Request.get('agent/reviews', option);
+    },
+
+    listingReviews: async (id) => {
+        const config = {
+                headers: options
+            }
+        return await Request.get(`reviews/fetch/${id}`, config)
     }
 
 }

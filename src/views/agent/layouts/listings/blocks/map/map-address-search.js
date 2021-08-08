@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { AsyncTypeahead } from 'react-bootstrap-typeahead'
-import Geocode from 'react-geocode'
-import { useDispatch, useSelector } from 'react-redux';
-import usePlacesAutocomplete, { getGeocode } from 'use-places-autocomplete';
+import usePlacesAutocomplete from 'use-places-autocomplete';
 import './css/map-address.css'
 
-export default function InputAddress({compileData, setMapData, mapData, setLatLong, name}) {
+export default function InputAddress({setLandmark, setMapData, mapData, setLatLong, name}) {
     const [isLoading, setIsLoading] = useState(false)
     const [options, setOptions] = useState([])
     const { ready, value, suggestions, setValue, clearSuggestions, } = usePlacesAutocomplete();
     
     const handleSelection = (query) => {
         setLatLong(query)
-        compileData('landmark', query)
+        setLandmark(query)
         clearSuggestions();
     }
 

@@ -32,9 +32,10 @@ import Wishlist from 'views/tenants/wishlist/wishlist';
 import Search from 'views/search';
 import Preloader from 'components/preloader/preloader';
 import { ToastContainer } from 'react-toastify';
+import Reviews from 'views/agent/reviews';
 
 
-function App(props) {
+function App() {
   const [isLoading, setIsLoading] = useState(false)
 
   return (
@@ -50,8 +51,8 @@ function App(props) {
           <Route path="/recover-password" isLoading={setIsLoading} component={PasswordRecovery} exact/>
 
           {/* User Routes */}
-          <Route path="/login" isLoading={setIsLoading} component={UserLogin} exact/>
-          <Route path="/signup" isLoading={setIsLoading} component={UserSignup} exact/>
+          <Route path="/login" render={(props) => (<UserLogin {...props} isLoading={setIsLoading} />)} exact/>
+          <Route path="/signup" isLoading={setIsLoading} render={(props) => (<UserSignup {...props} isLoading={setIsLoading} />)} exact/>
           <UserRoute path="/s" user component={Search} exact/>
           <UserRoute path="/listings" isLoading={setIsLoading} user component={Listing} exact/>
           <UserRoute path="/agents" isLoading={setIsLoading} user type="user" component={Agents} exact/>
@@ -67,6 +68,7 @@ function App(props) {
           <AgentRoute path="/new-listing" isLoading={setIsLoading} type="agent" component={NewListing} exact />
           <AgentRoute path="/agent-profile" isLoading={setIsLoading} type="agent" component={AgentProfile} exact />
           <AgentRoute path="/my-listings" isLoading={setIsLoading} type="agent" component={AgentsListings} exact />
+          <AgentRoute path="/reviews" isLoading={setIsLoading} type="agent" component={Reviews} exact />
 
           <Route component={NotFound} exact/>
       </Switch>

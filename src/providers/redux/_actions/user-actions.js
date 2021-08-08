@@ -14,14 +14,14 @@ export const signup = (data) => (dispatch) => {
             .then(response => {
                 dispatch({
                     type: SIGNUP_SUCCESS,
-                    payload: response
+                    payload: response.data
                 })
             })
             .catch(error => {
                 Response.error(error.response)
                 dispatch({
                     type: SIGNUP_FAILURE,
-                    payload: error.response.data.message
+                    payload: error.response
                 })
             })  
             
@@ -48,7 +48,7 @@ export const login = (data) => (dispatch) => {
                 Response.error(error.response)
                 dispatch({
                     type: LOGIN_FAILURE,
-                    payload: error.response.data.message
+                    payload: error.response
                 })
             })
 }
