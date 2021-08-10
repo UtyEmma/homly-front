@@ -12,6 +12,8 @@ export default function Error(err) {
             return handleFormError(err.data)
         case 401: 
             return handleUnauthorizedError(err.data)
+        case 403:
+            return handleEmailVerificationError()
         default:
             return handleServerError(err.data);
     } 
@@ -32,4 +34,8 @@ function handleUnauthorizedError(){
     // localStorage.removeItem('isAuthenticated');
     // localStorage.removeItem('type');
     // return window.location.href = '/login?msg=Session Expired! Please login.'
+}
+
+function handleEmailVerificationError(){
+    return window.location.href = '/verify'
 }

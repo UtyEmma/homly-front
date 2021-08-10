@@ -7,7 +7,6 @@ export default function ListingMedia({files, setFiles}) {
 
     const dispatch = useDispatch();
     const listing = useSelector((state) => state.store_listing.store);
-    
 
     const compileMedia = (e) => {
         dispatch(StoreListing({

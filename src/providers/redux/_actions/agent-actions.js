@@ -6,7 +6,11 @@ const {
     SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE, 
     LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE,
     UPDATE_REQUEST, UPDATE_SUCCESS, UPDATE_FAILURE,
-    SHOW_AGENTS_REQUEST, SHOW_AGENTS_SUCCESS, SHOW_AGENTS_FAILURE 
+    SHOW_AGENTS_REQUEST, SHOW_AGENTS_SUCCESS, SHOW_AGENTS_FAILURE,
+    DELETE_LISTING_REQUEST, DELETE_LISTING_SUCCESS, DELETE_LISTING_FAILURE,
+    REMOVE_LISTING_REQUEST, REMOVE_LISTING_SUCCESS, REMOVE_LISTING_FAILURE,
+    FETCH_SINGLE_AGENT_REQUEST, FETCH_SINGLE_AGENT_SUCCESS, FETCH_SINGLE_AGENT_FAILURE,
+    AGENT_LOGOUT 
 } = AgentConstants;
 
 
@@ -65,10 +69,8 @@ export const UpdateAgentProfile = (data) => (dispatch) => {
     AgentService.update(data)
                 .then((response) => {
                     let res = response.data;
-                    console.log(res)
                     Response.success(res)
                     localStorage.removeItem('user');
-                    localStorage.setItem('user', JSON.stringify(res.data.user));
                     localStorage.setItem('user', JSON.stringify(res.data.agent));
                     dispatch({
                         type: UPDATE_SUCCESS,
@@ -103,4 +105,82 @@ export const ShowAllAgents = () => (dispatch) => {
                     payload: error.response
                 })
             })
+}
+
+export const AgentLogout = () => (dispatch) => {
+    console.log('Logging out...')
+
+    AgentService.logout()
+                .then((response) => {
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                    localStorage.removeItem('isAuthenticated');
+                    localStorage.removeItem('type');
+                    return window.location.href = '/agent-login'
+                })
+                .catch((error) => {})
+}
+
+
+export const DeleteListing = (id) => (dispatch) => {
+    console.log('Deleting Listing...')
+    dispatch({type: DELETE_LISTING_REQUEST});
+
+    AgentService.deleteListing(id)
+                .then(response => {
+                    Response.success(response.data.data)
+                    return dispatch({
+                        type: DELETE_LISTING_SUCCESS,
+                        payload: response.data.data
+                    })
+                })
+                .catch(error => {
+                    Response.error(error.response)
+                    return dispatch({
+                        type: DELETE_LISTING_FAILURE,
+                        payload: error.response
+                    })
+                })
+}
+
+export const RemoveListing = (id) => (dispatch) => {
+    console.log('Removing Listing...')
+
+    dispatch({type: REMOVE_LISTING_REQUEST})
+
+    AgentService.removeListing(id)
+                .then(response => {
+                    Response.success(response.data.data)
+                    return dispatch({
+                        type: REMOVE_LISTING_SUCCESS,
+                        payload: response.data.data
+                    })
+                })
+                .catch(error => {
+                    Response.error(error.response)
+                    return dispatch({
+                        type: REMOVE_LISTING_FAILURE,
+                        payload: error.response
+                    })
+                })
+}
+
+export const FetchAgentDetails = (id) => (dispatch) => {
+    console.log("Fetching Details...")
+
+    dispatch({type: FETCH_SINGLE_AGENT_REQUEST})
+
+    AgentService.fetchSingleAgent(id)
+                .then((response) => {
+                    return dispatch({
+                        type: FETCH_SINGLE_AGENT_SUCCESS,
+                        payload: response.data.data
+                    })
+                })
+                .catch((error) => {
+                    return dispatch({
+                        type: FETCH_SINGLE_AGENT_FAILURE,
+                        payload: error.response
+                    })
+                })
 }

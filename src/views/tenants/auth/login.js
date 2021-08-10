@@ -1,25 +1,27 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 
 
 import NavBar from 'components/shared/nav-bar';
 import Footer from 'components/shared/footer';
 import UserLoginForm from './components/login-form';
-import Preloader from 'components/preloader/preloader';
 import { useSelector } from 'react-redux';
 
-const UserLogin = () => {
-    const user_login = useSelector(state => state.login)
-    const {loading} = user_login;
+const UserLogin = ({isLoading}) => {
+
+    const {loading} = useSelector(state => state.login)
+    
+    useEffect(() => {
+    }, [loading])
+
     return (
         <div>
-            <Preloader loading={loading}/>
             <NavBar/>
 
             <main id="content">
                 <section className="py-7">
                     <div className="container">
                         <div className="row justify-content-center">
-                            <UserLoginForm />         
+                            <UserLoginForm isLoading={isLoading} />         
                         </div>
                     </div>
                 </section>

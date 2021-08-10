@@ -1,20 +1,18 @@
 import React, {useEffect, useRef} from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux'
-import { signup } from '../../../../providers/redux/_actions/user-actions';
+import { signup } from 'providers/redux/_actions/user-actions';
 import { __tenantsignup } from 'libraries/validation/schema/tenant-schema';
 import { toggleConPassword, togglePassword } from 'libraries/forms/toggle-password';
 
 const SignUpForm = () =>  {
     const dispatch = useDispatch()
     const password = useRef()
-    const confirm_password = useRef()
+    const confirm_password = useRef()   
 
-    const userSignup = useSelector((state) => state.signup);
-    const {loading, success} = userSignup;
+    const {loading, success} = useSelector((state) => state.signup);
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(__tenantsignup)
@@ -29,7 +27,6 @@ const SignUpForm = () =>  {
 
     return (
         <div className="col-lg-7">
-            <ToastContainer position="bottom-right"/>
             <div className="card border-0 shadow-xxs-2 h-100">
                 <div className="card-body px-6 py-6">
                 <h2 className="card-title fs-30 font-weight-600 text-dark lh-16 mb-2">Sign Up</h2>

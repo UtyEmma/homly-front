@@ -5,7 +5,10 @@ const { STORE_LISTING,
         GETLISTINGS_REQUEST, GETLISTINGS_SUCCESS, GETLISTINGS_FAILURE,
         ACTIVE_LISTINGS_REQUEST, ACTIVE_LISTINGS_SUCCESS, ACTIVE_LISTINGS_FAILURE,
         FETCH_LISTING_DETAILS_REQUEST, FETCH_LISTING_DETAILS_SUCCESS, FETCH_LISTING_DETAILS_FAILURE,
-        FETCH_SINGLE_LISTING_REQUEST, FETCH_SINGLE_LISTING_SUCCESS, FETCH_SINGLE_LISTING_FAILURE
+        FETCH_SINGLE_LISTING_REQUEST, FETCH_SINGLE_LISTING_SUCCESS, FETCH_SINGLE_LISTING_FAILURE,
+        DELETE_LISTING_REQUEST, DELETE_LISTING_SUCCESS, DELETE_LISTING_FAILURE,
+        REMOVE_LISTING_REQUEST, REMOVE_LISTING_SUCCESS, REMOVE_LISTING_FAILURE,
+        FETCH_POPULAR_LISTINGS_REQUEST, FETCH_POPULAR_LISTINGS_SUCCESS, FETCH_POPULAR_LISTINGS_FAILURE
     } = ListingConstants;
 
 
@@ -37,9 +40,9 @@ export function AgentsListingsReducer(state={}, actions){
         case GETLISTINGS_REQUEST: 
             return {...state, loading: true}
         case GETLISTINGS_SUCCESS:
-            return {...state, loading: false, agents_listings: actions.payload}
+            return {...state, loading: false, listings: actions.payload.listings}
         case GETLISTINGS_FAILURE:
-            return {...state, loading: false, get_listing_failure: actions.payload }
+            return {...state, loading: false, error: actions.payload }
         default:
             return state
     }
@@ -50,9 +53,9 @@ export function ActiveListingsReducer(state={}, actions){
         case ACTIVE_LISTINGS_REQUEST: 
             return {...state, loading: true}
         case ACTIVE_LISTINGS_SUCCESS:
-            return {...state, loading: false, active_listings: actions.payload}
+            return {...state, loading: false, listings: actions.payload.listings, featured: actions.payload.featured}
         case ACTIVE_LISTINGS_FAILURE:
-            return {...state, loading: false, active_listings_failed: actions.payload }
+            return {...state, loading: false, error: actions.payload }
         default:
             return state
     }
@@ -87,3 +90,18 @@ export function FetchSingleListing(state={}, actions){
             return state
     }
 }
+
+export function FetchPopularListingsReducer(state={}, action){
+    switch (action.type) {
+        case FETCH_POPULAR_LISTINGS_REQUEST:
+            return {...state, loading: true}
+        case FETCH_POPULAR_LISTINGS_SUCCESS:
+            return {...state, loading: false, listings: action.payload.listings}
+        case FETCH_POPULAR_LISTINGS_FAILURE:
+            return {...state, loading: false, error: action.payload}
+        default:
+            return state;
+    }
+}
+
+

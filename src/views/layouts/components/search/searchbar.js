@@ -1,35 +1,25 @@
-import { ShowAllListings } from 'providers/redux/_actions/listing/listing-actions'
-import { SearchListings } from 'providers/redux/_actions/search-actions'
+import { LocalGovt, State } from 'components/city-state/city-state'
 import React, { useEffect, useState } from 'react'
-import { render } from 'react-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom'
 import { SearchbarSelectListing } from '../details/categories'
 
-export default function Searchbar() {
-    const dispatch = useDispatch()
+export default function Searchbar({parsed}) {
+    
+    const [selectedState, setSelectedState] = useState()
+    const [query, setQuery] = useState({})
     const history = useHistory()
 
-    const [query, setQuery] = useState({});
-    const results = useSelector((state) => state.search)
-    const {loading, result} = results
-
-    const compileSearchQuery = (e) => {
-        setQuery({ ...query, [e.target.name] : e.target.value });
-    }
-
-    const search = (e) => {
-        e.preventDefault(); 
-        dispatch(SearchListings(query));
+    const handleSearch = (e) => {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+        window.location.href = `/search?keyword=${formData.get('keyword')}&type=${formData.get('categories')}&price=${formData.get('price')}&bedrooms=${formData.get('bedrooms')}&bathrooms=${formData.get('bathrooms')}&areas=${formData.get('areas')}&features=${formData.get('features')}`
     }
 
     return (
-        <>
-        {result && <Redirect to='/s' results={result}/>}
-        
+        <>        
          <section className="bg-secondary">
             <div className="container">
-            <form className="property-search d-none d-lg-block" onSubmit={search}>
+            <form className="property-search d-none d-lg-block" onSubmit={handleSearch}>
                 <div className="row align-items-lg-center" id="accordion-2">
                 <div className="col-xl-2 col-lg-3 col-md-4">
                     <div className="property-search-status-tab d-flex flex-row">
@@ -43,9 +33,11 @@ export default function Searchbar() {
                     </div>
                 </div>
                 <div className="col-xl-8 col-lg-7 d-md-flex">
+                    
                     <SearchbarSelectListing onChange={compileSearchQuery}/>
+
                     <div className="form-group mb-0 position-relative flex-md-3 mt-3 mt-md-0">
-                    <input type="text" className="form-control form-control-lg border-0 shadow-none rounded-left-md-0 pr-8 bg-white placeholder-muted" onChange={compileSearchQuery} id="key-word-1" name="keyword" placeholder="Enter an address, neighbourhood..." />
+                    <input type="text" defaultValue={parsed && parsed.keyword} className="form-control form-control-lg border-0 shadow-none rounded-left-md-0 pr-8 bg-white placeholder-muted" onChange={compileSearchQuery} id="key-word-1" name="keyword" placeholder="Enter an address, neighbourhood..." />
                     <button type="submit" className="btn position-absolute pos-fixed-right-center p-0 text-heading fs-20 mr-4 shadow-none">
                         <i className="far fa-search" />
                     </button>
@@ -59,18 +51,13 @@ export default function Searchbar() {
                 <div id="advanced-search-filters-2" className="col-12 pb-6 pt-lg-2 collapse" data-parent="#accordion-2">
                     <div className="row mx-n2">
                     <div className="col-sm-6 col-md-4 col-lg-3 pt-4 px-2">
-                        <select className="form-control border-0 shadow-none form-control-lg selectpicker bg-white" name="bedroom" title="Bedrooms" onChange={compileSearchQuery} data-style="btn-lg py-2 h-52 bg-white">
+                        <select className="form-control border-0 shadow-none form-control-lg selectpicker bg-white" name="bedrooms" title="Bedrooms" onChange={compileSearchQuery} data-style="btn-lg py-2 h-52 bg-white">
                         <option>All Bedrooms</option>
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
                         <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
                         </select>
                     </div>
                     <div className="col-sm-6 col-md-4 col-lg-3 pt-4 px-2">
@@ -81,38 +68,27 @@ export default function Searchbar() {
                         <option>3</option>
                         <option>4</option>
                         <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
                         </select>
                     </div>
                     <div className="col-sm-6 col-md-4 col-lg-3 pt-4 px-2">
-                        <select className="form-control border-0 shadow-none form-control-lg selectpicker bg-white" title="All Cities" data-style="btn-lg py-2 h-52 bg-white" onChange={compileSearchQuery} name="city">
-                        <option>All Cities</option>
-                        <option>New York</option>
-                        <option>Los Angeles</option>
-                        <option>Chicago</option>
-                        <option>Houston</option>
-                        <option>San Diego</option>
-                        <option>Las Vegas</option>
-                        <option>Las Vegas</option>
-                        <option>Atlanta</option>
-                        </select>
+                        <State setSelectedState={setSelectedState} />
+                    </div>
+
+                    <div className="col-sm-6 col-md-4 col-lg-3 pt-4 px-2">
+                        <LocalGovt selectedState={selectedState} />
                     </div>
                     </div>
                     <div className="row">
                     <div className="col-md-6 col-lg-5 pt-6 slider-range slider-range-primary">
-                        <label htmlFor="price-2" className="mb-4 text-white">Price Range</label>
+                        <label htmlFor="price" className="mb-4 text-white">Price Range</label>
                         <div data-slider="true" data-slider-options="{&quot;min&quot;:0,&quot;max&quot;:1000000,&quot;values&quot;:[100000,700000],&quot;type&quot;:&quot;currency&quot;}" />
                         <div className="text-center mt-2">
-                        <input id="price-2" type="text" readOnly className="border-0 amount text-center text-white bg-transparent font-weight-500" onChange={compileSearchQuery} name="price" />
+                        <input id="price" type="text" readOnly className="border-0 amount text-center text-white bg-transparent font-weight-500" onChange={compileSearchQuery} name="price" />
                         </div>
                     </div>
                     <div className="col-12 pt-4 pb-2">
                         <a className="lh-17 d-inline-block other-feature collapsed" data-toggle="collapse" href="#other-feature-2" role="button" aria-expanded="false" aria-controls="other-feature-2">
-                        <span className="fs-15 text-white font-weight-500 hover-primary">Other Features</span>
+                            <span className="fs-15 text-white font-weight-500 hover-primary">Other Features</span>
                         </a>
                     </div>
                     <div className="collapse row mx-0" id="other-feature-2">
@@ -220,13 +196,6 @@ export default function Searchbar() {
                         <div data-slider="true" data-slider-options="{&quot;min&quot;:0,&quot;max&quot;:1000000,&quot;values&quot;:[100000,700000],&quot;type&quot;:&quot;currency&quot;}" />
                         <div className="text-center mt-2">
                         <input id="price-2-mobile" type="text" readOnly className="border-0 amount text-center text-white bg-transparent font-weight-500" name="price" />
-                        </div>
-                    </div>
-                    <div className="col-md-6 pt-6 slider-range slider-range-primary">
-                        <label htmlFor="area-size-2-mobile" className="mb-4 text-white">Area Size</label>
-                        <div data-slider="true" data-slider-options="{&quot;min&quot;:0,&quot;max&quot;:15000,&quot;values&quot;:[0,12000],&quot;type&quot;:&quot;sqrt&quot;}" />
-                        <div className="text-center mt-2">
-                        <input id="area-size-2-mobile" type="text" readOnly className="border-0 amount text-center text-white bg-transparent font-weight-500" name="area" />
                         </div>
                     </div>
                     <div className="col-12 pt-4 pb-2">

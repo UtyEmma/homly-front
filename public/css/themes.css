@@ -74,10 +74,12 @@ body {
   color: #696969;
   text-align: left;
   background-color: #fff;
+  box-shadow: none !important;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important;
+  box-shadow: none !important;
 }
 
 hr {
@@ -241,8 +243,7 @@ button {
 }
 
 button:focus {
-  outline: 1px dotted;
-  outline: 5px auto -webkit-focus-ring-color;
+  box-shadow: none !important;
 }
 
 input,

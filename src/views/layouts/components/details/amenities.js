@@ -32,25 +32,25 @@ export function TagifyAmenities({val, setValue, name, validate, message}){
     
     const dispatch = useDispatch();
     const fetchDetails = useSelector(state => state.details)
-    const {loading, details, error} = fetchDetails
+    const {loading, amenities, error} = fetchDetails
 
     const loadDetails = () => { dispatch(FetchDetails()) }
 
     useEffect(() => {
-        if(!details){
+        if(!amenities){
             loadDetails()
         }
-    }, [details])
+    }, [amenities])
 
     return (
         <>
             {
 
-            details 
+            amenities 
             
             && 
             
-            <Tagify suggestions={[...details.amenities]} message={message} validate val={val} setValue={setValue}  id="features"  name={name} />}
+            <Tagify suggestions={[...amenities]} message={message} validate val={val} setValue={setValue}  id="features"  name={name} />}
         </>
     )
 }

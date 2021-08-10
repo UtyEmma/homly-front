@@ -18,8 +18,18 @@ export default function Header({agent}) {
                     <div className="col-md-6 d-flex flex-wrap justify-content-md-end order-0 order-md-1">
                         <div className="dropdown border-md-right border-0 py-3 text-right">
                         <a href="#" className="dropdown-toggle text-heading pr-3 pr-sm-6 d-flex align-items-center justify-content-end" data-toggle="dropdown">
-                            <div className="mr-4 w-48px">
-                            <img src="images/testimonial-5.jpg" alt="Ronald Hunter" className="rounded-circle" />
+                            <div className="mr-2 w-48px">
+                            {    
+                                agent.avatar 
+                            ? 
+                                <div className="rounded-circle w-46px h-46 overflow-hidden">
+                                    <img src={agent.avatar} className="w-46px h-46" style={{objectFit: 'cover'}} alt={`${agent.firstname} ${agent.lastname}`} />
+                                </div> 
+                            : 
+                                <div className="d-inline-block mb-2 w-46px h-46 mr-2 bg-gray-01 rounded-circle fs-18 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
+                                    {`${agent.firstname.charAt(0).toUpperCase()}${agent.lastname.charAt(0).toUpperCase()}`}
+                                </div>
+                            }
                             </div>
                             <div className="fs-13 font-weight-500 lh-1">
                             {agent.firstname} {agent.lastname}

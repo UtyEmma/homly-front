@@ -53,7 +53,7 @@ const AgentDashboard = ({agent}) => {
                                     </span>
                                     </div>
                                     <div className="col-7 text-center">
-                                    <p className="fs-42 lh-12 mb-0 counterup" data-start={0} data-end={1730} data-decimals={0} data-duration={0} data-separator>1730</p>
+                                    <p className="fs-42 lh-12 mb-0 counterup" >{agent.views}</p>
                                     <p>Total views</p>
                                     </div>
                                 </div>
@@ -68,8 +68,8 @@ const AgentDashboard = ({agent}) => {
                                     </span>
                                     </div>
                                     <div className="col-8 text-center">
-                                    <p className="fs-42 lh-12 mb-0 counterup" data-start={0} data-end={329} data-decimals={0} data-duration={0} data-separator>329</p>
-                                    <p>Total Visitor Reviews</p>
+                                    <p className="fs-42 lh-12 mb-0 counterup" data-start={0} data-end={329} data-decimals={0} data-duration={0} data-separator>{agent.no_reviews}</p>
+                                    <p>Total Reviews</p>
                                     </div>
                                 </div>
                                 </div>
@@ -83,8 +83,8 @@ const AgentDashboard = ({agent}) => {
                                     </span>
                                     </div>
                                     <div className="col-7 text-center">
-                                    <p className="fs-42 lh-12 mb-0 counterup" data-start={0} data-end={914} data-decimals={0} data-duration={0} data-separator>914</p>
-                                    <p>Total Favorites</p>
+                                    <p className="fs-42 lh-12 mb-0 counterup" data-start={0} data-end={914} data-decimals={0} data-duration={0} data-separator>{agent.rating}</p>
+                                    <p>Rating</p>
                                     </div>
                                 </div>
                                 </div>

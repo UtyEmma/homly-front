@@ -3,7 +3,6 @@ import React, {Component, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { FetchSingleListing } from 'providers/redux/_actions/listing/listing-actions'
-import { ToastContainer } from 'react-toastify'
 import ListingGallery from './components/listing-details/listing-gallery'
 import ListingComponents from './components/listing-details'
 import ListingAction from './components/listing-action-card'
@@ -14,7 +13,7 @@ import NavBar from 'components/shared/nav-bar'
 import Footer from 'components/shared/footer'
 
 
-const ListingDetails = ({isLoggedIn, user}) => {
+const ListingDetails = ({isLoggedIn, user, status}) => {
     const {slug} = useParams();
     const dispatch = useDispatch()
 
@@ -32,14 +31,16 @@ const ListingDetails = ({isLoggedIn, user}) => {
     return (
         <div>
             <Preloader loading={loading}/>
-            <ToastContainer />
             <NavBar isloggedIn={isLoggedIn} user={user}/>
 
             <main id="content">
                 <Searchbar/>
                 
                 {
-                    listing ? 
+                    listing 
+                    
+                    && 
+                    
                     <>
                         <ListingGallery title={listing.title} images={listing.images}/>
 
@@ -47,7 +48,7 @@ const ListingDetails = ({isLoggedIn, user}) => {
                             <div className="container">
                             <div className="row">
                                 <article className="col-lg-8">
-                                    <ListingComponents listing={listing} />
+                                    <ListingComponents listing={listing} status={status} />
                                 </article>
 
                                 <ListingAction/>
@@ -55,15 +56,11 @@ const ListingDetails = ({isLoggedIn, user}) => {
                             </div>
                         </div>
                     </>
-                    :
-                    <div className="spinner-border text-gray-lighter" role="status">
-                        <span className="sr-only">Loading...</span>
-                    </div> 
                 }
                 
 
                 <section>
-                    <div className="d-flex   bottom-bar-action bottom-bar-action-01 py-2 px-4 bg-gray-01 align-items-center position-fixed fixed-bottom d-sm-none">
+                    <div className="d-flex  bottom-bar-action bottom-bar-action-01 py-2 px-4 bg-gray-01 align-items-center position-fixed fixed-bottom d-sm-none">
                     <div className="media align-items-center">
                         <img src="images/irene-wallace.png" alt="Irene Wallace" className="mr-4 rounded-circle" />
                         <div className="media-body">

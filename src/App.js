@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {  Switch, Route } from 'react-router-dom';
 
 // Route Guards
@@ -30,37 +30,49 @@ import AgentProfile from './views/agent/profile';
 import PasswordRecovery from './views/agent/auth/password-recovery';
 import Wishlist from 'views/tenants/wishlist/wishlist';
 import Search from 'views/search';
+import Preloader from 'components/preloader/preloader';
+import Reviews from 'views/agent/reviews';
+import VerifyEmail from 'views/onboarding/verify-email';
+
+import { ToastContainer } from 'react-toastify';
 
 
-function App(props) {
+function App() {
+  const [isLoading, setIsLoading] = useState(false)
+
   return (
     <div className="App">
-      <Switch>
-          {/* Unguarded Routes */}
-          <UserRoute path="/" component={Home} exact/>
-          <UserRoute path="/about" component={About} exact />
-
+      <Preloader loading={isLoading}/>
+      <ToastContainer />
+      <Switch>          
+        
           {/* Common Routes */}
-          <Route path="/recover-password" component={PasswordRecovery} exact/>
+          <Route path="/recover-password" isLoading={setIsLoading} component={PasswordRecovery} exact/>
+          <Route path="/login" render={(props) => (<UserLogin {...props} isLoading={setIsLoading} />)} exact/>
+          <Route path="/signup" isLoading={setIsLoading} render={(props) => (<UserSignup {...props} isLoading={setIsLoading} />)} exact/>
 
           {/* User Routes */}
-          <Route path="/login" component={UserLogin} exact/>
-          <Route path="/signup" component={UserSignup} exact/>
-          <UserRoute path="/s" user component={Search} exact/>
-          <UserRoute path="/listings" user component={Listing} exact/>
-          <UserRoute path="/agents" user type="user" component={Agents} exact/>
-          <UserRoute path="/agents/:id" user type="user" component={AgentDetails} exact/>
-          <UserRoute path="/listings/:slug" user component={ListingDetails} exact/>
-          <TenantRoute path="/profile" user component={Profile} exact/>
-          <TenantRoute path="/wishlist" user component={Wishlist} exact/>
+          <UserRoute path="/" isLoading={setIsLoading} component={Home} exact/>
+          <UserRoute path="/about" isLoading={setIsLoading} component={About} exact />
+          <UserRoute path="/verify" isLoading={setIsLoading} component={VerifyEmail} user exact />
+          <UserRoute path="/search" user component={Search} exact/>
+          <UserRoute path="/listings" isLoading={setIsLoading} user component={Listing} exact/>
+          <UserRoute path="/agents" isLoading={setIsLoading} user type="user" component={Agents} exact/>
+          <UserRoute path="/agents/:id" isLoading={setIsLoading} user type="user" component={AgentDetails} exact/>
+          <UserRoute path="/listings/:slug" isLoading={setIsLoading} user component={ListingDetails} exact/>
+          
+          {/* Tenant Routes */}
+          <TenantRoute path="/profile" isLoading={setIsLoading} user component={Profile} exact/>
+          <TenantRoute path="/wishlist" isLoading={setIsLoading} user component={Wishlist} exact/>
 
           {/* Agent Routes */}
-          <Route path="/agent-login" type="agent" component={AgentLogin} exact/>
-          <Route path="/agent-signup" type="agent" component={AgentSignup} exact/>
-          <AgentRoute path="/dashboard" type="agent" component={AgentDashboard} exact />
-          <AgentRoute path="/new-listing" type="agent" component={NewListing} exact />
-          <AgentRoute path="/agent-profile" type="agent" component={AgentProfile} exact />
-          <AgentRoute path="/my-listings" type="agent" component={AgentsListings} exact />
+          <Route path="/agent-login" isLoading={setIsLoading} type="agent" component={AgentLogin} exact/>
+          <Route path="/agent-signup" isLoading={setIsLoading} type="agent" component={AgentSignup} exact/>
+          <AgentRoute path="/dashboard" isLoading={setIsLoading} type="agent" component={AgentDashboard} exact />
+          <AgentRoute path="/new-listing" isLoading={setIsLoading} type="agent" component={NewListing} exact />
+          <AgentRoute path="/agent-profile" isLoading={setIsLoading} type="agent" component={AgentProfile} exact />
+          <AgentRoute path="/my-listings" isLoading={setIsLoading} type="agent" component={AgentsListings} exact />
+          <AgentRoute path="/reviews" isLoading={setIsLoading} type="agent" component={Reviews} exact />
 
           <Route component={NotFound} exact/>
       </Switch>

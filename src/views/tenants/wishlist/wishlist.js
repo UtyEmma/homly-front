@@ -47,7 +47,7 @@ const Wishlist = ({isLoggedIn, user}) => {
                             <h2 className="fs-15 text-dark mb-0">
                                 We found 
                                 <span className="text-primary"> {wishlists && wishlists.wishlists ? wishlists.wishlists.length : 0} </span> 
-                                items in your wishlist
+                                item{wishlists && wishlists.wishlists.length !== 1 && 's'} on your wishlist
                             </h2>
                         </div>
                     </div>
@@ -73,52 +73,14 @@ const Wishlist = ({isLoggedIn, user}) => {
                         </div>
                     </div>
                 </section>
-                <div id="compare" className="compare">
-                    <button className="btn shadow btn-open bg-white bg-hover-accent text-secondary rounded-right-0 d-flex justify-content-center align-items-center w-30px h-140 p-0">
-                    </button>
-                    <div className="list-group list-group-no-border bg-dark py-3">
-                    <a href="" className="list-group-item bg-transparent text-white fs-22 text-center py-0">
-                        <i className="far fa-bars" />
-                    </a>
-                    <div className="list-group-item card bg-transparent">
-                        <div className="position-relative hover-change-image bg-hover-overlay">
-                        <img src="images/compare-01.jpg" className="card-img" alt="properties" />
-                        <div className="card-img-overlay">
-                            <a href="" className="text-white hover-image fs-16 lh-1 pos-fixed-top-right position-absolute m-2"><i className="fal fa-minus-circle" /></a>
-                        </div>
-                        </div>
-                    </div>
-                    <div className="list-group-item card bg-transparent">
-                        <div className="position-relative hover-change-image bg-hover-overlay">
-                        <img src="images/compare-02.jpg" className="card-img" alt="properties" />
-                        <div className="card-img-overlay">
-                            <a href="" className="text-white hover-image fs-16 lh-1 pos-fixed-top-right position-absolute m-2"><i className="fal fa-minus-circle" /></a>
-                        </div>
-                        </div>
-                    </div>
-                    <div className="list-group-item card card bg-transparent">
-                        <div className="position-relative hover-change-image bg-hover-overlay ">
-                        <img src="images/compare-03.jpg" className="card-img" alt="properties" />
-                        <div className="card-img-overlay">
-                            <a href="" className="text-white hover-image fs-16 lh-1 pos-fixed-top-right position-absolute m-2"><i className="fal fa-minus-circle" /></a>
-                        </div>
-                        </div>
-                    </div>
-                    <div className="list-group-item bg-transparent">
-                        <a href="compare-details.html" className="btn btn-lg btn-primary w-100 px-0 d-flex justify-content-center">
-                        Compare
-                        </a>
-                    </div>
-                    </div>
-                </div>
-                </main>
+                               </main>
 
             <Footer />
 
-            <ModalOne id="modal-one">
+            <ModalOne id="modal-one" height="100%">
                 <div className="row">
-                    <div className="col-md-3 p-0 rounded-lg-top-left bg-overlay" style={wishListStyle}></div>
-                    <div className="col-md-9 pt-5">
+                    <div className="col-md-6 p-0 rounded-lg-top-left bg-overlay" style={wishListStyle}></div>
+                    <div className="col-md-6 pt-5">
                         <WishlistForm />
                     </div>
                 </div>
