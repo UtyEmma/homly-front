@@ -9,10 +9,6 @@ export default function Searchbar({parsed}) {
     const [query, setQuery] = useState({})
     const history = useHistory()
 
-    const compileSearchQuery = (e) => {
-        e.target.value && setQuery({...query, [e.target.name] : e.target.value})
-    }
-
     const handleSearch = (e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
