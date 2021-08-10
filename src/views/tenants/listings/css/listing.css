@@ -1,0 +1,18 @@
+.listing-image-container{
+    height: 15rem;
+    overflow: hidden;
+}
+
+.listing-image-container:hover .listing-image{
+    transform: scale(1.1);
+}
+
+.listing-image{
+    transition: transform 0.5s ease-in-out;
+    object-fit: cover;
+    object-position: center;
+}
+
+.listing-grid, .listing-list{
+    transition: all 0.5s ease-in-out !important;
+}

@@ -21,6 +21,7 @@
     "google-map-react": "^2.1.10",
     "jquery": "^3.6.0",
     "naija-state-local-government": "^1.1.2",
+    "query-string": "^7.0.1",
     "react": "^17.0.2",
     "react-addons-css-transition-group": "^15.6.0",
     "react-addons-shallow-compare": "^15.6.0",
@@ -41,6 +42,7 @@
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-slick": "^0.28.1",
     "react-summernote": "^2.0.2",
     "react-toastify": "^7.0.4",
     "react-transition-group": "^1.1.2",
@@ -48,7 +50,11 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "rsuite": "^4.10.2",
+<<<<<<< HEAD
     "tagify": "^0.1.1",
+=======
+    "slick-carousel": "^1.8.1",
+>>>>>>> utyemma
     "use-places-autocomplete": "^1.9.4",
     "validatorjs": "^3.22.1",
     "web-vitals": "^1.1.2",
