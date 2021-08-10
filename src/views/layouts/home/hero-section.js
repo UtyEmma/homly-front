@@ -1,6 +1,13 @@
 import React from 'react'
 
 export default function HeroSection() {
+
+    const handleSearch = (e) => {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+        window.location.href = `/search?keyword=${formData.get('keyword')}`
+    }
+
     return (
         <section>
             <div style={{ backgroundImage: `url( 'images/bg-slider-05.jpg')`, }} className="py-lg-17 py-11  bg-cover hero-cover">
@@ -21,10 +28,10 @@ export default function HeroSection() {
                     </a>
                     </li>
                 </ul>
-                <form className="d-flex">
+                <form className="d-flex" onSubmit={handleSearch}>
                     <div className="position-relative w-100">
                     <i className="far fa-search text-dark fs-18 position-absolute pl-4 pos-fixed-left-center" />
-                    <input type="text" className="rounded-bottom-right-lg w-100 pl-8 py-4 bg-white border-0 fs-13 font-weight-500 text-gray-light rounded-0 lh-17" placeholder="Enter an address, neighborhood" name="search" />
+                    <input type="text" name="keyword" className="rounded-bottom-right-lg w-100 pl-8 py-4 bg-white border-0 fs-13 font-weight-500 text-gray-light rounded-0 lh-17" placeholder="Enter an address, neighborhood" />
                     </div>
                     <button type="submit" className="btn btn-primary fs-16 font-weight-600 rounded-left-0 rounded-lg">
                     Search

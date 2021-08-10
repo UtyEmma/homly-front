@@ -50,7 +50,7 @@ export default function AgentListingItem({listing_item}) {
             <td className="align-middle">{listing_item.views}</td>
             <td className="align-middle">
             <a href={`listings/${listing_item.slug}`} data-toggle="tooltip" title="Edit" className="d-inline-block fs-18 text-muted hover-primary mr-5"><i className="fal fa-pencil-alt" /></a>
-            <a href="" data-toggle="tooltip" onClick={removeListing} title="Remove" className="d-inline-block fs-18 text-muted hover-primary mr-5"><i className="fal fa-eye-slash" /></a>
+            <a href="" data-toggle="tooltip" onClick={removeListing} title={listing_item.status === 'active' ? 'Set as Inactive' : 'Set as Active'} className="d-inline-block fs-18 text-muted hover-primary mr-5"><i className={listing_item.status === 'active' ? 'fal fa-eye-slash' : 'fal fa-eye'} /></a>
             <a href="" data-toggle="tooltip" onClick={deleteListing} title="Delete" className="d-inline-block fs-18 text-muted hover-primary"><i className="fal fa-trash-alt" /></a>
             </td>
         </tr>

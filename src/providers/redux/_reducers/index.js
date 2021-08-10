@@ -8,7 +8,7 @@ import { FetchDetailsReducer } from "./details-reducer";
 import { AgentsListingsReducer, NewListingReducer, StoreListingReducer,
          ActiveListingsReducer, FetchListingDetails, FetchSingleListing, FetchPopularListingsReducer } from "./listing-reducer";
 import { searchForLocationReducer } from "./location-reducer";
-import { FetchAgentReviewsReducer, FetchReviewsReducer, SubmitReviewReducer } from "./review-reducers";
+import { FetchAgentReviewsReducer, FetchReviewsReducer, ReportUserReducer, SubmitReviewReducer } from "./review-reducers";
 import { SearchListingsReducer } from "./search-reducer";
 
 import { CreateWishlistReducer, FetchWishlistReducer } from "./wishlist-reducer";
@@ -46,9 +46,8 @@ const rootReducer = combineReducers({
 
     submit_review: SubmitReviewReducer,
     agent_reviews: FetchAgentReviewsReducer,
-    listing_reviews: FetchReviewsReducer
-
-
+    listing_reviews: FetchReviewsReducer,
+    report_user: ReportUserReducer
 })
 
 export default rootReducer;

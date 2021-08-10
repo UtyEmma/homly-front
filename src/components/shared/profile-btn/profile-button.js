@@ -20,17 +20,18 @@ function loggedIn(user) {
                         
                         &&
 
-                        <span className="badge badge-primary badge-circle badge-absolute">{user.wishlists}</span>   
+                        <span className="badge badge-primary badge-circle badge-absolute p-1">{user.wishlists}</span>   
                     }
                 </a>
             </li>
 
             <li className="nav-item mr-2 d-flex hover bg-hover-overlay-gradient-2 hover-primary rounded p-1">
                 <div className="w-46px">
-                    {   user.avatar 
+                    {   
+                        user.avatar 
                         ? 
-                        <div className="rounded-circle w-120px h-120 overflow-hidden">
-                            <img src={user.avatar} className="w-120px h-120" style={{objectFit: 'cover'}} alt={`${user.firstname} ${user.lastname}`} />
+                        <div className="rounded-circle w-46px h-46 overflow-hidden">
+                            <img src={user.avatar} className="w-46px h-46" style={{objectFit: 'cover'}} alt={`${user.firstname} ${user.lastname}`} />
                         </div> 
                         : 
                         <div className="d-inline-block mb-2 w-46px h-46 mr-2 bg-gray-01 rounded-circle fs-18 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">

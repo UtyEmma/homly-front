@@ -38,8 +38,7 @@ export const ListingService = {
 
     fetchAllListings : async (query) => {
         const config = {
-                headers: options, 
-                params: query
+                headers: options
             }
         return await Request.get('listings', {...config})
     },

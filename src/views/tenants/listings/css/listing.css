@@ -10,6 +10,7 @@
 .listing-image{
     transition: transform 0.5s ease-in-out;
     object-fit: cover;
+    object-position: center;
 }
 
 .listing-grid, .listing-list{

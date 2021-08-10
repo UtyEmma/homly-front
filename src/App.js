@@ -31,8 +31,10 @@ import PasswordRecovery from './views/agent/auth/password-recovery';
 import Wishlist from 'views/tenants/wishlist/wishlist';
 import Search from 'views/search';
 import Preloader from 'components/preloader/preloader';
-import { ToastContainer } from 'react-toastify';
 import Reviews from 'views/agent/reviews';
+import VerifyEmail from 'views/onboarding/verify-email';
+
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {
@@ -42,22 +44,24 @@ function App() {
     <div className="App">
       <Preloader loading={isLoading}/>
       <ToastContainer />
-      <Switch>
-          {/* Unguarded Routes */}
-          <UserRoute path="/" isLoading={setIsLoading} component={Home} exact/>
-          <UserRoute path="/about" isLoading={setIsLoading} component={About} exact />
-
+      <Switch>          
+        
           {/* Common Routes */}
           <Route path="/recover-password" isLoading={setIsLoading} component={PasswordRecovery} exact/>
-
-          {/* User Routes */}
           <Route path="/login" render={(props) => (<UserLogin {...props} isLoading={setIsLoading} />)} exact/>
           <Route path="/signup" isLoading={setIsLoading} render={(props) => (<UserSignup {...props} isLoading={setIsLoading} />)} exact/>
-          <UserRoute path="/s" user component={Search} exact/>
+
+          {/* User Routes */}
+          <UserRoute path="/" isLoading={setIsLoading} component={Home} exact/>
+          <UserRoute path="/about" isLoading={setIsLoading} component={About} exact />
+          <UserRoute path="/verify" isLoading={setIsLoading} component={VerifyEmail} user exact />
+          <UserRoute path="/search" user component={Search} exact/>
           <UserRoute path="/listings" isLoading={setIsLoading} user component={Listing} exact/>
           <UserRoute path="/agents" isLoading={setIsLoading} user type="user" component={Agents} exact/>
           <UserRoute path="/agents/:id" isLoading={setIsLoading} user type="user" component={AgentDetails} exact/>
           <UserRoute path="/listings/:slug" isLoading={setIsLoading} user component={ListingDetails} exact/>
+          
+          {/* Tenant Routes */}
           <TenantRoute path="/profile" isLoading={setIsLoading} user component={Profile} exact/>
           <TenantRoute path="/wishlist" isLoading={setIsLoading} user component={Wishlist} exact/>
 

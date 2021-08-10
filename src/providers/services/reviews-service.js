@@ -18,13 +18,10 @@ export const ReviewsService = {
     },
 
     agentReviews : async () => {
-        const option = {
-            config: {
-                headers: options
-            }
+        const config = { 
+            headers: options 
         }
-
-        return await Request.get('agent/reviews', option);
+        return await Request.get('agent/reviews', config);
     },
 
     listingReviews: async (id) => {
@@ -32,6 +29,16 @@ export const ReviewsService = {
                 headers: options
             }
         return await Request.get(`reviews/fetch/${id}`, config)
+    },
+
+    reportUser: async(id, data) => {
+        const options = {
+            config : {
+                headers: options
+            },
+            payload : data
+        }
+        return await Request.post(`agent/reviews/report/${id}`, options)
     }
 
 }

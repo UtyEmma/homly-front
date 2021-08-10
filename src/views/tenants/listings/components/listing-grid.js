@@ -28,11 +28,6 @@ export default function ListingGrid({listing}) {
                             <i className="far fa-heart" />
                         </a>
                         </li>
-                        <li className="list-inline-item mr-3 h-32" data-toggle="tooltip" title="Compare">
-                        <a href="#" className="text-white fs-20 hover-primary">
-                            <i className="fas fa-exchange-alt" />
-                        </a>
-                        </li>
                     </ul>
                     </div>
                 </div>
