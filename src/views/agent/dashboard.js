@@ -83,7 +83,7 @@ const AgentDashboard = ({agent}) => {
                                     </span>
                                     </div>
                                     <div className="col-7 text-center">
-                                    <p className="fs-42 lh-12 mb-0 counterup" data-start={0} data-end={914} data-decimals={0} data-duration={0} data-separator>{agent.rating}</p>
+                                    <p className="fs-42 lh-12 mb-0 counterup" data-start={0} data-end={914} data-decimals={0} data-duration={0} data-separator>{agent.rating}/5</p>
                                     <p>Rating</p>
                                     </div>
                                 </div>

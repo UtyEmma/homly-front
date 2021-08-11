@@ -3,6 +3,10 @@ import RatingStar from 'components/rating/rating-star';
 
 export default function AgentCard({agent}) {
 
+    // useEffect(() => {
+        
+    // })
+
     return (
         <div className="col-sm-6 col-md-4 col-lg-3 mb-6">
             <div className="card shadow-hover-xs-4 agent-3">
@@ -17,7 +21,7 @@ export default function AgentCard({agent}) {
                 </a>
                 <a href={`agents/${agent.unique_id}`} className="d-block fs-16 lh-2 text-dark mb-0 font-weight-500 hover-primary">{agent.firstname} {agent.lastname}</a>
                 <p className="mb-2">Real Estate Broker</p>
-                <ul className="list-inline mb-0">
+                <ul className={`list-inline mb-0 ${agent.twitter || agent.facebook || agent.instagram || agent.website ? "" : "h-30"}`}>
                     {
                         agent.twitter 
                         
@@ -83,7 +87,13 @@ export default function AgentCard({agent}) {
                         :
 
                         <>
-                            <p>No Reviews</p>
+                            <li className="list-inline-item fs-13 text-heading font-weight-500">0/5</li>
+                                <li className="list-inline-item fs-13 text-heading font-weight-500 mr-1">
+                                <ul className="list-inline mb-0">
+                                    <RatingStar rating={0}/>
+                                </ul>
+                                </li>
+                            <li className="list-inline-item fs-13 text-gray-light">({0} reviews)</li>
                         </>
                     }
                 </ul>
