@@ -10,9 +10,6 @@ export function State({name, title, setSelectedState, register, classes, styles}
 
     const setState = (e) => {
         setSelectedState(e.target.value)
-        // $(function() {
-        //     $('#lga').selectpicker(lgas);  
-        // })
     }
 
     return (

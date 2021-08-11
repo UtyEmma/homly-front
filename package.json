@@ -50,11 +50,8 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "rsuite": "^4.10.2",
-<<<<<<< HEAD
     "tagify": "^0.1.1",
-=======
     "slick-carousel": "^1.8.1",
->>>>>>> utyemma
     "use-places-autocomplete": "^1.9.4",
     "validatorjs": "^3.22.1",
     "web-vitals": "^1.1.2",

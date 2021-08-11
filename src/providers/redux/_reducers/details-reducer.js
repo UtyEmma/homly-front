@@ -12,7 +12,7 @@ export function FetchDetailsReducer (state = {}, action) {
             return {...state, 
                 loading: false, 
                 amenities: action.payload.amenities, 
-                features: action.payload.features
+                // features: action.payload.features
             }
         case FETCH_DETAILS_FAILURE:
             return {...state, loading: false, error: action.payload}

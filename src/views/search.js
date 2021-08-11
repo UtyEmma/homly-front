@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { SearchListings } from 'providers/redux/_actions/search-actions'
 import { useQuery } from 'libraries/http/query';
 import { useLocation } from 'react-router';
+import ListingGrid from './tenants/listings/components/listing-grid';
 
 const QueryString =  require('query-string')
 
@@ -22,7 +23,6 @@ const Search = ({isLoggedIn, user}) => {
     const parsed = QueryString.parse(location.search);  
 
     const search = () => {
-        console.log(parsed)
         dispatch(SearchListings(parsed));
     }
 
@@ -54,7 +54,7 @@ const Search = ({isLoggedIn, user}) => {
                     <div className="col-xl-6 col-xxl-5 px-3 px-xxl-6 pt-7 order-2 order-xl-1 pb-11">
                     <div className="row align-items-sm-center mb-6">
                         <div className="col-md-6 col-xl-5 col-xxl-6">
-                        <h2 className="fs-15 text-dark mb-0">We found <span className="text-primary">45</span> properties
+                        <h2 className="fs-15 text-dark mb-0">We found <span className="text-primary">{result && result.total}</span> properties
                             available for
                             you
                         </h2>
@@ -83,7 +83,17 @@ const Search = ({isLoggedIn, user}) => {
                     </div>
                     <div className="row">
                        
+                        {
+                            result
 
+                            &&
+
+                            result.map((listing, index) => {
+                                return (
+                                    <ListingGrid listing={listing} key={index} />
+                                )
+                            })
+                        }
 
                         <div className="col-12">
                         <nav className="pt-2 pt-lg-4">
@@ -110,44 +120,6 @@ const Search = ({isLoggedIn, user}) => {
                 </div>
                 </div>
             </section>
-            <div id="compare" className="compare">
-                <button className="btn shadow btn-open bg-white bg-hover-accent text-secondary rounded-right-0 d-flex justify-content-center align-items-center w-30px h-140 p-0">
-                </button>
-                <div className="list-group list-group-no-border bg-dark py-3">
-                <a href="#" className="list-group-item bg-transparent text-white fs-22 text-center py-0">
-                    <i className="far fa-bars" />
-                </a>
-                <div className="list-group-item card bg-transparent">
-                    <div className="position-relative hover-change-image bg-hover-overlay">
-                    <img src="images/compare-01.jpg" className="card-img" alt="properties" />
-                    <div className="card-img-overlay">
-                        <a href="#" className="text-white hover-image fs-16 lh-1 pos-fixed-top-right position-absolute m-2"><i className="fal fa-minus-circle" /></a>
-                    </div>
-                    </div>
-                </div>
-                <div className="list-group-item card bg-transparent">
-                    <div className="position-relative hover-change-image bg-hover-overlay">
-                    <img src="images/compare-02.jpg" className="card-img" alt="properties" />
-                    <div className="card-img-overlay">
-                        <a href="#" className="text-white hover-image fs-16 lh-1 pos-fixed-top-right position-absolute m-2"><i className="fal fa-minus-circle" /></a>
-                    </div>
-                    </div>
-                </div>
-                <div className="list-group-item card card bg-transparent">
-                    <div className="position-relative hover-change-image bg-hover-overlay ">
-                    <img src="images/compare-03.jpg" className="card-img" alt="properties" />
-                    <div className="card-img-overlay">
-                        <a href="#" className="text-white hover-image fs-16 lh-1 pos-fixed-top-right position-absolute m-2"><i className="fal fa-minus-circle" /></a>
-                    </div>
-                    </div>
-                </div>
-                <div className="list-group-item bg-transparent">
-                    <a href="compare-details.html" className="btn btn-lg btn-primary w-100 px-0 d-flex justify-content-center">
-                    Compare
-                    </a>
-                </div>
-                </div>
-            </div>
             <div className="d-none" id="template-properties">
                 <div className="marker-item" data-icon-marker="images/googlle-market-02.png" data-position="[-73.9893691, 40.6751204]" data-marker-style="{&quot;className&quot;:&quot;marker&quot;,&quot;style&quot;:{&quot;width&quot;:&quot;45px&quot;,&quot;height&quot;:&quot;48px&quot;},&quot;popup&quot;:{&quot;className&quot;:&quot;popup-map-property-02&quot;,&quot;maxWidth&quot;:&quot;319px&quot;}}">
                 <div className="position-relative">
