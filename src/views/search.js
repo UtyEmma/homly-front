@@ -36,14 +36,15 @@ const Search = ({isLoggedIn, user}) => {
     useEffect(() => {
         !result && search()
     }, [result])
-
-
         
     return (
         <div>
             <Preloader loading={loading}/>
+
             <ToastContainer />
+            
             <NavBar isloggedIn={isLoggedIn} user={user}/>
+            
             <Searchbar parsed={parsed} />
 
             <SearchResultsFilter />
