@@ -31,7 +31,7 @@ function loggedIn(user) {
                         user.avatar 
                         ? 
                         <div className="rounded-circle w-46px h-46 overflow-hidden">
-                            <img src={user.avatar} className="w-46px h-46" style={{objectFit: 'cover'}} alt={`${user.firstname} ${user.lastname}`} />
+                            <img src={user.avatar} className="w-46px h-46" style={{objectFit: 'cover'}} alt={`${user.firstname}`} />
                         </div> 
                         : 
                         <div className="d-inline-block mb-2 w-46px h-46 mr-2 bg-gray-01 rounded-circle fs-18 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
@@ -39,7 +39,7 @@ function loggedIn(user) {
                         </div>
                     }
                 </div>
-                <a href="" className="nav-link px-2 dropdown-toggle " data-toggle="dropdown">{user.firstname} {user.lastname}</a>
+                <a href="" className="nav-link px-2 dropdown-toggle " data-toggle="dropdown">Hello {user.firstname}</a>
                 <div className="dropdown-menu px-3 dropdown-menu-right dropdown-menu-lg">
                     <div className="row">
                         <div className="col-6">

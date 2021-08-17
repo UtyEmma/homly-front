@@ -99,6 +99,14 @@ export default function Sidebar() {
                                         <span className="sidebar-item-number ml-auto text-primary fs-15 font-weight-bold">29</span>
                                     </a>
                                 </li>
+                                <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
+                                    <a href="/agent-wishlists" className="text-heading lh-1 sidebar-link">
+                                        <span className="sidebar-item-icon d-inline-block mr-3 text-muted fs-20">
+                                            <i className="far fa-heart"></i>
+                                        </span>
+                                        <span className="sidebar-item-text">Wishlists</span>
+                                    </a>
+                                </li>
                             </ul>
                             </li>
                             <li className="list-group-item pt-6 pb-4">
@@ -110,6 +118,14 @@ export default function Sidebar() {
                                             <svg className="icon icon-my-profile"><use xlinkHref="#icon-my-profile" /></svg>
                                             </span>
                                             <span className="sidebar-item-text">My Profile</span>
+                                        </a>
+                                    </li>
+                                    <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
+                                        <a href="/support" className="text-heading lh-1 sidebar-link">
+                                            <span className="sidebar-item-icon d-inline-block mr-3 text-muted fs-20">
+                                                <i className="fa fa-headset"></i>
+                                            </span>
+                                            <span className="sidebar-item-text">Support</span>
                                         </a>
                                     </li>
                                     <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">

@@ -15,7 +15,19 @@ export default function Searchbar({parsed}) {
     const handleSearch = (e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
-        window.location.href = `/search?keyword=${formData.get('keyword')}&type=${formData.get('category')}&price=${formData.get('price')}&bedrooms=${formData.get('bedrooms')}&bathrooms=${formData.get('bathrooms')}&areas=${formData.get('areas')}&features=${formData.get('features')}`
+        let query = buildSearchQuery(formData);
+        window.location.href = query;
+    }
+
+    const buildSearchQuery = (formData) => {
+        const keyword = formData.get('keyword') ? `keyword=${formData.get('keyword')}` : "";
+        const type = formData.get('type') ? `&type=${formData.get('type')}` : "";
+        const price = formData.get('price') ? `&price=${formData.get('price')}` : "";
+        const bedrooms = formData.get('bedrooms') ? `&bedrooms=${formData.get('bedrooms')}` : "";
+        const bathrooms = formData.get('bathrooms') ? `&bathrooms=${formData.get('bathrooms')}` : "";
+        const features = formData.get('features') ? `&features=${formData.get('features')}` : "";
+
+        return `/search?${keyword}${type}${price}${bedrooms}${bathrooms}${features}`;
     }
 
     return (
@@ -37,7 +49,7 @@ export default function Searchbar({parsed}) {
                 </div>
                 <div className="col-xl-8 col-lg-7 d-md-flex">
                     
-                    <SearchbarSelectListing name="category" onChange={compileSearchQuery}/>
+                    <SearchbarSelectListing name="type" onChange={compileSearchQuery}/>
 
                     <div className="form-group mb-0 position-relative flex-md-3 mt-3 mt-md-0">
                     <input type="text" defaultValue={parsed && parsed.keyword} className="form-control form-control-lg border-0 shadow-none rounded-left-md-0 pr-8 bg-white placeholder-muted" onChange={compileSearchQuery} id="key-word-1" name="keyword" placeholder="Enter an address, neighbourhood..." />

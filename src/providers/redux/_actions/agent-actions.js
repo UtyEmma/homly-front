@@ -10,6 +10,7 @@ const {
     DELETE_LISTING_REQUEST, DELETE_LISTING_SUCCESS, DELETE_LISTING_FAILURE,
     REMOVE_LISTING_REQUEST, REMOVE_LISTING_SUCCESS, REMOVE_LISTING_FAILURE,
     FETCH_SINGLE_AGENT_REQUEST, FETCH_SINGLE_AGENT_SUCCESS, FETCH_SINGLE_AGENT_FAILURE,
+    FETCH_AGENT_WISHLIST_REQUEST, FETCH_AGENT_WISHLIST_SUCCESS, FETCH_AGENT_WISHLIST_FAILURE,
     AGENT_LOGOUT 
 } = AgentConstants;
 
@@ -184,3 +185,26 @@ export const FetchAgentDetails = (id) => (dispatch) => {
                     })
                 })
 }
+
+export const FetchAgentWishlists = (id) => (dispatch) => {
+    console.log("Fetching Wishlists...")
+
+    dispatch({type: FETCH_AGENT_WISHLIST_REQUEST})
+
+    AgentService.fetchAgentsWishlists(id)
+                .then((response) => {
+                    return dispatch({
+                        type: FETCH_AGENT_WISHLIST_SUCCESS,
+                        payload: response.data.data
+                    })
+                })
+                .catch((error) => {
+                    return dispatch({
+                        type: FETCH_AGENT_WISHLIST_FAILURE,
+                        payload: error.response
+                    })
+                })
+}
+
+
+

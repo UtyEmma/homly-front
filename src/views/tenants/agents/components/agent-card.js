@@ -20,7 +20,7 @@ export default function AgentCard({agent}) {
                     }
                 </a>
                 <a href={`agents/${agent.unique_id}`} className="d-block fs-16 lh-2 text-dark mb-0 font-weight-500 hover-primary">{agent.firstname} {agent.lastname}</a>
-                <p className="mb-2">Real Estate Broker</p>
+                <p className="mb-2">{agent.title}</p>
                 <ul className={`list-inline mb-0 ${agent.twitter || agent.facebook || agent.instagram || agent.website ? "" : "h-30"}`}>
                     {
                         agent.twitter 
@@ -69,33 +69,13 @@ export default function AgentCard({agent}) {
                 <a href="mailto:oliverbeddows@homeid.com" className="text-body">{agent.email}</a>
                 <a href="tel:123-900-68668" className="text-heading font-weight-600 d-block mb-3">{agent.phone}</a>
                 <ul className="list-inline mb-0">
-                    {
-                        agent.rating
-
-                        ?
-
-                        <>
-                            <li className="list-inline-item fs-13 text-heading font-weight-500">{agent.rating}/5</li>
-                                <li className="list-inline-item fs-13 text-heading font-weight-500 mr-1">
-                                <ul className="list-inline mb-0">
-                                    <RatingStar rating={agent.rating}/>
-                                </ul>
-                                </li>
-                            <li className="list-inline-item fs-13 text-gray-light">({agent.no_reviews} reviews)</li>
-                        </>
-
-                        :
-
-                        <>
-                            <li className="list-inline-item fs-13 text-heading font-weight-500">0/5</li>
-                                <li className="list-inline-item fs-13 text-heading font-weight-500 mr-1">
-                                <ul className="list-inline mb-0">
-                                    <RatingStar rating={0}/>
-                                </ul>
-                                </li>
-                            <li className="list-inline-item fs-13 text-gray-light">({0} reviews)</li>
-                        </>
-                    }
+                    <li className="list-inline-item fs-13 text-heading font-weight-500">{agent.rating}/5</li>
+                        <li className="list-inline-item fs-13 text-heading font-weight-500 mr-1">
+                        <ul className="list-inline mb-0">
+                            <RatingStar rating={agent.rating}/>
+                        </ul>
+                        </li>
+                    <li className="list-inline-item fs-13 text-gray-light">({agent.no_reviews} reviews)</li>
                 </ul>
                 </div>
                 <div className="card-footer px-0 text-center hover-image border-0">

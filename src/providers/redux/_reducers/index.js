@@ -1,7 +1,8 @@
 import { combineReducers } from "redux";
+
 import {loginReducer, signupReducer} from "../_reducers/user.reducer";
 import { AgentLoginReducer, AgentSignupReducer,
-        UpdateAgentProfileReducer, ShowAvailableAgentsReducer, DeleteListingReducer, RemoveListingReducer, FetchSingleAgentReducer } from "./agent-reducer";
+        UpdateAgentProfileReducer, ShowAvailableAgentsReducer, DeleteListingReducer, RemoveListingReducer, FetchSingleAgentReducer, FetchAgentWishlistsReducer } from "./agent-reducer";
 import { FetchCategoriesReducer } from "./category-reducer";
 import { FetchDetailsReducer } from "./details-reducer";
 
@@ -10,6 +11,7 @@ import { AgentsListingsReducer, NewListingReducer, StoreListingReducer,
 import { searchForLocationReducer } from "./location-reducer";
 import { FetchAgentReviewsReducer, FetchReviewsReducer, ReportUserReducer, SubmitReviewReducer } from "./review-reducers";
 import { SearchListingsReducer } from "./search-reducer";
+import { DeleteTicketReducer, FetchMessagesReducer, FetchTicketsReducer, NewTicketReducer, SendMessageReducer } from "./support-reducer";
 
 import { CreateWishlistReducer, FetchWishlistReducer } from "./wishlist-reducer";
 
@@ -26,6 +28,7 @@ const rootReducer = combineReducers({
     update_agent_profile: UpdateAgentProfileReducer,
     available_agents: ShowAvailableAgentsReducer,
     agent: FetchSingleAgentReducer,
+    agent_wishlist: FetchAgentWishlistsReducer,
 
     store_listing: StoreListingReducer,
     new_listing: NewListingReducer,
@@ -47,7 +50,13 @@ const rootReducer = combineReducers({
     submit_review: SubmitReviewReducer,
     agent_reviews: FetchAgentReviewsReducer,
     listing_reviews: FetchReviewsReducer,
-    report_user: ReportUserReducer
+    report_user: ReportUserReducer,
+
+    new_ticket: NewTicketReducer,
+    tickets: FetchTicketsReducer,
+    delete_ticket: DeleteTicketReducer,
+    send_message: SendMessageReducer,
+    messages: FetchMessagesReducer    
 })
 
 export default rootReducer;

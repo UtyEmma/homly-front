@@ -10,6 +10,8 @@ import { SearchListings } from 'providers/redux/_actions/search-actions'
 import { useQuery } from 'libraries/http/query';
 import { useLocation } from 'react-router';
 import ListingGrid from './tenants/listings/components/listing-grid';
+import { MapWithMultipleMarkers } from './agent/layouts/listings/blocks/map/map-display';
+import { SearchListingsMap } from 'components/maps/multiple-markers';
 
 const QueryString =  require('query-string')
 
@@ -96,26 +98,22 @@ const Search = ({isLoggedIn, user}) => {
                             })
                         }
 
-                        <div className="col-12">
-                        <nav className="pt-2 pt-lg-4">
-                            <ul className="pagination rounded-active justify-content-center mb-0">
-                            <li className="page-item"><a className="page-link" href="#"><i className="far fa-angle-double-left" /></a>
-                            </li>
-                            <li className="page-item"><a className="page-link" href="#">1</a></li>
-                            <li className="page-item active"><a className="page-link" href="#">2</a></li>
-                            <li className="page-item d-none d-sm-block"><a className="page-link" href="#">3</a></li>
-                            <li className="page-item">...</li>
-                            <li className="page-item"><a className="page-link" href="#">6</a></li>
-                            <li className="page-item"><a className="page-link" href="#"><i className="far fa-angle-double-right" /></a></li>
-                            </ul>
-                        </nav>
-                        </div>
+                            
                     </div>
                     </div>
                     <div className="col-xl-6 col-xxl-7 order-1 order-xl-2 primary-map map-sticky overflow-hidden" id="map-sticky">
                     <div className="primary-map-inner">
-                        <div className="mapbox-gl map-grid-property-01 xl-vh-100" id="map" data-marker-target="#template-properties" data-mapbox-access-token="pk.eyJ1IjoiZHVvbmdsaCIsImEiOiJjanJnNHQ4czExMzhyNDVwdWo5bW13ZmtnIn0.f1bmXQsS6o4bzFFJc8RCcQ">
-                        </div>
+                        {/* <div className="mapbox-gl map-grid-property-01 xl-vh-100" id="map" data-marker-target="#template-properties" data-mapbox-access-token="pk.eyJ1IjoiZHVvbmdsaCIsImEiOiJjanJnNHQ4czExMzhyNDVwdWo5bW13ZmtnIn0.f1bmXQsS6o4bzFFJc8RCcQ">
+                        </div> */}
+                        {
+                        
+                            result && result.length > 0
+
+                            && 
+
+                            <SearchListingsMap zoom={11} listings={result}/>
+                        
+                        }
                     </div>
                     </div>
                 </div>
