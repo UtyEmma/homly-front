@@ -103,8 +103,6 @@ const Search = ({isLoggedIn, user}) => {
                     </div>
                     <div className="col-xl-6 col-xxl-7 order-1 order-xl-2 primary-map map-sticky overflow-hidden" id="map-sticky">
                     <div className="primary-map-inner">
-                        {/* <div className="mapbox-gl map-grid-property-01 xl-vh-100" id="map" data-marker-target="#template-properties" data-mapbox-access-token="pk.eyJ1IjoiZHVvbmdsaCIsImEiOiJjanJnNHQ4czExMzhyNDVwdWo5bW13ZmtnIn0.f1bmXQsS6o4bzFFJc8RCcQ">
-                        </div> */}
                         {
                         
                             result && result.length > 0

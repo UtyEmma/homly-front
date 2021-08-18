@@ -77,7 +77,7 @@ export default function AgentDetailsContainer({agent, listings, reviews}) {
                                 </ul>
                             </li>
                             </ul>
-                            <button type="submit" className="btn btn-primary btn-lg btn-block shadow-none">Send Message</button>
+                            <a href={`mailto:${agent.email}`} type="submit" className="btn btn-primary btn-lg btn-block shadow-none">Send Message</a>
                         </div>
                         </div>
                         <div className="card mb-4">

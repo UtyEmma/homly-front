@@ -36,12 +36,3 @@ const MapItem = withScriptjs(withGoogleMap(({listings, zoom}) =>
                 }
         </GoogleMap>
 ))
-
-{/* <MapMarker latitude={latitude} longitude={longitude} /> */}
-{/* <Marker position={{ lat: latitude, lng: longitude }} animation 
-    icon={{
-        url: 'images/googlle-market-02.png',
-        anchor: new window.google.maps.Point(17, 46),
-        scaledSize: new window.google.maps.Size(42, 42)
-    }}
-/> */}

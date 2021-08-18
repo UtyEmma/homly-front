@@ -46,7 +46,7 @@ const AgentWishlist = ({agent}) => {
                             </div>
 
 
-                            <div className="container-fluid">
+                            <div className="container-fluid px-0">
                                 <div className="row">
 
                                     {

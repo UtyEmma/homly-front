@@ -51,7 +51,7 @@ export const ListingMapInfo = ({listing}) => {
                         <img src={listing.images[0]} className="card-img" alt={listing.title} />
                     </div>
                         <div className="media-body col-9">
-                            <h2 className="my-0"><a href={`${listing.slug}`} className="fs-13 lh-2 text-dark hover-primary d-block">{listing.title}</a></h2>
+                            <h2 className="my-0"><a href={`listings/${listing.slug}`} className="fs-13 lh-2 text-dark hover-primary d-block">{listing.title}</a></h2>
                             <p className="mb-0 font-weight-500 text-gray-light">{listing.address}</p>
                             <p className="fs-17 font-weight-bold text-heading mb-0">$ {listing.rent} </p>
                         </div>
@@ -70,7 +70,6 @@ export const ListingMapInfo = ({listing}) => {
                             {listing.no_bathrooms} Ba
                         </li>
                     </ul>
-                {/* <div className="badge badge-primary">For Sale</div> */}
             </div>
         </div>
         </div>

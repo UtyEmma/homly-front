@@ -47,6 +47,19 @@ function loggedIn(user) {
                                 <i className="fa fa-user mr-2"></i>
                                 My Profile
                             </a>
+
+                            <a className="dropdown-item rounded py-2 align-middle" href="/profile">
+                                <i className="fa fa-heart mr-2"></i>
+                                Favourites
+                            </a>
+
+
+                            <a className="dropdown-item rounded py-2 align-middle" href="/wishlists">
+                                <i className="fa fa-heart mr-2"></i>
+                                Wishlists
+                            </a>
+
+
                             <a className="dropdown-item  btn btn-secondary rounded py-2 align-middle" href="/logout">
                                 <i className="mr-2"></i>
                                 Logout
