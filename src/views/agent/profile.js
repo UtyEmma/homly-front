@@ -63,7 +63,7 @@ const AgentProfile = ({agent}) => {
                                                             <div className="custom-file mt-2 h-auto" >
                                                                 <input type="file" name="avatar" className="custom-file-input" onChange={changeProfileImagePreview} id="customFile" />
                                                                 <label className="btn btn-secondary btn-lg btn-block" htmlFor="customFile">
-                                                                <span className="d-inline-block mr-1"><i className="fal fa-cloud-upload" /></span>Upload
+                                                                <span className="d-inline-block mr-1"><i className="fal fa-cloud-upload" /></span>Select
                                                                 profile image</label>
                                                             </div>
                                                             <p className="mb-0">*minimum 500px x 500px</p>

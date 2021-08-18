@@ -31,7 +31,7 @@ function loggedIn(user) {
                         user.avatar 
                         ? 
                         <div className="rounded-circle w-46px h-46 overflow-hidden">
-                            <img src={user.avatar} className="w-46px h-46" style={{objectFit: 'cover'}} alt={`${user.firstname} ${user.lastname}`} />
+                            <img src={user.avatar} className="w-46px h-46" style={{objectFit: 'cover'}} alt={`${user.firstname}`} />
                         </div> 
                         : 
                         <div className="d-inline-block mb-2 w-46px h-46 mr-2 bg-gray-01 rounded-circle fs-18 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
@@ -39,7 +39,7 @@ function loggedIn(user) {
                         </div>
                     }
                 </div>
-                <a href="" className="nav-link px-2 dropdown-toggle " data-toggle="dropdown">{user.firstname} {user.lastname}</a>
+                <a href="" className="nav-link px-2 dropdown-toggle " data-toggle="dropdown">Hello {user.firstname}</a>
                 <div className="dropdown-menu px-3 dropdown-menu-right dropdown-menu-lg">
                     <div className="row">
                         <div className="col-6">
@@ -47,6 +47,19 @@ function loggedIn(user) {
                                 <i className="fa fa-user mr-2"></i>
                                 My Profile
                             </a>
+
+                            <a className="dropdown-item rounded py-2 align-middle" href="/profile">
+                                <i className="fa fa-heart mr-2"></i>
+                                Favourites
+                            </a>
+
+
+                            <a className="dropdown-item rounded py-2 align-middle" href="/wishlists">
+                                <i className="fa fa-heart mr-2"></i>
+                                Wishlists
+                            </a>
+
+
                             <a className="dropdown-item  btn btn-secondary rounded py-2 align-middle" href="/logout">
                                 <i className="mr-2"></i>
                                 Logout
@@ -71,8 +84,8 @@ function loggedOut(params) {
                 <a className="nav-link pl-3 pr-2 mr-2" href="/login">Login</a>
             </li>
             <li class="nav-item ml-auto w-100 w-sm-auto">
-                <a class="btn btn-primary btn-lg d-flex align-items-center" href="/signup">
-                    Get Started
+                <a class="btn btn-primary btn-lg d-flex align-items-center" href="/agent-signup">
+                    For Agents
                     <img src="images/add-listing-icon.png" alt="Add listing" class="ml-2" />
                 </a>
             </li>

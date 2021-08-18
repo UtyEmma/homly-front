@@ -30,13 +30,13 @@ export default function PopularSection({setIsLoading}) {
                     </div>
 
                     {
-                        listings && listings.length > 0
+                        listings 
 
                         &&
 
                         <Tab.Container id="controlled-tab-example" defaultActiveKey={listings[0].category.slug} >
                             <div className="col-lg-7 col-xxl-6 ">
-                                <div className="row mt-lg-4 d-flex justify-content-lg-end mb-lg-0">
+                                <Row className="mt-lg-4 d-flex justify-content-lg-end mb-lg-0">
                                     <Nav variant="pills">
                                         {
                                             listings.map((listing, index) => {
@@ -50,7 +50,7 @@ export default function PopularSection({setIsLoading}) {
                                             })
                                         }
                                     </Nav>
-                                </div>
+                                </Row>
                             </div>
 
                             <TabContent className="col-12 p-0 shadow-none">

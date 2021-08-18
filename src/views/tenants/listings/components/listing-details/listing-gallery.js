@@ -54,7 +54,7 @@ export default function ListingGallery({images, title}) {
                         </ul>
                     </div>
 
-                    <GalleryDisplay images={images}/>
+                    <GalleryDisplay images={images} title={title} />
  
                 </div>
             </div>

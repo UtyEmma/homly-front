@@ -1,0 +1,23 @@
+.chat-body{
+    height: 70vh;
+    overflow-y: scroll;
+}
+
+.chat-body::-webkit-scrollbar{
+    width: 8px;
+}
+
+.chat-body::-webkit-scrollbar-button{
+    display: none;
+}
+
+.chat-body::-webkit-scrollbar-track{
+    background-color: rgb(211, 211, 211);
+    border-radius: 10px;
+}
+
+.chat-body::-webkit-scrollbar-thumb{
+    height: 40%;
+    background-color: gray;
+    border-radius: 10px;
+}

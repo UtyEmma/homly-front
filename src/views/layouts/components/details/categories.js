@@ -70,7 +70,7 @@ export function SelectTypes ({id, classes, register, styles, onChange, name}){
     )
 }
 
-export function SearchbarSelectListing ({onChange}) {
+export function SearchbarSelectListing ({onChange, name}) {
 
     const dispatch = useDispatch();
     const fetchCategories = useSelector(state => state.categories)
@@ -92,9 +92,10 @@ export function SearchbarSelectListing ({onChange}) {
                     
                 &&
 
-                <select className="form-control shadow-none form-control-lg rounded-right-md-0 rounded-md-top-left-0 rounded-lg-top-left flex-md-1 mt-3 mt-md-0" title="All Types" data-style="btn-lg py-2 h-52 border-right bg-white" onChange={onChange} id="category" name="category">
+                <select name={name} className="form-control shadow-none form-control-lg rounded-right-md-0 rounded-md-top-left-0 rounded-lg-top-left flex-md-1 mt-3 mt-md-0" title="All Types" data-style="btn-lg py-2 h-52 border-right bg-white" onChange={onChange} id="type" name="type">
+                    <option value="">Select Category</option>
                     {categories.map((category, index) => (
-                        <option key={index}>{category.category_title}</option>
+                        <option value={category.category_title} key={index}>{category.category_title}</option>
                     ))}
                 </select>
             }

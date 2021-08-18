@@ -35,6 +35,8 @@ import Reviews from 'views/agent/reviews';
 import VerifyEmail from 'views/onboarding/verify-email';
 
 import { ToastContainer } from 'react-toastify';
+import { Support } from 'views/agent/support/support';
+import AgentWishlist from 'views/agent/wishlist/agent-wishlist';
 
 
 function App() {
@@ -73,6 +75,8 @@ function App() {
           <AgentRoute path="/agent-profile" isLoading={setIsLoading} type="agent" component={AgentProfile} exact />
           <AgentRoute path="/my-listings" isLoading={setIsLoading} type="agent" component={AgentsListings} exact />
           <AgentRoute path="/reviews" isLoading={setIsLoading} type="agent" component={Reviews} exact />
+          <AgentRoute path="/support" isLoading={setIsLoading} type="agent" component={Support} exact />
+          <AgentRoute path="/agent-wishlist" isLoading={setIsLoading} type="agent" component={AgentWishlist} exact />
 
           <Route component={NotFound} exact/>
       </Switch>

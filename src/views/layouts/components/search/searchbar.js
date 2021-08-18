@@ -2,17 +2,32 @@ import { LocalGovt, State } from 'components/city-state/city-state'
 import React, { useEffect, useState } from 'react'
 import { Redirect, useHistory } from 'react-router-dom'
 import { SearchbarSelectListing } from '../details/categories'
+import { SelectAmenities } from '../details/amenities';
 
 export default function Searchbar({parsed}) {
     
     const [selectedState, setSelectedState] = useState()
-    const [query, setQuery] = useState({})
-    const history = useHistory()
+
+    const compileSearchQuery = (e) => {
+        console.log(e.target)
+    }
 
     const handleSearch = (e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
-        window.location.href = `/search?keyword=${formData.get('keyword')}&type=${formData.get('categories')}&price=${formData.get('price')}&bedrooms=${formData.get('bedrooms')}&bathrooms=${formData.get('bathrooms')}&areas=${formData.get('areas')}&features=${formData.get('features')}`
+        let query = buildSearchQuery(formData);
+        window.location.href = query;
+    }
+
+    const buildSearchQuery = (formData) => {
+        const keyword = formData.get('keyword') ? `keyword=${formData.get('keyword')}` : "";
+        const type = formData.get('type') ? `&type=${formData.get('type')}` : "";
+        const price = formData.get('price') ? `&price=${formData.get('price')}` : "";
+        const bedrooms = formData.get('bedrooms') ? `&bedrooms=${formData.get('bedrooms')}` : "";
+        const bathrooms = formData.get('bathrooms') ? `&bathrooms=${formData.get('bathrooms')}` : "";
+        const features = formData.get('features') ? `&features=${formData.get('features')}` : "";
+
+        return `/search?${keyword}${type}${price}${bedrooms}${bathrooms}${features}`;
     }
 
     return (
@@ -34,7 +49,7 @@ export default function Searchbar({parsed}) {
                 </div>
                 <div className="col-xl-8 col-lg-7 d-md-flex">
                     
-                    <SearchbarSelectListing onChange={compileSearchQuery}/>
+                    <SearchbarSelectListing name="type" onChange={compileSearchQuery}/>
 
                     <div className="form-group mb-0 position-relative flex-md-3 mt-3 mt-md-0">
                     <input type="text" defaultValue={parsed && parsed.keyword} className="form-control form-control-lg border-0 shadow-none rounded-left-md-0 pr-8 bg-white placeholder-muted" onChange={compileSearchQuery} id="key-word-1" name="keyword" placeholder="Enter an address, neighbourhood..." />
@@ -42,7 +57,7 @@ export default function Searchbar({parsed}) {
                         <i className="far fa-search" />
                     </button>
                     </div>
-                </div>
+                </div> 
                 <div className="col-lg-2">
                     <a href="#advanced-search-filters-2" className="icon-primary btn advanced-search w-100 shadow-none text-white text-left rounded-0 fs-14 font-weight-600 position-relative collapsed px-0 d-flex align-items-center" data-toggle="collapse" data-target="#advanced-search-filters-2" aria-expanded="true" aria-controls="advanced-search-filters-2">
                     Advanced Search
@@ -58,6 +73,7 @@ export default function Searchbar({parsed}) {
                         <option>3</option>
                         <option>4</option>
                         <option>5</option>
+                        <option>6+</option>
                         </select>
                     </div>
                     <div className="col-sm-6 col-md-4 col-lg-3 pt-4 px-2">
@@ -68,20 +84,21 @@ export default function Searchbar({parsed}) {
                         <option>3</option>
                         <option>4</option>
                         <option>5</option>
+                        <option>6+</option>
                         </select>
                     </div>
                     <div className="col-sm-6 col-md-4 col-lg-3 pt-4 px-2">
-                        <State setSelectedState={setSelectedState} />
+                        <State classes="form-control border-0 shadow-none form-control-lg bg-white" setSelectedState={setSelectedState} />
                     </div>
 
                     <div className="col-sm-6 col-md-4 col-lg-3 pt-4 px-2">
-                        <LocalGovt selectedState={selectedState} />
+                        <LocalGovt classes="form-control border-0 shadow-none form-control-lg bg-white" selectedState={selectedState} />
                     </div>
                     </div>
                     <div className="row">
                     <div className="col-md-6 col-lg-5 pt-6 slider-range slider-range-primary">
                         <label htmlFor="price" className="mb-4 text-white">Price Range</label>
-                        <div data-slider="true" data-slider-options="{&quot;min&quot;:0,&quot;max&quot;:1000000,&quot;values&quot;:[100000,700000],&quot;type&quot;:&quot;currency&quot;}" />
+                        <div data-slider="true" data-slider-options="{&quot;min&quot;:0,&quot;max&quot;:1000000,&quot;values&quot;:[100000,700000]}" />
                         <div className="text-center mt-2">
                         <input id="price" type="text" readOnly className="border-0 amount text-center text-white bg-transparent font-weight-500" onChange={compileSearchQuery} name="price" />
                         </div>
@@ -91,14 +108,9 @@ export default function Searchbar({parsed}) {
                             <span className="fs-15 text-white font-weight-500 hover-primary">Other Features</span>
                         </a>
                     </div>
-                    <div className="collapse row mx-0" id="other-feature-2">
-                        <div className="col-sm-6 col-md-4 col-lg-3 py-2">
-                        </div>
-                        <div className="col-sm-6 col-md-4 col-lg-3 py-2">
-                        <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" id="check16-2" onChange={compileSearchQuery} name="feature[]" />
-                            <label className="custom-control-label text-white" htmlFor="check16-2">Refrigerator</label>
-                        </div>
+                    <div className="col-12 px-0">
+                        <div className="collapse row mx-0" id="other-feature-2">
+                            <SelectAmenities />
                         </div>
                     </div>
                     </div>

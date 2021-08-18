@@ -1,7 +1,7 @@
 import Preloader from 'components/preloader/preloader'
 import React, { useState } from 'react'
 import { createRef } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import Searchbar from 'views/layouts/components/search/searchbar'
 import Footer from 'components/shared/footer'
@@ -18,8 +18,6 @@ const Profile = ({isLoggedIn, user}) => {
         let formData = new FormData(e.target);
         dispatch(UpdateTenantProfile(formData))
     }
-
-    // useEffect(() => setLoading(true), [])
 
     const changeProfileImagePreview = (e) => { 
         profileImage.current.src = URL.createObjectURL(e.target.files[0]) 

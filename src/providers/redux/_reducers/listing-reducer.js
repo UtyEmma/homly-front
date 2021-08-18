@@ -82,8 +82,7 @@ export function FetchSingleListing(state={}, actions){
         case FETCH_SINGLE_LISTING_REQUEST: 
             return {...state, loading: true}
         case FETCH_SINGLE_LISTING_SUCCESS:
-            return {...state, loading: false, 
-                    listing: actions.payload}
+            return {...state, loading: false, listing: actions.payload.listing, agent: actions.payload.agent}
         case FETCH_SINGLE_LISTING_FAILURE:
             return {...state, loading: false, error: actions.payload }
         default:
@@ -96,7 +95,7 @@ export function FetchPopularListingsReducer(state={}, action){
         case FETCH_POPULAR_LISTINGS_REQUEST:
             return {...state, loading: true}
         case FETCH_POPULAR_LISTINGS_SUCCESS:
-            return {...state, loading: false, listings: action.payload.listings}
+            return {...state, loading: false, listings: action.payload}
         case FETCH_POPULAR_LISTINGS_FAILURE:
             return {...state, loading: false, error: action.payload}
         default:

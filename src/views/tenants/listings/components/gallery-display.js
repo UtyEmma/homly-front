@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 
-export default function GalleryDisplay({images}) {    
+export default function GalleryDisplay({images, title}) {    
     let sliderCarousel = []
     let sliderNav = []
     const [slider, setSlider] = useState()
@@ -38,13 +38,13 @@ export default function GalleryDisplay({images}) {
                     })
                 }
             </Slider>
-            <Slider asNavFor={slider} ref={slider => (sliderNav = slider)} slidesToShow={images.length >= 3 ? 3 : images.length } swipeToSlide={true} focusOnSelect={true}>
+            <Slider asNavFor={slider} ref={slider => (sliderNav = slider)} slidesToShow={4} swipeToSlide={true} focusOnSelect={true}>
                 {
                     images.map((image, index) => {
                         return (
-                            <div className="box pb-6 px-0" key={index}>
-                                <div className="bg-white p-1 shadow-hover-xs-3 h-100 rounded-lg">
-                                    <img src={image} alt="Gallery 01" className="h-100 w-100 rounded-lg" />
+                            <div style={{minHeight : '100%'}} className="box pb-6 px-0" key={index} >
+                                <div style={{minHeight : '100%'}} className="bg-white p-1 shadow-hover-xs-3 h-100 rounded-lg">
+                                    <img src={image} style={{minHeight : '100%'}} alt={title} className="img-fluid  rounded-lg" />
                                 </div>
                             </div>
                         )

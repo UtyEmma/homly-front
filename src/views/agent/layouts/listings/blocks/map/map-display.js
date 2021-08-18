@@ -40,6 +40,15 @@ const Map = withScriptjs(withGoogleMap(({longitude, latitude, isMarkerShown, zoo
         center={{ lat: latitude, lng: longitude } }
         >            
             {isMarkerShown && 
-                <Marker onDragEnd={handleDragEnd} position={{ lat: latitude, lng: longitude }} animation  draggable/>}
+                <Marker    
+                icon={{
+                    url: 'images/googlle-market-02.png',
+                    anchor: new window.google.maps.Point(17, 46),
+                    scaledSize: new window.google.maps.Size(42, 42)
+                }}
+                onDragEnd={handleDragEnd} 
+                position={{ lat: latitude, lng: longitude }} 
+                animation  
+                draggable/>}
     </GoogleMap>
 ))

@@ -1,7 +1,7 @@
 import { Request } from "./api/http";
 
 export const AgentService = {
-    signup, login, update, show, logout, removeListing, deleteListing, fetchSingleAgent 
+    signup, login, update, show, logout, removeListing, deleteListing, fetchSingleAgent, fetchAgentsWishlists 
 }
 
 const auth_config = {
@@ -68,4 +68,8 @@ async function fetchSingleAgent(id){
         }
     }
     return await Request.get(`agent/${id}`, request)
+}
+
+async function fetchAgentsWishlists(){
+    return await Request.get('agent/wishlists', auth_config.config);
 }
