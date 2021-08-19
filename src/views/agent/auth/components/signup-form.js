@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom';
 import { AgentSignup } from '../../../../providers/redux/_actions/agent-actions';
 import { AgentSignupSchema } from '../schema';
+import { toggleConPassword, togglePassword } from 'libraries/forms/toggle-password';
 
 
 const AgentSignUpForm = () => {
@@ -28,16 +29,8 @@ const AgentSignUpForm = () => {
         if(agent_success){
             history.push('./agent-login')
         }
-        if(agent_error) {
-            console.log(agent_error)
-            handleServerError(agent_error)
-        }
-    }, [agent_success, agent_error])
+    }, [agent_success])
 
-    const handleServerError = (res) => {
-        console.log(res)
-        toast.error(res.data.message)
-    }
 
     const handleErrors = () => {
         toast.error("Invalid Input Data")
@@ -45,7 +38,7 @@ const AgentSignUpForm = () => {
 
     return (
         <div className="col-lg-7">
-            <ToastContainer position="bottom-left"/>
+            <ToastContainer />
             <div className="card border-0 shadow-xxs-2">
                 <div className="card-body px-6 py-6">
                 <h2 className="card-title fs-30 font-weight-600 text-dark lh-16 mb-2">Sign Up</h2>
@@ -90,9 +83,9 @@ const AgentSignUpForm = () => {
                         <div className="input-group input-group-lg">
                         <input type="password" {...register("password")} className="form-control border-0 shadow-none" id="password" name="password" placeholder="**********" />
                             <div className="input-group-append">
-                            <span className="input-group-text bg-gray-01 border-0 text-body fs-18">
+                            <button onClick={togglePassword} className="input-group-text bg-gray-01 border-0 text-body fs-18">
                                 <i className="far fa-eye-slash" />
-                            </span>
+                            </button>
                             </div>
                         </div>
                         <p className="text-danger fs-14">{errors.password?.message}</p>
@@ -104,9 +97,9 @@ const AgentSignUpForm = () => {
                         <div className="input-group input-group-lg">
                             <input type="password" {...register("confirm_password")} className="form-control border-0 shadow-none" id="confirm_password" name="confirm_password" placeholder="Password" />
                             <div className="input-group-append">
-                            <span className="input-group-text bg-gray-01 border-0 text-body fs-18">
+                            <button onClick={toggleConPassword} className="input-group-text bg-gray-01 border-0 text-body fs-18">
                                 <i className="far fa-eye-slash" />
-                            </span>
+                            </button>
                             </div>
                         </div>
                         <p className="text-danger fs-14">{errors.confirm_password?.message}</p>

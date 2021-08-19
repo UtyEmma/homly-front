@@ -1,8 +1,9 @@
-import { userConstants } from "../_contants/user-constants";
+import { _TENANT } from "../_contants/user-constants";
 
 const { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE,
-        LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE
-} = userConstants;
+        LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE,
+        UPDATE_REQUEST, UPDATE_SUCCESS, UPDATE_FAILURE
+} = _TENANT;
 
 export function signupReducer (state = {}, action) {
 
@@ -28,5 +29,16 @@ export function loginReducer (state = {}, action){
             return {...state, loading:false, error: action.payload}
         default:
             return state;
+    }
+}
+
+export function UpdateTenantProfileReducer(state={}, action){
+    switch(action.type){
+        case UPDATE_REQUEST:
+            return {...state, loading: true}
+        case UPDATE_SUCCESS:
+            return {...state, loading:false, tenant: action.payload.tenant}
+        case UPDATE_FAILURE:
+            return {...state, loading:false, error: action.payload}
     }
 }

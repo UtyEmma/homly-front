@@ -1,66 +1,58 @@
 import { Request } from "./api/http";
 
-export const ListingService = {
-    newListing, getAgentListings, loadActiveListings, 
-    fetchListingDetails, fetchSingleListing, fetchAllListings
-}
-
 const options = {
     'Accept' : 'application/json',
     'Content-Type' : 'application/json',
     'Authorization' : `Bearer ${localStorage.getItem('token')}`
 }
 
-async function newListing (data) {
-    const params = {
-        config: {
-            headers: options
-        },
-        payload: data
-    }
-
-    return await Request.post('agent/listing/create', params)
+const params = {
+    headers: options
 }
 
-async function getAgentListings(){
-    const params = {
-        headers: options
-    }
 
-    return await Request.get('agent/listing/agents-listings', params)
-}
+export const ListingService = {
 
-async function loadActiveListings(){
-    const params = {
-        'Accept' : 'application/json',
-        'Content-Type' : 'application/json'
-    }
+    newListing : async (data) => {
+        const params = {
+            config: {
+                headers: options
+            },
+            payload: data
+        }
+        return await Request.post('agent/listing/create', params)
+    },
 
-    return await Request.get('listings/active', params)
-}
+    getAgentListings : async () => {
+        const params = { headers: options }
+        return await Request.get('agent/listing/agents-listings', params)
+    },
 
-async function fetchAllListings(query){
-    const options = {
-        headers: {
+    loadActiveListings : async () => {
+        const params = {
             'Accept' : 'application/json',
             'Content-Type' : 'application/json'
-        },
-        params: query
+        }
+        return await Request.get('listings', params)
+    },
+
+    fetchAllListings : async (query) => {
+        const config = {
+                headers: options
+            }
+        return await Request.get('listings', {...config})
+    },
+
+    fetchListingDetails : async () => {
+        return await Request.get('tenant/listings/details', params);
+    },
+    
+    fetchSingleListing : async (slug) => {
+        return await Request.get(`listings/${slug}`, params);
+    },
+
+    fetchPopularListings: async () => {
+        return await Request.get(`listings/popular`, params)
     }
 
-    return await Request.get('listings', options)
-}
-
-async function fetchListingDetails(){
-    const params = {
-        headers: options
-    }
-    return await Request.get('tenant/listings/details', params);
-}
-
-async function fetchSingleListing(slug){
-    const params = {
-        headers: options
-    }
-    return await Request.get(`listings/${slug}`, params);
 }

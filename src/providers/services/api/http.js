@@ -7,7 +7,7 @@ export const Request = {
         return await axios.post(`${baseUrl}${url}`, data.payload, data.config)
     },
 
-    get : async (url, config) => {
+    get : async (url, config = {}) => {
         return await axios.get(`${baseUrl}${url}`, config)
     }  
 }

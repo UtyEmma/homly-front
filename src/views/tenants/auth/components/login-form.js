@@ -7,12 +7,16 @@ import { login } from '../../../../providers/redux/_actions/user-actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { __tenantlogin } from 'libraries/validation/schema/tenant-schema';
 import GoogleAuth from 'views/agent/auth/socialite/google-auth';
+import { useHistory, useParams } from 'react-router-dom';
+import { useQuery } from 'libraries/http/query';
 
-const UserLoginForm = () =>  {    
+const UserLoginForm = ({isLoading}) =>  {    
     const dispatch = useDispatch()
+    const query = useQuery()
+    const history = useHistory()
 
     const user_login = useSelector(state => state.login)
-    const {loading, success, error} = user_login;
+    const {loading, success} = user_login;
     
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(__tenantlogin)
@@ -23,9 +27,9 @@ const UserLoginForm = () =>  {
     }
 
     useEffect(() => {
-        if(success){window.location.href = '/'} 
-        error && toast.error(error)
-    }, [success, error])
+        isLoading(loading)
+        if(success){ history.push('/') }
+    }, [success])
 
     const handleErrors = () => {
         toast.error("Invalid Input Data");
@@ -33,16 +37,10 @@ const UserLoginForm = () =>  {
 
     return (
         <div className="col-lg-7">
-            <ToastContainer position="bottom-right"/>
 
             <div className="card border-0 shadow-xxs-2 mb-6">
                 <div className="card-body px-8">
                 <h2 className="card-title fs-30 font-weight-600 text-dark lh-16 mb-2">Log In</h2>
-                <p className="mb-4">Don’t have an account yet?  
-                    <a href="./signup" className="text-heading hover-primary">
-                        <u> Sign up for free?</u>
-                    </a>
-                </p>
 
                 <form className="form" id="loginForm" onSubmit={handleSubmit(handleSignup, handleErrors)}>
                     <div className="form-group mb-4">
@@ -100,6 +98,13 @@ const UserLoginForm = () =>  {
                     </a> */}
                         <GoogleAuth/>
                     </div>
+                </div>
+                <div className="text-center my-4">
+                    <p className="mb-4">Don’t have an account yet?  
+                        <a href="./signup" className="text-heading hover-primary">
+                            <u> Sign up here</u>
+                        </a>
+                    </p>
                 </div>
                 </div>
             </div>

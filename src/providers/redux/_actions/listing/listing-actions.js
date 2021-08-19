@@ -6,7 +6,8 @@ const { NEW_LISTING_REQUEST, NEW_LISTING_SUCCESS, NEW_LISTING_FAILURE,
         GETLISTINGS_SUCCESS, GETLISTINGS_FAILURE, GETLISTINGS_REQUEST,
         ACTIVE_LISTINGS_REQUEST, ACTIVE_LISTINGS_SUCCESS, ACTIVE_LISTINGS_FAILURE,
         FETCH_LISTING_DETAILS_REQUEST, FETCH_LISTING_DETAILS_SUCCESS, FETCH_LISTING_DETAILS_FAILURE,
-        FETCH_SINGLE_LISTING_REQUEST, FETCH_SINGLE_LISTING_SUCCESS, FETCH_SINGLE_LISTING_FAILURE, 
+        FETCH_SINGLE_LISTING_REQUEST, FETCH_SINGLE_LISTING_SUCCESS, FETCH_SINGLE_LISTING_FAILURE,
+        FETCH_POPULAR_LISTINGS_REQUEST, FETCH_POPULAR_LISTINGS_SUCCESS, FETCH_POPULAR_LISTINGS_FAILURE, 
         STORE_LISTING, 
     } = ListingConstants
 
@@ -27,9 +28,10 @@ export const CreateListing = (data) => (dispatch) =>{
 
     ListingService.newListing(data)
                 .then(response => {
+                    Response.success(response.data)
                     dispatch({
                         type: NEW_LISTING_SUCCESS,
-                        payload: response
+                        payload: response.data
                     })
                 })
                 .catch(error => {
@@ -42,15 +44,14 @@ export const CreateListing = (data) => (dispatch) =>{
 }
 
 export const GetAgentListings = () => (dispatch) => {
-    console.log('get_listings')
+    console.log("Fetching Agent's Listings...")
 
-    dispatch({ type: GETLISTINGS_REQUEST })
-
+    dispatch({ type : GETLISTINGS_REQUEST })
     ListingService.getAgentListings()
                     .then(response => {
                         return dispatch({
                             type: GETLISTINGS_SUCCESS,
-                            payload: response.data
+                            payload: response.data.data
                         })
                     })
                     .catch(error => {
@@ -76,6 +77,7 @@ export const ShowAllListings = (params) => (dispatch) => {
                         })
                     })
                     .catch(error => {
+                        !error && Response.error("");
                         Response.error(error.response)
                         return dispatch({
                             type: ACTIVE_LISTINGS_FAILURE,
@@ -98,6 +100,7 @@ export const ShowActiveListings = () => (dispatch) => {
                         })
                     })
                     .catch(error => {
+                        !error && Response.error("");
                         Response.error(error.response)
                         return dispatch({
                             type: ACTIVE_LISTINGS_FAILURE,
@@ -119,6 +122,7 @@ export const FetchListingDetails = () => (dispatch) => {
                         });
                     })
                     .catch(error => {
+                        !error && Response.error("");
                         Response.error(error.response)
                         return dispatch({
                             type : FETCH_LISTING_DETAILS_FAILURE,
@@ -150,3 +154,25 @@ export const FetchSingleListing = (slug) => (dispatch) => {
                     })
 
 }
+
+export const FetchPopularListings = () => (dispatch) => {
+    console.log('Fetching Popular Listings');
+
+    dispatch({type: FETCH_POPULAR_LISTINGS_REQUEST});
+
+    ListingService.fetchPopularListings()
+                .then((response) => {
+                    console.log(response.data.data)
+                    dispatch({
+                        type: FETCH_POPULAR_LISTINGS_SUCCESS,
+                        payload: response.data.data 
+                    })
+                })
+                .catch((error) => {
+                    dispatch({
+                        type: FETCH_POPULAR_LISTINGS_FAILURE,
+                        payload: error.response
+                    })
+                })
+}
+

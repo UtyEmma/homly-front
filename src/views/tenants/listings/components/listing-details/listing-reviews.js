@@ -1,6 +1,23 @@
-import React from 'react'
+import { FetchReview, SubmitReview } from 'providers/redux/_actions/review-actions'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import ListingReviewForm from '../listing-reviews/listing-review-form'
+import ListingReviewItem from '../listing-reviews/listing-review-item'
 
-export default function ListingReviews() {
+export default function ListingReviews({listing_id, status}) {
+    const dispatch = useDispatch()
+
+    const state = useSelector((state) => state.listing_reviews)
+    const {loading, reviews} = state;
+
+    const loadReviews = () => {
+        dispatch(FetchReview(listing_id))
+    }
+
+    useEffect(() => {
+        !reviews && loadReviews()
+    }, [reviews])
+
     return (
         <>
         <section className="mt-2 pb-7 px-6 pt-6 bg-white rounded-lg">
@@ -170,241 +187,31 @@ export default function ListingReviews() {
             <section className="mt-2 pb-2 px-6 pt-6 bg-white rounded-lg">
                 <div className="card border-0">
                 <div className="card-body p-0">
-                    <h3 className="fs-16 lh-2 text-heading mb-0 d-inline-block pr-4 border-bottom border-primary">5 Reviews</h3>
-                    <div className="media border-top pt-7 pb-6 d-sm-flex d-block text-sm-left text-center">
-                    <img src="images/review-07.jpg" alt="Danny Fox" className="mr-sm-8 mb-4 mb-sm-0" />
-                    <div className="media-body">
-                        <div className="row mb-1 align-items-center">
-                        <div className="col-sm-6 mb-2 mb-sm-0">
-                            <h4 className="mb-0 text-heading fs-14">Danny Fox</h4>
+                    <h3 className="fs-16 lh-2 text-heading mb-0 d-inline-block pr-4 border-bottom border-primary">
+                            {reviews && reviews.length > 0 ? reviews.length : ""} Reviews
+                    </h3>
+
+                    {
+                        reviews && reviews.length > 0
+
+                        ?
+
+                        reviews.map((review, index) => {
+                            return (
+                                <ListingReviewItem key={index} publisher={review.publisher} review={review.review} />
+                            )
+                        })
+
+                        :
+
+                        <div>
+                            There are currently no reviews for this Listing
                         </div>
-                        <div className="col-sm-6">
-                            <ul className="list-inline d-flex justify-content-sm-end justify-content-center mb-0">
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            </ul>
-                        </div>
-                        </div>
-                        <p className="mb-3 pr-xl-17">Very good and fast support during the week. Thanks for always
-                        keeping your WordPress themes up to date. Your level of support and dedication
-                        is second to none.</p>
-                        <div className="d-flex justify-content-sm-start justify-content-center">
-                        <p className="mb-0 text-muted fs-13 lh-1">02 Dec 2020 at 2:40pm</p>
-                        <a href="#" className="mb-0 text-heading border-left border-dark hover-primary lh-1 ml-2 pl-2">Reply</a>
-                        </div>
-                    </div>
-                    </div>
-                    <div className="media border-top py-6 d-sm-flex d-block text-sm-left text-center">
-                    <img src="images/review-08.jpg" alt="Viola Austin" className="mr-sm-8 mb-4 mb-sm-0" />
-                    <div className="media-body">
-                        <div className="row mb-1 align-items-center">
-                        <div className="col-sm-6 mb-2 mb-sm-0">
-                            <h4 className="mb-0 text-heading fs-14">Viola Austin</h4>
-                        </div>
-                        <div className="col-sm-6 ">
-                            <ul className="list-inline d-flex justify-content-sm-end justify-content-center mb-0">
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            </ul>
-                        </div>
-                        </div>
-                        <p className="mb-3 pr-xl-17">Very good and fast support during the week. Thanks for always
-                        keeping your WordPress themes up to date. Your level of support and dedication
-                        is second to none.</p>
-                        <div className="d-flex justify-content-sm-start justify-content-center">
-                        <p className="mb-0 text-muted fs-13 lh-1">02 Dec 2020 at 2:40pm</p>
-                        <a href="#" className="mb-0 text-heading border-left border-dark hover-primary lh-1 ml-2 pl-2">Reply</a>
-                        </div>
-                    </div>
-                    </div>
-                    <div className="media border-top py-6 d-sm-flex d-block text-sm-left text-center">
-                    <img src="images/review-09.jpg" alt="Nettie Singleton" className="mr-sm-8 mb-4 mb-sm-0" />
-                    <div className="media-body">
-                        <div className="row mb-1 align-items-center">
-                        <div className="col-sm-6 mb-2 mb-sm-0">
-                            <h4 className="mb-0 text-heading fs-14">Nettie Singleton</h4>
-                        </div>
-                        <div className="col-sm-6 ">
-                            <ul className="list-inline d-flex justify-content-sm-end justify-content-center mb-0">
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            </ul>
-                        </div>
-                        </div>
-                        <p className="mb-3 pr-xl-17">Very good and fast support during the week. Thanks for always
-                        keeping your WordPress themes up to date. Your level of support and dedication
-                        is second to none.</p>
-                        <div className="d-flex justify-content-sm-start justify-content-center">
-                        <p className="mb-0 text-muted fs-13 lh-1">02 Dec 2020 at 2:40pm</p>
-                        <a href="#" className="mb-0 text-heading border-left border-dark hover-primary lh-1 ml-2 pl-2">Reply</a>
-                        </div>
-                    </div>
-                    </div>
-                    <div className="media border-top py-6 d-sm-flex d-block text-sm-left text-center">
-                    <img src="images/review-07.jpg" alt="Vernon Fisher" className="mr-sm-8 mb-4 mb-sm-0" />
-                    <div className="media-body">
-                        <div className="row mb-1 align-items-center">
-                        <div className="col-sm-6 mb-2 mb-sm-0">
-                            <h4 className="mb-0 text-heading fs-14">Vernon Fisher</h4>
-                        </div>
-                        <div className="col-sm-6">
-                            <ul className="list-inline d-flex justify-content-sm-end justify-content-center mb-0">
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            <li className="list-inline-item mr-1">
-                                <span className="text-border fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            </ul>
-                        </div>
-                        </div>
-                        <p className="mb-3 pr-xl-17">Very good and fast support during the week. Thanks for always
-                        keeping your WordPress themes up to date. Your level of support and dedication
-                        is second to none.</p>
-                        <div className="d-flex justify-content-sm-start justify-content-center">
-                        <p className="mb-0 text-muted fs-13 lh-1">02 Dec 2020 at 2:40pm</p>
-                        <a href="#" className="mb-0 text-heading border-left border-dark hover-primary lh-1 ml-2 pl-2">Reply</a>
-                        </div>
-                    </div>
-                    </div>
-                    <div className="media border-top py-6 d-sm-flex d-block text-sm-left text-center">
-                    <div className="w-82px h-82 mr-2 bg-gray-01 rounded-circle fs-25 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
-                        HI
-                    </div>
-                    <div className="media-body">
-                        <div className="row mb-1 align-items-center">
-                        <div className="col-sm-6 mb-2 mb-sm-0">
-                            <h4 className="mb-0 text-heading fs-14">Harry Iglesias</h4>
-                        </div>
-                        <div className="col-sm-6">
-                            <ul className="list-inline d-flex justify-content-sm-end justify-content-center mb-0">
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            <li className="list-inline-item mr-1">
-                                <span className="text-warning fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            <li className="list-inline-item mr-1">
-                                <span className="text-border fs-12 lh-2"><i className="fas fa-star" /></span>
-                            </li>
-                            </ul>
-                        </div>
-                        </div>
-                        <p className="mb-3 pr-xl-17">Very good and fast support during the week. Thanks for always
-                        keeping your WordPress themes up to date. Your level of support and dedication
-                        is second to none.</p>
-                        <div className="d-flex justify-content-sm-start justify-content-center">
-                        <p className="mb-0 text-muted fs-13 lh-1">02 Dec 2020 at 2:40pm</p>
-                        <a href="#" className="mb-0 text-heading border-left border-dark hover-primary lh-1 ml-2 pl-2">Reply</a>
-                        </div>
-                    </div>
-                    </div>
+                    }
                 </div>
                 </div>
             </section>
-            <section className="mt-2 pb-7 px-6 pt-6 bg-white rounded-lg">
-                <div className="card border-0">
-                <div className="card-body p-0">
-                    <h3 className="fs-16 lh-2 text-heading mb-4">Write A Review</h3>
-                    <form>
-                    <div className="form-group mb-4 d-flex justify-content-start">
-                        <div className="rate-input">
-                        <input type="radio" id="star5" name="rate" defaultValue={5} />
-                        <label htmlFor="star5" title="text" className="mb-0 mr-1 lh-1">
-                            <i className="fas fa-star" />
-                        </label>
-                        <input type="radio" id="star4" name="rate" defaultValue={4} />
-                        <label htmlFor="star4" title="text" className="mb-0 mr-1 lh-1">
-                            <i className="fas fa-star" />
-                        </label>
-                        <input type="radio" id="star3" name="rate" defaultValue={3} />
-                        <label htmlFor="star3" title="text" className="mb-0 mr-1 lh-1">
-                            <i className="fas fa-star" />
-                        </label>
-                        <input type="radio" id="star2" name="rate" defaultValue={2} />
-                        <label htmlFor="star2" title="text" className="mb-0 mr-1 lh-1">
-                            <i className="fas fa-star" />
-                        </label>
-                        <input type="radio" id="star1" name="rate" defaultValue={1} />
-                        <label htmlFor="star1" title="text" className="mb-0 mr-1 lh-1">
-                            <i className="fas fa-star" />
-                        </label>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-sm-6">
-                        <div className="form-group mb-4">
-                            <input placeholder="Your Name" className="form-control form-control-lg border-0" type="text" name="name" />
-                        </div>
-                        </div>
-                        <div className="col-sm-6">
-                        <div className="form-group mb-4">
-                            <input type="email" placeholder="Email" name="email" className="form-control form-control-lg border-0" />
-                        </div>
-                        </div>
-                    </div>
-                    <div className="form-group mb-6">
-                        <textarea className="form-control form-control-lg border-0" placeholder="Your Review" name="message" rows={5} defaultValue={""} />
-                    </div>
-                    <button type="submit" className="btn btn-lg btn-primary px-10">Submit</button>
-                    </form>
-                </div>
-                </div>
-            </section>
+            <ListingReviewForm listing_id={listing_id} status={status} />
         </>
     )
 }

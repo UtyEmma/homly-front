@@ -1,10 +1,11 @@
 import Response from 'libraries/response/response';
 import { userService } from '../../services';
-import { userConstants } from '../_contants/user-constants';
+import { _TENANT } from '../_contants/user-constants';
 
 const { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE, 
-        LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE 
-        } = userConstants;
+        LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE,
+        UPDATE_REQUEST, UPDATE_SUCCESS, UPDATE_FAILURE 
+        } = _TENANT;
 
 export const signup = (data) => (dispatch) => {
     console.log("Signing Up...")
@@ -14,14 +15,14 @@ export const signup = (data) => (dispatch) => {
             .then(response => {
                 dispatch({
                     type: SIGNUP_SUCCESS,
-                    payload: response
+                    payload: response.data
                 })
             })
             .catch(error => {
                 Response.error(error.response)
                 dispatch({
                     type: SIGNUP_FAILURE,
-                    payload: error.response.data.message
+                    payload: error.response.data
                 })
             })  
             
@@ -48,9 +49,30 @@ export const login = (data) => (dispatch) => {
                 Response.error(error.response)
                 dispatch({
                     type: LOGIN_FAILURE,
-                    payload: error.response.data.message
+                    payload: error.response
                 })
             })
+}
+
+export const UpdateTenantProfile = (data) => (dispatch) => {
+    console.log("Update Tenant Profile...")
+    dispatch({
+        type: UPDATE_REQUEST
+    })
+
+    userService.updateTenantData(data)
+                .then((response) => {
+                    Response.success(response.data)
+                    localStorage.removeItem('user')
+                    localStorage.setItem('user', JSON.stringify(response.data.user));
+                    dispatch({
+                        type: UPDATE_SUCCESS,
+                        payload: response.data.data
+                    })
+                })
+                .catch((error) => {
+                    Response.error(error.response)
+                })
 }
 
 export const TenantLogout = () => {

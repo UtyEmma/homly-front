@@ -9,23 +9,14 @@ export function FetchDetailsReducer (state = {}, action) {
         case FETCH_DETAILS_REQUEST:
             return {...state, loading: true}
         case FETCH_DETAILS_SUCCESS:
-            return {...state, loading: false, details: action.payload}
+            return {...state, 
+                loading: false, 
+                amenities: action.payload.amenities, 
+                // features: action.payload.features
+            }
         case FETCH_DETAILS_FAILURE:
             return {...state, loading: false, error: action.payload}
         default:
             return state;
     }
 }
-
-// export function FetchCategoryReducer(state = {}, action){
-//     switch (action.type) {
-//         case FETCH_CATEGORY_REQUEST:
-//             return {...state, loading: true}
-//         case FETCH_CATEGORY_SUCCESS:
-//             return {...state, loading: false, categories: action.payload}
-//         case FETCH_CATEGORY_FAILURE:
-//             return {...state, loading: false, error: action.payload}
-//         default:
-//             return state;
-//     }
-// }

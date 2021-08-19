@@ -7,23 +7,33 @@ export function SelectAmenities({features, setFeatures, name, validate, message}
 
     const dispatch = useDispatch();
 
-    const [details, setDetails] = useState({})
+    const details = useSelector((state) => state.details)
+    const {loading, amenities} = details
 
     useEffect(() => {
-        if(!details){
-            setDetails(dispatch(FetchDetails())) 
+        if(!amenities){
+            dispatch(FetchDetails())
         }
-    }, [details])
+    }, [amenities])
+
     return (
         <>
-            {/* <div className="col-sm-6 col-lg-3">
-                <li className="list-group-item px-0 pt-0 pb-2">
-                    <div className="custom-control custom-checkbox">
-                    <input type="checkbox" className="custom-control-input" onChange={compileFeatures} name="kitchen" id="kitchen" />
-                    <label className="custom-control-label" htmlFor="kitchen" >Kitchen</label>
+            {
+                Array.isArray(amenities) && amenities.length > 0 
+
+                && 
+
+                amenities.map((amenity, index) => (
+                    <div key={index} className="col-sm-6 col-md-4 col-lg-3">
+                        <li className="list-group-item px-0 pt-0 pb-2 bg-transparent border-0 text-white">
+                            <div className="custom-control custom-checkbox">
+                                <input type="checkbox" className="custom-control-input" name={`amenities[${amenity.toLowerCase().replace(/ /g,'_')}]`} id={amenity} />
+                                <label className="custom-control-label" htmlFor={amenity} >{amenity}</label>
+                            </div>
+                        </li>
                     </div>
-                </li>                      
-            </div> */}
+                )) 
+            }
         </>
     )
 }
@@ -32,25 +42,25 @@ export function TagifyAmenities({val, setValue, name, validate, message}){
     
     const dispatch = useDispatch();
     const fetchDetails = useSelector(state => state.details)
-    const {loading, details, error} = fetchDetails
+    const {loading, amenities, error} = fetchDetails
 
     const loadDetails = () => { dispatch(FetchDetails()) }
 
     useEffect(() => {
-        if(!details){
+        if(!amenities){
             loadDetails()
         }
-    }, [details])
+    }, [amenities])
 
     return (
         <>
             {
 
-            details 
+            amenities 
             
             && 
             
-            <Tagify suggestions={[...details.amenities]} message={message} validate val={val} setValue={setValue}  id="features"  name={name} />}
+            <Tagify suggestions={[...amenities]} message={message} validate val={val} setValue={setValue}  id="features"  name={name} />}
         </>
     )
 }

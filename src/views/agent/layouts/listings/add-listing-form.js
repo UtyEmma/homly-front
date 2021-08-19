@@ -4,45 +4,42 @@ import { CreateListing, StoreListing } from '../../../../providers/redux/_action
 import ListingLocation from './blocks/listing-location'
 import ListingDescription from './blocks/listing-description'
 import ListingMedia from './blocks/listing-media'
-import ListingFeatures from './blocks/listing-features'
+import ListingAmenities from './blocks/listing-amenities'
 import ListingDetails from './blocks/listing-details'
 import { toast } from 'react-toastify';
 import { FetchDetails } from 'providers/redux/_actions/details-actions';
 
-function AddListingForm() {
+function AddListingForm({setIsLoading}) {
     const dispatch = useDispatch();
 
-    const listing = useSelector((state) => state.store_listing);
-    const {store, listing_failure, listing_success} = listing;
+    const [files, setFiles] = useState([]) //Set Files
+
+    const store_listing = useSelector((state) => state.store_listing);
+    const {store} = store_listing; 
+
+    const listing = useSelector((state) => state.new_listing);
+    const {loading, listing_success} = listing
+    
 
     const fetchDetails = useSelector(state => state.details)
-    const {loading, details, error} = fetchDetails
+    const {amenities} = fetchDetails
 
-    const loadDetails = () => { dispatch(FetchDetails()) }
-    let features = [];
+    const loadAmenities = () => { dispatch(FetchDetails()) }
 
     useEffect(() => {
-        !details && loadDetails()
-        listing_success && toast.success(listing_success.data.message)        
-        listing_failure && toast.error(listing_failure.data.message)
-    }, [listing_success, listing_failure])
+        !amenities && loadAmenities()
+        listing_success && document.getElementById('listing-form').reset()
+        setIsLoading(loading)
+    }, [listing_success, loading])
 
     const handleFormData = (e) => {
         e.preventDefault()
         let formData = new FormData(e.target);
-        if (store) {
-            formData.set('features', JSON.stringify(store.features))
-            details.features.map((feature) => (
-                formData.delete(feature.toLowerCase().replace(/ /g,'-'))
-            ))
-        }
 
-        if (store) {
-            details.amenities.map((amenity) => (
-                formData.delete(amenity.toLowerCase().replace(/ /g,'-'))
-            ))
-            formData.set('details', JSON.stringify(store.details))
-        }
+        formData.delete('undefined')
+        formData.delete('images')
+        formData.delete('filepond')
+        files.map(file => formData.append('images[]', file))
 
         dispatch(CreateListing(formData))
     }
@@ -50,15 +47,15 @@ function AddListingForm() {
     return (
         <form id="listing-form" onSubmit={handleFormData} encType="multipart/form-data" >
             <div id="collapse-tabs-accordion">
-                <ListingDescription />
+                <ListingDescription setIsLoading={setIsLoading}/>
 
-                <ListingMedia />
+                <ListingMedia files={files} setFiles={setFiles} />
 
                 <ListingLocation />
 
-                <ListingDetails features={details && details.features} />
+                <ListingDetails />
 
-                <ListingFeatures amenities={details && details.amenities}/>
+                <ListingAmenities amenities={amenities}/>
             </div>
         </form>
     )

@@ -1,7 +1,7 @@
 import { Request } from "./api/http";
 
 export const AgentService = {
-    signup, login, update, show 
+    signup, login, update, show, logout, removeListing, deleteListing, fetchSingleAgent, fetchAgentsWishlists 
 }
 
 const auth_config = {
@@ -21,9 +21,7 @@ const options = {
 
 async function signup(data){
     const request = {
-        config: {
-            headers : options
-        },
+        config: { headers: options },
         payload: data
     }
     return await Request.post('agent/signup', request)
@@ -49,4 +47,29 @@ async function update(data){
 
 async function show() {
     return await Request.get('agent/all', auth_config)
+}
+
+async function logout(){
+    return await Request.get('agent/logout', auth_config.config)
+}
+
+async function deleteListing(id){
+    return await Request.get(`agent/listing/delete/${id}`, auth_config.config);
+}
+
+async function removeListing(id){
+    return await Request.get(`agent/listing/remove/${id}`, auth_config.config);
+}
+
+async function fetchSingleAgent(id){
+    const request = {
+        config: {
+            headers : options
+        }
+    }
+    return await Request.get(`agent/${id}`, request)
+}
+
+async function fetchAgentsWishlists(){
+    return await Request.get('agent/wishlists', auth_config.config);
 }

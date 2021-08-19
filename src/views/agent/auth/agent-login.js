@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import AgentLoginForm from './components/login-form';
-import NavBar from 'views/layouts/nav-bar';
-import Footer from 'views/layouts/footer';
+import Footer from 'components/shared/footer';
+import NavBar from 'components/shared/nav-bar';
 
 const AgentLogin  =  () => {
 
         return (
             <div>
-                <NavBar/>
+                <NavBar />
 
                 <main id="content">
                     <section className="py-7">
@@ -19,7 +19,7 @@ const AgentLogin  =  () => {
                     </section>
                 </main>
 
-                <Footer/>
+                <Footer />
             </div>
         )
 

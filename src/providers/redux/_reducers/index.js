@@ -1,15 +1,17 @@
 import { combineReducers } from "redux";
+
 import {loginReducer, signupReducer} from "../_reducers/user.reducer";
-import {
-    AgentLoginReducer, 
-    AgentSignupReducer,
-    UpdateAgentProfileReducer, 
-    ShowAvailableAgentsReducer } from "./agent-reducer";
+import { AgentLoginReducer, AgentSignupReducer,
+        UpdateAgentProfileReducer, ShowAvailableAgentsReducer, DeleteListingReducer, RemoveListingReducer, FetchSingleAgentReducer, FetchAgentWishlistsReducer } from "./agent-reducer";
 import { FetchCategoriesReducer } from "./category-reducer";
 import { FetchDetailsReducer } from "./details-reducer";
 
 import { AgentsListingsReducer, NewListingReducer, StoreListingReducer,
-         ActiveListingsReducer, FetchListingDetails, FetchSingleListing} from "./listing-reducer";
+         ActiveListingsReducer, FetchListingDetails, FetchSingleListing, FetchPopularListingsReducer } from "./listing-reducer";
+import { searchForLocationReducer } from "./location-reducer";
+import { FetchAgentReviewsReducer, FetchReviewsReducer, ReportUserReducer, SubmitReviewReducer } from "./review-reducers";
+import { SearchListingsReducer } from "./search-reducer";
+import { DeleteTicketReducer, FetchMessagesReducer, FetchTicketsReducer, NewTicketReducer, SendMessageReducer } from "./support-reducer";
 
 import { CreateWishlistReducer, FetchWishlistReducer } from "./wishlist-reducer";
 
@@ -25,19 +27,36 @@ const rootReducer = combineReducers({
     agents_listings: AgentsListingsReducer,
     update_agent_profile: UpdateAgentProfileReducer,
     available_agents: ShowAvailableAgentsReducer,
-
+    agent: FetchSingleAgentReducer,
+    agent_wishlist: FetchAgentWishlistsReducer,
 
     store_listing: StoreListingReducer,
     new_listing: NewListingReducer,
     active_listings: ActiveListingsReducer,
     fetch_details : FetchListingDetails,
     listing : FetchSingleListing,
+    delete_listing: DeleteListingReducer,
+    remove_listing: RemoveListingReducer,
+    popular_listings: FetchPopularListingsReducer,
 
     categories: FetchCategoriesReducer,
 
+    search: SearchListingsReducer,
+
     details: FetchDetailsReducer,
 
+    searchGoogleMaps : searchForLocationReducer,
 
+    submit_review: SubmitReviewReducer,
+    agent_reviews: FetchAgentReviewsReducer,
+    listing_reviews: FetchReviewsReducer,
+    report_user: ReportUserReducer,
+
+    new_ticket: NewTicketReducer,
+    tickets: FetchTicketsReducer,
+    delete_ticket: DeleteTicketReducer,
+    send_message: SendMessageReducer,
+    messages: FetchMessagesReducer    
 })
 
 export default rootReducer;
