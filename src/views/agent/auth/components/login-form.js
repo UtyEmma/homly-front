@@ -96,7 +96,7 @@ const AgentLoginForm = () =>  {
                             <img src="images/google.png" alt="Google" className="mr-2"/>
                             Google
                         </a> */}
-                        <GoogleAuth />
+                        <GoogleAuth user="agent"/>
                         </div>
                     </div>
                     </div>

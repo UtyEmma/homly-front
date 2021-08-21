@@ -9,6 +9,8 @@ import { __tenantlogin } from 'libraries/validation/schema/tenant-schema';
 import GoogleAuth from 'views/agent/auth/socialite/google-auth';
 import { useHistory, useParams } from 'react-router-dom';
 import { useQuery } from 'libraries/http/query';
+// import ReactFacebookLogin from 'react-facebook-login';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
 const UserLoginForm = ({isLoading}) =>  {    
     const dispatch = useDispatch()
@@ -33,6 +35,14 @@ const UserLoginForm = ({isLoading}) =>  {
 
     const handleErrors = () => {
         toast.error("Invalid Input Data");
+    }
+
+    const componentClicked = () => {
+        console.log("Component Clicked");
+    }
+
+    const responseFacebook = (response) => {
+        console.log(response)
     }
 
     return (
@@ -86,17 +96,22 @@ const UserLoginForm = ({isLoading}) =>  {
                 </div>
                 <div className="row no-gutters mx-n2">
                     <div className="col-sm-6 px-2 mb-4">
-                    <a href="#" className="btn btn-lg btn-block text-heading border px-0 bg-hover-accent">
-                        <img src="images/facebook.png" alt="Google" className="mr-2" />
-                        Facebook
-                    </a>
+                        <FacebookLogin
+                            appId="1003408093533632"
+                            render={renderProps => (
+                                <button onClick={renderProps.onClick} className="btn btn-lg btn-block text-heading border px-0 bg-hover-accent">
+                                    <img src="images/facebook.png" alt="Google" className="mr-2" />
+                                    Facebook
+                                </button> 
+                            )}
+                            autoLoad={true}
+                            fields="name,email,picture"
+                            onClick={componentClicked}
+                            callback={responseFacebook}
+                            />
                     </div>
                     <div className="col-sm-6 px-2 mb-4">
-                    {/* <a href="#" className="btn btn-lg btn-block text-heading border px-0 bg-hover-accent">
-                        <img src="images/google.png" alt="Google" className="mr-2" />
-                        Google
-                    </a> */}
-                        <GoogleAuth/>
+                        <GoogleAuth user="tenant" />
                     </div>
                 </div>
                 <div className="text-center my-4">

@@ -55,31 +55,28 @@ const Wishlist = ({isLoggedIn, user}) => {
                 </section>
                 <section className="pb-11">
                     <div className="container container-xxl">
-                        <div className="row"> 
+                        <div className="row">   
+                            <AddWishlistBtn />
+    
                             {
                                 wishlists && wishlists.wishlists.length > 0
                                 
-                                ?
+                                &&
 
                                 wishlists.wishlists.map((wishlist, index) => (
                                     <WishlistItem item={wishlist} key={index} />
                                 ))
-
-                                :
-                                
-                                <WishlistPlaceholder/>
                             }       
-                            <AddWishlistBtn />
                         </div>
                     </div>
                 </section>
-                               </main>
+            </main>
 
             <Footer />
 
             <ModalOne id="modal-one" height="100%">
                 <div className="row">
-                    <div className="col-md-6 p-0 rounded-lg-top-left bg-overlay" style={wishListStyle}></div>
+                    <div className="col-md-6 d-md-block d-none p-0 rounded-lg-top-left bg-overlay" style={wishListStyle}></div>
                     <div className="col-md-6 pt-5">
                         <WishlistForm />
                     </div>

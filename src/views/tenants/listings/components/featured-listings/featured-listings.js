@@ -19,7 +19,7 @@ export default function FeaturedListings({listings}) {
                 {
                     listings.map((listing, index) => {
                         return (
-                            <div className="box px-0" >
+                            <div className="box px-0" key={index} >
                                 <div className="card border-0">
                                     <img src={listing.images[0]} style={{minHeight: '100%'}} className="card-img" alt={listing.title} />
                                     

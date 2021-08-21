@@ -31,7 +31,7 @@ export default function ListingContainer({listings}) {
                         <div className="input-group border rounded input-group-lg w-auto bg-white mr-3">
                             <label className="input-group-text bg-transparent border-0 text-uppercase letter-spacing-093 pr-1 pl-3" htmlFor="inputGroupSelect01"><i className="fas fa-align-left fs-16 pr-2" />Sortby:</label>
                             <select className="form-control border-0 bg-transparent shadow-none p-0 selectpicker sortby" data-style="bg-transparent border-0 font-weight-600 btn-lg pl-0 pr-3" id="inputGroupSelect01" name="sortby">
-                                <option selected>Top Selling</option>
+                                <option defaultValue="">Top Selling</option>
                                 <option value={1}>Most Viewed</option>
                                 <option value={2}>Price(low to high)</option>
                                 <option value={3}>Price(high to low)</option>

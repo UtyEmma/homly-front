@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 
 export default function ProfileButton({isloggedIn, user}) {
 
@@ -10,6 +11,11 @@ export default function ProfileButton({isloggedIn, user}) {
 }
 
 function loggedIn(user) {
+    const logout = () => {
+        let token = localStorage.getItem('token');
+        
+    }
+
     return (           
         <ul className="navbar-nav flex-row justify-content-lg-end align-items-center d-flex flex-wrap text-body py-2">            
             <li className="nav-item mr-4">
@@ -40,15 +46,15 @@ function loggedIn(user) {
                     }
                 </div>
                 <a href="" className="nav-link px-2 dropdown-toggle " data-toggle="dropdown">Hello {user.firstname}</a>
-                <div className="dropdown-menu px-3 dropdown-menu-right dropdown-menu-lg">
+                <div className="dropdown-menu px-3 dropdown-menu-right">
                     <div className="row">
-                        <div className="col-6">
+                        <div className="col-12">
                             <a className="dropdown-item rounded py-2 align-middle" href="/profile">
                                 <i className="fa fa-user mr-2"></i>
                                 My Profile
                             </a>
 
-                            <a className="dropdown-item rounded py-2 align-middle" href="/profile">
+                            <a className="dropdown-item rounded py-2 align-middle" href="/favourites">
                                 <i className="fa fa-heart mr-2"></i>
                                 Favourites
                             </a>
@@ -60,10 +66,10 @@ function loggedIn(user) {
                             </a>
 
 
-                            <a className="dropdown-item  btn btn-secondary rounded py-2 align-middle" href="/logout">
+                            <button className="dropdown-item  btn btn-secondary rounded py-2 align-middle" type="button" onClick={logout} >
                                 <i className="mr-2"></i>
                                 Logout
-                            </a>
+                            </button>
                         </div>
 
                         <div className="col-6">

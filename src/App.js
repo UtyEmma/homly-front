@@ -37,7 +37,7 @@ import VerifyEmail from 'views/onboarding/verify-email';
 import { ToastContainer } from 'react-toastify';
 import { Support } from 'views/agent/support/support';
 import AgentWishlist from 'views/agent/wishlist/agent-wishlist';
-
+import { GoogleOneTapAuth } from 'components/auth/social';
 
 function App() {
   const [isLoading, setIsLoading] = useState(false)
@@ -45,9 +45,17 @@ function App() {
   return (
     <div className="App">
       <Preloader loading={isLoading}/>
-      <ToastContainer />
-      <Switch>          
+      <ToastContainer />  
+
+      {
+        !localStorage.getItem('isAuthenticated')
+
+        &&
         
+        <GoogleOneTapAuth />
+      }
+
+      <Switch>                  
           {/* Common Routes */}
           <Route path="/recover-password" isLoading={setIsLoading} component={PasswordRecovery} exact/>
           <Route path="/login" render={(props) => (<UserLogin {...props} isLoading={setIsLoading} />)} exact/>
