@@ -9,5 +9,5 @@ export const Request = {
 
     get : async (url, config = {}) => {
         return await axios.get(`${baseUrl}${url}`, config)
-    }  
+    }
 }

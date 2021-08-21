@@ -38,6 +38,7 @@ import { ToastContainer } from 'react-toastify';
 import { Support } from 'views/agent/support/support';
 import AgentWishlist from 'views/agent/wishlist/agent-wishlist';
 import { GoogleOneTapAuth } from 'components/auth/social';
+import { Favourites } from 'views/tenants/favourites/favourites';
 
 function App() {
   const [isLoading, setIsLoading] = useState(false)
@@ -74,6 +75,8 @@ function App() {
           {/* Tenant Routes */}
           <TenantRoute path="/profile" isLoading={setIsLoading} user component={Profile} exact/>
           <TenantRoute path="/wishlist" isLoading={setIsLoading} user component={Wishlist} exact/>
+          <TenantRoute path="/favourites" isLoading={setIsLoading} user component={Favourites} exact/>
+
 
           {/* Agent Routes */}
           <Route path="/agent-login" isLoading={setIsLoading} type="agent" component={AgentLogin} exact/>

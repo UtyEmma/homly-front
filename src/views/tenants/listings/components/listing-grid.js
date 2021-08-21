@@ -1,7 +1,29 @@
-import React from 'react'
+import { AddListingToFavourites } from 'providers/redux/_actions/favourites-actions'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import '../css/listing.css'
 
 export default function ListingGrid({listing}) {
+    
+    const dispatch = useDispatch()
+
+    const item = useSelector((state) => state.add_favourites)
+    const {loading, status} = item
+    
+    const [favourite, setFavourite] = useState()
+
+    const addToFavourites = (id) => {
+        dispatch(AddListingToFavourites(id))
+    }
+
+    const setFavStatus = () => {
+        setFavourite(status)
+    }
+
+    useEffect(() => {
+        status && setFavStatus()
+    }, [status])
+
     return (
         <div className="col-md-6 mb-6 listing-grid">
             <div className="card border-0" >
@@ -14,16 +36,16 @@ export default function ListingGrid({listing}) {
                     <div className="mt-auto d-flex hover-image">
                     <ul className="list-inline mb-0 d-flex align-items-end mr-auto">
                         <li className="list-inline-item mr-2" data-toggle="tooltip" title={`${listing.images.length} Images`}>
-                            <a href="#" className="text-white hover-primary">
+                            <a href={null} className="text-white hover-primary">
                                 <i className="far fa-images" /><span className="pl-1">{listing.images.length}</span>
                             </a>
                         </li>
                     </ul>
                     <ul className="list-inline mb-0 d-flex align-items-end mr-n3">
                         <li className="list-inline-item mr-3 h-32" data-toggle="tooltip" title="Wishlist">
-                        <a href="#" className="text-white fs-20 hover-primary">
-                            <i className="far fa-heart" />
-                        </a>
+                            <a href="#" onClick={(e) => {e.preventDefault(); addToFavourites(listing.unique_id)}} className={`text-white fs-20 hover-primary`}>
+                                <i className={` fa-heart ${favourite ? "fas text-primary" : 'far'}`} />
+                            </a>
                         </li>
                     </ul>
                     </div>

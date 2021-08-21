@@ -5,6 +5,7 @@ import { AgentLoginReducer, AgentSignupReducer,
         UpdateAgentProfileReducer, ShowAvailableAgentsReducer, DeleteListingReducer, RemoveListingReducer, FetchSingleAgentReducer, FetchAgentWishlistsReducer } from "./agent-reducer";
 import { FetchCategoriesReducer } from "./category-reducer";
 import { FetchDetailsReducer } from "./details-reducer";
+import { AddFavouritesReducer, FetchFavouritesReducer, RemoveFavouritesReducer } from "./favourite-reducer";
 
 import { AgentsListingsReducer, NewListingReducer, StoreListingReducer,
          ActiveListingsReducer, FetchListingDetails, FetchSingleListing, FetchPopularListingsReducer } from "./listing-reducer";
@@ -56,7 +57,11 @@ const rootReducer = combineReducers({
     tickets: FetchTicketsReducer,
     delete_ticket: DeleteTicketReducer,
     send_message: SendMessageReducer,
-    messages: FetchMessagesReducer    
+    messages: FetchMessagesReducer,
+    
+    favourites: FetchFavouritesReducer,
+    add_favourites: AddFavouritesReducer,
+    remove_favourites: RemoveFavouritesReducer
 })
 
 export default rootReducer;
