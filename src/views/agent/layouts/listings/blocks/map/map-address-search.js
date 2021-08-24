@@ -3,7 +3,7 @@ import { AsyncTypeahead } from 'react-bootstrap-typeahead'
 import usePlacesAutocomplete from 'use-places-autocomplete';
 import './css/map-address.css'
 
-export default function InputAddress({setLandmark, setMapData, mapData, setLatLong, name}) {
+export default function InputAddress({setLandmark, setLatLong, name}) {
     const [isLoading, setIsLoading] = useState(false)
     const [options, setOptions] = useState([])
     const { ready, value, suggestions, setValue, clearSuggestions, } = usePlacesAutocomplete();

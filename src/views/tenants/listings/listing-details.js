@@ -52,7 +52,9 @@ const ListingDetails = ({isLoggedIn, user, status}) => {
                                     <ListingComponents listing={listing} status={status} />
                                 </article>
 
-                                <ListingAction agent={agent}/>
+                                <aside className="col-lg-4 pl-xl-4">
+                                    <ListingAction agent={agent}/>
+                                </aside>
                             </div>
                             </div>
                         </div>

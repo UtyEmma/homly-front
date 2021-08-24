@@ -30,7 +30,7 @@ export default function PopularSection({setIsLoading}) {
                     </div>
 
                     {
-                        listings 
+                        listings && listings.length > 0
 
                         &&
 

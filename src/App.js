@@ -39,6 +39,7 @@ import { Support } from 'views/agent/support/support';
 import AgentWishlist from 'views/agent/wishlist/agent-wishlist';
 import { GoogleOneTapAuth } from 'components/auth/social';
 import { Favourites } from 'views/tenants/favourites/favourites';
+import { AgentListingDetail } from 'views/agent/listings/agent-listing-details';
 
 function App() {
   const [isLoading, setIsLoading] = useState(false)
@@ -85,9 +86,10 @@ function App() {
           <AgentRoute path="/new-listing" isLoading={setIsLoading} type="agent" component={NewListing} exact />
           <AgentRoute path="/agent-profile" isLoading={setIsLoading} type="agent" component={AgentProfile} exact />
           <AgentRoute path="/my-listings" isLoading={setIsLoading} type="agent" component={AgentsListings} exact />
+          <AgentRoute path="/my-listings/:slug" isLoading={setIsLoading} type="agent" component={AgentListingDetail} />
           <AgentRoute path="/reviews" isLoading={setIsLoading} type="agent" component={Reviews} exact />
           <AgentRoute path="/support" isLoading={setIsLoading} type="agent" component={Support} exact />
-          <AgentRoute path="/agent-wishlist" isLoading={setIsLoading} type="agent" component={AgentWishlist} exact />
+          <AgentRoute path="/agent-wishlists" isLoading={setIsLoading} type="agent" component={AgentWishlist} exact />
 
           <Route component={NotFound} exact/>
       </Switch>

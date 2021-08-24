@@ -20,7 +20,7 @@ export function FileInput ({files, setFiles}) {
                 allowReorder={true}
                 onupdatefiles={updateFiles}
                 allowMultiple={true}
-                maxFiles={5}
+                maxFiles={7}
                 imagePreviewHeight="100px"
                 labelIdle='Drag & Drop Images here or <span class="filepond--label-action">Browse</span>'
             />

@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import Geocode, { setLanguage } from 'react-geocode'
-import {MapDisplay} from './map/map-display'
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreListing } from 'providers/redux/_actions/listing/listing-actions';
-import InputAddress from './map/map-address-search';
 import { LocalGovt, State } from 'components/city-state/city-state';
+import InputAddress from 'views/agent/layouts/listings/blocks/map/map-address-search';
+import { MapDisplay } from 'views/agent/layouts/listings/blocks/map/map-display';
 
-export default function ListingLocation() {
+
+export const UpdateListingLocation = ({listing}) => {
     const dispatch = useDispatch();
     const [city, setCity] = useState()
     const [state, setState] = useState()
-    const [landmark, setLandmark] = useState()
-    const [long, setLong] = useState(6.4584)
-    const [lat, setLat] = useState(7.5464)
+    const [landmark, setLandmark] = useState(listing.landmark)
+    const [long, setLong] = useState(listing.longitude)
+    const [lat, setLat] = useState(listing.latitude)
     const [zoom, setZoom] = useState(11)
 
     const updateMapData = (e) => {
@@ -25,11 +26,11 @@ export default function ListingLocation() {
         compileData('state', state)
     }
 
-    const listing = useSelector((state) => state.store_listing.store);
+    const item = useSelector((state) => state.store_listing.store);
 
     const compileData = (name, value) => {
         dispatch(StoreListing({
-                        ...listing,
+                        ...item,
                         [name] : value
                     }))
     }
@@ -62,16 +63,7 @@ export default function ListingLocation() {
     }, [state, city, landmark])
 
     return (
-        <div className="tab-pane tab-pane-parent fade px-0" id="location" role="tabpanel" aria-labelledby="location-tab">
-        <div className="card bg-transparent border-0">
-            <div className="card-header d-block d-md-none bg-transparent px-0 py-1 border-bottom-0" id="heading-location">
-            <h5 className="mb-0">
-                <button className="btn btn-block collapse-parent collapsed border shadow-none" data-toggle="collapse" data-number={3.} data-target="#location-collapse" aria-expanded="true" aria-controls="location-collapse">
-                <span className="number">3.</span> Location
-                </button>
-            </h5>
-            </div>
-            <div id="location-collapse" className="collapse collapsible" aria-labelledby="heading-location" data-parent="#collapse-tabs-accordion">
+        <div className="card bg-white border-0">
             <div className="card-body py-4 py-md-0 px-0">
                 <div className="row">
                 <div className="col-lg-6">
@@ -99,13 +91,13 @@ export default function ListingLocation() {
                             <div className="col-12 px-2">
                                 <div className="form-group">
                                 <label htmlFor="address" className="text-heading">Address</label>
-                                <input type="text" onChange={updateMapData} className="form-control form-control-lg border-0" id="address" name="address"/>
+                                <input type="text" onChange={updateMapData} defaultValue={listing.address} className="form-control form-control-lg border-0" id="address" name="address"/>
                                 </div>
                             </div>
                             <div className="col-12 px-2">
                                 <div className="form-group">
                                 <label htmlFor="landmark" className="text-heading">Landmark / Nearest Bus Stop</label>
-                                <InputAddress lat={lat} long={long} setLandmark={setLandmark} setLatLong={setLatLong} id="landmark"/>
+                                <InputAddress lat={lat} long={long} setLandmark={setLandmark}  setLatLong={setLatLong} id="landmark"/>
                                 <input hidden name="landmark" value={landmark} type="text"/>
                                 </div>
                             </div>
@@ -145,17 +137,7 @@ export default function ListingLocation() {
                     </div>
                 </div>
                 </div>
-                <div className="d-flex flex-wrap">
-                <a href="#" className="btn btn-lg bg-hover-white border rounded-lg mb-3 mr-auto prev-button">
-                    <span className="d-inline-block text-primary mr-2 fs-16"><i className="fal fa-long-arrow-left" /></span>Prev step
-                </a>
-                <button className="btn btn-lg btn-primary next-button mb-3">Next step
-                    <span className="d-inline-block ml-2 fs-16"><i className="fal fa-long-arrow-right" /></span>
-                </button>
-                </div>
-            </div>
             </div>
         </div>
-    </div>
     )
 }

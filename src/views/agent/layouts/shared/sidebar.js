@@ -123,7 +123,7 @@ export default function Sidebar() {
                                     <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
                                         <a href="/support" className="text-heading lh-1 sidebar-link">
                                             <span className="sidebar-item-icon d-inline-block mr-3 text-muted fs-20">
-                                                <i className="fa fa-headset"></i>
+                                                <i className="fal fa-headset"></i>
                                             </span>
                                             <span className="sidebar-item-text">Support</span>
                                         </a>

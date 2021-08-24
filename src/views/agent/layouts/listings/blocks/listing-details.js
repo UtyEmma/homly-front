@@ -26,22 +26,22 @@ export default function ListingDetails() {
                         <div className="row">
                             <div className="col-lg-4">
                                 <div className="form-group">
-                                    <label for="bedrooms" class="text-heading">Number of Bedrooms</label>
-                                        <input type="number" class="form-control form-control-lg border-0" id="bedrooms" min="1" name="no_bedrooms"></input>
+                                    <label htmlFor="bedrooms" className="text-heading">Number of Bedrooms</label>
+                                        <input type="number" className="form-control form-control-lg border-0" id="bedrooms" min="1" name="no_bedrooms"></input>
                                 </div>
                             </div>
 
                             <div className="col-lg-4">
                                 <div className="form-group">
-                                    <label for="bedrooms" class="text-heading">Number of Bathrooms</label>
-                                        <input type="number" class="form-control form-control-lg border-0" id="bathrooms" min="1" name="no_bathrooms"></input>
+                                    <label htmlFor="bedrooms" className="text-heading">Number of Bathrooms</label>
+                                        <input type="number" className="form-control form-control-lg border-0" id="bathrooms" min="1" name="no_bathrooms"></input>
                                 </div>
                             </div>
 
                             <div className="col-lg-4">
                                 <div className="form-group">
-                                    <label for="bedrooms" class="text-heading">Floor Number</label>
-                                        <input type="number" class="form-control form-control-lg border-0" id="floors" name="no_floors" min="1"></input>
+                                    <label htmlFor="bedrooms" className="text-heading">Floor Number</label>
+                                        <input type="number" className="form-control form-control-lg border-0" id="floors" name="no_floors" min="1"></input>
                                 </div>
                             </div>
                         </div>

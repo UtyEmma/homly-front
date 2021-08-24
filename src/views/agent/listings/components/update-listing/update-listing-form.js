@@ -1,0 +1,112 @@
+import { useEffect, useState } from "react";
+import 'bs-stepper/dist/css/bs-stepper.min.css'
+import Stepper from 'bs-stepper'
+import { yupResolver } from '@hookform/resolvers/yup';
+import { __updatelisting } from "libraries/validation";
+import { useForm } from "react-hook-form";
+import { UpdateListingDescription } from "./blocks/update-listing-description";
+import { UpdateListingMedia } from "./blocks/update-listing-media";
+import { UpdateListingLocation } from "./blocks/update-listing-location";
+import { UpdateListingDetails } from "./blocks/update-listing-details";
+
+export const UpdateListingForm = ({listing}) => {
+
+    const [stepper, setStepper] = useState();
+
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(__updatelisting)
+    });
+
+    const handleSuccess = (e) => {
+        console.log(e)
+    }
+
+    const handleErrors = (e) => {
+        console.log(e)
+    }
+
+    useEffect(() => {
+        setStepper(new Stepper(document.getElementById('wishlist-stepper'), {
+            linear: false,
+            animation: true
+        }));
+    }, [])
+
+    return (
+        <>
+         <div className="bs-stepper" id='wishlist-stepper'>
+                <div className="bs-stepper-header px-5" role="tablist">
+                    <div className="step" data-target="#description">
+                        <button type="button" className="step-trigger bs-stepper-trigger" role="tab" aria-controls="property-info" id="property-info-trigger">
+                            <span className="bg-primary bs-stepper-item"></span>
+                            <span className="bs-stepper-label">Property Info</span>
+                        </button>
+                    </div>
+                    <div className="line" />
+                    <div className="step" data-target="#media">
+                        <button type="button" className="step-trigger bs-stepper-trigger" role="tab" aria-controls="location-info" id="location-info-trigger">
+                            <span className="bg-primary bs-stepper-item"></span>
+                            <span className="bs-stepper-label">Media</span>
+                        </button>
+                    </div>
+                    <div className="line" />
+                    <div className="step" data-target="#location">
+                        <button type="button" className="step-trigger bs-stepper-trigger" role="tab" aria-controls="extra-details" id="extra-details-trigger">
+                            <span className="bg-primary bs-stepper-item"></span>
+                            <span className="bs-stepper-label">Location</span>
+                        </button>
+                    </div>
+                    <div className="line" />
+                    <div className="step" data-target="#details">
+                        <button type="button" className="step-trigger bs-stepper-trigger" role="tab" aria-controls="extra-details" id="extra-details-trigger">
+                            <span className="bg-primary bs-stepper-item"></span>
+                            <span className="bs-stepper-label">Property Details</span>
+                        </button>
+                    </div>
+                </div>
+                <div className="bs-stepper-content">
+                    <form className="form" onSubmit={handleSubmit(handleSuccess, handleErrors)} id="create_wishlist_form">
+                        <div id="description" className="content p-4" role="tabpanel" aria-labelledby="property-info-trigger" >
+                            
+                            <UpdateListingDescription listing={listing} />
+
+                            <div className='row d-flex justify-content-end'>
+                                    <button type="button" onClick={() => {stepper.next()}} className="btn btn-primary">Next</button>
+                            </div>
+                        </div>
+
+                        <div id="media" className="content p-4" role="tabpanel" aria-labelledby="location-info-trigger">
+                            
+                            <UpdateListingMedia listing={listing} />
+
+                            <div className='row d-flex justify-content-end'>
+                                <button type="button" onClick={() => {stepper.previous()}} className="btn">Previous</button>
+                                <button type="button" onClick={() => {stepper.next()}} className="btn btn-primary">Next</button>
+                            </div>
+                        </div>
+
+                        <div id="location" className="content p-4" role="tabpanel" aria-labelledby="location-info-trigger">
+                            <UpdateListingLocation listing={listing} />
+
+                            <div className='row d-flex justify-content-end'>
+                                <button type="button" onClick={() => {stepper.previous()}} className="btn">Previous</button>
+                                <button type="button" onClick={() => {stepper.next()}} className="btn btn-primary">Next</button>
+                            </div>
+                        </div>
+
+                        <div id="details" className="content p-4" role="tabpanel" aria-labelledby="extra-details-trigger">
+                            <UpdateListingDetails listing={listing}/>
+                            
+                            <div className='row d-flex justify-content-end'>
+                                <button type="button" onClick={() => {stepper.previous()}} className="btn">Previous</button>
+                                <button type="submit" className="btn btn-primary">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>   
+        </>
+    )
+}

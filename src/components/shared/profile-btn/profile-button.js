@@ -89,10 +89,10 @@ function loggedOut(params) {
             <li className="nav-item ">
                 <a className="nav-link pl-3 pr-2 mr-2" href="/login">Login</a>
             </li>
-            <li class="nav-item ml-auto w-100 w-sm-auto">
-                <a class="btn btn-primary btn-lg d-flex align-items-center" href="/agent-signup">
+            <li className="nav-item ml-auto w-100 w-sm-auto">
+                <a className="btn btn-primary btn-lg d-flex align-items-center" href="/agent-signup">
                     For Agents
-                    <img src="images/add-listing-icon.png" alt="Add listing" class="ml-2" />
+                    <img src="images/add-listing-icon.png" alt="Add listing" className="ml-2" />
                 </a>
             </li>
         </ul>

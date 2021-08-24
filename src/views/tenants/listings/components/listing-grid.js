@@ -36,14 +36,14 @@ export default function ListingGrid({listing}) {
                     <div className="mt-auto d-flex hover-image">
                     <ul className="list-inline mb-0 d-flex align-items-end mr-auto">
                         <li className="list-inline-item mr-2" data-toggle="tooltip" title={`${listing.images.length} Images`}>
-                            <a href={null} className="text-white hover-primary">
+                            <a  className="text-white hover-primary">
                                 <i className="far fa-images" /><span className="pl-1">{listing.images.length}</span>
                             </a>
                         </li>
                     </ul>
                     <ul className="list-inline mb-0 d-flex align-items-end mr-n3">
                         <li className="list-inline-item mr-3 h-32" data-toggle="tooltip" title="Wishlist">
-                            <a href="#" onClick={(e) => {e.preventDefault(); addToFavourites(listing.unique_id)}} className={`text-white fs-20 hover-primary`}>
+                            <a href={null} style={{cursor: 'pointer'}} onClick={(e) => {e.preventDefault(); addToFavourites(listing.unique_id)}} className={`text-white fs-20 hover-primary`}>
                                 <i className={` fa-heart ${favourite ? "fas text-primary" : 'far'}`} />
                             </a>
                         </li>
@@ -58,7 +58,7 @@ export default function ListingGrid({listing}) {
                     
                     <p className="font-weight-500 text-gray-light mb-0">{listing.address}, {listing.city}, {listing.state}</p>
                 
-                    <p className="card-text mb-2 ml-0" style={{textOverflow: 'ellipsis'}} >{listing.description}</p>
+                    <p className="card-text mb-2 ml-0">{listing.description.split(" ").splice(0,15).join(" ")}...</p>
                 
                     <p className="fs-17 font-weight-bold text-heading mb-0 lh-16">
                         &#8358; {listing.initial_fees.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}

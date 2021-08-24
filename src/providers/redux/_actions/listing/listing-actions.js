@@ -28,7 +28,7 @@ export const CreateListing = (data) => (dispatch) =>{
 
     ListingService.newListing(data)
                 .then(response => {
-                    Response.success(response.data)
+                    Response.toast(response.data, 'CREATE_LISTING')
                     dispatch({
                         type: NEW_LISTING_SUCCESS,
                         payload: response.data
