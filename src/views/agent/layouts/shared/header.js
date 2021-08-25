@@ -32,7 +32,7 @@ export default function Header({agent}) {
                                 }
                             </div>
                             <div className="fs-13 font-weight-500 lh-1">
-                                Hello {agent.firstname}
+                                Hello, {agent.firstname}
                             </div>
                         </a>
                         <div className="dropdown-menu dropdown-menu-right w-100">
