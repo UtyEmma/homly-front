@@ -8,7 +8,8 @@ const { STORE_LISTING,
         FETCH_SINGLE_LISTING_REQUEST, FETCH_SINGLE_LISTING_SUCCESS, FETCH_SINGLE_LISTING_FAILURE,
         DELETE_LISTING_REQUEST, DELETE_LISTING_SUCCESS, DELETE_LISTING_FAILURE,
         REMOVE_LISTING_REQUEST, REMOVE_LISTING_SUCCESS, REMOVE_LISTING_FAILURE,
-        FETCH_POPULAR_LISTINGS_REQUEST, FETCH_POPULAR_LISTINGS_SUCCESS, FETCH_POPULAR_LISTINGS_FAILURE
+        FETCH_POPULAR_LISTINGS_REQUEST, FETCH_POPULAR_LISTINGS_SUCCESS, FETCH_POPULAR_LISTINGS_FAILURE,
+        SET_AS_RENTED_REQUEST, SET_AS_RENTED_SUCCESS, SET_AS_RENTED_FAILURE
     } = ListingConstants;
 
 
@@ -103,4 +104,16 @@ export function FetchPopularListingsReducer(state={}, action){
     }
 }
 
+export function SetAsRentedReducer(state={}, action){
+    switch (action.type) {
+        case SET_AS_RENTED_REQUEST:
+            return {...state, loading: true}
+        case SET_AS_RENTED_SUCCESS:
+            return {...state, loading: false, listing: action.payload}
+        case SET_AS_RENTED_FAILURE:
+            return {...state, loading: false, error: action.payload}
+        default:
+            return state;
+    }
+}
 

@@ -53,6 +53,10 @@ export const ListingService = {
 
     fetchPopularListings: async () => {
         return await Request.get(`listings/popular`, params)
+    },
+
+    setAsRented: async (id) => {
+        return await Request.get(`agent/listing/rented/${id}`, params)
     }
 
 }

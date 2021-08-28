@@ -75,7 +75,7 @@ export const UpdateTenantProfile = (data) => (dispatch) => {
                 })
 }
 
-export const TenantLogout = () => {
+export const TenantLogout = () => (dispatch) => {
     userService.logout()
             .then((res) => {
                 localStorage.removeItem('token');

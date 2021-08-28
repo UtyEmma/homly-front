@@ -35,7 +35,7 @@ export default function ListingList({listing}) {
                 <h2 className="card-title my-0"><a href={`listings/${listing.slug}`} className="fs-16 lh-2 text-dark hover-primary d-block">{listing.title}</a>
                 </h2>
                 <p className="card-text mb-1 font-weight-500 text-gray-light">{listing.address}, {listing.city}, {listing.state}</p>
-                <p className="card-text mb-2 ml-0" style={{textOverflow: 'ellipsis'}}>{listing.description}</p>
+                <p className="card-text mb-2 ml-0" style={{textOverflow: 'ellipsis'}}>{listing.description.split(" ").splice(0,15).join(" ")}</p>
                 <p className="card-text fs-17 font-weight-bold text-heading mb-3">
                     &#8358; {listing.initial_fees.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </p>

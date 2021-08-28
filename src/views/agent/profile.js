@@ -50,15 +50,14 @@ const AgentProfile = ({agent}) => {
                                     <div className="row mb-6">
                                         
                                         <div className="col-lg-6">
-
                                             <div className="card mb-6">
                                                 <div className="card-body px-6 pt-6 pb-5">
                                                     <div className="row">
-                                                        <div className="col-sm-4 col-xl-12 col-xxl-7 mb-3">
+                                                        <div className="col-xl-12 mb-3">
                                                             <h3 className="card-title mb-0 text-heading fs-22 lh-15">Profile Image</h3>
                                                             <p className="card-text">Upload your profile photo.</p>
                                                         </div>
-                                                        <div className="col-sm-8 col-xl-12 col-xxl-5">
+                                                        <div className="col-xl-12">
                                                             <img src={agent.avatar ? agent.avatar : "images/my-profile.png"} alt="My Profile" id="profile-image" ref={profileImage} className="w-100" />
                                                             <div className="custom-file mt-2 h-auto" >
                                                                 <input type="file" name="avatar" className="custom-file-input" onChange={changeProfileImagePreview} id="customFile" />
@@ -91,8 +90,16 @@ const AgentProfile = ({agent}) => {
                                                             <input type="email" className="form-control form-control-lg border-0" id="email" name="email" defaultValue={agent.email} />
                                                         </div>
                                                         <div className="form-group col-md-6 px-4">
+                                                            <label htmlFor="username" className="text-heading">Username</label>
+                                                            <input type="text" className="form-control form-control-lg border-0" id="username" name="username" defaultValue={agent.username} />
+                                                        </div>
+                                                        <div className="form-group col-md-6 px-4">
                                                             <label htmlFor="phone" className="text-heading">Phone Number</label>
                                                             <input type="text" className="form-control form-control-lg border-0" defaultValue={agent.phone_number} id="phone" name="phone_number" />
+                                                        </div>
+                                                        <div className="form-group col-md-6 px-4">
+                                                            <label htmlFor="whatsapp_no" className="text-heading">WhatsApp Number</label>
+                                                            <input type="text" className="form-control form-control-lg border-0" defaultValue={agent.whatsapp_no} id="whatsapp_no" name="whatsapp_no" />
                                                         </div>
                                                     </div>
 
@@ -155,7 +162,7 @@ const AgentProfile = ({agent}) => {
 
                                             <div className="col-12">
                                                 <div className="d-flex justify-content-end flex-wrap">
-                                                    <button className="btn btn-lg bg-hover-white border rounded-lg mb-3">Delete Profile</button>
+                                                    <a href={`/${agent.username}`} className="btn btn-lg border ml-4 mb-3">Preview Profile <i className="ml-1 fa fa-external-link-alt"></i></a>
                                                     <button type="submit" className="btn btn-lg btn-primary ml-4 mb-3">Update Profile</button>
                                                 </div>
                                             </div>

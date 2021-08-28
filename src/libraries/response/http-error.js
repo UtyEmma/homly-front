@@ -2,7 +2,9 @@ import { toast } from "react-toastify";
 
 export default function Error(err) {
     if(!err){
-        return toast.error("Server Error: The Server is Down")
+        return toast.dark("Server Error: The Server is Down", {
+            style: {borderLeft: '6px solid red', background: 'white', color: 'black'}
+        })
     }
 
     switch (err.status) {
@@ -20,15 +22,21 @@ export default function Error(err) {
 }
 
 function handleServerError(data){
-    return toast.error(`Server Error: ${data.message}`)
+    return toast.dark(`Server Error: ${data.message}`, {
+        style: {borderLeft: '6px solid red', background: 'white', color: 'black'}
+    })
 }
 
 function handleFormError(err){
-    return toast.error(err.message)
+    return toast.dark(err.message, {
+        style: {borderLeft: '6px solid red', background: 'white', color: 'black'}
+    })
 }
 
 function handleUnauthorizedError(){
-    return toast.error("Unauthorized Error")
+    return toast.dark("Unauthorized Error", {
+        style: {borderLeft: '6px solid red', background: 'white', color: 'black'}
+    })
     // localStorage.removeItem('token');
     // localStorage.removeItem('user');
     // localStorage.removeItem('isAuthenticated');

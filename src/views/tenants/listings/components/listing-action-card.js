@@ -5,7 +5,7 @@ import AgentCard from 'views/tenants/agents/components/agent-card'
 export default function ListingAction({agent}) {
     return (
         <>
-            <div class="card border-0 shadow-hover-3 px-6 position-stick sticky-top" style={{top: '50px', zIndex: '0'}}>
+            <div class="card border-0 shadow-hover-3 px-6 position-stick sticky-top mt-4 mt-md-0" style={{top: '50px', zIndex: '0'}}>
                 <div class="card-body text-center pt-6 pb-2 px-0">
                     <a href={"agent-details-1.html"} class="d-inline-block mb-2">
                         {   

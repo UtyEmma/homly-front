@@ -11,6 +11,10 @@ export const Support = ({agent}) => {
     const [chat, setChat] = useState()
     const [ticket, setTicket] = useState()
 
+    const createTicket = () => {
+
+    }
+
     return (
         <div className="wrapper dashboard-wrapper">
             <div className="d-flex flex-wrap flex-xl-nowrap">
@@ -23,17 +27,15 @@ export const Support = ({agent}) => {
                         <div className="px-3 px-lg-6 px-xxl-13 py-5 py-lg-10 add-new-invoice">
                             <div className="row">
                                 <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                    <form method="get">
-                                        <div className="row">
-                                            <div className="col-xl-4">
-                                                <Tickets titles={titles} setTitles={setTitles} setChat={setChat}/>
-                                            </div>
-
-                                            <div className="col-xl-8 mb-6 mb-xl-0">
-                                                <ChatBox chat={chat} setChat={setChat} />
-                                            </div>
+                                    <div className="row">
+                                        <div className="col-xl-4">
+                                            <Tickets titles={titles} setTitles={setTitles} setChat={setChat}/>
                                         </div>
-                                    </form>
+
+                                        <div className="col-xl-8 mb-6 mb-xl-0">
+                                            <ChatBox chat={chat} setChat={setChat} />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

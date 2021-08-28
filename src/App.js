@@ -40,6 +40,8 @@ import AgentWishlist from 'views/agent/wishlist/agent-wishlist';
 import { GoogleOneTapAuth } from 'components/auth/social';
 import { Favourites } from 'views/tenants/favourites/favourites';
 import { AgentListingDetail } from 'views/agent/listings/agent-listing-details';
+import { Onboarding } from 'views/agent/onboarding/onboarding';
+import { SelectUser } from 'views/onboarding/select-user';
 
 function App() {
   const [isLoading, setIsLoading] = useState(false)
@@ -47,7 +49,14 @@ function App() {
   return (
     <div className="App">
       <Preloader loading={isLoading}/>
-      <ToastContainer />  
+
+      <ToastContainer 
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick 
+        draggable
+        pauseOnFocusLoss={false}
+      />  
 
       {
         !localStorage.getItem('isAuthenticated')
@@ -70,8 +79,8 @@ function App() {
           <UserRoute path="/search" user component={Search} exact/>
           <UserRoute path="/listings" isLoading={setIsLoading} user component={Listing} exact/>
           <UserRoute path="/agents" isLoading={setIsLoading} user type="user" component={Agents} exact/>
-          <UserRoute path="/agents/:id" isLoading={setIsLoading} user type="user" component={AgentDetails} exact/>
           <UserRoute path="/listings/:slug" isLoading={setIsLoading} user component={ListingDetails} exact/>
+          <UserRoute path="/user" isLoading={setIsLoading} user component={SelectUser} exact/>
           
           {/* Tenant Routes */}
           <TenantRoute path="/profile" isLoading={setIsLoading} user component={Profile} exact/>
@@ -82,6 +91,7 @@ function App() {
           {/* Agent Routes */}
           <Route path="/agent-login" isLoading={setIsLoading} type="agent" component={AgentLogin} exact/>
           <Route path="/agent-signup" isLoading={setIsLoading} type="agent" component={AgentSignup} exact/>
+          <Route path="/onboarding" isLoading={setIsLoading} type="agent" component={Onboarding} exact />
           <AgentRoute path="/dashboard" isLoading={setIsLoading} type="agent" component={AgentDashboard} exact />
           <AgentRoute path="/new-listing" isLoading={setIsLoading} type="agent" component={NewListing} exact />
           <AgentRoute path="/agent-profile" isLoading={setIsLoading} type="agent" component={AgentProfile} exact />
@@ -91,6 +101,8 @@ function App() {
           <AgentRoute path="/support" isLoading={setIsLoading} type="agent" component={Support} exact />
           <AgentRoute path="/agent-wishlists" isLoading={setIsLoading} type="agent" component={AgentWishlist} exact />
 
+
+          <UserRoute path="/:id" isLoading={setIsLoading} user type="user" component={AgentDetails} exact/>
           <Route component={NotFound} exact/>
       </Switch>
     </div>

@@ -58,13 +58,12 @@ export const FetchFavourites = () => (dispatch) => {
     
     dispatch({type: FETCH_FAVOURTIES_REQUEST})
 
-    console.log("E Dey Work")
 
     FavouriteService.fetchFavourites()
                     .then((response) => {
                         dispatch({
                             type: FETCH_FAVOURTIES_SUCCESS,
-                            payload: response.data
+                            payload: response.data.data
                         })
                     })
                     .catch((error) => {

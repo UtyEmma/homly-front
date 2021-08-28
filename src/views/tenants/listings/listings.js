@@ -13,7 +13,7 @@ import ListingContainer from './components/listing-container';
 import FeaturedListings from './components/featured-listings/featured-listings';
 
 
-const Listing = ({isLoggedIn, user}) => {
+const Listing = ({isLoggedIn, user, isLoading}) => {
         const dispatch = useDispatch();
         const state = useSelector((state) => state.active_listings);
         const {loading, listings, featured} = state;

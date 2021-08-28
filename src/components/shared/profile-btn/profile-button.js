@@ -1,3 +1,5 @@
+import { AgentLogout } from 'providers/redux/_actions/agent-actions'
+import { TenantLogout } from 'providers/redux/_actions/user-actions'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 
@@ -5,15 +7,18 @@ export default function ProfileButton({isloggedIn, user}) {
 
     return (
         <>
-            {isloggedIn ? loggedIn(user) : loggedOut()}
+            {isloggedIn ? LoggedIn(user) : loggedOut()}
         </>
     )
 }
 
-function loggedIn(user) {
+function LoggedIn(user) {
+
+    const dispatch = useDispatch()
+    
     const logout = () => {
-        let token = localStorage.getItem('token');
-        
+        let type = localStorage.getItem('type');
+        type === 'tenant' ? dispatch(TenantLogout()) : dispatch(AgentLogout())
     }
 
     return (           

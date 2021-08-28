@@ -8,6 +8,7 @@ const { NEW_LISTING_REQUEST, NEW_LISTING_SUCCESS, NEW_LISTING_FAILURE,
         FETCH_LISTING_DETAILS_REQUEST, FETCH_LISTING_DETAILS_SUCCESS, FETCH_LISTING_DETAILS_FAILURE,
         FETCH_SINGLE_LISTING_REQUEST, FETCH_SINGLE_LISTING_SUCCESS, FETCH_SINGLE_LISTING_FAILURE,
         FETCH_POPULAR_LISTINGS_REQUEST, FETCH_POPULAR_LISTINGS_SUCCESS, FETCH_POPULAR_LISTINGS_FAILURE, 
+        SET_AS_RENTED_REQUEST, SET_AS_RENTED_SUCCESS, SET_AS_RENTED_FAILURE, 
         STORE_LISTING, 
     } = ListingConstants
 
@@ -173,5 +174,27 @@ export const FetchPopularListings = () => (dispatch) => {
                         payload: error.response
                     })
                 })
+}
+
+export const SetAsRented = (id) => (dispatch) => {
+    console.log("Setting as Rented...")
+
+    dispatch({type: SET_AS_RENTED_REQUEST})
+
+    ListingService.setAsRented(id)
+                    .then((response) => {
+                        Response.success(response.data)
+                        dispatch({
+                            type: SET_AS_RENTED_SUCCESS,
+                            payload: response.data.data 
+                        })
+                    })
+                    .catch((error) => {
+                        Response.error(error.response)
+                        dispatch({
+                            type: SET_AS_RENTED_FAILURE,
+                            payload: error.response
+                        })
+                    })
 }
 

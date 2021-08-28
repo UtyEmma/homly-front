@@ -1,6 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-export const UpdateListingDetails = ({listing, amenities}) => {
+export const UpdateListingDetails = ({listing}) => {
+    
+    let [amenities, setAmenities] = useState([]);
+    let items = JSON.parse(listing.amenities);
+    
+    const parseAmenities = () => {
+        let array = []
+        for(let amenity in items){
+            array.push(amenity)
+        }
+        setAmenities(array)
+    }
+
+    useEffect(() => {
+        parseAmenities()
+    }, [listing])
+
     return (
         <>
          <div className="card bg-transparent border-0">
@@ -51,11 +67,11 @@ export const UpdateListingDetails = ({listing, amenities}) => {
                                         <div className="row">
                                             {
 
-                                            Array.isArray(JSON.parse(listing.amenities)) && listing.amenities.length > 0 
+                                            Array.isArray(amenities) && amenities.length > 0 
                                             
                                             && 
 
-                                            JSON.parse(listing.amenities).map((item, index) => (
+                                            amenities.map((item, index) => (
                                                 <div key={index} className="col-sm-6 col-lg-3">
                                                     <li className="list-group-item px-0 pt-0 pb-2">
                                                         <div className="custom-control custom-checkbox">

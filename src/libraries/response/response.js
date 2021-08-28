@@ -4,9 +4,11 @@ import Error from "./http-error"
 
 const Response = {
     success : (data) => { 
-        toast.success(data.message)
+        toast.dark(data.message, {
+            style: {borderLeft: '6px solid green', background: 'white', color: 'black'}
+        })
     },
-    error: (data)=>{ Error(data) },
+    error: (data)=>{ console.log(data); Error(data) },
     toast: (data, type) => {
         switch (type) {
             case 'CREATE_LISTING':

@@ -1,47 +1,41 @@
 import React from 'react'
+import { Col, Nav, Row, Tab } from 'react-bootstrap'
 import ListingGrid from 'views/tenants/listings/components/listing-grid'
 
 export default function AgentsListings({listings}) {
     return (
-        <>
-          <h2 className="fs-22 text-heading lh-15 mb-6">My listing</h2>
-                    <div className="collapse-tabs mb-10">
-                        <ul className="nav nav-tabs text-uppercase d-none d-md-inline-flex agent-details-tabs" role="tablist">
-                        <li className="nav-item">
-                            <a href="#all" className="nav-link active shadow-none fs-13" data-toggle="tab" role="tab">
-                            All (8)
-                            </a>
-                        </li>
-                        </ul>
-                        <div className="tab-content shadow-none pt-7 pb-0 px-6 bg-white">
-                        <div id="collapse-tabs-accordion-01">
-                            <div className="tab-pane tab-pane-parent fade show active" id="all" role="tabpanel">
-                            <div className="card border-0 bg-transparent">
-                                <div className="card-header border-0 d-block d-md-none bg-transparent px-0 py-1" id="headingAll-01">
-                                <h5 className="mb-0">
-                                    <button className="btn lh-2 fs-18 bg-white py-1 px-6 mb-4 shadow-none w-100 collapse-parent border" data-toggle="collapse" data-target="#all-collapse-01" aria-expanded="true" aria-controls="all-collapse-01">
-                                    All (8)
-                                    </button>
-                                </h5>
-                                </div>
-                                <div id="all-collapse-01" className="collapse show collapsible" aria-labelledby="headingAll-01" data-parent="#collapse-tabs-accordion-01">
-                                <div className="card-body p-0">
-                                    <div className="row">
+        <div id="properties">
+            <a name="properties"></a>
+            <h2 className="fs-22 text-heading lh-15 mb-6">My Properties</h2>
 
-                                        {
-                                            listings.map((listing, index) => (
-                                                <ListingGrid listing={listing} key={index} />
-                                            ))
-                                        }
-
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>  
-        </>
+            <div className="mb-10">
+                <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+                    <Nav variant="pills" className="nav nav-tabs text-uppercase d-none d-md-inline-flex agent-details-tabs">
+                        <Nav.Item>
+                            <Nav.Link eventKey="first" className="nav-link shadow-none fs-13">Available</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link eventKey="second">Rented</Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                    <Tab.Content>
+                        <Tab.Pane eventKey="first">
+                            {
+                                listings.not_rented.map((listing, index) => (
+                                    <ListingGrid listing={listing} key={index} />
+                                ))
+                            }
+                        </Tab.Pane>
+                        <Tab.Pane eventKey="second">
+                            {
+                                listings.rented.map((listing, index) => (
+                                    <ListingGrid listing={listing} key={index} />
+                                ))
+                            }
+                        </Tab.Pane>
+                    </Tab.Content>
+                </Tab.Container>
+            </div>
+        </div>  
     )
 }

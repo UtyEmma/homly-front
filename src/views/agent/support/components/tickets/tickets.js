@@ -46,20 +46,26 @@ export const Tickets = ({titles, setTitles, setChat}) => {
 
                         &&
 
-                        titles.map((title, index) => {
-                            return (
-                                <div key={index} className="" >
-                                    <button type="button" className="btn btn-block btn-default" onClick={() => fetchTicketChats(title.unique_id)} key={title.unique_id}>{title.title}</button>
-                                </div> 
-                            )
-                        })
+                        <>
+                        {
+                            titles.map((title, index) => {
+                                return (
+                                    <div key={index} className="" >
+                                        <button type="button" className="btn btn-block btn-lg bg-gray-01 bg-hover-dark hover-white" onClick={() => fetchTicketChats(title.unique_id)} key={title.unique_id}>{title.title}</button>
+                                    </div> 
+                                )
+                            })
+                        }
+                        
+                        <div className="mt-3">
+                            <button type="button" class="btn btn-primary  btn-block btn-lg" data-toggle="modal" data-target="#exampleModal">
+                                Create Ticket
+                            </button>
+                        </div>
 
+                        </>
                     }
 
-                    <hr/>
-                    <button type="button" class="btn btn-primary  btn-block btn-lg" data-toggle="modal" data-target="#exampleModal">
-                        Create Ticket
-                    </button>
                 </div>
             </div>
         </div>

@@ -61,50 +61,52 @@ const AgentSignUpForm = () => {
                     </div>
                     </div>
                     <div className="form-row mx-n2">
-                    <div className="col-sm-6 px-2">
-                        <div className="form-group">
-                        <label htmlFor="email" className="text-heading">Email</label>
-                        <input type="text" {...register("email")} className="form-control form-control-lg border-0" id="email" placeholder="johndoe@homly.com" name="email" />
-                        <p className="text-danger fs-14">{errors.email?.message}</p>
+                        <div className="col-sm-6 px-2">
+                            <div className="form-group">
+                            <label htmlFor="email" className="text-heading">Email</label>
+                            <input type="text" {...register("email")} className="form-control form-control-lg border-0" id="email" placeholder="johndoe@homly.com" name="email" />
+                            <p className="text-danger fs-14">{errors.email?.message}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div className="col-sm-6 px-2">
-                        <div className="form-group">
-                        <label htmlFor="email" className="text-heading">Phone Number</label>
-                        <input type="text" {...register("phone")} className="form-control form-control-lg border-0" id="phone" placeholder="+234 900 000 0000" name="phone" />
-                        <p className="text-danger fs-14">{errors.phone && "An 11 digit phone number is required"}</p>
+                        <div className="col-sm-6 px-2">
+                            <div className="form-group">
+                            <label htmlFor="username" className="text-heading">Username</label>
+                            <div className="input-group input-group-lg">
+                            <input type="username" {...register("username")} className="form-control border-0 shadow-none" id="username" name="username" placeholder="Username" />
+                            </div>
+                            <p className="text-danger fs-14">{errors.username?.message}</p>
+                            </div>
                         </div>
-                    </div>
                     </div>
                     <div className="form-row mx-n2">
-                    <div className="col-sm-6 px-2">
-                        <div className="form-group">
-                        <label htmlFor="password-1" className="text-heading">Password</label>
-                        <div className="input-group input-group-lg">
-                        <input type="password" {...register("password")} className="form-control border-0 shadow-none" id="password" name="password" placeholder="**********" />
-                            <div className="input-group-append">
-                            <button onClick={togglePassword} className="input-group-text bg-gray-01 border-0 text-body fs-18">
-                                <i className="far fa-eye-slash" />
-                            </button>
+                        <div className="col-sm-6 px-2">
+                            <div className="form-group">
+                            <label htmlFor="password-1" className="text-heading">Password</label>
+                            <div className="input-group input-group-lg">
+                            <input type="password" {...register("password")} className="form-control border-0 shadow-none" id="password" name="password" placeholder="**********" />
+                                <div className="input-group-append">
+                                <button onClick={togglePassword} className="input-group-text bg-gray-01 border-0 text-body fs-18">
+                                    <i className="far fa-eye-slash" />
+                                </button>
+                                </div>
+                            </div>
+                            <p className="text-danger fs-14">{errors.password?.message}</p>
                             </div>
                         </div>
-                        <p className="text-danger fs-14">{errors.password?.message}</p>
-                        </div>
-                    </div>
-                    <div className="col-sm-6 px-2">
-                        <div className="form-group">
-                        <label htmlFor="re-password">Re-Enter Password</label>
-                        <div className="input-group input-group-lg">
-                            <input type="password" {...register("confirm_password")} className="form-control border-0 shadow-none" id="confirm_password" name="confirm_password" placeholder="Password" />
-                            <div className="input-group-append">
-                            <button onClick={toggleConPassword} className="input-group-text bg-gray-01 border-0 text-body fs-18">
-                                <i className="far fa-eye-slash" />
-                            </button>
+                        <div className="col-sm-6 px-2">
+                            <div className="form-group">
+                            <label htmlFor="re-password">Re-Enter Password</label>
+                            <div className="input-group input-group-lg">
+                                <input type="password" {...register("confirm_password")} className="form-control border-0 shadow-none" id="confirm_password" name="confirm_password" placeholder="Password" />
+                                <div className="input-group-append">
+                                <button onClick={toggleConPassword} className="input-group-text bg-gray-01 border-0 text-body fs-18">
+                                    <i className="far fa-eye-slash" />
+                                </button>
+                                </div>
+                            </div>
+                            <p className="text-danger fs-14">{errors.confirm_password?.message}</p>
                             </div>
                         </div>
-                        <p className="text-danger fs-14">{errors.confirm_password?.message}</p>
-                        </div>
-                    </div>
                     </div>
                     <button type="submit" className="btn btn-primary btn-lg btn-block rounded">
                             {loading ? 

@@ -119,7 +119,9 @@ export const AgentLogout = () => (dispatch) => {
                     localStorage.removeItem('type');
                     return window.location.href = '/agent-login'
                 })
-                .catch((error) => {})
+                .catch((error) => {
+                    console.log(error.response)
+                })
 }
 
 

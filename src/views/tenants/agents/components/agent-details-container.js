@@ -10,8 +10,8 @@ export default function AgentDetailsContainer({agent, listings, reviews}) {
                 <div className="container">
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb pt-6 pt-lg-0 pb-0">
-                    <li className="breadcrumb-item"><a href="#">Home</a></li>
-                    <li className="breadcrumb-item"><a href="#">Agents</a></li>
+                    <li className="breadcrumb-item"><a href="../">Home</a></li>
+                    <li className="breadcrumb-item"><a href="/agents">Agents</a></li>
                     <li className="breadcrumb-item active" aria-current="page">{agent.firstname} {agent.lastname}</li>
                     </ol>
                 </nav>

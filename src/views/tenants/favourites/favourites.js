@@ -26,7 +26,6 @@ export const Favourites = ({user, isLoggedIn}) => {
         <>
             <div>
                 <Preloader loading={loading}/>
-                <ToastContainer />
 
                 <NavBar isloggedIn={isLoggedIn} user={user}/>
 

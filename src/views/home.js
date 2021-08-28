@@ -6,18 +6,18 @@ import NavBar from 'components/shared/nav-bar'
 import Footer from 'components/shared/footer'
 import Preloader from 'components/preloader/preloader'
 
-const Home = ({isLoggedIn, user}) => {
-    const [isLoading, setIsLoading] = useState()
+const Home = ({isLoggedIn, user, isLoading}) => {
+    // const [isLoading, setIsLoading] = useState()
     
     return (
         <div>
-            <Preloader loading={isLoading} />
+            {/* <Preloader loading={isLoading} /> */}
             <NavBar isloggedIn={isLoggedIn} user={user}/>
             
             <main id="content">
                 <HeroSection/>
 
-                <PopularSection setIsLoading={setIsLoading}/>
+                <PopularSection isLoading={isLoading}/>
 
                 <section className="bg-gray-02 pt-10 pb-11">
                     <div className="container container-xxl">
