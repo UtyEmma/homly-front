@@ -81,13 +81,13 @@ export default function AgentCard({agent}) {
                 </div>
                 <div className="card-body text-center pt-2  px-0">
                 <a href={`mailto:${agent.email}`} className="text-body">{agent.email}</a>
-                <a href="tel:123-900-68668" className="text-heading font-weight-600 d-block mb-3">{agent.phone}</a>
+                <a href={`tel:${agent.phone}"`} className="text-heading font-weight-600 d-block mb-3">{agent.phone}</a>
                 <ul className="list-inline mb-0">
                     <li className="list-inline-item fs-13 text-heading font-weight-500">{agent.rating}/5</li>
                         <li className="list-inline-item fs-13 text-heading font-weight-500 mr-1">
-                        <ul className="list-inline mb-0">
-                            <RatingStar rating={agent.rating}/>
-                        </ul>
+                            <ul className="list-inline mb-0">
+                                <RatingStar rating={agent.rating}/>
+                            </ul>
                         </li>
                     <li className="list-inline-item fs-13 text-gray-light">({agent.no_reviews} reviews)</li>
                 </ul>

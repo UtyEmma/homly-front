@@ -1,3 +1,4 @@
+import { NotificationBell } from 'components/notification/notification'
 import React from 'react'
 
 export default function Header({agent}) {
@@ -40,17 +41,8 @@ export default function Header({agent}) {
                             <a className="dropdown-item" href="#">Logout</a>
                         </div>
                         </div>
-                        <div className="dropdown no-caret py-3 px-3 px-sm-6 d-flex align-items-center justify-content-end notice">
-                        <a href="#" className="dropdown-toggle text-heading fs-20 font-weight-500 lh-1" data-toggle="dropdown">
-                            <i className="far fa-bell" />
-                            <span className="badge badge-primary badge-circle badge-absolute font-weight-bold fs-13">1</span>
-                        </a>
-                        <div className="dropdown-menu dropdown-menu-right">
-                            <a className="dropdown-item" href="#">Action</a>
-                            <a className="dropdown-item" href="#">Another action</a>
-                            <a className="dropdown-item" href="#">Something else here</a>
-                        </div>
-                        </div>
+                        
+                        <NotificationBell user={agent} />
                     </div>
                 </nav>
             </div>

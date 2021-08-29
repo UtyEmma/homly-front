@@ -50,7 +50,7 @@ export const AgentListingAside = ({listing}) => {
                                         ?
                                         <ul class="list-inline mb-0">
                                             <li className="list-inline-item fs-13 text-heading font-weight-500">{listing.rating}/5</li>
-                                                <li className="list-inline-item fs-13 text-heading font-weight-500">
+                                                <li className="list-inline-item text-heading font-weight-500">
                                                     <ul className="list-inline mb-0">
                                                         <RatingStar rating={listing.rating}/>
                                                     </ul>
@@ -70,7 +70,7 @@ export const AgentListingAside = ({listing}) => {
                 </div>
                 <div className="mr-xl-2">
                     {
-                        !listing.rented
+                        !listing.rented && listing.status !== 'rented'
 
                         &&
 

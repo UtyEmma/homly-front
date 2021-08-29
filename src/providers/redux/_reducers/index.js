@@ -10,6 +10,7 @@ import { AddFavouritesReducer, FetchFavouritesReducer, RemoveFavouritesReducer }
 import { AgentsListingsReducer, NewListingReducer, StoreListingReducer,
          ActiveListingsReducer, FetchListingDetails, FetchSingleListing, FetchPopularListingsReducer, SetAsRentedReducer } from "./listing-reducer";
 import { searchForLocationReducer } from "./location-reducer";
+import { FetchNotificationsReducer } from "./notification-reducer";
 import { DeleteReviewReducer, EditReviewReducer, FetchAgentReviewsReducer, FetchReviewsReducer, ReportUserReducer, SubmitReviewReducer } from "./review-reducers";
 import { SearchListingsReducer } from "./search-reducer";
 import { DeleteTicketReducer, FetchMessagesReducer, FetchTicketsReducer, NewTicketReducer, SendMessageReducer } from "./support-reducer";
@@ -64,7 +65,9 @@ const rootReducer = combineReducers({
     
     favourites: FetchFavouritesReducer,
     add_favourites: AddFavouritesReducer,
-    remove_favourites: RemoveFavouritesReducer
+    remove_favourites: RemoveFavouritesReducer,
+
+    notification: FetchNotificationsReducer
 })
 
 export default rootReducer;
