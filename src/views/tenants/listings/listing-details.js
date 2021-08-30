@@ -14,7 +14,7 @@ import Footer from 'components/shared/footer'
 import { MapItem } from './components/listing-details/listing-map'
 
 
-const ListingDetails = ({isLoggedIn, user, status}) => {
+const ListingDetails = ({isLoggedIn, user, status, adminMode}) => {
     const {slug} = useParams();
     const dispatch = useDispatch()
 
@@ -53,7 +53,7 @@ const ListingDetails = ({isLoggedIn, user, status}) => {
                                 </article>
 
                                 <aside className="col-lg-4 pl-xl-4">
-                                    <ListingAction agent={agent}/>
+                                    <ListingAction agent={agent} adminMode={adminMode} listing={listing}/>
                                 </aside>
                             </div>
                             </div>

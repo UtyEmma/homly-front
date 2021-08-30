@@ -43,7 +43,7 @@ export default function ListingGrid({listing}) {
                     </ul>
                     <ul className="list-inline mb-0 d-flex align-items-end mr-n3">
                         <li className="list-inline-item mr-3 h-32" data-toggle="tooltip" title="Wishlist">
-                            <a href={null} style={{cursor: 'pointer'}} onClick={(e) => {e.preventDefault(); addToFavourites(listing.unique_id)}} className={`text-white fs-20 hover-primary`}>
+                            <a href="#" style={{cursor: 'pointer'}} onClick={(e) => {e.preventDefault(); addToFavourites(listing.unique_id)}} className={`text-white fs-20 hover-primary`}>
                                 <i className={` fa-heart ${favourite ? "fas text-primary" : 'far'}`} />
                             </a>
                         </li>
@@ -53,7 +53,7 @@ export default function ListingGrid({listing}) {
                 </div>
                 <div className="card-body pt-3 px-0 pb-1">
                     <h2 className="fs-16 mb-1">
-                        <a href={`listings/${listing.slug}`} className="text-dark hover-primary">{listing.title}</a>
+                        <a href={`/listings/${listing.slug}`} className="text-dark hover-primary">{listing.title}</a>
                     </h2>
                     
                     <p className="font-weight-500 text-gray-light mb-0">{listing.address}, {listing.city}, {listing.state}</p>

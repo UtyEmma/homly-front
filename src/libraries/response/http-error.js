@@ -1,9 +1,21 @@
 import { toast } from "react-toastify";
 
+const styles = { 
+    background: 'white',
+    fontSize: '16px',
+    fontWeight: '600',
+    lineHeight: '24px',
+    borderLeft: '6px solid red'
+}
+
+const classname = 'text-dark'
+
+
 export default function Error(err) {
     if(!err){
         return toast.dark("Server Error: The Server is Down", {
-            style: {borderLeft: '6px solid red', background: 'white', color: 'black'}
+            className: classname,
+            style: styles
         })
     }
 
@@ -22,20 +34,23 @@ export default function Error(err) {
 }
 
 function handleServerError(data){
-    return toast.dark(`Server Error: ${data.message}`, {
-        style: {borderLeft: '6px solid red', background: 'white', color: 'black'}
+    return toast.dark(data.message, {
+        className: classname,
+        style: styles
     })
 }
 
 function handleFormError(err){
     return toast.dark(err.message, {
-        style: {borderLeft: '6px solid red', background: 'white', color: 'black'}
+        className: classname,
+        style: styles
     })
 }
 
 function handleUnauthorizedError(){
     return toast.dark("Unauthorized Error", {
-        style: {borderLeft: '6px solid red', background: 'white', color: 'black'}
+        className: classname,
+        style: styles
     })
     // localStorage.removeItem('token');
     // localStorage.removeItem('user');

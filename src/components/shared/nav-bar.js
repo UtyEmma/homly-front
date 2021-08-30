@@ -8,8 +8,8 @@ export default function NavBar({user, isloggedIn}) {
                 <div className="container">
                     <nav className="navbar navbar-expand-lg px-0">
                         <a className="navbar-brand" href="/">
-                        <img src="images/logo/main.png" width="156px" height="40px" alt="HomeID" className="d-none d-lg-inline-block" />
-                        <img src="images/logo/white.png" width="156px" height="40px" alt="HomeID" className="d-inline-block d-lg-none" />
+                        <img src="/images/logo/main.png" width="156px" height="40px" alt="Bayof Logo" className="d-none d-lg-inline-block" />
+                        <img src="/images/logo/white.png" width="156px" height="40px" alt="Bayof Logo" className="d-inline-block d-lg-none" />
                         </a>
 
                         <div className="d-flex d-lg-none ml-auto">
@@ -37,15 +37,15 @@ export default function NavBar({user, isloggedIn}) {
                                 </a>
                                 </li>
                                 <li id="navbar-item-property" className="nav-item py-2 py-lg-5 px-0 px-lg-4">
-                                <a className="nav-link p-0" href="about">
+                                <a className="nav-link p-0" href="/about">
                                     About</a>
                                 </li>
                                 <li id="navbar-item-property" className="nav-item py-2 py-lg-5 px-0 px-lg-4">
-                                <a className="nav-link p-0" href="listings">
+                                <a className="nav-link p-0" href="/listings">
                                     Find a Property</a>
                                 </li>
                                 <li id="navbar-item-dashboard"className="nav-item py-2 py-lg-5 px-0 px-lg-4">
-                                    <a className="nav-link p-0" href="agents">
+                                    <a className="nav-link p-0" href="/agents">
                                         Find an Agent
                                     </a>
                                 </li>                     

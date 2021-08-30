@@ -24,7 +24,7 @@ function LoggedIn(user) {
     return (           
         <ul className="navbar-nav flex-row justify-content-lg-end align-items-center d-flex flex-wrap text-body py-2">            
             <li className="nav-item mr-4">
-                <a className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" href="wishlist">
+                <a className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" href="/wishlist">
                     <i className="fal fa-heart fs-large-4" />
                     {
                         user.wishlists 
@@ -76,10 +76,6 @@ function LoggedIn(user) {
                                 Logout
                             </button>
                         </div>
-
-                        <div className="col-6">
-
-                        </div>
                     </div>
                 </div>
             </li>
@@ -97,7 +93,7 @@ function loggedOut(params) {
             <li className="nav-item ml-auto w-100 w-sm-auto">
                 <a className="btn btn-primary btn-lg d-flex align-items-center" href="/agent-signup">
                     For Agents
-                    <img src="images/add-listing-icon.png" alt="Add listing" className="ml-2" />
+                    <img src="/images/add-listing-icon.png" alt="Add listing" className="ml-2" />
                 </a>
             </li>
         </ul>

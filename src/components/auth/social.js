@@ -2,11 +2,10 @@ import { SocialAuth } from "providers/redux/_actions/auth-action";
 import { useDispatch } from "react-redux";
 import GoogleOneTapLogin from 'react-google-one-tap-login'
 import { Modal } from "react-bootstrap";
-import { useState } from "react";
-import ModalHeader from "react-bootstrap/esm/ModalHeader";
+import { useEffect, useState } from "react";
 
 export const GoogleOneTapAuth = () => {
-    const [show, setShow] = useState()
+    const [show, setShow] = useState(false)
     const [data, setData] = useState({})
 
     const handleSuccess = (response) => {
@@ -16,7 +15,15 @@ export const GoogleOneTapAuth = () => {
 
     return (
         <>
-            <GoogleOneTapLogin onError={(error) => console.log(error)} onSuccess={(res) => handleSuccess(res)} googleAccountConfigs={{ client_id: '210812762241-09vip45373gh2ia5ic4d86k78nlg4quj.apps.googleusercontent.com'}} ></GoogleOneTapLogin>
+            {
+                !localStorage.getItem('isAuthenticated')
+
+                &&
+
+                <GoogleOneTapLogin onError={(error) => console.log(error)} onSuccess={(res) => handleSuccess(res)} googleAccountConfigs={{ client_id: '210812762241-09vip45373gh2ia5ic4d86k78nlg4quj.apps.googleusercontent.com'}} ></GoogleOneTapLogin>
+                
+            }
+
             <SelectUserTypeModal show={show} setShow={setShow} auth_data={data}/>
         </>
     )

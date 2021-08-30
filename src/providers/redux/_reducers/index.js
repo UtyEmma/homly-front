@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 
 import {loginReducer, signupReducer} from "../_reducers/user.reducer";
+import { SuspendItemReducer } from "./admin-reducer";
 import { AgentLoginReducer, AgentSignupReducer,
         UpdateAgentProfileReducer, ShowAvailableAgentsReducer, DeleteListingReducer, RemoveListingReducer, FetchSingleAgentReducer, FetchAgentWishlistsReducer } from "./agent-reducer";
 import { FetchCategoriesReducer } from "./category-reducer";
@@ -67,7 +68,9 @@ const rootReducer = combineReducers({
     add_favourites: AddFavouritesReducer,
     remove_favourites: RemoveFavouritesReducer,
 
-    notification: FetchNotificationsReducer
+    notification: FetchNotificationsReducer,
+
+    suspend_item: SuspendItemReducer
 })
 
 export default rootReducer;

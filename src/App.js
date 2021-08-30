@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {  Switch, Route } from 'react-router-dom';
 
 // Route Guards
@@ -41,15 +41,37 @@ import { GoogleOneTapAuth } from 'components/auth/social';
 import { Favourites } from 'views/tenants/favourites/favourites';
 import { AgentListingDetail } from 'views/agent/listings/agent-listing-details';
 import { Onboarding } from 'views/agent/onboarding/onboarding';
-import { SelectUser } from 'views/onboarding/select-user';
+import { useQuery } from 'libraries/http/query';
+import { useDispatch } from 'react-redux';
+import { VerifyAdmin } from 'providers/redux/_actions/admin-actions';
+import { AdminModeBadge } from 'components/admin/admin-mode';
+import { AdminMode } from 'libraries/admin/admin-mode';
+// import { adminMode } from 'libraries/admin/admin-mode';
 
 function App() {
-  const [isLoading, setIsLoading] = useState(false)
+
+	const dispatch = useDispatch()
+
+	const [isLoading, setIsLoading] = useState(false)
+	const [adminMode, setAdminMode] = useState(true)
+  
+	const query = useQuery()
+	const admin = localStorage.getItem('auth')
+	const auth = query.get("auth")
+
+	const handleSetAdminMode = () => {
+		localStorage.setItem('adminMode', adminMode)
+	}
+
+  	useEffect(() => {
+    	auth && !admin && dispatch(VerifyAdmin(query.get("id")))
+		auth && handleSetAdminMode() 		
+  	}, [admin, adminMode])
 
   return (
     <div className="App">
       <Preloader loading={isLoading}/>
-
+		<AdminMode adminMode={adminMode} />
       <ToastContainer 
         hideProgressBar={true}
         newestOnTop={false}
@@ -58,13 +80,9 @@ function App() {
         pauseOnFocusLoss={false}
       />  
 
-      {
-        !localStorage.getItem('isAuthenticated')
+		<GoogleOneTapAuth />
 
-        &&
-        
-        <GoogleOneTapAuth />
-      }
+		<AdminModeBadge adminMode={adminMode} setAdminMode={setAdminMode} />
 
       <Switch>                  
           {/* Common Routes */}
@@ -80,7 +98,6 @@ function App() {
           <UserRoute path="/listings" isLoading={setIsLoading} user component={Listing} exact/>
           <UserRoute path="/agents" isLoading={setIsLoading} user type="user" component={Agents} exact/>
           <UserRoute path="/listings/:slug" isLoading={setIsLoading} user component={ListingDetails} exact/>
-          {/* <UserRoute path="/user" isLoading={setIsLoading} user component={SelectUser} exact/> */}
           
           {/* Tenant Routes */}
           <TenantRoute path="/profile" isLoading={setIsLoading} user component={Profile} exact/>

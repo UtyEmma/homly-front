@@ -28,7 +28,7 @@ export default function FeaturedListings({listings}) {
                                             <a href="#" className="mr-1 badge badge-orange">featured</a>
                                         </div>
                                         <div className="px-2 pb-2">
-                                            <a href={`listings/${listing.slug}`} className="text-white">
+                                            <a href={`/listings/${listing.slug}`} className="text-white">
                                                 <h5 className="card-title fs-16 lh-2 mb-0">{listing.title}</h5>
                                             </a>
     
