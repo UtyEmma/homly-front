@@ -23,11 +23,11 @@ export const NotificationBell = () => {
     const notificationItem = (notification, index) => {
         switch (notification.type) {
             case 'listing':
-                return <ListingNotificationItem notification={notification} index={index} />
+                return <ListingNotificationItem notification={notification} key={index} />
             case 'review':
-                return <ReviewNotificationItem notification={notification} index={index} />
+                return <ReviewNotificationItem notification={notification} key={index} />
             case 'support':
-                return <SupportNotificationItem notification={notification} index={index} />
+                return <SupportNotificationItem notification={notification} key={index} />
             default:
                 return null;
         }
@@ -47,7 +47,7 @@ export const NotificationBell = () => {
                         }
                     </span>
                 </a>
-                <div className="dropdown-menu dropdown-menu-right dropdown-menu-md">
+                <div className="dropdown-menu dropdown-menu-right dropdown-menu-md" style={{zIndex: '9999'}}>
                     {
                         notifications 
 

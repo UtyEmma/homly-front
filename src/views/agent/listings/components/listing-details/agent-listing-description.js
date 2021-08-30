@@ -9,6 +9,7 @@ export const AgentListingDescription = ({listing}) => {
                 </div>
                 <div className="mt-2 text-lg-right">
                     <p className="fs-22 text-heading font-weight-bold mb-0">&#8358; {listing.initial_fees.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+                    {/* <span className="badge badge-pill badge-success fs-12 px-3">{listing.status}</span> */}
                 </div>
             </div>
             <h4 className="fs-22 text-heading mt-6">Description</h4>

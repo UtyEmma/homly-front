@@ -20,18 +20,26 @@ export default function AgentsListings({listings}) {
                     </Nav>
                     <Tab.Content>
                         <Tab.Pane eventKey="first">
-                            {
-                                listings.not_rented.map((listing, index) => (
-                                    <ListingGrid listing={listing} key={index} />
-                                ))
-                            }
+                            
+                            <div className="row">
+                                {
+                                    listings.active.map((listing, index) => (
+                                        <ListingGrid listing={listing} key={index} />
+                                    ))
+                                }
+                            </div>
+                            
                         </Tab.Pane>
                         <Tab.Pane eventKey="second">
-                            {
-                                listings.rented.map((listing, index) => (
-                                    <ListingGrid listing={listing} key={index} />
-                                ))
-                            }
+                            
+                            <div className="row">
+                                {
+                                    listings.rented.map((listing, index) => (
+                                        <ListingGrid listing={listing} key={index} />
+                                    ))
+                                }
+                            </div>
+                            
                         </Tab.Pane>
                     </Tab.Content>
                 </Tab.Container>

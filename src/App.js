@@ -80,7 +80,7 @@ function App() {
           <UserRoute path="/listings" isLoading={setIsLoading} user component={Listing} exact/>
           <UserRoute path="/agents" isLoading={setIsLoading} user type="user" component={Agents} exact/>
           <UserRoute path="/listings/:slug" isLoading={setIsLoading} user component={ListingDetails} exact/>
-          <UserRoute path="/user" isLoading={setIsLoading} user component={SelectUser} exact/>
+          {/* <UserRoute path="/user" isLoading={setIsLoading} user component={SelectUser} exact/> */}
           
           {/* Tenant Routes */}
           <TenantRoute path="/profile" isLoading={setIsLoading} user component={Profile} exact/>

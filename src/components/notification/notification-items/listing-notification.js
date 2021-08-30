@@ -1,13 +1,13 @@
 import React from 'react'
 
-export const ListingNotificationItem = ({notification, index}) => {
+export const ListingNotificationItem = ({notification}) => {
     return (
         <>
-            <div className="dropdown-item py-2" key={index}>
+            <div className="dropdown-item py-2">
                 <div className="row">
                     <div className="col-auto d-flex align-items-center p-0 px-1">
                         {/* <i className="fa fa-home-alt fs-18"></i> */}
-                        <img src="images/house.png" width="30" className="img-fluid p-0" alt="listing item" />
+                        <img src="/images/house.png" width="30" className="img-fluid p-0" alt="listing item" />
                     </div>
 
                     <div className="col text-wrap pe-2">

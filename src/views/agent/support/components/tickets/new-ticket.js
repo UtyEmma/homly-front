@@ -25,7 +25,7 @@ export const NewTicketModal = () => {
                     </button>
                 </div>
                 <form onSubmit={createTicket} method="post" >
-                    <div class="modal-body">
+                    <div className="modal-body">
                         <div className="form-group">
                             <label>Ticket Title</label>
                             <input type="text" placeholder="What are you complaining about ?" className="form-control form-control-lg border-0" name="title" />

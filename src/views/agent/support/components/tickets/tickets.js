@@ -36,37 +36,35 @@ export const Tickets = ({titles, setTitles, setChat}) => {
     }, [tickets, ticket])
 
     return (
-        <div className="card card-body mb-6 p-6 pb-0">
-            <div className="invoice-action-currency mb-5">
-                <h5 className="card-title fs-16 lh-2 text-dark">My Tickets</h5>
-                <div className="mb-0">
+        <div className="col-3 px-0 h-100 rounded-left text-dark py-5">
+            <div className="my-3 text-center px-5">
+                <button type="button"  class="btn btn-primary btn-block " data-toggle="modal" data-target="#exampleModal">
+                    Create Ticket
+                </button>
+            </div>
+
+            <div className="mb-0 py-3">
+                {
+
+                    titles && titles.length > 0
+
+                    &&
+
+                    <>
                     {
-
-                        titles && titles.length > 0
-
-                        &&
-
-                        <>
-                        {
-                            titles.map((title, index) => {
-                                return (
-                                    <div key={index} className="" >
-                                        <button type="button" className="btn btn-block btn-lg bg-gray-01 bg-hover-dark hover-white" onClick={() => fetchTicketChats(title.unique_id)} key={title.unique_id}>{title.title}</button>
-                                    </div> 
-                                )
-                            })
-                        }
-                        
-                        <div className="mt-3">
-                            <button type="button" class="btn btn-primary  btn-block btn-lg" data-toggle="modal" data-target="#exampleModal">
-                                Create Ticket
-                            </button>
-                        </div>
-
-                        </>
+                        titles.map((title, index) => {
+                            return (
+                                <div role="button" key={index} className="py-3 px-2 bg-hover-dark hover-white" onClick={() => fetchTicketChats(title.unique_id)} key={title.unique_id}>
+                                    <i className="fa fa-comment"></i>
+                                    {title.title}
+                                </div> 
+                            )
+                        })
                     }
+                    
+                    </>
+                }
 
-                </div>
             </div>
         </div>
     )

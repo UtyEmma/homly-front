@@ -39,7 +39,15 @@ export const AgentListingDetail = ({loading, agent}) => {
 
                 <main id="content" className="bg-gray-01">
                     <div className="px-3 px-lg-6 px-xxl-13 py-5 py-lg-10">
-
+                    <div className="mb-6">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="/my-listings">My Properties</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{listing && listing.title}</li>
+                            </ol>
+                        </nav>
+                    </div>
                         <div className="row">
                             {
                                 listing
