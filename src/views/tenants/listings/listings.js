@@ -27,6 +27,7 @@ const Listing = ({isLoggedIn, user, isLoading, adminMode}) => {
         }, [params])
 
         const fetchListings = () => {
+            console.log(params)
             dispatch(ShowAllListings(params))
         }
         

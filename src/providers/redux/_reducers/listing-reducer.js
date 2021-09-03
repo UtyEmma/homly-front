@@ -4,6 +4,7 @@ const { STORE_LISTING,
         NEW_LISTING_REQUEST, NEW_LISTING_SUCCESS, NEW_LISTING_FAILURE, 
         GETLISTINGS_REQUEST, GETLISTINGS_SUCCESS, GETLISTINGS_FAILURE,
         ACTIVE_LISTINGS_REQUEST, ACTIVE_LISTINGS_SUCCESS, ACTIVE_LISTINGS_FAILURE,
+        UPDATE_LISTING_REQUEST, UPDATE_LISTING_SUCCESS,UPDATE_LISTING_FAILURE,
         FETCH_LISTING_DETAILS_REQUEST, FETCH_LISTING_DETAILS_SUCCESS, FETCH_LISTING_DETAILS_FAILURE,
         FETCH_SINGLE_LISTING_REQUEST, FETCH_SINGLE_LISTING_SUCCESS, FETCH_SINGLE_LISTING_FAILURE,
         DELETE_LISTING_REQUEST, DELETE_LISTING_SUCCESS, DELETE_LISTING_FAILURE,
@@ -30,7 +31,20 @@ export function NewListingReducer(state = {}, actions){
         case NEW_LISTING_SUCCESS:
             return {...state, loading: false, listing_success: actions.payload}
         case NEW_LISTING_FAILURE:
-            return {...state, loading: false, listing_failure: actions.payload }
+            return {...state, loading: false, error: actions.payload.error, formError : actions.payload.formError }
+        default:
+            return state
+    }
+}
+
+export function UpdateListingReducer(state={}, actions){
+    switch(actions.type){
+        case UPDATE_LISTING_REQUEST: 
+            return {...state, loading: true}
+        case UPDATE_LISTING_SUCCESS:
+            return {...state, loading: false, listing: actions.payload}
+        case UPDATE_LISTING_FAILURE:
+            return {...state, loading: false, error: actions.payload }
         default:
             return state
     }
@@ -109,7 +123,7 @@ export function SetAsRentedReducer(state={}, action){
         case SET_AS_RENTED_REQUEST:
             return {...state, loading: true}
         case SET_AS_RENTED_SUCCESS:
-            return {...state, loading: false, listing: action.payload}
+            return {...state, loading: false, listing: action.payload.listing}
         case SET_AS_RENTED_FAILURE:
             return {...state, loading: false, error: action.payload}
         default:

@@ -6,8 +6,9 @@ import AgentReviews from './agent-reviews'
 export default function AgentDetailsContainer({agent, listings, reviews}) {
     return (
         <>
-            <section className="pb-7 page-title">
+            <section className="py-7  page-title">
                 <div className="container">
+                <h3>Agent</h3>
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb pt-6 pt-lg-0 pb-0">
                     <li className="breadcrumb-item"><a href="../">Home</a></li>
@@ -78,44 +79,6 @@ export default function AgentDetailsContainer({agent, listings, reviews}) {
                             </li>
                             </ul>
                             <a href={`mailto:${agent.email}`} type="submit" className="btn btn-primary btn-lg btn-block shadow-none">Send Message</a>
-                        </div>
-                        </div>
-                        <div className="card mb-4">
-                        <div className="card-body px-6 pt-5 pb-6">
-                            <h4 className="card-title fs-16 lh-2 text-dark mb-3">Search</h4>
-                            <form>
-                            <div className="form-group mb-2">
-                                <select className="form-control border-0 shadow-none selectpicker" name="company" title="Company" data-style="btn-lg px-3">
-                                <option>Google</option>
-                                <option>Facebook</option>
-                                </select>
-                            </div>
-                            <div className="form-row mb-2">
-                                <div className="col-6 form-group">
-                                <select className="form-control selectpicker border-0" name="language" title="Language" data-style="btn-lg rounded-lg px-3">
-                                    <option>English</option>
-                                    <option>France</option>
-                                </select>
-                                </div>
-                                <div className="col-6 form-group">
-                                <select className="form-control selectpicker border-0" name="region" title="Region" data-style="btn-lg rounded-lg px-3">
-                                    <option>Austin</option>
-                                    <option>Boston</option>
-                                    <option>Chicago</option>
-                                    <option>Denver</option>
-                                    <option>Los Angeles</option>
-                                    <option>New York</option>
-                                    <option>San Francisco</option>
-                                </select>
-                                </div>
-                            </div>
-                            <div className="form-group mb-4">
-                                <input type="text" className="form-control form-control-lg border-0" name="search" placeholder="Search by agent’s name..." />
-                            </div>
-                            <button type="submit" className="btn btn-primary btn-lg btn-block">
-                                Search
-                            </button>
-                            </form>
                         </div>
                         </div>
                         <div className="card">

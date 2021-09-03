@@ -53,10 +53,10 @@ export default function ListingGrid({listing}) {
                 </div>
                 <div className="card-body pt-3 px-0 pb-1">
                     <h2 className="fs-16 mb-1">
-                        <a href={`/listings/${listing.slug}`} className="text-dark hover-primary">{listing.title}</a>
+                        <a href={`/listings/${listing.slug}`} className="d-inline-block text-dark hover-primary w-100 text-nowrap text-truncate">{listing.title}</a>
                     </h2>
                     
-                    <p className="font-weight-500 text-gray-light mb-0">{listing.address}, {listing.city}, {listing.state}</p>
+                    <p className="font-weight-500 text-gray-light mb-0 d-inline-block text-nowrap text-truncate w-100">{listing.address}, {listing.city}, {listing.state}</p>
                 
                     <p className="card-text mb-2 ml-0">{listing.description.split(" ").splice(0,15).join(" ")}...</p>
                 

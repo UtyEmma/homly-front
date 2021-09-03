@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { SelectAmenities } from 'views/layouts/components/details/amenities';
 
 export const UpdateListingDetails = ({listing}) => {
     
@@ -64,26 +65,8 @@ export const UpdateListingDetails = ({listing}) => {
                                 adipiscing elit</p>
                                 <div className="col-lg-12">
                                     <ul className="list-group list-group-no-border">
-                                        <div className="row">
-                                            {
-
-                                            Array.isArray(amenities) && amenities.length > 0 
-                                            
-                                            && 
-
-                                            amenities.map((item, index) => (
-                                                <div key={index} className="col-sm-6 col-lg-3">
-                                                    <li className="list-group-item px-0 pt-0 pb-2">
-                                                        <div className="custom-control custom-checkbox">
-                                                            <input type="checkbox" className="custom-control-input" name={`amenities[${item.toLowerCase().replace(/ /g,'_')}]`} id={item} />
-                                                            <label className="custom-control-label" htmlFor={item} >{item}</label>
-                                                        </div>
-                                                    </li>
-                                                </div>
-                                            )) 
-                                            
-                                            }
-
+                                        <div className="row">                                            
+                                            <SelectAmenities color="text-dark" selected={amenities} />
                                         </div>
                                     </ul>
                                 </div>

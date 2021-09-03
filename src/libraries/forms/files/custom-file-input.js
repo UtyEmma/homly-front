@@ -7,7 +7,7 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
-export function FileInput ({files, setFiles}) {  
+export function FileInput ({files, setFiles, name}) {  
 
     const updateFiles = (fileItems) => {
         setFiles(fileItems.map(fileItem => fileItem.file))
@@ -16,6 +16,7 @@ export function FileInput ({files, setFiles}) {
     return (
         <>
             <FilePond 
+                name={name}
                 files={files}
                 allowReorder={true}
                 onupdatefiles={updateFiles}

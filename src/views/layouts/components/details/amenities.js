@@ -3,7 +3,7 @@ import { FetchDetails } from 'providers/redux/_actions/details-actions';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-export function SelectAmenities({features, setFeatures, name, validate, message, color}) {
+export function SelectAmenities({features, setFeatures, name, validate, message, color, selected, classes}) {
 
     const dispatch = useDispatch();
 
@@ -11,9 +11,7 @@ export function SelectAmenities({features, setFeatures, name, validate, message,
     const {loading, amenities} = details
 
     useEffect(() => {
-        if(!amenities){
-            dispatch(FetchDetails())
-        }
+        !amenities && dispatch(FetchDetails())
     }, [amenities])
 
     return (
@@ -23,16 +21,27 @@ export function SelectAmenities({features, setFeatures, name, validate, message,
 
                 && 
 
-                amenities.map((amenity, index) => (
-                    <div key={index} className="col-sm-6 col-md-4 col-lg-3">
-                        <li className={`list-group-item px-0 pt-0 pb-2 bg-transparent border-0 ${color ? color : 'text-white'}`}>
-                            <div className="custom-control custom-checkbox">
-                                <input type="checkbox" className="custom-control-input" name={`amenities[${amenity.toLowerCase().replace(/ /g,'_')}]`} id={amenity} />
-                                <label className="custom-control-label " htmlFor={amenity} >{amenity}</label>
+                amenities.map((item, index) => (
+                    <div key={index} className="col-sm-6 col-lg-3">
+                        <li className={`list-group-item px-0 pt-0 pb-2 ${classes}`}>
+                            <div className="custom-control custom-checkbox ">
+                                <input type="checkbox" className="custom-control-input" name={`amenities[${item.toLowerCase().replace(/ /g,'_')}]`} id={item} />
+                                <label className="custom-control-label" htmlFor={item} >{item}</label>
                             </div>
                         </li>
                     </div>
                 )) 
+
+                // amenities.map((amenity, index) => (
+                //     <div key={index} className="col-sm-6 col-md-4 col-lg-3">
+                //         <li className={`list-group-item px-0 pt-0 pb-2 bg-transparent border-0 ${color ? color : 'text-white'}`}>
+                //             <div className="custom-control custom-checkbox">
+                //                 <input type="checkbox" className="custom-control-input"  checked={amenity in selected && true} name={`amenities[${amenity.toLowerCase().replace(/ /g,'_')}]`} id={amenity} />
+                //                 <label className="custom-control-label" htmlFor={amenity}>{amenity}</label>
+                //             </div>
+                //         </li>
+                //     </div>
+                // )) 
             }
         </>
     )

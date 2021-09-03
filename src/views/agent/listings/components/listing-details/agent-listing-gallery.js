@@ -16,13 +16,14 @@ export const AgentListingGallery = ({listing}) => {
                         <div className="row h-100">
 
                             {
+
                                 listing.images.map((image, index) => {
                                     return (
                                         index !== 0
 
                                         &&
     
-                                        <div className="col-sm-6 col-md-4 mb-6">
+                                        <div className="col-sm-6 col-md-4 mb-6" key={index} >
                                             <div className="item item-size-1-1">
                                             <a href={image} className="card p-0 hover-zoom-in" data-gtf-mfp="true" data-gallery-id={'0'+index}>
                                                 <div className="card-img img" style={{backgroundImage: `url(${image})`}}>

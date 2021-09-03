@@ -1,7 +1,6 @@
 import React from 'react'
 
-export default function ListingAmenities({amenities}) {
-
+export default function ListingAmenities({amenities, formErrors}) {
     return (
         <div className="tab-pane tab-pane-parent fade px-0" id="amenities" role="tabpanel" aria-labelledby="amenities-tab">
             <div className="card bg-transparent border-0">
@@ -43,6 +42,7 @@ export default function ListingAmenities({amenities}) {
 
                                 </div>
                             </ul>
+                            <p className="text-danger fs-12 mt-1">{formErrors.amenities?.message}</p>
                         </div>
                     </div>
                 </div>

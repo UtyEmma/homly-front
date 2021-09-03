@@ -56,22 +56,33 @@ function App() {
 	const [adminMode, setAdminMode] = useState(true)
   
 	const query = useQuery()
-	const admin = localStorage.getItem('auth')
 	const auth = query.get("auth")
 
 	const handleSetAdminMode = () => {
 		localStorage.setItem('adminMode', adminMode)
 	}
 
+	const admin = localStorage.getItem('auth')
+	const type = localStorage.getItem('type'); 
+	const mode = localStorage.getItem('adminMode') 
+
+	const checkAdminMode = () => {
+		if (admin && type === 'admin' && mode === 'true') {
+			return setAdminMode(true)	
+		}
+		return setAdminMode(false);
+	}
+
   	useEffect(() => {
     	auth && !admin && dispatch(VerifyAdmin(query.get("id")))
-		auth && handleSetAdminMode() 		
+		auth && handleSetAdminMode() 
+		checkAdminMode()		
   	}, [admin, adminMode])
 
   return (
     <div className="App">
       <Preloader loading={isLoading}/>
-		<AdminMode adminMode={adminMode} />
+		  <AdminMode adminMode={adminMode} />
       <ToastContainer 
         hideProgressBar={true}
         newestOnTop={false}

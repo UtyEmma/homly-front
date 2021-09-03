@@ -11,8 +11,7 @@ export const UpdateListingDescription = ({listing}) => {
                     <div className="col-lg-6">
                         <div className="card mb-6">
                         <div className="card-body p-6">
-                            <h3 className="card-title mb-0 text-heading fs-22 lh-15">Property
-                            Description</h3>
+                            <h3 className="card-title mb-0 text-heading fs-22 lh-15">Property Description</h3>
                             <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
                             <div className="form-group">
                             <label htmlFor="title" className="text-heading">Title <span className="text-muted">(mandatory)</span></label>
@@ -45,7 +44,7 @@ export const UpdateListingDescription = ({listing}) => {
                                 <div className="col-md-6 col-lg-12 col-xxl-6 px-2 mb-4 mb-md-0">
                                     <div className="form-group mb-0">
                                     <label htmlFor="tenure" className="text-heading">Rent Tenure Duration</label>
-                                    <select className="form-control border-0 shadow-none form-control-lg selectpicker" title="Select" data-style="btn-lg py-2 h-52" onChange={compileData} id="tenure" defaultValue={listing.tenure} name="tenure">
+                                    <select className="form-control border-0 shadow-none form-control-lg" title="Select" data-style="btn-lg py-2 h-52" onChange={compileData} id="tenure" defaultValue={listing.tenure} name="tenure">
                                         <option>Monthly Tenancy</option>
                                         <option>Quaterly Tenancy</option>
                                         <option>Yearly Tenancy</option>

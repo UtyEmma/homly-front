@@ -1,9 +1,6 @@
 import { LocalGovt, State } from 'components/city-state/city-state';
-import { ShowAllListings } from 'providers/redux/_actions/listing/listing-actions';
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
-import { SelectAmenities } from 'views/layouts/components/details/amenities';
-import SelectListingCategory, { SelectTypes } from 'views/layouts/components/details/categories';
+import { SelectTypes } from 'views/layouts/components/details/categories';
 
 export default function ListingFilter({params, setParams}) {
 
@@ -14,7 +11,7 @@ export default function ListingFilter({params, setParams}) {
         });
     }
 
-    const [selectedState, setSelectedState] = useState("Enugu");
+    const [selectedState, setSelectedState] = useState();
 
     return (
         <nav aria-label="breadcrumb">
@@ -25,38 +22,58 @@ export default function ListingFilter({params, setParams}) {
                 <form className="form-inline" id="accordion-5">
                     <div className="form-group p-1">
                         <label htmlFor="state"  className="sr-only">State</label>
-                        <State setSelectedState={setSelectedState} title="State" onChange={parseQueryParams} styles="bg-white" classes="form-control border-0 shadow-none shadow-xxs-1 font-weight-600 selectpicker" name="state"/>
+                        <State setSelectedState={setSelectedState} title="State" onChange={parseQueryParams} styles="bg-white" classes="form-control border-0 bg-white shadow-none shadow-xxs-1 font-weight-600" name="state"/>
                     </div>
                     <div className="form-group p-1">
                         <label htmlFor="city"  className="sr-only">Local Govt</label>
-                        <LocalGovt name="city" onChange={parseQueryParams} styles={"bg-white"} classes="form-control border-0 shadow-none shadow-xxs-1 font-weight-600 selectpicker" selectedState={selectedState}/>
+                        <LocalGovt name="city" onChange={parseQueryParams} styles={"bg-white"} classes="form-control border-0 shadow-none shadow-xxs-1 bg-white font-weight-600" selectedState={selectedState}/>
                     </div>
                     <div className="form-group p-1">
                         <label htmlFor="any-price" className="sr-only">Any Price</label>
-                        <select className="form-control border-0 shadow-none shadow-xxs-1 bg-transparent font-weight-600 selectpicker" title="Any Price" onChange={parseQueryParams} name="price" data-style="bg-white" id="any-price">
-                            <option>High</option>
-                            <option>Low</option>
-                            <option>Medium</option>
+                        <select className="form-control border-0 shadow-none shadow-xxs-1 bg-white font-weight-600" title="Any Price" onChange={parseQueryParams} name="price" data-style="bg-white" id="any-price">
+                            <option selected disabled>Price</option>
+                            <option defaultValue="0">Under &#8358;200k</option>
+                            <option defaultValue="1">&#8358;200k - &#8358;400k</option>
+                            <option defaultValue="2">&#8358;400k - &#8358;800k</option>
+                            <option defaultValue="3">&#8358;800k - &#8358;2M</option>
+                            <option defaultValue="4">Over &#8358;2M</option>
                         </select>
                     </div>
                     <div className="form-group p-1">
                         <SelectTypes name="type" styles="bg-white" classes="form-control border-0 shadow-none shadow-xxs-1 font-weight-600 bg-white" onChange={parseQueryParams} id="type"/>
                     </div>
                     <div className="form-group p-1">
-                    <label htmlFor="room" className="sr-only">Room</label>
-                    <select className="form-control border-0 shadow-xxs-1 bg-transparent font-weight-600 selectpicker" title="Rooms" data-style="bg-white" onChange={parseQueryParams} name="rooms" id="room">
-                        <option defaultValue="2" >2+ Beds</option>
-                        <option>3+ Beds</option>
-                    </select>
+                        <label htmlFor="room" className="sr-only">Room</label>
+                        <select className="form-control border-0 shadow-xxs-1 bg-white font-weight-600" title="Rooms" data-style="bg-white" onChange={parseQueryParams} name="rooms" id="room">
+                            <option selected defaultValue="">Bedrooms</option>
+                            <option defaultValue="1" >1</option>
+                            <option defaultValue="2" >2</option>
+                            <option defaultValue="3">3</option>
+                            <option defaultValue="4">4</option>
+                            <option defaultValue="5">5</option>
+                            <option defaultValue="6">6</option>
+                            <option defaultValue="7">7</option>
+                            <option defaultValue="8">8</option>
+                            <option defaultValue="9">9</option>
+                            <option defaultValue="10">10+</option>
+                        </select>
                     </div>
+
                     <div className="form-group p-1">
-                    <a href="#advanced-search-filters-5" className="btn bg-white border-0 shadow-xxs-1 text-gray-light" data-toggle="collapse" data-target="#advanced-search-filters-5" aria-expanded="true" aria-controls="advanced-search-filters-5">
-                        <span>More</span>
-                        <span className="ml-auto">...</span>
-                    </a>
-                    </div>
-                    <div id="advanced-search-filters-5" className="row pt-2 collapse p-1" data-parent="#accordion-5">
-                        <SelectAmenities color="text-dark" />
+                        <label htmlFor="room" className="sr-only">Bathrooms</label>
+                        <select className="form-control border-0 shadow-xxs-1 bg-white font-weight-600" title="Rooms" data-style="bg-white" onChange={parseQueryParams} name="rooms" id="room">
+                            <option selected defaultValue="">Bathrooms</option>
+                            <option defaultValue="1" >1</option>
+                            <option defaultValue="2" >2</option>
+                            <option defaultValue="3">3</option>
+                            <option defaultValue="4">4</option>
+                            <option defaultValue="5">5</option>
+                            <option defaultValue="6">6</option>
+                            <option defaultValue="7">7</option>
+                            <option defaultValue="8">8</option>
+                            <option defaultValue="9">9</option>
+                            <option defaultValue="10">10+</option>
+                        </select>
                     </div>
                 </form>
             </div>

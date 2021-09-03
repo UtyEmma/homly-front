@@ -1,3 +1,4 @@
+import Preloader from 'components/preloader/preloader'
 import React, { Component, useState } from 'react'
 import Header from 'views/agent/layouts/shared/header'
 import Sidebar from 'views/agent/layouts/shared/sidebar'
@@ -9,14 +10,13 @@ import { Tickets } from './components/tickets/tickets'
 
 export const Support = ({agent}) => {
 
-    const [ticket, setTicket] = useState()
-
-    const createTicket = () => {
-
-    }
+    const [titles, setTitles] = useState()
+    const [chat, setChat] = useState()
+    const [isLoading, setIsLoading] = useState()
 
     return (
         <div className="wrapper dashboard-wrapper">
+            <Preloader loading={isLoading} />
             <div className="d-flex flex-wrap flex-xl-nowrap">
                 <Sidebar />
 
@@ -31,8 +31,8 @@ export const Support = ({agent}) => {
                             
                             <div className="col-12 card" >
                                 <div className="row" style={{height: '600px'}}>
-                                    <SupportCenterSidebar />
-                                    <SupportCenterContent />
+                                    <SupportCenterSidebar titles={titles} setTitles={setTitles} setIsLoading={setIsLoading} chat={chat} setChat={setChat} />
+                                    <SupportCenterContent titles={titles} setTitles={setTitles} setIsLoading={setIsLoading} chat={chat} setChat={setChat} />
                                 </div>
                             </div>
                         </div>
@@ -40,7 +40,7 @@ export const Support = ({agent}) => {
                 </div>
             </div>
 
-            <NewTicketModal />
+            <NewTicketModal setTitles={setTitles} setIsLoading={setIsLoading} />
         </div>
     )
 }  

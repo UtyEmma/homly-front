@@ -19,7 +19,7 @@ export function AgentSignupReducer (state = {}, action) {
         case SIGNUP_SUCCESS:
             return { ...state, agent_success: action.payload, loading: false }
         case SIGNUP_FAILURE:
-            return { ...state, agent_error: action.payload, loading: false }
+            return { ...state, agent_error: action.payload.error, form_error: action.payload.formError, loading: false }
         default:
             return state;
     }
@@ -32,7 +32,7 @@ export function AgentLoginReducer (state = {}, action){
         case LOGIN_SUCCESS:
             return {...state, agent_success: action.payload, loading: false}
         case LOGIN_FAILURE:
-            return {...state, agent_error: action.payload, loading: false}
+            return {...state, agent_error: action.payload.errors, form_error: action.payload.formError, loading: false}
         default:
             return state;
     }

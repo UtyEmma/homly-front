@@ -26,8 +26,11 @@ export default function Searchbar({parsed}) {
         const bedrooms = formData.get('bedrooms') ? `&bedrooms=${formData.get('bedrooms')}` : "";
         const bathrooms = formData.get('bathrooms') ? `&bathrooms=${formData.get('bathrooms')}` : "";
         const features = formData.get('features') ? `&features=${formData.get('features')}` : "";
+        const minprice = formData.get('minprice') && `&min=${formData.get('minprice')}`
+        const maxprice = formData.get('maxprice') && `&max=${formData.get('maxprice')}`
 
-        return `/search?${keyword}${type}${price}${bedrooms}${bathrooms}${features}`;
+
+        return `/search?${keyword}${type}${price}${bedrooms}${bathrooms}${features}${minprice}${maxprice}`;
     }
 
     return (
@@ -67,13 +70,13 @@ export default function Searchbar({parsed}) {
                     <div className="row mx-n2">
                     <div className="col-sm-6 col-md-4 col-lg-3 pt-4 px-2">
                         <select className="form-control border-0 shadow-none form-control-lg selectpicker bg-white" name="bedrooms" title="Bedrooms" onChange={compileSearchQuery} data-style="btn-lg py-2 h-52 bg-white">
-                        <option>All Bedrooms</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6+</option>
+                            <option selected defaultValue="">All Bedrooms</option>
+                            <option defaultValue="1" >1</option>
+                            <option defaultValue="2" >2</option>
+                            <option defaultValue="3">3</option>
+                            <option defaultValue="4">4</option>
+                            <option defaultValue="5">5</option>
+                            <option defaultValue="6">6 +</option>
                         </select>
                     </div>
                     <div className="col-sm-6 col-md-4 col-lg-3 pt-4 px-2">
@@ -96,23 +99,21 @@ export default function Searchbar({parsed}) {
                     </div>
                     </div>
                     <div className="row">
-                    <div className="col-md-6 col-lg-5 pt-6 slider-range slider-range-primary">
-                        <label htmlFor="price" className="mb-4 text-white">Price Range</label>
-                        <div data-slider="true" data-slider-options="{&quot;min&quot;:0,&quot;max&quot;:1000000,&quot;values&quot;:[100000,700000]}" />
-                        <div className="text-center mt-2">
-                        <input id="price" type="text" readOnly className="border-0 amount text-center text-white bg-transparent font-weight-500" onChange={compileSearchQuery} name="price" />
+                        <div className="col-md-4">
+                            <div className='row'>
+                                <div className="col-md-6 col-md-6 col-lg-6 pt-6">
+                                    <div className="text-center mt-2">
+                                        <input type="text" className="form-control form-control-lg border-0" id="price" placeholder="Min Price (&#8358;)" name="minprice" onChange={compileSearchQuery} />
+                                    </div>
+                                </div>
+
+                                <div className="col-md-6 col-md-6 col-lg-6 pt-6">
+                                    <div className="text-center mt-2">
+                                        <input type="text" className="form-control form-control-lg border-0" id="price" placeholder="Max Price (&#8358;)" name="maxprice" onChange={compileSearchQuery} />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div className="col-12 pt-4 pb-2">
-                        <a className="lh-17 d-inline-block other-feature collapsed" data-toggle="collapse" href="#other-feature-2" role="button" aria-expanded="false" aria-controls="other-feature-2">
-                            <span className="fs-15 text-white font-weight-500 hover-primary">Other Features</span>
-                        </a>
-                    </div>
-                    <div className="col-12 px-0">
-                        <div className="collapse row mx-0" id="other-feature-2">
-                            <SelectAmenities />
-                        </div>
-                    </div>
                     </div>
                 </div>
                 </div>

@@ -11,11 +11,11 @@ export const AdminModeBadge = ({adminMode, setAdminMode}) => {
     return (
         <>
             {
-                defaultAdminMode
+                adminMode
 
                 &&
 
-                <div className="card position-fixed p-2 d-flex justify-content-between" style={{right: '20px', bottom: '20px', width: '170px', zIndex: '999'}}>
+                <div className="card position-fixed p-2 d-flex justify-content-between shadow-lg-2 shadow-hover-2" style={{right: '20px', bottom: '20px', width: '170px', zIndex: '999999'}}>
                     <p className="mb-0 font-weight-bold"><i className="fa fa-user-alien mr-1 text-primary"></i> Admin Mode</p>
                     <Form.Check
                         checked={adminMode} 

@@ -1,13 +1,9 @@
-import { Timer } from 'components/timer/timer'
-import { CreateNewTicket, SendMessage } from 'providers/redux/_actions/support-actions'
-import React, { createRef, useEffect, useRef } from 'react'
+import { SendMessage } from 'providers/redux/_actions/support-actions'
+import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import './chat.css'
 
-export const ChatBox = ({chat, setChat}) => {
-
-    const new_ticket = useSelector(state => state.new_ticket)
-    const {loading, tickets} = new_ticket
+export const ChatBox = ({chat, setChat, setIsLoading}) => {
 
     const send_message = useSelector(state => state.send_message)
     const {ticket} = send_message
@@ -18,8 +14,10 @@ export const ChatBox = ({chat, setChat}) => {
     useEffect(() => {
         if (!chat) {
             setChatData(ticket)   
+            setIsLoading(false)
         }else if(ticket){
             setChatData(ticket)
+            setIsLoading(false)
         }
         setPositions()
     }, [ticket, chat])
@@ -30,13 +28,8 @@ export const ChatBox = ({chat, setChat}) => {
         e.preventDefault();
         let formData = new FormData(e.target);
         formData.append('issue_id', chat.ticket.unique_id)
+        setIsLoading(true)
         dispatch(SendMessage(formData));
-    }
-
-    const newTicket = (e) => {
-        e.preventDefault()
-        let formData = new FormData(e.target);
-        dispatch(CreateNewTicket(formData));
     }
 
     const setChatData = (ticket) => {
@@ -53,29 +46,26 @@ export const ChatBox = ({chat, setChat}) => {
     return (
         <>
             {
-
                 chat 
 
                 &&
 
                 <div style={{height: "100%"}}>
-                    <div className="p-3 py-4 bg-gray-01 rounded" style={{height: "15%", boxSizing: "border-box"}} >
-                        <div className="row">
-                            <div className="col-12 d-flex justify-content-between">
-                                <div>
-                                    <h5 className="fs-14">{chat.ticket.title}</h5>
-                                    <span className="badge badge-blue fs-6 text-capitalize">{chat.ticket.status}</span>
-                                </div>
+                    <div className="px-3 rounded-right" style={{height: "15%", boxSizing: "border-box"}} >
+                        <div className="row d-flex align-items-end pb-2 h-100">
+                            <div className="col-auto">
+                            <p className="fs-12 mb-0 text-capitalize font-weight-600 mb-0">Ticket ID: <span className="font-weight-normal">{chat.ticket.unique_id}</span></p>
+                                <h5 className="text-heading font-weight-600 mb-0 text-gray">{chat.ticket.title}</h5>
+                                <p className="fs-12 mb-0 text-capitalize font-weight-600"><i className="fa fa-dot-circle text-warning"></i> {chat.ticket.status}</p>
+                            </div>
 
-                                <div>
-                                    <p className="fs-12">{chat.ticket.date}</p>
-                                    {/* <Timer />S */}
-                                </div>
+                            <div className="col text-right">
+                                <p className="fs-12 mb-0">{chat.ticket.date}</p>
                             </div>
                         </div>
                     </div>
 
-                    <div className="col-12 chat-body py-3" ref={chat_body} style={{height: "70%"}}>
+                    <div className="col-12 chat-body rounded-right bg-gray-04 py-3" ref={chat_body} style={{height: "70%"}}>
                         <div className="row">
                             <div className="col-8 offset-2 text-center">
                                 <p className="lh-1 mb-1 fs-12">
@@ -94,8 +84,8 @@ export const ChatBox = ({chat, setChat}) => {
 
                                         ? 
 
-                                        <div className="col-12 py-2 chat-item  chat-right" key={index}>
-                                            <div className="col-10 bg-primary text-white p-3 float-right rounded">
+                                        <div className="col-12 py-2 chat-item chat-right" key={index}>
+                                            <div className="col-9 bg-primary text-white p-3 float-right chat-item-box-right">
                                                 <p className="fs-14">
                                                     {chat.message}
                                                 </p>
@@ -108,7 +98,7 @@ export const ChatBox = ({chat, setChat}) => {
                                         :
 
                                         <div className="col-12 py-2 chat-item chat-left d-flex flex-column justify-content-left" key={index}>
-                                            <div className="col-10 bg-gray-01 p-3 rounded chat-text">
+                                            <div className="col-9 bg-white p-3 chat-item-box-left">
                                                 <p>
                                                     {chat.message}
                                                 </p>
@@ -125,16 +115,11 @@ export const ChatBox = ({chat, setChat}) => {
                         </div>
                     </div>
 
-                    <div className="col-12 bg-gray-01 px-3 pt-3" style={{height: "15%"}}>
+                    <div className="col-12 bg-white px-3 pt-3" style={{height: "15%"}}>
                         <form onSubmit={sendMessage} id="chat-form" ref={chat_form} >
                             <div className="col-12 rounded-pill bg-white border">
-                            <div className="row">
-                                    <div className="col-1 bg-white rounded-pill rounded-left px-0">
-                                        <button type="button" className="btn mt-1">
-                                        <i className="fa fa-paperclip fs-16"></i>
-                                        </button>
-                                    </div>
-                                    <div className="col-10 px-0 mx-0">
+                                <div className="row">
+                                    <div className="col-11 px-0 mx-0">
                                         <textarea className="form-control bg-transparent border-0 shadow-none form-control-lg" rows={1} name="message" id="chat-message" placeholder="Your message here..." style={{resize: 'none'}} defaultValue={""} />
                                     </div>
                                     <div className="col-1 px-0 pr-2 d-flex align-items-center justify-content-center">
@@ -142,7 +127,7 @@ export const ChatBox = ({chat, setChat}) => {
                                             <i className="fa fa-paper-plane fs-18 mr-1" ></i>
                                         </button>
                                     </div>
-                            </div>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -151,19 +136,3 @@ export const ChatBox = ({chat, setChat}) => {
         </>
     )
 }
-
-// <div className="col-12">
-//     <div className="container">
-//         <form onSubmit={newTicket}>
-//             <div className="form-group">
-//                 <label>Ticket Title</label>
-//                 <input type="text" placeholder="What are you complaining about ?" className="form-control form-control-lg border-0" name="title" />
-//             </div>
-//             <div className="form-group">
-//                 <label>Your Message</label>
-//                 <textarea type="text" placeholder="Your message goes here..." className="form-control form-control-lg border-0" name="message"></textarea>
-//             </div>
-//             <button type="submit" className="btn btn-primary">Create Ticket</button>
-//         </form>
-//     </div>
-// </div>

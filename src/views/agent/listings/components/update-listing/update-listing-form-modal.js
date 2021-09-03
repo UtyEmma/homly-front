@@ -1,6 +1,6 @@
 import { UpdateListingForm } from "./update-listing-form"
 
-export const UpdateListingModal = ({listing}) => {
+export const UpdateListingModal = ({listingItem}) => {
     return (
         <>
             <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -12,7 +12,7 @@ export const UpdateListingModal = ({listing}) => {
                         </button>
                     </div>
                         <div className="modal-body py-2">
-                            <UpdateListingForm listing={listing}/>
+                            <UpdateListingForm listing={listingItem}/>
                         </div>
                     </div>
                 </div>

@@ -4,7 +4,7 @@ export const defaultAdminMode = () => {
     const admin = localStorage.getItem('auth')
     const type = localStorage.getItem('type'); 
     const mode = localStorage.getItem('adminMode') 
-    return admin && type && mode === 'admin' ? true : false;
+    return admin && type && mode && mode === 'admin' ? true : false;
 }
 
 export const AdminMode = ({adminMode}) => {

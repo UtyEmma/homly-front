@@ -88,7 +88,9 @@ function loggedOut(params) {
     return (           
         <ul className="navbar-nav flex-row justify-content-lg-end align-items-center d-flex flex-wrap text-body py-2">
             <li className="nav-item ">
-                <a className="nav-link pl-3 pr-2 mr-2" href="/login">Login</a>
+                <a className="nav-link pl-3 pr-2 mr-1" href="/login">Login</a>
+                |
+                <a className="nav-link pl-3 pr-2 mr-1" href="/signup">Sign Up</a>
             </li>
             <li className="nav-item ml-auto w-100 w-sm-auto">
                 <a className="btn btn-primary btn-lg d-flex align-items-center" href="/agent-signup">

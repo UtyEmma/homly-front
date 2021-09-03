@@ -1,6 +1,6 @@
 import Preloader from "components/preloader/preloader"
 import { FetchSingleListing } from "providers/redux/_actions/listing/listing-actions"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import Header from "../layouts/shared/header"
@@ -13,16 +13,20 @@ import { AgentListingGallery } from "./components/listing-details/agent-listing-
 import { AgentListingLocation } from "./components/listing-details/agent-listing-location"
 import { UpdateListingModal } from "./components/update-listing/update-listing-form-modal"
 
-export const AgentListingDetail = ({loading, agent}) => {
+export const AgentListingDetail = ({agent}) => {
     const {slug} = useParams();
     const dispatch = useDispatch()
+    const [isLoading, setIsLoading] = useState()
+    const [listingItem, setListingItem] = useState(null)
 
     const details = useSelector((state) => state.listing);
-    const {listing} = details;
+    const {loading, listing} = details;
 
     useEffect(() => {
         !listing && fetchListingData(slug)
-    }, [listing]);
+        listing && setListingItem(listing)
+        setIsLoading(loading)
+    }, [listing, loading]);
 
     const fetchListingData = (slug) => {
         dispatch(FetchSingleListing(slug))
@@ -30,7 +34,7 @@ export const AgentListingDetail = ({loading, agent}) => {
 
     return (
         <div className="wrapper dashboard-wrapper">
-            <Preloader loading={loading} />
+            <Preloader loading={isLoading} />
             <div className="d-flex flex-wrap flex-xl-nowrap">
                 <Sidebar />
 
@@ -48,38 +52,39 @@ export const AgentListingDetail = ({loading, agent}) => {
                             </ol>
                         </nav>
                     </div>
-                        <div className="row">
-                            {
-                                listing
+                    
+                    <div className="row">
+                        {
+                            listingItem
 
-                                &&
+                            &&
 
-                                <>
-                                    <div className="col-md-8">
-                                        <AgentListingDescription listing={listing} />
-                                        <AgentListingGallery listing={listing} />
-                                        <AgentListingAmenities listing={listing} amenities={listing.amenities} />
-                                        <AgentListingDetails listing={listing} />
-                                        <AgentListingLocation listing={listing} />
-                                    </div>
+                            <>
+                                <div className="col-md-8">
+                                    <AgentListingDescription listing={listingItem} />
+                                    <AgentListingGallery listing={listingItem} />
+                                    <AgentListingAmenities listing={listingItem} amenities={listingItem.amenities} />
+                                    <AgentListingDetails listing={listingItem} />
+                                    <AgentListingLocation listing={listingItem} />
+                                </div>
 
 
-                                    <div className="col-md-4">
-                                        <AgentListingAside listing={listing} />
-                                    </div>
-                                </>
-                            }                            
-                        </div>
+                                <div className="col-md-4">
+                                    <AgentListingAside listingItem={listingItem} setListingItem={setListingItem} setIsLoading={setIsLoading} />
+                                </div>
+                            </>
+                        }                            
+                    </div>
 
                     </div>
                 </main>
                             
                 {
-                    listing
+                    listingItem
 
                     &&
 
-                    <UpdateListingModal listing={listing}/>
+                    <UpdateListingModal listingItem={listingItem} setIsLoading={setIsLoading} setListingItem={setListingItem}/>
                 }
                 </div>
 

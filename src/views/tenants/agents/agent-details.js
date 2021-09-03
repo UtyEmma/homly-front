@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FetchAgentDetails } from 'providers/redux/_actions/agent-actions'
 import AgentDetailsContainer from './components/agent-details-container'
 import NotFound from 'views/not-found'
+import Searchbar from 'views/layouts/components/search/searchbar'
 
 const AgentDetails = ({isLoggedIn, user}) => {
     const {id} = useParams()
@@ -31,7 +32,7 @@ const AgentDetails = ({isLoggedIn, user}) => {
             <NavBar isloggedIn={isLoggedIn} user={user}/>
 
             <main id="content">
-
+            <Searchbar />
             {
 
                 agent

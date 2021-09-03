@@ -1,3 +1,4 @@
+import { MapFormErrors } from "libraries/validation/handlers/error-handlers";
 import { toast } from "react-toastify";
 
 const styles = { 
@@ -41,10 +42,11 @@ function handleServerError(data){
 }
 
 function handleFormError(err){
-    return toast.dark(err.message, {
+    toast.dark(err.message, {
         className: classname,
         style: styles
     })
+    return MapFormErrors(err.errors);
 }
 
 function handleUnauthorizedError(){

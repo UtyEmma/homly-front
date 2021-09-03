@@ -9,7 +9,7 @@ import { FetchDetailsReducer } from "./details-reducer";
 import { AddFavouritesReducer, FetchFavouritesReducer, RemoveFavouritesReducer } from "./favourite-reducer";
 
 import { AgentsListingsReducer, NewListingReducer, StoreListingReducer,
-         ActiveListingsReducer, FetchListingDetails, FetchSingleListing, FetchPopularListingsReducer, SetAsRentedReducer } from "./listing-reducer";
+         ActiveListingsReducer, FetchListingDetails, FetchSingleListing, FetchPopularListingsReducer, SetAsRentedReducer, UpdateListingReducer } from "./listing-reducer";
 import { searchForLocationReducer } from "./location-reducer";
 import { FetchNotificationsReducer } from "./notification-reducer";
 import { DeleteReviewReducer, EditReviewReducer, FetchAgentReviewsReducer, FetchReviewsReducer, ReportUserReducer, SubmitReviewReducer } from "./review-reducers";
@@ -42,6 +42,7 @@ const rootReducer = combineReducers({
     remove_listing: RemoveListingReducer,
     popular_listings: FetchPopularListingsReducer,
     set_as_rented: SetAsRentedReducer,
+    update_listing: UpdateListingReducer,
 
     categories: FetchCategoriesReducer,
 

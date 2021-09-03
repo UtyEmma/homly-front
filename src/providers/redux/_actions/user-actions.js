@@ -19,10 +19,10 @@ export const signup = (data) => (dispatch) => {
                 })
             })
             .catch(error => {
-                Response.error(error.response)
+                const errors = Response.error(error.response)
                 dispatch({
                     type: SIGNUP_FAILURE,
-                    payload: error.response.data
+                    payload: {error: error.response.data, formErrors: errors}
                 })
             })  
             
@@ -46,10 +46,10 @@ export const login = (data) => (dispatch) => {
                 })
             })
             .catch(error => {
-                Response.error(error.response)
+                const errors = Response.error(error.response)
                 dispatch({
                     type: LOGIN_FAILURE,
-                    payload: error.response
+                    payload: {error: error.response.data, formErrors: errors}
                 })
             })
 }

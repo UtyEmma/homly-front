@@ -35,7 +35,7 @@ const Map = withScriptjs(withGoogleMap(({longitude, latitude, isMarkerShown, zoo
             {isMarkerShown && 
                 <Marker    
                 icon={{
-                    url: 'images/googlle-market-02.png',
+                    url: '/images/googlle-market-02.png',
                     anchor: new window.google.maps.Point(17, 46),
                     scaledSize: new window.google.maps.Size(42, 42)
                 }}

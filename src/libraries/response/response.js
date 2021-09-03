@@ -17,17 +17,7 @@ const Response = {
             style: styles
         })
     },
-    error: (data)=>{ console.log(data); Error(data) },
-    toast: (data, type) => {
-        switch (type) {
-            case 'CREATE_LISTING':
-                return toast(<ListingToast listing={data.data.listing}/>)
-                break;
-        
-            default:
-                return null;
-        }
-    }
+    error: (data)=>{ return Error(data) },
 }
 
 export default Response;

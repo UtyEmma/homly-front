@@ -13,7 +13,7 @@ export function signupReducer (state = {}, action) {
         case SIGNUP_SUCCESS:
             return { ...state, success: action.payload, loading: false }
         case SIGNUP_FAILURE:
-            return { ...state, error: action.payload, loading: false }
+            return { ...state, error: action.payload.error, formError: action.payload.formErrors, loading: false }
         default:
             return state;
     }
@@ -26,7 +26,7 @@ export function loginReducer (state = {}, action){
         case LOGIN_SUCCESS:
             return {...state, loading:false, success: action.payload}
         case LOGIN_FAILURE:
-            return {...state, loading:false, error: action.payload}
+            return {...state, loading:false, error: action.payload.error, formError: action.payload.formErrors,}
         default:
             return state;
     }

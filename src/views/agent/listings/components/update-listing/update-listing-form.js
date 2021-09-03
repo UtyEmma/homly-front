@@ -2,27 +2,36 @@ import { useEffect, useState } from "react";
 import 'bs-stepper/dist/css/bs-stepper.min.css'
 import Stepper from 'bs-stepper'
 import { yupResolver } from '@hookform/resolvers/yup';
-import { __updatelisting } from "libraries/validation";
 import { useForm } from "react-hook-form";
 import { UpdateListingDescription } from "./blocks/update-listing-description";
 import { UpdateListingMedia } from "./blocks/update-listing-media";
 import { UpdateListingLocation } from "./blocks/update-listing-location";
 import { UpdateListingDetails } from "./blocks/update-listing-details";
+import { useDispatch } from "react-redux";
+import { UpdateListing } from "providers/redux/_actions/listing/listing-actions";
+import { __updatelisting } from "libraries/validation";
 
 export const UpdateListingForm = ({listing}) => {
 
+    const dispatch = useDispatch()
+
     const [stepper, setStepper] = useState();
+    const [files, setFiles] = useState(listing.images)
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(__updatelisting)
     });
 
-    const handleSuccess = (e) => {
-        console.log(e)
+    const handleSuccess = () => {
+        let form = document.getElementById('create_wishlist_form')
+        let formData = new FormData(form);
+        files.map(file => formData.append('images[]', file))
+
+        dispatch(UpdateListing(formData, listing.unique_id))
     }
 
     const handleErrors = (e) => {
-        console.log(e)
+        console.log(e.target)
     }
 
     useEffect(() => {
@@ -65,7 +74,7 @@ export const UpdateListingForm = ({listing}) => {
                     </div>
                 </div>
                 <div className="bs-stepper-content">
-                    <form className="form" onSubmit={handleSubmit(handleSuccess, handleErrors)} id="create_wishlist_form">
+                    <form className="form" onSubmit={handleSubmit(handleSuccess, handleErrors)} id="create_wishlist_form" encType="multipart/form-data">
                         <div id="description" className="content p-4" role="tabpanel" aria-labelledby="property-info-trigger" >
                             
                             <UpdateListingDescription listing={listing} />
@@ -77,7 +86,7 @@ export const UpdateListingForm = ({listing}) => {
 
                         <div id="media" className="content p-4" role="tabpanel" aria-labelledby="location-info-trigger">
                             
-                            <UpdateListingMedia listing={listing} />
+                            <UpdateListingMedia listing={listing} files={files} setFiles={setFiles} />
 
                             <div className='row d-flex justify-content-end'>
                                 <button type="button" onClick={() => {stepper.previous()}} className="btn">Previous</button>

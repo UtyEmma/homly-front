@@ -3,8 +3,7 @@ import React, { useState } from 'react'
 import ListingVideo from 'views/tenants/listings/components/listing-details/listing-video'
 import Listing from 'views/tenants/listings/listings'
 
-export const UpdateListingMedia = ({listing}) => {
-    const [files, setFiles] = useState()
+export const UpdateListingMedia = ({listing, files, setFiles}) => {
     const [video, setVideo] = useState(listing.video_links)
 
     const compileMedia = () => {}

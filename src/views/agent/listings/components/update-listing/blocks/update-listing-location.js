@@ -9,11 +9,11 @@ import { MapDisplay } from 'views/agent/layouts/listings/blocks/map/map-display'
 
 export const UpdateListingLocation = ({listing}) => {
     const dispatch = useDispatch();
-    const [city, setCity] = useState()
-    const [state, setState] = useState()
+    const [city, setCity] = useState(listing.city)
+    const [state, setState] = useState(listing.state)
     const [landmark, setLandmark] = useState(listing.landmark)
-    const [long, setLong] = useState(listing.longitude)
-    const [lat, setLat] = useState(listing.latitude)
+    const [long, setLong] = useState(parseInt(listing.longitude))
+    const [lat, setLat] = useState(parseInt(listing.latitude))
     const [zoom, setZoom] = useState(11)
 
     const updateMapData = (e) => {
@@ -77,13 +77,13 @@ export const UpdateListingLocation = ({listing}) => {
                             <div className="col-12 px-2">
                                 <div className="form-group">
                                 <label htmlFor="state"  className="text-heading">State</label>
-                                <State setSelectedState={setSelectedState} classes="form-control form-control-lg border-0 selectpicker" id="state" name="state" />
+                                <State setSelectedState={setSelectedState} defaultValue={state} classes="form-control form-control-lg border-0 " id="state" name="state" />
                                 </div>
                             </div>
                             <div className="col-12 px-2">
                                 <div className="form-group">
                                 <label htmlFor="city" className="text-heading">City</label>
-                                <LocalGovt selectedState={state} onChange={updateMapData} classes="form-control form-control-lg border-0" id="city" name="city" />
+                                <LocalGovt selectedState={state} defaultValue={city} onChange={updateMapData} classes="form-control form-control-lg border-0" id="city" name="city" />
                                 </div>
                             </div>
                         </div>
@@ -97,7 +97,7 @@ export const UpdateListingLocation = ({listing}) => {
                             <div className="col-12 px-2">
                                 <div className="form-group">
                                 <label htmlFor="landmark" className="text-heading">Landmark / Nearest Bus Stop</label>
-                                <InputAddress lat={lat} long={long} setLandmark={setLandmark}  setLatLong={setLatLong} id="landmark"/>
+                                <InputAddress lat={lat} long={long} setLandmark={setLandmark} defaultValue={listing.landmark}  setLatLong={setLatLong} id="landmark"/>
                                 <input hidden name="landmark" value={landmark} type="text"/>
                                 </div>
                             </div>
