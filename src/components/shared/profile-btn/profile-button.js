@@ -51,32 +51,29 @@ function LoggedIn(user) {
                     }
                 </div>
                 <a href="" className="nav-link  dropdown-toggle " data-toggle="dropdown">Hello {user.firstname}</a>
-                <div className="dropdown-menu px-2 dropdown-menu-right">
-                    {/* <div className="row"> */}
-                        {/* <div className="col-12"> */}
-                            <a className="dropdown-item rounded py-2 align-middle" href="/profile">
-                                <i className="fa fa-user mr-2"></i>
-                                My Profile
-                            </a>
 
-                            <a className="dropdown-item rounded py-2 align-middle" href="/favourites">
-                                <i className="fa fa-heart mr-2"></i>
-                                Favourites
-                            </a>
+                <div className="dropdown-menu px-2 dropdown-lg dropdown-menu-right" style={{width: "250px"}}>
+                    <a className="dropdown-item rounded py-2 align-middle" href="/profile">
+                        <i className="fa fa-user mr-2"></i>
+                        My Profile
+                    </a>
 
-
-                            <a className="dropdown-item rounded py-2 align-middle" href="/wishlists">
-                                <i className="fa fa-heart mr-2"></i>
-                                Wishlists
-                            </a>
+                    <a className="dropdown-item rounded py-2 align-middle" href="/favourites">
+                        <i className="fa fa-heart mr-2"></i>
+                        Favourites
+                    </a>
 
 
-                            <button className="dropdown-item  btn btn-secondary rounded py-2 align-middle" type="button" onClick={logout} >
-                                <i className="mr-2"></i>
-                                Logout
-                            </button>
-                        {/* </div> */}
-                    {/* </div> */}
+                    <a className="dropdown-item rounded py-2 align-middle" href="/wishlists">
+                        <i className="fa fa-heart mr-2"></i>
+                        Wishlists
+                    </a>
+
+
+                    <button className="dropdown-item  btn btn-secondary rounded py-2 align-middle" type="button" onClick={logout} >
+                        <i className="mr-2"></i>
+                        Logout
+                    </button>
                 </div>
             </li>
         </ul>

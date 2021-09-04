@@ -13,6 +13,7 @@
     "bootstrap": "^5.0.2",
     "bootstrap-select": "^1.13.18",
     "bs-stepper": "^1.7.0",
+    "env-cmd": "^10.1.0",
     "filepond": "^4.28.2",
     "filepond-plugin-file-encode": "^2.1.10",
     "filepond-plugin-file-validate-type": "^1.2.6",
