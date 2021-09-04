@@ -50,10 +50,10 @@ function LoggedIn(user) {
                         </div>
                     }
                 </div>
-                <a href="" className="nav-link px-2 dropdown-toggle " data-toggle="dropdown">Hello {user.firstname}</a>
-                <div className="dropdown-menu px-3 dropdown-menu-right">
-                    <div className="row">
-                        <div className="col-12">
+                <a href="" className="nav-link  dropdown-toggle " data-toggle="dropdown">Hello {user.firstname}</a>
+                <div className="dropdown-menu px-2 dropdown-menu-right">
+                    {/* <div className="row"> */}
+                        {/* <div className="col-12"> */}
                             <a className="dropdown-item rounded py-2 align-middle" href="/profile">
                                 <i className="fa fa-user mr-2"></i>
                                 My Profile
@@ -75,8 +75,8 @@ function LoggedIn(user) {
                                 <i className="mr-2"></i>
                                 Logout
                             </button>
-                        </div>
-                    </div>
+                        {/* </div> */}
+                    {/* </div> */}
                 </div>
             </li>
         </ul>

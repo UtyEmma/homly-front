@@ -1,6 +1,5 @@
 import { LocalGovt, State } from 'components/city-state/city-state'
-import React, { useEffect, useState } from 'react'
-import { Redirect, useHistory } from 'react-router-dom'
+import React, { useState } from 'react'
 import { SearchbarSelectListing } from '../details/categories'
 import { SelectAmenities } from '../details/amenities';
 
@@ -124,7 +123,7 @@ export default function Searchbar({parsed}) {
                     <div className="form-group mb-0 position-relative">
                     <a href="#advanced-search-filters-2-mobile" className="icon-primary btn advanced-search shadow-none pr-3 pl-0 d-flex align-items-center position-absolute pos-fixed-left-center py-0 h-100 border-right collapsed" data-toggle="collapse" data-target="#advanced-search-filters-2-mobile" aria-expanded="true" aria-controls="advanced-search-filters-2-mobile">
                     </a>
-                    <input type="text" className="form-control form-control-lg border-0 shadow-none pr-9 pl-11 bg-white placeholder-muted" name="key-word" placeholder="Search..." />
+                    <input type="text" defaultValue={parsed && parsed.keyword} className="form-control form-control-lg border-0 shadow-none pr-9 pl-11 bg-white placeholder-muted" name="keyword" placeholder="Search..." />
                     <button type="submit" className="btn position-absolute pos-fixed-right-center p-0 text-heading fs-20 px-3 shadow-none h-100 border-left bg-white">
                         <i className="far fa-search" />
                     </button>
@@ -133,7 +132,7 @@ export default function Searchbar({parsed}) {
                 <div id="advanced-search-filters-2-mobile" className="col-12 pt-2 collapse" data-parent="#accordion-2-mobile">
                     <div className="row mx-n2">
                     <div className="col-sm-6 pt-4 px-2">
-                        <select className="form-control border-0 shadow-none form-control-lg selectpicker bg-white" title="Select" data-style="btn-lg py-2 h-52 bg-white" name="type">
+                        <select className="form-control border-0 shadow-none form-control-lg selectpicker bg-white" title="Select" data-style="btn-lg py-2 h-52 bg-white">
                         <option>All status</option>
                         <option>For Rent</option>
                         <option>For Sale</option>

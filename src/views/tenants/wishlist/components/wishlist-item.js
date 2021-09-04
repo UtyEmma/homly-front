@@ -1,6 +1,11 @@
 import React from 'react'
 
 const  WishlistItem = ({item}) => {
+
+    const deleteWishlistItem = () => {
+        
+    }
+
     return (
         <div className="col-xxl-3 col-lg-4 col-md-6 px-2 mb-2" style={{minHeight: '100%'}}>
             <div className="card h-100">
@@ -9,7 +14,7 @@ const  WishlistItem = ({item}) => {
                     <p className="font-weight-500 text-gray-light mb-3">{item.area} {item.city}, {item.state}</p>
                     
                     <div className="d-flex justify-content-between align-items-center ">
-                        <span className="badge badge-indigo text-capitalize">{item.category}</span>
+                        <span className="badge badge-indigo text-uppercase fs-12">{item.category}</span>
                         <p className="fs-17 font-weight-bold text-heading mb-0 lh-1">&#8358; {item.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<span className="text-gray-light font-weight-500 fs-14"> / year</span></p>
                     </div>
 

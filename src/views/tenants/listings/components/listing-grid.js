@@ -9,19 +9,19 @@ export default function ListingGrid({listing}) {
 
     const item = useSelector((state) => state.add_favourites)
     const {loading, status} = item
-    
+
+    const [loaded, setLoaded] = useState(false)
     const [favourite, setFavourite] = useState()
 
-    const addToFavourites = (id) => {
-        dispatch(AddListingToFavourites(id))
-    }
-
-    const setFavStatus = () => {
-        setFavourite(status)
+    const addToFavourites = (e) => {
+        e.preventDefault(); 
+        setFavourite(!favourite)
+        dispatch(AddListingToFavourites(listing.unique_id))
     }
 
     useEffect(() => {
-        status && setFavStatus()
+        !loaded && setFavourite(listing.isFavourite)
+        setLoaded(true)
     }, [status])
 
     return (
@@ -43,8 +43,8 @@ export default function ListingGrid({listing}) {
                     </ul>
                     <ul className="list-inline mb-0 d-flex align-items-end mr-n3">
                         <li className="list-inline-item mr-3 h-32" data-toggle="tooltip" title="Wishlist">
-                            <a href="#" style={{cursor: 'pointer'}} onClick={(e) => {e.preventDefault(); addToFavourites(listing.unique_id)}} className={`text-white fs-20 hover-primary`}>
-                                <i className={` fa-heart ${favourite ? "fas text-primary" : 'far'}`} />
+                            <a href="#" style={{cursor: 'pointer'}} onClick={addToFavourites} className={`text-white fs-20 hover-primary`}>
+                                <i className={`${favourite ? "fas text-primary" : 'far'} fa-heart`} />
                             </a>
                         </li>
                     </ul>
@@ -58,7 +58,7 @@ export default function ListingGrid({listing}) {
                     
                     <p className="font-weight-500 text-gray-light mb-0 d-inline-block text-nowrap text-truncate w-100">{listing.address}, {listing.city}, {listing.state}</p>
                 
-                    <p className="card-text mb-2 ml-0">{listing.description.split(" ").splice(0,15).join(" ")}...</p>
+                    <p className="card-text mb-2 ml-0">{listing.description.split(" ").splice(0,12).join(" ")}...</p>
                 
                     <p className="fs-17 font-weight-bold text-heading mb-0 lh-16">
                         &#8358; {listing.initial_fees.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}

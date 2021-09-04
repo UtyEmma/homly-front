@@ -1,5 +1,5 @@
 import { LocalGovt, State } from 'components/city-state/city-state';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SelectTypes } from 'views/layouts/components/details/categories';
 
 export default function ListingFilter({params, setParams}) {
@@ -12,6 +12,10 @@ export default function ListingFilter({params, setParams}) {
     }
 
     const [selectedState, setSelectedState] = useState();
+
+    useEffect(() => {
+        selectedState && setParams({...params, city: ""})
+    }, [selectedState])
 
     return (
         <nav aria-label="breadcrumb">
@@ -59,7 +63,7 @@ export default function ListingFilter({params, setParams}) {
                         </select>
                     </div>
 
-                    <div className="form-group p-1">
+                    {/* <div className="form-group p-1">
                         <label htmlFor="room" className="sr-only">Bathrooms</label>
                         <select className="form-control border-0 shadow-xxs-1 bg-white font-weight-600" title="Rooms" data-style="bg-white" onChange={parseQueryParams} name="rooms" id="room">
                             <option selected defaultValue="">Bathrooms</option>
@@ -74,7 +78,7 @@ export default function ListingFilter({params, setParams}) {
                             <option defaultValue="9">9</option>
                             <option defaultValue="10">10+</option>
                         </select>
-                    </div>
+                    </div> */}
                 </form>
             </div>
         </nav>

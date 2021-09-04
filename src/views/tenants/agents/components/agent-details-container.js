@@ -1,9 +1,9 @@
 import RatingStar from 'components/rating/rating-star'
 import React from 'react'
-import AgentsListings from './agent-listings'
-import AgentReviews from './agent-reviews'
+import AgentsListings from './agent-listings/agent-listings'
+import AgentReviews from './agent-reviews/agent-reviews'
 
-export default function AgentDetailsContainer({agent, listings, reviews}) {
+export default function AgentDetailsContainer({agent, listings, reviews, fetchAgent, status}) {
     return (
         <>
             <section className="py-7  page-title">
@@ -105,7 +105,7 @@ export default function AgentDetailsContainer({agent, listings, reviews}) {
                     
                     <AgentsListings listings={listings} />
 
-                    <AgentReviews reviews={reviews} />
+                    <AgentReviews status={status} reviews={reviews} agent={agent} fetchAgent={fetchAgent} />
                 </div>
                 </div>
                 </div>

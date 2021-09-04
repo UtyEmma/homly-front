@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ModalOne from 'views/layouts/components/modals/modal-one'
 import Searchbar from 'views/layouts/components/search/searchbar'
 import Footer from 'components/shared/footer'
@@ -12,14 +12,17 @@ import './css/wishlist.css'
 import { ToastContainer } from 'react-toastify'
 import { FetchWishlist } from 'providers/redux/_actions/wishlist-actions'
 import { useDispatch, useSelector } from 'react-redux'
-import WishlistPlaceholder from './components/wishlist-placeholder'
 import Preloader from 'components/preloader/preloader'
 
 const Wishlist = ({isLoggedIn, user}) => {
 
     const dispatch = useDispatch();
     const fetchWishlist = useSelector((state) => state.wishlists)
+    
     const {loading, wishlists} = fetchWishlist
+    const [wishlist, setWishlist] = useState()
+
+    const [isLoading, setIsLoading] = useState(true)
 
     const loadWishlists = () => {
         dispatch(FetchWishlist())
@@ -27,13 +30,12 @@ const Wishlist = ({isLoggedIn, user}) => {
 
     useEffect(() => {
         !wishlists && loadWishlists()
+        wishlists && setIsLoading(false)
     }, [wishlists])
 
     return (
         <div>
-            <Preloader loading={loading}/>
-            
-            <ToastContainer />
+            <Preloader loading={isLoading}/>
 
             <NavBar isloggedIn={isLoggedIn} user={user}/>
 
@@ -78,7 +80,7 @@ const Wishlist = ({isLoggedIn, user}) => {
                 <div className="row">
                     <div className="col-md-6 d-md-block d-none p-0 rounded-lg-top-left bg-overlay" style={wishListStyle}></div>
                     <div className="col-md-6 pt-5">
-                        <WishlistForm />
+                        <WishlistForm setIsLoading={setIsLoading} />
                     </div>
                 </div>
             </ModalOne>

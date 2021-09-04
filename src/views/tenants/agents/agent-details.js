@@ -11,7 +11,7 @@ import AgentDetailsContainer from './components/agent-details-container'
 import NotFound from 'views/not-found'
 import Searchbar from 'views/layouts/components/search/searchbar'
 
-const AgentDetails = ({isLoggedIn, user}) => {
+const AgentDetails = ({isLoggedIn, user, status}) => {
     const {id} = useParams()
     const dispatch = useDispatch()
 
@@ -39,7 +39,7 @@ const AgentDetails = ({isLoggedIn, user}) => {
                 
                 ?
 
-                <AgentDetailsContainer agent={agent.agent} listings={agent.listing} reviews={agent.reviews} />
+                <AgentDetailsContainer agent={agent.agent} status={status} fetchAgent={loadAgent} listings={agent.listing} reviews={agent.reviews} />
 
                 :
 

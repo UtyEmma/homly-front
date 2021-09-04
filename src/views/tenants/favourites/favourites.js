@@ -1,18 +1,20 @@
 import { FetchFavourites } from 'providers/redux/_actions/favourites-actions'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ToastContainer } from 'react-toastify'
-import ListingGrid from '../listings/components/listing-grid'
 import Preloader from 'components/preloader/preloader'
 import Searchbar from 'views/layouts/components/search/searchbar'
 import NavBar from 'components/shared/nav-bar'
 import Footer from 'components/shared/footer'
+import FavouriteItem from './components/favourite-item'
+import FavouritesNotFound from 'components/404/404-favourites'
 
 export const Favourites = ({user, isLoggedIn}) => {
 
     const dispatch = useDispatch()
     const favourites = useSelector(state => state.favourites)
-    const {loading, listings} = favourites
+    let {loading, listings} = favourites
+
+    const [allFavourites, setFavourites] = useState()
 
     const GetFavourites = () => {
         dispatch(FetchFavourites())
@@ -20,6 +22,7 @@ export const Favourites = ({user, isLoggedIn}) => {
 
     useEffect(() => {
         !listings && GetFavourites()
+        listings && setFavourites(listings)
     }, [listings])
 
     return (
@@ -49,13 +52,15 @@ export const Favourites = ({user, isLoggedIn}) => {
                         <div className="container container-xxl">
                             <div className="row">         
                                 {
-                                    listings && listings.length > 0
+                                    allFavourites && allFavourites.length > 0
                                     
-                                    &&
+                                    ?
 
-                                    listings.map((listing, index) => (
-                                        <ListingGrid listing={listing} key={index} />
-                                    ))
+                                    allFavourites.map((favourite, index) => <FavouriteItem listing={favourite} fetchFavourites={GetFavourites} key={favourite.unique_id} />)
+
+                                    :
+
+                                    <FavouritesNotFound />
                                 }       
                             </div>
                         </div>
