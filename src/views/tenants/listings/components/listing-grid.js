@@ -1,7 +1,29 @@
-import React from 'react'
+import { AddListingToFavourites } from 'providers/redux/_actions/favourites-actions'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import '../css/listing.css'
 
 export default function ListingGrid({listing}) {
+    
+    const dispatch = useDispatch()
+
+    const item = useSelector((state) => state.add_favourites)
+    const {loading, status} = item
+
+    const [loaded, setLoaded] = useState(false)
+    const [favourite, setFavourite] = useState()
+
+    const addToFavourites = (e) => {
+        e.preventDefault(); 
+        setFavourite(!favourite)
+        dispatch(AddListingToFavourites(listing.unique_id))
+    }
+
+    useEffect(() => {
+        !loaded && setFavourite(listing.isFavourite)
+        setLoaded(true)
+    }, [status])
+
     return (
         <div className="col-md-6 mb-6 listing-grid">
             <div className="card border-0" >
@@ -14,16 +36,16 @@ export default function ListingGrid({listing}) {
                     <div className="mt-auto d-flex hover-image">
                     <ul className="list-inline mb-0 d-flex align-items-end mr-auto">
                         <li className="list-inline-item mr-2" data-toggle="tooltip" title={`${listing.images.length} Images`}>
-                            <a href="#" className="text-white hover-primary">
+                            <a  className="text-white hover-primary">
                                 <i className="far fa-images" /><span className="pl-1">{listing.images.length}</span>
                             </a>
                         </li>
                     </ul>
                     <ul className="list-inline mb-0 d-flex align-items-end mr-n3">
                         <li className="list-inline-item mr-3 h-32" data-toggle="tooltip" title="Wishlist">
-                        <a href="#" className="text-white fs-20 hover-primary">
-                            <i className="far fa-heart" />
-                        </a>
+                            <a href="#" style={{cursor: 'pointer'}} onClick={addToFavourites} className={`text-white fs-20 hover-primary`}>
+                                <i className={`${favourite ? "fas text-primary" : 'far'} fa-heart`} />
+                            </a>
                         </li>
                     </ul>
                     </div>
@@ -31,12 +53,12 @@ export default function ListingGrid({listing}) {
                 </div>
                 <div className="card-body pt-3 px-0 pb-1">
                     <h2 className="fs-16 mb-1">
-                        <a href={`listings/${listing.slug}`} className="text-dark hover-primary">{listing.title}</a>
+                        <a href={`/listings/${listing.slug}`} className="d-inline-block text-dark hover-primary w-100 text-nowrap text-truncate">{listing.title}</a>
                     </h2>
                     
-                    <p className="font-weight-500 text-gray-light mb-0">{listing.address}, {listing.city}, {listing.state}</p>
+                    <p className="font-weight-500 text-gray-light mb-0 d-inline-block text-nowrap text-truncate w-100">{listing.address}, {listing.city}, {listing.state}</p>
                 
-                    <p className="card-text mb-2 ml-0" style={{textOverflow: 'ellipsis'}} >{listing.description}</p>
+                    <p className="card-text mb-2 ml-0">{listing.description.split(" ").splice(0,12).join(" ")}...</p>
                 
                     <p className="fs-17 font-weight-bold text-heading mb-0 lh-16">
                         &#8358; {listing.initial_fees.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}

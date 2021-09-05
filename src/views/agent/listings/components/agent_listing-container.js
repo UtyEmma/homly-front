@@ -36,7 +36,7 @@ export default function AgentListingContainer({listings}) {
             </div>
             </div>
             <div className="table-responsive">
-                <table className="table table-hover bg-white border rounded-lg">
+                <table className="table table-hover bg-white border rounded-lg ">
                     <thead className="thead-sm thead-black">
                         <tr>
                             <th scope="col" className="border-top-0 px-6 pt-5 pb-4">Listing title</th>

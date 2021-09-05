@@ -80,8 +80,6 @@ export function ReviewItem({reviews}) {
                                                 </form>
                                             </div>
                                         </div>
-
-
                                     }
                                 </div>
                             </div>

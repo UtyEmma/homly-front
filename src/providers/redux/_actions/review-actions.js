@@ -6,7 +6,9 @@ const {
     SUBMIT_REVIEW_REQUEST, SUBMIT_REVIEW_SUCCESS, SUBMIT_REVIEW_FAILURE,
     FETCH_AGENT_REVIEWS_REQUEST, FETCH_AGENT_REVIEWS_SUCCESS, FETCH_AGENT_REVIEWS_FAILURE,
     FETCH_REVIEWS_REQUEST, FETCH_REVIEWS_SUCCESS, FETCH_REVIEWS_FAILURE,
-    REPORT_USER_REQUEST, REPORT_USER_SUCCESS, REPORT_USER_FAILURE
+    REPORT_USER_REQUEST, REPORT_USER_SUCCESS, REPORT_USER_FAILURE,
+    EDIT_REVIEW_REQUEST, EDIT_REVIEW_SUCCESS, EDIT_REVIEW_FAILURE,
+    DELETE_REVIEW_REQUEST, DELETE_REVIEW_SUCCESS, DELETE_REVIEW_FAILURE
 } = _REVIEWS
 
 export const SubmitReview = (data, id) => (dispatch) => {
@@ -88,6 +90,48 @@ export const ReportUser = (id, data) => (dispatch) => {
                         Response.error(error.response)
                         dispatch({
                             type: REPORT_USER_FAILURE,
+                            payload: error.response
+                        })
+                    })
+}
+
+export const EditReview = (data) => (dispatch) => {
+    console.log("Submitting Edited Review...")
+
+    dispatch({type: EDIT_REVIEW_REQUEST})
+    ReviewsService.editReviews(data)
+                    .then((response) => {
+                        Response.success(response.data)
+                        dispatch({
+                            type: EDIT_REVIEW_SUCCESS,
+                            payload: response.data.data
+                        })
+                    })
+                    .catch((error) => {
+                        Response.error(error.response)
+                        dispatch({
+                            type: EDIT_REVIEW_FAILURE,
+                            payload: error.response
+                        })
+                    })
+}
+
+export const DeleteReview = (id, data) => (dispatch) => {
+    console.log("Deleting Review...")
+    dispatch({type: DELETE_REVIEW_REQUEST})
+
+    ReviewsService.deleteReviews(id, data)
+                    .then((response) => {
+                        Response.success(response.data)
+                        dispatch({
+                            type: DELETE_REVIEW_SUCCESS,
+                            payload: response.data.data
+                        })
+                    })
+                    .catch((error) => {
+                        Response.error(error.response)
+                        dispatch({
+                            type: DELETE_REVIEW_FAILURE,
                             payload: error.response
                         })
                     })

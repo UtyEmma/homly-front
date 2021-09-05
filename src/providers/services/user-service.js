@@ -46,13 +46,11 @@ async function getTenant(){
 }
 
 async function logout(){
-    const request = {
-        config: {
-            headers: authHeaders
-        }
+    const config = {
+        headers: authHeaders
     }
 
-    return await Request.get('tenant/logout', request)
+    return await Request.get('tenant/logout', config)
 }
 
 async function updateTenantData(data) {

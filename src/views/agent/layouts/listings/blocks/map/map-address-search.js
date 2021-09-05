@@ -3,7 +3,8 @@ import { AsyncTypeahead } from 'react-bootstrap-typeahead'
 import usePlacesAutocomplete from 'use-places-autocomplete';
 import './css/map-address.css'
 
-export default function InputAddress({setLandmark, setMapData, mapData, setLatLong, name}) {
+export default function InputAddress({setLandmark, setLatLong, name, defaultValue}) {
+
     const [isLoading, setIsLoading] = useState(false)
     const [options, setOptions] = useState([])
     const { ready, value, suggestions, setValue, clearSuggestions, } = usePlacesAutocomplete();
@@ -14,9 +15,8 @@ export default function InputAddress({setLandmark, setMapData, mapData, setLatLo
         clearSuggestions();
     }
 
-    const updateSuggestions = (items) => {
-        let array = [];
-        array = items.data.map((item, index) => {
+    const updateSuggestions = ({data}) => {
+        const array = data.map((item, index) => {
             return item.description;
         });
         setOptions(array)  
@@ -43,6 +43,7 @@ export default function InputAddress({setLandmark, setMapData, mapData, setLatLo
                 onSearch={handleSearch}
                 onChange={handleSelection}
                 options={options}
+                defaultInputValue={defaultValue}
                 name={name}
                 className="form-control form-control-lg border-0 p-0"
                 placeholder="Provide a popular location"

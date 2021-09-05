@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
 
-function UserRoute({ component: Component, ...restOfProps }) {
+function UserRoute({ isLoading, component: Component, ...restOfProps}) {
   const isAuthenticated = localStorage.getItem("isAuthenticated");
   const userType = isAuthenticated ? localStorage.getItem('type') : "guest";
   const user_object = JSON.parse(localStorage.getItem('user'));
@@ -13,7 +13,7 @@ function UserRoute({ component: Component, ...restOfProps }) {
     <Route
       {...restOfProps}
       render={(props) =>
-            <Component {...props} status={userType} isLoggedIn={isAuthenticated} user={user} />
+            <Component {...props} status={userType} isLoading={isLoading} isLoggedIn={isAuthenticated} user={user} />
       }
     />
   );

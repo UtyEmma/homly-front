@@ -4,7 +4,7 @@ import ListingTabItem from './components/listing-tab-item'
 import { FetchPopularListings } from 'providers/redux/_actions/listing/listing-actions'
 import { useDispatch, useSelector } from 'react-redux'
 
-export default function PopularSection({setIsLoading}) {
+export default function PopularSection({isLoading}) {
     const dispatch = useDispatch()
     const popular_listings = useSelector((state) => state.popular_listings)
     const {loading, listings} = popular_listings
@@ -15,10 +15,16 @@ export default function PopularSection({setIsLoading}) {
 
     useEffect(() => {
         !listings && loadPopularListings()
-        setIsLoading(loading)
+        isLoading(loading)
     }, [listings])
 
     return (
+        <>
+        {
+            
+            listings && listings.length > 0
+
+            &&
         <section className="pt-lg-12 pt-11 pb-11">
             <div className="container container-xxl">
 
@@ -28,11 +34,6 @@ export default function PopularSection({setIsLoading}) {
                         <span className="heading-divider" />
                         <p className="mb-7">Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse suscipit</p>
                     </div>
-
-                    {
-                        listings 
-
-                        &&
 
                         <Tab.Container id="controlled-tab-example" defaultActiveKey={listings[0].category.slug} >
                             <div className="col-lg-7 col-xxl-6 ">
@@ -74,8 +75,6 @@ export default function PopularSection({setIsLoading}) {
                             </TabContent>
                                 
                         </Tab.Container>
-
-                    }
                 </div>
 
                 <div className="text-center">
@@ -83,5 +82,7 @@ export default function PopularSection({setIsLoading}) {
                 </div>
             </div>
         </section>
+        }
+        </>
     )
 }

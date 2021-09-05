@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { StoreListing } from '../../../../../providers/redux/_actions/listing/listing-actions';
 
-export default function ListingDetails() {
-    const dispatch = useDispatch();
-    const listing = useSelector((state) => state.store_listing.store);
-
+export default function ListingDetails({formErrors}) {
     return (
         <div className="tab-pane tab-pane-parent fade px-0" id="detail" role="tabpanel" aria-labelledby="detail-tab">
             <div className="card bg-transparent border-0">
@@ -26,22 +21,25 @@ export default function ListingDetails() {
                         <div className="row">
                             <div className="col-lg-4">
                                 <div className="form-group">
-                                    <label for="bedrooms" class="text-heading">Number of Bedrooms</label>
-                                        <input type="number" class="form-control form-control-lg border-0" id="bedrooms" min="1" name="no_bedrooms"></input>
+                                    <label htmlFor="bedrooms" className="text-heading">Number of Bedrooms</label>
+                                    <input type="number" className="form-control form-control-lg border-0" id="bedrooms" min="1" name="no_bedrooms" />
+                                    <p className="text-danger fs-12 mt-1">{formErrors.no_bedrooms?.message}</p>
                                 </div>
                             </div>
 
                             <div className="col-lg-4">
                                 <div className="form-group">
-                                    <label for="bedrooms" class="text-heading">Number of Bathrooms</label>
-                                        <input type="number" class="form-control form-control-lg border-0" id="bathrooms" min="1" name="no_bathrooms"></input>
+                                    <label htmlFor="bedrooms" className="text-heading">Number of Bathrooms</label>
+                                    <input type="number" className="form-control form-control-lg border-0" id="bathrooms" min="1" name="no_bathrooms" />
+                                    <p className="text-danger fs-12 mt-1">{formErrors.no_bathrooms?.message}</p>
                                 </div>
                             </div>
 
                             <div className="col-lg-4">
                                 <div className="form-group">
-                                    <label for="bedrooms" class="text-heading">Floor Number</label>
-                                        <input type="number" class="form-control form-control-lg border-0" id="floors" name="no_floors" min="1"></input>
+                                    <label htmlFor="bedrooms" className="text-heading">Floor Number</label>
+                                        <input type="number" className="form-control form-control-lg border-0" id="floors" name="no_floors" min="1" />
+                                        <p className="text-danger fs-12 mt-1">{formErrors.no_floor?.message}</p>
                                 </div>
                             </div>
                         </div>
@@ -50,6 +48,7 @@ export default function ListingDetails() {
                             <div className="form-group">
                             <label htmlFor="extra-details" className="text-heading">Extra details</label>
                                 <textarea className="form-control border-0" rows={5} id="extra_info" name="extra_info" />
+                                <p className="text-danger fs-12 mt-1">{formErrors.extra_info?.message}</p>
                             </div>
                         </div>
                         </div>

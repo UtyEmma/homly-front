@@ -1,4 +1,4 @@
-const auth = {
+export const auth = {
     status : () => {
         return localStorage.getItem('isAuthenticated');
     },

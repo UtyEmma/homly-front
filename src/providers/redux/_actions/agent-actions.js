@@ -27,10 +27,10 @@ export const AgentSignup = (data) => (dispatch) => {
                 })
             })
             .catch(error => {
-                Response.error(error.response)
+                const errors = Response.error(error.response)
                 dispatch({
                     type: SIGNUP_FAILURE,
-                    payload: error.response
+                    payload: {error: error, formError: errors},
                 })
             })  
 }
@@ -55,10 +55,10 @@ export const AgentLogin = (data) => (dispatch) => {
                 })
             })
             .catch(error => {
-                Response.error(error.response)
+                let errors = Response.error(error.response)
                 dispatch({
                     type: LOGIN_FAILURE,
-                    payload: error.response
+                    payload: {errors: error.response, formError: errors}
                 })
             })
 }
@@ -79,10 +79,10 @@ export const UpdateAgentProfile = (data) => (dispatch) => {
                     })
                 })
                 .catch((error) => {
-                    Response.error(error.response)
+                    let errors = Response.error(error.response)
                     dispatch({
                         type: UPDATE_FAILURE,
-                        payload: error.response
+                        payload: {error: error.response, formError: errors}
                     })
                 })
 }
@@ -119,7 +119,9 @@ export const AgentLogout = () => (dispatch) => {
                     localStorage.removeItem('type');
                     return window.location.href = '/agent-login'
                 })
-                .catch((error) => {})
+                .catch((error) => {
+                    console.log(error.response)
+                })
 }
 
 

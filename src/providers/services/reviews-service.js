@@ -31,14 +31,32 @@ export const ReviewsService = {
         return await Request.get(`reviews/fetch/${id}`, config)
     },
 
-    reportUser: async(id, data) => {
-        const options = {
+    reportUser: async (id, data) => {
+        const option = {
             config : {
                 headers: options
             },
             payload : data
         }
-        return await Request.post(`agent/reviews/report/${id}`, options)
+        return await Request.post(`agent/reviews/report/${id}`, option)
+    },
+
+    editReviews: async (data) => {
+        const option = {
+            config : {
+                headers: options
+            },
+            payload : data
+        }
+
+        return await Request.post('tenant/reviews/edit', option)
+    },
+
+    deleteReviews: async (id) => {
+        const config = {
+            headers: options
+        }
+        return await Request.get(`tenant/reviews/delete/${id}`, config)
     }
 
 }

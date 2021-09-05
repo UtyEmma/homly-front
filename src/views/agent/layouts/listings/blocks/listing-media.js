@@ -3,17 +3,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreListing } from 'providers/redux/_actions/listing/listing-actions';
 
-export default function ListingMedia({files, setFiles}) {
-
-    const dispatch = useDispatch();
-    const listing = useSelector((state) => state.store_listing.store);
-
-    const compileMedia = (e) => {
-        dispatch(StoreListing({
-            ...listing,
-            [e.target.name] : e.target.value
-        }))
-    }
+export default function ListingMedia({files, setFiles, formErrors}) {
 
     return (
         <div className="tab-pane tab-pane-parent fade px-0" id="media" role="tabpanel" aria-labelledby="media-tab">
@@ -35,7 +25,7 @@ export default function ListingMedia({files, setFiles}) {
                             of your property</h3>
                             <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
                             adipiscing elit</p>
-                           <FileInput files={files} setFiles={setFiles}/>
+                           <FileInput name="" files={files} setFiles={setFiles}/>
                         </div>
                         </div>
                     </div>
@@ -48,8 +38,9 @@ export default function ListingMedia({files, setFiles}) {
                             <div className="form-row mx-n2">
                                 <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
                                     <div className="form-group mb-md-0">
-                                    <label htmlFor="embed-video-id"  className="text-heading">Upload Video File</label>
-                                    <input type="text" name="video_links" onChange={compileMedia} className="form-control form-control-lg border-0" placeholder="Youtube, Vimeo or any link to your Video" id="embed-video-id" />
+                                        <label htmlFor="embed-video-id"  className="text-heading">Upload Video File</label>
+                                        <input type="text" name="video_links" className="form-control form-control-lg border-0" placeholder="Youtube, Vimeo or any link to your Video" id="embed-video-id" />
+                                        <p className="text-danger fs-12 mt-1">{formErrors.video_links?.message}</p>
                                     </div>
                                 </div>
                             </div>

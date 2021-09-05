@@ -14,14 +14,14 @@ export default function Sidebar() {
                     <div className="sticky-area shadow-xs-1 py-3">
                         <div className="d-flex px-3 px-xl-6 w-100">
                         <a className="navbar-brand" href="/">
-                            <img src="images/logo.png" alt="HomeID" />
+                            <img src="/images/logo.png" alt="HomeID" />
                         </a>
                         <div className="ml-auto d-flex align-items-center ">
                             <div className="d-flex align-items-center d-xl-none">
                             <div className="dropdown px-3">
                                 <a href="#" className="dropdown-toggle d-flex align-items-center text-heading" data-toggle="dropdown">
                                 <div className="w-48px">
-                                    <img src="images/testimonial-5.jpg" alt="Ronald Hunter" className="rounded-circle" />
+                                    <img src="/images/testimonial-5.jpg" alt="Ronald Hunter" className="rounded-circle" />
                                 </div>
                                 <span className="fs-13 font-weight-500 d-none d-sm-inline ml-2">
                                     Ronald Hunter
@@ -123,7 +123,7 @@ export default function Sidebar() {
                                     <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
                                         <a href="/support" className="text-heading lh-1 sidebar-link">
                                             <span className="sidebar-item-icon d-inline-block mr-3 text-muted fs-20">
-                                                <i className="fa fa-headset"></i>
+                                                <i className="fal fa-headset"></i>
                                             </span>
                                             <span className="sidebar-item-text">Support</span>
                                         </a>
