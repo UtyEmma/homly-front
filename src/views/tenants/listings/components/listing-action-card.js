@@ -2,17 +2,16 @@ import RatingStar from 'components/rating/rating-star'
 import { AdminMode, defaultAdminMode } from 'libraries/admin/admin-mode'
 import { DeleteItem, SuspendItem } from 'providers/redux/_actions/admin-actions'
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { ConfirmActionDialog } from 'views/layouts/components/modals/confirm-action-dialog'
-import AgentCard from 'views/tenants/agents/components/agent-card'
 
 export default function ListingAction({agent, listing}) {
     
     const dispatch = useDispatch()
     const [show, setShow] = useState(false)
+    const {adminMode} = useSelector((state) => state.admin_mode)
 
     const suspendListing = () => {
-
         setShow(true)
     }
 
@@ -22,7 +21,7 @@ export default function ListingAction({agent, listing}) {
 
     const deleteListing = () => {
         return (
-            <ConfirmActionDialog callback={dispatch(DeleteItem('listing', listing.unique_id, '/listings'))} />
+            <ConfirmActionDialog callback={dispatch(DeleteItem('listing', listing.unique_id, `/listings`))} />
         )
     }
     
@@ -122,7 +121,7 @@ export default function ListingAction({agent, listing}) {
 
 
                 {
-                    AdminMode
+                    adminMode
 
                     &&
 
@@ -130,7 +129,16 @@ export default function ListingAction({agent, listing}) {
                         <hr/>
                     
                         <div className="">
-                            <button type="button" onClick={suspendListing} className="btn btn-block btn-lg btn-outline-warning hover-white">Suspend Listing</button>
+                            {
+                                listing.status === 'rented'
+
+                                ?
+
+                                <button type="button" disabled className="btn btn-block btn-lg btn-success hover-white text-capitalize">Property Rented</button>
+
+                                :
+                                <button type="button" onClick={suspendListing} className="btn btn-block btn-lg btn-outline-warning hover-white text-capitalize">{listing.status == 'active' ? 'Suspend' : 'Unsuspend'} Listing</button>
+                            }
                             <button type="button" onClick={deleteListing} className="btn btn-block btn-lg btn-danger">Delete Listing</button>
                         </div>
                     </>

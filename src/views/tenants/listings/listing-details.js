@@ -1,4 +1,4 @@
-import React, {Component, useEffect} from 'react'
+import React, {Component, useEffect, useState} from 'react'
 
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -18,12 +18,19 @@ const ListingDetails = ({isLoggedIn, user, status, adminMode}) => {
     const {slug} = useParams();
     const dispatch = useDispatch()
 
+    const [listingData, setListingData] = useState()
+
     const details = useSelector((state) => state.listing);
-    const {loading, listing, agent} = details;
+    const {loading, listing} = details;
+
+    const suspend_listing = useSelector((state) => state.suspend_item);
+    const {data} = suspend_listing;
 
     useEffect(() => {
         !listing && fetchListingData(slug)
-    }, [listing]);
+        listing && setListingData(listing)
+        data && setListingData(data)
+    }, [listing, data]);
 
     const fetchListingData = (slug) => {
         dispatch(FetchSingleListing(slug))
@@ -38,22 +45,22 @@ const ListingDetails = ({isLoggedIn, user, status, adminMode}) => {
                 <Searchbar/>
                 
                 {
-                    listing 
+                    listingData 
                     
                     && 
                     
                     <>
-                        <MapItem listing={listing} />
+                        <MapItem listing={listingData.listing} />
                         
                         <div className="primary-content bg-gray-01 pt-7 pb-12">
                             <div className="container">
                             <div className="row">
                                 <article className="col-lg-8">
-                                    <ListingComponents listing={listing} status={status} />
+                                    <ListingComponents listing={listingData.listing} status={status} />
                                 </article>
 
                                 <aside className="col-lg-4 pl-xl-4">
-                                    <ListingAction agent={agent} adminMode={adminMode} listing={listing}/>
+                                    <ListingAction agent={listingData.agent} adminMode={adminMode} listing={listingData.listing}/>
                                 </aside>
                             </div>
                             </div>
@@ -65,7 +72,7 @@ const ListingDetails = ({isLoggedIn, user, status, adminMode}) => {
                 <section>
 
                     {
-                        agent
+                        listingData && listingData.agent
 
                         &&
 
@@ -73,28 +80,28 @@ const ListingDetails = ({isLoggedIn, user, status, adminMode}) => {
                         <div className="d-flex  bottom-bar-action bottom-bar-action-01 py-2 px-4 bg-gray-01 align-items-center position-fixed fixed-bottom d-sm-none">
                                 <div className="media align-items-center">
                                     {   
-                                        agent.avatar 
+                                        listingData.agent.avatar 
                                         
                                         ? 
                                         
-                                        <div className="rounded-circle w-120px h-120 d-flex align-items-center justify-content-center overflow-hidden">
-                                            <img src={agent.avatar} className="w-120px h-120" style={{objectFit: 'cover'}} alt={`${agent.firstname} ${agent.lastname}`} />
+                                        <div className="rounded-circle d-flex align-items-center justify-content-center overflow-hidden">
+                                            <img src={listingData.agent.avatar} className="w-70px h-70" style={{objectFit: 'cover'}} alt={`${listingData.firstname} ${listingData.lastname}`} />
                                         </div> 
                                         
                                         : 
-                                        <div className="d-inline-block mb-2 w-120px h-120 w-82px h-82 mr-2 bg-gray-01 rounded-circle fs-25 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
-                                            {`${agent.firstname.charAt(0).toUpperCase()}${agent.lastname.charAt(0).toUpperCase()}`}
+                                        <div className="d-inline-block mb-2 w-70px h-70 mr-2 bg-gray-01 rounded-circle fs-25 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
+                                            {`${listingData.firstname.charAt(0).toUpperCase()}${listingData.lastname.charAt(0).toUpperCase()}`}
                                         </div>
                                     }
 
                                     <div className="media-body">
-                                        <a href="#" className="d-block text-dark fs-15 font-weight-500 lh-15">{agent.firstname} {agent.lastname} </a>
-                                        <span className="fs-13 lh-2">{agent.title}</span>
+                                        <a href="#" className="d-block text-dark fs-15 font-weight-500 lh-15">{listingData.firstname} {listingData.lastname} </a>
+                                        <span className="fs-13 lh-2">{listingData.title}</span>
                                     </div>
                                 </div>
                                 <div className="ml-auto">
                                     <button type="button" className="btn btn-primary fs-18 p-2 lh-1 mr-1 mb-1 shadow-none" data-toggle="modal" data-target="#modal-messenger"><i className="fal fa-comment" /></button>
-                                    <a href={`tel:${agent.phone_number}`} className="btn btn-primary fs-18 p-2 lh-1 mb-1 shadow-none" target="_blank"><i className="fal fa-phone" /></a>
+                                    <a href={`tel:${listingData.phone_number}`} className="btn btn-primary fs-18 p-2 lh-1 mb-1 shadow-none" target="_blank"><i className="fal fa-phone" /></a>
                                 </div>
                             </div>
                             <div className="modal fade" id="modal-messenger" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">

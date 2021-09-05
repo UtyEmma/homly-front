@@ -7,8 +7,8 @@ import InputAddress from 'views/agent/layouts/listings/blocks/map/map-address-se
 import { MapDisplay } from 'views/agent/layouts/listings/blocks/map/map-display';
 
 
-export const UpdateListingLocation = ({listing}) => {
-    const dispatch = useDispatch();
+export const UpdateListingLocation = ({listing, formErrors}) => {
+    
     const [city, setCity] = useState(listing.city)
     const [state, setState] = useState(listing.state)
     const [landmark, setLandmark] = useState(listing.landmark)
@@ -18,22 +18,13 @@ export const UpdateListingLocation = ({listing}) => {
 
     const updateMapData = (e) => {
         e.target.name === 'city' && setCity(e.target.value)
-        compileData(e.target.name, e.target.value)
     }
 
     const setSelectedState = (state) => {
         setState(state)
-        compileData('state', state)
     }
 
     const item = useSelector((state) => state.store_listing.store);
-
-    const compileData = (name, value) => {
-        dispatch(StoreListing({
-                        ...item,
-                        [name] : value
-                    }))
-    }
 
     const setLatLong = (address) => {
         Geocode.setApiKey( "AIzaSyBBYmJujloM3zNdxMpokW1G_Qo5Qo_05_A" )
@@ -78,12 +69,14 @@ export const UpdateListingLocation = ({listing}) => {
                                 <div className="form-group">
                                 <label htmlFor="state"  className="text-heading">State</label>
                                 <State setSelectedState={setSelectedState} defaultValue={state} classes="form-control form-control-lg border-0 " id="state" name="state" />
+                                <p className="text-danger fs-12">{formErrors.state?.message}</p>
                                 </div>
                             </div>
                             <div className="col-12 px-2">
                                 <div className="form-group">
                                 <label htmlFor="city" className="text-heading">City</label>
                                 <LocalGovt selectedState={state} defaultValue={city} onChange={updateMapData} classes="form-control form-control-lg border-0" id="city" name="city" />
+                                <p className="text-danger fs-12">{formErrors.city?.message}</p>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +84,8 @@ export const UpdateListingLocation = ({listing}) => {
                             <div className="col-12 px-2">
                                 <div className="form-group">
                                 <label htmlFor="address" className="text-heading">Address</label>
-                                <input type="text" onChange={updateMapData} defaultValue={listing.address} className="form-control form-control-lg border-0" id="address" name="address"/>
+                                <input type="text"  defaultValue={listing.address} className="form-control form-control-lg border-0" id="address" name="address"/>
+                                <p className="text-danger fs-12">{formErrors.address?.message}</p>
                                 </div>
                             </div>
                             <div className="col-12 px-2">
@@ -99,6 +93,7 @@ export const UpdateListingLocation = ({listing}) => {
                                 <label htmlFor="landmark" className="text-heading">Landmark / Nearest Bus Stop</label>
                                 <InputAddress lat={lat} long={long} setLandmark={setLandmark} defaultValue={listing.landmark}  setLatLong={setLatLong} id="landmark"/>
                                 <input hidden name="landmark" value={landmark} type="text"/>
+                                <p className="text-danger fs-12">{formErrors.landmark?.message}</p>
                                 </div>
                             </div>
                         </div>
@@ -124,12 +119,14 @@ export const UpdateListingLocation = ({listing}) => {
                             <div className="form-group mb-md-0">
                             <label htmlFor="latitude" className="text-heading">Latitude </label>
                             <input type="text" value={lat} className="form-control form-control-lg border-0" id="latitude" name="latitude" readOnly />
+                            <p className="text-danger fs-12">{formErrors.latitude?.message}</p>
                             </div>
                         </div>
                         <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
                             <div className="form-group mb-md-0">
                             <label htmlFor="longitude" className="text-heading">Longitude</label>
                             <input type="text" value={lat} className="form-control form-control-lg border-0" id="longitude" name="longitude" readOnly/>
+                            <p className="text-danger fs-12">{formErrors.longitude?.message}</p>
                             </div>
                         </div>
                         </div>

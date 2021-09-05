@@ -82,7 +82,7 @@ export default function ListingDescription({formErrors}) {
                         <div className="form-row mx-n2">
                             <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
                                 <div className="form-group">
-                                    <label htmlFor="extra_fees" className="text-heading">Extra Fees (in &#8358;) </label>
+                                    <label htmlFor="extra_fees" className="text-heading">Professional Fees (in &#8358;) </label>
                                     <input type="text" className="form-control form-control-lg border-0" id="extra_fees" name="extra_fees" />
                                     <p className="text-danger fs-12 mt-1">{formErrors.extra_fees?.message}</p>
                                 </div>

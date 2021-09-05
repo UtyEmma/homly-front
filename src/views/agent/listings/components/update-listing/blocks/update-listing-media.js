@@ -3,10 +3,9 @@ import React, { useState } from 'react'
 import ListingVideo from 'views/tenants/listings/components/listing-details/listing-video'
 import Listing from 'views/tenants/listings/listings'
 
-export const UpdateListingMedia = ({listing, files, setFiles}) => {
-    const [video, setVideo] = useState(listing.video_links)
+export const UpdateListingMedia = ({listing, files, setFiles, formErrors}) => {
 
-    const compileMedia = () => {}
+    const [video, setVideo] = useState(listing.video_links)
 
     return (
         <>
@@ -20,7 +19,8 @@ export const UpdateListingMedia = ({listing, files, setFiles}) => {
                             of your property</h3>
                             <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
                             adipiscing elit</p>
-                           <FileInput files={files} setFiles={setFiles}/>
+                           <FileInput files={files} setFiles={setFiles} name=""/>
+                           <p className="text-danger fs-12">{formErrors.images?.message}</p>
                         </div>
                         </div>
                     </div>
@@ -37,7 +37,8 @@ export const UpdateListingMedia = ({listing, files, setFiles}) => {
                                     </div>
                                     <div className="form-group mb-md-0">
                                     <label htmlFor="embed-video-id"  className="text-heading">Upload Video File</label>
-                                    <input type="text" name="video_links" onChange={compileMedia} defaultValue={video} className="form-control form-control-lg border-0" placeholder="Youtube, Vimeo or any link to your Video" id="embed-video-id" />
+                                    <input type="text" name="video_links" defaultValue={video} className="form-control form-control-lg border-0" placeholder="Youtube, Vimeo or any link to your Video" id="embed-video-id" />
+                                    <p className="text-danger fs-12">{formErrors.video_links?.message}</p>
                                     </div>
                                 </div>
                             </div>

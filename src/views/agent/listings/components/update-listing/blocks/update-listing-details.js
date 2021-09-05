@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { SelectAmenities } from 'views/layouts/components/details/amenities';
 
-export const UpdateListingDetails = ({listing}) => {
+export const UpdateListingDetails = ({listing, formErrors}) => {
     
     let [amenities, setAmenities] = useState([]);
     let items = JSON.parse(listing.amenities);
@@ -32,6 +32,7 @@ export const UpdateListingDetails = ({listing}) => {
                                     <div className="form-group">
                                         <label htmlFor="bedrooms" className="text-heading">Number of Bedrooms</label>
                                             <input type="number" defaultValue={listing.no_bedrooms} className="form-control form-control-lg border-0" id="bedrooms" min="1" name="no_bedrooms"></input>
+                                            <p className="text-danger fs-12">{formErrors.no_bedrooms?.message}</p>
                                     </div>
                                 </div>
 
@@ -39,6 +40,7 @@ export const UpdateListingDetails = ({listing}) => {
                                     <div className="form-group">
                                         <label htmlFor="bedrooms" className="text-heading">Number of Bathrooms</label>
                                             <input type="number" defaultValue={listing.no_bathrooms} className="form-control form-control-lg border-0" id="bathrooms" min="1" name="no_bathrooms"></input>
+                                            <p className="text-danger fs-12">{formErrors.no_bathrooms?.message}</p>
                                     </div>
                                 </div>
 
@@ -46,6 +48,7 @@ export const UpdateListingDetails = ({listing}) => {
                                     <div className="form-group">
                                         <label htmlFor="bedrooms" className="text-heading">Floor Number</label>
                                             <input type="number" defaultValue={listing.no_floors} className="form-control form-control-lg border-0" id="floors" name="no_floors" min="1"></input>
+                                            <p className="text-danger fs-12">{formErrors.no_floors?.message}</p>
                                     </div>
                                 </div>
                             </div>
@@ -54,6 +57,7 @@ export const UpdateListingDetails = ({listing}) => {
                                 <div className="form-group">
                                 <label htmlFor="extra-details" className="text-heading">Extra details</label>
                                     <textarea className="form-control border-0" defaultValue={listing.extra_info} rows={5} id="extra_info" name="extra_info" />
+                                    <p className="text-danger fs-12">{formErrors.extra_info?.message}</p>
                                 </div>
                             </div>
                         </div>
@@ -68,6 +72,7 @@ export const UpdateListingDetails = ({listing}) => {
                                         <div className="row">                                            
                                             <SelectAmenities color="text-dark" selected={amenities} />
                                         </div>
+                                        <p className="text-danger fs-12">{formErrors.amenities?.message}</p>
                                     </ul>
                                 </div>
                             </div>

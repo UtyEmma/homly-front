@@ -1,9 +1,51 @@
 import RatingStar from 'components/rating/rating-star'
-import React from 'react'
+import { DeleteItem, SuspendItem, VerifyAgent } from 'providers/redux/_actions/admin-actions'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { ConfirmActionDialog } from 'views/layouts/components/modals/confirm-action-dialog'
 import AgentsListings from './agent-listings/agent-listings'
 import AgentReviews from './agent-reviews/agent-reviews'
 
-export default function AgentDetailsContainer({agent, listings, reviews, fetchAgent, status}) {
+export default function AgentDetailsContainer({agent, listings, reviews, fetchAgent, status, setAgentData}) {
+    
+    const dispatch = useDispatch()
+    const {adminMode} = useSelector((state) => state.admin_mode)
+    const [show, setShow] = useState(false)
+    const [callbackFunc, setCallbackFunc] = useState()
+
+    const suspend_agent = useSelector(state => state.suspend_item)
+    const {loading, data} = suspend_agent
+
+    const verify_agent = useSelector(state => state.verify_agent)
+    const {verifiedAgent} = verify_agent
+
+    const suspendAgent = () => {
+        setShow(true)
+    }
+
+    const callback = () => {
+        dispatch(SuspendItem('agent', agent.unique_id))
+    }
+
+    const verifyAgent = () => {
+        dispatch(VerifyAgent(agent.unique_id))
+    } 
+
+    const handleSetAgentData = (agent) => {
+        console.log(agent)
+        setAgentData(agent)
+    }
+    useEffect(() => {
+        data && handleSetAgentData(data)
+        verifiedAgent && handleSetAgentData(verifiedAgent)
+    }, [data, verifiedAgent])
+
+    const deleteAgent = () => {
+        return (
+            <ConfirmActionDialog callback={dispatch(DeleteItem('agent', agent.unique_id, `/agents`))} />
+        )
+    }
+
     return (
         <>
             <section className="py-7  page-title">
@@ -11,9 +53,11 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                 <h3>Agent</h3>
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb pt-6 pt-lg-0 pb-0">
-                    <li className="breadcrumb-item"><a href="../">Home</a></li>
-                    <li className="breadcrumb-item"><a href="/agents">Agents</a></li>
-                    <li className="breadcrumb-item active" aria-current="page">{agent.firstname} {agent.lastname}</li>
+                        <li className="breadcrumb-item"><a href="../">Home</a></li>
+                        <li className="breadcrumb-item"><a href="/agents">Agents</a></li>
+                        <li className="breadcrumb-item active" aria-current="page">
+                            {agent.firstname} {agent.lastname} 
+                        </li>
                     </ol>
                 </nav>
                 </div>
@@ -37,7 +81,19 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                                     </div>
                                 }
                             </div>
-                            <p className="d-block fs-16 lh-214 text-dark mb-0 font-weight-500">{agent.firstname} {agent.lastname}
+                            <p className="d-block fs-16 lh-214 text-dark mb-0 font-weight-500">
+                                {agent.firstname} {agent.lastname}
+                                {   
+                                    agent.verified 
+                                    
+                                    ? 
+                                    
+                                    <i className="ml-1 fas fa-certificate text-primary"></i> 
+                                    
+                                    :
+                                    
+                                    ""
+                                }
                             </p>
                             <p className="mb-0">{agent.title}</p>
                             <ul className="list-inline mb-2">
@@ -79,15 +135,40 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                             </li>
                             </ul>
                             <a href={`mailto:${agent.email}`} type="submit" className="btn btn-primary btn-lg btn-block shadow-none">Send Message</a>
+
+                            {
+                                adminMode
+
+                                &&
+
+                                <>
+                                    <hr/>
+                                
+                                    <div className="">
+                                        {
+                                            
+                                            !agent.verified
+
+                                            &&
+
+                                            <button type="button" onClick={verifyAgent} className="btn btn-block btn-lg btn-success">Verify Agent</button>
+
+                                        }
+                                        <button type="button" onClick={suspendAgent} className="btn btn-block btn-lg btn-outline-warning hover-white">{agent.status === 'active' ? 'Suspend' : 'Unsuspend'} Agent</button>
+                                        
+                                        <button type="button" onClick={deleteAgent} className="btn btn-block btn-lg btn-danger">Delete Agent</button>
+                                    </div>
+                                </>
+                            }
                         </div>
                         </div>
                         <div className="card">
                         <div className="card-body text-center pt-7 pb-6 px-0">
                             <img src="images/contact-widget.jpg" alt="Want to become an Estate Agent ?" />
-                            <div className="text-dark mb-6 mt-n2 font-weight-500">Want to become an
-                            <p className="mb-0 fs-18">Estate Agent?</p>
+                            <div className="text-lead fs-20 text-dark mb-6 mt-n2 font-weight-600">Boost your visibility as
+                            <p className="mb-0 fs-18">a Real Estate Agent?</p>
                             </div>
-                            <a href="/agent-signup" className="btn btn-primary">Register</a>
+                            <a href="/agent-signup" className="btn btn-primary">Sign up Now</a>
                         </div>
                         </div>
                     </div>
@@ -154,6 +235,7 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                 </div>
                 </div>
             </div>
+            <ConfirmActionDialog show={show} setShow={setShow} callback={callback} />
                 </>
     )
 }

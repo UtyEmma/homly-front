@@ -24,9 +24,14 @@ export const AgentListingDetail = ({agent}) => {
 
     useEffect(() => {
         !listing && fetchListingData(slug)
-        listing && setListingItem(listing)
+        listing && handleSetListing()
         setIsLoading(loading)
     }, [listing, loading]);
+
+    const handleSetListing = () => {
+        console.log(listing)
+        setListingItem(listing.listing)
+    }
 
     const fetchListingData = (slug) => {
         dispatch(FetchSingleListing(slug))
@@ -48,7 +53,7 @@ export const AgentListingDetail = ({agent}) => {
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
                                 <li class="breadcrumb-item"><a href="/my-listings">My Properties</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">{listing && listing.title}</li>
+                                <li class="breadcrumb-item active" aria-current="page">{listingItem && listingItem.title}</li>
                             </ol>
                         </nav>
                     </div>

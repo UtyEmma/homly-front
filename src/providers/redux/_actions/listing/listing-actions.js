@@ -80,10 +80,10 @@ export const UpdateListing = (data, id) => (dispatch) => {
                         })
                     })
                     .catch(error => {
-                        Response.error(error.response)
+                        let errors = Response.error(error.response)
                         return dispatch({
                             type: UPDATE_LISTING_FAILURE,
-                            payload: error
+                            payload: {error: error.response, formErrors: errors }
                         })
                     })
 }

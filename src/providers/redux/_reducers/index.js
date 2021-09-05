@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 
 import {loginReducer, signupReducer} from "../_reducers/user.reducer";
-import { SuspendItemReducer } from "./admin-reducer";
+import { SetAdminModeReducer, SuspendItemReducer, verifyAgentReducer } from "./admin-reducer";
 import { AgentLoginReducer, AgentSignupReducer,
         UpdateAgentProfileReducer, ShowAvailableAgentsReducer, DeleteListingReducer, RemoveListingReducer, FetchSingleAgentReducer, FetchAgentWishlistsReducer } from "./agent-reducer";
 import { FetchCategoriesReducer } from "./category-reducer";
@@ -71,7 +71,10 @@ const rootReducer = combineReducers({
 
     notification: FetchNotificationsReducer,
 
-    suspend_item: SuspendItemReducer
+    suspend_item: SuspendItemReducer,
+    verify_agent: verifyAgentReducer,
+
+    admin_mode: SetAdminModeReducer
 })
 
 export default rootReducer;

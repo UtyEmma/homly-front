@@ -7,7 +7,6 @@ import Footer from 'components/shared/footer'
 import Preloader from 'components/preloader/preloader'
 
 const Home = ({isLoggedIn, user, isLoading}) => {
-    // const [isLoading, setIsLoading] = useState()
     
     return (
         <div>

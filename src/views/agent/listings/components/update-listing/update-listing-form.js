@@ -7,39 +7,61 @@ import { UpdateListingDescription } from "./blocks/update-listing-description";
 import { UpdateListingMedia } from "./blocks/update-listing-media";
 import { UpdateListingLocation } from "./blocks/update-listing-location";
 import { UpdateListingDetails } from "./blocks/update-listing-details";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { UpdateListing } from "providers/redux/_actions/listing/listing-actions";
-import { __updatelisting } from "libraries/validation";
+import { MapFormErrors, __createlisting, __updatelisting } from "libraries/validation";
+import Validator from "validatorjs";
+import { useHistory } from "react-router-dom";
 
-export const UpdateListingForm = ({listing}) => {
+export const UpdateListingForm = ({listing, setListing, setIsLoading}) => {
 
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const [stepper, setStepper] = useState();
     const [files, setFiles] = useState(listing.images)
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(__updatelisting)
-    });
+    const [update, setUpdate] = useState(false)
 
-    const handleSuccess = () => {
-        let form = document.getElementById('create_wishlist_form')
-        let formData = new FormData(form);
+    const {rules, messages, attributes} = __createlisting
+    const [formErrors, setFormErrors] = useState({})
+
+    const update_listing = useSelector((state) => state.update_listing);
+    const {loading, success, formError} = update_listing
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        let formData = new FormData(e.target);
         files.map(file => formData.append('images[]', file))
 
-        dispatch(UpdateListing(formData, listing.unique_id))
-    }
-
-    const handleErrors = (e) => {
-        console.log(e.target)
+        const values = Object.fromEntries(formData.entries());
+        let validation = new Validator(values, rules)
+        validation.setAttributeNames(attributes);
+        validation.fails(() => {setFormErrors(MapFormErrors(validation.errors.errors))})
+        console.log(validation)
+        if (validation.passes()) {
+            setFormErrors({}); 
+            dispatch(UpdateListing(formData, listing.unique_id))
+            setUpdate(true)
+        }
     }
 
     useEffect(() => {
-        setStepper(new Stepper(document.getElementById('wishlist-stepper'), {
+        !stepper && setStepper(new Stepper(document.getElementById('wishlist-stepper'), {
             linear: false,
             animation: true
         }));
-    }, [])
+        setIsLoading(loading)
+        formError && setFormErrors(formError)
+        success && update && handleUpdateSuccess()
+    }, [formError, stepper, loading])
+
+    const handleUpdateSuccess = () => {
+        setFormErrors({})
+        history.push(`/my-listings/${success.listing.slug}`)
+        setListing(success.listing)
+    }
 
     return (
         <>
@@ -74,10 +96,10 @@ export const UpdateListingForm = ({listing}) => {
                     </div>
                 </div>
                 <div className="bs-stepper-content">
-                    <form className="form" onSubmit={handleSubmit(handleSuccess, handleErrors)} id="create_wishlist_form" encType="multipart/form-data">
+                    <form className="form" onSubmit={handleSubmit} id="create_wishlist_form" encType="multipart/form-data">
                         <div id="description" className="content p-4" role="tabpanel" aria-labelledby="property-info-trigger" >
                             
-                            <UpdateListingDescription listing={listing} />
+                            <UpdateListingDescription listing={listing} formErrors={formErrors} />
 
                             <div className='row d-flex justify-content-end'>
                                     <button type="button" onClick={() => {stepper.next()}} className="btn btn-primary">Next</button>
@@ -86,7 +108,7 @@ export const UpdateListingForm = ({listing}) => {
 
                         <div id="media" className="content p-4" role="tabpanel" aria-labelledby="location-info-trigger">
                             
-                            <UpdateListingMedia listing={listing} files={files} setFiles={setFiles} />
+                            <UpdateListingMedia listing={listing} files={files} setFiles={setFiles} formErrors={formErrors} />
 
                             <div className='row d-flex justify-content-end'>
                                 <button type="button" onClick={() => {stepper.previous()}} className="btn">Previous</button>
@@ -95,7 +117,7 @@ export const UpdateListingForm = ({listing}) => {
                         </div>
 
                         <div id="location" className="content p-4" role="tabpanel" aria-labelledby="location-info-trigger">
-                            <UpdateListingLocation listing={listing} />
+                            <UpdateListingLocation listing={listing} formErrors={formErrors} />
 
                             <div className='row d-flex justify-content-end'>
                                 <button type="button" onClick={() => {stepper.previous()}} className="btn">Previous</button>
@@ -104,13 +126,11 @@ export const UpdateListingForm = ({listing}) => {
                         </div>
 
                         <div id="details" className="content p-4" role="tabpanel" aria-labelledby="extra-details-trigger">
-                            <UpdateListingDetails listing={listing}/>
+                            <UpdateListingDetails listing={listing} formErrors={formErrors} />
                             
                             <div className='row d-flex justify-content-end'>
                                 <button type="button" onClick={() => {stepper.previous()}} className="btn">Previous</button>
-                                <button type="submit" className="btn btn-primary">
-                                    Submit
-                                </button>
+                                <button type="submit" className="btn btn-primary">Submit</button>
                             </div>
                         </div>
                     </form>

@@ -25,23 +25,12 @@ export function SelectAmenities({features, setFeatures, name, validate, message,
                     <div key={index} className="col-sm-6 col-lg-3">
                         <li className={`list-group-item px-0 pt-0 pb-2 ${classes}`}>
                             <div className="custom-control custom-checkbox ">
-                                <input type="checkbox" className="custom-control-input" name={`amenities[${item.toLowerCase().replace(/ /g,'_')}]`} id={item} />
+                                <input type="checkbox" className="custom-control-input" defaultChecked={selected.includes(item.toLowerCase().replace(/ /g,'_'))} name={`amenities[${item.toLowerCase().replace(/ /g,'_')}]`} id={item} />
                                 <label className="custom-control-label" htmlFor={item} >{item}</label>
                             </div>
                         </li>
                     </div>
                 )) 
-
-                // amenities.map((amenity, index) => (
-                //     <div key={index} className="col-sm-6 col-md-4 col-lg-3">
-                //         <li className={`list-group-item px-0 pt-0 pb-2 bg-transparent border-0 ${color ? color : 'text-white'}`}>
-                //             <div className="custom-control custom-checkbox">
-                //                 <input type="checkbox" className="custom-control-input"  checked={amenity in selected && true} name={`amenities[${amenity.toLowerCase().replace(/ /g,'_')}]`} id={amenity} />
-                //                 <label className="custom-control-label" htmlFor={amenity}>{amenity}</label>
-                //             </div>
-                //         </li>
-                //     </div>
-                // )) 
             }
         </>
     )

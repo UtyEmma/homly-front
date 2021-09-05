@@ -18,5 +18,8 @@ export const AdminService = {
     },
     suspendItem: async (id, type) => {
         return await Request.get(`admin/${type}/suspend/${id}`, config)
+    },
+    verifyAgent : async (id) => {
+        return await Request.get(`admin/agent/verify/${id}`, config)
     }
 }

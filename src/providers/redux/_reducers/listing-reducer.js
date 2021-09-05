@@ -42,9 +42,9 @@ export function UpdateListingReducer(state={}, actions){
         case UPDATE_LISTING_REQUEST: 
             return {...state, loading: true}
         case UPDATE_LISTING_SUCCESS:
-            return {...state, loading: false, listing: actions.payload}
+            return {...state, loading: false, success: actions.payload}
         case UPDATE_LISTING_FAILURE:
-            return {...state, loading: false, error: actions.payload }
+            return {...state, loading: false, error: actions.payload.error, formError: actions.payload.formErrors  }
         default:
             return state
     }
@@ -97,7 +97,7 @@ export function FetchSingleListing(state={}, actions){
         case FETCH_SINGLE_LISTING_REQUEST: 
             return {...state, loading: true}
         case FETCH_SINGLE_LISTING_SUCCESS:
-            return {...state, loading: false, listing: actions.payload.listing, agent: actions.payload.agent}
+            return {...state, loading: false, listing: actions.payload}
         case FETCH_SINGLE_LISTING_FAILURE:
             return {...state, loading: false, error: actions.payload }
         default:

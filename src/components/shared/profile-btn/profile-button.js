@@ -15,9 +15,9 @@ export default function ProfileButton({isloggedIn, user}) {
 function LoggedIn(user) {
 
     const dispatch = useDispatch()
-    
+    const type = localStorage.getItem('type');
+
     const logout = () => {
-        let type = localStorage.getItem('type');
         type === 'tenant' ? dispatch(TenantLogout()) : dispatch(AgentLogout())
     }
 
@@ -53,25 +53,21 @@ function LoggedIn(user) {
                 <a href="" className="nav-link  dropdown-toggle " data-toggle="dropdown">Hello {user.firstname}</a>
 
                 <div className="dropdown-menu px-2 dropdown-lg dropdown-menu-right" style={{width: "250px"}}>
-                    <a className="dropdown-item rounded py-2 align-middle" href="/profile">
-                        <i className="fa fa-user mr-2"></i>
-                        My Profile
-                    </a>
+                    
+                    {
+                        type === 'tenant'
 
-                    <a className="dropdown-item rounded py-2 align-middle" href="/favourites">
-                        <i className="fa fa-heart mr-2"></i>
-                        Favourites
-                    </a>
+                        ?
 
+                        <TenantNavItems />
 
-                    <a className="dropdown-item rounded py-2 align-middle" href="/wishlists">
-                        <i className="fa fa-heart mr-2"></i>
-                        Wishlists
-                    </a>
+                        :
 
+                        <AgentNavItems/>
+                    }
 
                     <button className="dropdown-item  btn btn-secondary rounded py-2 align-middle" type="button" onClick={logout} >
-                        <i className="mr-2"></i>
+                        <i className="fa fa-door-open mr-3 text-primary"></i>
                         Logout
                     </button>
                 </div>
@@ -79,6 +75,51 @@ function LoggedIn(user) {
         </ul>
     )
 
+}
+
+function TenantNavItems () {
+    return (
+        <>
+            <a className="dropdown-item rounded py-2 align-middle" href="/profile">
+                <i className="fa fa-user mr-3 text-primary"></i>
+                My Profile
+            </a>
+
+            <a className="dropdown-item rounded py-2 align-middle" href="/favourites">
+                <i className="fa fa-heart mr-3 text-primary"></i>
+                Favourites
+            </a>
+
+
+            <a className="dropdown-item rounded py-2 align-middle" href="/wishlists">
+                <i className="fa fa-gifts mr-3 text-primary"></i>
+                Wishlists
+            </a>
+        </>
+    )
+}
+
+
+export function AgentNavItems () {
+    return (
+        <>
+            <a className="dropdown-item rounded py-2 align-middle" href="/dashboard">
+                <i className="fa fa-user mr-3 text-primary"></i>
+                Go to Dashboard
+            </a>
+
+            <a className="dropdown-item rounded py-2 align-middle" href="/agent-profile">
+                <i className="fa fa-heart mr-3 text-primary"></i>
+                My Profile
+            </a>
+
+
+            <a className="dropdown-item rounded py-2 align-middle" href="/support">
+                <i className="fa fa-headset mr-3 text-primary"></i>
+                Support
+            </a>
+        </>
+    )
 }
 
 function loggedOut(params) {

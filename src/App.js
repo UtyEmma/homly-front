@@ -42,47 +42,34 @@ import { Favourites } from 'views/tenants/favourites/favourites';
 import { AgentListingDetail } from 'views/agent/listings/agent-listing-details';
 import { Onboarding } from 'views/agent/onboarding/onboarding';
 import { useQuery } from 'libraries/http/query';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { VerifyAdmin } from 'providers/redux/_actions/admin-actions';
-import { AdminModeBadge } from 'components/admin/admin-mode';
-import { AdminMode } from 'libraries/admin/admin-mode';
-// import { adminMode } from 'libraries/admin/admin-mode';
+import { AdminModeBadge } from 'libraries/admin/admin-mode';
 
 function App() {
 
 	const dispatch = useDispatch()
 
 	const [isLoading, setIsLoading] = useState(false)
-	const [adminMode, setAdminMode] = useState(true)
   
 	const query = useQuery()
 	const auth = query.get("auth")
+	const type = localStorage.getItem('type') 
 
-	const handleSetAdminMode = () => {
-		localStorage.setItem('adminMode', adminMode)
-	}
+  const {adminMode} = useSelector((state) => state.admin_mode)
 
-	const admin = localStorage.getItem('auth')
-	const type = localStorage.getItem('type'); 
-	const mode = localStorage.getItem('adminMode') 
+  const handleAdminMode = () => {
+    auth && type !== 'admin' && dispatch(VerifyAdmin(query.get("id")))
+  }
 
-	const checkAdminMode = () => {
-		if (admin && type === 'admin' && mode === 'true') {
-			return setAdminMode(true)	
-		}
-		return setAdminMode(false);
-	}
-
-  	useEffect(() => {
-    	auth && !admin && dispatch(VerifyAdmin(query.get("id")))
-		auth && handleSetAdminMode() 
-		checkAdminMode()		
-  	}, [admin, adminMode])
+  useEffect(() => {
+    handleAdminMode()
+  }, [])
 
   return (
     <div className="App">
       <Preloader loading={isLoading}/>
-		  <AdminMode adminMode={adminMode} />
+
       <ToastContainer 
         hideProgressBar={true}
         newestOnTop={false}
@@ -93,7 +80,7 @@ function App() {
 
 		<GoogleOneTapAuth />
 
-		<AdminModeBadge adminMode={adminMode} setAdminMode={setAdminMode} />
+		<AdminModeBadge adminMode={adminMode} />
 
       <Switch>                  
           {/* Common Routes */}

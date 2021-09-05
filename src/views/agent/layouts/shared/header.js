@@ -1,4 +1,5 @@
 import { NotificationBell } from 'components/notification/notification'
+import { AgentNavItems } from 'components/shared/profile-btn/profile-button'
 import React from 'react'
 
 export default function Header({agent}) {
@@ -37,8 +38,7 @@ export default function Header({agent}) {
                             </div>
                         </a>
                         <div className="dropdown-menu dropdown-menu-right w-100">
-                            <a className="dropdown-item" href="/agent-profile">My Profile</a>
-                            <a className="dropdown-item" href="#">Logout</a>
+                            <AgentNavItems />
                         </div>
                         </div>
                         
