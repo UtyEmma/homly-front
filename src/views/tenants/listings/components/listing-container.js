@@ -38,10 +38,10 @@ export default function ListingContainer({listings, setParams, params}) {
                             </select>
                         </div>
                         <div className="d-none d-md-block">
-                            <button className="btn fs-sm-18 px-2 py-0 text-dark opacity-2" onClick={toggleList}>
+                            <button className={`btn fs-sm-18 px-2 py-0 text-dark ${grid ? 'opacity-2' : '' }`} onClick={toggleList}>
                                 <i className="fas fa-list" />
                             </button>
-                            <button className="btn fs-sm-18 px-2 py-0 text-dark ml-5" onClick={toggleGrid}>
+                            <button className={`btn fs-sm-18 px-2 py-0 text-dark ml-5 ${!grid ? 'opacity-2' : '' }`} onClick={toggleGrid}>
                                 <i className="fa fa-th-large" />
                             </button>
                         </div>

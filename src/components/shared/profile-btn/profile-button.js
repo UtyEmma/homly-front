@@ -105,12 +105,12 @@ export function AgentNavItems () {
         <>
             <a className="dropdown-item rounded py-2 align-middle" href="/dashboard">
                 <i className="fa fa-user mr-3 text-primary"></i>
-                Go to Dashboard
+                My Dashboard
             </a>
 
             <a className="dropdown-item rounded py-2 align-middle" href="/agent-profile">
                 <i className="fa fa-heart mr-3 text-primary"></i>
-                My Profile
+                Profile
             </a>
 
 

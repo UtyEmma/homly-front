@@ -1,5 +1,5 @@
 import React from 'react'
-
+import ScrollAnimation from 'react-animate-on-scroll';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick';
@@ -13,6 +13,7 @@ export default function FeaturedListings({listings}) {
         arrows: true,
     }
     return (
+        <ScrollAnimation animateIn="fadeInRight">
         <div>
             <Slider {...options}>
 
@@ -48,5 +49,6 @@ export default function FeaturedListings({listings}) {
 
             </Slider>            
         </div>
+        </ScrollAnimation>
     )
 }

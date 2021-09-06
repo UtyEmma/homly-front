@@ -72,7 +72,7 @@ export default function Searchbar({parsed}) {
                 <div id="advanced-search-filters-2" className="col-12 pb-6 pt-lg-2 collapse" data-parent="#accordion-2">
                     <div className="row mx-n2">
                     <div className="col-sm-6 col-md-4 col-lg-3 pt-4 px-2">
-                        <select className="form-control border-0 shadow-none selectpicker bg-white" name="bedrooms" title="Bedrooms" onChange={compileSearchQuery} data-style="btn-lg py-2 h-52 bg-white">
+                        <select className="form-control border-0 shadow-none selectpicker bg-white" name="bedrooms" title="Select Bedrooms" onChange={compileSearchQuery} data-style="btn-lg py-2 h-52 bg-white">
                             <option disabled>All Bedrooms</option>
                             <option defaultValue="1" >1</option>
                             <option defaultValue="2" >2</option>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
 
-function TenantRoute({ component: Component, ...restOfProps }) {
+function TenantRoute({isLoading, setIsLoading, component: Component, ...restOfProps }) {
   const isAuthenticated = localStorage.getItem("isAuthenticated");
   const userType = localStorage.getItem('type');
   const user_object = JSON.parse(localStorage.getItem('user'));
@@ -13,7 +13,7 @@ function TenantRoute({ component: Component, ...restOfProps }) {
       {...restOfProps}
       render={(props) =>
           isAuthenticated && userType === 'tenant' 
-                        ? <Component {...props} isLoggedIn={isAuthenticated} status={userType} user={user}/> : <Redirect to="/login" />
+                        ? <Component {...props} isLoading={isLoading} setIsLoading={setIsLoading} isLoggedIn={isAuthenticated}  status={userType} user={user}/> : <Redirect to="/login" />
       }
     />
   );

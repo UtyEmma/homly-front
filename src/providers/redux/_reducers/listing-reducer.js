@@ -66,7 +66,7 @@ export function AgentsListingsReducer(state={}, actions){
 export function ActiveListingsReducer(state={}, actions){
     switch(actions.type){
         case ACTIVE_LISTINGS_REQUEST: 
-            return {...state, loading: true}
+            return {...state, loading: true }
         case ACTIVE_LISTINGS_SUCCESS:
             return {...state, loading: false, listings: actions.payload.listings, featured: actions.payload.featured}
         case ACTIVE_LISTINGS_FAILURE:

@@ -13,31 +13,30 @@ import ListingContainer from './components/listing-container';
 import FeaturedListings from './components/featured-listings/featured-listings';
 
 
-const Listing = ({isLoggedIn, user, adminMode}) => {
+const Listing = ({isLoggedIn, user, setIsLoading}) => {
         const dispatch = useDispatch();
         const state = useSelector((state) => state.active_listings);
         const {loading, listings, featured} = state;
 
-        const [params, setParams] = useState({})
+        const [params, setParams] = useState()
 
         useEffect(() => {
-            if(!listings || params) {
+            if(!listings || params){
                 fetchListings()
             }
+            setIsLoading(false)
         }, [params])
 
         const fetchListings = () => {
-            console.log(params)
             dispatch(ShowAllListings(params))
         }
         
         return (
             <div>
-                
-                <Preloader loading={loading}/>
-
                 <NavBar isloggedIn={isLoggedIn} user={user}/>
-    
+                
+                <Preloader loading={loading} />
+
                 <main id="content">
                     <Searchbar />
 

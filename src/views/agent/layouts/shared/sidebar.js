@@ -1,48 +1,54 @@
+import { NotificationBell } from 'components/notification/notification'
+import { AgentNavItems } from 'components/shared/profile-btn/profile-button'
 import { AgentLogout } from 'providers/redux/_actions/agent-actions'
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-export default function Sidebar() {
+export default function Sidebar({agent}) {
     const dispatch = useDispatch()
+
     const logout = () => {
         dispatch(AgentLogout())
     }
 
     return (
             <div className="db-sidebar bg-white">
+                
                 <nav className="navbar navbar-expand-xl navbar-light d-block px-0 position-fixed dashboard-nav py-0">
                     <div className="sticky-area shadow-xs-1 py-3">
                         <div className="d-flex px-3 px-xl-6 w-100">
-                        <a className="navbar-brand" href="/">
-                            <img src="/images/logo.png" alt="HomeID" />
-                        </a>
+
+                            <Link className="navbar-brand" to="/dashboard">
+                                <img src="/images/logo.png" alt="HomeID" />
+                            </Link>
+
                         <div className="ml-auto d-flex align-items-center ">
                             <div className="d-flex align-items-center d-xl-none">
                             <div className="dropdown px-3">
                                 <a href="#" className="dropdown-toggle d-flex align-items-center text-heading" data-toggle="dropdown">
-                                <div className="w-48px">
-                                    <img src="/images/testimonial-5.jpg" alt="Ronald Hunter" className="rounded-circle" />
-                                </div>
+                                {    
+                                    agent.avatar 
+                                ? 
+                                    <div className="w-46px h-46 overflow-hidden">
+                                        <img src={agent.avatar} className="rounded-circle  w-46px h-46" style={{objectFit: 'cover'}} alt={`${agent.firstname} ${agent.lastname}`} />
+                                    </div> 
+                                : 
+                                    <div className="d-inline-block mb-2 w-46px h-46 mr-2 bg-gray-01 rounded-circle fs-18 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
+                                        {`${agent.firstname.charAt(0).toUpperCase()}${agent.lastname.charAt(0).toUpperCase()}`}
+                                    </div>
+                                }
                                 <span className="fs-13 font-weight-500 d-none d-sm-inline ml-2">
                                     Ronald Hunter
                                 </span>
                                 </a>
                                 <div className="dropdown-menu dropdown-menu-right">
-                                <a className="dropdown-item" href="#">My Profile</a>
-                                <a className="dropdown-item" href="#">My Profile</a>
-                                <a className="dropdown-item" href="#">Logout</a>
+                                    <AgentNavItems/>
                                 </div>
                             </div>
-                            <div className="dropdown no-caret py-4 px-3 d-flex align-items-center notice mr-3">
-                                <a href="#" className="dropdown-toggle text-heading fs-20 font-weight-500 lh-1" data-toggle="dropdown">
-                                <i className="far fa-bell" />
-                                <span className="badge badge-primary badge-circle badge-absolute font-weight-bold fs-13">1</span>
-                                </a>
-                                <div className="dropdown-menu dropdown-menu-right">
-                                <a className="dropdown-item" href="#">Action</a>
-                                <a className="dropdown-item" href="#">Another action</a>
-                                <a className="dropdown-item" href="#">Something else here</a>
-                                </div>
+
+                            <div className="pr-2">
+                                <NotificationBell />
                             </div>
                             </div>
                             <button className="navbar-toggler border-0 px-0" type="button" data-toggle="collapse" data-target="#primaryMenuSidebar" aria-controls="primaryMenuSidebar" aria-expanded="false" aria-label="Toggle navigation">
@@ -143,6 +149,5 @@ export default function Sidebar() {
                     </div>
                 </nav>
             </div>
-
     )
 }
