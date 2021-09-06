@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import naijaStateLocalGovernment from 'naija-state-local-government'
 
-export function State({name, title, setSelectedState, register, classes, styles, defaultValue, onChange}){
+export function State({name, title, setSelectedState, dataStyle, classes, defaultValue, onChange}){
     const states = naijaStateLocalGovernment.states();
 
     const setState = (e) => {
@@ -18,7 +18,7 @@ export function State({name, title, setSelectedState, register, classes, styles,
 
     return (
         <>
-            <select className={`${classes} selectpicker`} ref={state} id="state" defaultValue={defaultValue} default title={title} data-style={styles} data-live-search="true" onChange={setState} id="type" title="Select State"  name={name}>
+            <select className={`${classes} selectpicker`}  ref={state} id="state" defaultValue={defaultValue} default title={title} data-style={dataStyle} data-live-search="true" onChange={setState} id="type" title="Select State"  name={name}>
                 {states ? states.map((state, index) => (
                     <option key={index} defaultValue={state} >{state}</option>
                 )) : <option>Select State</option>}
@@ -27,7 +27,7 @@ export function State({name, title, setSelectedState, register, classes, styles,
     )
 }
 
-export function LocalGovt({selectedState, name, onChange, classes, styles, defaultValue}){
+export function LocalGovt({selectedState, name, onChange, dataStyle, classes, defaultValue}){
     const stateData = selectedState && naijaStateLocalGovernment.lgas(selectedState);
     const lgas = stateData ? stateData.lgas : null;
     const select_city = useRef()
@@ -43,7 +43,7 @@ export function LocalGovt({selectedState, name, onChange, classes, styles, defau
 
     return (
         <>
-            <select className={`${classes} selectpicker`} ref={select_city} onChange={onChange} defaultValue={defaultValue} data-live-search="true" data-style={styles} title="Select City" id="lga" name={name}>
+            <select className={`${classes} selectpicker`} data-style={dataStyle} ref={select_city} onChange={onChange} defaultValue={defaultValue} data-live-search="true" title="Select City" id="lga" name={name}>
                 {
                 
                     lgas 

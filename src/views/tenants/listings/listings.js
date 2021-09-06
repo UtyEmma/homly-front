@@ -42,16 +42,16 @@ const Listing = ({isLoggedIn, user, adminMode}) => {
                     <Searchbar />
 
                     <div className="bg-gray-03 py-3">
-                        <div className="container px-6 px-lg-0">
+                        <div className="container px-3 px-lg-0">
                             <div className="row d-flex align-items-center">
-                                <div className="col-md-3">
+                                <div className="col-md-4">
                                     <div className="agent-header">
                                         <span><a href="/">Home</a> / Properties</span>
-                                        <h3>Available Properties</h3>
+                                        <h3 className="w-100">Available Properties</h3>
                                     </div>
                                 </div>
 
-                                <div className="col-md-9 col-12 d-md-flex justify-content-end">
+                                <div className="col-md-8 col-12 px-2 d-md-flex justify-content-end">
                                     <ListingFilter params={params} setParams={setParams}/> 
                                 </div>
                             </div>
@@ -64,7 +64,7 @@ const Listing = ({isLoggedIn, user, adminMode}) => {
                             <div className="col-lg-8 mb-8 mb-lg-0">
                                 {
                                     listings && listings.length > 0 
-                                        ? <ListingContainer listings={listings} /> : <ListingNotFound/>
+                                        ? <ListingContainer listings={listings} params={params} setParams={setParams} /> : <ListingNotFound/>
                                 }  
                             </div>
 

@@ -37,7 +37,7 @@ export default function ListingList({listing}) {
                 <p className="card-text mb-1 font-weight-500 text-gray-light">{listing.address}, {listing.city}, {listing.state}</p>
                 <p className="card-text mb-2 ml-0" style={{textOverflow: 'ellipsis'}}>{listing.description.split(" ").splice(0,15).join(" ")}</p>
                 <p className="card-text fs-17 font-weight-bold text-heading mb-3">
-                    &#8358; {listing.initial_fees.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    &#8358; {listing.rent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </p>
             </div>
             <div className="card-footer pt-3 bg-transparent px-0 pb-0">

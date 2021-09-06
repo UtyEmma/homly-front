@@ -89,6 +89,7 @@ export function SearchbarSelectListing ({onChange, name}) {
                 &&
 
                 <select name={name} className="form-control shadow-none form-control-lg rounded-right-md-0  rounded flex-md-1 mt-3 mt-md-0 selectpicker" title="Select Category" data-style="btn-lg py-2 h-52 border-right bg-white" onChange={onChange} id="type" name="type">
+                    <option disabled>All Categories</option>
                     {categories.map((category, index) => (
                         <option value={category.category_title} key={index}>{category.category_title}</option>
                     ))}

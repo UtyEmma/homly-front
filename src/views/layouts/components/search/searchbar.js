@@ -72,8 +72,8 @@ export default function Searchbar({parsed}) {
                 <div id="advanced-search-filters-2" className="col-12 pb-6 pt-lg-2 collapse" data-parent="#accordion-2">
                     <div className="row mx-n2">
                     <div className="col-sm-6 col-md-4 col-lg-3 pt-4 px-2">
-                        <select className="form-control border-0 shadow-none form-control-lg selectpicker bg-white" name="bedrooms" title="Bedrooms" onChange={compileSearchQuery} data-style="btn-lg py-2 h-52 bg-white">
-                            <option selected defaultValue="">All Bedrooms</option>
+                        <select className="form-control border-0 shadow-none selectpicker bg-white" name="bedrooms" title="Bedrooms" onChange={compileSearchQuery} data-style="btn-lg py-2 h-52 bg-white">
+                            <option disabled>All Bedrooms</option>
                             <option defaultValue="1" >1</option>
                             <option defaultValue="2" >2</option>
                             <option defaultValue="3">3</option>
@@ -83,7 +83,8 @@ export default function Searchbar({parsed}) {
                         </select>
                     </div>
                     <div className="col-sm-6 col-md-4 col-lg-3 pt-4 px-2">
-                        <select className="form-control border-0 shadow-none form-control-lg selectpicker bg-white" name="bathrooms" title="All Bathrooms" onChange={compileSearchQuery} data-style="btn-lg py-2 h-52 bg-white">
+                        <select className="form-control border-0 shadow-none selectpicker bg-white" name="bathrooms" title="All Bathrooms" onChange={compileSearchQuery} data-style="btn-lg py-2 h-52 bg-white">
+                            <option disabled>All Bathrooms</option>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -93,11 +94,11 @@ export default function Searchbar({parsed}) {
                         </select>
                     </div>
                     <div className="col-sm-6 col-md-4 col-lg-3 pt-4 px-2">
-                        <State classes="form-control border-0 shadow-none form-control-lg bg-white" setSelectedState={setSelectedState} />
+                        <State classes="form-control form-control-lg border-0 shadow-none bg-white" setSelectedState={setSelectedState} dataStyle="btn-lg py-2 h-52 bg-white"/>
                     </div>
 
                     <div className="col-sm-6 col-md-4 col-lg-3 pt-4 px-2">
-                        <LocalGovt classes="form-control border-0 shadow-none form-control-lg bg-white" selectedState={selectedState} />
+                        <LocalGovt classes="form-control form-control-lg border-0 shadow-none bg-white" dataStyle="btn-lg py-2 h-52 bg-white" selectedState={selectedState} />
                     </div>
                     </div>
                     <div className="row">
@@ -105,13 +106,13 @@ export default function Searchbar({parsed}) {
                             <div className='row'>
                                 <div className="col-md-6 col-md-6 col-lg-6 pt-6">
                                     <div className="text-center mt-2">
-                                        <input type="text" className="form-control form-control-lg border-0" id="price" placeholder="Min Price (&#8358;)" name="minprice" onChange={compileSearchQuery} />
+                                        <input type="text" className="form-control form-control-lg border-0" id="price" placeholder="Min Price (&#8358;)" dataStyle="btn-lg py-2 h-52 bg-white" name="minprice" onChange={compileSearchQuery} />
                                     </div>
                                 </div>
 
                                 <div className="col-md-6 col-md-6 col-lg-6 pt-6">
                                     <div className="text-center mt-2">
-                                        <input type="text" className="form-control form-control-lg border-0" id="price" placeholder="Max Price (&#8358;)" name="maxprice" onChange={compileSearchQuery} />
+                                        <input type="text" className="form-control form-control-lg border-0" id="price" placeholder="Max Price (&#8358;)" dataStyle="btn-lg py-2 h-52 bg-white" name="maxprice" onChange={compileSearchQuery} />
                                     </div>
                                 </div>
                             </div>

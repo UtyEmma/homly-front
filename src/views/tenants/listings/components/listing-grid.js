@@ -1,6 +1,7 @@
 import { AddListingToFavourites } from 'providers/redux/_actions/favourites-actions'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import ScrollAnimation from 'react-animate-on-scroll';
 import '../css/listing.css'
 
 export default function ListingGrid({listing}) {
@@ -25,6 +26,7 @@ export default function ListingGrid({listing}) {
     }, [status])
 
     return (
+        <ScrollAnimation animateIn="fadeInUp">
         <div className="col-md-6 mb-6 listing-grid">
             <div className="card border-0" >
                 <div className="position-relative hover-change-image bg-hover-overlay rounded-lg card-img listing-image-container">
@@ -61,7 +63,7 @@ export default function ListingGrid({listing}) {
                     <p className="card-text mb-2 ml-0">{listing.description.split(" ").splice(0,12).join(" ")}...</p>
                 
                     <p className="fs-17 font-weight-bold text-heading mb-0 lh-16">
-                        &#8358; {listing.initial_fees.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                        &#8358; {listing.rent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                     </p>
 
                 </div>
@@ -82,6 +84,7 @@ export default function ListingGrid({listing}) {
                 </ul>
                 </div>
             </div>
-            </div>
+        </div>
+        </ScrollAnimation>
     )
 }
