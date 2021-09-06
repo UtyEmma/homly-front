@@ -15,6 +15,7 @@ export default function ListingFilter({params, setParams}) {
 
     useEffect(() => {
         selectedState && setParams({...params, city: ""})
+        window.$('select').selectpicker('refresh')
     }, [selectedState])
 
     return (
@@ -26,7 +27,7 @@ export default function ListingFilter({params, setParams}) {
                 <form className="form-inline" id="accordion-5">
                     <div className="form-group p-1">
                         <label htmlFor="state"  className="sr-only">State</label>
-                        <State setSelectedState={setSelectedState} title="State" onChange={parseQueryParams} styles="bg-white" classes="form-control border-0 bg-white shadow-none shadow-xxs-1 font-weight-600" name="state"/>
+                        <State setSelectedState={setSelectedState} title="State" onChange={parseQueryParams} classes="form-control form-control-lg border-0 bg-white shadow-none shadow-xxs-1 font-weight-600" name="state"/>
                     </div>
                     <div className="form-group p-1">
                         <label htmlFor="city"  className="sr-only">Local Govt</label>
@@ -34,8 +35,7 @@ export default function ListingFilter({params, setParams}) {
                     </div>
                     <div className="form-group p-1">
                         <label htmlFor="any-price" className="sr-only">Any Price</label>
-                        <select className="form-control border-0 shadow-none shadow-xxs-1 bg-white font-weight-600" title="Any Price" onChange={parseQueryParams} name="price" data-style="bg-white" id="any-price">
-                            <option selected disabled>Price</option>
+                        <select className="form-control border-0 shadow-none shadow-xxs-1 bg-white font-weight-600" title="Price" onChange={parseQueryParams} name="price" data-style="bg-white" id="any-price">
                             <option defaultValue="0">Under &#8358;200k</option>
                             <option defaultValue="1">&#8358;200k - &#8358;400k</option>
                             <option defaultValue="2">&#8358;400k - &#8358;800k</option>
@@ -49,7 +49,6 @@ export default function ListingFilter({params, setParams}) {
                     <div className="form-group p-1">
                         <label htmlFor="room" className="sr-only">Room</label>
                         <select className="form-control border-0 shadow-xxs-1 bg-white font-weight-600" title="Rooms" data-style="bg-white" onChange={parseQueryParams} name="rooms" id="room">
-                            <option selected defaultValue="">Bedrooms</option>
                             <option defaultValue="1" >1</option>
                             <option defaultValue="2" >2</option>
                             <option defaultValue="3">3</option>

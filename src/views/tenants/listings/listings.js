@@ -51,7 +51,7 @@ const Listing = ({isLoggedIn, user, adminMode}) => {
                                     </div>
                                 </div>
 
-                                <div className="col-md-9 d-flex justify-content-end">
+                                <div className="col-md-9 col-12 d-md-flex justify-content-end">
                                     <ListingFilter params={params} setParams={setParams}/> 
                                 </div>
                             </div>

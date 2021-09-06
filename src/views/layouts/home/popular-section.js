@@ -43,7 +43,7 @@ export default function PopularSection({isLoading}) {
                                             listings.map((listing, index) => {
                                                 return (
                                                     <Nav.Item key={index}>
-                                                        <Nav.Link className="pointer fs-13 ml-2 letter-spacing-087 text-secondary text-uppercase px-4 bg-gray-01 text-active-white bg-active-primary rounded-lg" eventKey={listing.category.slug}>
+                                                        <Nav.Link className="pointer fs-13 ml-2 letter-spacing-087 text-secondary text-uppercase px-4 bg-gray-01 text-active-white bg-active-primary rounded" eventKey={listing.category.slug}>
                                                             {listing.category.title}
                                                         </Nav.Link>
                                                     </Nav.Item>
@@ -54,7 +54,7 @@ export default function PopularSection({isLoading}) {
                                 </Row>
                             </div>
 
-                            <TabContent className="col-12 p-0 shadow-none">
+                            <TabContent className="col-12 p-md-0 p-2 shadow-none">
                                 {
                                     listings.map((listing, index) => {
                                         return (

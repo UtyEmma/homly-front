@@ -10,7 +10,7 @@ const Home = ({isLoggedIn, user, isLoading}) => {
     
     return (
         <div>
-            {/* <Preloader loading={isLoading} /> */}
+            <Preloader loading={isLoading} />
             <NavBar isloggedIn={isLoggedIn} user={user}/>
             
             <main id="content">

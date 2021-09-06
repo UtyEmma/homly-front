@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import naijaStateLocalGovernment from 'naija-state-local-government'
-
 
 export function State({name, title, setSelectedState, register, classes, styles, defaultValue, onChange}){
     const states = naijaStateLocalGovernment.states();
@@ -10,10 +9,16 @@ export function State({name, title, setSelectedState, register, classes, styles,
         onChange && onChange(e)
     }
 
+    const state = useRef()
+    const picker = window.$(state.current)
+
+    useEffect(() => {
+        picker.selectpicker('refresh')
+    })
+
     return (
         <>
-            <select className={classes} id="state" defaultValue={defaultValue} default title={title} data-style={styles} data-live-search="true" onChange={setState} id="type"  name={name}>
-                <option value="" selected>Select State</option>
+            <select className={`${classes} selectpicker`} ref={state} id="state" defaultValue={defaultValue} default title={title} data-style={styles} data-live-search="true" onChange={setState} id="type" title="Select State"  name={name}>
                 {states ? states.map((state, index) => (
                     <option key={index} defaultValue={state} >{state}</option>
                 )) : <option>Select State</option>}
@@ -22,26 +27,35 @@ export function State({name, title, setSelectedState, register, classes, styles,
     )
 }
 
-export function LocalGovt({selectedState, setCity, name, onChange, classes, styles, defaultValue}){
+export function LocalGovt({selectedState, name, onChange, classes, styles, defaultValue}){
     const stateData = selectedState && naijaStateLocalGovernment.lgas(selectedState);
     const lgas = stateData ? stateData.lgas : null;
+    const select_city = useRef()
+    let picker = window.$(select_city.current)
+    
+    const handlePicker = () => {
+        picker.selectpicker('refresh')
+    }
+
+    useEffect(() => {
+        handlePicker()
+    }, [lgas])
+
     return (
         <>
-            <select className={classes} onChange={onChange} defaultValue={defaultValue} data-live-search="true" data-style={styles} title="Local Govt" id="lga" name={name}>
-                {lgas 
+            <select className={`${classes} selectpicker`} ref={select_city} onChange={onChange} defaultValue={defaultValue} data-live-search="true" data-style={styles} title="Select City" id="lga" name={name}>
+                {
+                
+                    lgas 
                     
-                    ? 
+                    &&
                         <>
-                            <option value="" selected>Select City</option>
                             {
                                 lgas.map((lga, index) => (
                                     <option key={index} defaultValue={lga}>{lga}</option>
                                 ))
                             } 
-                        </>            
-                    : 
-                    
-                    <option selected>Select LGA</option>            
+                        </>                        
                 }
             </select>
         </>

@@ -4,8 +4,9 @@ export default function ListingTabItem({listing}) {
     return (
         <div className="col-xxl-3 col-lg-4 col-md-6 mb-6" >
             <div className="card border-0 bg-overlay-gradient-3 rounded-lg hover-change-image">
-                <img src={listing.images[0]} style={{minHeight: '100%'}} className="card-img" alt={listing.title} />
-                <div className="card-img-overlay d-flex flex-column position-relative-sm">
+                <img src={listing.images[0]} style={{minHeight: '100%', objectFit: 'cover', objectPosition: 'center'}} className="card-img" alt={listing.title} />
+               
+                <div className="card-img-overlay d-flex flex-column">
                     <div className="d-flex">
                         <div className="mr-auto h-24 d-flex">
                             <span className="badge badge-primary mr-2">For Sale</span>
