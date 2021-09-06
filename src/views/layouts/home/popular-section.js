@@ -17,9 +17,8 @@ export default function PopularSection({isLoading, setIsLoading}) {
 
     useEffect(() => {
         !listings && loadPopularListings()
-        console.log(loading)
         setIsLoading(loading)
-    }, [listings, loading])
+    }, [listings])
 
     return (
         <>
