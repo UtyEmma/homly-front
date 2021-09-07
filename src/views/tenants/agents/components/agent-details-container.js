@@ -9,9 +9,9 @@ import AgentReviews from './agent-reviews/agent-reviews'
 export default function AgentDetailsContainer({agent, listings, reviews, fetchAgent, status, setAgentData}) {
     
     const dispatch = useDispatch()
+
     const {adminMode} = useSelector((state) => state.admin_mode)
     const [show, setShow] = useState(false)
-    const [callbackFunc, setCallbackFunc] = useState()
 
     const suspend_agent = useSelector(state => state.suspend_item)
     const {loading, data} = suspend_agent
@@ -137,11 +137,11 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                             <a href={`mailto:${agent.email}`} type="submit" className="btn btn-primary btn-lg btn-block shadow-none">Send Message</a>
 
                             {
-                                adminMode
+                                adminMode == 'true'
 
                                 &&
 
-                                <>
+                                <> 
                                     <hr/>
                                 
                                     <div className="">
@@ -154,22 +154,24 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                                             <button type="button" onClick={verifyAgent} className="btn btn-block btn-lg btn-success">Verify Agent</button>
 
                                         }
+
                                         <button type="button" onClick={suspendAgent} className="btn btn-block btn-lg btn-outline-warning hover-white">{agent.status === 'active' ? 'Suspend' : 'Unsuspend'} Agent</button>
                                         
                                         <button type="button" onClick={deleteAgent} className="btn btn-block btn-lg btn-danger">Delete Agent</button>
                                     </div>
                                 </>
+
                             }
                         </div>
                         </div>
-                        <div className="card">
-                        <div className="card-body text-center pt-7 pb-6 px-0">
-                            <img src="images/contact-widget.jpg" alt="Want to become an Estate Agent ?" />
-                            <div className="text-lead fs-20 text-dark mb-6 mt-n2 font-weight-600">Boost your visibility as
-                            <p className="mb-0 fs-18">a Real Estate Agent?</p>
+                        <div className="card d-none d-md-block">
+                            <div className="card-body text-center pt-7 pb-6 px-0">
+                                <img src="images/contact-widget.jpg" alt="Want to become an Estate Agent ?" />
+                                <div className="text-lead fs-20 text-dark mb-6 mt-n2 font-weight-600">Boost your visibility as
+                                <p className="mb-0 fs-18">a Real Estate Agent?</p>
+                                </div>
+                                <a href="/agent-signup" className="btn btn-primary">Sign up Now</a>
                             </div>
-                            <a href="/agent-signup" className="btn btn-primary">Sign up Now</a>
-                        </div>
                         </div>
                     </div>
                     </div>

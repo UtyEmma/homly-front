@@ -10,7 +10,7 @@ import { LocalGovt, State } from 'components/city-state/city-state';
 import Validator from 'validatorjs';
 import { MapFormErrors, __agent_updateProfile } from 'libraries/validation';
 
-const AgentProfile = ({agent}) => {
+const AgentProfile = ({agent, setIsLoading}) => {
         const dispatch = useDispatch()
         const profileImage = createRef()
         const [selectedState, setSelectedState] = useState('Abia')
@@ -20,7 +20,8 @@ const AgentProfile = ({agent}) => {
 
         useEffect(() => {
             error && error.formError && setFormErrors(error.formError)
-        }, [error])
+            setIsLoading(loading)
+        }, [loading, error])
 
         const {rules, messages, attributes} = __agent_updateProfile
         const [formErrors, setFormErrors] = useState({})
@@ -46,7 +47,7 @@ const AgentProfile = ({agent}) => {
             <div className="wrapper dashboard-wrapper">
                 <Preloader loading={loading}/>
                 <div className="d-flex flex-wrap flex-xl-nowrap">
-                    <Sidebar />
+                    <Sidebar agent={agent} />
 
                     <div className="page-content">
                         <Header agent={agent}/>
@@ -55,7 +56,8 @@ const AgentProfile = ({agent}) => {
                             <div className="px-3 px-lg-6 px-xxl-13 py-5 py-lg-10">
                                 <div className="mb-6">
                                     <h2 className="mb-0 text-heading fs-22 lh-15">My Profile</h2>
-                                    <p className="mb-1">Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse suscipit</p>
+                                    <p className="mb-5">Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse suscipit</p>
+                                    <a href={`/${agent.username}`} target="_blank" className="btn btn-lg btn-outline-primary d-block d-md-inline my-3">Preview Profile <i className="ml-1 fa fa-external-link-alt"></i></a>
                                 </div>
                                 <form onSubmit={updateUserData} id="profile-form" encType="multipart/form-data">
                                     <div className="row mb-6">
@@ -137,73 +139,72 @@ const AgentProfile = ({agent}) => {
 
                                         <div className="col-lg-6">
                                             
-                                            <div class="card mb-6">
-                                                <div class="card-body px-6 pt-6 pb-5">
-                                                    <h3 class="card-title mb-0 text-heading fs-22 lh-15">Agent Location</h3>
-                                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                                                    <div class="form-group">
-                                                        <label for="state" class="text-heading">State</label>
+                                            <div className="card mb-6">
+                                                <div className="card-body px-6 pt-6 pb-5">
+                                                    <h3 className="card-title mb-0 text-heading fs-22 lh-15">Agent Location</h3>
+                                                    <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                                    <div className="form-group">
+                                                        <label htmlFor="state" className="text-heading">State</label>
                                                         <State classes="form-control form-control-lg border-0" setSelectedState={setSelectedState} name="state" id="state"/>
                                                         <p className="text-danger fs-12 mt-1">{formErrors.state?.message}</p>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="instagram" class="text-heading">City</label>
+                                                    <div className="form-group">
+                                                        <label htmlFor="instagram" className="text-heading">City</label>
                                                         <LocalGovt selectedState={selectedState} classes="form-control form-control-lg border-0" id="city" name="city"/>
                                                         <p className="text-danger fs-12 mt-1">{formErrors.city?.message}</p>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="card mb-6">
-                                                <div class="card-body px-6 pt-6 pb-5">
-                                                    <h3 class="card-title mb-0 text-heading fs-22 lh-15">Social Media Handles</h3>
-                                                    <p class="card-text">Make it easier for clients to reach you Social Media</p>
-                                                    <div class="form-group">
-                                                        <label for="facebook" class="text-heading">Facebook</label>
-                                                        <div class="input-group mb-3">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text fs-14 font-weight-600" id="basic-addon3">
+                                            <div className="card mb-6">
+                                                <div className="card-body px-6 pt-6 pb-5">
+                                                    <h3 className="card-title mb-0 text-heading fs-22 lh-15">Social Media Handles</h3>
+                                                    <p className="card-text">Make it easier for clients to reach you Social Media</p>
+                                                    <div className="form-group">
+                                                        <label htmlFor="facebook" className="text-heading">Facebook</label>
+                                                        <div className="input-group mb-3">
+                                                            <div className="input-group-prepend">
+                                                                <span className="input-group-text fs-14 font-weight-600" id="basic-addon3">
                                                                     <i className="fab fa-facebook-square fs-20"></i>
                                                                 </span>
                                                             </div>
-                                                            <input type="text" name="facebook" id="facebook" class="form-control border-0" defaultValue={agent.facebook} aria-describedby="basic-addon3" />
+                                                            <input type="text" name="facebook" id="facebook" className="form-control border-0" defaultValue={agent.facebook} aria-describedby="basic-addon3" />
                                                         </div>
                                                         <p className="text-danger fs-12 mt-1">{formErrors.facebook?.message}</p>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="instagram" class="text-heading">Instagram</label>
-                                                        <div class="input-group mb-3">
-                                                            <div class="input-group-prepend">
-                                                            <span class="input-group-text fs-14 font-weight-600" id="basic-addon3"><i className="fab fa-instagram fs-20"></i></span>
+                                                    <div className="form-group">
+                                                        <label htmlFor="instagram" className="text-heading">Instagram</label>
+                                                        <div className="input-group mb-3">
+                                                            <div className="input-group-prepend">
+                                                            <span className="input-group-text fs-14 font-weight-600" id="basic-addon3"><i className="fab fa-instagram fs-20"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control border-0" defaultValue={agent.instagram} id="instagram" name="instagram" aria-describedby="basic-addon3"/>
+                                                            <input type="text" className="form-control border-0" defaultValue={agent.instagram} id="instagram" name="instagram" aria-describedby="basic-addon3"/>
                                                         </div>
                                                         <p className="text-danger fs-12 mt-1">{formErrors.instagram?.message}</p>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="twitter" class="text-heading">Twitter</label>
-                                                        <div class="input-group mb-3">
-                                                            <div class="input-group-prepend">
-                                                            <span class="input-group-text fs-14" id="basic-addon3">
+                                                    <div className="form-group">
+                                                        <label htmlFor="twitter" className="text-heading">Twitter</label>
+                                                        <div className="input-group mb-3">
+                                                            <div className="input-group-prepend">
+                                                            <span className="input-group-text fs-14" id="basic-addon3">
                                                                 <i className="fab fa-twitter fs-20"></i>
                                                             </span>
                                                             </div>
-                                                            <input type="text" class="form-control border-0" defaultValue={agent.twitter} id="twitter" name="twitter" aria-describedby="basic-addon3"/>
+                                                            <input type="text" className="form-control border-0" defaultValue={agent.twitter} id="twitter" name="twitter" aria-describedby="basic-addon3"/>
                                                         </div>
                                                         <p className="text-danger fs-12 mt-1">{formErrors.twitter?.message}</p>
                                                     </div>
-                                                    <div class="form-group mb-7">
-                                                        <label for="website" class="text-heading">Website Url <span class="text-muted">(without http)</span></label>
-                                                        <input type="url" class="form-control form-control-lg border-0" defaultValue={agent.website} id="website" name="website" />
+                                                    <div className="form-group mb-7">
+                                                        <label htmlFor="website" className="text-heading">Website Url <span className="text-muted">(without http)</span></label>
+                                                        <input type="url" className="form-control form-control-lg border-0" defaultValue={agent.website} id="website" name="website" />
                                                         <p className="text-danger fs-12 mt-1">{formErrors.website?.message}</p>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div className="col-12">
-                                                <div className="d-flex justify-content-end flex-wrap">
-                                                    <a href={`/${agent.username}`} target="_blank" className="btn btn-lg border ml-4 mb-3">Preview Profile <i className="ml-1 fa fa-external-link-alt"></i></a>
-                                                    <button type="submit" className="btn btn-lg btn-primary ml-4 mb-3">Update Profile</button>
+                                                <div className="d-md-flex justify-content-end flex-wrap">
+                                                    <button type="submit" className="btn btn-lg btn-primary d-block ml-4 mb-3">Update Profile</button>
                                                 </div>
                                             </div>
 

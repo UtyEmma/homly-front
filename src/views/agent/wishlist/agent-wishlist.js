@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Header from '../layouts/shared/header'
 import Sidebar from '../layouts/shared/sidebar'
 
-const AgentWishlist = ({agent}) => {
+const AgentWishlist = ({agent, setIsLoading}) => {
     
     const dispatch = useDispatch()
     const fetch_wishlists = useSelector(state => state.agent_wishlist)
@@ -18,12 +18,13 @@ const AgentWishlist = ({agent}) => {
 
     useEffect(() => {
         !wishlists && FetchWishlist()
+        wishlists && setIsLoading(false)
     }, [wishlists]);
 
     return (
         <div className="wrapper dashboard-wrapper">
             <div className="d-flex flex-wrap flex-xl-nowrap">
-                <Sidebar />
+                <Sidebar agent={agent}/>
 
                 <div className="page-content">
                     <Header agent={agent}/>

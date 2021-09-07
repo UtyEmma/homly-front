@@ -2,6 +2,7 @@ import React, { Component, useEffect } from 'react'
 
 import Sidebar from './layouts/shared/sidebar'
 import Header from './layouts/shared/header'
+import { Link } from 'react-router-dom'
 
 const AgentDashboard = ({agent, setIsLoading}) => {
     useEffect(() => {
@@ -13,20 +14,20 @@ const AgentDashboard = ({agent, setIsLoading}) => {
 
                 <Sidebar agent={agent} />
 
-                <div className="page-content bg-primary">
+                <div className="page-content">
                     <Header agent={agent}/>
                         <main id="content" className="bg-gray-01">
                             <div className="px-3 px-lg-6 px-xxl-13 py-5 py-lg-10">
                                 <div className="d-flex flex-wrap flex-md-nowrap mb-6">
-                                <div className="mr-0 mr-md-auto">
-                                    <h2 className="mb-0 text-heading fs-22 lh-15">Welcome back, {agent.firstname} {agent.lastname}!</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At iusto, laboriosam. Atque</p>
-                                </div>
+                                    <div className="mr-0 mr-md-auto">
+                                        <h2 className="mb-0 text-heading fs-22 lh-15">Welcome back, {agent.firstname} {agent.lastname}!</h2>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At iusto, laboriosam. Atque</p>
+                                    </div>
                                 <div>
-                                    <a href="/new-listing" className="btn btn-primary btn-lg">
+                                    <Link to="/new-listing" className="btn btn-primary btn-lg">
                                     <span>Add New Property</span>
                                     <span className="d-inline-block ml-1 fs-20 lh-1"><svg className="icon icon-add-new"><use xlinkHref="#icon-add-new" /></svg></span>
-                                    </a>
+                                    </Link>
                                 </div>
                                 </div>
                                 <div className="row">

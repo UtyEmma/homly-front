@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FetchAgentReview } from 'providers/redux/_actions/review-actions';
 import Preloader from 'components/preloader/preloader';
 
-const Reviews = ({agent}) => {
+const Reviews = ({agent, setIsLoading}) => {
 
     const dispatch = useDispatch();
     const {loading, reviews} = useSelector((state) => (state.agent_reviews));
@@ -20,13 +20,14 @@ const Reviews = ({agent}) => {
 
     useEffect(() => {
         !reviews && fetchReviews()
+        reviews && setIsLoading(false)
     }, [reviews])
 
     return (
         <div className="wrapper dashboard-wrapper">
             <Preloader loading={loading} />
             <div className="d-flex flex-wrap flex-xl-nowrap">
-                <Sidebar />
+                <Sidebar agent={agent} />
 
                 <div className="page-content">
                     <Header agent={agent} />

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import ScrollAnimation from 'react-animate-on-scroll';
 import '../css/listing.css'
 
-export default function ListingGrid({listing}) {
+export default function ListingGrid({listing, tab}) {
     
     const dispatch = useDispatch()
 
@@ -26,8 +26,8 @@ export default function ListingGrid({listing}) {
     }, [status])
 
     return (
-        <ScrollAnimation animateIn="fadeInUp">
-            <div className="col-md-6 mb-6 listing-grid">
+        <ScrollAnimation animateIn="fadeInUp" className={`${tab ? 'col-md-6' : ''} px-0 px-md-0 d-md-inline-block`}>
+            <div className={`${tab ? 'col-md-12' : 'col-md-6' }  mb-6 listing-grid`}>
                 <div className="card border-0" >
                     <div className="position-relative hover-change-image bg-hover-overlay rounded-lg card-img listing-image-container">
                     <img className="listing-image" style={{minHeight: '100%'}} src={listing.images[0]} alt={listing.title} />

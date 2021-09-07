@@ -11,7 +11,7 @@ import AgentDetailsContainer from './components/agent-details-container'
 import NotFound from 'views/not-found'
 import Searchbar from 'views/layouts/components/search/searchbar'
 
-const AgentDetails = ({isLoggedIn, user, status}) => {
+const AgentDetails = ({isLoggedIn, user, status, setIsLoading}) => {
 
     const {id} = useParams()
     const dispatch = useDispatch()
@@ -26,7 +26,6 @@ const AgentDetails = ({isLoggedIn, user, status}) => {
     }
 
     const handleSetAgentData = () => {
-        console.log(agent)
         if (agent) {
             console.log(agent)
             setAgentData(agent)   
@@ -36,6 +35,7 @@ const AgentDetails = ({isLoggedIn, user, status}) => {
     useEffect(() => {
         !agent && loadAgent()
         agent && handleSetAgentData()
+        setIsLoading(loading)
     }, [agent])
 
     return (

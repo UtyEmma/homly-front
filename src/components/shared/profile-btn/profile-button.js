@@ -2,6 +2,8 @@ import { AgentLogout } from 'providers/redux/_actions/agent-actions'
 import { TenantLogout } from 'providers/redux/_actions/user-actions'
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
+import ScrollAnimation from 'react-animate-on-scroll'
 
 export default function ProfileButton({isloggedIn, user}) {
 
@@ -24,7 +26,7 @@ function LoggedIn(user) {
     return (           
         <ul className="navbar-nav flex-row justify-content-lg-end align-items-center d-flex flex-wrap text-body py-2">            
             <li className="nav-item mr-4">
-                <a className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" href="/wishlist">
+                <Link className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" to="/wishlist">
                     <i className="fal fa-heart fs-large-4" />
                     {
                         user.wishlists 
@@ -33,7 +35,7 @@ function LoggedIn(user) {
 
                         <span className="badge badge-primary badge-circle badge-absolute p-1">{user.wishlists}</span>   
                     }
-                </a>
+                </Link>
             </li>
 
             <li className="nav-item mr-2 d-flex hover bg-hover-overlay-gradient-2 hover-primary rounded p-1">
@@ -50,10 +52,10 @@ function LoggedIn(user) {
                         </div>
                     }
                 </div>
-                <a href="" className="nav-link  dropdown-toggle " data-toggle="dropdown">Hello {user.firstname}</a>
+                
+                <button className="nav-link btn dropdown-toggle " data-toggle="dropdown">Hello {user.firstname}</button>
 
                 <div className="dropdown-menu px-2 dropdown-lg dropdown-menu-right" style={{width: "250px"}}>
-                    
                     {
                         type === 'tenant'
 
@@ -80,21 +82,21 @@ function LoggedIn(user) {
 function TenantNavItems () {
     return (
         <>
-            <a className="dropdown-item rounded py-2 align-middle" href="/profile">
+            <Link className="dropdown-item rounded py-2 align-middle" to="/profile">
                 <i className="fa fa-user mr-3 text-primary"></i>
                 My Profile
-            </a>
+            </Link>
 
-            <a className="dropdown-item rounded py-2 align-middle" href="/favourites">
+            <Link className="dropdown-item rounded py-2 align-middle" to="/favourites">
                 <i className="fa fa-heart mr-3 text-primary"></i>
                 Favourites
-            </a>
+            </Link>
 
 
-            <a className="dropdown-item rounded py-2 align-middle" href="/wishlists">
+            <Link className="dropdown-item rounded py-2 align-middle" to="/wishlists">
                 <i className="fa fa-gifts mr-3 text-primary"></i>
                 Wishlists
-            </a>
+            </Link>
         </>
     )
 }
@@ -103,21 +105,21 @@ function TenantNavItems () {
 export function AgentNavItems () {
     return (
         <>
-            <a className="dropdown-item rounded py-2 align-middle" href="/dashboard">
+            <Link className="dropdown-item rounded py-2 align-middle" to="/dashboard">
                 <i className="fa fa-user mr-3 text-primary"></i>
                 My Dashboard
-            </a>
+            </Link>
 
-            <a className="dropdown-item rounded py-2 align-middle" href="/agent-profile">
+            <Link className="dropdown-item rounded py-2 align-middle" to="/agent-profile">
                 <i className="fa fa-heart mr-3 text-primary"></i>
                 Profile
-            </a>
+            </Link>
 
 
-            <a className="dropdown-item rounded py-2 align-middle" href="/support">
+            <Link className="dropdown-item rounded py-2 align-middle" to="/support">
                 <i className="fa fa-headset mr-3 text-primary"></i>
                 Support
-            </a>
+            </Link>
         </>
     )
 }
@@ -126,15 +128,15 @@ function loggedOut(params) {
     return (           
         <ul className="navbar-nav flex-row justify-content-lg-end align-items-center d-flex flex-wrap text-body py-2">
             <li className="nav-item ">
-                <a className="nav-link pl-3 pr-2 mr-1" href="/login">Login</a>
+                <Link className="nav-link pl-3 pr-2 mr-1" to="/login">Login</Link>
                 |
-                <a className="nav-link pl-3 pr-2 mr-1" href="/signup">Sign Up</a>
+                <Link className="nav-link pl-3 pr-2 mr-1" to="/signup">Sign Up</Link>
             </li>
             <li className="nav-item ml-auto w-100 w-sm-auto">
-                <a className="btn btn-primary btn-lg d-flex align-items-center" href="/agent-signup">
+                <Link className="btn btn-primary btn-lg d-flex align-items-center" to="/agent-signup">
                     For Agents
                     <img src="/images/add-listing-icon.png" alt="Add listing" className="ml-2" />
-                </a>
+                </Link>
             </li>
         </ul>
     )

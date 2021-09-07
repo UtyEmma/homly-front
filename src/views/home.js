@@ -9,7 +9,7 @@ import ScrollAnimation from 'react-animate-on-scroll'
 const Home = ({isLoggedIn, user, isLoading, setIsLoading}) => {
 
     useEffect(() => {
-        console.log(isLoading)
+        setIsLoading(false)
     })
 
     return (

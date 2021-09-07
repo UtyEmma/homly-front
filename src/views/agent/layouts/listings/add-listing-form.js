@@ -15,6 +15,9 @@ function AddListingForm({setIsLoading}) {
 
     const [files, setFiles] = useState([]) //Set Files
 
+    const store_listing = useSelector((state) => state.store_listing);
+    const {store} = store_listing; 
+
     const listing = useSelector((state) => state.new_listing);
     const {loading, listing_success, formError} = listing
     

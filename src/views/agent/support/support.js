@@ -1,24 +1,21 @@
 import Preloader from 'components/preloader/preloader'
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react'
 import Header from 'views/agent/layouts/shared/header'
 import Sidebar from 'views/agent/layouts/shared/sidebar'
-import { ChatBox } from './components/chat/chatbox'
 import { SupportCenterContent } from './components/support-content'
 import { SupportCenterSidebar } from './components/support-sidebar'
 import { NewTicketModal } from './components/tickets/new-ticket'
-import { Tickets } from './components/tickets/tickets'
 
-export const Support = ({agent}) => {
+export const Support = ({agent, isLoading, setIsLoading}) => {
 
     const [titles, setTitles] = useState()
     const [chat, setChat] = useState()
-    const [isLoading, setIsLoading] = useState()
-
+     
     return (
-        <div className="wrapper dashboard-wrapper">
+        <div className="wrapper dashboard-wrapper py-sm-10">
             <Preloader loading={isLoading} />
             <div className="d-flex flex-wrap flex-xl-nowrap">
-                <Sidebar />
+                <Sidebar agent={agent} />
 
                 <div className="page-content">
                     <Header agent={agent}/>
@@ -38,9 +35,8 @@ export const Support = ({agent}) => {
                         </div>
                     </main>
                 </div>
+                <NewTicketModal setTitles={setTitles} setIsLoading={setIsLoading} />
             </div>
-
-            <NewTicketModal setTitles={setTitles} setIsLoading={setIsLoading} />
         </div>
     )
 }  

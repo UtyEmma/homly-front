@@ -8,7 +8,7 @@ import Header from '../layouts/shared/header'
 import Sidebar from '../layouts/shared/sidebar'
 import AgentListingContainer from './components/agent_listing-container'
 
-const AgentsListings = ({agent}) => {
+const AgentsListings = ({agent, setIsLoading}) => {
     
     const dispatch = useDispatch();
 
@@ -21,15 +21,16 @@ const AgentsListings = ({agent}) => {
     useEffect(() => {
         if(!listings){
             loadListings()
+            setIsLoading(loading)
         }
+        listings && setIsLoading(false)
     }, [listings])
 
 
     return (
         <div className="wrapper dashboard-wrapper">
-            <Preloader loading={loading} />
             <div className="d-flex flex-wrap flex-xl-nowrap">
-                <Sidebar />
+                <Sidebar agent={agent}/>
 
                 <div className="page-content">
                     <Header agent={agent}/>

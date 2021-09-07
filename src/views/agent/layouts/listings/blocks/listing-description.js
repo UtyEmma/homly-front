@@ -1,7 +1,5 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
 import SelectListingCategory from 'views/layouts/components/details/categories';
-import { StoreListing } from 'providers/redux/_actions/listing/listing-actions';
 
 export default function ListingDescription({formErrors}) {
 
@@ -30,8 +28,8 @@ export default function ListingDescription({formErrors}) {
                                 <p className="text-danger fs-12 mt-1">{formErrors.title?.message}</p>
                             </div>
                             <div className="form-group mb-0">
-                                <label htmlFor="category" className="text-heading mb-0">Type</label>
-                                <SelectListingCategory className="mt-0" classes="form-control border-0 shadow-none mt-n3 form-control-lg" name="type" />
+                                <label htmlFor="category" className="text-heading">Type</label>
+                                <SelectListingCategory classes="form-control border-0 shadow-none form-control-lg" name="type" />
                                 <p className="text-danger fs-12">{formErrors.type?.message}</p>
                             </div>
                             <div className="form-group mb-0">
@@ -73,7 +71,7 @@ export default function ListingDescription({formErrors}) {
                         <div className="form-row mx-n2">
                             <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
                                 <div className="form-group">
-                                    <label htmlFor="rent" className="text-heading">Total Rent (in &#8358;) </label>
+                                    <label htmlFor="rent" className="text-heading">Rent (in &#8358;) </label>
                                     <input type="text" className="form-control form-control-lg border-0" id="rent" name="rent" />
                                     <p className="text-danger fs-12 mt-1">{formErrors.rent?.message}</p>
                                 </div>
@@ -93,7 +91,7 @@ export default function ListingDescription({formErrors}) {
                 </div>
                 </div>
                 <div className="text-right">
-                <button className="btn btn-lg btn-primary next-button">Next step
+                <button className="btn btn-lg btn-primary next-button" type="button" role="button">Next step
                     <span className="d-inline-block ml-2 fs-16"><i className="fal fa-long-arrow-right" /></span>
                 </button>
                 </div>
