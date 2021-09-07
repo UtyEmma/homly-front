@@ -19,12 +19,12 @@ const AgentsListings = ({agent, setIsLoading}) => {
     }
 
     useEffect(() => {
-        if(!listings){
-            loadListings()
-            setIsLoading(loading)
-        }
-        listings && setIsLoading(false)
+        if(!listings){ loadListings() }
     }, [listings])
+
+    useEffect(() => {
+        setIsLoading(loading)
+    }, [loading])
 
 
     return (

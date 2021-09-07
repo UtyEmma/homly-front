@@ -25,6 +25,10 @@ export const SupportCenterSidebar = ({titles, setTitles, chat, setChat, setIsLoa
         dispatch(FetchMessages(id))
     }
 
+    useEffect(() => {
+        setIsLoading(loading)
+    }, [loading])
+
     const setMessages = () => {
         titles && setTitles(titles)
         setChat(ticket)
@@ -35,8 +39,7 @@ export const SupportCenterSidebar = ({titles, setTitles, chat, setChat, setIsLoa
         !tickets && fetchTicket()
         tickets && setTickets()
         ticket && setMessages()
-        setIsLoading(loading)
-    }, [tickets, ticket, loading])
+    }, [tickets, ticket])
 
 
     return (
@@ -64,12 +67,12 @@ export const SupportCenterSidebar = ({titles, setTitles, chat, setChat, setIsLoa
                                     titles.map((title, index) => {
                                         return (
                                             <li key={index} className="list-group-item px-3 px-xl-4 py-3 sidebar-item bg-hover-light" role="button" onClick={() => fetchTicketChats(title.unique_id)}>
-                                                <a href="#" className="text-heading lh-1 sidebar-link d-flex align-items-center">
+                                                <button className="btn text-heading lh-1 sidebar-link d-flex align-items-center text-left">
                                                     <span className="sidebar-item-icon d-inline-block mr-3 text-muted fs-20">
                                                         <i className="fa fa-circle text-warning fs-12"></i>
                                                     </span>
                                                     <span className="fs-13 lh-13">{title.title}</span>
-                                                </a>
+                                                </button>
                                             </li>
                                         )
                                     })

@@ -6,12 +6,16 @@ import Footer from 'components/shared/footer';
 import UserLoginForm from './components/login-form';
 import { useSelector } from 'react-redux';
 
-const UserLogin = ({isLoading}) => {
+const UserLogin = ({isLoading, setIsLoading}) => {
 
     const {loading} = useSelector(state => state.login)
     
     useEffect(() => {
     }, [loading])
+
+    useEffect(() => {
+        setIsLoading(false)
+    })
 
     return (
         <div>

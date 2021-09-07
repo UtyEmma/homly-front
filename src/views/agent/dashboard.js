@@ -5,6 +5,7 @@ import Header from './layouts/shared/header'
 import { Link } from 'react-router-dom'
 
 const AgentDashboard = ({agent, setIsLoading}) => {
+    
     useEffect(() => {
         setIsLoading(false)
     })

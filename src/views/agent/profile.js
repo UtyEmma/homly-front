@@ -24,7 +24,11 @@ const AgentProfile = ({agent, setIsLoading}) => {
 
         useEffect(() => {
             error && error.formError && setFormErrors(error.formError)
-        }, [loading, error])
+        }, [error])
+
+        useEffect(() => {
+            setIsLoading(loading)
+        }, [loading])
 
         const {rules, messages, attributes} = __agent_updateProfile
         const [formErrors, setFormErrors] = useState({})
@@ -48,7 +52,6 @@ const AgentProfile = ({agent, setIsLoading}) => {
         
         return (
             <div className="wrapper dashboard-wrapper">
-                <Preloader loading={loading}/>
                 <div className="d-flex flex-wrap flex-xl-nowrap">
                     <Sidebar agent={agent} />
 

@@ -24,8 +24,8 @@ const Reviews = ({agent, setIsLoading}) => {
     }, [reviews])
 
     useEffect(() => {
-        setIsLoading(false)   
-    })
+        setIsLoading(loading)   
+    }, [loading])
 
     return (
         <div className="wrapper dashboard-wrapper">

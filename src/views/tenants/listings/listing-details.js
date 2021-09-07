@@ -14,7 +14,7 @@ import Footer from 'components/shared/footer'
 import { MapItem } from './components/listing-details/listing-map'
 
 
-const ListingDetails = ({isLoggedIn, user, status, adminMode}) => {
+const ListingDetails = ({isLoggedIn, user, status, adminMode, setIsLoading}) => {
     const {slug} = useParams();
     const dispatch = useDispatch()
 
@@ -31,6 +31,10 @@ const ListingDetails = ({isLoggedIn, user, status, adminMode}) => {
         listing && setListingData(listing)
         data && setListingData(data)
     }, [listing, data]);
+
+    useEffect(() => {
+        setIsLoading(false)
+    })
 
     const fetchListingData = (slug) => {
         dispatch(FetchSingleListing(slug))

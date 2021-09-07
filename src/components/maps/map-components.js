@@ -52,7 +52,7 @@ export const ListingMapInfo = ({listing}) => {
                         <div className="media-body col-9">
                             <h2 className="my-0"><a href={`listings/${listing.slug}`} className="fs-13 lh-2 text-dark hover-primary d-block">{listing.title}</a></h2>
                             <p className="mb-0 font-weight-500 text-gray-light">{listing.address}</p>
-                            <p className="fs-17 font-weight-bold text-heading mb-0">$ {listing.rent} </p>
+                            <p className="fs-17 font-weight-bold text-heading mb-0">&#8358; {listing.rent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </p>
                         </div>
                     </div>
                     <ul className="list-inline d-flex mb-0 flex-wrap justify-content-around p-2">

@@ -28,7 +28,7 @@ const Home = ({isLoggedIn, user, isLoading, setIsLoading}) => {
                         <h2 className="text-dark lh-1625 text-center">Why Choose Us?</h2>
                         <span className="heading-divider mx-auto" />
                         <div className="row justify-content-between mt-10">
-                        <div className="col-lg-4 mb-6 mb-lg-0" data-animate="fadeInUp">
+                        <ScrollAnimation animateIn="fadeInUp" className="col-lg-4 mb-6 mb-lg-0">
                             <div className="card border-0 bg-transparent">
                             <div className="card-img-top d-flex align-items-end justify-content-center">
                                 <img src="images/urban.png" alt="Wider range of properties" />
@@ -40,8 +40,8 @@ const Home = ({isLoggedIn, user, isLoading, setIsLoading}) => {
                                 </p>
                             </div>
                             </div>
-                        </div>
-                        <div className="col-lg-4 mb-6 mb-lg-0" data-animate="fadeInUp">
+                        </ScrollAnimation>
+                        <ScrollAnimation animateIn="fadeInUp" className="col-lg-4 mb-6 mb-lg-0">
                             <div className="card border-0 bg-transparent">
                             <div className="card-img-top d-flex align-items-end justify-content-center">
                                 <img src="images/bank.png" alt="Financing made easy" />
@@ -53,8 +53,8 @@ const Home = ({isLoggedIn, user, isLoading, setIsLoading}) => {
                                 </p>
                             </div>
                             </div>
-                        </div>
-                        <div className="col-lg-4 mb-6 mb-lg-0" data-animate="fadeInUp">
+                        </ScrollAnimation>
+                        <ScrollAnimation animateIn="fadeInUp" className="col-lg-4 mb-6 mb-lg-0" >
                             <div className="card border-0 bg-transparent">
                             <div className="card-img-top d-flex align-items-end justify-content-center">
                                 <img src="images/buy.png" alt="Transparentcy" />
@@ -66,7 +66,7 @@ const Home = ({isLoggedIn, user, isLoading, setIsLoading}) => {
                                 </p>
                             </div>
                             </div>
-                        </div>
+                        </ScrollAnimation>
                         </div>
                     </div>
                     </section>
@@ -86,7 +86,7 @@ const Home = ({isLoggedIn, user, isLoading, setIsLoading}) => {
                         </div>
                         </div>
                         <div className="slick-slider mx-n2 custom-arrow-spacing-30" data-slick-options="{&quot;slidesToShow&quot;: 5, &quot;autoplay&quot;:true,&quot;dots&quot;:false,&quot;arrows&quot;:true,&quot;responsive&quot;:[{&quot;breakpoint&quot;: 1600,&quot;settings&quot;: {&quot;slidesToShow&quot;:3,&quot;arrows&quot;:false}},{&quot;breakpoint&quot;: 992,&quot;settings&quot;: {&quot;slidesToShow&quot;:3,&quot;arrows&quot;:false}},{&quot;breakpoint&quot;: 768,&quot;settings&quot;: {&quot;slidesToShow&quot;: 2,&quot;arrows&quot;:false,&quot;dots&quot;:true,&quot;autoplay&quot;:true}},{&quot;breakpoint&quot;: 576,&quot;settings&quot;: {&quot;slidesToShow&quot;: 1,&quot;arrows&quot;:false,&quot;dots&quot;:true,&quot;autoplay&quot;:true}}]}">
-                        <div className="box px-2" data-animate="fadeInUp">
+                        <ScrollAnimation animateIn="fadeInUp" className="box px-2">
                             <div className="card border-0 hover-change-image">
                             <div className="bg-overlay-gradient-1 bg-hover-overlay-gradient-3 rounded-lg card-img">
                                 <img src="images/properties-grid-12.jpg" alt="Villa on Hollywood Boulevard" />
@@ -137,8 +137,8 @@ const Home = ({isLoggedIn, user, isLoading, setIsLoading}) => {
                                 <p className="fs-17 font-weight-bold text-heading mb-0">$1.250.000</p>
                             </div>
                             </div>
-                        </div>
-                        <div className="box px-2" data-animate="fadeInUp">
+                        </ScrollAnimation>
+                        <ScrollAnimation className="box px-2" animateIn="fadeInUp">
                             <div className="card border-0 hover-change-image">
                             <div className="bg-overlay-gradient-1 bg-hover-overlay-gradient-3 rounded-lg card-img">
                                 <img src="images/properties-grid-13.jpg" alt="Home in Metric Way" />
@@ -187,8 +187,8 @@ const Home = ({isLoggedIn, user, isLoading, setIsLoading}) => {
                                 <p className="fs-17 font-weight-bold text-heading mb-0">$1.250.000</p>
                             </div>
                             </div>
-                        </div>
-                        <div className="box px-2" data-animate="fadeInUp">
+                        </ScrollAnimation>
+                        <ScrollAnimation className="box px-2" animateIn="fadeInUp">
                             <div className="card border-0 hover-change-image">
                             <div className="bg-overlay-gradient-1 bg-hover-overlay-gradient-3 rounded-lg card-img">
                                 <img src="images/properties-grid-14.jpg" alt="Affordable Urban House" />
@@ -237,7 +237,7 @@ const Home = ({isLoggedIn, user, isLoading, setIsLoading}) => {
                                 <p className="fs-17 font-weight-bold text-heading mb-0">$1.250.000</p>
                             </div>
                             </div>
-                        </div>
+                        </ScrollAnimation>
                         <div className="box px-2" data-animate="fadeInUp">
                             <div className="card border-0 hover-change-image">
                             <div className="bg-overlay-gradient-1 bg-hover-overlay-gradient-3 rounded-lg card-img">

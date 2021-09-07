@@ -11,7 +11,6 @@ const AgentWishlist = ({agent, setIsLoading}) => {
     const fetch_wishlists = useSelector(state => state.agent_wishlist)
     const {loading, wishlists} = fetch_wishlists
     
-
     const FetchWishlist = () => {
         dispatch(FetchAgentWishlists())
     }
@@ -20,6 +19,10 @@ const AgentWishlist = ({agent, setIsLoading}) => {
         !wishlists && FetchWishlist()
         wishlists && setIsLoading(false)
     }, [wishlists]);
+
+    useEffect(() => {
+        setIsLoading(loading)
+    }, [loading])
 
     return (
         <div className="wrapper dashboard-wrapper">

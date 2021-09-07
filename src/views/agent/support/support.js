@@ -11,13 +11,8 @@ export const Support = ({agent, isLoading, setIsLoading}) => {
     const [titles, setTitles] = useState()
     const [chat, setChat] = useState()
 
-    useEffect(() => {
-        setIsLoading(false)   
-    })
-     
     return (
-        <div className="wrapper dashboard-wrapper py-sm-10">
-            <Preloader loading={isLoading} />
+        <div className="wrapper dashboard-wrapper">
             <div className="d-flex flex-wrap flex-xl-nowrap">
                 <Sidebar agent={agent} />
 

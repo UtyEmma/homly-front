@@ -33,8 +33,8 @@ const AgentDetails = ({isLoggedIn, user, status, setIsLoading}) => {
     }
 
     useEffect(() => {
-        setIsLoading(false)
-    })
+        setIsLoading(loading)
+    }, loading)
 
     useEffect(() => {
         !agent && loadAgent()
@@ -55,7 +55,7 @@ const AgentDetails = ({isLoggedIn, user, status, setIsLoading}) => {
                 
                 ?
 
-                <AgentDetailsContainer agent={agentData.agent} setAgentData={setAgentData} status={status} fetchAgent={loadAgent} listings={agentData.listing} reviews={agentData.reviews} />
+                <AgentDetailsContainer agent={agentData.agent} setAgentData={setAgentData} status={status} fetchAgent={loadAgent} listings={agentData.listing} reviews={agentData.reviews} setIsLoading={setIsLoading} />
 
                 :
 

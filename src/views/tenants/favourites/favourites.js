@@ -29,11 +29,13 @@ export const Favourites = ({user, isLoggedIn, setIsLoading}) => {
         setIsLoading(false)   
     })
 
+    useEffect(() => {
+        setIsLoading(loading)
+    }, [loading])
+
     return (
         <>
             <div>
-                <Preloader loading={loading}/>
-
                 <NavBar isloggedIn={isLoggedIn} user={user}/>
 
                 <main id="content">

@@ -27,8 +27,8 @@ const Listing = ({isLoggedIn, user, setIsLoading}) => {
         }, [params])
 
         useEffect(() => {
-            setIsLoading(false)   
-        })
+            setIsLoading(loading)
+        }, [loading])
 
         const fetchListings = () => {
             dispatch(ShowAllListings(params))

@@ -7,10 +7,8 @@ import Searchbar from 'views/layouts/components/search/searchbar'
 import Preloader from 'components/preloader/preloader'
 import AgentContainer from './components/agent-container'
 import AgentNotFound from 'components/404/404-agents'
-import AgentDetails from './agent-details'
-import UserRoute from 'providers/guards/user-guard'
 
-const Agents = ({isLoggedIn, user, match}) => {
+const Agents = ({isLoggedIn, user, setIsLoading}) => {
 
     const dispatch = useDispatch();
     const agents_listing = useSelector((state) => state.available_agents)
@@ -24,8 +22,11 @@ const Agents = ({isLoggedIn, user, match}) => {
         if(!agents){
             loadAgents()
         }
-        console.log(agents)
     }, [agents])
+
+    useEffect(() => {
+        setIsLoading(loading)
+    }, [loading])
 
     return (
         <div>

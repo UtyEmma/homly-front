@@ -14,14 +14,12 @@ import { FetchWishlist } from 'providers/redux/_actions/wishlist-actions'
 import { useDispatch, useSelector } from 'react-redux'
 import Preloader from 'components/preloader/preloader'
 
-const Wishlist = ({isLoggedIn, user}) => {
+const Wishlist = ({isLoggedIn, user, setIsLoading}) => {
 
     const dispatch = useDispatch();
     const fetchWishlist = useSelector((state) => state.wishlists)
     
     const {loading, wishlists} = fetchWishlist
-
-    const [isLoading, setIsLoading] = useState(true)
 
     const loadWishlists = () => {
         dispatch(FetchWishlist())
@@ -32,13 +30,15 @@ const Wishlist = ({isLoggedIn, user}) => {
     }, [wishlists])
 
     useEffect(() => {
+        setIsLoading(loading)
+    }, [loading])
+
+    useEffect(() => {
         setIsLoading(false)   
     })
 
     return (
         <div>
-            <Preloader loading={isLoading}/>
-
             <NavBar isloggedIn={isLoggedIn} user={user}/>
 
             <main id="content">

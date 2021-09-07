@@ -1,14 +1,11 @@
 import React from 'react'
 import RatingStar from 'components/rating/rating-star';
+import ScrollAnimation from 'react-animate-on-scroll';
 
 export default function AgentCard({agent}) {
 
-    // useEffect(() => {
-        
-    // })
-
     return (
-        <div className="col-sm-6 col-md-4 col-lg-3 mb-6">
+        <ScrollAnimation animateIn="fadeInUp" className="col-sm-6 col-md-4 col-lg-3 mb-6">
             <div className="card shadow-hover-xs-4 agent-3">
                 <div className="card-header text-center pt-6 pb-3 bg-transparent text-center">
                 <a href={`/${agent.username}`} className="d-inline-block mb-2 w-120px h-120">
@@ -100,6 +97,6 @@ export default function AgentCard({agent}) {
                 </a>
                 </div>
             </div>
-        </div>
+        </ScrollAnimation>
     )
 }

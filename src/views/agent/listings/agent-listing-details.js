@@ -13,10 +13,10 @@ import { AgentListingGallery } from "./components/listing-details/agent-listing-
 import { AgentListingLocation } from "./components/listing-details/agent-listing-location"
 import { UpdateListingModal } from "./components/update-listing/update-listing-form-modal"
 
-export const AgentListingDetail = ({agent}) => {
+export const AgentListingDetail = ({agent, setIsLoading, isLoading}) => {
+
     const {slug} = useParams();
     const dispatch = useDispatch()
-    const [isLoading, setIsLoading] = useState()
     const [listingItem, setListingItem] = useState(null)
 
     const details = useSelector((state) => state.listing);
@@ -25,11 +25,13 @@ export const AgentListingDetail = ({agent}) => {
     useEffect(() => {
         !listing && fetchListingData(slug)
         listing && handleSetListing()
+    }, [listing]);
+
+    useEffect(() => {
         setIsLoading(loading)
-    }, [listing, loading]);
+    }, [loading])
 
     const handleSetListing = () => {
-        console.log(listing)
         setListingItem(listing.listing)
     }
 
@@ -39,9 +41,8 @@ export const AgentListingDetail = ({agent}) => {
 
     return (
         <div className="wrapper dashboard-wrapper">
-            <Preloader loading={isLoading} />
             <div className="d-flex flex-wrap flex-xl-nowrap">
-                <Sidebar />
+                <Sidebar agent={agent} />
 
                 <div className="page-content">
                 <Header agent={agent}/>

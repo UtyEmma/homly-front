@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Nav, Tab } from 'react-bootstrap'
 import ListingGrid from 'views/tenants/listings/components/listing-grid'
 
-export default function AgentsListings({listings, setIsLoading}) {
+export default function AgentsListings({listings, setIsLoading, status}) {
 
     useEffect(() => {
         setIsLoading(false)
@@ -29,7 +29,7 @@ export default function AgentsListings({listings, setIsLoading}) {
                             <div className="row">
                                 {
                                     listings.active.map((listing, index) => (
-                                        <ListingGrid listing={listing} key={index} tab/>
+                                        <ListingGrid listing={listing} key={index} status={status}/>
                                     ))
                                 }
                             </div>
@@ -39,7 +39,7 @@ export default function AgentsListings({listings, setIsLoading}) {
                             <div className="row">
                                 {
                                     listings.rented.map((listing, index) => (
-                                        <ListingGrid listing={listing} key={index} tab />
+                                        <ListingGrid listing={listing} key={index} status={status} />
                                     ))
                                 }
                             </div>

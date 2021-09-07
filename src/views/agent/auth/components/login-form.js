@@ -33,13 +33,12 @@ const AgentLoginForm = () =>  {
     } 
 
     useEffect(() => {
-        if(agent_success){
-            history.push('/dashboard')
-        }
-        if(form_error){
-            setFormErrors(form_error)
-        }
-    }, [agent_success, form_error])
+        history.push('/dashboard')
+    }, [agent_success])
+
+    useEffect(() => {
+        form_error && setFormErrors(form_error)
+    }, [form_error])
 
         return (
             <div className="col-lg-7">

@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-export default function VerifyEmail({user}) {
+export default function VerifyEmail({user, setIsLoading}) {
+
+    useEffect(() =>{
+        setIsLoading(false)
+    })
 
     const resendVerificationEmail = () => {
         
