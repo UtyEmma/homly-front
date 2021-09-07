@@ -1,5 +1,5 @@
 import Preloader from 'components/preloader/preloader'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from 'views/agent/layouts/shared/header'
 import Sidebar from 'views/agent/layouts/shared/sidebar'
 import { SupportCenterContent } from './components/support-content'
@@ -10,6 +10,10 @@ export const Support = ({agent, isLoading, setIsLoading}) => {
 
     const [titles, setTitles] = useState()
     const [chat, setChat] = useState()
+
+    useEffect(() => {
+        setIsLoading(false)   
+    })
      
     return (
         <div className="wrapper dashboard-wrapper py-sm-10">

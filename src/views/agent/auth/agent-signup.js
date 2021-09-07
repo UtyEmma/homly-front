@@ -1,26 +1,30 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import AgentSignUpForm from './components/signup-form';
 import Footer from 'components/shared/footer';
 import NavBar from 'components/shared/nav-bar';
 
-export default class AgentSignup extends Component {
-    render() {
-        return (
-            <div>
-                <NavBar />
+export default function AgentSignup ({setIsLoading}) {
+    
+    useEffect(() => {
+        setIsLoading(false)   
+    })
 
-                <main id="content">
-                    <section className="py-7">
-                        <div className="container">
-                            <div className="row justify-content-center">
-                                <AgentSignUpForm />         
-                            </div>
+    return (
+        <div>
+            <NavBar />
+
+            <main id="content">
+                <section className="py-7">
+                    <div className="container">
+                        <div className="row justify-content-center">
+                            <AgentSignUpForm />         
                         </div>
-                    </section>
-                </main>
+                    </div>
+                </section>
+            </main>
 
-                <Footer />
-            </div>
-        )
-    }
+            <Footer />
+        </div>
+    )
+
 }

@@ -19,8 +19,11 @@ const AgentProfile = ({agent, setIsLoading}) => {
         const {loading, success, error} = updateProfile
 
         useEffect(() => {
+            setIsLoading(false)
+        })
+
+        useEffect(() => {
             error && error.formError && setFormErrors(error.formError)
-            setIsLoading(loading)
         }, [loading, error])
 
         const {rules, messages, attributes} = __agent_updateProfile

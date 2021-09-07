@@ -8,6 +8,7 @@ const AgentDashboard = ({agent, setIsLoading}) => {
     useEffect(() => {
         setIsLoading(false)
     })
+    
     return (
         <div className="wrapper dashboard-wrapper">
             <div className="d-flex flex-wrap flex-xl-nowrap">

@@ -35,6 +35,7 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
         console.log(agent)
         setAgentData(agent)
     }
+
     useEffect(() => {
         data && handleSetAgentData(data)
         verifiedAgent && handleSetAgentData(verifiedAgent)

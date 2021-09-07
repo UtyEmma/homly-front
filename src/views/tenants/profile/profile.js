@@ -1,5 +1,5 @@
 import Preloader from 'components/preloader/preloader'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
@@ -8,7 +8,7 @@ import Footer from 'components/shared/footer'
 import NavBar from 'components/shared/nav-bar'
 import { UpdateTenantProfile } from 'providers/redux/_actions/user-actions'
 
-const Profile = ({isLoggedIn, user}) => {
+const Profile = ({isLoggedIn, user, setIsLoading}) => {
     const dispatch = useDispatch()
     const profileImage = createRef()
     const [loading, setLoading] = useState(false)
@@ -22,6 +22,10 @@ const Profile = ({isLoggedIn, user}) => {
     const changeProfileImagePreview = (e) => { 
         profileImage.current.src = URL.createObjectURL(e.target.files[0]) 
     }
+
+    useEffect(() => {
+        setIsLoading(false)   
+    })
 
 
     return (

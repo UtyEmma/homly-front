@@ -33,6 +33,10 @@ const AgentDetails = ({isLoggedIn, user, status, setIsLoading}) => {
     }
 
     useEffect(() => {
+        setIsLoading(false)
+    })
+
+    useEffect(() => {
         !agent && loadAgent()
         agent && handleSetAgentData()
         setIsLoading(loading)

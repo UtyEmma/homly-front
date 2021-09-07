@@ -23,6 +23,10 @@ const Reviews = ({agent, setIsLoading}) => {
         reviews && setIsLoading(false)
     }, [reviews])
 
+    useEffect(() => {
+        setIsLoading(false)   
+    })
+
     return (
         <div className="wrapper dashboard-wrapper">
             <Preloader loading={loading} />

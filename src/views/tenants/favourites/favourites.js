@@ -8,7 +8,7 @@ import Footer from 'components/shared/footer'
 import FavouriteItem from './components/favourite-item'
 import FavouritesNotFound from 'components/404/404-favourites'
 
-export const Favourites = ({user, isLoggedIn}) => {
+export const Favourites = ({user, isLoggedIn, setIsLoading}) => {
 
     const dispatch = useDispatch()
     const favourites = useSelector(state => state.favourites)
@@ -24,6 +24,10 @@ export const Favourites = ({user, isLoggedIn}) => {
         !listings && GetFavourites()
         listings && setFavourites(listings)
     }, [listings])
+
+    useEffect(() => {
+        setIsLoading(false)   
+    })
 
     return (
         <>

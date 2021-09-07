@@ -1,8 +1,13 @@
-import React from 'react'
-import { Col, Nav, Row, Tab } from 'react-bootstrap'
+import React, { useEffect } from 'react'
+import { Nav, Tab } from 'react-bootstrap'
 import ListingGrid from 'views/tenants/listings/components/listing-grid'
 
-export default function AgentsListings({listings}) {
+export default function AgentsListings({listings, setIsLoading}) {
+
+    useEffect(() => {
+        setIsLoading(false)
+    })
+
     return (
         <div id="properties">
             <a name="properties"></a>

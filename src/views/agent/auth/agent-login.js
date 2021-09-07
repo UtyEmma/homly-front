@@ -1,27 +1,31 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import AgentLoginForm from './components/login-form';
 import Footer from 'components/shared/footer';
 import NavBar from 'components/shared/nav-bar';
 
-const AgentLogin  =  () => {
+const AgentLogin  =  ({setIsLoading}) => {
 
-        return (
-            <div>
-                <NavBar />
+    useEffect(() => {
+        setIsLoading(false)   
+    })
 
-                <main id="content">
-                    <section className="py-7">
-                        <div className="container">
-                            <div className="row justify-content-center">
-                                <AgentLoginForm />         
-                            </div>
+    return (
+        <div>
+            <NavBar />
+
+            <main id="content">
+                <section className="py-7">
+                    <div className="container">
+                        <div className="row justify-content-center">
+                            <AgentLoginForm />         
                         </div>
-                    </section>
-                </main>
+                    </div>
+                </section>
+            </main>
 
-                <Footer />
-            </div>
-        )
+            <Footer />
+        </div>
+    )
 
 }
 

@@ -20,7 +20,6 @@ const Wishlist = ({isLoggedIn, user}) => {
     const fetchWishlist = useSelector((state) => state.wishlists)
     
     const {loading, wishlists} = fetchWishlist
-    const [wishlist, setWishlist] = useState()
 
     const [isLoading, setIsLoading] = useState(true)
 
@@ -30,8 +29,11 @@ const Wishlist = ({isLoggedIn, user}) => {
 
     useEffect(() => {
         !wishlists && loadWishlists()
-        wishlists && setIsLoading(false)
     }, [wishlists])
+
+    useEffect(() => {
+        setIsLoading(false)   
+    })
 
     return (
         <div>
