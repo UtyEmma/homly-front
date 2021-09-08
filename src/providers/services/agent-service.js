@@ -1,8 +1,5 @@
 import { Request } from "./api/http";
 
-export const AgentService = {
-    signup, login, update, show, logout, removeListing, deleteListing, fetchSingleAgent, fetchAgentsWishlists 
-}
 
 const auth_config = {
     config: {
@@ -19,57 +16,53 @@ const options = {
     'Content-Type' : 'application/json'
 }
 
-async function signup(data){
-    const request = {
-        config: { headers: options },
-        payload: data
-    }
-    return await Request.post('agent/signup', request)
-}
-
-
-async function login(data){
-    const request = {
-        headers : options,
-        payload: data
-    }
-    return await Request.post('agent/login', request)
-}
-
-
-async function update(data){
-    const request = {
-        ...auth_config,
-        payload: data
-    }
-    return await Request.post('agent/update', request)
-}
-
-async function show() {
-    return await Request.get('agent/all', auth_config)
-}
-
-async function logout(){
-    return await Request.get('agent/logout', auth_config.config)
-}
-
-async function deleteListing(id){
-    return await Request.get(`agent/listing/delete/${id}`, auth_config.config);
-}
-
-async function removeListing(id){
-    return await Request.get(`agent/listing/remove/${id}`, auth_config.config);
-}
-
-async function fetchSingleAgent(id){
-    const request = {
-        config: {
-            headers : options
+export const AgentService = {
+    signup : async (data) => {
+        const request = {
+            config: { headers: options },
+            payload: data
         }
-    }
-    return await Request.get(`agent/${id}`, request)
-}
+        return await Request.post('agent/signup', request)
+    },
 
-async function fetchAgentsWishlists(){
-    return await Request.get('agent/wishlists', auth_config.config);
+    login : async (data) => {
+        const request = {
+            headers : options,
+            payload: data
+        }
+        return await Request.post('agent/login', request)
+    },
+
+    update : async (data) => {
+        const request = {
+            ...auth_config,
+            payload: data
+        }
+        return await Request.post('agent/update', request)
+    },
+
+    show : async () => {
+        return await Request.get('agent/all', auth_config)
+    },
+
+    logout : async () => {
+        return await Request.get('agent/logout', auth_config.config)
+    },
+
+    deleteListing : async (id) => {
+        return await Request.get(`agent/listing/delete/${id}`, auth_config.config);
+    },
+
+    removeListing : async (id) => {
+       return await Request.get(`agent/listing/remove/${id}`, auth_config.config);
+    },
+
+    fetchSingleAgent : async (id) => {
+        return await Request.get(`agent/${id}`, auth_config.config)
+    },
+
+    fetchAgentsWishlists : async () => {
+        return await Request.get('agent/wishlists', auth_config.config);
+    }
+
 }

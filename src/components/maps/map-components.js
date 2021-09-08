@@ -1,4 +1,3 @@
-import { createRef } from "react";
 import { useState } from "react";
 import InfoBox from "react-google-maps/lib/components/addons/InfoBox";
 import Marker from "react-google-maps/lib/components/Marker"

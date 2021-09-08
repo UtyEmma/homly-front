@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import ProfileButton from './profile-btn/profile-button'
 
 export default function NavBar({user, isloggedIn}) {
@@ -8,8 +9,8 @@ export default function NavBar({user, isloggedIn}) {
                 <div className="container">
                     <nav className="navbar navbar-expand-lg px-0">
                         <a className="navbar-brand" href="/">
-                        <img src="images/logo/main.png" width="156px" height="40px" alt="HomeID" className="d-none d-lg-inline-block" />
-                        <img src="images/logo/white.png" width="156px" height="40px" alt="HomeID" className="d-inline-block d-lg-none" />
+                        <img src="/images/logo/main.png" width="156px" height="40px" alt="Bayof Logo" className="d-none d-lg-inline-block" />
+                        <img src="/images/logo/white.png" width="156px" height="40px" alt="Bayof Logo" className="d-inline-block d-lg-none" />
                         </a>
 
                         <div className="d-flex d-lg-none ml-auto">
@@ -32,22 +33,22 @@ export default function NavBar({user, isloggedIn}) {
                         <div className="collapse navbar-collapse mt-3 mt-lg-0 mx-auto flex-grow-0" id="primaryMenu01">
                             <ul className="navbar-nav hover-menu main-menu px-0 mx-lg-n4">
                                 <li id="navbar-item-home" className="nav-item py-2 py-lg-5 px-0 px-lg-4">
-                                <a className="nav-link p-0" href="/">
+                                <Link className="nav-link p-0" to="/">
                                     Home
-                                </a>
+                                </Link>
                                 </li>
                                 <li id="navbar-item-property" className="nav-item py-2 py-lg-5 px-0 px-lg-4">
-                                <a className="nav-link p-0" href="about">
-                                    About</a>
+                                <Link className="nav-link p-0" to="/about">
+                                    About</Link>
                                 </li>
                                 <li id="navbar-item-property" className="nav-item py-2 py-lg-5 px-0 px-lg-4">
-                                <a className="nav-link p-0" href="listings">
-                                    Find a Property</a>
+                                <Link className="nav-link p-0" to="/listings">
+                                    Rent a Property</Link>
                                 </li>
                                 <li id="navbar-item-dashboard"className="nav-item py-2 py-lg-5 px-0 px-lg-4">
-                                    <a className="nav-link p-0" href="agents">
+                                    <Link className="nav-link p-0" to="/agents">
                                         Find an Agent
-                                    </a>
+                                    </Link>
                                 </li>                     
                             </ul>
                         </div>

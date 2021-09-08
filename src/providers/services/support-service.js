@@ -15,7 +15,7 @@ const options = {
 export const SupportService =  {
     createTicket : async (data) => {
         const params = {
-            options,
+            ...options,
             payload: data
         }
         return await Request.post('agent/support/create', params)
@@ -30,10 +30,8 @@ export const SupportService =  {
     },
 
     sendMessage : async (data) => {
-        const params = {
-            config : {
-                headers: options
-            },
+        const params = { 
+            ...options,
             payload: data
         }
         return await Request.post('agent/chats/send', params);

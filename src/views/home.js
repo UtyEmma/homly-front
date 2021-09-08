@@ -1,23 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 
 import HeroSection from './layouts/home/hero-section'
 import PopularSection from './layouts/home/popular-section'
 import NavBar from 'components/shared/nav-bar'
 import Footer from 'components/shared/footer'
-import Preloader from 'components/preloader/preloader'
+import ScrollAnimation from 'react-animate-on-scroll'
 
-const Home = ({isLoggedIn, user}) => {
-    const [isLoading, setIsLoading] = useState()
-    
+const Home = ({isLoggedIn, user, isLoading, setIsLoading}) => {
+
+    useEffect(() => {
+        console.log(isLoading)
+    })
+
     return (
         <div>
-            <Preloader loading={isLoading} />
             <NavBar isloggedIn={isLoggedIn} user={user}/>
             
             <main id="content">
                 <HeroSection/>
 
-                <PopularSection setIsLoading={setIsLoading}/>
+                <ScrollAnimation animateIn="fadeInUp">
+                    <PopularSection isLoading={isLoading} setIsLoading={setIsLoading}/>
+                </ScrollAnimation>
 
                 <section className="bg-gray-02 pt-10 pb-11">
                     <div className="container container-xxl">

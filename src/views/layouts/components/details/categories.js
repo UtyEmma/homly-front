@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // import $ from 'jquery'
 // import 'bootstrap-select'
 
-export default function SelectListingCategory({title, register, formError, name, id, onChange, classes, styles}) {
+export default function SelectListingCategory({title, defaultValue, register, formError, name, id, onChange, classes, styles}) {
     const dispatch = useDispatch();
     const fetchCategories = useSelector(state => state.categories)
     const {loading, categories, error} = fetchCategories
@@ -12,9 +12,8 @@ export default function SelectListingCategory({title, register, formError, name,
     const loadCategories = () => { dispatch(FetchCategories()) }
 
     useEffect(() => {
-        if(!categories){
-            loadCategories()
-        }
+        if(!categories){ loadCategories() }
+        window.$('select').selectpicker()
     }, [categories])
 
 
@@ -26,8 +25,7 @@ export default function SelectListingCategory({title, register, formError, name,
                 
                 &&  
                 
-                <select className={classes}  {...register} title="Select" data-style={styles} id={id} onChange={onChange} name={name}>
-                    <option value="">Type</option>
+                <select className={classes}  title="Category" defaultValue={defaultValue} data-style={styles} id={id} onChange={onChange} name={name}>
                     {categories.map((category, index) => (
                         <option value={category.category_title} key={index}>{category.category_title}</option>
                     ))}
@@ -39,7 +37,7 @@ export default function SelectListingCategory({title, register, formError, name,
     )
 }
 
-export function SelectTypes ({id, classes, register, styles, onChange, name}){
+export function SelectTypes ({id, classes, styles, onChange, name}){
     const dispatch = useDispatch();
     const fetchCategories = useSelector(state => state.categories)
     const {loading, categories, error} = fetchCategories
@@ -47,9 +45,8 @@ export function SelectTypes ({id, classes, register, styles, onChange, name}){
     const loadCategories = () => { dispatch(FetchCategories()) }
 
     useEffect(() => {
-        if(!categories){
-            loadCategories()
-        }
+        if(!categories){ loadCategories() }
+        window.$('select').selectpicker()
     }, [categories])
 
     return (
@@ -59,8 +56,7 @@ export function SelectTypes ({id, classes, register, styles, onChange, name}){
                 
                 &&
 
-                <select className={classes}  {...register} title="Select" data-style={styles} id={id} onChange={onChange} name={name}>
-                    <option value="">Type</option>
+                <select className={classes}  title="Category" data-style={styles} id={id} onChange={onChange} name={name}>
                     {categories.map((category, index) => (
                         <option value={category.category_title} key={index}>{category.category_title}</option>
                     ))}
@@ -75,7 +71,6 @@ export function SearchbarSelectListing ({onChange, name}) {
     const dispatch = useDispatch();
     const fetchCategories = useSelector(state => state.categories)
     const {loading, categories, error} = fetchCategories
-    const category =  useRef()
 
     const loadCategories = () => { dispatch(FetchCategories()) }
 
@@ -83,6 +78,7 @@ export function SearchbarSelectListing ({onChange, name}) {
         if(!categories){
             loadCategories()   
         }
+        window.$('select').selectpicker('refresh')
     }, [categories])
 
     return (
@@ -92,8 +88,8 @@ export function SearchbarSelectListing ({onChange, name}) {
                     
                 &&
 
-                <select name={name} className="form-control shadow-none form-control-lg rounded-right-md-0 rounded-md-top-left-0 rounded-lg-top-left flex-md-1 mt-3 mt-md-0" title="All Types" data-style="btn-lg py-2 h-52 border-right bg-white" onChange={onChange} id="type" name="type">
-                    <option value="">Select Category</option>
+                <select name={name} className="form-control shadow-none form-control-lg rounded-right-md-0  rounded flex-md-1 mt-3 mt-md-0 selectpicker" title="Select Category" data-style="btn-lg py-2 h-52 border-right bg-white" onChange={onChange} id="type" name="type">
+                    <option disabled>All Categories</option>
                     {categories.map((category, index) => (
                         <option value={category.category_title} key={index}>{category.category_title}</option>
                     ))}

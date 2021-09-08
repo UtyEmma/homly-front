@@ -1,65 +1,69 @@
-import React, { useEffect} from 'react'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup';
-import { toast, ToastContainer } from 'react-toastify';
+import React, { useEffect, useState} from 'react'
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom';
 import { AgentLogin } from '../../../../providers/redux/_actions/agent-actions';
-import { AgentLoginSchema } from '../schema';
 import GoogleAuth from '../socialite/google-auth';
 import { togglePassword } from 'libraries/forms/toggle-password';
+import Validator from 'validatorjs';
+import { MapFormErrors } from 'libraries/validation/handlers/error-handlers';
+import { __agent_login } from 'libraries/validation';
 
 
 const AgentLoginForm = () =>  {
     const agentLogin = useSelector((state) => state.agent_login);
-    const {loading, agent_success} = agentLogin;
+    const {loading, agent_success, form_error} = agentLogin;
 
     const dispatch = useDispatch()
     const history = useHistory()
+    const {rules, messages} = __agent_login
+    const [formErrors, setFormErrors] = useState({})
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(AgentLoginSchema)
-    });
-
-    const handleLogin = (data) => {
-        dispatch(AgentLogin({...data}));
+    const handleLogin = (e) => {
+        e.preventDefault()
+        const data = new FormData(e.target);
+        const values = Object.fromEntries(data.entries());
+        let validation = new Validator(values, rules)
+        validation.fails(() => {setFormErrors(MapFormErrors(validation.errors.errors))})
+        
+        if (validation.passes()) {
+            setFormErrors({}); 
+            dispatch(AgentLogin(values));
+        } 
     } 
 
     useEffect(() => {
         if(agent_success){
             history.push('/dashboard')
         }
-    }, [agent_success])
-
-    const handleErrors = () => {
-        toast.error("Invalid Input Data")
-    }
+        if(form_error){
+            setFormErrors(form_error)
+        }
+    }, [agent_success, form_error])
 
         return (
             <div className="col-lg-7">
-                <ToastContainer />
                 <div className="card border-0 shadow-xxs-2 mb-6">
                     <div className="card-body px-8">
                     <h2 className="card-title fs-30 font-weight-600 text-dark lh-16 mb-2">Log In as Agent</h2>
                     <p className="mb-4">Want to become an Agent? <Link to='/agent-signup' className="text-heading hover-primary"><u>Sign Up</u></Link></p>
-                    <form className="form" onSubmit={handleSubmit(handleLogin, handleErrors)}>
+                    <form className="form" onSubmit={handleLogin}>
                         <div className="form-group mb-4">
                         <label htmlFor="username-1">Email</label>
-                        <input type="text" {...register("email")} className="form-control form-control-lg border-0" id="email" placeholder="johndoe@homly.com" name="email" />
-                        <p className="text-danger fs-14">{errors.email?.message}</p>
+                        <input type="text" className="form-control form-control-lg border-0" id="email" placeholder="johndoe@homly.com" name="email" />
+                        <p className="text-danger fs-12 mt-1">{formErrors.email?.message}</p>
                         </div>
                         <div className="form-group mb-4">
                         <label htmlFor="password-2">Password</label>
                         <div className="input-group input-group-lg">
-                        <input type="password" {...register("password")} className="form-control border-0 shadow-none" id="password" name="password" placeholder="**********" />
+                        <input type="password" className="form-control border-0 shadow-none" id="password" name="password" placeholder="**********" />
                             <div className="input-group-append">
                             <button onClick={togglePassword} className="input-group-text bg-gray-01 border-0 text-body fs-18">
                                 <i className="far fa-eye-slash" />
                             </button>
                             </div>
                         </div>
-                        <p className="text-danger fs-14">{errors.password?.message}</p>
+                        <p className="text-danger fs-12 mt-1">{formErrors.password?.message}</p>
                         </div>
                         <div className="d-flex mb-4">
                         <div className="form-check">
@@ -96,7 +100,7 @@ const AgentLoginForm = () =>  {
                             <img src="images/google.png" alt="Google" className="mr-2"/>
                             Google
                         </a> */}
-                        <GoogleAuth />
+                        <GoogleAuth user="agent"/>
                         </div>
                     </div>
                     </div>

@@ -4,9 +4,9 @@ import ReactPlayer from 'react-player'
 export default function ListingVideo({video}) {
     return (
         <>
-            <section className="">
-                <ReactPlayer url={video} />
-            </section>
+            <div className="">
+                <ReactPlayer width="auto" height="auto" url={video} />
+            </div>
         </>
     )
 }

@@ -1,3 +1,4 @@
+import WishlistNotFound from 'components/404/404-wishlist'
 import { FetchAgentWishlists } from 'providers/redux/_actions/agent-actions'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -52,7 +53,7 @@ const AgentWishlist = ({agent}) => {
                                     {
                                         wishlists && wishlists.length > 0
 
-                                        &&
+                                        ?
 
                                         wishlists.map((wishlist, index) => {
                                             return (
@@ -95,7 +96,9 @@ const AgentWishlist = ({agent}) => {
                                             )
                                         })
 
+                                        :
 
+                                        <WishlistNotFound />
                                     }
 
                                     </div>

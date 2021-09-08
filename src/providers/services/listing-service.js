@@ -12,7 +12,6 @@ const params = {
 
 
 export const ListingService = {
-
     newListing : async (data) => {
         const params = {
             config: {
@@ -28,6 +27,16 @@ export const ListingService = {
         return await Request.get('agent/listing/agents-listings', params)
     },
 
+    updateListing : async (data, id) => {
+        const params = {
+            config: {
+                headers: options
+            },
+            payload: data
+        }
+        return await Request.post(`agent/listing/update/${id}`, params)
+    },
+
     loadActiveListings : async () => {
         const params = {
             'Accept' : 'application/json',
@@ -38,7 +47,8 @@ export const ListingService = {
 
     fetchAllListings : async (query) => {
         const config = {
-                headers: options
+                headers: options,
+                params: query
             }
         return await Request.get('listings', {...config})
     },
@@ -53,6 +63,14 @@ export const ListingService = {
 
     fetchPopularListings: async () => {
         return await Request.get(`listings/popular`, params)
+    },
+
+    setAsRented: async (id) => {
+        return await Request.get(`agent/listing/rented/${id}`, params)
+    },
+
+    updateViews : async (id) => {
+        return await Request.get(`listings/update-views/${id}`, params)
     }
 
 }

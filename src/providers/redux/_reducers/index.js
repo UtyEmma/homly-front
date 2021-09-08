@@ -1,15 +1,18 @@
 import { combineReducers } from "redux";
 
 import {loginReducer, signupReducer} from "../_reducers/user.reducer";
+import { SetAdminModeReducer, SuspendItemReducer, verifyAgentReducer } from "./admin-reducer";
 import { AgentLoginReducer, AgentSignupReducer,
         UpdateAgentProfileReducer, ShowAvailableAgentsReducer, DeleteListingReducer, RemoveListingReducer, FetchSingleAgentReducer, FetchAgentWishlistsReducer } from "./agent-reducer";
 import { FetchCategoriesReducer } from "./category-reducer";
 import { FetchDetailsReducer } from "./details-reducer";
+import { AddFavouritesReducer, FetchFavouritesReducer, RemoveFavouritesReducer } from "./favourite-reducer";
 
 import { AgentsListingsReducer, NewListingReducer, StoreListingReducer,
-         ActiveListingsReducer, FetchListingDetails, FetchSingleListing, FetchPopularListingsReducer } from "./listing-reducer";
+         ActiveListingsReducer, FetchListingDetails, FetchSingleListing, FetchPopularListingsReducer, SetAsRentedReducer, UpdateListingReducer } from "./listing-reducer";
 import { searchForLocationReducer } from "./location-reducer";
-import { FetchAgentReviewsReducer, FetchReviewsReducer, ReportUserReducer, SubmitReviewReducer } from "./review-reducers";
+import { FetchNotificationsReducer } from "./notification-reducer";
+import { DeleteReviewReducer, EditReviewReducer, FetchAgentReviewsReducer, FetchReviewsReducer, ReportUserReducer, SubmitReviewReducer } from "./review-reducers";
 import { SearchListingsReducer } from "./search-reducer";
 import { DeleteTicketReducer, FetchMessagesReducer, FetchTicketsReducer, NewTicketReducer, SendMessageReducer } from "./support-reducer";
 
@@ -38,6 +41,8 @@ const rootReducer = combineReducers({
     delete_listing: DeleteListingReducer,
     remove_listing: RemoveListingReducer,
     popular_listings: FetchPopularListingsReducer,
+    set_as_rented: SetAsRentedReducer,
+    update_listing: UpdateListingReducer,
 
     categories: FetchCategoriesReducer,
 
@@ -51,12 +56,25 @@ const rootReducer = combineReducers({
     agent_reviews: FetchAgentReviewsReducer,
     listing_reviews: FetchReviewsReducer,
     report_user: ReportUserReducer,
+    edit_review: EditReviewReducer,
+    delete_review: DeleteReviewReducer,
 
     new_ticket: NewTicketReducer,
     tickets: FetchTicketsReducer,
     delete_ticket: DeleteTicketReducer,
     send_message: SendMessageReducer,
-    messages: FetchMessagesReducer    
+    messages: FetchMessagesReducer,
+    
+    favourites: FetchFavouritesReducer,
+    add_favourites: AddFavouritesReducer,
+    remove_favourites: RemoveFavouritesReducer,
+
+    notification: FetchNotificationsReducer,
+
+    suspend_item: SuspendItemReducer,
+    verify_agent: verifyAgentReducer,
+
+    admin_mode: SetAdminModeReducer
 })
 
 export default rootReducer;

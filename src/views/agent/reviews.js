@@ -43,16 +43,17 @@ const Reviews = ({agent}) => {
 
                             <div className="card border-0 mb-4">
                                 <div className="card-body p-0 p-sm-8 p-4">
-                                    <h3 className="fs-16 lh-2 text-heading mb-0 d-inline-block pr-4 border-bottom border-primary">
-                                        {reviews && reviews.length} Review{reviews &&  reviews.length !== 1 && 's'}
-                                    </h3>
                                         {
                                             reviews && reviews.length > 0
 
                                             ? 
-
-                                            <ReviewItem reviews={reviews} />
-
+                                                <>
+                                                    <h3 className="fs-16 lh-2 text-heading mb-0 d-inline-block pr-4 border-bottom border-primary">
+                                                        {reviews && reviews.length} Review{reviews &&  reviews.length !== 1 && 's'}
+                                                    </h3>
+                                                    
+                                                    <ReviewItem reviews={reviews} />
+                                                </>
                                             :
                                             
                                             <ReviewsNotFound />

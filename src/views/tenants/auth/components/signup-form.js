@@ -1,49 +1,60 @@
-import React, {useEffect, useRef} from 'react'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup';
-import { toast } from 'react-toastify';
+import React, {useEffect, useRef, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { signup } from 'providers/redux/_actions/user-actions';
-import { __tenantsignup } from 'libraries/validation/schema/tenant-schema';
 import { toggleConPassword, togglePassword } from 'libraries/forms/toggle-password';
+import { MapFormErrors, __tenantsignup } from 'libraries/validation';
+import Validator from 'validatorjs';
+import { useHistory } from 'react-router-dom';
 
 const SignUpForm = () =>  {
     const dispatch = useDispatch()
     const password = useRef()
-    const confirm_password = useRef()   
+    const confirm_password = useRef() 
+    const history = useHistory()  
 
-    const {loading, success} = useSelector((state) => state.signup);
+    const {loading, success, formError} = useSelector((state) => state.signup);
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(__tenantsignup)
-    });
+    const {rules, messages, attributes} = __tenantsignup
+    const [formErrors, setFormErrors] = useState({})
 
-    const handleSignup = (data) => { dispatch(signup({...data})) } 
-    const handleErrors = () => { toast.error("Invalid Input Data") }
-
+    const handleSignup = (e) => { 
+        e.preventDefault()
+        const data = new FormData(e.target);
+        const values = Object.fromEntries(data.entries());
+        let validation = new Validator(values, rules)
+        validation.setAttributeNames(attributes);
+        validation.fails(() => {setFormErrors(MapFormErrors(validation.errors.errors))})
+        
+        if (validation.passes()) {
+            setFormErrors({}); 
+            dispatch(signup(data))
+        } 
+    } 
+    
     useEffect(() => {
-        if(success){ window.location.href = './login' }
-    }, [success])
+        if(formError){setFormErrors(formError)}
+        if(success){ history.push('/login', {message: "Sign up Successful. Please Login"}) }
+    }, [success, formError])
 
     return (
         <div className="col-lg-7">
             <div className="card border-0 shadow-xxs-2 h-100">
                 <div className="card-body px-6 py-6">
                 <h2 className="card-title fs-30 font-weight-600 text-dark lh-16 mb-2">Sign Up</h2>
-                <form className="form" id="signupForm" onSubmit={handleSubmit(handleSignup, handleErrors)}>
+                <form className="form" id="signupForm" onSubmit={handleSignup}>
                     <div className="form-row mx-n2">
                     <div className="col-sm-6 px-2">
                         <div className="form-group">
                             <label htmlFor="firstName" className="text-heading">First Name</label>
-                            <input type="text" {...register("firstname")} name="firstname" className="form-control form-control-lg border-0" id="firstName" placeholder="John" />
-                            <p className="text-danger fs-14">{errors.firstname?.message}</p>
+                            <input type="text"  name="firstname" className="form-control form-control-lg border-0" id="firstName" placeholder="John" />
+                            <p className="text-danger fs-12 mt-1">{formErrors.firstname?.message}</p>
                         </div>
                     </div>
                     <div className="col-sm-6 px-2">
                         <div className="form-group">
                             <label htmlFor="lastName" className="text-heading">Last Name</label>
-                            <input type="text" {...register("lastname")} name="lastname" className="form-control form-control-lg border-0" id="lastName" placeholder="Doe" />
-                            <p className="text-danger fs-14">{errors.lastname?.message}</p>
+                            <input type="text" name="lastname" className="form-control form-control-lg border-0" id="lastName" placeholder="Doe" />
+                            <p className="text-danger fs-12 mt-1">{formErrors.lastname?.message}</p>
                         </div>
                     </div>
                     </div>
@@ -51,15 +62,15 @@ const SignUpForm = () =>  {
                     <div className="col-sm-6 px-2">
                         <div className="form-group">
                             <label htmlFor="email" className="text-heading">Email</label>
-                            <input type="text" {...register("email")} className="form-control form-control-lg border-0" id="email" placeholder="johndoe@homly.com" name="email" />
-                            <p className="text-danger fs-14">{errors.email?.message}</p>
+                            <input type="text" className="form-control form-control-lg border-0" id="email" placeholder="johndoe@homly.com" name="email" />
+                            <p className="text-danger fs-12 mt-1">{formErrors.email?.message}</p>
                         </div>
                     </div>
                     <div className="col-sm-6 px-2">
                         <div className="form-group">
                             <label htmlFor="email" className="text-heading">Phone Number</label>
-                            <input type="text" {...register("phone")} className="form-control form-control-lg border-0" id="phone" placeholder="+234 900 000 0000" name="phone" />
-                            <p className="text-danger fs-14">{errors.phone && "An 11 digit phone number is required"}</p>
+                            <input type="text" className="form-control form-control-lg border-0" id="phone" placeholder="+234 900 000 0000" name="phone" />
+                            <p className="text-danger fs-12 mt-1">{formErrors.phone?.message}</p>
                         </div>
                     </div>
                     </div>
@@ -68,21 +79,21 @@ const SignUpForm = () =>  {
                         <div className="form-group">
                         <label htmlFor="password-1" className="text-heading">Password</label>
                         <div className="input-group input-group-lg">
-                            <input type="password" {...register("password")} ref={confirm_password} className="form-control border-0 shadow-none" id="password" name="password" placeholder="**********" />
+                            <input type="password"  ref={confirm_password} className="form-control border-0 shadow-none" id="password" name="password" placeholder="**********" />
                             <div className="input-group-append">
                             <button className="input-group-text bg-gray-01 border-0 text-body fs-18" onClick={togglePassword}>
                                 <i className="far fa-eye-slash" />
                             </button>
                             </div>
                         </div>
-                        <p className="text-danger fs-14">{errors.password?.message}</p>
+                        <p className="text-danger fs-12 mt-1">{formErrors.password?.message}</p>
                         </div>
                     </div>
                     <div className="col-sm-6 px-2">
                         <div className="form-group">
                         <label htmlFor="re-password">Re-Enter Password</label>
                         <div className="input-group input-group-lg">
-                            <input type="password" {...register("confirm_password")} ref={confirm_password} className="form-control border-0 shadow-none" id="confirm_password" name="confirm_password" placeholder="Password" />
+                            <input type="password" ref={confirm_password} className="form-control border-0 shadow-none" id="confirm_password" name="password_confirmation" placeholder="Password" />
                             <div className="input-group-append">
                             <button className="input-group-text bg-gray-01 border-0 text-body fs-18" 
                                     onClick={toggleConPassword}>
@@ -90,7 +101,7 @@ const SignUpForm = () =>  {
                             </button>
                             </div>
                         </div>
-                        <p className="text-danger fs-14">{errors.confirm_password?.message}</p>
+                        <p className="text-danger fs-12 mt-1">{formErrors.confirm_password?.message}</p>
                         </div>
                     </div>
                     </div>

@@ -1,19 +1,30 @@
+import { AgentLogout } from 'providers/redux/_actions/agent-actions'
+import { TenantLogout } from 'providers/redux/_actions/user-actions'
 import React from 'react'
+import { useDispatch } from 'react-redux'
 
 export default function ProfileButton({isloggedIn, user}) {
 
     return (
         <>
-            {isloggedIn ? loggedIn(user) : loggedOut()}
+            {isloggedIn ? LoggedIn(user) : loggedOut()}
         </>
     )
 }
 
-function loggedIn(user) {
+function LoggedIn(user) {
+
+    const dispatch = useDispatch()
+    const type = localStorage.getItem('type');
+
+    const logout = () => {
+        type === 'tenant' ? dispatch(TenantLogout()) : dispatch(AgentLogout())
+    }
+
     return (           
         <ul className="navbar-nav flex-row justify-content-lg-end align-items-center d-flex flex-wrap text-body py-2">            
             <li className="nav-item mr-4">
-                <a className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" href="wishlist">
+                <a className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" href="/wishlist">
                     <i className="fal fa-heart fs-large-4" />
                     {
                         user.wishlists 
@@ -39,37 +50,26 @@ function loggedIn(user) {
                         </div>
                     }
                 </div>
-                <a href="" className="nav-link px-2 dropdown-toggle " data-toggle="dropdown">Hello {user.firstname}</a>
-                <div className="dropdown-menu px-3 dropdown-menu-right dropdown-menu-lg">
-                    <div className="row">
-                        <div className="col-6">
-                            <a className="dropdown-item rounded py-2 align-middle" href="/profile">
-                                <i className="fa fa-user mr-2"></i>
-                                My Profile
-                            </a>
+                <a href="" className="nav-link  dropdown-toggle " data-toggle="dropdown">Hello {user.firstname}</a>
 
-                            <a className="dropdown-item rounded py-2 align-middle" href="/profile">
-                                <i className="fa fa-heart mr-2"></i>
-                                Favourites
-                            </a>
+                <div className="dropdown-menu px-2 dropdown-lg dropdown-menu-right" style={{width: "250px"}}>
+                    
+                    {
+                        type === 'tenant'
 
+                        ?
 
-                            <a className="dropdown-item rounded py-2 align-middle" href="/wishlists">
-                                <i className="fa fa-heart mr-2"></i>
-                                Wishlists
-                            </a>
+                        <TenantNavItems />
 
+                        :
 
-                            <a className="dropdown-item  btn btn-secondary rounded py-2 align-middle" href="/logout">
-                                <i className="mr-2"></i>
-                                Logout
-                            </a>
-                        </div>
+                        <AgentNavItems/>
+                    }
 
-                        <div className="col-6">
-
-                        </div>
-                    </div>
+                    <button className="dropdown-item  btn btn-secondary rounded py-2 align-middle" type="button" onClick={logout} >
+                        <i className="fa fa-door-open mr-3 text-primary"></i>
+                        Logout
+                    </button>
                 </div>
             </li>
         </ul>
@@ -77,16 +77,63 @@ function loggedIn(user) {
 
 }
 
+function TenantNavItems () {
+    return (
+        <>
+            <a className="dropdown-item rounded py-2 align-middle" href="/profile">
+                <i className="fa fa-user mr-3 text-primary"></i>
+                My Profile
+            </a>
+
+            <a className="dropdown-item rounded py-2 align-middle" href="/favourites">
+                <i className="fa fa-heart mr-3 text-primary"></i>
+                Favourites
+            </a>
+
+
+            <a className="dropdown-item rounded py-2 align-middle" href="/wishlists">
+                <i className="fa fa-gifts mr-3 text-primary"></i>
+                Wishlists
+            </a>
+        </>
+    )
+}
+
+
+export function AgentNavItems () {
+    return (
+        <>
+            <a className="dropdown-item rounded py-2 align-middle" href="/dashboard">
+                <i className="fa fa-user mr-3 text-primary"></i>
+                My Dashboard
+            </a>
+
+            <a className="dropdown-item rounded py-2 align-middle" href="/agent-profile">
+                <i className="fa fa-heart mr-3 text-primary"></i>
+                Profile
+            </a>
+
+
+            <a className="dropdown-item rounded py-2 align-middle" href="/support">
+                <i className="fa fa-headset mr-3 text-primary"></i>
+                Support
+            </a>
+        </>
+    )
+}
+
 function loggedOut(params) {
     return (           
         <ul className="navbar-nav flex-row justify-content-lg-end align-items-center d-flex flex-wrap text-body py-2">
             <li className="nav-item ">
-                <a className="nav-link pl-3 pr-2 mr-2" href="/login">Login</a>
+                <a className="nav-link pl-3 pr-2 mr-1" href="/login">Login</a>
+                |
+                <a className="nav-link pl-3 pr-2 mr-1" href="/signup">Sign Up</a>
             </li>
-            <li class="nav-item ml-auto w-100 w-sm-auto">
-                <a class="btn btn-primary btn-lg d-flex align-items-center" href="/agent-signup">
+            <li className="nav-item ml-auto w-100 w-sm-auto">
+                <a className="btn btn-primary btn-lg d-flex align-items-center" href="/agent-signup">
                     For Agents
-                    <img src="images/add-listing-icon.png" alt="Add listing" class="ml-2" />
+                    <img src="/images/add-listing-icon.png" alt="Add listing" className="ml-2" />
                 </a>
             </li>
         </ul>

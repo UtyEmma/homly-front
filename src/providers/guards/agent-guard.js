@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
 
-function AgentRoute({ component: Component, ...restOfProps }) {
+function AgentRoute({isLoading, setIsLoading, component: Component, ...restOfProps }) {
   const isAuthenticated = localStorage.getItem("isAuthenticated");
   const user = localStorage.getItem('user')
   const type = localStorage.getItem('type');
@@ -18,7 +18,7 @@ function AgentRoute({ component: Component, ...restOfProps }) {
       {...restOfProps}
       render={({...props}) =>
         isAuthenticated && type === 'agent' 
-          ? <Component {...props} status={type} agent={agent} /> : <Redirect to="/agent-login" />
+          ? <Component {...props} isLoading={isLoading} setIsLoading={setIsLoading} status={type} agent={agent} /> : <Redirect to="/agent-login" />
       }
     />
   );

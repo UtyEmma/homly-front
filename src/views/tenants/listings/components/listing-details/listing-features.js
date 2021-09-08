@@ -70,30 +70,30 @@ export const ListingFeatures = ({listing}) => {
             <section className="mt-2 pb-6 px-6 pt-5 bg-white rounded-lg">
                 <h4 className="fs-22 text-heading mb-4">Additional Details</h4>
                 <div className="row">
-                <dl className="col-sm-6 mb-0 d-flex">
-                    <dt className="w-110px fs-14 font-weight-500 text-heading pr-2">Rent</dt>
-                    <dd>&#8358; {listing.rent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</dd>
-                </dl>
-                <dl className="col-sm-6 mb-0 d-flex">
-                    <dt className="w-110px fs-14 font-weight-500 text-heading pr-2">First Payment</dt>
-                    <dd>&#8358; {listing.initial_fees.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</dd>
-                </dl>
-                <dl className="col-sm-6 mb-0 d-flex">
-                    <dt className="w-110px fs-14 font-weight-500 text-heading pr-2">Property type</dt>
-                    <dd>{listing.type}</dd>
-                </dl>
-                <dl className="col-sm-6 mb-0 d-flex">
-                    <dt className="w-110px fs-14 font-weight-500 text-heading pr-2">Property status</dt>
-                    <dd className="text-capitalize">{listing.status}</dd>
-                </dl>
-                <dl className="col-sm-6 mb-0 d-flex">
-                    <dt className="w-110px fs-14 font-weight-500 text-heading pr-2">Bedrooms</dt>
-                    <dd>{listing.no_bedrooms}</dd>
-                </dl>
-                <dl className="col-sm-6 mb-0 d-flex">
-                    <dt className="w-110px fs-14 font-weight-500 text-heading pr-2">Bathrooms</dt>
-                    <dd>{listing.no_bathrooms}</dd>
-                </dl>
+                    <dl className="col-sm-6 mb-0 d-flex">
+                        <dt className="w-110px fs-14 font-weight-500 text-heading pr-2">Rent</dt>
+                        <dd>&#8358; {listing.rent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</dd>
+                    </dl>
+                    <dl className="col-sm-6 mb-0 d-flex">
+                        <dt className="w-110px fs-14 font-weight-500 text-heading pr-2">First Payment</dt>
+                        <dd>&#8358; {listing.initial_fees.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</dd>
+                    </dl>
+                    <dl className="col-sm-6 mb-0 d-flex">
+                        <dt className="w-110px fs-14 font-weight-500 text-heading pr-2">Property type</dt>
+                        <dd>{listing.type}</dd>
+                    </dl>
+                    <dl className="col-sm-6 mb-0 d-flex">
+                        <dt className="w-110px fs-14 font-weight-500 text-heading pr-2">Property status</dt>
+                        <dd className="text-capitalize">{listing.status}</dd>
+                    </dl>
+                    <dl className="col-sm-6 mb-0 d-flex">
+                        <dt className="w-110px fs-14 font-weight-500 text-heading pr-2">Bedrooms</dt>
+                        <dd>{listing.no_bedrooms}</dd>
+                    </dl>
+                    <dl className="col-sm-6 mb-0 d-flex">
+                        <dt className="w-110px fs-14 font-weight-500 text-heading pr-2">Bathrooms</dt>
+                        <dd>{listing.no_bathrooms}</dd>
+                    </dl>
                 </div>
             </section>
             <section className="mt-2 pb-7 px-6 pt-5 bg-white rounded-lg">
