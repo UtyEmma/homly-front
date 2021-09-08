@@ -5,16 +5,16 @@ import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ScrollAnimation from 'react-animate-on-scroll'
 
-export default function ProfileButton({isloggedIn, user}) {
+export default function ProfileButton({isloggedIn, user, status}) {
 
     return (
         <>
-            {isloggedIn ? LoggedIn(user) : loggedOut()}
+            {isloggedIn ? LoggedIn(user, status) : loggedOut()}
         </>
     )
 }
 
-function LoggedIn(user) {
+function LoggedIn(user, status) {
 
     const dispatch = useDispatch()
     const type = localStorage.getItem('type');
@@ -25,20 +25,43 @@ function LoggedIn(user) {
 
     return (           
         <ul className="navbar-nav flex-row justify-content-lg-end align-items-center d-flex flex-wrap text-body py-2">            
-            <li className="nav-item mr-4">
-                <Link className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" to="/wishlist">
-                    <i className="fal fa-heart fs-large-4" />
-                    {
-                        user.wishlists 
-                        
-                        &&
+            
+            {
+                status === "tenant"
 
-                        <span className="badge badge-primary badge-circle badge-absolute p-1">{user.wishlists}</span>   
-                    }
-                </Link>
-            </li>
+                &&
 
-            <li className="nav-item mr-2 d-flex hover bg-hover-overlay-gradient-2 hover-primary rounded p-1">
+
+                <>
+                    <li className="nav-item">
+                        <Link className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" to="/wishlist">
+                            <i className="fal fa-gift fs-large-4" title="Wishlists" />
+                            {
+                                user.wishlists 
+                                
+                                &&
+
+                                <span className="badge badge-primary badge-circle badge-absolute p-1">{user.wishlists}</span>   
+                            }
+                        </Link>
+                    </li>
+
+                    <li className="nav-item">
+                        <Link className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" to="/favourites">
+                            <i className="fal fa-heart fs-large-4" title="Favourites" />
+                            {
+                                user.wishlists 
+                                
+                                &&
+
+                                <span className="badge badge-primary badge-circle badge-absolute p-1">{user.wishlists}</span>   
+                            }
+                        </Link>
+                    </li>
+                </>
+            }
+
+            <li className="nav-item mr-2 d-flex align-items-center hover bg-hover-overlay-gradient-2 hover-primary rounded p-1 dropdown-toggle" data-toggle="dropdown" >
                 <div className="w-46px">
                     {   
                         user.avatar 
@@ -53,11 +76,11 @@ function LoggedIn(user) {
                     }
                 </div>
                 
-                <button className="nav-link btn dropdown-toggle " data-toggle="dropdown">Hello {user.firstname}</button>
+                <button className="nav-link btn d-none d-lg-block">Hello {user.firstname}</button>
 
                 <div className="dropdown-menu px-2 dropdown-lg dropdown-menu-right" style={{width: "250px"}}>
                     {
-                        type === 'tenant'
+                        status === 'tenant'
 
                         ?
 
@@ -79,7 +102,7 @@ function LoggedIn(user) {
 
 }
 
-function TenantNavItems () {
+export function TenantNavItems () {
     return (
         <>
             <Link className="dropdown-item rounded py-2 align-middle" to="/profile">
@@ -127,13 +150,18 @@ export function AgentNavItems () {
 function loggedOut(params) {
     return (           
         <ul className="navbar-nav flex-row justify-content-lg-end align-items-center d-flex flex-wrap text-body py-2">
-            <li className="nav-item ">
-                <Link className="nav-link pl-3 pr-2 mr-1" to="/login">Login</Link>
-                |
-                <Link className="nav-link pl-3 pr-2 mr-1" to="/signup">Sign Up</Link>
+            <li className="nav-item">
+                <Link className="nav-link pl-md-3 pr-md-2 mr-1 mr-md-0" to="/login">Login</Link>
+                <span className="d-none d-md-inline">|</span>
+                <Link className="d-none d-md-inline nav-link pl-3 pr-2 mr-1 mr-md-auto" to="/signup">Sign Up</Link>
             </li>
-            <li className="nav-item ml-auto w-100 w-sm-auto">
-                <Link className="btn btn-primary btn-lg d-flex align-items-center" to="/agent-signup">
+            <li className="nav-item ml-md-auto w-auto w-sm-auto mr-2 mr-md-auto">
+                <Link className="btn btn-primary d-md-none d-flex align-items-center" to="/agent-signup">
+                    For Agents
+                    <img src="/images/add-listing-icon.png" alt="Add listing" className="ml-2" />
+                </Link>
+
+                <Link className="btn btn-primary d-none btn-lg d-md-flex align-items-center" to="/agent-signup">
                     For Agents
                     <img src="/images/add-listing-icon.png" alt="Add listing" className="ml-2" />
                 </Link>

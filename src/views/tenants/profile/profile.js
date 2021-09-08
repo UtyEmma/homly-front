@@ -8,7 +8,7 @@ import Footer from 'components/shared/footer'
 import NavBar from 'components/shared/nav-bar'
 import { UpdateTenantProfile } from 'providers/redux/_actions/user-actions'
 
-const Profile = ({isLoggedIn, user, setIsLoading}) => {
+const Profile = ({isLoggedIn, user, setIsLoading, status}) => {
     const dispatch = useDispatch()
     const profileImage = createRef()
     const [loading, setLoading] = useState(false)
@@ -32,7 +32,7 @@ const Profile = ({isLoggedIn, user, setIsLoading}) => {
         <div>
             <Preloader loading={loading} />
             <ToastContainer />
-            <NavBar isloggedIn={isLoggedIn} user={user}/>
+            <NavBar isloggedIn={isLoggedIn} user={user} status={status} />
 
             <Searchbar/>
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Footer from 'components/shared/footer';
 import NavBar from 'components/shared/nav-bar';
 import { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 
 export default function PasswordRecovery ({setIsLoading}) {
     
@@ -11,6 +12,10 @@ export default function PasswordRecovery ({setIsLoading}) {
     
     return (
         <div>
+            <Helmet>
+                <title>Reset Password - Bayof Real Estate</title>
+            </Helmet>
+
             <NavBar />
             
             <main id="content">

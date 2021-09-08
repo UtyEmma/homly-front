@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Helmet } from 'react-helmet'
 
 export default function VerifyEmail({user, setIsLoading}) {
 
@@ -12,6 +13,11 @@ export default function VerifyEmail({user, setIsLoading}) {
     
     return (
         <div style={{height: '100vh'}}>
+            <Helmet>
+                <title>Bayof Real Estate - Find Properties and agents around you</title>
+                <meta name="description" content="Find Properties and agents around you." />
+            </Helmet>
+
             <div className="row d-flex align-items-center justify-content-center bg-light" style={{height: '100%'}} >
                 {/* <div className="col-12 text-center pb-0">
                     <a href="/">

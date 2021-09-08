@@ -8,7 +8,7 @@ import Footer from 'components/shared/footer'
 import FavouriteItem from './components/favourite-item'
 import FavouritesNotFound from 'components/404/404-favourites'
 
-export const Favourites = ({user, isLoggedIn, setIsLoading}) => {
+export const Favourites = ({user, isLoggedIn, setIsLoading, status}) => {
 
     const dispatch = useDispatch()
     const favourites = useSelector(state => state.favourites)
@@ -36,7 +36,7 @@ export const Favourites = ({user, isLoggedIn, setIsLoading}) => {
     return (
         <>
             <div>
-                <NavBar isloggedIn={isLoggedIn} user={user}/>
+                <NavBar isloggedIn={isLoggedIn} user={user} status={status} />
 
                 <main id="content">
                     <Searchbar />

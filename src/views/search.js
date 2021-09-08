@@ -8,10 +8,11 @@ import { useLocation } from 'react-router';
 import ListingGrid from './tenants/listings/components/listing-grid';
 import { SearchListingsMap } from 'components/maps/multiple-markers';
 import { SearchListings } from 'providers/redux/_actions/search-actions';
+import { Helmet } from 'react-helmet';
 
 const QueryString =  require('query-string')
 
-const Search = ({isLoggedIn, user, setIsLoading}) => {
+const Search = ({isLoggedIn, user, setIsLoading, status}) => {
 
     const location = useLocation()
     const dispatch = useDispatch()
@@ -35,10 +36,27 @@ const Search = ({isLoggedIn, user, setIsLoading}) => {
         
     return (
         <div>
-
+            <Helmet>
+                <title>Search - Bayof Real Estate</title>
+                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:site" content="@" />
+                <meta name="twitter:creator" content="@" />
+                <meta name="twitter:title" content="Bayof Real Estate" />
+                <meta name="twitter:description" content="Find the best accomodation around you" />
+                <meta name="twitter:image" content="/images/homeid-social-logo.png" />
+                <meta property="og:url" content="home-01.html" />
+                <meta property="og:title" content="Home 01" />
+                <meta property="og:description" content="Find the best accomodation around you" />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content="/images/homeid-social.png" />
+                <meta property="og:image:type" content="image/png" />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
+                <meta name="description" content="Find Properties and agents around you." />
+            </Helmet>
             <ToastContainer />
             
-            <NavBar isloggedIn={isLoggedIn} user={user}/>
+            <NavBar isloggedIn={isLoggedIn} user={user} status={status} />
             
             <Searchbar parsed={parsed} />
 

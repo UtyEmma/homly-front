@@ -5,23 +5,36 @@ import PopularSection from './layouts/home/popular-section'
 import NavBar from 'components/shared/nav-bar'
 import Footer from 'components/shared/footer'
 import ScrollAnimation from 'react-animate-on-scroll'
+import { Helmet } from 'react-helmet'
 
-const Home = ({isLoggedIn, user, isLoading, setIsLoading}) => {
-
-    useEffect(() => {
-        setIsLoading(false)
-    })
+const Home = ({isLoggedIn, user, isLoading, setIsLoading, status}) => {
 
     return (
-        <div>
-            <NavBar isloggedIn={isLoggedIn} user={user}/>
+        <div>           
+            <Helmet>
+                <title>Bayof - Find Properties and agents around you</title>
+                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:site" content="@" />
+                <meta name="twitter:creator" content="@" />
+                <meta name="twitter:title" content="Bayof Real Estate" />
+                <meta name="twitter:description" content="Find the best accomodation around you" />
+                <meta name="twitter:image" content="/images/homeid-social-logo.png" />
+                <meta property="og:url" content="home-01.html" />
+                <meta property="og:title" content="Home 01" />
+                <meta property="og:description" content="Find the best accomodation around you" />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content="/images/homeid-social.png" />
+                <meta property="og:image:type" content="image/png" />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
+                <meta name="description" content="Find Properties and agents around you." />
+            </Helmet>
+            <NavBar isloggedIn={isLoggedIn} user={user} status={status} />
             
             <main id="content">
                 <HeroSection/>
 
-                <ScrollAnimation animateIn="fadeInUp">
-                    <PopularSection isLoading={isLoading} setIsLoading={setIsLoading}/>
-                </ScrollAnimation>
+                <PopularSection isLoading={isLoading} setIsLoading={setIsLoading} status={status} />
 
                 <section className="bg-gray-02 pt-10 pb-11">
                     <div className="container container-xxl">

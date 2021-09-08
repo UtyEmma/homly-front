@@ -1,22 +1,27 @@
 import React from 'react'
+import ScrollAnimation from 'react-animate-on-scroll'
 
-export default function ListingTabItem({listing}) {
+export default function ListingTabItem({listing, status}) {
     return (
-        <div className="col-xxl-3 col-lg-4 col-md-6 mb-6" >
-            <div className="card border-0 bg-overlay-gradient-3 rounded-lg hover-change-image">
+        <ScrollAnimation animateIn="fadeInUp" className="col-xxl-3 col-lg-4 col-md-6 mb-6 " >
+            <div className="card border-0 bg-overlay-gradient-3 rounded-lg hover-change-image h-100">
                 <img src={listing.images[0]} style={{minHeight: '100%', objectFit: 'cover', objectPosition: 'center'}} className="card-img" alt={listing.title} />
                
                 <div className="card-img-overlay d-flex flex-column">
                     <div className="d-flex">
-                        <div className="mr-auto h-24 d-flex">
-                            <span className="badge badge-primary mr-2">For Sale</span>
-                        </div>
                         <ul className="list-inline mb-0 d-flex justify-content-center align-items-center h-100 hover-image">
-                            <li className="list-inline-item">
-                            <a href="#" className="w-40px h-40 rounded-circle d-inline-flex align-items-center justify-content-center text-white bg-dark-opacity-03 bg-hover-primary hover-white" data-toggle="tooltip" title="Wishlist">
-                                <i className="far fa-heart" />
-                            </a>
-                            </li>
+                            {
+                                status === 'tenant'
+
+                                && 
+
+
+                                <li className="list-inline-item">
+                                    <a href="#" className="w-40px h-40 rounded-circle d-inline-flex align-items-center justify-content-center text-white bg-dark-opacity-03 bg-hover-primary hover-white" data-toggle="tooltip" title="Wishlist">
+                                        <i className="far fa-heart" />
+                                    </a>
+                                </li>
+                            }
                         </ul>
                     </div>
                     <div className="mt-auto px-2">
@@ -37,6 +42,6 @@ export default function ListingTabItem({listing}) {
                     </div>
                 </div>
             </div>
-        </div>
+        </ScrollAnimation>
     )
 }
