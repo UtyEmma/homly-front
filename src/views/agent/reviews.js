@@ -8,6 +8,7 @@ import ReviewsNotFound from 'components/404/404-reviews';
 import { useDispatch, useSelector } from 'react-redux';
 import { FetchAgentReview } from 'providers/redux/_actions/review-actions';
 import Preloader from 'components/preloader/preloader';
+import { Helmet } from 'react-helmet';
 
 const Reviews = ({agent, setIsLoading}) => {
 
@@ -29,6 +30,10 @@ const Reviews = ({agent, setIsLoading}) => {
 
     return (
         <div className="wrapper dashboard-wrapper">
+            <Helmet>
+                <title>My Reviews</title>
+            </Helmet>
+
             <Preloader loading={loading} />
             <div className="d-flex flex-wrap flex-xl-nowrap">
                 <Sidebar agent={agent} />

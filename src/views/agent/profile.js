@@ -1,14 +1,12 @@
-import React, {Component, createRef, useEffect, useState} from 'react'
-
+import React, {createRef, useEffect, useState} from 'react'
 import Sidebar from './layouts/shared/sidebar'
 import Header from './layouts/shared/header'
-import { useDispatch, useSelector } from 'react-redux';
-import { UpdateAgentProfile } from '../../providers/redux/_actions/agent-actions';
-import { ToastContainer } from 'react-toastify';
-import Preloader from 'components/preloader/preloader';
 import { LocalGovt, State } from 'components/city-state/city-state';
 import Validator from 'validatorjs';
 import { MapFormErrors, __agent_updateProfile } from 'libraries/validation';
+import { Helmet } from 'react-helmet';
+import { useDispatch, useSelector } from 'react-redux';
+import { UpdateAgentProfile } from 'providers/redux/_actions/agent-actions';
 
 const AgentProfile = ({agent, setIsLoading}) => {
         const dispatch = useDispatch()
@@ -17,10 +15,6 @@ const AgentProfile = ({agent, setIsLoading}) => {
 
         const updateProfile = useSelector(state => (state.update_agent_profile))
         const {loading, success, error} = updateProfile
-
-        useEffect(() => {
-            setIsLoading(false)
-        })
 
         useEffect(() => {
             error && error.formError && setFormErrors(error.formError)
@@ -52,6 +46,10 @@ const AgentProfile = ({agent, setIsLoading}) => {
         
         return (
             <div className="wrapper dashboard-wrapper">
+                <Helmet>
+                    <title>My Profile - Agent Dashboard</title>
+                </Helmet>
+
                 <div className="d-flex flex-wrap flex-xl-nowrap">
                     <Sidebar agent={agent} />
 

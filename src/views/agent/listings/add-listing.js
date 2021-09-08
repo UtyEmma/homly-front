@@ -1,10 +1,8 @@
-import Preloader from 'components/preloader/preloader';
-import React, {Component, useEffect, useState} from 'react'
-import { ToastContainer } from 'react-toastify';
-
+import React, {useEffect} from 'react'
 import AddListingForm from '../layouts/listings/add-listing-form'
 import Header from '../layouts/shared/header';
 import Sidebar from '../layouts/shared/sidebar';
+import { Helmet } from 'react-helmet';
 
 const NewListing = ({agent, setIsLoading, isLoading}) => {
         
@@ -14,6 +12,10 @@ const NewListing = ({agent, setIsLoading, isLoading}) => {
     
         return (
             <div className="wrapper dashboard-wrapper">
+                <Helmet>
+                    <title>Properties - Create Property</title>
+                </Helmet>
+                
                 <div className="d-flex flex-wrap flex-xl-nowrap">
                     <Sidebar agent={agent}/>
     

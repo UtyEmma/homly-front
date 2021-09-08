@@ -4,6 +4,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Header from '../layouts/shared/header'
 import Sidebar from '../layouts/shared/sidebar'
+import { Helmet } from 'react-helmet'
 
 const AgentWishlist = ({agent, setIsLoading}) => {
     
@@ -26,6 +27,10 @@ const AgentWishlist = ({agent, setIsLoading}) => {
 
     return (
         <div className="wrapper dashboard-wrapper">
+            <Helmet>
+                <title>Wishlists</title>
+            </Helmet>
+
             <div className="d-flex flex-wrap flex-xl-nowrap">
                 <Sidebar agent={agent}/>
 

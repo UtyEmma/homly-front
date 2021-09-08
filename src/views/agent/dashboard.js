@@ -1,8 +1,8 @@
-import React, { Component, useEffect } from 'react'
-
+import React, { useEffect } from 'react'
 import Sidebar from './layouts/shared/sidebar'
 import Header from './layouts/shared/header'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 const AgentDashboard = ({agent, setIsLoading}) => {
     
@@ -12,6 +12,24 @@ const AgentDashboard = ({agent, setIsLoading}) => {
     
     return (
         <div className="wrapper dashboard-wrapper">
+            <Helmet>
+                <title>My Dashboard</title>
+                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:site" content="@" />
+                <meta name="twitter:creator" content="@" />
+                <meta name="twitter:title" content="Bayof Real Estate" />
+                <meta name="twitter:description" content="Find the best accomodation around you" />
+                <meta name="twitter:image" content="/images/homeid-social-logo.png" />
+                <meta property="og:url" content="home-01.html" />
+                <meta property="og:title" content="Home 01" />
+                <meta property="og:description" content="Find the best accomodation around you" />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content="/images/homeid-social.png" />
+                <meta property="og:image:type" content="image/png" />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
+                <meta name="description" content="Find Properties and agents around you." />
+            </Helmet>
             <div className="d-flex flex-wrap flex-xl-nowrap">
 
                 <Sidebar agent={agent} />

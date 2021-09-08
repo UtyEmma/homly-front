@@ -1,10 +1,10 @@
-import Preloader from 'components/preloader/preloader'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Header from 'views/agent/layouts/shared/header'
 import Sidebar from 'views/agent/layouts/shared/sidebar'
 import { SupportCenterContent } from './components/support-content'
 import { SupportCenterSidebar } from './components/support-sidebar'
 import { NewTicketModal } from './components/tickets/new-ticket'
+import { Helmet } from 'react-helmet'
 
 export const Support = ({agent, isLoading, setIsLoading}) => {
 
@@ -13,6 +13,10 @@ export const Support = ({agent, isLoading, setIsLoading}) => {
 
     return (
         <div className="wrapper dashboard-wrapper">
+            <Helmet>
+                <title>Support Center</title>
+            </Helmet>
+
             <div className="d-flex flex-wrap flex-xl-nowrap">
                 <Sidebar agent={agent} />
 

@@ -40,7 +40,6 @@ import AgentWishlist from 'views/agent/wishlist/agent-wishlist';
 import { GoogleOneTapAuth } from 'components/auth/social';
 import { Favourites } from 'views/tenants/favourites/favourites';
 import { AgentListingDetail } from 'views/agent/listings/agent-listing-details';
-import { Onboarding } from 'views/agent/onboarding/onboarding';
 import { useQuery } from 'libraries/http/query';
 import { useDispatch, useSelector } from 'react-redux';
 import { VerifyAdmin } from 'providers/redux/_actions/admin-actions';
@@ -106,7 +105,6 @@ function App() {
           {/* Agent Routes */}
           <Route path="/agent-login" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={AgentLogin} exact/>
           <Route path="/agent-signup" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={AgentSignup} exact/>
-          <Route path="/onboarding" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={Onboarding} exact />
           <AgentRoute path="/dashboard" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={AgentDashboard} exact />
           <AgentRoute path="/new-listing" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={NewListing} exact />
           <AgentRoute path="/agent-profile" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={AgentProfile} exact />
