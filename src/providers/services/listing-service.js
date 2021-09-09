@@ -71,6 +71,10 @@ export const ListingService = {
 
     updateViews : async (id) => {
         return await Request.get(`listings/update-views/${id}`, params)
+    },
+
+    deleteListing : async (id) => {
+        return await Request.get(`listings/delete/${id}`, params)
     }
 
 }

@@ -7,7 +7,7 @@ export const UpdateListingDescription = ({listing, formErrors}) => {
                 <div className="row">
                     <div className="col-lg-6">
                         <div className="card mb-6">
-                        <div className="card-body p-6">
+                        <div className="card-body p-md-6">
                             <h3 className="card-title mb-0 text-heading fs-22 lh-15">Property Description</h3>
                             <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
                             <div className="form-group">
@@ -16,13 +16,8 @@ export const UpdateListingDescription = ({listing, formErrors}) => {
                             <p className="text-danger fs-12">{formErrors.title?.message}</p>
                             </div>
                             <div className="form-group mb-0">
-                                <label htmlFor="category" className="text-heading mb-0">Type</label>
-                                <SelectListingCategory 
-                                    className="mt-0"
-                                    classes="form-control border-0 shadow-none mt-n3 form-control-lg"
-                                    name="type" 
-                                    defaultValue={listing.type}
-                                />
+                                <label htmlFor="category" className="text-heading">Type</label>
+                                <SelectListingCategory classes="form-control border-0 shadow-none form-control-lg" name="type" defaultValue={listing.type} />
                                 <p className="text-danger fs-12">{formErrors.type?.message}</p>
                             </div>
                             <div className="form-group mb-0">
@@ -35,7 +30,7 @@ export const UpdateListingDescription = ({listing, formErrors}) => {
                 </div>
                 <div className="col-lg-6">
                     <div className="card mb-6">
-                            <div className="card-body p-6">
+                            <div className="card-body p-md-6">
                                 <h3 className="card-title mb-0 text-heading fs-22 lh-15">Rent Details</h3>
                                 <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
                                 adipiscing elit</p>
@@ -56,7 +51,7 @@ export const UpdateListingDescription = ({listing, formErrors}) => {
                         </div>
                     </div>
                     <div className="card mb-6">
-                    <div className="card-body p-6">
+                    <div className="card-body p-md-6">
                         <h3 className="card-title mb-0 text-heading fs-22 lh-15">Property Fees</h3>
                         <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
                         adipiscing elit</p>

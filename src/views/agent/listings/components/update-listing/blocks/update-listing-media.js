@@ -14,7 +14,7 @@ export const UpdateListingMedia = ({listing, files, setFiles, formErrors}) => {
                     <div className="row">
                     <div className="col-lg-6">
                         <div className="card mb-6">
-                        <div className="card-body p-6">
+                        <div className="card-body p-md-6">
                             <h3 className="card-title mb-0 text-heading fs-22 lh-15">Upload photos
                             of your property</h3>
                             <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
@@ -26,7 +26,7 @@ export const UpdateListingMedia = ({listing, files, setFiles, formErrors}) => {
                     </div>
                     <div className="col-lg-6">
                         <div className="card mb-6">
-                        <div className="card-body p-6">
+                        <div className="card-body p-md-6">
                             <h3 className="card-title mb-0 text-heading fs-22 lh-15">Upload Video</h3>
                             <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
                             adipiscing elit</p>

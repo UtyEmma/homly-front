@@ -22,7 +22,7 @@ export const signup = (data) => (dispatch) => {
                 const errors = Response.error(error.response)
                 dispatch({
                     type: SIGNUP_FAILURE,
-                    payload: {error: error.response.data, formErrors: errors}
+                    payload: {error: error.response, formErrors: errors}
                 })
             })  
             
@@ -35,6 +35,7 @@ export const login = (data) => (dispatch) => {
     userService.login(data)
             .then(response => {
                 let res = response.data;
+                localStorage.clear()
                 localStorage.setItem('token', res.data.token);
                 localStorage.setItem('user', JSON.stringify(res.data.user));
                 localStorage.setItem('isAuthenticated', true);
@@ -49,7 +50,7 @@ export const login = (data) => (dispatch) => {
                 const errors = Response.error(error.response)
                 dispatch({
                     type: LOGIN_FAILURE,
-                    payload: {error: error.response.data, formErrors: errors}
+                    payload: {error: error.response, formErrors: errors}
                 })
             })
 }
@@ -78,10 +79,7 @@ export const UpdateTenantProfile = (data) => (dispatch) => {
 export const TenantLogout = () => (dispatch) => {
     userService.logout()
             .then((res) => {
-                localStorage.removeItem('token');
-                localStorage.removeItem('user');
-                localStorage.removeItem('isAuthenticated');
-                localStorage.removeItem('type');
+                localStorage.clear()
                 return window.location.href = '/login?msg=Logout Successful'
             })
             .catch((error) => {

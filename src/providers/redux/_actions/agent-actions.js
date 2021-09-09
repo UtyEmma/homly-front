@@ -132,10 +132,7 @@ export const DeleteListing = (id) => (dispatch) => {
     AgentService.deleteListing(id)
                 .then(response => {
                     Response.success(response.data.data)
-                    return dispatch({
-                        type: DELETE_LISTING_SUCCESS,
-                        payload: response.data.data
-                    })
+                    return window.location.href = '/my-listings'
                 })
                 .catch(error => {
                     Response.error(error.response)

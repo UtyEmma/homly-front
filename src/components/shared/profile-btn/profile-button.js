@@ -2,7 +2,7 @@ import { AgentLogout } from 'providers/redux/_actions/agent-actions'
 import { TenantLogout } from 'providers/redux/_actions/user-actions'
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import ScrollAnimation from 'react-animate-on-scroll'
 
 export default function ProfileButton({isloggedIn, user, status}) {
@@ -34,7 +34,7 @@ function LoggedIn(user, status) {
 
                 <>
                     <li className="nav-item">
-                        <Link className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" to="/wishlist">
+                        <NavLink className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" to="/wishlist">
                             <i className="fal fa-gift fs-large-4" title="Wishlists" />
                             {
                                 user.wishlists 
@@ -43,11 +43,11 @@ function LoggedIn(user, status) {
 
                                 <span className="badge badge-primary badge-circle badge-absolute p-1">{user.wishlists}</span>   
                             }
-                        </Link>
+                        </NavLink>
                     </li>
 
                     <li className="nav-item">
-                        <Link className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" to="/favourites">
+                        <NavLink to="/favourites" className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" >
                             <i className="fal fa-heart fs-large-4" title="Favourites" />
                             {
                                 user.wishlists 
@@ -56,7 +56,7 @@ function LoggedIn(user, status) {
 
                                 <span className="badge badge-primary badge-circle badge-absolute p-1">{user.wishlists}</span>   
                             }
-                        </Link>
+                        </NavLink>
                     </li>
                 </>
             }
@@ -70,7 +70,7 @@ function LoggedIn(user, status) {
                             <img src={user.avatar} className="w-46px h-46" style={{objectFit: 'cover'}} alt={`${user.firstname}`} />
                         </div> 
                         : 
-                        <div className="d-inline-block mb-2 w-46px h-46 mr-2 bg-gray-01 rounded-circle fs-18 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
+                        <div className="d-inline-block mb-md-2 w-46px h-46 mr-2 bg-gray-01 rounded-circle fs-18 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
                             {`${user.firstname.charAt(0).toUpperCase()}${user.lastname.charAt(0).toUpperCase()}`}
                         </div>
                     }
@@ -150,10 +150,10 @@ export function AgentNavItems () {
 function loggedOut(params) {
     return (           
         <ul className="navbar-nav flex-row justify-content-lg-end align-items-center d-flex flex-wrap text-body py-2">
-            <li className="nav-item">
+            <li className="nav-item d-none d-md-inline">
                 <Link className="nav-link pl-md-3 pr-md-2 mr-1 mr-md-0" to="/login">Login</Link>
-                <span className="d-none d-md-inline">|</span>
-                <Link className="d-none d-md-inline nav-link pl-3 pr-2 mr-1 mr-md-auto" to="/signup">Sign Up</Link>
+                <span>|</span>
+                <Link className="nav-link pl-3 pr-2 mr-1 mr-md-auto" to="/signup">Sign Up</Link>
             </li>
             <li className="nav-item ml-md-auto w-auto w-sm-auto mr-2 mr-md-auto">
                 <Link className="btn btn-primary d-md-none d-flex align-items-center" to="/agent-signup">

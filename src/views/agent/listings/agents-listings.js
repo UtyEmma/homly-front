@@ -26,7 +26,6 @@ const AgentsListings = ({agent, setIsLoading}) => {
         setIsLoading(loading)
     }, [loading])
 
-
     return (
         <div className="wrapper dashboard-wrapper">
             <Helmet>

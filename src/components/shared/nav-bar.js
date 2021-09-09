@@ -43,7 +43,26 @@ export default function NavBar({user, isloggedIn, status}) {
                                     <Link className="nav-link p-0" to="/agents">
                                         Find an Agent
                                     </Link>
-                                </li>                    
+                                </li> 
+
+                                {
+                                    !isloggedIn
+
+                                    &&
+
+                                    <>
+                                        <li id="navbar-item-dashboard" className="nav-item py-2 py-lg-5 px-0 px-lg-4 d-md-none">
+                                            <Link className="nav-link btn btn-block btn-primary btn-lg" to="/login">
+                                                Login
+                                            </Link>
+                                        </li> 
+                                        <li id="navbar-item-dashboard" className="nav-item py-2 py-lg-5 px-0 px-lg-4 d-md-none">
+                                            <Link className="nav-link btn btn-block btn-outline-primary btn-lg" to="/signup">
+                                                Sign Up
+                                            </Link>
+                                        </li>
+                                    </>
+                                }                    
                             </ul>
                         </div>
                         <div className="d-none d-lg-block">

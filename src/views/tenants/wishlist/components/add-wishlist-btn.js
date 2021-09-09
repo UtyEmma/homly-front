@@ -10,7 +10,7 @@ export default function AddWishlistBtn() {
                     <img className="img-fluid" style={{maxWidth: '70%'}} src="images/svg/find-home.svg"  />
                     <h1 className="fs-24 text-center mt-2 text-bold" style={{lineHeight: '150%'}}>Let's make your housing dreams come true!!!</h1>
                     <button data-toggle="modal" data-target="#modal-one" className="btn btn-lg bg-primary text-white">
-                        Create Wishlist
+                        Create New Wishlist
                     </button>
                 </div>
             </div>

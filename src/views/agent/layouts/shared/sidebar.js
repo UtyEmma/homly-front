@@ -140,12 +140,12 @@ export default function Sidebar({agent}) {
                                                 </Link>
                                             </li>
                                             <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
-                                                <Link onClick={logout} style={{cursor: "pointer"}} className="text-heading lh-1 sidebar-link">
+                                                <button onClick={logout} style={{cursor: "pointer"}} className="btn p-0 text-heading lh-1 sidebar-link">
                                                     <span className="sidebar-item-icon d-inline-block mr-3 text-muted fs-20">
                                                     <svg className="icon icon-log-out"><use xlinkHref="#icon-log-out" /></svg>
                                                     </span>
                                                     <span className="sidebar-item-text">Log Out</span>
-                                                </Link>
+                                                </button>
                                             </li>
                                         </ul>
                                     </li>

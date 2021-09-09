@@ -7,6 +7,10 @@ export const ConfirmActionDialog = ({show, setShow, callback, message, title}) =
         setShow(false)
     }
 
+    const handleCallback = () => {
+        return callback.action()
+    }
+
     return (
         <>
            <Modal show={show} onHide={handleClose}>
@@ -18,7 +22,7 @@ export const ConfirmActionDialog = ({show, setShow, callback, message, title}) =
                 <button className="btn btn-link" onClick={handleClose}>
                     Close
                 </button>
-                <button className="btn btn-secondary" onClick={() => {callback(); handleClose()}}>
+                <button className="btn btn-secondary" onClick={handleCallback} >
                     Proceed
                 </button>
                 </Modal.Footer>

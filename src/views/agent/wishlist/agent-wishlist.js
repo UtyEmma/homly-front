@@ -18,7 +18,6 @@ const AgentWishlist = ({agent, setIsLoading}) => {
 
     useEffect(() => {
         !wishlists && FetchWishlist()
-        wishlists && setIsLoading(false)
     }, [wishlists]);
 
     useEffect(() => {

@@ -3,13 +3,11 @@ import { LocalGovt, State } from 'components/city-state/city-state';
 import { MapFormErrors, __createwishlist } from 'libraries/validation';
 import { CreateWishlist } from 'providers/redux/_actions/wishlist-actions';
 import React, { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import 'bs-stepper/dist/css/bs-stepper.min.css'
 import Stepper from 'bs-stepper'
 import { TagifyAmenities } from 'views/layouts/components/details/amenities';
 import SelectListingCategory from 'views/layouts/components/details/categories';
-import Error from 'libraries/response/http-error';
 import Validator from 'validatorjs';
 
 const WishlistForm = ({setIsLoading}) => {
@@ -47,22 +45,24 @@ const WishlistForm = ({setIsLoading}) => {
             linear: false,
             animation: true
         }));
-
         setIsLoading(loading)
     }, [loading])
+
     
     return (
         <div className="card border-0">
-            <div className="card-body">
+            <div className="card-body px-3 pt-0 px-md-4 py-md-4">
             <div className="bs-stepper" id='wishlist-stepper'>
-                <div className="bs-stepper-header" role="tablist">
+                <div className="bs-stepper-header mb-3 d-block d-md-flex" role="tablist">
                     <div className="step" data-target="#property-info">
                         <button type="button" className="step-trigger bs-stepper-trigger" role="tab" aria-controls="property-info" id="property-info-trigger">
                             <span className="bg-primary bs-stepper-item"></span>
                             <span className="bs-stepper-label">Property Info</span>
                         </button>
                     </div>
+                    
                     <div className="line" />
+                    
                     <div className="step" data-target="#location-info">
                         <button type="button" className="step-trigger bs-stepper-trigger" role="tab" aria-controls="location-info" id="location-info-trigger">
                             <span className="bg-primary bs-stepper-item"></span>

@@ -33,7 +33,7 @@ const AgentLoginForm = () =>  {
     } 
 
     useEffect(() => {
-        history.push('/dashboard')
+        agent_success && history.push('/dashboard')
     }, [agent_success])
 
     useEffect(() => {

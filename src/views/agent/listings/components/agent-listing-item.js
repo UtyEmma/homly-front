@@ -22,7 +22,7 @@ export default function AgentListingItem({listing_item}) {
     }, listing)
 
     return (
-        <tr className="shadow-hover-xs-2 bg-hover-white">
+        <tr className="shadow-hover-xs-2 bg-hover-white filter-row">
             <td className="align-middle pt-6 pb-4 px-6" style={{minWidth: '300px'}}>
                 <div className="media">
                     <div className="w-120px mr-4 position-relative">
@@ -33,7 +33,7 @@ export default function AgentListingItem({listing_item}) {
                     </div>
                     <div className="media-body" style={{width: '350px'}}>
                         <a href={`my-listings/${listing_item.slug}`} className="text-dark hover-primary">
-                            <h5 className="fs-16 mb-0 lh-18">{listing_item.title}</h5>
+                            <h5 className="fs-16 mb-0 lh-18 filter-item">{listing_item.title}</h5>
                         </a>
                         <p className="mb-1 font-weight-500">{`${listing_item.description.split(" ").splice(0,15).join(" ")} ...`}</p>
                         <span className="text-heading lh-15 font-weight-bold fs-17">&#8358; {listing_item.initial_fees.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
@@ -50,8 +50,8 @@ export default function AgentListingItem({listing_item}) {
             <td className="align-middle"><p className="text-center">{listing_item.views}</p></td>
             <td className="align-middle">
                 <a href={`my-listings/${listing_item.slug}`} data-toggle="tooltip" title="Edit" className="d-inline-block fs-18 text-muted hover-primary mr-5"><i className="fal fa-eye" /></a>
-                {/* <a href="" data-toggle="tooltip" onClick={removeListing} title={listing_item.status === 'active' ? 'Set as Inactive' : 'Set as Active'} className="d-inline-block fs-18 text-muted hover-primary mr-5"><i className={listing_item.status === 'active' ? 'fal fa-eye-slash' : 'fal fa-eye'} /></a> */}
-                {/* <a href="" data-toggle="tooltip" onClick={deleteListing} title="Delete" className="d-inline-block fs-18 text-muted hover-primary"><i className="fal fa-trash-alt" /></a> */}
+                <a href="" data-toggle="tooltip" onClick={removeListing} title={listing_item.status === 'active' ? 'Suspend' : 'Restore'} className="d-inline-block fs-18 text-muted hover-primary mr-5"><i className={listing_item.status === 'active' ? 'fal fa-eye-slash' : 'fal fa-eye'} /></a>
+                <a href="" data-toggle="tooltip" onClick={deleteListing} title="Delete" className="d-inline-block fs-18 text-muted hover-primary"><i className="fal fa-trash-alt" /></a>
             </td>
         </tr>
     )
