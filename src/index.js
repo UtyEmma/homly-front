@@ -8,9 +8,9 @@ import { Provider } from 'react-redux'
 import store from './providers/redux/store';
 
 
-ReactDOM.hydrate(
+ReactDOM.render(
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter >
           <App />
       </BrowserRouter>
     </Provider>,

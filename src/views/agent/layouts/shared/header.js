@@ -1,5 +1,5 @@
 import { NotificationBell } from 'components/notification/notification'
-import { AgentNavItems } from 'components/shared/profile-btn/profile-button'
+import ProfileButton, { AgentNavItems } from 'components/shared/profile-btn/profile-button'
 import React from 'react'
 
 export default function Header({agent}) {

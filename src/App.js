@@ -85,7 +85,7 @@ function App() {
           {/* Common Routes */}
           <Route path="/recover-password" isLoading={isLoading} setIsLoading={setIsLoading} component={PasswordRecovery} exact/>
           <Route path="/login" render={(props) => (<UserLogin {...props} isLoading={isLoading} setIsLoading={setIsLoading} />)} exact/>
-          <Route path="/signup" isLoading={isLoading} setIsLoading={setIsLoading} render={(props) => (<UserSignup {...props} isLoading={setIsLoading} />)} exact/>
+          <Route path="/signup" isLoading={isLoading} setIsLoading={setIsLoading} render={(props) => (<UserSignup {...props} setIsLoading={setIsLoading} isLoading={setIsLoading} />)} exact/>
 
           {/* User Routes */}
           <UserRoute path="/" isLoading={isLoading} setIsLoading={setIsLoading} component={Home} exact/>
@@ -116,7 +116,7 @@ function App() {
 
 
           <UserRoute path="/:id" isLoading={isLoading} setIsLoading={setIsLoading} user type="user" component={AgentDetails} exact/>
-          <Route render={(props) => (<NotFound setIsLoading={setIsLoading} {...props} />)} exact/>
+          <Route render={(props) => (<NotFound setIsLoading={setIsLoading} type="agent" {...props} />)} exact/>
       </Switch>
     </div>
   );

@@ -8,7 +8,6 @@ function UserRoute({ isLoading, setIsLoading, component: Component, ...restOfPro
   let user = null;
 
   if(isAuthenticated){ user = user_object; }
-
   return (
     <Route
       {...restOfProps}

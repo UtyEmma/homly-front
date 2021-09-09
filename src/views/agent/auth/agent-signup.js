@@ -13,7 +13,7 @@ export default function AgentSignup ({setIsLoading}) {
     return (
         <div>
             <Helmet>
-                <title>Agent Dashboar - Signup</title>
+                <title>Sign up as an Agent - Bayof Real Estate</title>
                 <meta name="twitter:card" content="summary" />
                 <meta name="twitter:site" content="@" />
                 <meta name="twitter:creator" content="@" />

@@ -1,11 +1,16 @@
 import { AgentLogout } from 'providers/redux/_actions/agent-actions'
 import { TenantLogout } from 'providers/redux/_actions/user-actions'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Link, NavLink } from 'react-router-dom'
-import ScrollAnimation from 'react-animate-on-scroll'
+import { Link } from 'react-router-dom'
 
-export default function ProfileButton({isloggedIn, user, status}) {
+export default function ProfileButton({isloggedIn, user}) {
+
+    const [status, setStatus] = useState()
+
+    useEffect(() => {
+        setStatus(localStorage.getItem('type'))
+    })
 
     return (
         <>
@@ -31,10 +36,9 @@ function LoggedIn(user, status) {
 
                 &&
 
-
                 <>
                     <li className="nav-item">
-                        <NavLink className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" to="/wishlist">
+                        <Link className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" to="/wishlist">
                             <i className="fal fa-gift fs-large-4" title="Wishlists" />
                             {
                                 user.wishlists 
@@ -43,11 +47,11 @@ function LoggedIn(user, status) {
 
                                 <span className="badge badge-primary badge-circle badge-absolute p-1">{user.wishlists}</span>   
                             }
-                        </NavLink>
+                        </Link>
                     </li>
 
                     <li className="nav-item">
-                        <NavLink to="/favourites" className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" >
+                        <Link to="/favourites" className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" >
                             <i className="fal fa-heart fs-large-4" title="Favourites" />
                             {
                                 user.wishlists 
@@ -56,45 +60,48 @@ function LoggedIn(user, status) {
 
                                 <span className="badge badge-primary badge-circle badge-absolute p-1">{user.wishlists}</span>   
                             }
-                        </NavLink>
+                        </Link>
                     </li>
                 </>
             }
+            
+            <li className="nav-item mr-md-2 d-flex align-items-center hover bg-hover-overlay-gradient-2 hover-primary rounded p-1 " >
 
-            <li className="nav-item mr-2 d-flex align-items-center hover bg-hover-overlay-gradient-2 hover-primary rounded p-1 dropdown-toggle" data-toggle="dropdown" >
-                <div className="w-46px">
-                    {   
+                <div className="dropdown px-md-3">
+                    <Link to="#" className="dropdown-toggle d-flex align-items-center justify-content-end text-heading" data-toggle="dropdown">
+                    {    
                         user.avatar 
-                        ? 
-                        <div className="rounded-circle w-46px h-46 overflow-hidden">
-                            <img src={user.avatar} className="w-46px h-46" style={{objectFit: 'cover'}} alt={`${user.firstname}`} />
+                    ? 
+                        <div className="w-46px h-46 overflow-hidden">
+                            <img src={user.avatar} className="rounded-circle w-46px h-46" style={{objectFit: 'cover'}} alt={`${user.firstname}`} />
                         </div> 
-                        : 
-                        <div className="d-inline-block mb-md-2 w-46px h-46 mr-2 bg-gray-01 rounded-circle fs-18 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
+                    : 
+                        <div className="d-inline-block w-46px h-46 bg-gray-01 rounded-circle fs-18 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mx-auto">
                             {`${user.firstname.charAt(0).toUpperCase()}${user.lastname.charAt(0).toUpperCase()}`}
                         </div>
                     }
-                </div>
-                
-                <button className="nav-link btn d-none d-lg-block">Hello {user.firstname}</button>
+                    <span className="fs-13 ml-2 font-weight-500 d-none d-sm-inline ml-0">
+                        Hello {user.firstname}
+                    </span>
+                    </Link>
+                    <div className="dropdown-menu dropdown-menu-right" style={{width: "200px"}}>
+                        {
+                            status === 'tenant'
 
-                <div className="dropdown-menu px-2 dropdown-lg dropdown-menu-right" style={{width: "250px"}}>
-                    {
-                        status === 'tenant'
+                            ?
 
-                        ?
+                            <TenantNavItems />
 
-                        <TenantNavItems />
+                            :
 
-                        :
+                            <AgentNavItems/>
+                        }
 
-                        <AgentNavItems/>
-                    }
-
-                    <button className="dropdown-item  btn btn-secondary rounded py-2 align-middle" type="button" onClick={logout} >
-                        <i className="fa fa-door-open mr-3 text-primary"></i>
-                        Logout
-                    </button>
+                        <button className="dropdown-item btn btn-secondary rounded py-2 align-middle" type="button" onClick={logout} >
+                            <i className="fa fa-door-open mr-3 text-primary"></i>
+                            Logout
+                        </button>
+                    </div>
                 </div>
             </li>
         </ul>
@@ -105,7 +112,7 @@ function LoggedIn(user, status) {
 export function TenantNavItems () {
     return (
         <>
-            <Link className="dropdown-item rounded py-2 align-middle" to="/profile">
+            <Link to="/profile" className="dropdown-item rounded py-2 align-middle">
                 <i className="fa fa-user mr-3 text-primary"></i>
                 My Profile
             </Link>
@@ -128,7 +135,7 @@ export function TenantNavItems () {
 export function AgentNavItems () {
     return (
         <>
-            <Link className="dropdown-item rounded py-2 align-middle" to="/dashboard">
+            <Link  to="/dashboard" className="dropdown-item rounded py-2 align-middle">
                 <i className="fa fa-user mr-3 text-primary"></i>
                 My Dashboard
             </Link>

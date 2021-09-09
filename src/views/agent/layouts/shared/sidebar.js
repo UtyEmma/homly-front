@@ -28,38 +28,58 @@ export default function Sidebar({agent}) {
                                     <img src="/images/logo.png" alt="HomeID" />
                                 </Link>
 
-                            <div className="ml-auto d-flex align-items-center ">
-                                <div className="d-flex align-items-center d-xl-none">
-                                <div className="dropdown px-3">
-                                    <Link to="#" className="dropdown-toggle d-flex align-items-center text-heading" data-toggle="dropdown">
-                                    {    
-                                        agent.avatar 
-                                    ? 
-                                        <div className="w-46px h-46 overflow-hidden">
-                                            <img src={agent.avatar} className="rounded-circle  w-46px h-46" style={{objectFit: 'cover'}} alt={`${agent.firstname} ${agent.lastname}`} />
-                                        </div> 
-                                    : 
-                                        <div className="d-inline-block mb-2 w-46px h-46 mr-2 bg-gray-01 rounded-circle fs-18 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
-                                            {`${agent.firstname.charAt(0).toUpperCase()}${agent.lastname.charAt(0).toUpperCase()}`}
-                                        </div>
-                                    }
-                                    <span className="fs-13 font-weight-500 d-none d-sm-inline ml-2">
-                                        Ronald Hunter
-                                    </span>
-                                    </Link>
-                                    <div className="dropdown-menu dropdown-menu-right">
-                                        <AgentNavItems/>
-                                    </div>
-                                </div>
+                                <div className="ml-auto d-flex align-items-center ">
+                                    <div className="d-flex align-items-center d-xl-none">
+                                        <div className="dropdown px-3">
+                                            <Link to="#" className="dropdown-toggle d-flex align-items-center text-heading" data-toggle="dropdown">
+                                            {    
+                                                agent.avatar 
+                                            ? 
+                                                <div className="w-46px h-46 overflow-hidden">
+                                                    <img src={agent.avatar} className="rounded-circle  w-46px h-46" style={{objectFit: 'cover'}} alt={`${agent.firstname} ${agent.lastname}`} />
+                                                </div> 
+                                            : 
+                                                <div className="d-inline-block mb-2 w-46px h-46 mr-2 bg-gray-01 rounded-circle fs-18 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
+                                                    {`${agent.firstname.charAt(0).toUpperCase()}${agent.lastname.charAt(0).toUpperCase()}`}
+                                                </div>
+                                            }
+                                            <span className="fs-13 font-weight-500 d-none d-sm-inline ml-2">
+                                                Ronald Hunter
+                                            </span>
+                                            </Link>
+                                            <div className="dropdown-menu dropdown-menu-right">
+                                                <Link  to="/dashboard" className="dropdown-item rounded py-2 align-middle">
+                                                    <i className="fa fa-user mr-3 text-primary"></i>
+                                                    My Dashboard
+                                                </Link>
 
-                                <div className="pr-2">
-                                    <NotificationBell />
+                                                <Link className="dropdown-item rounded py-2 align-middle" to="/agent-profile">
+                                                    <i className="fa fa-heart mr-3 text-primary"></i>
+                                                    Profile
+                                                </Link>
+
+
+                                                <Link className="dropdown-item rounded py-2 align-middle" to="/support">
+                                                    <i className="fa fa-headset mr-3 text-primary"></i>
+                                                    Support
+                                                </Link>
+                                                    
+                                                <button className="dropdown-item btn btn-secondary rounded py-2 align-middle" type="button" onClick={logout} >
+                                                    <i className="fa fa-door-open mr-3 text-primary"></i>
+                                                    Logout
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div className="pr-2">
+                                            <NotificationBell />
+                                        </div>
+                                    </div>
+                                    
+                                    <button className="navbar-toggler border-0 px-0" type="button" data-toggle="collapse" data-target="#primaryMenuSidebar" aria-controls="primaryMenuSidebar" aria-expanded="false" aria-label="Toggle navigation">
+                                        <span className="navbar-toggler-icon" />
+                                    </button>
                                 </div>
-                                </div>
-                                <button className="navbar-toggler border-0 px-0" type="button" data-toggle="collapse" data-target="#primaryMenuSidebar" aria-controls="primaryMenuSidebar" aria-expanded="false" aria-label="Toggle navigation">
-                                <span className="navbar-toggler-icon" />
-                                </button>
-                            </div>
                             </div>
                             <div className="collapse navbar-collapse bg-white" id="primaryMenuSidebar">
                                 <form className="d-block d-xl-none pt-5 px-3">

@@ -65,7 +65,7 @@ export default function NavBar({user, isloggedIn, status}) {
                                 }                    
                             </ul>
                         </div>
-                        <div className="d-none d-lg-block">
+                        <div className="d-none d-lg-block ">
                             <ProfileButton isloggedIn={isloggedIn} user={user} />
                         </div>
                     </nav>
