@@ -18,7 +18,6 @@ export const FetchCategories = () => (dispatch) => {
                     })
                 })
                 .catch((err) => {
-                    Response.error(err.response)
                     dispatch({
                         type: FETCH_CATEGORY_FAILURE,
                         payload: err.response

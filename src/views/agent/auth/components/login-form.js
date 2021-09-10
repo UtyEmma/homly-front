@@ -71,7 +71,7 @@ const AgentLoginForm = () =>  {
                             Stay signed in
                             </label>
                         </div>
-                        <a href="password-recovery.html" className="d-inline-block ml-auto fs-13 lh-2 text-body">
+                        <a href="/recover-password" className="d-inline-block ml-auto fs-13 lh-2 text-body">
                             <u>Forgot your password?</u>
                         </a>
                         </div>

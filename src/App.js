@@ -44,6 +44,8 @@ import { useQuery } from './libraries/http/query';
 import { useDispatch, useSelector } from 'react-redux';
 import { VerifyAdmin } from './providers/redux/_actions/admin-actions';
 import { AdminModeBadge } from './libraries/admin/admin-mode';
+import ResetPassword from 'views/agent/auth/reset-password';
+import ServerError from 'views/onboarding/sever-error';
 
 function App() {
 
@@ -83,7 +85,8 @@ function App() {
 
       <Switch>                  
           {/* Common Routes */}
-          <Route path="/recover-password" isLoading={isLoading} setIsLoading={setIsLoading} component={PasswordRecovery} exact/>
+          <Route path="/recover-password" render={(props) => (<PasswordRecovery {...props} isLoading={isLoading} setIsLoading={setIsLoading} />)} exact/>
+          <Route path="/reset-password" render={(props) => (<ResetPassword {...props} isLoading={isLoading} setIsLoading={setIsLoading} />)} exact/>
           <Route path="/login" render={(props) => (<UserLogin {...props} isLoading={isLoading} setIsLoading={setIsLoading} />)} exact/>
           <Route path="/signup" isLoading={isLoading} setIsLoading={setIsLoading} render={(props) => (<UserSignup {...props} setIsLoading={setIsLoading} isLoading={setIsLoading} />)} exact/>
 
@@ -114,9 +117,10 @@ function App() {
           <AgentRoute path="/support" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={Support} exact />
           <AgentRoute path="/agent-wishlists" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={AgentWishlist} exact />
 
+          <Route path="/server-error" render={(props) => (<ServerError {...props} setIsLoading={setIsLoading}  />)} exact/>
 
           <UserRoute path="/:id" isLoading={isLoading} setIsLoading={setIsLoading} user type="user" component={AgentDetails} exact/>
-          <Route render={(props) => (<NotFound setIsLoading={setIsLoading} type="agent" {...props} />)} exact/>
+          <Route render={(props) => (<NotFound {...props} setIsLoading={setIsLoading}  />)} exact/>
       </Switch>
     </div>
   );
