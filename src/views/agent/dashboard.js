@@ -3,6 +3,7 @@ import Sidebar from './layouts/shared/sidebar'
 import Header from './layouts/shared/header'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
+import { AddUsernameModal } from './layouts/dashboard/add-username-modal'
 
 const AgentDashboard = ({agent, setIsLoading}) => {
     
@@ -43,13 +44,35 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                                         <h2 className="mb-0 text-heading fs-22 lh-15">Welcome back, {agent.firstname} {agent.lastname}!</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At iusto, laboriosam. Atque</p>
                                     </div>
-                                <div>
-                                    <Link to="/new-listing" className="btn btn-primary btn-lg">
-                                    <span>Add New Property</span>
-                                    <span className="d-inline-block ml-1 fs-20 lh-1"><svg className="icon icon-add-new"><use xlinkHref="#icon-add-new" /></svg></span>
-                                    </Link>
+                                    <div>
+                                        <a href="/new-listing" className="btn btn-primary btn-lg">
+                                        <span>Add New Property</span>
+                                        <span className="d-inline-block ml-1 fs-20 lh-1"><svg className="icon icon-add-new"><use xlinkHref="#icon-add-new" /></svg></span>
+                                        </a>
+                                    </div>
                                 </div>
-                                </div>
+                                {
+                                    !agent.username
+
+                                    &&
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <div className="w-100 alert alert-primary">
+                                                <div className="row d-flex align-items-center">
+                                                    <div className="col-md-9">
+                                                        <p className="fs-20 lh-12 fs-md-24 font-weight-600 mb-0">Your Account Set Up is Almost Complete</p>
+                                                        <p className="fs-16">Please we need you to Provide a Username</p>
+                                                    </div>
+
+                                                    <div className="col-md-3">
+                                                        <button className="btn btn-lg btn-primary" data-toggle="modal" data-target="#exampleModal">Create Username</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
                                 <div className="row">
                                 <div className="col-sm-6 col-xxl-3 mb-6">
                                     <div className="card">
@@ -290,6 +313,8 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                     </main>
                 </div>
             </div>
+
+            <AddUsernameModal agent={agent} />
         </div>
     )
  }

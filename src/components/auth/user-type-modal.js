@@ -2,7 +2,8 @@ import { SocialAuth } from "providers/redux/_actions/auth-action";
 import { useDispatch } from "react-redux";
 import { Modal } from "react-bootstrap";
 
-export const SelectUserTypeModal = ({show, setShow, auth_data}) => {
+export const SelectUserTypeModal = ({show, setShow, auth_data, setIsLoading}) => {
+
     const dispatch = useDispatch()
 
     const handleAuth = (user) => {
@@ -42,8 +43,8 @@ export const SelectUserTypeModal = ({show, setShow, auth_data}) => {
                                 </div>
                             </div>
 
-                            <div className="col-md-6">
-                                <div role="button" className="card bg-white h-100 d-flex flex-column align-items-center bg-hover-light btn-focus-secondary py-2 px-3" onClick={() => {handleAuth('tenant')}} >
+                            <div className="col-md-6 mb-4">
+                                <div role="button" className="card bg-white h-100 bg-hover-light btn-focus-secondary py-2 px-3" onClick={() => {handleAuth('tenant')}} >
                                     <div className="row d-flex align-items-center">
                                         <div className="col-4">
                                             <img src="/images/svg/tenant-user.svg" className="img-fluid" />

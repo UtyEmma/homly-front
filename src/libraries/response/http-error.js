@@ -6,6 +6,7 @@ const styles = {
     fontSize: '16px',
     fontWeight: '600',
     lineHeight: '24px',
+    width: '200px',
     borderLeft: '6px solid red'
 }
 
@@ -29,9 +30,18 @@ export default function Error(err) {
             return handleUnauthorizedError(err.data)
         case 403:
             return handleEmailVerificationError()
+        case 400:
+            return badRequestError(err.data)
         default:
             return handleServerError(err.data);
     } 
+}
+
+function badRequestError(err){
+    return toast.dark(err.message, {
+        className: classname,
+        style: styles
+    })
 }
 
 function handleServerError(data){

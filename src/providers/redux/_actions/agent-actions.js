@@ -72,11 +72,11 @@ export const UpdateAgentProfile = (data) => (dispatch) => {
                     let res = response.data;
                     Response.success(res)
                     localStorage.removeItem('user');
-                    localStorage.setItem('user', JSON.stringify(res.data.agent));
                     dispatch({
                         type: UPDATE_SUCCESS,
                         payload: res
                     })
+                    localStorage.setItem('user', JSON.stringify(res.data.agent));
                 })
                 .catch((error) => {
                     let errors = Response.error(error.response)

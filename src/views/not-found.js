@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 
 
-export default function NotFound ({setIsLoading}) {
+export default function NotFound (props) {
 
-    useEffect(() => {
-        setIsLoading(false)
-    })
+    // useEffect(() => {
+    //     props.setIsLoading(false)
+    // })
 
     return (
         <div>

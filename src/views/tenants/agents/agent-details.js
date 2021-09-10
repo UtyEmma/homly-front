@@ -26,12 +26,6 @@ const AgentDetails = ({isLoggedIn, user, status, setIsLoading}) => {
         dispatch(FetchAgentDetails(id))
     }
 
-    const handleSetAgentData = () => {
-        if (agent) {
-            console.log(agent)
-            setAgentData(agent)   
-        }
-    }
 
     useEffect(() => {
         setIsLoading(loading)
@@ -39,7 +33,7 @@ const AgentDetails = ({isLoggedIn, user, status, setIsLoading}) => {
 
     useEffect(() => {
         !agent && loadAgent()
-        agent && handleSetAgentData()
+        agent && setAgentData(agent)
         setIsLoading(loading)
     }, [agent])
 
@@ -47,11 +41,15 @@ const AgentDetails = ({isLoggedIn, user, status, setIsLoading}) => {
         <div>
             <Helmet>
                 {
-                    agent
+                    agentData
                     
-                    &&
+                    ?
 
-                    <title>{agent.firstname} {agent.lastname} - Bayof Agent</title>
+                    <title>{`${agentData.firstname}`} {`${agentData.lastname}`} - Bayof Agent</title>
+
+                    :
+
+                    <title>Bayof Agent</title>
                 }
                 <meta name="twitter:card" content="summary" />
                 <meta name="twitter:site" content="@" />

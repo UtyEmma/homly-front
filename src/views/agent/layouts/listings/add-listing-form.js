@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { CreateListing, StoreListing } from '../../../../providers/redux/_actions/listing/listing-actions';
 import ListingLocation from './blocks/listing-location'
@@ -9,6 +9,7 @@ import ListingDetails from './blocks/listing-details'
 import { FetchDetails } from 'providers/redux/_actions/details-actions';
 import { MapFormErrors, __createlisting } from 'libraries/validation';
 import Validator from 'validatorjs';
+import { NewListingStepper } from './listing-function';
 
 function AddListingForm({setIsLoading}) {
     const dispatch = useDispatch();

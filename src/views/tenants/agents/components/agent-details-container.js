@@ -83,7 +83,7 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                                         <img src={agent.avatar} className="w-120px h-120" style={{objectFit: 'cover'}} alt={`${agent.firstname} ${agent.lastname}`} />
                                     </div> 
                                     : 
-                                    <div className="d-inline-block mb-2 w-120px h-120 w-82px h-82 mr-2 bg-gray-01 rounded-circle fs-25 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
+                                    <div className="d-inline-block mb-2 w-120px h-120 w-82px h-82 mr-2 bg-gray-01 rounded-circle fs-25 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mb-4 mb-sm-0 mx-auto">
                                         {`${agent.firstname.charAt(0).toUpperCase()}${agent.lastname.charAt(0).toUpperCase()}`}
                                     </div>
                                 }
@@ -201,50 +201,6 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                 </div>
             </section>
             
-            {/* <div className="bottom-bar-action py-2 px-4 bg-gray-01 position-fixed fixed-bottom d-block d-sm-none">
-                <div className="container">
-                <div className="row no-gutters mx-n2 mxw-571 mx-auto">
-                    <div className="col-6 px-2">
-                    <a href="#modal-messenger" data-toggle="modal" className="btn btn-primary btn-lg btn-block fs-14 px-1 py-3 h-auto lh-13">Send Message</a>
-                    </div>
-                    <div className="col-6 px-2">
-                    <a href="tel:(+84)2388-969-888" className="btn btn-primary btn-lg btn-block fs-14 px-1 py-3 h-auto lh-13">Call</a>
-                    </div>
-                </div>
-                </div>
-            </div>
-            <div className="modal fade" id="modal-messenger" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header border-0 pb-0">
-                        <h4 className="modal-title text-heading" id="exampleModalLabel">Contact Form</h4>
-                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                        </div>
-                        <div className="modal-body pb-6">
-                        <div className="form-group mb-2">
-                            <input type="text" className="form-control form-control-lg border-0" placeholder="First Name, Last Name" />
-                        </div>
-                        <div className="form-group mb-2">
-                            <input type="email" className="form-control form-control-lg border-0" placeholder="Your Email" />
-                        </div>
-                        <div className="form-group mb-2">
-                            <input type="tel" className="form-control form-control-lg border-0" placeholder="Your phone" />
-                        </div>
-                        <div className="form-group mb-2">
-                            <textarea className="form-control border-0" rows={4} defaultValue={"Hello, I'm interested in Villa Called Archangel"} />
-                        </div>
-                        <div className="form-group form-check mb-4">
-                            <input type="checkbox" className="form-check-input" id="exampleCheck3" />
-                            <label className="form-check-label fs-13" htmlFor="exampleCheck3">Egestas fringilla phasellus faucibus
-                            scelerisque eleifend donec.</label>
-                        </div>
-                        <button type="submit" className="btn btn-primary btn-lg btn-block rounded">Request Info</button>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
             <ConfirmActionDialog show={show} setShow={setShow} callback={callback} />
                 </>
     )

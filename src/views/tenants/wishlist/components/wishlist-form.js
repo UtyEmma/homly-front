@@ -1,11 +1,10 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import { LocalGovt, State } from 'components/city-state/city-state';
 import { MapFormErrors, __createwishlist } from 'libraries/validation';
 import { CreateWishlist } from 'providers/redux/_actions/wishlist-actions';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import 'bs-stepper/dist/css/bs-stepper.min.css'
 import Stepper from 'bs-stepper'
+import 'bs-stepper/dist/css/bs-stepper.min.css'
 import { TagifyAmenities } from 'views/layouts/components/details/amenities';
 import SelectListingCategory from 'views/layouts/components/details/categories';
 import Validator from 'validatorjs';

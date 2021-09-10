@@ -2,7 +2,7 @@ import GoogleOneTapLogin from 'react-google-one-tap-login'
 import { useEffect, useState } from "react";
 import { SelectUserTypeModal } from './user-type-modal';
 
-export const GoogleOneTapAuth = () => {
+export const GoogleOneTapAuth = ({setIsLoading}) => {
     const [show, setShow] = useState(false)
     const [data, setData] = useState({})
 
@@ -22,7 +22,7 @@ export const GoogleOneTapAuth = () => {
                 
             }
 
-            <SelectUserTypeModal show={show} setShow={setShow} auth_data={data}/>
+            <SelectUserTypeModal setIsLoading={setIsLoading} show={show} setShow={setShow} auth_data={data}/>
         </>
     )
 }

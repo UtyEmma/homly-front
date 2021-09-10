@@ -28,9 +28,17 @@ export default function AgentsListings({listings, setIsLoading, status}) {
                         <Tab.Pane eventKey="first">
                             <div className="row">
                                 {
+                                    listings.active && listings.active.length > 0
+
+                                    ?
+
                                     listings.active.map((listing, index) => (
                                         <ListingGrid listing={listing} key={index} status={status}/>
                                     ))
+
+                                    :
+
+                                    <p>There are no properties available by this agent</p>
                                 }
                             </div>
                         </Tab.Pane>
@@ -38,9 +46,17 @@ export default function AgentsListings({listings, setIsLoading, status}) {
                             
                             <div className="row">
                                 {
+                                    listings.rented && listings.rented.length > 0
+
+                                    ?
+
                                     listings.rented.map((listing, index) => (
                                         <ListingGrid listing={listing} key={index} status={status} />
                                     ))
+
+                                    :
+
+                                    <p>This agent has no rented property yet!</p>
                                 }
                             </div>
                             

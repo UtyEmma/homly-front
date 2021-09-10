@@ -79,7 +79,7 @@ function App() {
         pauseOnFocusLoss={false}
       />  
 
-		<GoogleOneTapAuth />
+		<GoogleOneTapAuth setIsLoading={setIsLoading} />
 
 		<AdminModeBadge adminMode={adminMode} />
 
