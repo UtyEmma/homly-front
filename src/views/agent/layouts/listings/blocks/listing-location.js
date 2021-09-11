@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import Geocode, { setLanguage } from 'react-geocode'
-import {MapDisplay} from './map/map-display'
-import { useDispatch, useSelector } from 'react-redux';
-import { StoreListing } from 'providers/redux/_actions/listing/listing-actions';
+import Geocode from 'react-geocode'
 import InputAddress from './map/map-address-search';
 import { LocalGovt, State } from 'components/city-state/city-state';
+import { MapDisplay } from './map/map-display';
 
 export default function ListingLocation({formErrors}) {
 
@@ -133,9 +131,9 @@ export default function ListingLocation({formErrors}) {
                     </div>
                     </div>
                     <div className="d-flex flex-wrap">
-                        <a href="#" className="btn btn-lg bg-hover-white border rounded-lg mb-3 mr-auto prev-button">
+                        <button className="btn btn-lg bg-hover-white border rounded-lg mb-3 mr-auto prev-button" type="button" role="button">
                             <span className="d-inline-block text-primary mr-2 fs-16"><i className="fal fa-long-arrow-left" /></span>Prev step
-                        </a>
+                        </button>
                         <button className="btn btn-lg btn-primary next-button mb-3">Next step
                             <span className="d-inline-block ml-2 fs-16"><i className="fal fa-long-arrow-right" /></span>
                         </button>

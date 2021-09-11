@@ -6,12 +6,12 @@ import { ConfirmActionDialog } from 'views/layouts/components/modals/confirm-act
 import AgentsListings from './agent-listings/agent-listings'
 import AgentReviews from './agent-reviews/agent-reviews'
 
-export default function AgentDetailsContainer({agent, listings, reviews, fetchAgent, status, setAgentData}) {
+export default function AgentDetailsContainer({agent, listings, reviews, fetchAgent, status, setAgentData, setIsLoading}) {
     
     const dispatch = useDispatch()
+
     const {adminMode} = useSelector((state) => state.admin_mode)
     const [show, setShow] = useState(false)
-    const [callbackFunc, setCallbackFunc] = useState()
 
     const suspend_agent = useSelector(state => state.suspend_item)
     const {loading, data} = suspend_agent
@@ -32,13 +32,20 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
     } 
 
     const handleSetAgentData = (agent) => {
-        console.log(agent)
         setAgentData(agent)
     }
+
+    useEffect(() => {
+        setIsLoading(loading)
+    }, [loading])
+
     useEffect(() => {
         data && handleSetAgentData(data)
+    }, [data])
+
+    useEffect(() => {
         verifiedAgent && handleSetAgentData(verifiedAgent)
-    }, [data, verifiedAgent])
+    }, [verifiedAgent])
 
     const deleteAgent = () => {
         return (
@@ -76,7 +83,7 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                                         <img src={agent.avatar} className="w-120px h-120" style={{objectFit: 'cover'}} alt={`${agent.firstname} ${agent.lastname}`} />
                                     </div> 
                                     : 
-                                    <div className="d-inline-block mb-2 w-120px h-120 w-82px h-82 mr-2 bg-gray-01 rounded-circle fs-25 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
+                                    <div className="d-inline-block mb-2 w-120px h-120 w-82px h-82 mr-2 bg-gray-01 rounded-circle fs-25 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mb-4 mb-sm-0 mx-auto">
                                         {`${agent.firstname.charAt(0).toUpperCase()}${agent.lastname.charAt(0).toUpperCase()}`}
                                     </div>
                                 }
@@ -137,11 +144,11 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                             <a href={`mailto:${agent.email}`} type="submit" className="btn btn-primary btn-lg btn-block shadow-none">Send Message</a>
 
                             {
-                                adminMode
+                                adminMode == 'true'
 
                                 &&
 
-                                <>
+                                <> 
                                     <hr/>
                                 
                                     <div className="">
@@ -154,22 +161,24 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                                             <button type="button" onClick={verifyAgent} className="btn btn-block btn-lg btn-success">Verify Agent</button>
 
                                         }
+
                                         <button type="button" onClick={suspendAgent} className="btn btn-block btn-lg btn-outline-warning hover-white">{agent.status === 'active' ? 'Suspend' : 'Unsuspend'} Agent</button>
                                         
                                         <button type="button" onClick={deleteAgent} className="btn btn-block btn-lg btn-danger">Delete Agent</button>
                                     </div>
                                 </>
+
                             }
                         </div>
                         </div>
-                        <div className="card">
-                        <div className="card-body text-center pt-7 pb-6 px-0">
-                            <img src="images/contact-widget.jpg" alt="Want to become an Estate Agent ?" />
-                            <div className="text-lead fs-20 text-dark mb-6 mt-n2 font-weight-600">Boost your visibility as
-                            <p className="mb-0 fs-18">a Real Estate Agent?</p>
+                        <div className="card d-none d-md-block">
+                            <div className="card-body text-center pt-7 pb-6 px-0">
+                                <img src="images/contact-widget.jpg" alt="Want to become an Estate Agent ?" />
+                                <div className="text-lead fs-20 text-dark mb-6 mt-n2 font-weight-600">Boost your visibility as
+                                <p className="mb-0 fs-18">a Real Estate Agent?</p>
+                                </div>
+                                <a href="/agent-signup" className="btn btn-primary">Sign up Now</a>
                             </div>
-                            <a href="/agent-signup" className="btn btn-primary">Sign up Now</a>
-                        </div>
                         </div>
                     </div>
                     </div>
@@ -184,57 +193,14 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                         </div>
                     </div>
                     
-                    <AgentsListings listings={listings} />
+                    <AgentsListings listings={listings} setIsLoading={setIsLoading} />
 
-                    <AgentReviews status={status} reviews={reviews} agent={agent} fetchAgent={fetchAgent} />
+                    <AgentReviews status={status} reviews={reviews} agent={agent} fetchAgent={fetchAgent} setIsLoading={setIsLoading} />
                 </div>
                 </div>
                 </div>
             </section>
-            <div className="bottom-bar-action py-2 px-4 bg-gray-01 position-fixed fixed-bottom d-block d-sm-none">
-                <div className="container">
-                <div className="row no-gutters mx-n2 mxw-571 mx-auto">
-                    <div className="col-6 px-2">
-                    <a href="#modal-messenger" data-toggle="modal" className="btn btn-primary btn-lg btn-block fs-14 px-1 py-3 h-auto lh-13">Send Message</a>
-                    </div>
-                    <div className="col-6 px-2">
-                    <a href="tel:(+84)2388-969-888" className="btn btn-primary btn-lg btn-block fs-14 px-1 py-3 h-auto lh-13">Call</a>
-                    </div>
-                </div>
-                </div>
-            </div>
-            <div className="modal fade" id="modal-messenger" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                <div className="modal-content">
-                    <div className="modal-header border-0 pb-0">
-                    <h4 className="modal-title text-heading" id="exampleModalLabel">Contact Form</h4>
-                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                    </div>
-                    <div className="modal-body pb-6">
-                    <div className="form-group mb-2">
-                        <input type="text" className="form-control form-control-lg border-0" placeholder="First Name, Last Name" />
-                    </div>
-                    <div className="form-group mb-2">
-                        <input type="email" className="form-control form-control-lg border-0" placeholder="Your Email" />
-                    </div>
-                    <div className="form-group mb-2">
-                        <input type="tel" className="form-control form-control-lg border-0" placeholder="Your phone" />
-                    </div>
-                    <div className="form-group mb-2">
-                        <textarea className="form-control border-0" rows={4} defaultValue={"Hello, I'm interested in Villa Called Archangel"} />
-                    </div>
-                    <div className="form-group form-check mb-4">
-                        <input type="checkbox" className="form-check-input" id="exampleCheck3" />
-                        <label className="form-check-label fs-13" htmlFor="exampleCheck3">Egestas fringilla phasellus faucibus
-                        scelerisque eleifend donec.</label>
-                    </div>
-                    <button type="submit" className="btn btn-primary btn-lg btn-block rounded">Request Info</button>
-                    </div>
-                </div>
-                </div>
-            </div>
+            
             <ConfirmActionDialog show={show} setShow={setShow} callback={callback} />
                 </>
     )

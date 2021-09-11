@@ -1,21 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { Helmet } from 'react-helmet'
 
-export default function VerifyEmail({user}) {
+export default function VerifyEmail({user, setIsLoading}) {
+
+    useEffect(() =>{
+        setIsLoading(false)
+    })
 
     const resendVerificationEmail = () => {
         
     }
     
     return (
-        <div style={{height: '100vh'}}>
-            <div className="row d-flex align-items-center justify-content-center bg-light" style={{height: '100%'}} >
+        <div className="bg-white" style={{height: '100vh'}}>
+            <Helmet>
+                <title>Veirfy Your Email</title>
+                <meta name="description" content="Find Properties and agents around you." />
+            </Helmet>
+
+            <div className="row d-flex align-items-center justify-content-center" style={{height: '100%'}} >
                 {/* <div className="col-12 text-center pb-0">
                     <a href="/">
                         <img src="images/logo.png" alt="HomeID" className="d-none d-lg-inline-block" />
                     </a>
                 </div> */}
 
-                <div className="card col-md-7 p-5 py-9 border-0 text-center">
+                <div className="card shadow-0 col-md-7 p-5 py-9 border-0 text-center">
 
                     <div className="col-md-4 offset-md-4 col-6 offset-3 mt-4">
                         <img src="images/svg/verify-email.svg" width="150" className="img-fluid" />

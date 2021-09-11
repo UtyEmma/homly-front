@@ -50,11 +50,11 @@ export const ChatBox = ({chat, setChat, setIsLoading}) => {
 
                 &&
 
-                <div style={{height: "100%"}}>
+                <div style={{height: "100%"}} className="mb-10 py-md-0">
                     <div className="px-3 rounded-right" style={{height: "15%", boxSizing: "border-box"}} >
                         <div className="row d-flex align-items-end pb-2 h-100">
                             <div className="col-auto">
-                            <p className="fs-12 mb-0 text-capitalize font-weight-600 mb-0">Ticket ID: <span className="font-weight-normal">{chat.ticket.unique_id}</span></p>
+                                <p className="fs-12 mb-0 text-capitalize font-weight-600 mb-0">Ticket ID: <span className="font-weight-normal">{chat.ticket.unique_id}</span></p>
                                 <h5 className="text-heading font-weight-600 mb-0 text-gray">{chat.ticket.title}</h5>
                                 <p className="fs-12 mb-0 text-capitalize font-weight-600"><i className="fa fa-dot-circle text-warning"></i> {chat.ticket.status}</p>
                             </div>

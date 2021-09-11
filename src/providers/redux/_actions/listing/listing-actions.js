@@ -10,19 +10,9 @@ const { NEW_LISTING_REQUEST, NEW_LISTING_SUCCESS, NEW_LISTING_FAILURE,
         FETCH_SINGLE_LISTING_REQUEST, FETCH_SINGLE_LISTING_SUCCESS, FETCH_SINGLE_LISTING_FAILURE,
         FETCH_POPULAR_LISTINGS_REQUEST, FETCH_POPULAR_LISTINGS_SUCCESS, FETCH_POPULAR_LISTINGS_FAILURE, 
         SET_AS_RENTED_REQUEST, SET_AS_RENTED_SUCCESS, SET_AS_RENTED_FAILURE, 
-        UPDATE_LISTING_VIEWS_REQUEST, UPDATE_LISTING_VIEWS_SUCCESS, UPDATE_LISTING_VIEWS_FAILURE,
-        STORE_LISTING, 
+        UPDATE_LISTING_VIEWS_REQUEST, UPDATE_LISTING_VIEWS_SUCCESS, UPDATE_LISTING_VIEWS_FAILURE
     } = ListingConstants
 
-    
-export const StoreListing = (data) => (dispatch) => {
-    let values = JSON.stringify(data);
-    localStorage.setItem('listingData', values);
-    dispatch({
-        type: STORE_LISTING,
-        payload: data
-    })
-}
 
 export const CreateListing = (data) => (dispatch) =>{
     console.log('Create Listing')

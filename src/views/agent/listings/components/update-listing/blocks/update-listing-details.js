@@ -23,7 +23,7 @@ export const UpdateListingDetails = ({listing, formErrors}) => {
          <div className="card bg-transparent border-0">
                 <div className="card-body py-4 py-md-0 px-0">
                     <div className="card mb-6">
-                        <div className="card-body p-6">
+                        <div className="card-body p-md-6">
                             <h3 className="card-title mb-0 text-heading fs-22 lh-15">Listing Detail</h3>
                             <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
                             adipiscing elit</p>
@@ -63,7 +63,7 @@ export const UpdateListingDetails = ({listing, formErrors}) => {
                         </div>
 
                         <div className="card mb-6">
-                            <div className="card-body p-6">
+                            <div className="card-body p-md-6">
                                 <h3 className="card-title mb-0 text-heading fs-22 lh-15">Select Amenities</h3>
                                 <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
                                 adipiscing elit</p>

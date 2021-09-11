@@ -1,14 +1,14 @@
 import AgentListingsNotFound from 'components/404/404-agent_listings'
 import Preloader from 'components/preloader/preloader'
 import React, {useEffect} from 'react'
-
 import { useDispatch, useSelector } from 'react-redux'
 import { GetAgentListings } from '../../../providers/redux/_actions/listing/listing-actions'
 import Header from '../layouts/shared/header'
 import Sidebar from '../layouts/shared/sidebar'
 import AgentListingContainer from './components/agent_listing-container'
+import { Helmet } from 'react-helmet'
 
-const AgentsListings = ({agent}) => {
+const AgentsListings = ({agent, setIsLoading}) => {
     
     const dispatch = useDispatch();
 
@@ -19,17 +19,21 @@ const AgentsListings = ({agent}) => {
     }
 
     useEffect(() => {
-        if(!listings){
-            loadListings()
-        }
+        if(!listings){ loadListings() }
     }, [listings])
 
+    useEffect(() => {
+        setIsLoading(loading)
+    }, [loading])
 
     return (
         <div className="wrapper dashboard-wrapper">
-            <Preloader loading={loading} />
+            <Helmet>
+                <title>My Listings - Bayof Agent Dashboard</title>
+            </Helmet>
+            
             <div className="d-flex flex-wrap flex-xl-nowrap">
-                <Sidebar />
+                <Sidebar agent={agent}/>
 
                 <div className="page-content">
                     <Header agent={agent}/>

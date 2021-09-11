@@ -1,6 +1,6 @@
-import React, {Component, useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 
-import { Redirect, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import NavBar from 'components/shared/nav-bar'
 import Footer from 'components/shared/footer'
@@ -10,8 +10,9 @@ import { FetchAgentDetails } from 'providers/redux/_actions/agent-actions'
 import AgentDetailsContainer from './components/agent-details-container'
 import NotFound from 'views/not-found'
 import Searchbar from 'views/layouts/components/search/searchbar'
+import { Helmet } from 'react-helmet'
 
-const AgentDetails = ({isLoggedIn, user, status}) => {
+const AgentDetails = ({isLoggedIn, user, status, setIsLoading}) => {
 
     const {id} = useParams()
     const dispatch = useDispatch()
@@ -25,21 +26,47 @@ const AgentDetails = ({isLoggedIn, user, status}) => {
         dispatch(FetchAgentDetails(id))
     }
 
-    const handleSetAgentData = () => {
-        console.log(agent)
-        if (agent) {
-            console.log(agent)
-            setAgentData(agent)   
-        }
-    }
+
+    useEffect(() => {
+        setIsLoading(loading)
+    }, loading)
 
     useEffect(() => {
         !agent && loadAgent()
-        agent && handleSetAgentData()
+        agent && setAgentData(agent)
+        setIsLoading(loading)
     }, [agent])
 
     return (
         <div>
+            <Helmet>
+                {
+                    agentData
+                    
+                    ?
+
+                    <title>{`${agentData.firstname}`} {`${agentData.lastname}`} - Bayof Agent</title>
+
+                    :
+
+                    <title>Bayof Agent</title>
+                }
+                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:site" content="@" />
+                <meta name="twitter:creator" content="@" />
+                <meta name="twitter:title" content="Bayof Real Estate" />
+                <meta name="twitter:description" content="Find the best accomodation around you" />
+                <meta name="twitter:image" content="/images/homeid-social-logo.png" />
+                <meta property="og:url" content="home-01.html" />
+                <meta property="og:title" content="Home 01" />
+                <meta property="og:description" content="Find the best accomodation around you" />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content="/images/homeid-social.png" />
+                <meta property="og:image:type" content="image/png" />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
+                <meta name="description" content="Find Properties and agents around you." />
+            </Helmet>
             <Preloader loading={loading} />
             <NavBar isloggedIn={isLoggedIn} user={user}/>
 
@@ -51,7 +78,7 @@ const AgentDetails = ({isLoggedIn, user, status}) => {
                 
                 ?
 
-                <AgentDetailsContainer agent={agentData.agent} setAgentData={setAgentData} status={status} fetchAgent={loadAgent} listings={agentData.listing} reviews={agentData.reviews} />
+                <AgentDetailsContainer agent={agentData.agent} setAgentData={setAgentData} status={status} fetchAgent={loadAgent} listings={agentData.listing} reviews={agentData.reviews} setIsLoading={setIsLoading} />
 
                 :
 

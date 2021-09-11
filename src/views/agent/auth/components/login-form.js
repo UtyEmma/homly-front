@@ -33,13 +33,12 @@ const AgentLoginForm = () =>  {
     } 
 
     useEffect(() => {
-        if(agent_success){
-            history.push('/dashboard')
-        }
-        if(form_error){
-            setFormErrors(form_error)
-        }
-    }, [agent_success, form_error])
+        agent_success && history.push('/dashboard')
+    }, [agent_success])
+
+    useEffect(() => {
+        form_error && setFormErrors(form_error)
+    }, [form_error])
 
         return (
             <div className="col-lg-7">
@@ -72,7 +71,7 @@ const AgentLoginForm = () =>  {
                             Stay signed in
                             </label>
                         </div>
-                        <a href="password-recovery.html" className="d-inline-block ml-auto fs-13 lh-2 text-body">
+                        <a href="/recover-password" className="d-inline-block ml-auto fs-13 lh-2 text-body">
                             <u>Forgot your password?</u>
                         </a>
                         </div>

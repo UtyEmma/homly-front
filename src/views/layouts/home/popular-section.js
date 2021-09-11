@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import ScrollAnimation from 'react-animate-on-scroll'
 import { Link } from 'react-router-dom'
 
-export default function PopularSection({isLoading, setIsLoading}) {
+export default function PopularSection({isLoading, setIsLoading, status}) {
     const dispatch = useDispatch()
+
     const popular_listings = useSelector((state) => state.popular_listings)
     const {loading, listings} = popular_listings
 
@@ -17,9 +18,11 @@ export default function PopularSection({isLoading, setIsLoading}) {
 
     useEffect(() => {
         !listings && loadPopularListings()
-        console.log(loading)
+    }, [listings])
+
+    useEffect(() => {
         setIsLoading(loading)
-    }, [listings, loading])
+    }, [loading])
 
     return (
         <>
@@ -66,9 +69,7 @@ export default function PopularSection({isLoading, setIsLoading}) {
                                                         {
                                                             listing.listings.map((listing, index) => {
                                                                 return (
-                                                                    <ScrollAnimation animateIn="fadeInUp">
-                                                                        <ListingTabItem  listing={listing} key={index} />
-                                                                    </ScrollAnimation>
+                                                                    <ListingTabItem  listing={listing} key={index} status={status} />
                                                                 )
                                                             })
                                                         }

@@ -1,34 +1,78 @@
-import React, { Component, useEffect } from 'react'
-
+import React, { useEffect } from 'react'
 import Sidebar from './layouts/shared/sidebar'
 import Header from './layouts/shared/header'
+import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
+import { AddUsernameModal } from './layouts/dashboard/add-username-modal'
 
 const AgentDashboard = ({agent, setIsLoading}) => {
+    
     useEffect(() => {
         setIsLoading(false)
     })
+    
     return (
         <div className="wrapper dashboard-wrapper">
+            <Helmet>
+                <title>My Dashboard</title>
+                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:site" content="@" />
+                <meta name="twitter:creator" content="@" />
+                <meta name="twitter:title" content="Bayof Real Estate" />
+                <meta name="twitter:description" content="Find the best accomodation around you" />
+                <meta name="twitter:image" content="/images/homeid-social-logo.png" />
+                <meta property="og:url" content="home-01.html" />
+                <meta property="og:title" content="Home 01" />
+                <meta property="og:description" content="Find the best accomodation around you" />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content="/images/homeid-social.png" />
+                <meta property="og:image:type" content="image/png" />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
+                <meta name="description" content="Find Properties and agents around you." />
+            </Helmet>
             <div className="d-flex flex-wrap flex-xl-nowrap">
 
                 <Sidebar agent={agent} />
 
-                <div className="page-content bg-primary">
+                <div className="page-content">
                     <Header agent={agent}/>
                         <main id="content" className="bg-gray-01">
                             <div className="px-3 px-lg-6 px-xxl-13 py-5 py-lg-10">
                                 <div className="d-flex flex-wrap flex-md-nowrap mb-6">
-                                <div className="mr-0 mr-md-auto">
-                                    <h2 className="mb-0 text-heading fs-22 lh-15">Welcome back, {agent.firstname} {agent.lastname}!</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At iusto, laboriosam. Atque</p>
+                                    <div className="mr-0 mr-md-auto">
+                                        <h2 className="mb-0 text-heading fs-22 lh-15">Welcome back, {agent.firstname} {agent.lastname}!</h2>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At iusto, laboriosam. Atque</p>
+                                    </div>
+                                    <div>
+                                        <a href="/new-listing" className="btn btn-primary btn-lg">
+                                        <span>Add New Property</span>
+                                        <span className="d-inline-block ml-1 fs-20 lh-1"><svg className="icon icon-add-new"><use xlinkHref="#icon-add-new" /></svg></span>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div>
-                                    <a href="/new-listing" className="btn btn-primary btn-lg">
-                                    <span>Add New Property</span>
-                                    <span className="d-inline-block ml-1 fs-20 lh-1"><svg className="icon icon-add-new"><use xlinkHref="#icon-add-new" /></svg></span>
-                                    </a>
-                                </div>
-                                </div>
+                                {
+                                    !agent.username
+
+                                    &&
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <div className="w-100 alert alert-primary">
+                                                <div className="row d-flex align-items-center">
+                                                    <div className="col-md-9">
+                                                        <p className="fs-20 lh-12 fs-md-24 font-weight-600 mb-0">Your Account Set Up is Almost Complete</p>
+                                                        <p className="fs-16">Please we need you to Provide a Username</p>
+                                                    </div>
+
+                                                    <div className="col-md-3">
+                                                        <button className="btn btn-lg btn-primary" data-toggle="modal" data-target="#exampleModal">Create Username</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
                                 <div className="row">
                                 <div className="col-sm-6 col-xxl-3 mb-6">
                                     <div className="card">
@@ -269,6 +313,8 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                     </main>
                 </div>
             </div>
+
+            <AddUsernameModal agent={agent} />
         </div>
     )
  }

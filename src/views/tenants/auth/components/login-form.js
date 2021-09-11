@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { login } from '../../../../providers/redux/_actions/user-actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { __tenantlogin } from 'libraries/validation/schema/tenant-schema';
 import GoogleAuth from 'views/agent/auth/socialite/google-auth';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useQuery } from 'libraries/http/query';
-// import ReactFacebookLogin from 'react-facebook-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import Validator from 'validatorjs';
 import { MapFormErrors } from 'libraries/validation';
@@ -41,10 +37,12 @@ const UserLoginForm = ({isLoading}) =>  {
     }
 
     useEffect(() => {
-        isLoading(loading)
-        if(formError){console.log(formError); setFormErrors(formError)}
+        formError && setFormErrors(formError)
+    }, [formError])
+
+    useEffect(() => {
         if(success){ history.push('/') }
-    }, [success, formError])
+    }, [success])
 
     const responseFacebook = (response) => {
         console.log(response)
@@ -53,7 +51,7 @@ const UserLoginForm = ({isLoading}) =>  {
     return (
         <div className="col-lg-7">
             <div className="card border-0 shadow-xxs-2 mb-6">
-                <div className="card-body px-8">
+                <div className="card-body px-md-8">
                 <h2 className="card-title fs-30 font-weight-600 text-dark lh-16 mb-2">Log In</h2>
 
                 <form className="form" onSubmit={handleSubmit}>
@@ -76,13 +74,13 @@ const UserLoginForm = ({isLoading}) =>  {
                         <p className="text-danger fs-12 mt-1">{formErrors.password?.message}</p>
                     </div>
                     <div className="d-flex mb-4">
-                    <div className="form-check">
+                    {/* <div className="form-check">
                         <input className="form-check-input" type="checkbox" defaultValue id="remember-me-1" name="remember" />
                         <label className="form-check-label" htmlFor="remember-me-1">
                         Stay signed in
                         </label>
-                    </div>
-                    <a href="recover-password" className="d-inline-block ml-auto fs-13 lh-2 text-body">
+                    </div> */}
+                    <a href="/recover-password" className="d-inline-block ml-auto fs-13 lh-2 text-body">
                         <u>Forgot your password?</u>
                     </a>
                     </div>

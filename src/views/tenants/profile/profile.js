@@ -1,14 +1,15 @@
 import Preloader from 'components/preloader/preloader'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch} from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import Searchbar from 'views/layouts/components/search/searchbar'
 import Footer from 'components/shared/footer'
 import NavBar from 'components/shared/nav-bar'
 import { UpdateTenantProfile } from 'providers/redux/_actions/user-actions'
+import { Helmet } from 'react-helmet'
 
-const Profile = ({isLoggedIn, user}) => {
+const Profile = ({isLoggedIn, user, setIsLoading, status}) => {
     const dispatch = useDispatch()
     const profileImage = createRef()
     const [loading, setLoading] = useState(false)
@@ -23,12 +24,35 @@ const Profile = ({isLoggedIn, user}) => {
         profileImage.current.src = URL.createObjectURL(e.target.files[0]) 
     }
 
+    useEffect(() => {
+        setIsLoading(false)   
+    })
+
 
     return (
         <div>
+            <Helmet>
+                <title>Profile - Bayof Real Estate - Find Properties and agents around you</title>
+                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:site" content="@" />
+                <meta name="twitter:creator" content="@" />
+                <meta name="twitter:title" content="Bayof Real Estate" />
+                <meta name="twitter:description" content="Find the best accomodation around you" />
+                <meta name="twitter:image" content="/images/homeid-social-logo.png" />
+                <meta property="og:url" content="home-01.html" />
+                <meta property="og:title" content="Home 01" />
+                <meta property="og:description" content="Find the best accomodation around you" />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content="/images/homeid-social.png" />
+                <meta property="og:image:type" content="image/png" />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
+                <meta name="description" content="Find Properties and agents around you." />
+            </Helmet>
+            
             <Preloader loading={loading} />
             <ToastContainer />
-            <NavBar isloggedIn={isLoggedIn} user={user}/>
+            <NavBar isloggedIn={isLoggedIn} user={user} status={status} />
 
             <Searchbar/>
 

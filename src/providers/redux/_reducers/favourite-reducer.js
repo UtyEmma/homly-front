@@ -37,7 +37,7 @@ export function AddFavouritesReducer (state = {}, {type, payload}){
         case ADD_FAVOURITES_REQUEST:
             return {...state, loading: true}
         case ADD_FAVOURITES_SUCCESS:
-            return {...state, loading: false, status: payload.status}
+            return {...state, loading: false, favourite: payload.status}
         case ADD_FAVOURITES_FAILURE:
             return {...state, loading: false, error: payload}
         default:

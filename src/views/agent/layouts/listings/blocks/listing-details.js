@@ -55,10 +55,10 @@ export default function ListingDetails({formErrors}) {
                     </div>
                     </div>
                     <div className="d-flex flex-wrap">
-                    <a href="#" className="btn btn-lg bg-hover-white border rounded-lg mb-3 mr-auto prev-button">
+                    <button className="btn btn-lg bg-hover-white border rounded-lg mb-3 mr-auto prev-button" type="button" role="button">
                         <span className="d-inline-block text-primary mr-2 fs-16"><i className="fal fa-long-arrow-left" /></span>Prev step
-                    </a>
-                    <button className="btn btn-lg btn-primary next-button mb-3">Next step
+                    </button>
+                    <button className="btn btn-lg btn-primary next-button mb-3" type="button" role="button">Next step
                         <span className="d-inline-block ml-2 fs-16"><i className="fal fa-long-arrow-right" /></span>
                     </button>
                     </div>

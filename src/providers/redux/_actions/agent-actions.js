@@ -72,11 +72,11 @@ export const UpdateAgentProfile = (data) => (dispatch) => {
                     let res = response.data;
                     Response.success(res)
                     localStorage.removeItem('user');
-                    localStorage.setItem('user', JSON.stringify(res.data.agent));
                     dispatch({
                         type: UPDATE_SUCCESS,
                         payload: res
                     })
+                    localStorage.setItem('user', JSON.stringify(res.data.agent));
                 })
                 .catch((error) => {
                     let errors = Response.error(error.response)
@@ -132,10 +132,7 @@ export const DeleteListing = (id) => (dispatch) => {
     AgentService.deleteListing(id)
                 .then(response => {
                     Response.success(response.data.data)
-                    return dispatch({
-                        type: DELETE_LISTING_SUCCESS,
-                        payload: response.data.data
-                    })
+                    return window.location.href = '/my-listings'
                 })
                 .catch(error => {
                     Response.error(error.response)

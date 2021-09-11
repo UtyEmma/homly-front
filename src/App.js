@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react';
 import {  Switch, Route } from 'react-router-dom';
 
 // Route Guards
-import AgentRoute from 'providers/guards/agent-guard';
-import TenantRoute from 'providers/guards/tenant-guard';
-import UserRoute from 'providers/guards/user-guard';
+import AgentRoute from './providers/guards/agent-guard';
+import TenantRoute from './providers/guards/tenant-guard';
+import UserRoute from './providers/guards/user-guard';
 
 // Front Pages
-import About from 'views/about';
-import Home from 'views/home';
+import About from './views/about';
+import Home from './views/home';
 import NotFound from './views/not-found';
 
 // Tenant Pages
-import UserLogin from 'views/tenants/auth/login';
-import UserSignup from 'views/tenants/auth/signup';
+import UserLogin from './views/tenants/auth/login';
+import UserSignup from './views/tenants/auth/signup';
 import Listing from './views/tenants/listings/listings';
 import ListingDetails from './views/tenants/listings/listing-details';
 import Agents from './views/tenants/agents/agents';
@@ -28,23 +28,24 @@ import NewListing from './views/agent/listings/add-listing';
 import AgentsListings from './views/agent/listings/agents-listings';
 import AgentProfile from './views/agent/profile';
 import PasswordRecovery from './views/agent/auth/password-recovery';
-import Wishlist from 'views/tenants/wishlist/wishlist';
-import Search from 'views/search';
-import Preloader from 'components/preloader/preloader';
-import Reviews from 'views/agent/reviews';
-import VerifyEmail from 'views/onboarding/verify-email';
+import Wishlist from './views/tenants/wishlist/wishlist';
+import Search from './views/search';
+import Preloader from './components/preloader/preloader';
+import Reviews from './views/agent/reviews';
+import VerifyEmail from './views/onboarding/verify-email';
 
 import { ToastContainer } from 'react-toastify';
-import { Support } from 'views/agent/support/support';
-import AgentWishlist from 'views/agent/wishlist/agent-wishlist';
-import { GoogleOneTapAuth } from 'components/auth/social';
-import { Favourites } from 'views/tenants/favourites/favourites';
-import { AgentListingDetail } from 'views/agent/listings/agent-listing-details';
-import { Onboarding } from 'views/agent/onboarding/onboarding';
-import { useQuery } from 'libraries/http/query';
+import { Support } from './views/agent/support/support';
+import AgentWishlist from './views/agent/wishlist/agent-wishlist';
+import { GoogleOneTapAuth } from './components/auth/social';
+import { Favourites } from './views/tenants/favourites/favourites';
+import { AgentListingDetail } from './views/agent/listings/agent-listing-details';
+import { useQuery } from './libraries/http/query';
 import { useDispatch, useSelector } from 'react-redux';
-import { VerifyAdmin } from 'providers/redux/_actions/admin-actions';
-import { AdminModeBadge } from 'libraries/admin/admin-mode';
+import { VerifyAdmin } from './providers/redux/_actions/admin-actions';
+import { AdminModeBadge } from './libraries/admin/admin-mode';
+import ResetPassword from 'views/agent/auth/reset-password';
+import ServerError from 'views/onboarding/sever-error';
 
 function App() {
 
@@ -78,15 +79,16 @@ function App() {
         pauseOnFocusLoss={false}
       />  
 
-		<GoogleOneTapAuth />
+		<GoogleOneTapAuth setIsLoading={setIsLoading} />
 
 		<AdminModeBadge adminMode={adminMode} />
 
       <Switch>                  
           {/* Common Routes */}
-          <Route path="/recover-password" isLoading={isLoading} setIsLoading={setIsLoading} component={PasswordRecovery} exact/>
+          <Route path="/recover-password" render={(props) => (<PasswordRecovery {...props} isLoading={isLoading} setIsLoading={setIsLoading} />)} exact/>
+          <Route path="/reset-password" render={(props) => (<ResetPassword {...props} isLoading={isLoading} setIsLoading={setIsLoading} />)} exact/>
           <Route path="/login" render={(props) => (<UserLogin {...props} isLoading={isLoading} setIsLoading={setIsLoading} />)} exact/>
-          <Route path="/signup" isLoading={isLoading} setIsLoading={setIsLoading} render={(props) => (<UserSignup {...props} isLoading={setIsLoading} />)} exact/>
+          <Route path="/signup" isLoading={isLoading} setIsLoading={setIsLoading} render={(props) => (<UserSignup {...props} setIsLoading={setIsLoading} isLoading={setIsLoading} />)} exact/>
 
           {/* User Routes */}
           <UserRoute path="/" isLoading={isLoading} setIsLoading={setIsLoading} component={Home} exact/>
@@ -104,9 +106,8 @@ function App() {
 
 
           {/* Agent Routes */}
-          <Route path="/agent-login" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={AgentLogin} exact/>
-          <Route path="/agent-signup" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={AgentSignup} exact/>
-          <Route path="/onboarding" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={Onboarding} exact />
+          <Route path="/agent-login" render={(props) => (<AgentLogin {...props} setIsLoading={setIsLoading} isLoading={isLoading} type="agent" />)} exact/>
+          <Route path="/agent-signup" render={(props) => (<AgentSignup {...props} setIsLoading={setIsLoading} isLoading={isLoading} type="agent" />)} exact/>
           <AgentRoute path="/dashboard" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={AgentDashboard} exact />
           <AgentRoute path="/new-listing" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={NewListing} exact />
           <AgentRoute path="/agent-profile" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={AgentProfile} exact />
@@ -116,9 +117,10 @@ function App() {
           <AgentRoute path="/support" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={Support} exact />
           <AgentRoute path="/agent-wishlists" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={AgentWishlist} exact />
 
+          <Route path="/server-error" render={(props) => (<ServerError {...props} setIsLoading={setIsLoading}  />)} exact/>
 
           <UserRoute path="/:id" isLoading={isLoading} setIsLoading={setIsLoading} user type="user" component={AgentDetails} exact/>
-          <Route component={NotFound} exact/>
+          <Route render={(props) => (<NotFound {...props} setIsLoading={setIsLoading}  />)} exact/>
       </Switch>
     </div>
   );

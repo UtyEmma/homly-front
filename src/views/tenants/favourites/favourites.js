@@ -7,8 +7,9 @@ import NavBar from 'components/shared/nav-bar'
 import Footer from 'components/shared/footer'
 import FavouriteItem from './components/favourite-item'
 import FavouritesNotFound from 'components/404/404-favourites'
+import { Helmet } from 'react-helmet'
 
-export const Favourites = ({user, isLoggedIn}) => {
+export const Favourites = ({user, isLoggedIn, setIsLoading, status}) => {
 
     const dispatch = useDispatch()
     const favourites = useSelector(state => state.favourites)
@@ -25,12 +26,37 @@ export const Favourites = ({user, isLoggedIn}) => {
         listings && setFavourites(listings)
     }, [listings])
 
+    useEffect(() => {
+        setIsLoading(false)   
+    })
+
+    useEffect(() => {
+        setIsLoading(loading)
+    }, [loading])
+
     return (
         <>
             <div>
-                <Preloader loading={loading}/>
+                <Helmet>
+                    <title>Favourites - Bayof Real Estate - Find Properties and agents around you</title>
+                    <meta name="twitter:card" content="summary" />
+                    <meta name="twitter:site" content="@" />
+                    <meta name="twitter:creator" content="@" />
+                    <meta name="twitter:title" content="Bayof Real Estate" />
+                    <meta name="twitter:description" content="Find the best accomodation around you" />
+                    <meta name="twitter:image" content="/images/homeid-social-logo.png" />
+                    <meta property="og:url" content="home-01.html" />
+                    <meta property="og:title" content="Home 01" />
+                    <meta property="og:description" content="Find the best accomodation around you" />
+                    <meta property="og:type" content="website" />
+                    <meta property="og:image" content="/images/homeid-social.png" />
+                    <meta property="og:image:type" content="image/png" />
+                    <meta property="og:image:width" content="1200" />
+                    <meta property="og:image:height" content="630" />
+                    <meta name="description" content="Find Properties and agents around you." />
+                </Helmet>
 
-                <NavBar isloggedIn={isLoggedIn} user={user}/>
+                <NavBar isloggedIn={isLoggedIn} user={user} status={status} />
 
                 <main id="content">
                     <Searchbar />

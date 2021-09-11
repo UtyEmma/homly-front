@@ -4,14 +4,14 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Header from '../layouts/shared/header'
 import Sidebar from '../layouts/shared/sidebar'
+import { Helmet } from 'react-helmet'
 
-const AgentWishlist = ({agent}) => {
+const AgentWishlist = ({agent, setIsLoading}) => {
     
     const dispatch = useDispatch()
     const fetch_wishlists = useSelector(state => state.agent_wishlist)
     const {loading, wishlists} = fetch_wishlists
     
-
     const FetchWishlist = () => {
         dispatch(FetchAgentWishlists())
     }
@@ -20,10 +20,18 @@ const AgentWishlist = ({agent}) => {
         !wishlists && FetchWishlist()
     }, [wishlists]);
 
+    useEffect(() => {
+        setIsLoading(loading)
+    }, [loading])
+
     return (
         <div className="wrapper dashboard-wrapper">
+            <Helmet>
+                <title>Wishlists</title>
+            </Helmet>
+
             <div className="d-flex flex-wrap flex-xl-nowrap">
-                <Sidebar />
+                <Sidebar agent={agent}/>
 
                 <div className="page-content">
                     <Header agent={agent}/>

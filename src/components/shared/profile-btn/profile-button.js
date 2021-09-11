@@ -1,18 +1,25 @@
 import { AgentLogout } from 'providers/redux/_actions/agent-actions'
 import { TenantLogout } from 'providers/redux/_actions/user-actions'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 export default function ProfileButton({isloggedIn, user}) {
 
+    const [status, setStatus] = useState()
+
+    useEffect(() => {
+        setStatus(localStorage.getItem('type'))
+    })
+
     return (
         <>
-            {isloggedIn ? LoggedIn(user) : loggedOut()}
+            {isloggedIn ? LoggedIn(user, status) : loggedOut()}
         </>
     )
 }
 
-function LoggedIn(user) {
+function LoggedIn(user, status) {
 
     const dispatch = useDispatch()
     const type = localStorage.getItem('type');
@@ -23,53 +30,78 @@ function LoggedIn(user) {
 
     return (           
         <ul className="navbar-nav flex-row justify-content-lg-end align-items-center d-flex flex-wrap text-body py-2">            
-            <li className="nav-item mr-4">
-                <a className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" href="/wishlist">
-                    <i className="fal fa-heart fs-large-4" />
-                    {
-                        user.wishlists 
-                        
-                        &&
+            
+            {
+                status === "tenant"
 
-                        <span className="badge badge-primary badge-circle badge-absolute p-1">{user.wishlists}</span>   
-                    }
-                </a>
-            </li>
+                &&
 
-            <li className="nav-item mr-2 d-flex hover bg-hover-overlay-gradient-2 hover-primary rounded p-1">
-                <div className="w-46px">
-                    {   
+                <>
+                    <li className="nav-item">
+                        <Link className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" to="/wishlist">
+                            <i className="fal fa-gift fs-large-4" title="Wishlists" />
+                            {
+                                user.wishlists 
+                                
+                                &&
+
+                                <span className="badge badge-primary badge-circle badge-absolute p-1">{user.wishlists}</span>   
+                            }
+                        </Link>
+                    </li>
+
+                    <li className="nav-item">
+                        <Link to="/favourites" className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" >
+                            <i className="fal fa-heart fs-large-4" title="Favourites" />
+                            {
+                                user.wishlists 
+                                
+                                &&
+
+                                <span className="badge badge-primary badge-circle badge-absolute p-1">{user.wishlists}</span>   
+                            }
+                        </Link>
+                    </li>
+                </>
+            }
+            
+            <li className="nav-item mr-md-2 d-flex align-items-center hover bg-hover-overlay-gradient-2 hover-primary rounded p-1 " >
+
+                <div className="dropdown px-md-3">
+                    <Link to="#" className="dropdown-toggle d-flex align-items-center justify-content-end text-heading" data-toggle="dropdown">
+                    {    
                         user.avatar 
-                        ? 
-                        <div className="rounded-circle w-46px h-46 overflow-hidden">
-                            <img src={user.avatar} className="w-46px h-46" style={{objectFit: 'cover'}} alt={`${user.firstname}`} />
+                    ? 
+                        <div className="w-46px h-46 overflow-hidden">
+                            <img src={user.avatar} className="rounded-circle w-46px h-46" style={{objectFit: 'cover'}} alt={`${user.firstname}`} />
                         </div> 
-                        : 
-                        <div className="d-inline-block mb-2 w-46px h-46 mr-2 bg-gray-01 rounded-circle fs-18 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
+                    : 
+                        <div className="d-inline-block w-46px h-46 bg-gray-01 rounded-circle fs-18 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mx-auto">
                             {`${user.firstname.charAt(0).toUpperCase()}${user.lastname.charAt(0).toUpperCase()}`}
                         </div>
                     }
-                </div>
-                <a href="" className="nav-link  dropdown-toggle " data-toggle="dropdown">Hello {user.firstname}</a>
+                    <span className="fs-13 ml-2 font-weight-500 d-none d-sm-inline ml-0">
+                        Hello {user.firstname}
+                    </span>
+                    </Link>
+                    <div className="dropdown-menu dropdown-menu-right" style={{width: "200px"}}>
+                        {
+                            status === 'tenant'
 
-                <div className="dropdown-menu px-2 dropdown-lg dropdown-menu-right" style={{width: "250px"}}>
-                    
-                    {
-                        type === 'tenant'
+                            ?
 
-                        ?
+                            <TenantNavItems />
 
-                        <TenantNavItems />
+                            :
 
-                        :
+                            <AgentNavItems/>
+                        }
 
-                        <AgentNavItems/>
-                    }
-
-                    <button className="dropdown-item  btn btn-secondary rounded py-2 align-middle" type="button" onClick={logout} >
-                        <i className="fa fa-door-open mr-3 text-primary"></i>
-                        Logout
-                    </button>
+                        <button className="dropdown-item btn btn-secondary rounded py-2 align-middle" type="button" onClick={logout} >
+                            <i className="fa fa-door-open mr-3 text-primary"></i>
+                            Logout
+                        </button>
+                    </div>
                 </div>
             </li>
         </ul>
@@ -77,24 +109,24 @@ function LoggedIn(user) {
 
 }
 
-function TenantNavItems () {
+export function TenantNavItems () {
     return (
         <>
-            <a className="dropdown-item rounded py-2 align-middle" href="/profile">
+            <Link to="/profile" className="dropdown-item rounded py-2 align-middle">
                 <i className="fa fa-user mr-3 text-primary"></i>
                 My Profile
-            </a>
+            </Link>
 
-            <a className="dropdown-item rounded py-2 align-middle" href="/favourites">
+            <Link className="dropdown-item rounded py-2 align-middle" to="/favourites">
                 <i className="fa fa-heart mr-3 text-primary"></i>
                 Favourites
-            </a>
+            </Link>
 
 
-            <a className="dropdown-item rounded py-2 align-middle" href="/wishlists">
+            <Link className="dropdown-item rounded py-2 align-middle" to="/wishlists">
                 <i className="fa fa-gifts mr-3 text-primary"></i>
                 Wishlists
-            </a>
+            </Link>
         </>
     )
 }
@@ -103,21 +135,21 @@ function TenantNavItems () {
 export function AgentNavItems () {
     return (
         <>
-            <a className="dropdown-item rounded py-2 align-middle" href="/dashboard">
+            <Link  to="/dashboard" className="dropdown-item rounded py-2 align-middle">
                 <i className="fa fa-user mr-3 text-primary"></i>
                 My Dashboard
-            </a>
+            </Link>
 
-            <a className="dropdown-item rounded py-2 align-middle" href="/agent-profile">
+            <Link className="dropdown-item rounded py-2 align-middle" to="/agent-profile">
                 <i className="fa fa-heart mr-3 text-primary"></i>
                 Profile
-            </a>
+            </Link>
 
 
-            <a className="dropdown-item rounded py-2 align-middle" href="/support">
+            <Link className="dropdown-item rounded py-2 align-middle" to="/support">
                 <i className="fa fa-headset mr-3 text-primary"></i>
                 Support
-            </a>
+            </Link>
         </>
     )
 }
@@ -125,16 +157,21 @@ export function AgentNavItems () {
 function loggedOut(params) {
     return (           
         <ul className="navbar-nav flex-row justify-content-lg-end align-items-center d-flex flex-wrap text-body py-2">
-            <li className="nav-item ">
-                <a className="nav-link pl-3 pr-2 mr-1" href="/login">Login</a>
-                |
-                <a className="nav-link pl-3 pr-2 mr-1" href="/signup">Sign Up</a>
+            <li className="nav-item d-none d-md-inline">
+                <Link className="nav-link pl-md-3 pr-md-2 mr-1 mr-md-0" to="/login">Login</Link>
+                <span>|</span>
+                <Link className="nav-link pl-3 pr-2 mr-1 mr-md-auto" to="/signup">Sign Up</Link>
             </li>
-            <li className="nav-item ml-auto w-100 w-sm-auto">
-                <a className="btn btn-primary btn-lg d-flex align-items-center" href="/agent-signup">
+            <li className="nav-item ml-md-auto w-auto w-sm-auto mr-2 mr-md-auto">
+                <Link className="btn btn-primary d-md-none d-flex align-items-center" to="/agent-signup">
                     For Agents
                     <img src="/images/add-listing-icon.png" alt="Add listing" className="ml-2" />
-                </a>
+                </Link>
+
+                <Link className="btn btn-primary d-none btn-lg d-md-flex align-items-center" to="/agent-signup">
+                    For Agents
+                    <img src="/images/add-listing-icon.png" alt="Add listing" className="ml-2" />
+                </Link>
             </li>
         </ul>
     )

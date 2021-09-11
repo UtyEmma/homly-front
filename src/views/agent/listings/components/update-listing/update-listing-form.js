@@ -66,7 +66,7 @@ export const UpdateListingForm = ({listing, setListing, setIsLoading}) => {
     return (
         <>
          <div className="bs-stepper" id='wishlist-stepper'>
-                <div className="bs-stepper-header px-5" role="tablist">
+                <div className="bs-stepper-header px-5 d-block d-md-flex" role="tablist">
                     <div className="step" data-target="#description">
                         <button type="button" className="step-trigger bs-stepper-trigger" role="tab" aria-controls="property-info" id="property-info-trigger">
                             <span className="bg-primary bs-stepper-item"></span>
@@ -97,38 +97,39 @@ export const UpdateListingForm = ({listing, setListing, setIsLoading}) => {
                 </div>
                 <div className="bs-stepper-content">
                     <form className="form" onSubmit={handleSubmit} id="create_wishlist_form" encType="multipart/form-data">
-                        <div id="description" className="content p-4" role="tabpanel" aria-labelledby="property-info-trigger" >
+                        <div id="description" className="content p-md-4" role="tabpanel" aria-labelledby="property-info-trigger" >
                             
                             <UpdateListingDescription listing={listing} formErrors={formErrors} />
 
-                            <div className='row d-flex justify-content-end'>
-                                    <button type="button" onClick={() => {stepper.next()}} className="btn btn-primary">Next</button>
+                            <div className='row d-flex justify-content-end px-3'>
+                                <button type="button" className="btn" data-dismiss="modal" aria-label="Close">Close</button>
+                                <button type="button" onClick={() => {stepper.next()}} className="btn btn-primary">Next</button>
                             </div>
                         </div>
 
-                        <div id="media" className="content p-4" role="tabpanel" aria-labelledby="location-info-trigger">
+                        <div id="media" className="content p-md-4" role="tabpanel" aria-labelledby="location-info-trigger">
                             
                             <UpdateListingMedia listing={listing} files={files} setFiles={setFiles} formErrors={formErrors} />
 
-                            <div className='row d-flex justify-content-end'>
+                            <div className='row d-flex justify-content-end px-3'>
                                 <button type="button" onClick={() => {stepper.previous()}} className="btn">Previous</button>
                                 <button type="button" onClick={() => {stepper.next()}} className="btn btn-primary">Next</button>
                             </div>
                         </div>
 
-                        <div id="location" className="content p-4" role="tabpanel" aria-labelledby="location-info-trigger">
+                        <div id="location" className="content p-md-4" role="tabpanel" aria-labelledby="location-info-trigger">
                             <UpdateListingLocation listing={listing} formErrors={formErrors} />
 
-                            <div className='row d-flex justify-content-end'>
+                            <div className='row d-flex justify-content-end px-3'>
                                 <button type="button" onClick={() => {stepper.previous()}} className="btn">Previous</button>
                                 <button type="button" onClick={() => {stepper.next()}} className="btn btn-primary">Next</button>
                             </div>
                         </div>
 
-                        <div id="details" className="content p-4" role="tabpanel" aria-labelledby="extra-details-trigger">
+                        <div id="details" className="content p-md-4" role="tabpanel" aria-labelledby="extra-details-trigger">
                             <UpdateListingDetails listing={listing} formErrors={formErrors} />
                             
-                            <div className='row d-flex justify-content-end'>
+                            <div className='row d-flex justify-content-end px-3'>
                                 <button type="button" onClick={() => {stepper.previous()}} className="btn">Previous</button>
                                 <button type="submit" className="btn btn-primary">Submit</button>
                             </div>

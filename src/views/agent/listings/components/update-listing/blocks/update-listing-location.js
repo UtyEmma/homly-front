@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Geocode, { setLanguage } from 'react-geocode'
 import { useDispatch, useSelector } from 'react-redux';
-import { StoreListing } from 'providers/redux/_actions/listing/listing-actions';
 import { LocalGovt, State } from 'components/city-state/city-state';
 import InputAddress from 'views/agent/layouts/listings/blocks/map/map-address-search';
 import { MapDisplay } from 'views/agent/layouts/listings/blocks/map/map-display';
@@ -59,7 +58,7 @@ export const UpdateListingLocation = ({listing, formErrors}) => {
                 <div className="row">
                 <div className="col-lg-6">
                     <div className="card mb-6">
-                    <div className="card-body p-6">
+                    <div className="card-body p-md-6">
                         <h3 className="card-title mb-0 text-heading fs-22 lh-15">Listing
                         Location</h3>
                         <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
@@ -92,7 +91,7 @@ export const UpdateListingLocation = ({listing, formErrors}) => {
                                 <div className="form-group">
                                 <label htmlFor="landmark" className="text-heading">Landmark / Nearest Bus Stop</label>
                                 <InputAddress lat={lat} long={long} setLandmark={setLandmark} defaultValue={listing.landmark}  setLatLong={setLatLong} id="landmark"/>
-                                <input hidden name="landmark" value={landmark} type="text"/>
+                                <input hidden name="landmark" defaultValue={landmark} type="text"/>
                                 <p className="text-danger fs-12">{formErrors.landmark?.message}</p>
                                 </div>
                             </div>
@@ -102,7 +101,7 @@ export const UpdateListingLocation = ({listing, formErrors}) => {
                 </div>
                 <div className="col-lg-6">
                     <div className="card mb-6">
-                    <div className="card-body p-6">
+                    <div className="card-body p-md-6">
                         <h3 className="card-title mb-6 text-heading fs-22 lh-15">Place the
                         listing pin on the map</h3>
                         
@@ -118,14 +117,14 @@ export const UpdateListingLocation = ({listing, formErrors}) => {
                         <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
                             <div className="form-group mb-md-0">
                             <label htmlFor="latitude" className="text-heading">Latitude </label>
-                            <input type="text" value={lat} className="form-control form-control-lg border-0" id="latitude" name="latitude" readOnly />
+                            <input type="text" defaultValue={lat} className="form-control form-control-lg border-0" id="latitude" name="latitude" readOnly />
                             <p className="text-danger fs-12">{formErrors.latitude?.message}</p>
                             </div>
                         </div>
                         <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
                             <div className="form-group mb-md-0">
                             <label htmlFor="longitude" className="text-heading">Longitude</label>
-                            <input type="text" value={lat} className="form-control form-control-lg border-0" id="longitude" name="longitude" readOnly/>
+                            <input type="text" defaultValue={lat} className="form-control form-control-lg border-0" id="longitude" name="longitude" readOnly />
                             <p className="text-danger fs-12">{formErrors.longitude?.message}</p>
                             </div>
                         </div>

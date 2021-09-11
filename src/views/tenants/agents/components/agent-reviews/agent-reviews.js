@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import AgentReviewForm from './agent-review-form'
 import AgentReviewItem from './agent-review-item'
 
-export default function AgentReviews({reviews, agent, fetchAgent, status}) {
+export default function AgentReviews({reviews, agent, fetchAgent, status, setIsLoading}) {
+    
+    useEffect(() => {
+        setIsLoading(false)
+    })
+
     return (
         <>
           <h2 className="fs-22 text-heading lh-15 mb-6">Agents Rating &amp; Reviews </h2>

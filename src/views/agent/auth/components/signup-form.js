@@ -43,7 +43,7 @@ const AgentSignUpForm = () => {
         <div className="col-lg-7">
             <div className="card border-0 shadow-xxs-2">
                 <div className="card-body px-6 py-6">
-                <h2 className="card-title fs-30 font-weight-600 text-dark lh-16 mb-2">Sign Up</h2>
+                <h2 className="card-title fs-30 font-weight-600 text-dark lh-16 mb-2">Agent Sign Up</h2>
                 <p className="mb-4">I am already an Agent <Link to="/agent-login" className="text-heading hover-primary"><u>Log in Here</u></Link></p>
                 <form className="form" id="signupForm" onSubmit={handleSignup}>
                     <div className="form-row mx-n2">
