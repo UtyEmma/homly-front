@@ -19,7 +19,7 @@ const UserLoginForm = ({isLoading}) =>  {
     const [formErrors, setFormErrors] = useState({})
 
     const user_login = useSelector(state => state.login)
-    const {loading, success, formError} = user_login;
+    const {loading, success, verify_email, formError} = user_login;
 
     
     const handleSubmit = (e) => {
@@ -43,6 +43,10 @@ const UserLoginForm = ({isLoading}) =>  {
     useEffect(() => {
         if(success){ history.push('/') }
     }, [success])
+
+    useEffect(() => {
+        verify_email && history.push('/verify')
+    }, [verify_email])
 
     const responseFacebook = (response) => {
         console.log(response)

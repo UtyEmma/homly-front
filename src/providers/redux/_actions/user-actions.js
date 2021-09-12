@@ -3,7 +3,7 @@ import { userService } from '../../services';
 import { _TENANT } from '../_contants/user-constants';
 
 const { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE, 
-        LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE,
+        LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_SUCCESS_VERIFY_EMAIL, LOGIN_FAILURE, 
         UPDATE_REQUEST, UPDATE_SUCCESS, UPDATE_FAILURE 
         } = _TENANT;
 
@@ -41,8 +41,15 @@ export const login = (data) => (dispatch) => {
                 localStorage.setItem('isAuthenticated', true);
                 localStorage.setItem('type', 'tenant');
 
+                if (res.data.user.isVerified) {
+                    return dispatch({
+                        type: LOGIN_SUCCESS,
+                        payload: response.data
+                    })   
+                }
+
                 return dispatch({
-                    type: LOGIN_SUCCESS,
+                    type: LOGIN_SUCCESS_VERIFY_EMAIL,
                     payload: response.data
                 })
             })

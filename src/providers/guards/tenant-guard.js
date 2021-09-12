@@ -13,7 +13,7 @@ function TenantRoute({isLoading, setIsLoading, component: Component, ...restOfPr
       {...restOfProps}
       render={(props) =>
           isAuthenticated && userType === 'tenant' 
-                        ? <Component {...props} isLoading={isLoading} setIsLoading={setIsLoading} isLoggedIn={isAuthenticated}  status={userType} user={user}/> : <Redirect to="/login" />
+                        ? <Component {...props} isLoading={isLoading} setIsLoading={setIsLoading} isLoggedIn={isAuthenticated}  status={userType} user={user}/> : <Redirect to="/login"  />
       }
     />
   );

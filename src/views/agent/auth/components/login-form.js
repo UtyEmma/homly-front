@@ -12,7 +12,7 @@ import { __agent_login } from 'libraries/validation';
 
 const AgentLoginForm = () =>  {
     const agentLogin = useSelector((state) => state.agent_login);
-    const {loading, agent_success, form_error} = agentLogin;
+    const {loading, agent_success, verify_email, form_error} = agentLogin;
 
     const dispatch = useDispatch()
     const history = useHistory()
@@ -31,6 +31,10 @@ const AgentLoginForm = () =>  {
             dispatch(AgentLogin(values));
         } 
     } 
+
+    useEffect(() => {
+        verify_email && history.push('/verify')
+    }, [verify_email])
 
     useEffect(() => {
         agent_success && history.push('/dashboard')

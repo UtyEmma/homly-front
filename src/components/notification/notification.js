@@ -43,7 +43,7 @@ export const NotificationBell = () => {
                     <i className="far fa-bell" />
                     <span className="badge badge-primary badge-circle badge-absolute font-weight-bold fs-13">
                         {
-                            count && count
+                            count > 0 && count
                         }
                     </span>
                 </a>

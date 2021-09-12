@@ -46,6 +46,7 @@ import { VerifyAdmin } from './providers/redux/_actions/admin-actions';
 import { AdminModeBadge } from './libraries/admin/admin-mode';
 import ResetPassword from 'views/agent/auth/reset-password';
 import ServerError from 'views/onboarding/sever-error';
+import { EmailVerified } from 'views/onboarding/email-verified';
 
 function App() {
 
@@ -90,10 +91,11 @@ function App() {
           <Route path="/login" render={(props) => (<UserLogin {...props} isLoading={isLoading} setIsLoading={setIsLoading} />)} exact/>
           <Route path="/signup" isLoading={isLoading} setIsLoading={setIsLoading} render={(props) => (<UserSignup {...props} setIsLoading={setIsLoading} isLoading={setIsLoading} />)} exact/>
 
+          <Route path="email/verify/{:type}/{:code}/{:user}" render={(props) => (<EmailVerified {...props} isLoading={isLoading} setIsLoading={setIsLoading} />)} exact/>
           {/* User Routes */}
           <UserRoute path="/" isLoading={isLoading} setIsLoading={setIsLoading} component={Home} exact/>
           <UserRoute path="/about" isLoading={isLoading} setIsLoading={setIsLoading} component={About} exact />
-          <UserRoute path="/verify" isLoading={isLoading} setIsLoading={setIsLoading} component={VerifyEmail} user exact />
+          <UserRoute path="/verify" isLoading={isLoading} setIsLoading={setIsLoading} component={VerifyEmail} exact />
           <UserRoute path="/search" isLoading={isLoading} setIsLoading={setIsLoading} user component={Search} exact/>
           <UserRoute path="/listings" isLoading={isLoading} setIsLoading={setIsLoading} user component={Listing} exact/>
           <UserRoute path="/agents" isLoading={isLoading} setIsLoading={setIsLoading} user type="user" component={Agents} exact/>
