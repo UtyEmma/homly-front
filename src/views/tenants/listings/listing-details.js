@@ -1,9 +1,8 @@
-import React, {Component, useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { FetchSingleListing } from 'providers/redux/_actions/listing/listing-actions'
-import ListingGallery from './components/listing-details/listing-gallery'
 import ListingComponents from './components/listing-details'
 import ListingAction from './components/listing-action-card'
 import Searchbar from 'views/layouts/components/search/searchbar'
@@ -28,18 +27,18 @@ const ListingDetails = ({isLoggedIn, user, status, adminMode, setIsLoading}) => 
     const {data} = suspend_listing;
 
     useEffect(() => {
+        const fetchListingData = (slug) => {
+            dispatch(FetchSingleListing(slug))
+        }
+        
         !listing && fetchListingData(slug)
         listing && setListingData(listing)
         data && setListingData(data)
-    }, [listing, data]);
+    }, [listing, data, slug, dispatch]);
 
     useEffect(() => {
         setIsLoading(false)
     })
-
-    const fetchListingData = (slug) => {
-        dispatch(FetchSingleListing(slug))
-    }
 
     return (
         <div>
@@ -124,13 +123,13 @@ const ListingDetails = ({isLoggedIn, user, status, adminMode, setIsLoading}) => 
                                     }
 
                                     <div className="media-body">
-                                        <a href="#" className="d-block text-dark fs-15 font-weight-500 lh-15">{listingData.agent.firstname} {listingData.agent.lastname} </a>
+                                        <a href={`/${listing.agent.username}`} className="d-block text-dark fs-15 font-weight-500 lh-15">{listingData.agent.firstname} {listingData.agent.lastname} </a>
                                         <span className="fs-13 lh-2">{listingData.listing.title}</span>
                                     </div>
                                 </div>
                                 <div className="ml-auto">
                                     <button type="button" className="btn btn-primary fs-18 p-2 lh-1 mr-1 mb-1 shadow-none" data-toggle="modal" data-target="#modal-messenger"><i className="fal fa-comment" /></button>
-                                    <a href={`tel:${listingData.agent.phone_number}`} className="btn btn-primary fs-18 p-2 lh-1 mb-1 shadow-none" target="_blank"><i className="fal fa-phone" /></a>
+                                    <a href={`tel:${listingData.agent.phone_number}`} className="btn btn-primary fs-18 p-2 lh-1 mb-1 shadow-none" target="_blank" rel="noreferrer"><i className="fal fa-phone" /></a>
                                 </div>
                             </div>
                             <div className="modal fade" id="modal-messenger" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
