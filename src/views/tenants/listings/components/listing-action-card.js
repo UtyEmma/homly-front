@@ -76,7 +76,8 @@ export default function ListingAction({agent, listing}) {
                             &&
 
                             <li className="list-inline-item mr-6">
-                                <a href={agent.twitter} target="_blank" className="text-muted hover-primary"><i className="fab fa-twitter" /></a>
+                                <a href={agent.twitter} target="_blank" className="text-muted hover-primary">
+                                    <i className="fab fa-twitter" /></a>
                             </li>
                         }
 

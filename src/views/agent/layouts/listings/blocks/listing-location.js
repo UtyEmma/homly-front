@@ -18,7 +18,7 @@ export default function ListingLocation({formErrors}) {
     }
 
     const setLatLong = (address) => {
-        Geocode.setApiKey( "AIzaSyBBYmJujloM3zNdxMpokW1G_Qo5Qo_05_A" )
+        Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API_KEY)
         Geocode.setRegion("ng");
         Geocode.setLocationType("ROOFTOP");
 

@@ -47,6 +47,8 @@ import { AdminModeBadge } from './libraries/admin/admin-mode';
 import ResetPassword from 'views/agent/auth/reset-password';
 import ServerError from 'views/onboarding/sever-error';
 import { EmailVerified } from 'views/onboarding/email-verified';
+import { GetLoggedInUser } from 'providers/redux/_actions/auth-action';
+import toast, { ToastBar, Toaster } from 'react-hot-toast';
 
 function App() {
 
@@ -56,29 +58,66 @@ function App() {
   
 	const query = useQuery()
 	const auth = query.get("auth")
-	const type = localStorage.getItem('type') 
+	const user_type = localStorage.getItem('type') 
 
   const {adminMode} = useSelector((state) => state.admin_mode)
 
   const handleAdminMode = () => {
-    auth && type !== 'admin' && dispatch(VerifyAdmin(query.get("id")))
+    auth && user_type !== 'admin' && dispatch(VerifyAdmin(query.get("id")))
+  }
+
+  const fetch_user = useSelector(state => state.user);
+  const {loading, success} = fetch_user
+
+  const [user, setUser] = useState()
+  const [type, setType] = useState(localStorage.getItem('type'))
+
+  const fetchLoggedInUser = () => {
+    if(!!localStorage.getItem('token')){
+      dispatch(GetLoggedInUser(localStorage.getItem('type')))
+    }
   }
 
   useEffect(() => {
     handleAdminMode()
   }, [])
 
+  useEffect(() => {
+    fetchLoggedInUser()
+  }, []);
+
+  useEffect(() => {
+    success && setUser(success)
+  }, [success])
+
   return (
     <div className="App">
       <Preloader loading={isLoading}/>
 
-      <ToastContainer 
+      
+      {/* <ToastContainer 
         hideProgressBar={true}
         newestOnTop={false}
         closeOnClick 
         draggable
         pauseOnFocusLoss={false}
-      />  
+      />   */}
+      <Toaster position='top-right'> 
+            {(t) => (
+          <ToastBar toast={t}>
+            {({ icon, message }) => (
+              <>
+                {icon}
+                {message}
+                {t.type !== 'loading' && (
+                  <button class="btn p-0" onClick={() => toast.dismiss(t.id)}>X</button>
+                )}
+              </>
+            )}
+          </ToastBar>
+        )}
+      </Toaster>
+      
 
 		<GoogleOneTapAuth setIsLoading={setIsLoading} />
 

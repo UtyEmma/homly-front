@@ -114,23 +114,23 @@ const ListingDetails = ({isLoggedIn, user, status, adminMode, setIsLoading}) => 
                                         ? 
                                         
                                         <div className="rounded-circle d-flex align-items-center justify-content-center overflow-hidden">
-                                            <img src={listingData.agent.avatar} className="w-70px h-70" style={{objectFit: 'cover'}} alt={`${listingData.firstname} ${listingData.lastname}`} />
+                                            <img src={listingData.agent.avatar} className="w-70px h-70" style={{objectFit: 'cover'}} alt={`${listingData.agent.firstname} ${listingData.agent.lastname}`} />
                                         </div> 
                                         
                                         : 
                                         <div className="d-inline-block mb-2 w-70px h-70 mr-2 bg-gray-01 rounded-circle fs-25 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
-                                            {`${listingData.firstname.charAt(0).toUpperCase()}${listingData.lastname.charAt(0).toUpperCase()}`}
+                                            {`${listingData.agent.firstname.charAt(0).toUpperCase()}${listingData.agent.lastname.charAt(0).toUpperCase()}`}
                                         </div>
                                     }
 
                                     <div className="media-body">
-                                        <a href="#" className="d-block text-dark fs-15 font-weight-500 lh-15">{listingData.firstname} {listingData.lastname} </a>
-                                        <span className="fs-13 lh-2">{listingData.title}</span>
+                                        <a href="#" className="d-block text-dark fs-15 font-weight-500 lh-15">{listingData.agent.firstname} {listingData.agent.lastname} </a>
+                                        <span className="fs-13 lh-2">{listingData.listing.title}</span>
                                     </div>
                                 </div>
                                 <div className="ml-auto">
                                     <button type="button" className="btn btn-primary fs-18 p-2 lh-1 mr-1 mb-1 shadow-none" data-toggle="modal" data-target="#modal-messenger"><i className="fal fa-comment" /></button>
-                                    <a href={`tel:${listingData.phone_number}`} className="btn btn-primary fs-18 p-2 lh-1 mb-1 shadow-none" target="_blank"><i className="fal fa-phone" /></a>
+                                    <a href={`tel:${listingData.agent.phone_number}`} className="btn btn-primary fs-18 p-2 lh-1 mb-1 shadow-none" target="_blank"><i className="fal fa-phone" /></a>
                                 </div>
                             </div>
                             <div className="modal fade" id="modal-messenger" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">

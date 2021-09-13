@@ -1,5 +1,5 @@
 import { MapFormErrors } from "libraries/validation/handlers/error-handlers";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 const styles = { 
     background: 'white',
@@ -11,13 +11,21 @@ const styles = {
 
 const classname = 'text-dark'
 
+const errorToast = (message) => {
+    return toast.error(message,
+        {
+            style: {
+              background: '#333',
+              color: '#fff',
+            },
+        }
+    )
+}
+
 
 export default function Error(err) {
     if(!err){
-        return toast.dark("Server Error: The Server is Down", {
-            className: classname,
-            style: styles
-        })
+        return toast.error("Server Error: The Server is Down")
     }
 
     switch (err.status) {
@@ -37,32 +45,20 @@ export default function Error(err) {
 }
 
 function badRequestError(err){
-    return toast.dark(err.message, {
-        className: classname,
-        style: styles
-    })
+    return errorToast(err.message)
 }
 
 function handleServerError(data){
-    return toast.dark(data.message, {
-        className: classname,
-        style: styles
-    })
+    return errorToast(data.message)
 }
 
 function handleFormError(err){
-    toast.dark(err.message, {
-        className: classname,
-        style: styles
-    })
+    errorToast(err.message)
     return MapFormErrors(err.errors);
 }
 
 function handleUnauthorizedError(){
-    return toast.dark("Unauthorized Error", {
-        className: classname,
-        style: styles
-    })
+    return errorToast("Unauthorized Error")
     // localStorage.removeItem('token');
     // localStorage.removeItem('user');
     // localStorage.removeItem('isAuthenticated');

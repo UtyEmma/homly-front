@@ -1,5 +1,6 @@
 import { ListingToast } from "components/toasts/listing-toast"
-import { toast } from "react-toastify"
+import toast from "react-hot-toast"
+// import { toast } from "react-toastify"
 import Error from "./http-error"
 
 const styles = { 
@@ -12,10 +13,7 @@ const styles = {
 
 const Response = {
     success : (data) => { 
-        toast.dark(data.message, {
-            className: 'text-dark',
-            style: styles
-        })
+        toast.success(data.message)
     },
     error: (data)=>{ return Error(data) },
 }
