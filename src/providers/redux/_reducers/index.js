@@ -4,7 +4,7 @@ import {loginReducer, signupReducer} from "../_reducers/user.reducer";
 import { SetAdminModeReducer, SuspendItemReducer, verifyAgentReducer } from "./admin-reducer";
 import { AgentLoginReducer, AgentSignupReducer,
         UpdateAgentProfileReducer, ShowAvailableAgentsReducer, DeleteListingReducer, RemoveListingReducer, FetchSingleAgentReducer, FetchAgentWishlistsReducer } from "./agent-reducer";
-import { RecoverPasswordReducer, ResetPasswordReducer } from "./auth-reducer";
+import { GetLoggedInUserReducer, RecoverPasswordReducer, ResendEmailReducer, ResetPasswordReducer, VerifyEmailReducer } from "./auth-reducer";
 import { FetchCategoriesReducer } from "./category-reducer";
 import { FetchDetailsReducer } from "./details-reducer";
 import { AddFavouritesReducer, FetchFavouritesReducer, RemoveFavouritesReducer } from "./favourite-reducer";
@@ -22,6 +22,9 @@ import { CreateWishlistReducer, FetchWishlistReducer } from "./wishlist-reducer"
 const rootReducer = combineReducers({
     signup: signupReducer,
     login: loginReducer,
+    user: GetLoggedInUserReducer,
+    resend_mail: ResendEmailReducer,
+    verify_email: VerifyEmailReducer,
 
     wishlist : CreateWishlistReducer,
     wishlists: FetchWishlistReducer,

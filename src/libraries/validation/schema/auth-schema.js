@@ -2,7 +2,7 @@ export const __reset_password = {
     rules: {
         token: 'required|numeric|digits:5',
         email: 'required|email',
-        password: 'required|confirmed|min:6',
+        password: 'required|min:6',
         type: 'required'
     },
 

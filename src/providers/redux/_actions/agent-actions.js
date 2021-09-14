@@ -4,7 +4,7 @@ import { AgentConstants } from '../_contants/agent-constants';
 
 const {
     SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE, 
-    LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE,
+    LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_SUCCESS_VERIFY_EMAIL, LOGIN_FAILURE,
     UPDATE_REQUEST, UPDATE_SUCCESS, UPDATE_FAILURE,
     SHOW_AGENTS_REQUEST, SHOW_AGENTS_SUCCESS, SHOW_AGENTS_FAILURE,
     DELETE_LISTING_REQUEST, DELETE_LISTING_SUCCESS, DELETE_LISTING_FAILURE,
@@ -46,13 +46,25 @@ export const AgentLogin = (data) => (dispatch) => {
                 localStorage.setItem('user', JSON.stringify(res.data.user));
                 localStorage.setItem('isAuthenticated', true);
                 localStorage.setItem('type', 'agent');
-                dispatch({
-                    type: LOGIN_SUCCESS,
+
+                if (res.data.user.isVerified) {
+                    return dispatch({
+                        type: LOGIN_SUCCESS,
+                        payload: {
+                            user: response.data.user,
+                            token: response.data.token
+                        }
+                    })    
+                }
+
+                return dispatch({
+                    type: LOGIN_SUCCESS_VERIFY_EMAIL,
                     payload: {
                         user: response.data.user,
                         token: response.data.token
                     }
                 })
+                
             })
             .catch(error => {
                 let errors = Response.error(error.response)

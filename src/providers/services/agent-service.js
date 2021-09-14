@@ -64,5 +64,4 @@ export const AgentService = {
     fetchAgentsWishlists : async () => {
         return await Request.get('agent/wishlists', auth_config.config);
     }
-
 }

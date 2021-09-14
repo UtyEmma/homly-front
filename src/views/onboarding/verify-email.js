@@ -1,15 +1,46 @@
+import { GetLoggedInUser, ResendVerificationEmail } from 'providers/redux/_actions/auth-action'
 import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 export default function VerifyEmail({user, setIsLoading}) {
 
+    const dispatch = useDispatch()
+    const history = useHistory()
+
+    const type = localStorage.getItem('type');
+    
     useEffect(() =>{
         setIsLoading(false)
     })
 
-    const resendVerificationEmail = () => {
-        
+    const logged_user = useSelector(state => state.user)
+    const {auth_user, verify_email} = logged_user;
+
+    const fetchLoggedInUser = () => {
+        dispatch(GetLoggedInUser(type)) 
     }
+
+    const resendVerificationEmail = () => {
+        let user = JSON.parse(localStorage.getItem('user'))
+        let id = user.unique_id
+        dispatch(ResendVerificationEmail(type, id))
+    }
+
+    const handleSetUser = () => {
+        localStorage.removeItem('user')
+        localStorage.setItem('user', JSON.stringify(auth_user))
+        history.push('/verify')
+    }
+
+    useEffect(() => {
+        !!verify_email && history.push('/verify')
+    }, [verify_email])
+
+    useEffect(() => {
+        !!auth_user && handleSetUser()
+    }, [auth_user])
     
     return (
         <div className="bg-white" style={{height: '100vh'}}>
@@ -37,7 +68,7 @@ export default function VerifyEmail({user, setIsLoading}) {
                         <p>If the email doesn’t show up soon, check your spam folder.</p>
 
                         <div className="col-10 offset-1">
-                            <a href="/dashboard" className="btn btn-block btn-lg btn-primary mr-2">I have Clicked the link</a>
+                            <button onClick={fetchLoggedInUser} className="btn btn-block btn-lg btn-primary mr-2" >I have Clicked the link</button>
                             <button className="btn btn-link mt-2" onClick={resendVerificationEmail}>Resend Verification Email</button>
                         </div>
                     </div>

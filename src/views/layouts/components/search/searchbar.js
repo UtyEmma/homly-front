@@ -36,19 +36,8 @@ export default function Searchbar({parsed}) {
          <section className="bg-secondary">
             <div className="container">
             <form className="property-search d-none d-lg-block" onSubmit={handleSearch}>
-                <div className="row align-items-lg-center" id="accordion-2">
-                <div className="col-xl-2 col-lg-3 col-md-4">
-                    <div className="property-search-status-tab d-flex flex-row">
-                    <input className="search-field" type="hidden" defaultValue="for-rent" data-default-value />
-                    <button type="button" data-value="for-rent" className="btn shadow-none btn-active-primary text-white rounded-0 hover-white text-uppercase h-lg-80 border-right-0 border-top-0 border-bottom-0 border-left border-white-opacity-03 active flex-md-1">
-                        Rent
-                    </button>
-                    <button type="button" data-value="for-sale" className="btn shadow-none btn-active-primary text-white rounded-0 hover-white text-uppercase h-lg-80 border-left-0 border-top-0 border-bottom-0 border-right border-white-opacity-03 flex-md-1">
-                        Sale
-                    </button>
-                    </div>
-                </div>
-                <div className="col-xl-8 col-lg-7 d-md-flex">
+                <div className="row align-items-lg-center py-2" id="accordion-2">
+                <div className="col-xl-8 offset-xl-1 col-lg-7 d-md-flex">
                     
                     <SearchbarSelectListing name="type" />
 

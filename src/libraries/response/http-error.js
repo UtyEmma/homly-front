@@ -6,7 +6,6 @@ const styles = {
     fontSize: '16px',
     fontWeight: '600',
     lineHeight: '24px',
-    width: '200px',
     borderLeft: '6px solid red'
 }
 

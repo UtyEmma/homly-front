@@ -1,6 +1,6 @@
 import { _TENANT } from "../_contants/user-constants";
 
-const { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE,
+const { SIGNUP_REQUEST, SIGNUP_SUCCESS, LOGIN_SUCCESS_VERIFY_EMAIL, SIGNUP_FAILURE,
         LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE,
         UPDATE_REQUEST, UPDATE_SUCCESS, UPDATE_FAILURE
 } = _TENANT;
@@ -25,6 +25,8 @@ export function loginReducer (state = {}, action){
             return {...state, loading: true}
         case LOGIN_SUCCESS:
             return {...state, loading:false, success: action.payload}
+        case LOGIN_SUCCESS_VERIFY_EMAIL:
+            return {...state, loading: false, verify_email: action.payload}
         case LOGIN_FAILURE:
             return {...state, loading:false, error: action.payload.error, formError: action.payload.formErrors,}
         default:

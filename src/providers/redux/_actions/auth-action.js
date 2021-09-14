@@ -72,3 +72,78 @@ export const PasswordReset = (data) => (dispatch) => {
                 })
             })
 }
+
+
+
+export const GetLoggedInUser = (type) => (dispatch) => {
+    console.log('Fetching User...')
+
+    dispatch({type: 'LOGGED_IN_USER_REQUEST'})
+
+    AuthService.getLoggedInUser(type)
+            .then((response) => {
+                let user = response.data.data.user;
+                if(user.isVerified){
+                    return dispatch({
+                        type: 'LOGGED_IN_USER_SUCCESS',
+                        payload: response.data.data
+                    })
+                }
+
+                return dispatch({
+                    type: 'LOGGED_IN_USER_SUCCESS_VERIFY_EMAIL',
+                    payload: response.data.data
+                })
+
+            })
+            .catch((error) => {
+                Response.error(error.response)
+                dispatch({
+                    type: 'LOGGED_IN_USER_FAILURE',
+                    payload: error.response
+                })
+            })
+}
+
+export const ResendVerificationEmail = (type, id) => (dispatch) => {
+
+    dispatch({type: 'RESEND_EMAIL_REQUEST'})
+
+    AuthService.resendVerificationEmail(type, id)
+            .then((response) => {
+                Response.success(response.data)
+                dispatch({
+                    type: 'RESEND_EMAIL_SUCCESS',
+                    payload: response.data.data
+                })
+            })
+            .catch((error) => {
+                Response.error(error.response)
+                dispatch({
+                    type: 'RESEND_EMAIL_FAILURE',
+                    payload: error.response
+                })
+            })
+}
+
+
+export const VerifyEmailAddress = (type, code, user_id) => (dispatch) => {
+
+    dispatch({type: 'VERIFY_EMAIL_REQUEST'})
+
+    AuthService.verifyEmail(type, code, user_id)
+            .then((response) => {
+                Response.success(response.data)
+                dispatch({
+                    type: 'VERIFY_EMAIL_SUCCESS',
+                    payload: response.data.data
+                })
+            })
+            .catch((error) => {
+                Response.error(error.response)
+                dispatch({
+                    type: 'VERIFY_EMAIL_FAILURE',
+                    payload: error.response
+                })
+            })
+}
