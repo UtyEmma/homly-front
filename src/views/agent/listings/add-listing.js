@@ -3,7 +3,6 @@ import AddListingForm from '../layouts/listings/add-listing-form'
 import Header from '../layouts/shared/header';
 import Sidebar from '../layouts/shared/sidebar';
 import { Helmet } from 'react-helmet';
-import { NewListingStepper } from '../layouts/listings/listing-function';
 
 const NewListing = ({agent, setIsLoading, isLoading}) => {
         

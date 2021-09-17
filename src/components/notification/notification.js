@@ -12,6 +12,9 @@ export const NotificationBell = () => {
     const notification = useSelector((state) => state.notification)
     const {loading, notifications, count} = notification
 
+    const user_data = useSelector(state => (state.user_data))
+    const {token} = user_data
+
     useEffect(() => {
         !notifications && getNotifications()
     }, [notifications])
@@ -34,19 +37,19 @@ export const NotificationBell = () => {
     }
 
     const getNotifications = () => {
-        dispatch(FetchNotifications('agent'))
+        dispatch(FetchNotifications(token, 'agent'))
     } 
     return (
         <>
             <div className="dropdown no-caret py-3 px-3 px-sm-6 d-flex align-items-center justify-content-end notice">
-                <a href="#" className="dropdown-toggle text-heading fs-20 font-weight-500 lh-1" data-toggle="dropdown">
+                <button className="bg-transparent border-0 dropdown-toggle text-heading fs-20 font-weight-500 lh-1" data-toggle="dropdown">
                     <i className="far fa-bell" />
                     <span className="badge badge-primary badge-circle badge-absolute font-weight-bold fs-13">
                         {
                             count > 0 && count
                         }
                     </span>
-                </a>
+                </button>
                 <div className="dropdown-menu dropdown-menu-right dropdown-menu-md" style={{zIndex: '9999'}}>
                     {
                         notifications 

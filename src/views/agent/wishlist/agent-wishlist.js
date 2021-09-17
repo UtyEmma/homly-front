@@ -11,9 +11,12 @@ const AgentWishlist = ({agent, setIsLoading}) => {
     const dispatch = useDispatch()
     const fetch_wishlists = useSelector(state => state.agent_wishlist)
     const {loading, wishlists} = fetch_wishlists
+
+    const user_data = useSelector(state => (state.user_data))
+    const {token} = user_data
     
     const FetchWishlist = () => {
-        dispatch(FetchAgentWishlists())
+        dispatch(FetchAgentWishlists(token))
     }
 
     useEffect(() => {

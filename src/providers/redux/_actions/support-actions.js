@@ -9,12 +9,12 @@ const {
     SEND_MESSAGE_REQUEST, SEND_MESSAGE_SUCCESS, SEND_MESSAGE_FAILURE,
     FETCH_MESSAGES_REQUEST, FETCH_MESSAGES_SUCCESS, FETCH_MESSAGES_FAILURE } = _SUPPORT;
 
-export const CreateNewTicket = (data) => (dispatch) => {
+export const CreateNewTicket = (token, data) => (dispatch) => {
     console.log("Creating Ticket...")
 
     dispatch({type: CREATE_NEW_TICKET_REQUEST})
 
-    SupportService.createTicket(data)
+    SupportService.createTicket(token, data)
                 .then((response) => {
                     Response.success(response.data)
                     dispatch({
@@ -31,12 +31,12 @@ export const CreateNewTicket = (data) => (dispatch) => {
                 })
 }
 
-export const FetchTickets = () => (dispatch) => {
+export const FetchTickets = (token) => (dispatch) => {
     console.log("Fetching Ticket...")
 
     dispatch({type: FETCH_TICKETS_REQUEST})
 
-    SupportService.fetchTickets()
+    SupportService.fetchTickets(token)
                 .then((response) => {
                     dispatch({
                         type : FETCH_TICKETS_SUCCESS,
@@ -53,12 +53,12 @@ export const FetchTickets = () => (dispatch) => {
 }
 
 
-export const DeleteTicket = (id) => (dispatch) => {
+export const DeleteTicket = (token, id) => (dispatch) => {
     console.log("Deleting Ticket...")
 
     dispatch({type: DELETE_TICKET_REQUEST})
 
-    SupportService.deleteTicket(id)
+    SupportService.deleteTicket(token, id)
                 .then((response) => {
                     Response.success(response.data)
                     dispatch({
@@ -75,12 +75,12 @@ export const DeleteTicket = (id) => (dispatch) => {
                 })
 }
 
-export const SendMessage = (data) => (dispatch) => {
+export const SendMessage = (token, data) => (dispatch) => {
     console.log("Sending Message...")
 
     dispatch({type: SEND_MESSAGE_REQUEST})
 
-    SupportService.sendMessage(data)
+    SupportService.sendMessage(token, data)
                 .then((response) => {
                     Response.success(response.data)
                     dispatch({
@@ -97,12 +97,12 @@ export const SendMessage = (data) => (dispatch) => {
                 })
 }
 
-export const FetchMessages = (ticket_id) => (dispatch) => {
+export const FetchMessages = (token, ticket_id) => (dispatch) => {
     console.log("Fetching Messages...")
 
     dispatch({type: FETCH_MESSAGES_REQUEST})
 
-    SupportService.fetchMessages(ticket_id)
+    SupportService.fetchMessages(token, ticket_id)
                 .then((response) => {
                     dispatch({
                         type : FETCH_MESSAGES_SUCCESS,

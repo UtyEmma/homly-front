@@ -1,8 +1,9 @@
 import { Request } from "./api/http";
 
 export const userService = {
-    signup, login, getTenant, updateTenantData, tenantResendEmail , logout
+    signup, getTenant, updateTenantData, tenantResendEmail , logout
 }
+
 
 const options = {
     'Accept' : 'application/json',
@@ -12,10 +13,7 @@ const options = {
 const authHeaders = {
     'Accept' : 'application/json',
     'Content-Type' : 'application/json',
-    'Authorization' : `Bearer ${localStorage.getItem('token')}`
 }
-
-const tenant_data = JSON.parse(localStorage.getItem('user'));
 
 async function signup(data) {
     const request = {
@@ -27,15 +25,6 @@ async function signup(data) {
     return await Request.post('tenant/signup', request)
 }
 
-
-async function login(data) {
-    const request = {
-        headers : options,
-        payload: data
-    }
-    return await Request.post('tenant/login', request)
-}
-
 async function getTenant(){
     const request = {
         config: {
@@ -45,18 +34,20 @@ async function getTenant(){
     return await Request.get('tenant/auth_user', request)
 }
 
-async function logout(){
+async function logout(token){
     const config = {
-        headers: authHeaders
+        headers: {
+            ...authHeaders,
+            'Authorization' : `Bearer ${token}`
+        }
     }
-
     return await Request.get('tenant/logout', config)
 }
 
 async function updateTenantData(data) {
     const request = {
         config: {
-            headers: {...options, 'Authorization' : `Bearer ${localStorage.getItem('token')}`},
+            headers: authHeaders
         },
         payload: data
     }
@@ -67,9 +58,9 @@ async function updateTenantData(data) {
 async function tenantResendEmail(data) {
     const request = {
         config: {
-            headers: {...options, 'Authorization' : `Bearer ${localStorage.getItem('token')}`},
+            headers: authHeaders,
         },
         payload: data
     }
-    return await Request.post(`tenant/resend/${tenant_data.unique_id}`, request)
+    return await Request.post(`tenant/resend/${data.unique_id}`, request)
 }

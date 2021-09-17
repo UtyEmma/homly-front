@@ -1,7 +1,6 @@
 import RatingStar from 'components/rating/rating-star'
-import { AdminMode, defaultAdminMode } from 'libraries/admin/admin-mode'
 import { DeleteItem, SuspendItem } from 'providers/redux/_actions/admin-actions'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ConfirmActionDialog } from 'views/layouts/components/modals/confirm-action-dialog'
 
@@ -76,7 +75,7 @@ export default function ListingAction({agent, listing}) {
                             &&
 
                             <li className="list-inline-item mr-6">
-                                <a href={agent.twitter} target="_blank" className="text-muted hover-primary">
+                                <a href={agent.twitter} target="_blank" className="text-muted hover-primary" rel="noreferrer">
                                     <i className="fab fa-twitter" /></a>
                             </li>
                         }
@@ -87,7 +86,7 @@ export default function ListingAction({agent, listing}) {
                             &&
 
                             <li className="list-inline-item mr-6">
-                                <a href={agent.facebook} target="_blank" className="text-muted hover-primary"><i className="fab fa-facebook-f"/></a>
+                                <a href={agent.facebook} target="_blank" className="text-muted hover-primary" rel="noreferrer"><i className="fab fa-facebook-f"/></a>
                             </li>
                         }
                         
@@ -98,7 +97,7 @@ export default function ListingAction({agent, listing}) {
                             && 
 
                             <li className="list-inline-item mr-6">
-                                <a href={agent.instagram} target="_blank" className="text-muted hover-primary"><i className="fab fa-instagram" /></a>
+                                <a href={agent.instagram} target="_blank" className="text-muted hover-primary" rel="noreferrer"><i className="fab fa-instagram" /></a>
                             </li>
                         }
 
@@ -109,7 +108,7 @@ export default function ListingAction({agent, listing}) {
                             && 
 
                             <li className="list-inline-item">
-                                <a href={agent.website} target="_blank" className="text-muted hover-primary"><i className="fa fa-globe-africa" /></a>
+                                <a href={agent.website} target="_blank" className="text-muted hover-primary" rel="noreferrer"><i className="fa fa-globe-africa" /></a>
                             </li>
                         }
                     </ul>
@@ -138,7 +137,7 @@ export default function ListingAction({agent, listing}) {
                                 <button type="button" disabled className="btn btn-block btn-lg btn-success hover-white text-capitalize">Property Rented</button>
 
                                 :
-                                <button type="button" onClick={suspendListing} className="btn btn-block btn-lg btn-outline-warning hover-white text-capitalize">{listing.status == 'active' ? 'Suspend' : 'Unsuspend'} Listing</button>
+                                <button type="button" onClick={suspendListing} className="btn btn-block btn-lg btn-outline-warning hover-white text-capitalize">{listing.status === 'active' ? 'Suspend' : 'Unsuspend'} Listing</button>
                             }
                             <button type="button" onClick={deleteListing} className="btn btn-block btn-lg btn-danger">Delete Listing</button>
                         </div>

@@ -15,8 +15,11 @@ const Reviews = ({agent, setIsLoading}) => {
     const dispatch = useDispatch();
     const {loading, reviews} = useSelector((state) => (state.agent_reviews));
 
+    const user_data = useSelector(state => (state.user_data))
+    const {token} = user_data
+
     const fetchReviews = () => {
-        dispatch(FetchAgentReview())
+        dispatch(FetchAgentReview(token))
     }
 
     useEffect(() => {

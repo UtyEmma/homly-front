@@ -1,6 +1,6 @@
 import RatingStar from 'components/rating/rating-star'
 import { DeleteItem, SuspendItem, VerifyAgent } from 'providers/redux/_actions/admin-actions'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ConfirmActionDialog } from 'views/layouts/components/modals/confirm-action-dialog'
 import AgentsListings from './agent-listings/agent-listings'
@@ -31,21 +31,21 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
         dispatch(VerifyAgent(agent.unique_id))
     } 
 
-    const handleSetAgentData = (agent) => {
-        setAgentData(agent)
-    }
+    const handleSetAgentData = useCallback((data) => {
+            setAgentData(agent)
+    }, [agent, setAgentData])
 
     useEffect(() => {
         setIsLoading(loading)
-    }, [loading])
+    }, [loading, setIsLoading])
 
     useEffect(() => {
         data && handleSetAgentData(data)
-    }, [data])
+    }, [data, handleSetAgentData])
 
     useEffect(() => {
         verifiedAgent && handleSetAgentData(verifiedAgent)
-    }, [verifiedAgent])
+    }, [verifiedAgent, handleSetAgentData])
 
     const deleteAgent = () => {
         return (
@@ -95,7 +95,7 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                                     
                                     ? 
                                     
-                                    <i className="ml-1 fas fa-certificate text-primary"></i> 
+                                    <i className="ml-1 fas fa-badge-check text-primary"></i> 
                                     
                                     :
                                     
@@ -144,7 +144,7 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                             <a href={`mailto:${agent.email}`} type="submit" className="btn btn-primary btn-lg btn-block shadow-none">Send Message</a>
 
                             {
-                                adminMode == 'true'
+                                adminMode === 'true'
 
                                 &&
 
@@ -195,7 +195,7 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                     
                     <AgentsListings listings={listings} setIsLoading={setIsLoading} />
 
-                    <AgentReviews status={status} reviews={reviews} agent={agent} fetchAgent={fetchAgent} setIsLoading={setIsLoading} />
+                    <AgentReviews status={status} reviews={reviews} agent={agent} setIsLoading={setIsLoading} />
                 </div>
                 </div>
                 </div>

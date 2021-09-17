@@ -1,7 +1,5 @@
-import { ScrollSpy } from 'bootstrap'
 import React from 'react'
 import './preloader.css'
-import ScrollAnimation from 'react-animate-on-scroll'
 
 export default function Preloader({loading}) {
     return (

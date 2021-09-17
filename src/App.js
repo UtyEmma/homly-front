@@ -34,7 +34,6 @@ import Preloader from './components/preloader/preloader';
 import Reviews from './views/agent/reviews';
 import VerifyEmail from './views/onboarding/verify-email';
 
-import { ToastContainer } from 'react-toastify';
 import { Support } from './views/agent/support/support';
 import AgentWishlist from './views/agent/wishlist/agent-wishlist';
 import { GoogleOneTapAuth } from './components/auth/social';
@@ -55,62 +54,44 @@ function App() {
 	const dispatch = useDispatch()
 
 	const [isLoading, setIsLoading] = useState(true)
-  
+
 	const query = useQuery()
+
+  const current_user = useSelector(state => state.user_data)
+  const { type, user, token } = current_user
+
 	const auth = query.get("auth")
 	const user_type = localStorage.getItem('type') 
 
   const {adminMode} = useSelector((state) => state.admin_mode)
 
-  const handleAdminMode = () => {
-    auth && user_type !== 'admin' && dispatch(VerifyAdmin(query.get("id")))
-  }
-
   const fetch_user = useSelector(state => state.user);
-  const {loading, success} = fetch_user
-
-  const [user, setUser] = useState()
-  const [type, setType] = useState(localStorage.getItem('type'))
-
-  const fetchLoggedInUser = () => {
-    if(!!localStorage.getItem('token')){
-      dispatch(GetLoggedInUser(localStorage.getItem('type')))
-    }
-  }
+  const {loading, auth_user} = fetch_user
 
   useEffect(() => {
-    handleAdminMode()
-  }, [])
+    auth && user_type !== 'admin' && dispatch(VerifyAdmin(query.get("id"))) 
+  }, [auth, dispatch, query, user_type])
+
 
   useEffect(() => {
-    fetchLoggedInUser()
-  }, []);
-
-  useEffect(() => {
-    success && setUser(success)
-  }, [success])
+    setIsLoading(loading)
+  }, [loading])
 
   return (
     <div className="App">
       <Preloader loading={isLoading}/>
 
-      
-      {/* <ToastContainer 
-        hideProgressBar={true}
-        newestOnTop={false}
-        closeOnClick 
-        draggable
-        pauseOnFocusLoss={false}
-      />   */}
-      <Toaster position='top-right'> 
-            {(t) => (
+      <Toaster position='bottom-right'> 
+        {(t) => (
           <ToastBar toast={t}>
             {({ icon, message }) => (
               <>
                 {icon}
                 {message}
                 {t.type !== 'loading' && (
-                  <button class="btn p-0" onClick={() => toast.dismiss(t.id)}>X</button>
+                  <button className="btn p-0" onClick={() => toast.dismiss(t.id)}>
+                    <i className="fa fa-times"></i>
+                  </button>
                 )}
               </>
             )}
@@ -119,49 +100,50 @@ function App() {
       </Toaster>
       
 
-		<GoogleOneTapAuth setIsLoading={setIsLoading} />
+      <GoogleOneTapAuth setIsLoading={setIsLoading} />
 
-		<AdminModeBadge adminMode={adminMode} />
+      <AdminModeBadge adminMode={adminMode} />
 
       <Switch>                  
-          {/* Common Routes */}
-          <Route path="/recover-password" render={(props) => (<PasswordRecovery {...props} isLoading={isLoading} setIsLoading={setIsLoading} />)} exact/>
-          <Route path="/reset-password" render={(props) => (<ResetPassword {...props} isLoading={isLoading} setIsLoading={setIsLoading} />)} exact/>
-          <Route path="/login" render={(props) => (<UserLogin {...props} isLoading={isLoading} setIsLoading={setIsLoading} />)} exact/>
-          <Route path="/signup" isLoading={isLoading} setIsLoading={setIsLoading} render={(props) => (<UserSignup {...props} setIsLoading={setIsLoading} isLoading={setIsLoading} />)} exact/>
+        {/* Common Routes */}
+        <Route path="/recover-password" render={(props) => (<PasswordRecovery {...props} user={user} isLoading={isLoading} setIsLoading={setIsLoading} />)} exact/>
+        <Route path="/reset-password" render={(props) => (<ResetPassword {...props} user={user} isLoading={isLoading} setIsLoading={setIsLoading} />)} exact/>
+        <Route path="/login" render={(props) => (<UserLogin {...props} isLoading={isLoading} user={user} setIsLoading={setIsLoading} />)} exact/>
+        <Route path="/signup" isLoading={isLoading} setIsLoading={setIsLoading} render={(props) => (<UserSignup user={user} {...props} setIsLoading={setIsLoading} isLoading={setIsLoading} />)} exact/>
 
-          <Route path="email/verify/{:type}/{:code}/{:user}" render={(props) => (<EmailVerified {...props} isLoading={isLoading} setIsLoading={setIsLoading} />)} exact/>
-          {/* User Routes */}
-          <UserRoute path="/" isLoading={isLoading} setIsLoading={setIsLoading} component={Home} exact/>
-          <UserRoute path="/about" isLoading={isLoading} setIsLoading={setIsLoading} component={About} exact />
-          <UserRoute path="/verify" isLoading={isLoading} setIsLoading={setIsLoading} component={VerifyEmail} exact />
-          <UserRoute path="/search" isLoading={isLoading} setIsLoading={setIsLoading} user component={Search} exact/>
-          <UserRoute path="/listings" isLoading={isLoading} setIsLoading={setIsLoading} user component={Listing} exact/>
-          <UserRoute path="/agents" isLoading={isLoading} setIsLoading={setIsLoading} user type="user" component={Agents} exact/>
-          <UserRoute path="/listings/:slug" isLoading={isLoading} setIsLoading={setIsLoading} user component={ListingDetails} exact/>
-          
-          {/* Tenant Routes */}
-          <TenantRoute path="/profile" isLoading={isLoading} setIsLoading={setIsLoading} user component={Profile} exact/>
-          <TenantRoute path="/wishlist" isLoading={isLoading} setIsLoading={setIsLoading} user component={Wishlist} exact/>
-          <TenantRoute path="/favourites" isLoading={isLoading} setIsLoading={setIsLoading} user component={Favourites} exact/>
+        <Route path="/email/verify/:code" render={(props) => (<EmailVerified {...props} user={user} isLoading={isLoading} setIsLoading={setIsLoading} />)} exact/>
+        
+        {/* User Routes */}
+        <UserRoute path="/" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={Home} exact/>
+        <UserRoute path="/about" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={About} exact />
+        <UserRoute path="/verify" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={VerifyEmail} exact />
+        <UserRoute path="/search" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={Search} exact/>
+        <UserRoute path="/listings" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={Listing} exact/>
+        <UserRoute path="/agents" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} type="user" component={Agents} exact/>
+        
+        {/* Tenant Routes */}
+        <TenantRoute path="/profile" isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} type={type} component={Profile} exact/>
+        <TenantRoute path="/wishlist" isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} type={type} component={Wishlist} exact/>
+        <TenantRoute path="/favourites" isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} type={type} component={Favourites} exact/>
 
 
-          {/* Agent Routes */}
-          <Route path="/agent-login" render={(props) => (<AgentLogin {...props} setIsLoading={setIsLoading} isLoading={isLoading} type="agent" />)} exact/>
-          <Route path="/agent-signup" render={(props) => (<AgentSignup {...props} setIsLoading={setIsLoading} isLoading={isLoading} type="agent" />)} exact/>
-          <AgentRoute path="/dashboard" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={AgentDashboard} exact />
-          <AgentRoute path="/new-listing" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={NewListing} exact />
-          <AgentRoute path="/agent-profile" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={AgentProfile} exact />
-          <AgentRoute path="/my-listings" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={AgentsListings} exact />
-          <AgentRoute path="/my-listings/:slug" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={AgentListingDetail} />
-          <AgentRoute path="/reviews" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={Reviews} exact />
-          <AgentRoute path="/support" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={Support} exact />
-          <AgentRoute path="/agent-wishlists" isLoading={isLoading} setIsLoading={setIsLoading} type="agent" component={AgentWishlist} exact />
+        {/* Agent Routes */}
+        <Route path="/agent-login" render={(props) => (<AgentLogin {...props} setIsLoading={setIsLoading} user={user} isLoading={isLoading} type="agent" />)} exact/>
+        <Route path="/agent-signup" render={(props) => (<AgentSignup {...props} setIsLoading={setIsLoading} user={user} isLoading={isLoading} type="agent" />)} exact/>
+        <AgentRoute path="/dashboard" isLoading={isLoading} setIsLoading={setIsLoading} token={token} type={type} user={user} component={AgentDashboard} exact />
+        <AgentRoute path="/new-listing" isLoading={isLoading} setIsLoading={setIsLoading} token={token} type={type} user={user} component={NewListing} exact />
+        <AgentRoute path="/agent-profile" isLoading={isLoading} setIsLoading={setIsLoading} token={token} type={type} user={user} component={AgentProfile} exact />
+        <AgentRoute path="/my-listings" isLoading={isLoading} setIsLoading={setIsLoading} token={token} type={type} user={user} component={AgentsListings} exact />
+        <AgentRoute path="/my-listings/:slug" isLoading={isLoading} setIsLoading={setIsLoading} type={type} token={token} user={user} component={AgentListingDetail} />
+        <AgentRoute path="/reviews" isLoading={isLoading} setIsLoading={setIsLoading} type={type} token={token} user={user} component={Reviews} exact />
+        <AgentRoute path="/support" isLoading={isLoading} setIsLoading={setIsLoading} type={type} token={token} user={user} component={Support} exact />
+        <AgentRoute path="/agent-wishlists" isLoading={isLoading} setIsLoading={setIsLoading} type={type} token={token} user={user} component={AgentWishlist} exact />
 
-          <Route path="/server-error" render={(props) => (<ServerError {...props} setIsLoading={setIsLoading}  />)} exact/>
+        <Route path="/server-error" render={(props) => (<ServerError {...props} setIsLoading={setIsLoading}  token={token} user={user} />)} exact/>
 
-          <UserRoute path="/:id" isLoading={isLoading} setIsLoading={setIsLoading} user type="user" component={AgentDetails} exact/>
-          <Route render={(props) => (<NotFound {...props} setIsLoading={setIsLoading}  />)} exact/>
+        <UserRoute path="/:username/:slug" type={type} isLoading={isLoading} setIsLoading={setIsLoading} user={user} token={token} component={ListingDetails} exact/>
+        <UserRoute path="/:id" isLoading={isLoading} setIsLoading={setIsLoading} user={user} type={type} token={token} component={AgentDetails} exact/>
+        <Route render={(props) => (<NotFound {...props} setIsLoading={setIsLoading}  user={user} />)} exact/>
       </Switch>
     </div>
   );

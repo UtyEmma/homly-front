@@ -1,90 +1,48 @@
 import { AgentLogout } from 'providers/redux/_actions/agent-actions'
 import { TenantLogout } from 'providers/redux/_actions/user-actions'
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-export default function ProfileButton({isloggedIn, user}) {
-
-    const [status, setStatus] = useState()
-
-    useEffect(() => {
-        setStatus(localStorage.getItem('type'))
-    })
-
+export default function ProfileButton({token, isloggedIn, user, status}) {
     return (
         <>
-            {isloggedIn ? LoggedIn(user, status) : loggedOut()}
+            {isloggedIn ? <LoggedIn user={user} status={status} /> : loggedOut()}
         </>
     )
 }
 
-function LoggedIn(user, status) {
+function LoggedIn({user, status}) {
 
     const dispatch = useDispatch()
-    const type = localStorage.getItem('type');
+    const {token} = useSelector(state => state.user_data)
 
     const logout = () => {
-        type === 'tenant' ? dispatch(TenantLogout()) : dispatch(AgentLogout())
+        status === 'tenant' ? dispatch(TenantLogout(token)) : dispatch(AgentLogout(token))
     }
 
     return (           
         <ul className="navbar-nav flex-row justify-content-lg-end align-items-center d-flex flex-wrap text-body py-2">            
-            
-            {
-                status === "tenant"
-
-                &&
-
-                <>
-                    <li className="nav-item">
-                        <Link className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" to="/wishlist">
-                            <i className="fal fa-gift fs-large-4" title="Wishlists" />
-                            {
-                                user.wishlists 
-                                
-                                &&
-
-                                <span className="badge badge-primary badge-circle badge-absolute p-1">{user.wishlists}</span>   
-                            }
-                        </Link>
-                    </li>
-
-                    <li className="nav-item">
-                        <Link to="/favourites" className="nav-link px-2 position-relative mr-md-2 pr-2 pl-0 pl-lg-2" >
-                            <i className="fal fa-heart fs-large-4" title="Favourites" />
-                            {
-                                user.wishlists 
-                                
-                                &&
-
-                                <span className="badge badge-primary badge-circle badge-absolute p-1">{user.wishlists}</span>   
-                            }
-                        </Link>
-                    </li>
-                </>
-            }
-            
             <li className="nav-item mr-md-2 d-flex align-items-center hover bg-hover-overlay-gradient-2 hover-primary rounded p-1 " >
 
                 <div className="dropdown px-md-3">
-                    <Link to="#" className="dropdown-toggle d-flex align-items-center justify-content-end text-heading" data-toggle="dropdown">
-                    {    
-                        user.avatar 
-                    ? 
-                        <div className="w-46px h-46 overflow-hidden">
-                            <img src={user.avatar} className="rounded-circle w-46px h-46" style={{objectFit: 'cover'}} alt={`${user.firstname}`} />
-                        </div> 
-                    : 
-                        <div className="d-inline-block w-46px h-46 bg-gray-01 rounded-circle fs-18 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mx-auto">
-                            {`${user.firstname.charAt(0).toUpperCase()}${user.lastname.charAt(0).toUpperCase()}`}
-                        </div>
-                    }
-                    <span className="fs-13 ml-2 font-weight-500 d-none d-sm-inline ml-0">
-                        Hello {user.firstname}
-                    </span>
-                    </Link>
-                    <div className="dropdown-menu dropdown-menu-right" style={{width: "200px"}}>
+                    <button className="btn px-0 py-0 dropdown-toggle d-flex align-items-center justify-content-end text-heading" data-toggle="dropdown">
+                        {    
+                            user.avatar 
+                        ? 
+                            <div className="w-46px h-46 overflow-hidden">
+                                <img src={user.avatar} className="rounded-circle w-46px h-46" style={{objectFit: 'cover'}} alt={`${user.firstname}`} />
+                            </div> 
+                        : 
+                            <div className="d-inline-block w-46px h-46 bg-gray-01 rounded-circle fs-18 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mx-auto">
+                                {`${user.firstname.charAt(0).toUpperCase()}${user.lastname.charAt(0).toUpperCase()}`}
+                            </div>
+                        }
+                        <span className="fs-13 ml-2 font-weight-500 d-none d-sm-inline ml-0">
+                            Hello {user.firstname}
+                        </span>
+                    </button>
+                    <div className="dropdown-menu mt-2 dropdown-menu-right" style={{width: "200px"}}>
                         {
                             status === 'tenant'
 
@@ -123,7 +81,7 @@ export function TenantNavItems () {
             </Link>
 
 
-            <Link className="dropdown-item rounded py-2 align-middle" to="/wishlists">
+            <Link className="dropdown-item rounded py-2 align-middle" to="/wishlist">
                 <i className="fa fa-gifts mr-3 text-primary"></i>
                 Wishlists
             </Link>

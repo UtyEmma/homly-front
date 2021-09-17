@@ -1,27 +1,8 @@
-import { AddListingToFavourites } from 'providers/redux/_actions/favourites-actions';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import ScrollAnimation from 'react-animate-on-scroll';
-import { useDispatch, useSelector } from 'react-redux';
+import { FavouriteListingButton } from 'views/tenants/favourites/components/favourite-listing-btn';
 
-export default function ListingList({listing}) {
-    const dispatch = useDispatch()
-
-    const item = useSelector((state) => state.add_favourites)
-    const {loading, status} = item
-
-    const [loaded, setLoaded] = useState(false)
-    const [favourite, setFavourite] = useState()
-
-    const addToFavourites = (e) => {
-        e.preventDefault(); 
-        setFavourite(!favourite)
-        dispatch(AddListingToFavourites(listing.unique_id))
-    }
-
-    useEffect(() => {
-        !loaded && setFavourite(listing.isFavourite)
-        setLoaded(true)
-    }, [status])
+export default function ListingList({listing, status}) {
 
     return (
         <ScrollAnimation animateIn="fadeInUp">
@@ -37,25 +18,30 @@ export default function ListingList({listing}) {
                                 <div className="mt-auto d-flex hover-image">
                                     <ul className="list-inline mb-0 d-flex align-items-end mr-auto">
                                         <li className="list-inline-item mr-2" data-toggle="tooltip" title={`${listing.images.length} Images`}>
-                                            <a href="#" className="text-white hover-primary">
+                                            <button className="btn p-0 text-white hover-primary">
                                             <i className="far fa-images" /><span className="pl-1">{listing.images.length}</span>
-                                            </a>
+                                            </button>
                                         </li>
                                     </ul>
-                                    <ul className="list-inline mb-0 d-flex align-items-end mr-n3">
-                                        <li className="list-inline-item mr-3 h-32" data-toggle="tooltip" title="Favourites">
-                                            <a href="#" style={{cursor: 'pointer'}} onClick={addToFavourites} className={`text-white fs-20 hover-primary`}>
-                                                <i className={`${favourite ? "fas text-primary" : 'far'} fa-heart`} />
-                                            </a>
-                                        </li>
-                                    </ul>
+
+                                    {
+                                        status === 'tenant'
+
+                                        &&
+
+                                        <ul className="list-inline mb-0 d-flex align-items-end mr-n3">
+                                            <li className="list-inline-item mr-3 h-32" data-toggle="tooltip" title="Favourites">
+                                                <FavouriteListingButton listing={listing} />
+                                            </li>
+                                        </ul>
+                                    }
                                 </div>
                             </div>
                         </div>
                         </div>
                         <div className="col-md-6 ">
                         <div className="card-body p-0">
-                            <h2 className="card-title my-0"><a href={`listings/${listing.slug}`} className="fs-16 lh-2 text-dark hover-primary d-block">{listing.title}</a>
+                            <h2 className="card-title my-0"><a href={`/${listing.agent.username}/${listing.slug}`} className="fs-16 lh-2 text-dark hover-primary d-block">{listing.title}</a>
                             </h2>
                             <p className="card-text mb-1 font-weight-500 text-gray-light">{listing.address}, {listing.city}, {listing.state}</p>
                             <p className="card-text mb-2 ml-0" style={{textOverflow: 'ellipsis'}}>{listing.description.split(" ").splice(0,15).join(" ")}</p>

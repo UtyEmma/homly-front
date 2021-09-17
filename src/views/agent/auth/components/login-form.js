@@ -2,17 +2,24 @@ import React, { useEffect, useState} from 'react'
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom';
-import { AgentLogin } from '../../../../providers/redux/_actions/agent-actions';
 import GoogleAuth from '../socialite/google-auth';
 import { togglePassword } from 'libraries/forms/toggle-password';
 import Validator from 'validatorjs';
 import { MapFormErrors } from 'libraries/validation/handlers/error-handlers';
 import { __agent_login } from 'libraries/validation';
+import { Login } from 'providers/redux/_actions/auth-action';
+import { FacebookLogin } from 'react-facebook-login/dist/facebook-login-render-props';
+import { persistor } from 'providers/redux/store';
 
 
 const AgentLoginForm = () =>  {
-    const agentLogin = useSelector((state) => state.agent_login);
-    const {loading, agent_success, verify_email, form_error} = agentLogin;
+    const agentLogin = useSelector((state) => state.user_data);
+    const {loading, user, type} = agentLogin;
+
+    const input_error = useSelector((state) => state.login);
+    const {form_error} = input_error;
+
+    const state = persistor.getState()
 
     const dispatch = useDispatch()
     const history = useHistory()
@@ -28,17 +35,21 @@ const AgentLoginForm = () =>  {
         
         if (validation.passes()) {
             setFormErrors({}); 
-            dispatch(AgentLogin(values));
+            dispatch(Login(values, 'agent'));
         } 
     } 
 
-    useEffect(() => {
-        verify_email && history.push('/verify')
-    }, [verify_email])
+    const responseFacebook = (response) => {
+        console.log(response)
+    }
 
     useEffect(() => {
-        agent_success && history.push('/dashboard')
-    }, [agent_success])
+       user && !user.isVerified && history.push('/verify')
+    }, [user, history])
+
+    useEffect(() => {
+        user && user.isVerified && type === 'agent' && history.push('/dashboard')
+    }, [user, type, history])
 
     useEffect(() => {
         form_error && setFormErrors(form_error)
@@ -93,17 +104,20 @@ const AgentLoginForm = () =>  {
                     </div>
                     <div className="row no-gutters mx-n2">
                         <div className="col-sm-6 px-2 mb-4">
-                        <a href="#" className="btn btn-lg btn-block text-heading border px-0 bg-hover-accent">
-                            <img src="images/facebook.png" alt="Google" className="mr-2" />
-                            Facebook
-                        </a>
+                            {/* <FacebookLogin
+                                appId="1003408093533632"
+                                render={renderProps => (
+                                    <button onClick={renderProps.onClick} className="btn btn-lg btn-block text-heading border px-0 bg-hover-accent">
+                                        <img src="images/facebook.png" alt="Facebook" className="mr-2" />
+                                        Facebook
+                                    </button> 
+                                )}
+                                fields="name,email,picture,username"
+                                callback={responseFacebook}
+                            /> */}
                         </div>
                         <div className="col-sm-6 px-2 mb-4">
-                        {/* <a href="#" className="btn btn-lg btn-block text-heading border px-0 bg-hover-accent">
-                            <img src="images/google.png" alt="Google" className="mr-2"/>
-                            Google
-                        </a> */}
-                        <GoogleAuth user="agent"/>
+                            <GoogleAuth user="agent"/>
                         </div>
                     </div>
                     </div>

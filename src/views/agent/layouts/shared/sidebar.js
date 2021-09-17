@@ -36,7 +36,7 @@ export default function Sidebar({agent}) {
                                                 agent.avatar 
                                             ? 
                                                 <div className="w-46px h-46 overflow-hidden">
-                                                    <img src={agent.avatar} className="rounded-circle  w-46px h-46" style={{objectFit: 'cover'}} alt={`${agent.firstname} ${agent.lastname}`} />
+                                                    <img src={agent.avatar} className="rounded-circle  w-46px h-46" style={{objectFit: 'cover'}} alt={`${agent.firstname}`} />
                                                 </div> 
                                             : 
                                                 <div className="d-inline-block mb-2 w-46px h-46 mr-2 bg-gray-01 rounded-circle fs-18 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
@@ -44,7 +44,7 @@ export default function Sidebar({agent}) {
                                                 </div>
                                             }
                                             <span className="fs-13 font-weight-500 d-none d-sm-inline ml-2">
-                                                Ronald Hunter
+                                                {agent.firstname}
                                             </span>
                                             </Link>
                                             <div className="dropdown-menu dropdown-menu-right">

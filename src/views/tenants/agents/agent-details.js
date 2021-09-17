@@ -22,35 +22,28 @@ const AgentDetails = ({isLoggedIn, user, status, setIsLoading}) => {
     const single_agent = useSelector(state => state.agent)
     const {loading, agent, error} = single_agent
 
-    const loadAgent = () => {
-        dispatch(FetchAgentDetails(id))
-    }
-
 
     useEffect(() => {
         setIsLoading(loading)
-    }, loading)
+    }, [loading, setIsLoading])
 
     useEffect(() => {
+        
+    }, [error])
+
+    useEffect(() => {
+        const loadAgent = () => {
+            dispatch(FetchAgentDetails(id))
+        }
+        
         !agent && loadAgent()
         agent && setAgentData(agent)
-        setIsLoading(loading)
-    }, [agent])
+    }, [agent, dispatch, id, setIsLoading])
 
     return (
         <div>
             <Helmet>
-                {
-                    agentData
-                    
-                    ?
-
-                    <title>{`${agentData.firstname}`} {`${agentData.lastname}`} - Bayof Agent</title>
-
-                    :
-
-                    <title>Bayof Agent</title>
-                }
+                <title>Bayof Agent</title>
                 <meta name="twitter:card" content="summary" />
                 <meta name="twitter:site" content="@" />
                 <meta name="twitter:creator" content="@" />
@@ -78,7 +71,7 @@ const AgentDetails = ({isLoggedIn, user, status, setIsLoading}) => {
                 
                 ?
 
-                <AgentDetailsContainer agent={agentData.agent} setAgentData={setAgentData} status={status} fetchAgent={loadAgent} listings={agentData.listing} reviews={agentData.reviews} setIsLoading={setIsLoading} />
+                <AgentDetailsContainer agent={agentData.agent} setAgentData={setAgentData} status={status} listings={agentData.listing} reviews={agentData.reviews} setIsLoading={setIsLoading} />
 
                 :
 

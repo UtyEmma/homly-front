@@ -1,6 +1,9 @@
+import { errorToast } from 'libraries/response/http-error'
+import { successToast } from 'libraries/response/response'
 import { GetLoggedInUser, ResendVerificationEmail } from 'providers/redux/_actions/auth-action'
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
+import toast from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
@@ -10,56 +13,61 @@ export default function VerifyEmail({user, setIsLoading}) {
     const history = useHistory()
 
     const type = localStorage.getItem('type');
-    
-    useEffect(() =>{
-        setIsLoading(false)
-    })
 
     const logged_user = useSelector(state => state.user)
-    const {auth_user, verify_email} = logged_user;
+    const {loading, auth_user, verify_email} = logged_user;
 
     const fetchLoggedInUser = () => {
         dispatch(GetLoggedInUser(type)) 
     }
 
     const resendVerificationEmail = () => {
-        let user = JSON.parse(localStorage.getItem('user'))
-        let id = user.unique_id
-        dispatch(ResendVerificationEmail(type, id))
+        dispatch(ResendVerificationEmail(type, user.unique_id))
     }
 
-    const handleSetUser = () => {
-        localStorage.removeItem('user')
-        localStorage.setItem('user', JSON.stringify(auth_user))
-        history.push('/verify')
-    }
+    useEffect(() =>{
+        setIsLoading(loading)
+    }, [loading])
 
     useEffect(() => {
-        !!verify_email && history.push('/verify')
+        verify_email && console.log(verify_email)
     }, [verify_email])
+
+    const handleSetUser = useCallback(() => {
+        localStorage.removeItem('user')
+        console.log(auth_user)
+        successToast("Email Verified")
+        localStorage.setItem('user', auth_user)
+        auth_user.type === 'tenant' ?  history.push('/') : history.push('/dashboard')
+    }, [history, auth_user])
+
+    useEffect(() => {
+        verify_email && history.push('/verify')
+        verify_email && errorToast("Email is Not Verified")
+    }, [history, verify_email])
 
     useEffect(() => {
         !!auth_user && handleSetUser()
-    }, [auth_user])
+    }, [auth_user, handleSetUser])
     
     return (
         <div className="bg-white" style={{height: '100vh'}}>
             <Helmet>
-                <title>Veirfy Your Email</title>
+                <title>Verify Your Email</title>
                 <meta name="description" content="Find Properties and agents around you." />
             </Helmet>
 
             <div className="row d-flex align-items-center justify-content-center" style={{height: '100%'}} >
-                {/* <div className="col-12 text-center pb-0">
+                {/* <div className="col-12 text-center pb-0 mb-0">
                     <a href="/">
-                        <img src="images/logo.png" alt="HomeID" className="d-none d-lg-inline-block" />
+                        <img src="/images/logo.png" alt="HomeID" className="d-none d-lg-inline-block" />
                     </a>
                 </div> */}
 
                 <div className="card shadow-0 col-md-7 p-5 py-9 border-0 text-center">
 
                     <div className="col-md-4 offset-md-4 col-6 offset-3 mt-4">
-                        <img src="images/svg/verify-email.svg" width="150" className="img-fluid" />
+                        <img src="images/svg/verify-email.svg" alt="verify email" width="150" className="img-fluid" />
                     </div>
 
                     <div className="col-12">

@@ -4,34 +4,98 @@ import _AUTH from "../_contants/auth-constants";
 
 const { 
     SOCIAL_AUTH_REQUEST, SOCIAL_AUTH_SUCCESS, SOCIAL_AUTH_FAILURE,
+    LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_SUCCESS_VERIFY_EMAIL, LOGIN_FAILURE, 
     PASSWORD_RECOVERY_REQUEST, PASSWORD_RECOVERY_SUCCESS, PASSWORD_RECOVERY_FAILURE,
     PASSWORD_RESET_REQUEST, PASSWORD_RESET_SUCCESS, PASSWORD_RESET_FAILURE 
 } = _AUTH;
 
-export const SocialAuth = (data) => (dispatch) => {
-    console.log('Sending Social Auth Request...')
 
+export const user = (data) => (dispatch) => {
+    dispatch({
+        type: 'SET_USER',
+        payload: data
+    })
+}
+
+export const UnsetUser = () => (dispatch) => {
+    dispatch({
+        type: 'UNSET_USER_DATA',
+     })
+}
+
+export const UpdateUser = (data) => (dispatch) => {
+    dispatch({
+        type: 'UPDATE_USER_DATA',
+        payload: data
+    })
+}
+
+export const FetchDataFromStorage = (key) => (dispatch) => {
+
+    AuthService.getDataFromStorage(key)
+                .then((res) => {
+                    dispatch({
+                        type: "FETCH_DATA_FROM_STORAGE",
+                        payload: res
+                    })
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+}
+
+
+export const Login = (data, type) => (dispatch) => {
+    dispatch({ type: LOGIN_REQUEST });
+
+    AuthService.login(data, type)
+            .then(response => {
+                let res = response.data.data;
+                let token = res.token
+                let user = res.user
+
+                dispatch({
+                    type: 'SET_USER_DATA',
+                    payload: {user: user, token: token, type: type}
+                })
+
+                return dispatch({
+                    type: LOGIN_SUCCESS,
+                    payload: {user: user, token: token, type: type, verified_email: res.user.isVerified}
+                })   
+            })
+            .catch(error => {
+                const errors = Response.error(error.response)
+                dispatch({
+                    type: LOGIN_FAILURE,
+                    payload: {error: error.response, formErrors: errors}
+                })
+            })
+}
+
+export const SocialAuth = (data) => (dispatch) => {
     dispatch({type: SOCIAL_AUTH_REQUEST})
 
     AuthService.socialAuth(data)
             .then((response) => {
-                let res = response.data;
-                localStorage.setItem('token', res.data.token);
-                localStorage.setItem('user', JSON.stringify(res.data.user));
-                localStorage.setItem('isAuthenticated', true);
-                localStorage.setItem('type', res.data.type);
+                let res = response.data.data;
+                let token = res.token
+                let user = res.user
+                let type = data.type
+
+                dispatch({
+                    type: 'SET_USER_DATA',
+                    payload: {user: user, token: token, type: type}
+                })
                 window.location.href = '/'
             })
             .catch((error) => {
                 Response.error(error.response)
-                console.log(error.response)
             })
 }
 
 
 export const RecoverPassword = (data) => (dispatch) => {
-    console.log('Recover Password Request...')
-
     dispatch({type: PASSWORD_RECOVERY_REQUEST})
 
     AuthService.recoverpassword(data)
@@ -52,8 +116,6 @@ export const RecoverPassword = (data) => (dispatch) => {
 }
 
 export const PasswordReset = (data) => (dispatch) => {
-    console.log('Reset Password Request...')
-
     dispatch({type: PASSWORD_RESET_REQUEST})
 
     AuthService.resetpassword(data)
@@ -76,30 +138,27 @@ export const PasswordReset = (data) => (dispatch) => {
 
 
 export const GetLoggedInUser = (type) => (dispatch) => {
-    console.log('Fetching User...')
-
-    dispatch({type: 'LOGGED_IN_USER_REQUEST'})
+    dispatch({type: 'GET_USER_REQUEST'})
 
     AuthService.getLoggedInUser(type)
             .then((response) => {
                 let user = response.data.data.user;
                 if(user.isVerified){
                     return dispatch({
-                        type: 'LOGGED_IN_USER_SUCCESS',
-                        payload: response.data.data
+                        type: 'GET_USER_SUCCESS',
+                        payload: {user: {...user, type: type}}
                     })
                 }
-
                 return dispatch({
-                    type: 'LOGGED_IN_USER_SUCCESS_VERIFY_EMAIL',
-                    payload: response.data.data
+                    type: 'GET_USER_VERIFY_EMAIL',
+                    payload: {user: {...user, type: type}}
                 })
 
             })
             .catch((error) => {
                 Response.error(error.response)
                 dispatch({
-                    type: 'LOGGED_IN_USER_FAILURE',
+                    type: 'GET_USER_FAILURE',
                     payload: error.response
                 })
             })
@@ -127,11 +186,11 @@ export const ResendVerificationEmail = (type, id) => (dispatch) => {
 }
 
 
-export const VerifyEmailAddress = (type, code, user_id) => (dispatch) => {
+export const VerifyEmailAddress = (code) => (dispatch) => {
 
     dispatch({type: 'VERIFY_EMAIL_REQUEST'})
 
-    AuthService.verifyEmail(type, code, user_id)
+    AuthService.verifyEmail(code)
             .then((response) => {
                 Response.success(response.data)
                 dispatch({

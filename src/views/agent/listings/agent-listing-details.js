@@ -2,7 +2,7 @@ import Preloader from "components/preloader/preloader"
 import { FetchSingleListing } from "providers/redux/_actions/listing/listing-actions"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom"
 import Header from "../layouts/shared/header"
 import Sidebar from "../layouts/shared/sidebar"
 import { AgentListingAmenities } from "./components/listing-details/agent-listing-amenities"
@@ -19,8 +19,10 @@ export const AgentListingDetail = ({agent, setIsLoading, isLoading}) => {
     const dispatch = useDispatch()
     const [listingItem, setListingItem] = useState(null)
 
+    const history = useHistory()
+
     const details = useSelector((state) => state.listing);
-    const {loading, listing} = details;
+    const {loading, listing, error} = details;
 
     useEffect(() => {
         !listing && fetchListingData(slug)
@@ -31,12 +33,16 @@ export const AgentListingDetail = ({agent, setIsLoading, isLoading}) => {
         setIsLoading(loading)
     }, [loading])
 
+    useEffect(() => {
+        error && history.push('/my-listings')
+    }, [error])
+
     const handleSetListing = () => {
         setListingItem(listing.listing)
     }
 
     const fetchListingData = (slug) => {
-        dispatch(FetchSingleListing(slug))
+        dispatch(FetchSingleListing(agent.username, slug))
     }
 
     return (
@@ -76,7 +82,7 @@ export const AgentListingDetail = ({agent, setIsLoading, isLoading}) => {
 
 
                                 <div className="col-md-4">
-                                    <AgentListingAside listingItem={listingItem} setListingItem={setListingItem} setIsLoading={setIsLoading} />
+                                    <AgentListingAside listingItem={listingItem} agent={agent} setListingItem={setListingItem} setIsLoading={setIsLoading} />
                                 </div>
                             </>
                         }                            

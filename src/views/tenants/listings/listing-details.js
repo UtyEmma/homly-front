@@ -15,7 +15,7 @@ import { Helmet } from 'react-helmet'
 
 
 const ListingDetails = ({isLoggedIn, user, status, adminMode, setIsLoading}) => {
-    const {slug} = useParams();
+    const {username, slug} = useParams();
     const dispatch = useDispatch()
 
     const [listingData, setListingData] = useState()
@@ -27,14 +27,14 @@ const ListingDetails = ({isLoggedIn, user, status, adminMode, setIsLoading}) => 
     const {data} = suspend_listing;
 
     useEffect(() => {
-        const fetchListingData = (slug) => {
-            dispatch(FetchSingleListing(slug))
+        const fetchListingData = () => {
+            dispatch(FetchSingleListing(username, slug))
         }
         
-        !listing && fetchListingData(slug)
+        !listing && fetchListingData()
         listing && setListingData(listing)
         data && setListingData(data)
-    }, [listing, data, slug, dispatch]);
+    }, [listing, data, username, slug, dispatch]);
 
     useEffect(() => {
         setIsLoading(false)

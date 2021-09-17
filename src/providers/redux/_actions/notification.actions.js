@@ -6,11 +6,11 @@ const {
     FETCH_NOTIFICATION_REQUEST, FETCH_NOTIFICATION_SUCCESS ,FETCH_NOTIFICATION_ERROR
 } = _NOTIFICATION 
 
-export const FetchNotifications = (type) => (dispatch) => {
+export const FetchNotifications = (token, type) => (dispatch) => {
     console.log("Fetching Notifications...")
     dispatch({ type: FETCH_NOTIFICATION_REQUEST });
 
-    NotificationService.fetchNotification(type)
+    NotificationService.fetchNotification(token, type)
                             .then((response) => {
                                 dispatch({
                                     type: FETCH_NOTIFICATION_SUCCESS,

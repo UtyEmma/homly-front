@@ -1,36 +1,40 @@
+import { authHeaders, headers } from "./api/headers";
 import { Request } from "./api/http";
 
-const options = {
-    'Accept' : 'application/json',
-    'Content-Type' : 'application/json',
-    'Authorization' : `Bearer ${localStorage.getItem('token')}`
+const options = (token = null) => {
+    return {    
+        'Accept' : 'application/json',
+        'Content-Type' : 'application/json',
+        'Authorization' : `Bearer ${token}`
+    }
 }
 
-const params = {
-    headers: options
+const params = (token) => {
+    return {
+        headers: authHeaders(token)
+    }
 }
-
 
 export const ListingService = {
-    newListing : async (data) => {
+    newListing : async (token, data) => {
         const params = {
             config: {
-                headers: options
+                headers: authHeaders(token)
             },
             payload: data
         }
         return await Request.post('agent/listing/create', params)
     },
 
-    getAgentListings : async () => {
-        const params = { headers: options }
+    getAgentListings : async (token) => {
+        const params = { headers: options(token) }
         return await Request.get('agent/listing/agents-listings', params)
     },
 
-    updateListing : async (data, id) => {
+    updateListing : async (token, data, id) => {
         const params = {
             config: {
-                headers: options
+                headers: options(token)
             },
             payload: data
         }
@@ -38,18 +42,14 @@ export const ListingService = {
     },
 
     loadActiveListings : async () => {
-        const params = {
-            'Accept' : 'application/json',
-            'Content-Type' : 'application/json'
-        }
-        return await Request.get('listings', params)
+        return await Request.get('listings', headers)
     },
 
     fetchAllListings : async (query) => {
         const config = {
-                headers: options,
-                params: query
-            }
+            headers: headers,
+            params: query
+        }
         return await Request.get('listings', {...config})
     },
 
@@ -57,16 +57,16 @@ export const ListingService = {
         return await Request.get('tenant/listings/details', params);
     },
     
-    fetchSingleListing : async (slug) => {
-        return await Request.get(`listings/${slug}`, params);
+    fetchSingleListing : async (username, slug) => {
+        return await Request.get(`listings/${username}/${slug}`, params);
     },
 
     fetchPopularListings: async () => {
         return await Request.get(`listings/popular`, params)
     },
 
-    setAsRented: async (id) => {
-        return await Request.get(`agent/listing/rented/${id}`, params)
+    setAsRented: async (token, id) => {
+        return await Request.get(`agent/listing/rented/${id}`, params(token))
     },
 
     updateViews : async (id) => {

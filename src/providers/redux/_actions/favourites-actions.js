@@ -1,6 +1,7 @@
 import Response from "libraries/response/response";
 import { FavouriteService } from "providers/services/favorites-service";
 import { _FAVOURTIES } from "../_contants/favourite-constants";
+import { UpdateUser } from "./auth-action";
 
 const { 
     FETCH_FAVOURTIES_REQUEST, FETCH_FAVOURTIES_SUCCESS, FETCH_FAVOURTIES_FAILURE, 
@@ -16,7 +17,11 @@ export const AddListingToFavourites = (listing_id) => (dispatch) => {
 
     FavouriteService.addFavourites(listing_id)
                     .then((response) => {
-                        Response.success(response.data)
+                        const res = response.data
+                        Response.success(res)
+                        
+                        dispatch(UpdateUser(res.data.user))
+
                         dispatch({
                             type: ADD_FAVOURITES_SUCCESS,
                             payload: response.data
@@ -39,6 +44,7 @@ export const RemoveListingFromFavourites = (listing_id) => (dispatch) => {
     FavouriteService.removeFavourites(listing_id)
                     .then((response) => {
                         Response.success(response.data)
+                        localStorage.setItem('user', response.data.data.user)
                         dispatch({
                             type: REMOVE_FAVOURITES_SUCCESS,
                             payload: response.data

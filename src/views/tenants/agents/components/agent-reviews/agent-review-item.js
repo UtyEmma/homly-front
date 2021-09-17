@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import RatingStar from 'components/rating/rating-star';
 import { useDispatch } from 'react-redux';
 import { DeleteReview, EditReview } from 'providers/redux/_actions/review-actions';
 
 export default function AgentReviewItem({review, publisher}) {
     const dispatch = useDispatch()
-
-    const review_id = review.review_id;
 
     const deleteReview = () => {
         dispatch(DeleteReview(review.unique_id))
@@ -60,7 +58,7 @@ export default function AgentReviewItem({review, publisher}) {
                         
                         <>
                             <div className="btn-group ">
-                                <a type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="mb-0 text-muted border-left border-dark dropdown hover-primary lh-1 ml-2 pl-2"><i className="fa fa-edit"></i></a>
+                                <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn p-0 mb-0 text-muted border-left border-dark dropdown hover-primary lh-1 ml-2 pl-2"><i className="fa fa-edit"></i></button>
 
                                 <div className="dropdown-menu dropdown-menu-lg dropdown-menu-left mb-2">
                                     <div className="py-2 px-3">
@@ -100,7 +98,7 @@ export default function AgentReviewItem({review, publisher}) {
                                     </div>
                                 </div>
                             </div>
-                            <a type="button" onClick={deleteReview} class="mb-0 text-muted border-left border-dark hover-primary lh-1 ml-2 pl-2"><i className="fa fa-trash-alt"></i></a>
+                            <button type="button" onClick={deleteReview} class="btn p-0 mb-0 text-muted border-left border-dark hover-primary lh-1 ml-2 pl-2"><i className="fa fa-trash-alt"></i></button>
                         </>
                     }
                     </div>
