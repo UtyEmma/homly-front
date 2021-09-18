@@ -13,10 +13,13 @@ export default function FavouriteItem({listing, fetchFavourites}) {
     const [loaded, setLoaded] = useState(false)
     const [favourite, setFavourite] = useState()
 
+    const user_data = useSelector(state => (state.user_data))
+    const {token} = user_data
+
     const addToFavourites = (e) => {
         e.preventDefault(); 
         setFavourite(!favourite)
-        dispatch(AddListingToFavourites(listing.unique_id))
+        dispatch(AddListingToFavourites(token, listing.unique_id))
     }
 
     useEffect(() => {
@@ -36,16 +39,16 @@ export default function FavouriteItem({listing, fetchFavourites}) {
                     <div className="mt-auto d-flex hover-image">
                     <ul className="list-inline mb-0 d-flex align-items-end mr-auto">
                         <li className="list-inline-item mr-2" data-toggle="tooltip" title={`${listing.images.length} Images`}>
-                            <a  className="text-white hover-primary">
+                            <button className="bg-transparent border-0 text-white hover-primary">
                                 <i className="far fa-images" /><span className="pl-1">{listing.images.length}</span>
-                            </a>
+                            </button>
                         </li>
                     </ul>
                     <ul className="list-inline mb-0 d-flex align-items-end mr-n3">
                         <li className="list-inline-item mr-3 h-32" data-toggle="tooltip" title="Wishlist">
-                            <a href="#" style={{cursor: 'pointer'}} onClick={addToFavourites} className={`text-white fs-20 hover-primary`}>
+                            <button style={{cursor: 'pointer'}} onClick={addToFavourites} className={`bg-transparent border-0 text-white fs-20 hover-primary`}>
                                 <i className={`${favourite ? "fas text-primary" : 'far'} fa-heart`} />
-                            </a>
+                            </button>
                         </li>
                     </ul>
                     </div>

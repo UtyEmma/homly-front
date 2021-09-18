@@ -6,13 +6,26 @@ import Footer from 'components/shared/footer';
 import UserLoginForm from './components/login-form';
 import { useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
+import { useQuery } from 'libraries/http/query';
+import toast from 'react-hot-toast';
+import { useHistory } from 'react-router-dom';
 
 const UserLogin = ({isLoading, setIsLoading}) => {
 
     const {loading} = useSelector(state => state.login)
+    const history = useHistory()
+
+    let message = useQuery().get('msg')
     
     useEffect(() => {
     }, [loading])
+
+    useEffect(() => {
+        if (message) { 
+            toast.success(message)
+            history.push('/login')
+        }
+    })
 
     useEffect(() => {
         setIsLoading(false)

@@ -18,13 +18,21 @@ export const AuthService = {
         return Request.get(`${type}/user`, auth)
     },
 
+    login: async (data, type) => {
+        const request = {
+            headers : options,
+            payload: data
+        }
+        return await Request.post(`${type}/login`, request)
+    },    
+
     resendVerificationEmail: async (type, id) => {
         return Request.get(`${type}/resend/${id}`, auth)
     },
 
 
-    verifyEmail: async (type, code, user_id) => {
-        return Request.get(`email/verify/${type}/${code}/${user_id}`, auth)
+    verifyEmail: async (code) => {
+        return Request.get(`auth/email/verify/${code}`, auth)
     },
 
     socialAuth: async (data) => {

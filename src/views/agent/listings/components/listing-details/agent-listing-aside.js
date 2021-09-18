@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ConfirmActionDialog } from "views/layouts/components/modals/confirm-action-dialog";
 
-export const AgentListingAside = ({listingItem, setIsLoading, setListingItem}) => {
+export const AgentListingAside = ({agent, listingItem, setIsLoading, setListingItem}) => {
     
     const dispatch = useDispatch()
 
@@ -14,6 +14,9 @@ export const AgentListingAside = ({listingItem, setIsLoading, setListingItem}) =
     
     const set_as_rented = useSelector(state => state.set_as_rented)
     const {loading, listing} = set_as_rented;
+
+    const user_data = useSelector(state => (state.user_data))
+    const {token} = user_data
 
     const delete_listing = useSelector(state => (state.delete_listing))
 
@@ -25,7 +28,7 @@ export const AgentListingAside = ({listingItem, setIsLoading, setListingItem}) =
     }
 
     const markAsRented = () => {
-        dispatch(SetAsRented(listingItem.unique_id))    
+        dispatch(SetAsRented(token, listingItem.unique_id))    
     }
 
     useEffect(() => {
@@ -35,7 +38,7 @@ export const AgentListingAside = ({listingItem, setIsLoading, setListingItem}) =
 
     useEffect(() => {
         setIsLoading(delete_listing.loading)
-    }, [delete_listing.loading])
+    }, [delete_listing. loading])
 
     return (
         <>
@@ -105,7 +108,7 @@ export const AgentListingAside = ({listingItem, setIsLoading, setListingItem}) =
                         </>
                     }
 
-                    <a href={`../listings/${listingItem.slug}`} target="_blank" className="btn btn btn-primary btn-lg btn-block rounded border-primary bg-hover-white border-hover-primary hover-primary">Preview Property <i className="ml-1 fa fa-external-link-alt"></i></a>
+                    <a href={`../listings/${agent.username}/${listingItem.slug}`} target="_blank" className="btn btn btn-primary btn-lg btn-block rounded border-primary bg-hover-white border-hover-primary hover-primary" rel="noreferrer">Preview Property <i className="ml-1 fa fa-external-link-alt"></i></a>
                     <button type="button" className="btn btn-outline-primary btn-lg btn-block rounded border text-body border-hover-primary hover-white mt-4" data-toggle="modal" data-target="#exampleModal">Edit Property Info <i className="ml-1 far fa-edit"></i></button>
                     <button type="button" onClick={deleteListing} className="btn btn-link btn-lg btn-block text-body mt-4">Delete Property <i className="ml-1 far fa-trash"></i></button>
                 </div>

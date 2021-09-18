@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 
 import HeroSection from './layouts/home/hero-section'
 import PopularSection from './layouts/home/popular-section'
@@ -7,7 +7,7 @@ import Footer from 'components/shared/footer'
 import ScrollAnimation from 'react-animate-on-scroll'
 import { Helmet } from 'react-helmet'
 
-const Home = ({isLoggedIn, user, isLoading, setIsLoading, status}) => {
+const Home = ({isLoggedIn, user, isLoading, setIsLoading, status, token}) => {
 
     return (
         <div>           
@@ -29,7 +29,8 @@ const Home = ({isLoggedIn, user, isLoading, setIsLoading, status}) => {
                 <meta property="og:image:height" content="630" />
                 <meta name="description" content="Find Properties and agents around you." />
             </Helmet>
-            <NavBar isloggedIn={isLoggedIn} user={user} status={status} />
+            
+            <NavBar isloggedIn={isLoggedIn} token={token} user={user} status={status} />
             
             <main id="content">
                 <HeroSection/>

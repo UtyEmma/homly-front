@@ -2,7 +2,6 @@ import { AgentConstants } from "../_contants/agent-constants";
 
 
 const { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE,
-        LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_SUCCESS_VERIFY_EMAIL, LOGIN_FAILURE,
         UPDATE_REQUEST, UPDATE_SUCCESS, UPDATE_FAILURE,
         SHOW_AGENTS_REQUEST, SHOW_AGENTS_SUCCESS, SHOW_AGENTS_FAILURE,
         DELETE_LISTING_REQUEST, DELETE_LISTING_SUCCESS, DELETE_LISTING_FAILURE,
@@ -20,21 +19,6 @@ export function AgentSignupReducer (state = {}, action) {
             return { ...state, agent_success: action.payload, loading: false }
         case SIGNUP_FAILURE:
             return { ...state, agent_error: action.payload.error, form_error: action.payload.formError, loading: false }
-        default:
-            return state;
-    }
-}
-
-export function AgentLoginReducer (state = {}, action){
-    switch (action.type) {
-        case LOGIN_REQUEST:
-            return {...state, loading: true}
-        case LOGIN_SUCCESS:
-            return {...state, agent_success: action.payload, loading: false}
-        case LOGIN_SUCCESS_VERIFY_EMAIL:
-            return {...state, verify_email: action.payload, loading: false}
-        case LOGIN_FAILURE:
-            return {...state, agent_error: action.payload.errors, form_error: action.payload.formError, loading: false}
         default:
             return state;
     }

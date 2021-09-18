@@ -1,3 +1,4 @@
+import { authHeaders } from "./api/headers";
 import { Request } from "./api/http";
 
 
@@ -6,7 +7,15 @@ const auth_config = {
         headers: {
             'Accept': 'application/json', 
             'Content-Type': 'application/json', 
-            'Authorization' : `Bearer ${localStorage.getItem('token')}` 
+            'Authorization' : `Bearer` 
+        }
+    }
+}
+
+const authHeader = (token = "") => {
+    return {
+        headers: {
+            ...authHeaders(token)
         }
     }
 }
@@ -33,35 +42,37 @@ export const AgentService = {
         return await Request.post('agent/login', request)
     },
 
-    update : async (data) => {
+    update : async (token, data) => {
         const request = {
-            ...auth_config,
+            config : {
+                ...authHeader(token)
+            },
             payload: data
         }
         return await Request.post('agent/update', request)
     },
 
     show : async () => {
-        return await Request.get('agent/all', auth_config)
+        return await Request.get('agent/all', options)
     },
 
-    logout : async () => {
-        return await Request.get('agent/logout', auth_config.config)
+    logout : async (token) => {
+        return await Request.get('agent/logout', authHeader(token))
     },
 
-    deleteListing : async (id) => {
-        return await Request.get(`agent/listing/delete/${id}`, auth_config.config);
+    deleteListing : async (token, id) => {
+        return await Request.get(`agent/listing/delete/${id}`, authHeader(token));
     },
 
-    removeListing : async (id) => {
-       return await Request.get(`agent/listing/remove/${id}`, auth_config.config);
+    removeListing : async (token, id) => {
+       return await Request.get(`agent/listing/remove/${id}`, authHeader(token));
     },
 
-    fetchSingleAgent : async (id) => {
-        return await Request.get(`agent/${id}`, auth_config.config)
+    fetchSingleAgent : async (token, id) => {
+        return await Request.get(`agent/${id}`, authHeader(token))
     },
 
-    fetchAgentsWishlists : async () => {
-        return await Request.get('agent/wishlists', auth_config.config);
+    fetchAgentsWishlists : async (token) => {
+        return await Request.get('agent/wishlists', authHeader(token));
     }
 }

@@ -1,22 +1,14 @@
-import React from "react";
-import { Redirect, Route } from "react-router-dom";
+import Preloader from "components/preloader/preloader";
+import React, { useEffect, useState } from "react";
+import { Route } from "react-router-dom";
 
-function UserRoute({ isLoading, setIsLoading, component: Component, ...restOfProps}) {
-  
-  const isAuthenticated = localStorage.getItem("isAuthenticated");
-  const userType = isAuthenticated ? localStorage.getItem('type') : "guest";
-  const user_object = JSON.parse(localStorage.getItem('user'));
-  let user = null;
-
-  if(isAuthenticated){ user = user_object; console.log(user_object) }
-
+function UserRoute({user, type, token, isLoading, setIsLoading, component: Component, ...restOfProps}) {
   return (
-    <Route
-      {...restOfProps}
-      render={(props) =>
-            <Component {...props} status={userType} isLoading={isLoading} setIsLoading={setIsLoading} isLoggedIn={isAuthenticated} user={user_object} />
-      }
-    />
+      <Route
+        {...restOfProps}
+        render={(props) =>
+              <Component {...props} token={token} status={type} isLoading={isLoading} setIsLoading={setIsLoading} isLoggedIn={!!user} user={user} />
+        }/>
   );
 }
 

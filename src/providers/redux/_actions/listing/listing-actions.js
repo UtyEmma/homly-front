@@ -36,11 +36,11 @@ export const CreateListing = (data) => (dispatch) =>{
                 })
 }
 
-export const GetAgentListings = () => (dispatch) => {
+export const GetAgentListings = (token) => (dispatch) => {
     console.log("Fetching Agent's Listings...")
 
     dispatch({ type : GETLISTINGS_REQUEST })
-    ListingService.getAgentListings()
+    ListingService.getAgentListings(token)
                     .then(response => {
                         return dispatch({
                             type: GETLISTINGS_SUCCESS,
@@ -56,12 +56,12 @@ export const GetAgentListings = () => (dispatch) => {
                     })
 }
 
-export const UpdateListing = (data, id) => (dispatch) => {
+export const UpdateListing = (token, data, id) => (dispatch) => {
     console.log('Updating Listing...')
 
     dispatch({ type: UPDATE_LISTING_REQUEST })
 
-    ListingService.updateListing(data, id)
+    ListingService.updateListing(token, data, id)
                     .then(response => {
                         Response.success(response.data)
                         return dispatch({
@@ -147,12 +147,12 @@ export const FetchListingDetails = () => (dispatch) => {
 }
 
 
-export const FetchSingleListing = (slug) => (dispatch) => {
+export const FetchSingleListing = (username, slug) => (dispatch) => {
     console.log('fetching...');
     
     dispatch({ type: FETCH_SINGLE_LISTING_REQUEST });
 
-    ListingService.fetchSingleListing(slug)
+    ListingService.fetchSingleListing(username, slug)
                     .then(response => {
                         return dispatch({
                             type : FETCH_SINGLE_LISTING_SUCCESS,
@@ -189,12 +189,12 @@ export const FetchPopularListings = () => (dispatch) => {
                 })
 }
 
-export const SetAsRented = (id) => (dispatch) => {
+export const SetAsRented = (token, id) => (dispatch) => {
     console.log("Setting as Rented...")
 
     dispatch({type: SET_AS_RENTED_REQUEST})
 
-    ListingService.setAsRented(id)
+    ListingService.setAsRented(token, id)
                     .then((response) => {
                         Response.success(response.data)
                         dispatch({

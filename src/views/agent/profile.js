@@ -11,10 +11,13 @@ import { UpdateAgentProfile } from 'providers/redux/_actions/agent-actions';
 const AgentProfile = ({agent, setIsLoading}) => {
         const dispatch = useDispatch()
         const profileImage = createRef()
-        const [selectedState, setSelectedState] = useState('Abia')
+        const [selectedState, setSelectedState] = useState()
 
         const updateProfile = useSelector(state => (state.update_agent_profile))
-        const {loading, success, error} = updateProfile
+        const {loading, error} = updateProfile
+
+        const user_data = useSelector(state => (state.user_data))
+        const {token} = user_data
 
         useEffect(() => {
             error && error.formError && setFormErrors(error.formError)
@@ -22,9 +25,9 @@ const AgentProfile = ({agent, setIsLoading}) => {
 
         useEffect(() => {
             setIsLoading(loading)
-        }, [loading])
+        }, [loading, setIsLoading])
 
-        const {rules, messages, attributes} = __agent_updateProfile
+        const {rules, attributes} = __agent_updateProfile
         const [formErrors, setFormErrors] = useState({})
 
         const updateUserData = (e) => {
@@ -36,7 +39,7 @@ const AgentProfile = ({agent, setIsLoading}) => {
             validation.fails(() => {setFormErrors(MapFormErrors(validation.errors.errors))})
             if (validation.passes()) {
                 setFormErrors({}); 
-                dispatch(UpdateAgentProfile(data));
+                dispatch(UpdateAgentProfile(token, data));
             } 
         }
 
@@ -61,7 +64,7 @@ const AgentProfile = ({agent, setIsLoading}) => {
                                 <div className="mb-6">
                                     <h2 className="mb-0 text-heading fs-22 lh-15">My Profile</h2>
                                     <p className="mb-5">Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse suscipit</p>
-                                    <a href={`/${agent.username}`} target="_blank" className="btn btn-lg btn-outline-primary d-block d-md-inline my-3">Preview Profile <i className="ml-1 fa fa-external-link-alt"></i></a>
+                                    <a href={`/${agent.username}`} target="_blank" className="btn btn-lg btn-outline-primary d-block d-md-inline my-3" rel="noreferrer">Preview Profile <i className="ml-1 fa fa-external-link-alt"></i></a>
                                 </div>
                                 <form onSubmit={updateUserData} id="profile-form" encType="multipart/form-data">
                                     <div className="row mb-6">
@@ -130,9 +133,7 @@ const AgentProfile = ({agent, setIsLoading}) => {
                                                         </div>
                                                         <div className="form-group col-md-12 px-4">
                                                             <label htmlFor="phone" className="text-heading">Bio</label>
-                                                            <textarea rows="4" className="form-control form-control-lg border-0" id="bio" name="bio">
-                                                                {agent.bio}
-                                                            </textarea>
+                                                            <textarea rows="4" defaultValue={agent.bio} className="form-control form-control-lg border-0" id="bio" name="bio"></textarea>
                                                             <p className="text-danger fs-12 mt-1">{formErrors.bio?.message}</p>
                                                         </div>
                                                     </div>

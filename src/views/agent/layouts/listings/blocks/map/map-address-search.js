@@ -12,6 +12,7 @@ export default function InputAddress({setLandmark, setLatLong, name, defaultValu
     const handleSelection = (query) => {
         setLatLong(query)
         setLandmark(query)
+        console.log("Selected ", query)
         clearSuggestions();
     }
 

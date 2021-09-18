@@ -1,28 +1,10 @@
-import { AddListingToFavourites } from 'providers/redux/_actions/favourites-actions'
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
 import ScrollAnimation from 'react-animate-on-scroll';
 import '../css/listing.css'
+import { FavouriteListingButton } from 'views/tenants/favourites/components/favourite-listing-btn';
 
 export default function ListingGrid({listing, status}) {
     
-    const dispatch = useDispatch()
-
-    const item = useSelector((state) => state.add_favourites)
-    const {loading, favourite} = item
-
-    const [isFavourite, setIsFavourite] = useState()
-
-    const addToFavourites = (e) => {
-        e.preventDefault(); 
-        setIsFavourite(!isFavourite)
-        dispatch(AddListingToFavourites(listing.unique_id))
-    }
-
-    useEffect(() => {
-        favourite && setIsFavourite(listing.isFavourite)
-    }, [favourite])
-
     return (
         <ScrollAnimation animateIn="fadeInUp" className='col-md-6 mb-6 listing-grid'>
             <div className="card border-0" >
@@ -35,9 +17,9 @@ export default function ListingGrid({listing, status}) {
                         <div className="mt-auto d-flex hover-image">
                             <ul className="list-inline mb-0 d-flex align-items-end mr-auto">
                                 <li className="list-inline-item mr-2" data-toggle="tooltip" title={`${listing.images.length} Images`}>
-                                    <a  className="text-white hover-primary">
+                                    <button className="btn p-0 text-white hover-primary">
                                         <i className="far fa-images" /><span className="pl-1">{listing.images.length}</span>
-                                    </a>
+                                    </button>
                                 </li>
                             </ul>
                             {
@@ -47,9 +29,7 @@ export default function ListingGrid({listing, status}) {
 
                                 <ul className="list-inline mb-0 d-flex align-items-end mr-n3">
                                     <li className="list-inline-item mr-3 h-32" data-toggle="tooltip" title="Favourites">
-                                        <a href="#" style={{cursor: 'pointer'}} onClick={addToFavourites} className={`text-white fs-20 hover-primary`}>
-                                            <i className={`${favourite ? "fas text-primary" : 'far'} fa-heart`} />
-                                        </a>
+                                        <FavouriteListingButton listing={listing} />
                                     </li>
                                 </ul>
                             }
@@ -58,7 +38,7 @@ export default function ListingGrid({listing, status}) {
                 </div>
                 <div className="card-body pt-3 px-0 pb-1">
                     <h2 className="fs-16 mb-1">
-                        <a href={`/listings/${listing.slug}`} className="d-inline-block text-dark hover-primary w-100 text-nowrap text-truncate">{listing.title}</a>
+                        <a href={`/${listing.agent.username}/${listing.slug}`} className="d-inline-block text-dark hover-primary w-100 text-nowrap text-truncate">{listing.title}</a>
                     </h2>
                     
                     <p className="font-weight-500 text-gray-light mb-0 d-inline-block text-nowrap text-truncate w-100">{listing.address}, {listing.city}, {listing.state}</p>

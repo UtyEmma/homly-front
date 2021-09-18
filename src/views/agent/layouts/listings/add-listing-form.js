@@ -10,6 +10,7 @@ import { FetchDetails } from 'providers/redux/_actions/details-actions';
 import { MapFormErrors, __createlisting } from 'libraries/validation';
 import Validator from 'validatorjs';
 import { NewListingStepper } from './listing-function';
+import toast from 'react-hot-toast';
 
 function AddListingForm({setIsLoading}) {
     const dispatch = useDispatch();
@@ -50,7 +51,10 @@ function AddListingForm({setIsLoading}) {
         const values = Object.fromEntries(formData.entries());
         let validation = new Validator(values, rules)
         validation.setAttributeNames(attributes);
-        validation.fails(() => {setFormErrors(MapFormErrors(validation.errors.errors))})
+        validation.fails(() => {
+            toast.error("Invalid Input Data")
+            setFormErrors(MapFormErrors(validation.errors.errors))
+        })
 
         if (validation.passes()) {
             setFormErrors({}); 

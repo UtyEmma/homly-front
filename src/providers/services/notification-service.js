@@ -1,15 +1,17 @@
 const { Request } = require("./api/http")
 
-const config = {
-            headers : {
-                'Accept' : 'application/json',
-                'Content-Type' : 'application/json',
-                'Authorization' : `Bearer ${localStorage.getItem('token')}`
-            }
+const config = (token) =>  {
+    return {
+        headers : {
+            'Accept' : 'application/json',
+            'Content-Type' : 'application/json',
+            'Authorization' : `Bearer ${token}`
         }
+    }
+}
 
 export const NotificationService = {
-    fetchNotification : async (type) => {
-        return await Request.get(`${type}/notifications`, config)
+    fetchNotification : async (token, type) => {
+        return await Request.get(`${type}/notifications`, config(token))
     }
 }

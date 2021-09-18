@@ -3,8 +3,22 @@ import AgentLoginForm from './components/login-form';
 import Footer from 'components/shared/footer';
 import NavBar from 'components/shared/nav-bar';
 import { Helmet } from 'react-helmet';
+import { useHistory } from 'react-router-dom';
+import { useQuery } from 'libraries/http/query';
+import toast from 'react-hot-toast';
 
 const AgentLogin  =  ({setIsLoading}) => {
+
+    const history = useHistory()
+
+    let message = useQuery().get('msg')
+
+    useEffect(() => {
+        if (message) { 
+            toast.success(message)
+            history.push('/agent-login')
+        }
+    })
 
     useEffect(() => {
         setIsLoading(false)   

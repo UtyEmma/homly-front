@@ -1,21 +1,13 @@
-import { ListingToast } from "components/toasts/listing-toast"
-import { toast } from "react-toastify"
+import toast from "react-hot-toast"
 import Error from "./http-error"
 
-const styles = { 
-    background: 'white',
-    fontSize: '16px',
-    fontWeight: '600',
-    lineHeight: '24px',
-    borderLeft: '6px solid green'
+export const successToast = (message) => {
+    return toast.success(message)
 }
 
 const Response = {
     success : (data) => { 
-        toast.dark(data.message, {
-            className: 'text-dark',
-            style: styles
-        })
+        successToast(data.message)
     },
     error: (data)=>{ return Error(data) },
 }

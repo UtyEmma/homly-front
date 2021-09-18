@@ -1,26 +1,35 @@
 import { SendMessage } from 'providers/redux/_actions/support-actions'
-import React, { useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import './chat.css'
 
 export const ChatBox = ({chat, setChat, setIsLoading}) => {
 
     const send_message = useSelector(state => state.send_message)
-    const {ticket} = send_message
+    const {loading, ticket} = send_message
+
+    const user_data = useSelector(state => (state.user_data))
+    const {token} = user_data
 
     const chat_form = useRef(null)
     const chat_body = useRef()
 
+    const setChatData = useCallback((ticket) => {
+        chat && setChat(ticket)
+    }, [chat, setChat]) 
+
     useEffect(() => {
         if (!chat) {
-            setChatData(ticket)   
-            setIsLoading(false)
+            setChatData(ticket)
         }else if(ticket){
             setChatData(ticket)
-            setIsLoading(false)
         }
-        setPositions()
-    }, [ticket, chat])
+        setPosition()
+    }, [ticket, chat, setChatData, setIsLoading])
+
+    useEffect(() => {
+        setIsLoading(loading)
+    }, [loading])
 
     const dispatch = useDispatch()
 
@@ -28,15 +37,10 @@ export const ChatBox = ({chat, setChat, setIsLoading}) => {
         e.preventDefault();
         let formData = new FormData(e.target);
         formData.append('issue_id', chat.ticket.unique_id)
-        setIsLoading(true)
-        dispatch(SendMessage(formData));
-    }
+        dispatch(SendMessage(token, formData));
+    } 
 
-    const setChatData = (ticket) => {
-        chat && setChat(ticket)
-    }
-
-    const setPositions = () => {
+    const setPosition = () => {
         chat_form.current && chat_form.current.reset()
         if(chat_body.current){ 
             chat_body.current.scrollTop = chat_body.current.scrollHeight;

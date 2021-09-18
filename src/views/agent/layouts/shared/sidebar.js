@@ -2,7 +2,7 @@ import { NotificationBell } from 'components/notification/notification'
 import { AgentNavItems } from 'components/shared/profile-btn/profile-button'
 import { AgentLogout } from 'providers/redux/_actions/agent-actions'
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { headerSticky, sidebarSticky } from './handle-sticky-header'
 
@@ -14,8 +14,10 @@ export default function Sidebar({agent}) {
         sidebarSticky.init()
     })
 
+    const {token} = useSelector(state => state.user_data)
+
     const logout = () => {
-        dispatch(AgentLogout())
+        dispatch(AgentLogout(token))
     }
 
     return (
@@ -36,7 +38,7 @@ export default function Sidebar({agent}) {
                                                 agent.avatar 
                                             ? 
                                                 <div className="w-46px h-46 overflow-hidden">
-                                                    <img src={agent.avatar} className="rounded-circle  w-46px h-46" style={{objectFit: 'cover'}} alt={`${agent.firstname} ${agent.lastname}`} />
+                                                    <img src={agent.avatar} className="rounded-circle  w-46px h-46" style={{objectFit: 'cover'}} alt={`${agent.firstname}`} />
                                                 </div> 
                                             : 
                                                 <div className="d-inline-block mb-2 w-46px h-46 mr-2 bg-gray-01 rounded-circle fs-18 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
@@ -44,7 +46,7 @@ export default function Sidebar({agent}) {
                                                 </div>
                                             }
                                             <span className="fs-13 font-weight-500 d-none d-sm-inline ml-2">
-                                                Ronald Hunter
+                                                {agent.firstname}
                                             </span>
                                             </Link>
                                             <div className="dropdown-menu dropdown-menu-right">

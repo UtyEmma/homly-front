@@ -1,10 +1,11 @@
+import { connectRouter } from "connected-react-router";
 import { combineReducers } from "redux";
 
-import {loginReducer, signupReducer} from "../_reducers/user.reducer";
+import {signupReducer} from "../_reducers/user.reducer";
 import { SetAdminModeReducer, SuspendItemReducer, verifyAgentReducer } from "./admin-reducer";
 import { AgentLoginReducer, AgentSignupReducer,
         UpdateAgentProfileReducer, ShowAvailableAgentsReducer, DeleteListingReducer, RemoveListingReducer, FetchSingleAgentReducer, FetchAgentWishlistsReducer } from "./agent-reducer";
-import { GetLoggedInUserReducer, RecoverPasswordReducer, ResendEmailReducer, ResetPasswordReducer, VerifyEmailReducer } from "./auth-reducer";
+import { GetLoggedInUserReducer, LoginReducer, RecoverPasswordReducer, ResendEmailReducer, ResetPasswordReducer, SetUserReducer, VerifyEmailReducer } from "./auth-reducer";
 import { FetchCategoriesReducer } from "./category-reducer";
 import { FetchDetailsReducer } from "./details-reducer";
 import { AddFavouritesReducer, FetchFavouritesReducer, RemoveFavouritesReducer } from "./favourite-reducer";
@@ -19,9 +20,11 @@ import { DeleteTicketReducer, FetchMessagesReducer, FetchTicketsReducer, NewTick
 
 import { CreateWishlistReducer, FetchWishlistReducer } from "./wishlist-reducer";
 
-const rootReducer = combineReducers({
+const rootReducer = (history) => combineReducers({
+    router: connectRouter(history),
+    user_data: SetUserReducer,
     signup: signupReducer,
-    login: loginReducer,
+    login: LoginReducer,
     user: GetLoggedInUserReducer,
     resend_mail: ResendEmailReducer,
     verify_email: VerifyEmailReducer,
@@ -29,7 +32,6 @@ const rootReducer = combineReducers({
     wishlist : CreateWishlistReducer,
     wishlists: FetchWishlistReducer,
 
-    agent_login: AgentLoginReducer,
     agent_signup: AgentSignupReducer,
     agents_listings: AgentsListingsReducer,
     update_agent_profile: UpdateAgentProfileReducer,
@@ -83,5 +85,7 @@ const rootReducer = combineReducers({
 
     admin_mode: SetAdminModeReducer
 })
+
+
 
 export default rootReducer;

@@ -24,7 +24,7 @@ export default function AgentCard({agent}) {
 
                         ?
 
-                        <i className="fs-12 pb-1 fa fa-certificate text-primary ml-1"></i>
+                        <i className="fs-12 pb-1 fa fa-badge-check text-primary ml-1"></i>
 
                         :
 

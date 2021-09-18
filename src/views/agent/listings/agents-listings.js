@@ -14,8 +14,11 @@ const AgentsListings = ({agent, setIsLoading}) => {
 
     const {loading, listings} = useSelector((state) => state.agents_listings);
 
+    const user_data = useSelector(state => (state.user_data))
+    const {token} = user_data
+
     const loadListings = () => {
-        dispatch(GetAgentListings());
+        dispatch(GetAgentListings(token));
     }
 
     useEffect(() => {

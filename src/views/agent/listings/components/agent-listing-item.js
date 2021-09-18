@@ -6,15 +6,18 @@ export default function AgentListingItem({listing_item}) {
     const dispatch = useDispatch()
 
     const {loading, listing, error} = useSelector(state => (state.delete_listing))
+    
+    const user_data = useSelector(state => (state.user_data))
+    const {token} = user_data
 
     const deleteListing = (e) => {
         e.preventDefault()
-        dispatch(DeleteListing(listing_item.unique_id));
+        dispatch(DeleteListing(token, listing_item.unique_id));
     }
 
     const removeListing = (e) => {
         e.preventDefault()
-        dispatch(RemoveListing(listing_item.unique_id));
+        dispatch(RemoveListing(token, listing_item.unique_id));
     }
 
     useEffect(() => {

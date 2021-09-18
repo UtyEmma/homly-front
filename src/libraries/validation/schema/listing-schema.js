@@ -10,7 +10,6 @@ export const __createlisting = {
         state: "required|string",
         city: "required|string",
         address: "required|string", 
-        landmark: "required|string", 
         latitude: "required|numeric",
         longitude: "required|numeric",
         no_bedrooms: "required|numeric", 

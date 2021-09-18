@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ListingGrid from './listing-grid'
 import ListingList from './listing-list'
 
-export default function ListingContainer({listings, setParams, params}) {
+export default function ListingContainer({listings, setParams, params, status}) {
     const [grid, setGrid] = useState(true)
 
     const toggleGrid = () => {
@@ -51,8 +51,8 @@ export default function ListingContainer({listings, setParams, params}) {
             <div className="row">
                 {
                      listings.map((listing, index) => (    
-                            grid ? <ListingGrid listing={listing} key={index}/> : 
-                                        <ListingList listing={listing} key={index}/>
+                            grid ? <ListingGrid status={status} listing={listing} key={index}/> : 
+                                        <ListingList status={status} listing={listing} key={index}/>
                     ))
                  }
             </div>

@@ -33,11 +33,11 @@ export const SubmitReview = (data, id) => (dispatch) => {
                     })
 }
 
-export const FetchAgentReview = () => (dispatch) => {
+export const FetchAgentReview = (token) => (dispatch) => {
     console.log("Fetching Agents Reviews...")
     dispatch({type: FETCH_AGENT_REVIEWS_REQUEST})
 
-    ReviewsService.agentReviews()
+    ReviewsService.agentReviews(token)
                     .then((response) => {
                         dispatch({
                             type: FETCH_AGENT_REVIEWS_SUCCESS,

@@ -23,6 +23,9 @@ export const UpdateListingForm = ({listing, setListing, setIsLoading}) => {
 
     const [update, setUpdate] = useState(false)
 
+    const user_data = useSelector(state => (state.user_data))
+    const {token} = user_data
+
     const {rules, messages, attributes} = __createlisting
     const [formErrors, setFormErrors] = useState({})
 
@@ -39,10 +42,9 @@ export const UpdateListingForm = ({listing, setListing, setIsLoading}) => {
         let validation = new Validator(values, rules)
         validation.setAttributeNames(attributes);
         validation.fails(() => {setFormErrors(MapFormErrors(validation.errors.errors))})
-        console.log(validation)
         if (validation.passes()) {
             setFormErrors({}); 
-            dispatch(UpdateListing(formData, listing.unique_id))
+            dispatch(UpdateListing(token, formData, listing.unique_id))
             setUpdate(true)
         }
     }
@@ -52,10 +54,19 @@ export const UpdateListingForm = ({listing, setListing, setIsLoading}) => {
             linear: false,
             animation: true
         }));
+    }, [stepper])
+
+    useEffect(() => {
         setIsLoading(loading)
+    }, [loading, setIsLoading])
+
+    useEffect(() => {
         formError && setFormErrors(formError)
+    }, [formError])
+
+    useEffect(() => {
         success && update && handleUpdateSuccess()
-    }, [formError, stepper, loading])
+    }, [success, update])
 
     const handleUpdateSuccess = () => {
         setFormErrors({})

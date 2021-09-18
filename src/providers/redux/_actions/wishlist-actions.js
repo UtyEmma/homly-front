@@ -31,11 +31,11 @@ export const CreateWishlist = (data) => (dispatch) => {
                 })
 }
 
-export const FetchWishlist = () => (dispatch) => {
+export const FetchWishlist = (token) => (dispatch) => {
     console.log('Fetching Wishlists...')
     dispatch({ type: FETCH_WISHLIST_REQUEST })
 
-    WishlistService.fetchTenantWishlist()
+    WishlistService.fetchTenantWishlist(token)
                 .then((response) => {
                     return dispatch({
                         type: FETCH_WISHLIST_SUCCESS,

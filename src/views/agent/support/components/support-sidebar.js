@@ -12,8 +12,12 @@ export const SupportCenterSidebar = ({titles, setTitles, chat, setChat, setIsLoa
     const messages = useSelector(state => state.messages)
     const {ticket} = messages
 
+    const user_data = useSelector(state => (state.user_data))
+    const {token} = user_data
+
+
     const fetchTicket = () => {
-        dispatch(FetchTickets());
+        dispatch(FetchTickets(token));
     }
 
     const setTickets = () => {
@@ -22,7 +26,7 @@ export const SupportCenterSidebar = ({titles, setTitles, chat, setChat, setIsLoa
 
     const fetchTicketChats = (id) => {
         setIsLoading(true)
-        dispatch(FetchMessages(id))
+        dispatch(FetchMessages(token, id))
     }
 
     useEffect(() => {

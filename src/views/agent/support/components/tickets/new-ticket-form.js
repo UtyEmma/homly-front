@@ -9,10 +9,13 @@ export const NewTicketForm = ({close, setTitles, setIsLoading}) => {
     const new_ticket = useSelector(state => state.new_ticket)
     const {loading, tickets } = new_ticket
 
+    const user_data = useSelector(state => (state.user_data))
+    const {token} = user_data
+
     const createTicket = (e) => {
         e.preventDefault()
         let formData = new FormData(e.target);
-        dispatch(CreateNewTicket(formData));
+        dispatch(CreateNewTicket(token, formData));
     }
 
     useEffect(() => {

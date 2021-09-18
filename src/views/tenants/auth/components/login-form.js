@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import 'react-toastify/dist/ReactToastify.css';
-import { login } from '../../../../providers/redux/_actions/user-actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { __tenantlogin } from 'libraries/validation/schema/tenant-schema';
 import GoogleAuth from 'views/agent/auth/socialite/google-auth';
@@ -9,6 +8,7 @@ import { useQuery } from 'libraries/http/query';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import Validator from 'validatorjs';
 import { MapFormErrors } from 'libraries/validation';
+import { Login } from 'providers/redux/_actions/auth-action';
 
 const UserLoginForm = ({isLoading}) =>  {    
     const dispatch = useDispatch()
@@ -19,8 +19,10 @@ const UserLoginForm = ({isLoading}) =>  {
     const [formErrors, setFormErrors] = useState({})
 
     const user_login = useSelector(state => state.login)
-    const {loading, success, verify_email, formError} = user_login;
+    const {loading, formError, error} = user_login;
 
+    const user_data = useSelector(state => state.user_data)
+    const {type, user} = user_data;
     
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -32,7 +34,7 @@ const UserLoginForm = ({isLoading}) =>  {
         
         if (validation.passes()) {
             setFormErrors({}); 
-            dispatch(login(data));
+            dispatch(Login(data, 'tenant'));
         }
     }
 
@@ -41,12 +43,12 @@ const UserLoginForm = ({isLoading}) =>  {
     }, [formError])
 
     useEffect(() => {
-        if(success){ history.push('/') }
-    }, [success])
+        if(user && user.isVerified){ history.push('/') }
+    }, [user, history])
 
     useEffect(() => {
-        verify_email && history.push('/verify')
-    }, [verify_email])
+        user && !user.isVerified && history.push('/verify')
+    }, [user, history])
 
     const responseFacebook = (response) => {
         console.log(response)
@@ -106,14 +108,13 @@ const UserLoginForm = ({isLoading}) =>  {
                             appId="1003408093533632"
                             render={renderProps => (
                                 <button onClick={renderProps.onClick} className="btn btn-lg btn-block text-heading border px-0 bg-hover-accent">
-                                    <img src="images/facebook.png" alt="Google" className="mr-2" />
+                                    <img src="images/facebook.png" alt="Facebook" className="mr-2" />
                                     Facebook
                                 </button> 
                             )}
-                            autoLoad={true}
                             fields="name,email,picture"
                             callback={responseFacebook}
-                            />
+                        />
                     </div>
                     <div className="col-sm-6 px-2 mb-4">
                         <GoogleAuth user="tenant" />

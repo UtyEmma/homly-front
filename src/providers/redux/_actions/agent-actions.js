@@ -1,17 +1,17 @@
 import Response from 'libraries/response/response';
 import { AgentService } from 'providers/services';
+import { persistor, store } from '../store';
 import { AgentConstants } from '../_contants/agent-constants';
+import { UnsetUser } from './auth-action';
 
 const {
     SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE, 
-    LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_SUCCESS_VERIFY_EMAIL, LOGIN_FAILURE,
     UPDATE_REQUEST, UPDATE_SUCCESS, UPDATE_FAILURE,
     SHOW_AGENTS_REQUEST, SHOW_AGENTS_SUCCESS, SHOW_AGENTS_FAILURE,
     DELETE_LISTING_REQUEST, DELETE_LISTING_SUCCESS, DELETE_LISTING_FAILURE,
     REMOVE_LISTING_REQUEST, REMOVE_LISTING_SUCCESS, REMOVE_LISTING_FAILURE,
     FETCH_SINGLE_AGENT_REQUEST, FETCH_SINGLE_AGENT_SUCCESS, FETCH_SINGLE_AGENT_FAILURE,
-    FETCH_AGENT_WISHLIST_REQUEST, FETCH_AGENT_WISHLIST_SUCCESS, FETCH_AGENT_WISHLIST_FAILURE,
-    AGENT_LOGOUT 
+    FETCH_AGENT_WISHLIST_REQUEST, FETCH_AGENT_WISHLIST_SUCCESS, FETCH_AGENT_WISHLIST_FAILURE
 } = AgentConstants;
 
 
@@ -35,60 +35,26 @@ export const AgentSignup = (data) => (dispatch) => {
             })  
 }
 
-export const AgentLogin = (data) => (dispatch) => {
-    console.log("Logging in...")
-    dispatch({ type: LOGIN_REQUEST });
-
-    AgentService.login(data)
-            .then(response => {
-                let res = response.data;
-                localStorage.setItem('token', res.data.token);
-                localStorage.setItem('user', JSON.stringify(res.data.user));
-                localStorage.setItem('isAuthenticated', true);
-                localStorage.setItem('type', 'agent');
-
-                if (res.data.user.isVerified) {
-                    return dispatch({
-                        type: LOGIN_SUCCESS,
-                        payload: {
-                            user: response.data.user,
-                            token: response.data.token
-                        }
-                    })    
-                }
-
-                return dispatch({
-                    type: LOGIN_SUCCESS_VERIFY_EMAIL,
-                    payload: {
-                        user: response.data.user,
-                        token: response.data.token
-                    }
-                })
-                
-            })
-            .catch(error => {
-                let errors = Response.error(error.response)
-                dispatch({
-                    type: LOGIN_FAILURE,
-                    payload: {errors: error.response, formError: errors}
-                })
-            })
-}
-
-export const UpdateAgentProfile = (data) => (dispatch) => {
+export const UpdateAgentProfile = (token, data) => (dispatch) => {
     console.log('Updating Data...')
     dispatch({ type: UPDATE_REQUEST })
 
-    AgentService.update(data)
+    AgentService.update(token, data)
                 .then((response) => {
                     let res = response.data;
+
                     Response.success(res)
-                    localStorage.removeItem('user');
+                    let agent = res.data.agent
+
+                    dispatch({
+                        type: 'UPDATE_USER_DATA',
+                        payload: agent
+                    })
+
                     dispatch({
                         type: UPDATE_SUCCESS,
                         payload: res
                     })
-                    localStorage.setItem('user', JSON.stringify(res.data.agent));
                 })
                 .catch((error) => {
                     let errors = Response.error(error.response)
@@ -120,16 +86,13 @@ export const ShowAllAgents = () => (dispatch) => {
             })
 }
 
-export const AgentLogout = () => (dispatch) => {
+export const AgentLogout = (token) => (dispatch) => {
     console.log('Logging out...')
-
-    AgentService.logout()
+    AgentService.logout(token)
                 .then((response) => {
-                    localStorage.removeItem('token');
-                    localStorage.removeItem('user');
-                    localStorage.removeItem('isAuthenticated');
-                    localStorage.removeItem('type');
-                    return window.location.href = '/agent-login'
+                    store.dispatch(UnsetUser())
+                    persistor.purge()
+                    return window.location.href = '/agent-login?msg=Logout Successful'
                 })
                 .catch((error) => {
                     console.log(error.response)
@@ -137,11 +100,11 @@ export const AgentLogout = () => (dispatch) => {
 }
 
 
-export const DeleteListing = (id) => (dispatch) => {
+export const DeleteListing = (token, id) => (dispatch) => {
     console.log('Deleting Listing...')
     dispatch({type: DELETE_LISTING_REQUEST});
 
-    AgentService.deleteListing(id)
+    AgentService.deleteListing(token, id)
                 .then(response => {
                     Response.success(response.data.data)
                     return window.location.href = '/my-listings'
@@ -197,12 +160,12 @@ export const FetchAgentDetails = (id) => (dispatch) => {
                 })
 }
 
-export const FetchAgentWishlists = (id) => (dispatch) => {
+export const FetchAgentWishlists = (token) => (dispatch) => {
     console.log("Fetching Wishlists...")
 
     dispatch({type: FETCH_AGENT_WISHLIST_REQUEST})
 
-    AgentService.fetchAgentsWishlists(id)
+    AgentService.fetchAgentsWishlists(token)
                 .then((response) => {
                     return dispatch({
                         type: FETCH_AGENT_WISHLIST_SUCCESS,
