@@ -8,12 +8,15 @@ export const FavouriteListingButton = ({listing}) => {
     const item = useSelector((state) => state.add_favourites)
     const {favourite} = item
 
+    const user_data = useSelector(state => (state.user_data))
+    const {token} = user_data
+
     const [isFavourite, setIsFavourite] = useState()
 
     const addToFavourites = (e) => {
         e.preventDefault(); 
         setIsFavourite(!isFavourite)
-        dispatch(AddListingToFavourites(listing.unique_id))
+        dispatch(AddListingToFavourites(token, listing.unique_id))
     }
 
     useEffect(() => {

@@ -6,23 +6,25 @@ export const WishlistService = {
 }
 
 
-const options = {
-    'Accept' : 'application/json',
-    'Content-Type' : 'application/json',
-    'Authorization' : `Bearer ${localStorage.getItem('token')}`
+const options = (token) => {
+    return {
+        'Accept' : 'application/json',
+        'Content-Type' : 'application/json',
+        'Authorization' : `Bearer ${token}`
+    }
 }
 
-async function create(data){
+async function create(token, data){
     const request = {
-        config : { headers : options },
+        config : { headers : options(token) },
         payload : data
     }
 
     return await Request.post('tenant/wishlist/create', request);
 }
 
-async function fetchTenantWishlist(){
-    const config = { headers : options }
+async function fetchTenantWishlist(token){
+    const config = { headers : options(token) }
     return await Request.get('tenant/wishlist/get-wishlist', config);
 }
 

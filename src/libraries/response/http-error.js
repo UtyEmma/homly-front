@@ -3,14 +3,7 @@ import toast from "react-hot-toast";
 
 
 export const errorToast = (message) => {
-    return toast.error(message,
-        {
-            style: {
-              background: '#333',
-              color: '#fff',
-            },
-        }
-    )
+    return toast.error(message)
 }
 
 

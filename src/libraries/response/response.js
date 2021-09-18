@@ -2,14 +2,7 @@ import toast from "react-hot-toast"
 import Error from "./http-error"
 
 export const successToast = (message) => {
-    return toast.success(message,
-        {
-            style: {
-              background: '#333',
-              color: '#fff',
-            },
-        }
-    )
+    return toast.success(message)
 }
 
 const Response = {

@@ -16,11 +16,13 @@ const Wishlist = ({isLoggedIn, user, setIsLoading, status}) => {
 
     const dispatch = useDispatch();
     const fetchWishlist = useSelector((state) => state.wishlists)
-    
     const {loading, wishlists} = fetchWishlist
 
+    const user_data = useSelector(state => (state.user_data))
+    const {token} = user_data
+
     const loadWishlists = () => {
-        dispatch(FetchWishlist())
+        dispatch(FetchWishlist(token))
     }
 
     useEffect(() => {

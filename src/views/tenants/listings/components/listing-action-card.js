@@ -2,6 +2,7 @@ import RatingStar from 'components/rating/rating-star'
 import { DeleteItem, SuspendItem } from 'providers/redux/_actions/admin-actions'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { ConfirmActionDialog } from 'views/layouts/components/modals/confirm-action-dialog'
 
 export default function ListingAction({agent, listing}) {
@@ -43,17 +44,17 @@ export default function ListingAction({agent, listing}) {
                         }
                     </a>
 
-                    <a href="agent-details-1.html" className="d-block fs-16 lh-214 text-dark mb-0 font-weight-500 hover-primary">{agent.firstname} {agent.lastname}</a>
+                    <Link to={`/${agent.username}`} className="d-block fs-16 lh-214 text-dark mb-0 font-weight-500 hover-primary">{agent.firstname} {agent.lastname}</Link>
                     
                     <p className="mb-0">{agent.title}</p>
                     <ul className="list-inline mb-0">
                         <li className="list-inline-item fs-13 text-heading font-weight-500">{agent.rating}/5</li>
                         <li className="list-inline-item fs-13 text-heading font-weight-500 mr-1">
                             <ul className="list-inline mb-0">
-                                <RatingStar rating={agent.rating}/>
+                                <RatingStar rating={agent.rating ? agent.rating : 1}/>
                             </ul>
                         </li>
-                        <li className="list-inline-item fs-13 text-gray-light">({agent.no_reviews} reviews)</li>
+                        <li className="list-inline-item fs-13 text-gray-light">({agent.no_reviews ? agent.no_reviews : 0} reviews)</li>
                     </ul>
                 </div>
                 <div className="card-footer bg-white px-0 pt-1 pb-6">
@@ -116,7 +117,7 @@ export default function ListingAction({agent, listing}) {
                 </ul>
 
                 <div className="mt-5" >
-                    <a href={`/${agent.username}`} className="btn btn-block btn-lg btn-outline-primary">View Profile</a>
+                    <Link to={`/${agent.username}`} className="btn btn-block btn-lg btn-outline-primary">View Profile</Link>
                 </div>
 
 

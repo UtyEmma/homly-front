@@ -2,7 +2,7 @@ import { NotificationBell } from 'components/notification/notification'
 import { AgentNavItems } from 'components/shared/profile-btn/profile-button'
 import { AgentLogout } from 'providers/redux/_actions/agent-actions'
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { headerSticky, sidebarSticky } from './handle-sticky-header'
 
@@ -14,8 +14,10 @@ export default function Sidebar({agent}) {
         sidebarSticky.init()
     })
 
+    const {token} = useSelector(state => state.user_data)
+
     const logout = () => {
-        dispatch(AgentLogout())
+        dispatch(AgentLogout(token))
     }
 
     return (

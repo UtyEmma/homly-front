@@ -46,7 +46,6 @@ import { AdminModeBadge } from './libraries/admin/admin-mode';
 import ResetPassword from 'views/agent/auth/reset-password';
 import ServerError from 'views/onboarding/sever-error';
 import { EmailVerified } from 'views/onboarding/email-verified';
-import { GetLoggedInUser } from 'providers/redux/_actions/auth-action';
 import toast, { ToastBar, Toaster } from 'react-hot-toast';
 
 function App() {
@@ -66,7 +65,7 @@ function App() {
   const {adminMode} = useSelector((state) => state.admin_mode)
 
   const fetch_user = useSelector(state => state.user);
-  const {loading, auth_user} = fetch_user
+  const {loading} = fetch_user
 
   useEffect(() => {
     auth && user_type !== 'admin' && dispatch(VerifyAdmin(query.get("id"))) 
@@ -81,7 +80,7 @@ function App() {
     <div className="App">
       <Preloader loading={isLoading}/>
 
-      <Toaster position='bottom-right'> 
+      <Toaster position='top-right'> 
         {(t) => (
           <ToastBar toast={t}>
             {({ icon, message }) => (
@@ -119,7 +118,7 @@ function App() {
         <UserRoute path="/verify" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={VerifyEmail} exact />
         <UserRoute path="/search" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={Search} exact/>
         <UserRoute path="/listings" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={Listing} exact/>
-        <UserRoute path="/agents" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} type="user" component={Agents} exact/>
+        <UserRoute path="/agents" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={Agents} exact/>
         
         {/* Tenant Routes */}
         <TenantRoute path="/profile" isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} type={type} component={Profile} exact/>

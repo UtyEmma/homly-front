@@ -92,7 +92,7 @@ export const AgentLogout = (token) => (dispatch) => {
                 .then((response) => {
                     store.dispatch(UnsetUser())
                     persistor.purge()
-                    return window.location.href = '/agent-login'
+                    return window.location.href = '/agent-login?msg=Logout Successful'
                 })
                 .catch((error) => {
                     console.log(error.response)

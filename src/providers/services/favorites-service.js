@@ -1,23 +1,25 @@
 import { Request } from "./api/http"
 
-const config = {
-    headers : {
-        'Accept' : 'application/json',
-        'Content-Type' : 'application/json',
-        'Authorization' : `Bearer ${localStorage.getItem('token')}`
+const config = (token) => {
+    return {
+        headers : {
+            'Accept' : 'application/json',
+            'Content-Type' : 'application/json',
+            'Authorization' : `Bearer ${token}`
+        }
     }
 }
 
 export const FavouriteService = {
-    fetchFavourites : async () => {
-        return await Request.get('tenant/favourites', config)
+    fetchFavourites : async (token) => {
+        return await Request.get('tenant/favourites', config(token))
     },
 
-    addFavourites : async (id) => {
-        return await Request.get(`tenant/favourites/add/${id}`, config)
+    addFavourites : async (token, id) => {
+        return await Request.get(`tenant/favourites/add/${id}`, config(token))
     },
 
-    removeFavourites : async (id) => {
-        return await Request.get(`tenant/favourites/remove/${id}`, config)
+    removeFavourites : async (token, id) => {
+        return await Request.get(`tenant/favourites/remove/${id}`, config(token))
     }
 }

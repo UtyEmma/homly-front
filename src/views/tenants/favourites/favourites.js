@@ -1,7 +1,6 @@
 import { FetchFavourites } from 'providers/redux/_actions/favourites-actions'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Preloader from 'components/preloader/preloader'
 import Searchbar from 'views/layouts/components/search/searchbar'
 import NavBar from 'components/shared/nav-bar'
 import Footer from 'components/shared/footer'
@@ -15,10 +14,13 @@ export const Favourites = ({user, isLoggedIn, setIsLoading, status}) => {
     const favourites = useSelector(state => state.favourites)
     let {loading, listings} = favourites
 
+    const user_data = useSelector(state => (state.user_data))
+    const {token} = user_data
+    
     const [allFavourites, setFavourites] = useState()
 
     const GetFavourites = () => {
-        dispatch(FetchFavourites())
+        dispatch(FetchFavourites(token))
     }
 
     useEffect(() => {
