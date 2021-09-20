@@ -141,7 +141,10 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                                 </ul>
                             </li>
                             </ul>
-                            <a href={`mailto:${agent.email}`} type="submit" className="btn btn-primary btn-lg btn-block shadow-none">Send Message</a>
+                            <a href={`mailto:${agent.email}`} type="submit" className="btn btn-primary btn-lg btn-block shadow-none">
+                                Send An Email
+                                <i className="fa fa-envelope ml-2"></i>
+                            </a>
 
                             {
                                 adminMode === 'true'

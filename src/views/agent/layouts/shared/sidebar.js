@@ -1,12 +1,11 @@
 import { NotificationBell } from 'components/notification/notification'
-import { AgentNavItems } from 'components/shared/profile-btn/profile-button'
 import { AgentLogout } from 'providers/redux/_actions/agent-actions'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { headerSticky, sidebarSticky } from './handle-sticky-header'
 
-export default function Sidebar({agent}) {
+export default function Sidebar({setIsLoading, agent}) {
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -120,7 +119,7 @@ export default function Sidebar({agent}) {
                                                 <svg className="icon icon-my-properties"><use xlinkHref="#icon-my-properties" /></svg>
                                                 </span>
                                                 <span className="sidebar-item-text">My Properties</span>
-                                                <span className="sidebar-item-number ml-auto text-primary fs-15 font-weight-bold">29</span>
+                                                <span className="sidebar-item-number ml-auto text-primary fs-15 font-weight-bold">{agent.no_of_listings ? agent.no_of_listings : ''}</span>
                                             </Link>
                                         </li>
                                         <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
@@ -129,7 +128,7 @@ export default function Sidebar({agent}) {
                                                 <svg className="icon icon-review"><use xlinkHref="#icon-review" /></svg>
                                                 </span>
                                                 <span className="sidebar-item-text">Reviews</span>
-                                                <span className="sidebar-item-number ml-auto text-primary fs-15 font-weight-bold">29</span>
+                                                <span className="sidebar-item-number ml-auto text-primary fs-15 font-weight-bold">{agent.no_reviews ? agent.no_reviews : ''}</span>
                                             </Link>
                                         </li>
                                         <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
@@ -162,7 +161,7 @@ export default function Sidebar({agent}) {
                                                 </Link>
                                             </li>
                                             <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
-                                                <button onClick={logout} style={{cursor: "pointer"}} className="btn p-0 text-heading lh-1 sidebar-link">
+                                                <button onClick={logout} className="btn p-0 text-heading lh-1 sidebar-link">
                                                     <span className="sidebar-item-icon d-inline-block mr-3 text-muted fs-20">
                                                     <svg className="icon icon-log-out"><use xlinkHref="#icon-log-out" /></svg>
                                                     </span>

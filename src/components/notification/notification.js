@@ -41,7 +41,7 @@ export const NotificationBell = () => {
     } 
     return (
         <>
-            <div className="dropdown no-caret py-3 px-3 px-sm-6 d-flex align-items-center justify-content-end notice">
+            <div className="dropdown no-caret py-3 px-sm-6 d-flex align-items-center justify-content-end notice">
                 <button className="bg-transparent border-0 dropdown-toggle text-heading fs-20 font-weight-500 lh-1" data-toggle="dropdown">
                     <i className="far fa-bell" />
                     <span className="badge badge-primary badge-circle badge-absolute font-weight-bold fs-13">

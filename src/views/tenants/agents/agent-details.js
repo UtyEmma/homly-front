@@ -22,6 +22,7 @@ const AgentDetails = ({isLoggedIn, user, status, setIsLoading}) => {
     const single_agent = useSelector(state => state.agent)
     const {loading, agent, error} = single_agent
 
+    const {token} = useSelector(state => state.user_data)
 
     useEffect(() => {
         setIsLoading(loading)
@@ -33,12 +34,12 @@ const AgentDetails = ({isLoggedIn, user, status, setIsLoading}) => {
 
     useEffect(() => {
         const loadAgent = () => {
-            dispatch(FetchAgentDetails(id))
+            dispatch(FetchAgentDetails(token, id))
         }
         
         !agent && loadAgent()
         agent && setAgentData(agent)
-    }, [agent, dispatch, id, setIsLoading])
+    }, [agent, dispatch, id, setIsLoading, token])
 
     return (
         <div>

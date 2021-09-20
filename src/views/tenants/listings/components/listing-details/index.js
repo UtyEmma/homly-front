@@ -23,9 +23,9 @@ export default function ListingComponents({ listing, status }) {
             <Tab eventKey="reviews" title="Reviews">
                 <ListingReviews status={status} listing_id={listing.unique_id} />
             </Tab>
-            <Tab eventKey="more" title="More">
+            {/* <Tab eventKey="more" title="More">
                 <SimilarListings />
-            </Tab>
+            </Tab> */}
         </Tabs>
 
         {/* <ListingStats /> */}

@@ -14,12 +14,12 @@ const { NEW_LISTING_REQUEST, NEW_LISTING_SUCCESS, NEW_LISTING_FAILURE,
     } = ListingConstants
 
 
-export const CreateListing = (data) => (dispatch) =>{
+export const CreateListing = (token, data) => (dispatch) =>{
     console.log('Create Listing')
 
     dispatch({ type: NEW_LISTING_REQUEST })
 
-    ListingService.newListing(data)
+    ListingService.newListing(token, data)
                 .then(response => {
                     Response.success(response.data)
                     dispatch({
@@ -78,12 +78,12 @@ export const UpdateListing = (token, data, id) => (dispatch) => {
                     })
 }
 
-export const ShowAllListings = (params) => (dispatch) => {
+export const ShowAllListings = (token, params) => (dispatch) => {
     console.log('All Listings...')
 
     dispatch({ type: ACTIVE_LISTINGS_REQUEST })
 
-    ListingService.fetchAllListings(params)
+    ListingService.fetchAllListings(token, params)
                     .then(response => {
                         return dispatch({
                             type: ACTIVE_LISTINGS_SUCCESS,

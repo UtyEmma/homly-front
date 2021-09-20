@@ -1,8 +1,8 @@
-import { VerifyEmailAddress } from 'providers/redux/_actions/auth-action'
-import React, { useEffect, useState } from 'react'
+import { GetLoggedInUser, VerifyEmailAddress } from 'providers/redux/_actions/auth-action'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useHistory, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 export const EmailVerified = ({setIsLoading, user}) => {
 
@@ -14,23 +14,24 @@ export const EmailVerified = ({setIsLoading, user}) => {
         user && console.log(user)
     }, [user])
 
-    const verify_email = useSelector(state => state.verify_email)
-    const {loading, success, error} = verify_email
+    const user_data = useSelector(state => state.user_data)
 
-    const verifyEmail = () => {
+    const verify_email = useSelector(state => state.verify_email)
+    const {loading, success} = verify_email
+
+    const verifyEmail = useCallback(() => {
         dispatch(VerifyEmailAddress(code))
-    }
+    }, [code, dispatch])
 
     useEffect(() => {
         setIsLoading(loading)
-    }, [loading])
+    }, [loading, setIsLoading])
 
 
     useEffect(() => {
         !success && verifyEmail()
-        success && console.log(success)
         success && success.type === 'tenant' ? setUrl('/login') : setUrl('/agent-login')
-    }, [success])
+    }, [success, verifyEmail])
 
     return (
         <>
@@ -60,7 +61,7 @@ export const EmailVerified = ({setIsLoading, user}) => {
     )
 }
 
-export function EmailVerificationFailure ({url}) {
+export function EmailVerificationFailure () {
     return (
         <>
             <div className="col-md-6 offset-md-3 col-8 offset-2">
@@ -91,7 +92,7 @@ export function EmailVerificationSuccess ({url}) {
 
             <div className="col-12">
                 <h3 className="text-heading mt-5 mb-3 font-weight-bold">
-                    Your Email has been verified Successfully.
+                    Your Email has been verified successfully.
                 </h3>
 
                 <div className="mt-md-5">

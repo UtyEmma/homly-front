@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {  Switch, Route } from 'react-router-dom';
+import {  Switch, Route, useHistory } from 'react-router-dom';
 
 // Route Guards
 import AgentRoute from './providers/guards/agent-guard';
@@ -47,30 +47,27 @@ import ResetPassword from 'views/agent/auth/reset-password';
 import ServerError from 'views/onboarding/sever-error';
 import { EmailVerified } from 'views/onboarding/email-verified';
 import toast, { ToastBar, Toaster } from 'react-hot-toast';
+import { EmailUpdateVerification } from 'views/onboarding/email-update-verification';
 
 function App() {
 
 	const dispatch = useDispatch()
+	const query = useQuery()
 
 	const [isLoading, setIsLoading] = useState(true)
 
-	const query = useQuery()
-
-  const current_user = useSelector(state => state.user_data)
-  const { type, user, token } = current_user
+  const { type, user, token } = useSelector(state => state.user_data)
 
 	const auth = query.get("auth")
 	const user_type = localStorage.getItem('type') 
 
   const {adminMode} = useSelector((state) => state.admin_mode)
 
-  const fetch_user = useSelector(state => state.user);
-  const {loading} = fetch_user
+  const {loading} = useSelector(state => state.user);
 
   useEffect(() => {
     auth && user_type !== 'admin' && dispatch(VerifyAdmin(query.get("id"))) 
   }, [auth, dispatch, query, user_type])
-
 
   useEffect(() => {
     setIsLoading(loading)
@@ -116,6 +113,7 @@ function App() {
         <UserRoute path="/" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={Home} exact/>
         <UserRoute path="/about" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={About} exact />
         <UserRoute path="/verify" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={VerifyEmail} exact />
+        <UserRoute path="/email/verify" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={EmailUpdateVerification} exact />
         <UserRoute path="/search" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={Search} exact/>
         <UserRoute path="/listings" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={Listing} exact/>
         <UserRoute path="/agents" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={Agents} exact/>
@@ -123,6 +121,7 @@ function App() {
         {/* Tenant Routes */}
         <TenantRoute path="/profile" isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} type={type} component={Profile} exact/>
         <TenantRoute path="/wishlist" isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} type={type} component={Wishlist} exact/>
+        <TenantRoute path="/wishlist/:slug" isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} type={type} component={Wishlist} exact/>
         <TenantRoute path="/favourites" isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} type={type} component={Favourites} exact/>
 
 

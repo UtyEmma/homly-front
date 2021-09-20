@@ -8,22 +8,19 @@ import Validator from 'validatorjs';
 import { MapFormErrors } from 'libraries/validation/handlers/error-handlers';
 import { __agent_login } from 'libraries/validation';
 import { Login } from 'providers/redux/_actions/auth-action';
-import { FacebookLogin } from 'react-facebook-login/dist/facebook-login-render-props';
-import { persistor } from 'providers/redux/store';
-
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
 const AgentLoginForm = () =>  {
+
     const agentLogin = useSelector((state) => state.user_data);
-    const {loading, user, type} = agentLogin;
+    const {user, type} = agentLogin;
 
     const input_error = useSelector((state) => state.login);
-    const {form_error} = input_error;
-
-    const state = persistor.getState()
+    const {loading, form_error} = input_error;
 
     const dispatch = useDispatch()
     const history = useHistory()
-    const {rules, messages} = __agent_login
+    const {rules} = __agent_login
     const [formErrors, setFormErrors] = useState({})
 
     const handleLogin = (e) => {
@@ -48,7 +45,7 @@ const AgentLoginForm = () =>  {
     }, [user, history])
 
     useEffect(() => {
-        user && user.isVerified && type === 'agent' && history.push('/dashboard')
+        user && user.isVerified && type === 'agent' && history.push('/dashboard', "Logout Successful")
     }, [user, type, history])
 
     useEffect(() => {
@@ -80,15 +77,9 @@ const AgentLoginForm = () =>  {
                         <p className="text-danger fs-12 mt-1">{formErrors.password?.message}</p>
                         </div>
                         <div className="d-flex mb-4">
-                        <div className="form-check">
-                            <input className="form-check-input" type="checkbox" value="" id="remember-me-1" name="remember" />
-                            <label className="form-check-label" htmlFor="remember-me-1">
-                            Stay signed in
-                            </label>
-                        </div>
-                        <a href="/recover-password" className="d-inline-block ml-auto fs-13 lh-2 text-body">
-                            <u>Forgot your password?</u>
-                        </a>
+                            <Link to="/recover-password" className="d-inline-block ml-auto fs-13 lh-2 hover-primary text-body">
+                                <u>Forgot your password?</u>
+                            </Link>
                         </div>
                         <button type="submit" className="btn btn-primary btn-lg btn-block rounded">
                             {loading ? 
@@ -104,17 +95,17 @@ const AgentLoginForm = () =>  {
                     </div>
                     <div className="row no-gutters mx-n2">
                         <div className="col-sm-6 px-2 mb-4">
-                            {/* <FacebookLogin
-                                appId="1003408093533632"
+                            <FacebookLogin
+                                appId={process.env.REACT_APP_FACEBOOK_APP_ID}
                                 render={renderProps => (
                                     <button onClick={renderProps.onClick} className="btn btn-lg btn-block text-heading border px-0 bg-hover-accent">
                                         <img src="images/facebook.png" alt="Facebook" className="mr-2" />
                                         Facebook
                                     </button> 
                                 )}
-                                fields="name,email,picture,username"
+                                fields="name,email,picture"
                                 callback={responseFacebook}
-                            /> */}
+                            />
                         </div>
                         <div className="col-sm-6 px-2 mb-4">
                             <GoogleAuth user="agent"/>

@@ -24,9 +24,9 @@ export function UpdateTenantProfileReducer(state={}, action){
         case UPDATE_REQUEST:
             return {...state, loading: true}
         case UPDATE_SUCCESS:
-            return {...state, loading:false, tenant: action.payload.tenant}
+            return {...state, loading: false, tenant: action.payload.tenant}
         case UPDATE_FAILURE:
-            return {...state, loading:false, error: action.payload}
+            return {...state, loading: false, error: action.payload}
         default:
             return state;
     }

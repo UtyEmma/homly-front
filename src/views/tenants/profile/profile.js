@@ -1,32 +1,60 @@
 import Preloader from 'components/preloader/preloader'
 import React, { useEffect, useState } from 'react'
 import { createRef } from 'react'
-import { useDispatch} from 'react-redux'
+import { useDispatch, useSelector} from 'react-redux'
 import { ToastContainer } from 'react-toastify'
 import Searchbar from 'views/layouts/components/search/searchbar'
 import Footer from 'components/shared/footer'
 import NavBar from 'components/shared/nav-bar'
 import { UpdateTenantProfile } from 'providers/redux/_actions/user-actions'
 import { Helmet } from 'react-helmet'
+import { MapFormErrors, __update_tenant_profile } from 'libraries/validation'
+import Validator from 'validatorjs'
+import { useHistory } from 'react-router-dom'
 
 const Profile = ({isLoggedIn, user, setIsLoading, status}) => {
+    
     const dispatch = useDispatch()
     const profileImage = createRef()
-    const [loading, setLoading] = useState(false)
+    const history = useHistory()
+
+    const {loading, tenant, formError} = useSelector(state => state.update_tenant)
+
+    const {rules, attributes} = __update_tenant_profile
+    const [formErrors, setFormErrors] = useState({})
+
+    const {token} = useSelector(state => state.user_data)
 
     const updateUserData = (e) => {
         e.preventDefault()
-        let formData = new FormData(e.target);
-        dispatch(UpdateTenantProfile(formData))
+        let data = new FormData(e.target);
+        const values = Object.fromEntries(data.entries());
+        let validation = new Validator(values, rules)
+        validation.setAttributeNames(attributes);
+        validation.fails(() => {setFormErrors(MapFormErrors(validation.errors.errors))})
+        
+        if (validation.passes()) {
+            setFormErrors({}); 
+            dispatch(UpdateTenantProfile(token, data))
+        }
     }
+
+    useEffect(() => {
+        user && !user.isVerified && history.push('/email/verify')
+    }, [history, user])
 
     const changeProfileImagePreview = (e) => { 
         profileImage.current.src = URL.createObjectURL(e.target.files[0]) 
     }
 
+
     useEffect(() => {
-        setIsLoading(false)   
+        setIsLoading(false)  
     })
+
+    useEffect(() => {
+        formError && setFormErrors(formError)
+    }, [formError])
 
 
     return (
@@ -49,10 +77,11 @@ const Profile = ({isLoggedIn, user, setIsLoading, status}) => {
                 <meta property="og:image:height" content="630" />
                 <meta name="description" content="Find Properties and agents around you." />
             </Helmet>
-            
+
             <Preloader loading={loading} />
+
             <ToastContainer />
-            <NavBar isloggedIn={isLoggedIn} user={user} status={status} />
+            <NavBar isloggedIn={isLoggedIn}  user={user} status={status} />
 
             <Searchbar/>
 
@@ -75,7 +104,7 @@ const Profile = ({isLoggedIn, user, setIsLoading, status}) => {
                                         <p className="card-text">Upload your profile photo.</p>
                                         </div>
                                         <div className="col-sm-8 col-xl-12 col-xxl-5">
-                                        <img src="images/my-profile.png" alt="My Profile" ref={profileImage} id="profile-image" className="w-100" />
+                                        <img src={user.avatar ? user.avatar : "images/my-profile.png"} alt="My Profile" ref={profileImage} id="profile-image" className="w-100" />
                                         <div className="custom-file mt-2 h-auto" >
                                             <input type="file" name="avatar" className="custom-file-input" onChange={changeProfileImagePreview} id="customFile" />
                                             <label className="btn btn-secondary btn-lg btn-block" htmlFor="customFile">
@@ -97,29 +126,32 @@ const Profile = ({isLoggedIn, user, setIsLoading, status}) => {
                                     <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
                                     <div className="form-row mx-n4">
                                         <div className="form-group col-md-6 px-4">
-                                        <label htmlFor="firstName" className="text-heading">First name</label>
-                                        <input type="text" className="form-control form-control-lg border-0" id="firstName" name="firstname" defaultValue={user.firstname}/>
+                                            <label htmlFor="firstName" className="text-heading">First name</label>
+                                            <input type="text" className="form-control form-control-lg border-0" id="firstName" name="firstname" defaultValue={user.firstname}/>
+                                            <p className="text-danger fs-12 mt-1">{formErrors.firstname?.message}</p>
                                         </div>
                                         <div className="form-group col-md-6 px-4">
-                                        <label htmlFor="lastName" className="text-heading">Last name</label>
-                                        <input type="text" className="form-control form-control-lg border-0" id="lastName" name="lastname" defaultValue={user.lastname}/>
+                                            <label htmlFor="lastName" className="text-heading">Last name</label>
+                                            <input type="text" className="form-control form-control-lg border-0" id="lastName" name="lastname" defaultValue={user.lastname}/>
+                                            <p className="text-danger fs-12 mt-1">{formErrors.lastname?.message}</p>
                                         </div>
                                     </div>
                                     <div className="form-row mx-n4">
                                         <div className="form-group col-md-6 px-4 mb-md-0">
-                                        <label htmlFor="email" className="text-heading">Email</label>
-                                        <input type="email" className="form-control form-control-lg border-0" id="email" name="email" defaultValue={user.email} />
+                                            <label htmlFor="email" className="text-heading">Email</label>
+                                            <input type="email" className="form-control form-control-lg border-0" id="email" name="email" defaultValue={user.email} />
+                                            <p className="text-danger fs-12 mt-1">{formErrors.email?.message}</p>
                                         </div>
                                         <div className="form-group col-md-6 px-4">
-                                        <label htmlFor="phone" className="text-heading">Phone Number</label>
-                                        <input type="text" className="form-control form-control-lg border-0" defaultValue={user.phone} id="phone" name="phone_number" />
+                                            <label htmlFor="phone" className="text-heading">Phone Number</label>
+                                            <input type="text" className="form-control form-control-lg border-0" defaultValue={user.phone} id="phone" name="phone" />
+                                            <p className="text-danger fs-12 mt-1">{formErrors.phone?.message}</p>
                                         </div>
                                     </div>
                                     </div>
                                 </div>
                                 <div className="d-flex justify-content-end flex-wrap">
-                                    <button className="btn btn-lg bg-hover-white border rounded-lg mb-3">Delete Profile</button>
-                                    <button className="btn btn-lg btn-primary ml-4 mb-3">Update Profile</button>
+                                    <button type="submit" className="btn btn-lg btn-primary ml-4 mb-3">Update Profile</button>
                                 </div>
                                 </div>
                             </div>

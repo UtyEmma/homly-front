@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import Geocode from 'react-geocode'
 import InputAddress from './map/map-address-search';
 import { LocalGovt, State } from 'components/city-state/city-state';
@@ -36,13 +36,13 @@ export default function ListingLocation({formErrors}) {
                 });        
     }
 
-    const mapViewUpdate = () => {
+    const mapViewUpdate = useCallback(() => {
         setLatLong(`${state}, ${city}, ${landmark}`)
-    }
+    }, [state, city, landmark])
 
     useEffect(() => {
         mapViewUpdate()
-    }, [state, city, landmark])
+    }, [state, city, landmark, mapViewUpdate])
 
     return (
         <div className="tab-pane tab-pane-parent fade px-0" id="location" role="tabpanel" aria-labelledby="location-tab">
@@ -131,7 +131,7 @@ export default function ListingLocation({formErrors}) {
                     </div>
                     </div>
                     <div className="d-flex flex-wrap">
-                        <button className="btn btn-lg bg-hover-white border rounded-lg mb-3 mr-auto prev-button" type="button" role="button">
+                        <button className="btn btn-lg bg-hover-white border rounded-lg mb-3 mr-auto prev-button" type="button">
                             <span className="d-inline-block text-primary mr-2 fs-16"><i className="fal fa-long-arrow-left" /></span>Prev step
                         </button>
                         <button className="btn btn-lg btn-primary next-button mb-3">Next step

@@ -12,17 +12,17 @@ export const UpdateListingDescription = ({listing, formErrors}) => {
                             <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
                             <div className="form-group">
                             <label htmlFor="title" className="text-heading">Title <span className="text-muted">(mandatory)</span></label>
-                            <input type="text" className="form-control form-control-lg border-0" defaultValue={listing.title} id="title" name="title" />
+                            <input type="text" className="form-control form-control-lg border-0" defaultValue={listing?.title} id="title" name="title" />
                             <p className="text-danger fs-12">{formErrors.title?.message}</p>
                             </div>
                             <div className="form-group mb-0">
                                 <label htmlFor="category" className="text-heading">Type</label>
-                                <SelectListingCategory classes="form-control border-0 shadow-none form-control-lg" name="type" defaultValue={listing.type} />
+                                <SelectListingCategory classes="form-control border-0 shadow-none form-control-lg" name="type" defaultValue={listing?.type} />
                                 <p className="text-danger fs-12">{formErrors.type?.message}</p>
                             </div>
                             <div className="form-group mb-0">
                             <label htmlFor="description-01" className="text-heading">Description</label>
-                            <textarea className="form-control border-0" rows={5} defaultValue={listing.description} name="description" id="description-01" />
+                            <textarea className="form-control border-0" rows={5} defaultValue={listing?.description} name="description" id="description-01" />
                             <p className="text-danger fs-12">{formErrors.description?.message}</p>
                             </div>
                         </div>
@@ -38,7 +38,7 @@ export const UpdateListingDescription = ({listing, formErrors}) => {
                                 <div className="col-md-6 col-lg-12 col-xxl-6 px-2 mb-4 mb-md-0">
                                     <div className="form-group mb-0">
                                     <label htmlFor="tenure" className="text-heading">Rent Tenure Duration</label>
-                                    <select className="form-control border-0 shadow-none form-control-lg" title="Select" data-style="btn-lg py-2 h-52" id="tenure" defaultValue={listing.tenure} name="tenure">
+                                    <select className="form-control border-0 shadow-none form-control-lg" title="Select" data-style="btn-lg py-2 h-52" id="tenure" defaultValue={listing?.tenure} name="tenure">
                                         <option value="">Select</option>
                                         <option>Monthly Tenancy</option>
                                         <option>Quaterly Tenancy</option>
@@ -59,7 +59,7 @@ export const UpdateListingDescription = ({listing, formErrors}) => {
                             <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
                                 <div className="form-group">
                                     <label htmlFor="rent" className="text-heading">Total Rent in &#8358; </label>
-                                    <input type="text" className="form-control form-control-lg border-0" defaultValue={listing.rent} id="rent" name="rent" />
+                                    <input type="text" className="form-control form-control-lg border-0" defaultValue={listing?.rent} id="rent" name="rent" />
                                     <p className="text-danger fs-12">{formErrors.rent?.message}</p>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@ export const UpdateListingDescription = ({listing, formErrors}) => {
                             <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
                                 <div className="form-group">
                                     <label htmlFor="extra_fees" className="text-heading">Professional Fees in &#8358; </label>
-                                    <input type="text" className="form-control form-control-lg border-0" defaultValue={listing.extra_fees} id="extra_fees" name="extra_fees" />
+                                    <input type="text" className="form-control form-control-lg border-0" defaultValue={listing?.extra_fees} id="extra_fees" name="extra_fees" />
                                     <p className="text-danger fs-12">{formErrors.extra_fees?.message}</p>
                                 </div>
                             </div>

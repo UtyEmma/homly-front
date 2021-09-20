@@ -1,22 +1,34 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import RatingStar from 'components/rating/rating-star';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { DeleteReview, EditReview } from 'providers/redux/_actions/review-actions';
 
-export default function ListingReviewItem({review, publisher}) {
+export default function ListingReviewItem({userHasReviewed, setUserHasReviewed, review, publisher}) {
     const dispatch = useDispatch()
 
-    const review_id = review.review_id;
+    const {token} = useSelector(state => state.user_data)
+    const {reviews} = useSelector(state => state.delete_review)
 
     const deleteReview = () => {
-        dispatch(DeleteReview(review.unique_id))
+        dispatch(DeleteReview(token, review.unique_id))
     }
 
     const editPropertyReview = (e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
-        dispatch(EditReview(formData))
+        dispatch(EditReview(token, formData))
     }
+
+    useEffect(() => {
+        review.owned_by_user && setUserHasReviewed(true)   
+    })
+
+    useEffect(() => {
+        let status = !!reviews;
+        status && console.log(!!reviews)
+        status && setUserHasReviewed(!userHasReviewed)
+        status && console.log(userHasReviewed)
+    }, [reviews, setUserHasReviewed, userHasReviewed])
 
     return (
         <>
@@ -24,7 +36,7 @@ export default function ListingReviewItem({review, publisher}) {
                 <div className="w-82px h-82 mr-2 bg-gray-01 rounded-circle fs-25 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
                     {
                         publisher.avatar 
-                            ? <img src={publisher.avatar} alt={`${publisher.firstname} ${publisher.lastname}`} /> : 
+                            ? <img src={publisher.avatar} className="rounded-circle img-fluid" alt={`${publisher.firstname.charAt(0).toUpperCase()}${publisher.lastname.charAt(0).toUpperCase()}`} /> : 
                                 `${publisher.firstname.charAt(0).toUpperCase()}${publisher.lastname.charAt(0).toUpperCase()}`
                     }
                 </div>
@@ -60,7 +72,7 @@ export default function ListingReviewItem({review, publisher}) {
                         
                         <>
                             <div className="btn-group ">
-                                <a type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="mb-0 text-muted border-left border-dark dropdown hover-primary lh-1 ml-2 pl-2"><i className="fa fa-edit"></i></a>
+                                <button data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn rounded-0 p-0 mb-0 text-muted border-0 border-left border-dark dropdown hover-primary lh-1 ml-2 pl-2"><i className="fa fa-edit"></i></button>
 
                                 <div className="dropdown-menu dropdown-menu-lg dropdown-menu-left mb-2">
                                     <div className="py-2 px-3">
@@ -100,7 +112,7 @@ export default function ListingReviewItem({review, publisher}) {
                                     </div>
                                 </div>
                             </div>
-                            <a type="button" onClick={deleteReview} class="mb-0 text-muted border-left border-dark hover-primary lh-1 ml-2 pl-2"><i className="fa fa-trash-alt"></i></a>
+                            <button onClick={deleteReview} class="btn p-0 mb-0 border-0 rounded-0 text-muted border-left border-dark hover-primary lh-1 ml-2 pl-2"><i className="fa fa-trash-alt"></i></button>
                         </>
                     }
                     </div>

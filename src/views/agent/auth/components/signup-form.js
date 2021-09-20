@@ -1,4 +1,4 @@
-import React, {Component, useEffect, useState} from 'react'
+import React, { useEffect, useState} from 'react'
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom';
@@ -7,18 +7,20 @@ import { toggleConPassword, togglePassword } from 'libraries/forms/toggle-passwo
 import * as Validator from 'validatorjs';
 import { MapFormErrors } from 'libraries/validation/handlers/error-handlers';
 import { __agent_signup } from 'libraries/validation';
+import GoogleAuth from 'views/agent/auth/socialite/google-auth';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
 
 const AgentSignUpForm = () => {
 
     const agentSignup = useSelector((state) => state.agent_signup);
-    const {loading, agent_error, form_error, agent_success} = agentSignup;
+    const {loading, form_error, agent_success} = agentSignup;
     const [formErrors, setFormErrors] = useState({})
 
     const dispatch = useDispatch()
     const history = useHistory()
     
-    const {rules, messages} = __agent_signup
+    const {rules} = __agent_signup
 
     const handleSignup = (e) => {
         e.preventDefault()
@@ -33,11 +35,15 @@ const AgentSignUpForm = () => {
         } 
     } 
 
+    const responseFacebook = (response) => {
+        console.log(response)
+    }
+
     useEffect(() => {
-        agent_success && history.push('./agent-login')
+        agent_success && history.push('./agent-login?msg=Sign up Successful. Please Login')
         form_error && setFormErrors(form_error)
         form_error && console.log(form_error)
-    }, [agent_success, form_error])
+    }, [agent_success, form_error, history])
 
     return (
         <div className="col-lg-7">
@@ -124,16 +130,20 @@ const AgentSignUpForm = () => {
                 </div>
                 <div className="row no-gutters mx-n2">
                     <div className="col-sm-6 px-2 mb-4">
-                    <a href="#" className="btn btn-lg btn-block text-heading border px-0 rounded bg-hover-accent">
-                        <img src="images/facebook.png" alt="Google" className="mr-2" />
-                        Facebook
-                    </a>
+                        <FacebookLogin
+                            appId={process.env.REACT_APP_FACEBOOK_APP_ID}
+                            render={renderProps => (
+                                <button onClick={renderProps.onClick} className="btn btn-lg btn-block text-heading border px-0 bg-hover-accent">
+                                    <img src="images/facebook.png" alt="Facebook" className="mr-2" />
+                                    Facebook
+                                </button> 
+                            )}
+                            fields="name,email,picture"
+                            callback={responseFacebook}
+                        />
                     </div>
                     <div className="col-sm-6 px-2 mb-4">
-                    <a href="#" className="btn btn-lg btn-block text-heading border px-0 rounded bg-hover-accent">
-                        <img src="images/google.png" alt="Google" className="mr-2" />
-                        Google
-                    </a>
+                        <GoogleAuth />
                     </div>
                 </div>
                 </div>

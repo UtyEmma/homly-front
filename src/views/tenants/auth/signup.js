@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { useEffect} from 'react'
 
 import SignUpForm from './components/signup-form';
 import NavBar from 'components/shared/nav-bar';
@@ -8,8 +8,9 @@ import { useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
 
 export default function UserSignup ({setIsLoading}) {
+
     const userSignup = useSelector((state) => state.signup);
-    const {loading, error, success} = userSignup;
+    const {loading} = userSignup;
 
     useEffect(() => {
         setIsLoading(false)

@@ -10,7 +10,6 @@ export default function AgentsListings({listings, setIsLoading, status}) {
 
     return (
         <div id="properties">
-            <a name="properties"></a>
             <h2 className="fs-22 text-heading lh-15 mb-6">My Properties</h2>
 
             <div className="mb-10">
@@ -37,8 +36,15 @@ export default function AgentsListings({listings, setIsLoading, status}) {
                                     ))
 
                                     :
-
-                                    <p>There are no properties available by this agent</p>
+                                    
+                                    <div className="card border-0 p-0 p-md-4 mb-0">
+                                        <div className="card-body d-flex justify-content-center flex-column">
+                                            <div className="col-md-6 offset-md-3 mb-2">
+                                                <img src="/images/svg/wishlist-item.svg" className="img-fluid" alt="property review" />
+                                            </div>
+                                            <h3 className="fs-md-18px fs-26 text-center">No available properties</h3>
+                                        </div>
+                                    </div>
                                 }
                             </div>
                         </Tab.Pane>
@@ -55,8 +61,15 @@ export default function AgentsListings({listings, setIsLoading, status}) {
                                     ))
 
                                     :
-
-                                    <p>This agent has no rented property yet!</p>
+                                    
+                                    <div className="card border-0 p-0 p-md-4 mb-0">
+                                        <div className="card-body d-flex justify-content-center flex-column">
+                                            <div className="col-md-6 offset-md-3 mb-5">
+                                                <img src="/images/svg/wishlist-item.svg" className="img-fluid" alt="property review" />
+                                            </div>
+                                            <h3 className="fs-md-18px fs-26 text-center">No rented property yet!</h3>
+                                        </div>
+                                    </div>
                                 }
                             </div>
                             

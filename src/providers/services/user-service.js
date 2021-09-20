@@ -5,11 +5,6 @@ export const userService = {
 }
 
 
-const options = {
-    'Accept' : 'application/json',
-    'Content-Type' : 'application/json'
-}
-
 const authHeaders = {
     'Accept' : 'application/json',
     'Content-Type' : 'application/json',
@@ -18,7 +13,7 @@ const authHeaders = {
 async function signup(data) {
     const request = {
         config: {
-            headers : options
+            headers : authHeaders
         },
         payload: data
     }
@@ -44,10 +39,13 @@ async function logout(token){
     return await Request.get('tenant/logout', config)
 }
 
-async function updateTenantData(data) {
+async function updateTenantData(token, data) {
     const request = {
         config: {
-            headers: authHeaders
+            headers: {
+                ...authHeaders,
+                'Authorization' : `Bearer ${token}`
+            }
         },
         payload: data
     }

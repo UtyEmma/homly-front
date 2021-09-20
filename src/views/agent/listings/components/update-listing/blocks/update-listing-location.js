@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import Geocode, { setLanguage } from 'react-geocode'
 import { useDispatch, useSelector } from 'react-redux';
 import { LocalGovt, State } from 'components/city-state/city-state';
@@ -23,8 +23,6 @@ export const UpdateListingLocation = ({listing, formErrors}) => {
         setState(state)
     }
 
-    const item = useSelector((state) => state.store_listing.store);
-
     const setLatLong = (address) => {
         Geocode.setApiKey( "AIzaSyBBYmJujloM3zNdxMpokW1G_Qo5Qo_05_A" )
         Geocode.setRegion("ng");
@@ -44,13 +42,13 @@ export const UpdateListingLocation = ({listing, formErrors}) => {
                 });        
     }
 
-    const mapViewUpdate = () => {
+    const mapViewUpdate = useCallback(() => {
         setLatLong(`${state}, ${city}, ${landmark}`)
-    }
+    }, [state, city, landmark])
 
     useEffect(() => {
         mapViewUpdate()
-    }, [state, city, landmark])
+    }, [state, city, landmark, mapViewUpdate])
 
     return (
         <div className="card bg-white border-0">
@@ -83,14 +81,14 @@ export const UpdateListingLocation = ({listing, formErrors}) => {
                             <div className="col-12 px-2">
                                 <div className="form-group">
                                 <label htmlFor="address" className="text-heading">Address</label>
-                                <input type="text"  defaultValue={listing.address} className="form-control form-control-lg border-0" id="address" name="address"/>
+                                <input type="text"  defaultValue={listing?.address} className="form-control form-control-lg border-0" id="address" name="address"/>
                                 <p className="text-danger fs-12">{formErrors.address?.message}</p>
                                 </div>
                             </div>
                             <div className="col-12 px-2">
                                 <div className="form-group">
                                 <label htmlFor="landmark" className="text-heading">Landmark / Nearest Bus Stop</label>
-                                <InputAddress lat={lat} long={long} setLandmark={setLandmark} defaultValue={listing.landmark}  setLatLong={setLatLong} id="landmark"/>
+                                <InputAddress lat={lat} long={long} setLandmark={setLandmark} defaultValue={listing.landmark ? listing.landmark : ""}  setLatLong={setLatLong} id="landmark"/>
                                 <input hidden name="landmark" defaultValue={landmark} type="text"/>
                                 <p className="text-danger fs-12">{formErrors.landmark?.message}</p>
                                 </div>

@@ -29,20 +29,20 @@ export default function ListingAction({agent, listing}) {
         <>
             <div className="card border-0 shadow-hover-3 px-6 position-stick sticky-top mt-4 mt-md-0" style={{top: '50px', zIndex: '0'}}>
                 <div className="card-body text-center pt-6 pb-2 px-0">
-                    <a href={"agent-details-1.html"} className="d-inline-block mb-2">
+                    <Link to={`/${agent.username}`} className="d-inline-block mb-2">
                         {   
                             agent.avatar 
                             
                             ? 
                             
-                            <div className="rounded-circle w-120px h-120 d-flex align-items-center justify-content-center overflow-hidden"><img src={agent.avatar} className="w-120px h-120" style={{objectFit: 'cover'}} alt={`${agent.firstname} ${agent.lastname}`} /></div> 
+                            <div className="rounded-circle w-120px h-120 d-flex align-items-center justify-content-center overflow-hidden"><img src={agent.avatar} className="w-120px h-120" style={{objectFit: 'cover'}} alt={`${agent.firstname.charAt(0).toUpperCase()}${agent.lastname.charAt(0).toUpperCase()}`} /></div> 
                             
                             : 
                             <div className="d-inline-block mb-2 w-120px h-120 bg-gray-01 rounded-circle fs-30 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mb-4 mb-sm-0">
                                 {`${agent.firstname.charAt(0).toUpperCase()}${agent.lastname.charAt(0).toUpperCase()}`}
                             </div>
                         }
-                    </a>
+                    </Link>
 
                     <Link to={`/${agent.username}`} className="d-block fs-16 lh-214 text-dark mb-0 font-weight-500 hover-primary">{agent.firstname} {agent.lastname}</Link>
                     
@@ -59,65 +59,82 @@ export default function ListingAction({agent, listing}) {
                 </div>
                 <div className="card-footer bg-white px-0 pt-1 pb-6">
                 <ul className="list-group list-group-no-border pb-1">
-                    <li className="list-group-item d-flex align-items-sm-center lh-114 row m-0 px-0 pt-3 pb-0">
-                    <span className="col-sm-4 p-0 fs-13 mb-1 mb-sm-0">Phone</span>
-                    <span className="col-sm-8 p-0 text-heading font-weight-500">{agent.phone_number}</span>
-                    </li>
+                    {
+                        agent.phone_number
+
+                        &&
+
+                        <li className="list-group-item d-flex align-items-sm-center lh-114 row m-0 px-0 pt-3 pb-0">
+                            <span className="col-sm-4 p-0 fs-13 mb-1 mb-sm-0">Phone</span>
+                            <span className="col-sm-8 p-0 text-heading font-weight-500">{agent.phone_number}</span>
+                        </li>
+                    }
                     <li className="list-group-item d-flex align-items-sm-center row m-0 px-0 pt-2 pb-0">
                     <span className="col-sm-4 p-0 fs-13 lh-114">Email</span>
                     <span className="col-sm-8 p-0">{agent.email}</span>
                     </li>
-                    <li className="list-group-item d-flex align-items-sm-center lh-114 row m-0 px-0 pt-3 pb-0">
-                    <span className="col-sm-4 p-0 fs-13 mb-1 mb-sm-0">Social</span>
-                    <ul className={`list-inline mb-0 ${agent.twitter || agent.facebook || agent.instagram || agent.website ? "" : "h-30"}`}>
-                        {
-                            agent.twitter 
-                            
-                            &&
+                    {
+                        agent.twitter || agent.facebook || agent.instagram || agent.website
 
-                            <li className="list-inline-item mr-6">
-                                <a href={agent.twitter} target="_blank" className="text-muted hover-primary" rel="noreferrer">
-                                    <i className="fab fa-twitter" /></a>
-                            </li>
-                        }
+                        ?
 
-                        {
-                            agent.facebook
+                        <li className="list-group-item d-flex align-items-sm-center lh-114 row m-0 px-0 pt-3 pb-0">
+                            <span className="col-sm-4 p-0 fs-13 mb-1 mb-sm-0">Social</span>
+                            <ul className={`list-inline mb-0 ${agent.twitter || agent.facebook || agent.instagram || agent.website ? "" : "h-30"}`}>
+                                {
+                                    agent.twitter 
+                                    
+                                    &&
+        
+                                    <li className="list-inline-item mr-6">
+                                        <a href={agent.twitter} target="_blank" className="text-muted hover-primary" rel="noreferrer">
+                                            <i className="fab fa-twitter" /></a>
+                                    </li>
+                                }
+        
+                                {
+                                    agent.facebook
+        
+                                    &&
+        
+                                    <li className="list-inline-item mr-6">
+                                        <a href={agent.facebook} target="_blank" className="text-muted hover-primary" rel="noreferrer"><i className="fab fa-facebook-f"/></a>
+                                    </li>
+                                }
+                                
+        
+                                {
+                                    agent.instagram
+        
+                                    && 
+        
+                                    <li className="list-inline-item mr-6">
+                                        <a href={agent.instagram} target="_blank" className="text-muted hover-primary" rel="noreferrer"><i className="fab fa-instagram" /></a>
+                                    </li>
+                                }
+        
+        
+                                {
+                                    agent.website
+        
+                                    && 
+        
+                                    <li className="list-inline-item">
+                                        <a href={agent.website} target="_blank" className="text-muted hover-primary" rel="noreferrer"><i className="fa fa-globe-africa" /></a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
 
-                            &&
+                        :
 
-                            <li className="list-inline-item mr-6">
-                                <a href={agent.facebook} target="_blank" className="text-muted hover-primary" rel="noreferrer"><i className="fab fa-facebook-f"/></a>
-                            </li>
-                        }
-                        
-
-                        {
-                            agent.instagram
-
-                            && 
-
-                            <li className="list-inline-item mr-6">
-                                <a href={agent.instagram} target="_blank" className="text-muted hover-primary" rel="noreferrer"><i className="fab fa-instagram" /></a>
-                            </li>
-                        }
-
-
-                        {
-                            agent.website
-
-                            && 
-
-                            <li className="list-inline-item">
-                                <a href={agent.website} target="_blank" className="text-muted hover-primary" rel="noreferrer"><i className="fa fa-globe-africa" /></a>
-                            </li>
-                        }
-                    </ul>
-                    </li>
+                        ""
+                    }
                 </ul>
 
                 <div className="mt-5" >
-                    <Link to={`/${agent.username}`} className="btn btn-block btn-lg btn-outline-primary">View Profile</Link>
+                    <a href={`mailto:${agent.email}`} className="btn btn-block btn-lg btn-outline-primary">Send Email Message <i className="fa fa-envelope ml-1"></i> </a>
+                    <Link to={`/${agent.username}`} className="btn btn-block btn-lg btn-primary">View Profile <i className="fa fa-user ml-1"></i></Link>
                 </div>
 
 

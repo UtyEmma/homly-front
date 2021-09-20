@@ -45,9 +45,9 @@ export const ListingService = {
         return await Request.get('listings', headers)
     },
 
-    fetchAllListings : async (query) => {
+    fetchAllListings : async (token, query) => {
         const config = {
-            headers: headers,
+            headers: options(token),
             params: query
         }
         return await Request.get('listings', {...config})

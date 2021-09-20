@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useCallback, useEffect} from 'react'
 
 import Sidebar from './layouts/shared/sidebar';
 import Header from './layouts/shared/header';
@@ -18,18 +18,18 @@ const Reviews = ({agent, setIsLoading}) => {
     const user_data = useSelector(state => (state.user_data))
     const {token} = user_data
 
-    const fetchReviews = () => {
+    const fetchReviews = useCallback(() => {
         dispatch(FetchAgentReview(token))
-    }
+    }, [dispatch, token])
 
     useEffect(() => {
         !reviews && fetchReviews()
         reviews && setIsLoading(false)
-    }, [reviews])
+    }, [fetchReviews, reviews, setIsLoading])
 
     useEffect(() => {
         setIsLoading(loading)   
-    }, [loading])
+    }, [loading, setIsLoading])
 
     return (
         <div className="wrapper dashboard-wrapper">

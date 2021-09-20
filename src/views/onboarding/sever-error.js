@@ -6,10 +6,6 @@ export default function ServerError({user, setIsLoading}) {
     useEffect(() =>{
         setIsLoading(false)
     })
-
-    const resendVerificationEmail = () => {
-        
-    }
     
     return (
         <div className="bg-white" style={{height: '100vh'}}>
@@ -28,7 +24,7 @@ export default function ServerError({user, setIsLoading}) {
                 <div className="card shadow-0 col-md-7 p-5 py-9 border-0 text-center">
 
                     <div className="col-md-4 offset-md-4 col-6 offset-3 mt-4">
-                        <img src="images/svg/server_error.svg" width="150" className="img-fluid" />
+                        <img src="images/svg/server_error.svg" width="150" alt='Server Error' className="img-fluid" />
                     </div>
 
                     <div className="col-12">

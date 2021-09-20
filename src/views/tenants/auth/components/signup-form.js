@@ -4,17 +4,19 @@ import { signup } from 'providers/redux/_actions/user-actions';
 import { toggleConPassword, togglePassword } from 'libraries/forms/toggle-password';
 import { MapFormErrors, __tenantsignup } from 'libraries/validation';
 import Validator from 'validatorjs';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import GoogleAuth from 'views/agent/auth/socialite/google-auth';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
 const SignUpForm = () =>  {
+
     const dispatch = useDispatch()
-    const password = useRef()
     const confirm_password = useRef() 
     const history = useHistory()  
 
     const {loading, success, formError} = useSelector((state) => state.signup);
 
-    const {rules, messages, attributes} = __tenantsignup
+    const {rules, attributes} = __tenantsignup
     const [formErrors, setFormErrors] = useState({})
 
     const handleSignup = (e) => { 
@@ -30,11 +32,15 @@ const SignUpForm = () =>  {
             dispatch(signup(data))
         } 
     } 
+
+    const responseFacebook = (response) => {
+        console.log(response)
+    }
     
     useEffect(() => {
         if(formError){setFormErrors(formError)}
-        if(success){ history.push('/login', {message: "Sign up Successful. Please Login"}) }
-    }, [success, formError])
+        if(success){ history.push('/login?msg=Sign up Successful. Please Login') }
+    }, [success, formError, history])
 
     return (
         <div className="col-lg-7">
@@ -106,7 +112,18 @@ const SignUpForm = () =>  {
                     </div>
                     </div>
                     <button type="submit" className="btn btn-primary btn-lg btn-block rounded">
-                        Sign up
+                        {
+                            loading 
+                            
+                            ? 
+                            <div className="spinner-border text-white" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </div> 
+                            
+                            : 
+                            
+                            "Sign up" 
+                        }
                     </button>
                 </form>
                 <div className="divider text-center my-2">
@@ -116,20 +133,24 @@ const SignUpForm = () =>  {
                 </div>
                 <div className="row no-gutters mx-n2">
                     <div className="col-sm-6 px-2 mb-4">
-                        <a href="#" className="btn btn-lg btn-block text-heading border px-0 rounded bg-hover-accent">
-                            <img src="images/facebook.png" alt="Google" className="mr-2" />
-                            Facebook
-                        </a>
+                        <FacebookLogin
+                            appId={process.env.REACT_APP_FACEBOOK_APP_ID}
+                            render={renderProps => (
+                                <button onClick={renderProps.onClick} className="btn btn-lg btn-block text-heading border px-0 bg-hover-accent">
+                                    <img src="images/facebook.png" alt="Facebook" className="mr-2" />
+                                    Facebook
+                                </button> 
+                            )}
+                            fields="name,email,picture"
+                            callback={responseFacebook}
+                        />
                     </div>
                     <div className="col-sm-6 px-2 mb-4">
-                        <a href="#" className="btn btn-lg btn-block text-heading border px-0 rounded bg-hover-accent">
-                            <img src="images/google.png" alt="Google" className="mr-2" />
-                            Google
-                        </a>
+                        <GoogleAuth user="tenant" />
                     </div>
                 </div>
                     <div className="col-12 text-center">
-                        <p className="mb-4">Already have an account? <a href="./login" className="text-heading hover-primary text-center"><u>Log in</u></a></p>
+                        <p className="mb-4">Already have an account? <Link to="/login" className="text-heading hover-primary text-center"><u>Log in</u></Link></p>
                     </div>
                 </div>
             </div>

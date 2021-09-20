@@ -111,10 +111,10 @@ export default function Searchbar({parsed}) {
                     <div className="form-group mb-0 position-relative">
                     <a href="#advanced-search-filters-2-mobile" className="icon-primary btn advanced-search shadow-none pr-3 pl-0 d-flex align-items-center position-absolute pos-fixed-left-center py-0 h-100 border-right collapsed" data-toggle="collapse" data-target="#advanced-search-filters-2-mobile" aria-expanded="true" aria-controls="advanced-search-filters-2-mobile">
                     </a>
-                    <input type="text" defaultValue={parsed && parsed.keyword} className="form-control form-control-lg border-0 shadow-none pr-9 pl-11 bg-white placeholder-muted" name="keyword" placeholder="Search..." />
-                    <button type="submit" className="btn position-absolute pos-fixed-right-center p-0 text-heading fs-20 px-3 shadow-none h-100 border-left bg-white">
-                        <i className="far fa-search" />
-                    </button>
+                        <input type="text" defaultValue={parsed && parsed.keyword} className="form-control form-control-lg border-0 shadow-none pr-9 pl-11 bg-white placeholder-muted" name="keyword" placeholder="Search..." />
+                        <button type="submit" className="btn position-absolute pos-fixed-right-center p-0 text-heading fs-20 px-3 shadow-none h-100 border-left bg-white">
+                            <i className="far fa-search" />
+                        </button>
                     </div>
                 </div>
                 <div id="advanced-search-filters-2-mobile" className="col-12 pt-2 collapse" data-parent="#accordion-2-mobile">

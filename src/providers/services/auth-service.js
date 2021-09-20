@@ -5,17 +5,19 @@ const options = {
     'Content-Type' : 'application/json',
 }
 
-const auth = {
-    headers: {
-        'Accept' : 'application/json',
-        'Content-Type' : 'application/json',
-        'Authorization' : `Bearer ${localStorage.getItem('token')}`
+const auth = (token) => {
+    return {
+        headers: {
+            'Accept' : 'application/json',
+            'Content-Type' : 'application/json',
+            'Authorization' : `Bearer ${token}`
+        }
     }
 }
 
 export const AuthService = {
-    getLoggedInUser: async (type) => {
-        return Request.get(`${type}/user`, auth)
+    getLoggedInUser: async (token, type) => {
+        return Request.get(`${type}/user`, auth(token))
     },
 
     login: async (data, type) => {
@@ -26,8 +28,8 @@ export const AuthService = {
         return await Request.post(`${type}/login`, request)
     },    
 
-    resendVerificationEmail: async (type, id) => {
-        return Request.get(`${type}/resend/${id}`, auth)
+    resendVerificationEmail: async (token, type, id) => {
+        return Request.get(`${type}/resend/${id}`, auth(token))
     },
 
 

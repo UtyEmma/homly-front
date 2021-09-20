@@ -1,6 +1,6 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { CreateListing, StoreListing } from '../../../../providers/redux/_actions/listing/listing-actions';
+import { CreateListing } from '../../../../providers/redux/_actions/listing/listing-actions';
 import ListingLocation from './blocks/listing-location'
 import ListingDescription from './blocks/listing-description'
 import ListingMedia from './blocks/listing-media'
@@ -9,37 +9,29 @@ import ListingDetails from './blocks/listing-details'
 import { FetchDetails } from 'providers/redux/_actions/details-actions';
 import { MapFormErrors, __createlisting } from 'libraries/validation';
 import Validator from 'validatorjs';
-import { NewListingStepper } from './listing-function';
 import toast from 'react-hot-toast';
 
 function AddListingForm({setIsLoading}) {
+
     const dispatch = useDispatch();
 
-    const [files, setFiles] = useState([]) //Set Files
-
-    const store_listing = useSelector((state) => state.store_listing);
-    const {store} = store_listing; 
-
-    const listing = useSelector((state) => state.new_listing);
-    const {loading, listing_success, formError} = listing
-    
-    const {rules, messages, attributes} = __createlisting
+    const [files, setFiles] = useState([])
     const [formErrors, setFormErrors] = useState({})
 
-    const fetchDetails = useSelector(state => state.details)
-    const {amenities} = fetchDetails
+    const {loading, listing_success, formError} = useSelector((state) => state.new_listing);
+    const {token} = useSelector(state => state.user_data)
+    
+    const {amenities} = useSelector(state => state.details)
 
-    const loadAmenities = () => { dispatch(FetchDetails()) }
+    const {rules, attributes} = __createlisting
 
-    useEffect(() => {
-        !amenities && loadAmenities()
-        listing_success && resetFormData()
-        setIsLoading(loading)
-        formError && setFormErrors(formError)
-    }, [listing_success, loading])
+    const loadAmenities = useCallback(() => {
+        dispatch(FetchDetails()) 
+    }, [dispatch]) 
 
     const resetFormData = () => {
         setFormErrors({})
+        setFiles([])
         document.getElementById('listing-form').reset()
     }
 
@@ -52,15 +44,31 @@ function AddListingForm({setIsLoading}) {
         let validation = new Validator(values, rules)
         validation.setAttributeNames(attributes);
         validation.fails(() => {
-            toast.error("Invalid Input Data")
+            toast.error("Some fields are Invalid")
             setFormErrors(MapFormErrors(validation.errors.errors))
         })
 
         if (validation.passes()) {
             setFormErrors({}); 
-            dispatch(CreateListing(formData))
+            dispatch(CreateListing(token, formData))
         }
     }
+    
+    useEffect(() => {
+        !amenities && loadAmenities()
+    }, [amenities, loadAmenities])
+
+    useEffect(() => {
+        formError && setFormErrors(formError)
+    }, [formError])
+
+    useEffect(() => {
+        listing_success && resetFormData()
+    }, [listing_success])
+
+    useEffect(() => {
+        setIsLoading(loading)
+    }, [loading, setIsLoading])
 
     return (
         <form id="listing-form" onSubmit={handleFormData} encType="multipart/form-data" >

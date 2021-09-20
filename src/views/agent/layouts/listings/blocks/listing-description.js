@@ -55,7 +55,6 @@ export default function ListingDescription({formErrors}) {
                                             <option>Monthly Tenancy</option>
                                             <option>Quaterly Tenancy</option>
                                             <option>Yearly Tenancy</option>
-                                            <option>Custom Duration</option>
                                         </select>
                                         <p className="text-danger fs-12 mt-1">{formErrors.tenure?.message}</p>
                                     </div>
@@ -91,7 +90,7 @@ export default function ListingDescription({formErrors}) {
                 </div>
                 </div>
                 <div className="text-right">
-                <button className="btn btn-lg btn-primary next-button" type="button" role="button">Next step
+                <button className="btn btn-lg btn-primary next-button" type="button">Next step
                     <span className="d-inline-block ml-2 fs-16"><i className="fal fa-long-arrow-right" /></span>
                 </button>
                 </div>

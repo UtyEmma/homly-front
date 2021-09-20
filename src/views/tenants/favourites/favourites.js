@@ -1,5 +1,5 @@
 import { FetchFavourites } from 'providers/redux/_actions/favourites-actions'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Searchbar from 'views/layouts/components/search/searchbar'
 import NavBar from 'components/shared/nav-bar'
@@ -19,14 +19,21 @@ export const Favourites = ({user, isLoggedIn, setIsLoading, status}) => {
     
     const [allFavourites, setFavourites] = useState()
 
-    const GetFavourites = () => {
+    const GetFavourites = useCallback(() => {
         dispatch(FetchFavourites(token))
-    }
+    }, [dispatch, token])
+
+    const setFavourite = useCallback(() => {
+        setFavourites(listings)
+    }, [listings])
 
     useEffect(() => {
-        !listings && GetFavourites()
-        listings && setFavourites(listings)
-    }, [listings])
+        !allFavourites && GetFavourites()
+    }, [GetFavourites, allFavourites])
+
+    useEffect(() => {
+        listings && setFavourite(listings)
+    }, [listings, setFavourite])
 
     useEffect(() => {
         setIsLoading(false)   
@@ -34,7 +41,7 @@ export const Favourites = ({user, isLoggedIn, setIsLoading, status}) => {
 
     useEffect(() => {
         setIsLoading(loading)
-    }, [loading])
+    }, [loading, setIsLoading])
 
     return (
         <>

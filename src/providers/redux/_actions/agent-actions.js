@@ -106,8 +106,11 @@ export const DeleteListing = (token, id) => (dispatch) => {
 
     AgentService.deleteListing(token, id)
                 .then(response => {
-                    Response.success(response.data.data)
-                    return window.location.href = '/my-listings'
+                    Response.success(response.data)
+                    dispatch({
+                        type: DELETE_LISTING_SUCCESS,
+                        payload: true
+                    })
                 })
                 .catch(error => {
                     Response.error(error.response)
@@ -140,12 +143,12 @@ export const RemoveListing = (id) => (dispatch) => {
                 })
 }
 
-export const FetchAgentDetails = (id) => (dispatch) => {
+export const FetchAgentDetails = (token, id) => (dispatch) => {
     console.log("Fetching Details...")
 
     dispatch({type: FETCH_SINGLE_AGENT_REQUEST})
 
-    AgentService.fetchSingleAgent(id)
+    AgentService.fetchSingleAgent(token, id)
                 .then((response) => {
                     return dispatch({
                         type: FETCH_SINGLE_AGENT_SUCCESS,

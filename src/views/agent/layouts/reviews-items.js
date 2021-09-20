@@ -1,17 +1,18 @@
 import RatingStar from 'components/rating/rating-star'
 import { ReportUser } from 'providers/redux/_actions/review-actions'
 import React from 'react'
-import { OverlayTrigger, Popover } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 export function ReviewItem({reviews}) {
 
     const dispatch = useDispatch()
 
+    const {token} = useSelector(state => state.user_data)
+
     const submitReport = (e) => {
         e.preventDefault()
         const formData = new FormData(e.target) 
-        dispatch(ReportUser(formData))
+        dispatch(ReportUser(token, formData))
     }
 
     return (
@@ -49,14 +50,13 @@ export function ReviewItem({reviews}) {
                                 <div className="d-flex justify-content-sm-between justify-content-between">
                                     <p className="mb-0 text-muted fs-13">{review.created_at.date} at {review.created_at.time}</p>
 
-                                    {
+                                    {/* {
                                         review.reported
 
                                         ?
                                         
                                             <div>
                                                 <span class="badge badge-pill badge-accent text-capitalize">
-                                                    {/* review.report */}
                                                     <i className="fa fa-exclamation-circle mr-1"></i>
                                                     Report Sent
                                                 </span>
@@ -80,7 +80,7 @@ export function ReviewItem({reviews}) {
                                                 </form>
                                             </div>
                                         </div>
-                                    }
+                                    } */}
                                 </div>
                             </div>
                         </div>

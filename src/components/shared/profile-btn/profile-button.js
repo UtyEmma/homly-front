@@ -4,15 +4,15 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-export default function ProfileButton({token, isloggedIn, user, status}) {
+export default function ProfileButton({setIsLoading, isloggedIn, user, status}) {
     return (
         <>
-            {isloggedIn ? <LoggedIn user={user} status={status} /> : loggedOut()}
+            {isloggedIn ? <LoggedIn user={user} status={status} setIsLoading={setIsLoading} /> : loggedOut()}
         </>
     )
 }
 
-function LoggedIn({user, status}) {
+function LoggedIn({setIsLoading, user, status}) {
 
     const dispatch = useDispatch()
     const {token} = useSelector(state => state.user_data)

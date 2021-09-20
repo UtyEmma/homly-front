@@ -1,15 +1,13 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import 'bs-stepper/dist/css/bs-stepper.min.css'
 import Stepper from 'bs-stepper'
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from "react-hook-form";
 import { UpdateListingDescription } from "./blocks/update-listing-description";
 import { UpdateListingMedia } from "./blocks/update-listing-media";
 import { UpdateListingLocation } from "./blocks/update-listing-location";
 import { UpdateListingDetails } from "./blocks/update-listing-details";
 import { useDispatch, useSelector } from "react-redux";
 import { UpdateListing } from "providers/redux/_actions/listing/listing-actions";
-import { MapFormErrors, __createlisting, __updatelisting } from "libraries/validation";
+import { MapFormErrors, __createlisting } from "libraries/validation";
 import Validator from "validatorjs";
 import { useHistory } from "react-router-dom";
 
@@ -26,7 +24,7 @@ export const UpdateListingForm = ({listing, setListing, setIsLoading}) => {
     const user_data = useSelector(state => (state.user_data))
     const {token} = user_data
 
-    const {rules, messages, attributes} = __createlisting
+    const {rules, attributes} = __createlisting
     const [formErrors, setFormErrors] = useState({})
 
     const update_listing = useSelector((state) => state.update_listing);
@@ -49,6 +47,12 @@ export const UpdateListingForm = ({listing, setListing, setIsLoading}) => {
         }
     }
 
+    const handleUpdateSuccess = useCallback(() => {
+        setFormErrors({})
+        history.push(`/my-listings/${success.listing.slug}`)
+        setListing(success.listing)
+    }, [success])
+
     useEffect(() => {
         !stepper && setStepper(new Stepper(document.getElementById('wishlist-stepper'), {
             linear: false,
@@ -66,13 +70,7 @@ export const UpdateListingForm = ({listing, setListing, setIsLoading}) => {
 
     useEffect(() => {
         success && update && handleUpdateSuccess()
-    }, [success, update])
-
-    const handleUpdateSuccess = () => {
-        setFormErrors({})
-        history.push(`/my-listings/${success.listing.slug}`)
-        setListing(success.listing)
-    }
+    }, [handleUpdateSuccess, success, update])
 
     return (
         <>

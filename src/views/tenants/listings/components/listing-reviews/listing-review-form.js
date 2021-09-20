@@ -1,16 +1,21 @@
 import { SubmitReview } from 'providers/redux/_actions/review-actions'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-export default function ListingReviewForm({listing_id, status}) {
+export default function ListingReviewForm({setUserHasReviewed, listing_id, status}) {
     const dispatch = useDispatch()
     const {loading, reviews} = useSelector(state => state.submit_review)
+    const {token} = useSelector((state) => state.user_data)
 
     const submitPropertyReview = (e) => {
         e.preventDefault()
         let formData = new FormData(e.target)
-        dispatch(SubmitReview(formData, listing_id))    
+        dispatch(SubmitReview(token, formData, listing_id))    
     }
+
+    useEffect(() => {
+        reviews && setUserHasReviewed(true)
+    }, [reviews, setUserHasReviewed])
 
     return (
         <>

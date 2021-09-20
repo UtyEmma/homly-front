@@ -1,11 +1,13 @@
-import React, {useEffect, useLayoutEffect} from 'react'
+import React, {useEffect, useLayoutEffect, useState} from 'react'
 import AddListingForm from '../layouts/listings/add-listing-form'
 import Header from '../layouts/shared/header';
 import Sidebar from '../layouts/shared/sidebar';
 import { Helmet } from 'react-helmet';
+import Preloader from 'components/preloader/preloader';
 
 const NewListing = ({agent, setIsLoading, isLoading}) => {
-        
+        const [loading, setLoading] = useState(false)    
+
         useEffect(() => {
             setIsLoading(false)
         })
@@ -15,6 +17,8 @@ const NewListing = ({agent, setIsLoading, isLoading}) => {
                 <Helmet>
                     <title>Properties - Create Property</title>
                 </Helmet>
+
+                <Preloader loading={loading} />
                 
                 <div className="d-flex flex-wrap flex-xl-nowrap">
                     <Sidebar agent={agent}/>
@@ -48,7 +52,7 @@ const NewListing = ({agent, setIsLoading, isLoading}) => {
                                     </li>
                                 </ul>
                                 <div className="tab-content shadow-none p-0">
-                                    <AddListingForm setIsLoading={setIsLoading}/>
+                                    <AddListingForm setIsLoading={setLoading}/>
                                 </div>
                                 </div>
                             </div>

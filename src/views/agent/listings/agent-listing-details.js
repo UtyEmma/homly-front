@@ -1,6 +1,6 @@
 import Preloader from "components/preloader/preloader"
 import { FetchSingleListing } from "providers/redux/_actions/listing/listing-actions"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
 import Header from "../layouts/shared/header"
@@ -23,27 +23,27 @@ export const AgentListingDetail = ({agent, setIsLoading, isLoading}) => {
 
     const details = useSelector((state) => state.listing);
     const {loading, listing, error} = details;
+    
+    const handleSetListing = useCallback(() => {
+        setListingItem(listing.listing)
+    }, [listing]) 
+
+    const fetchListingData = useCallback((slug) => {
+        dispatch(FetchSingleListing(agent.username, slug))
+    }, [agent.username, dispatch]) 
 
     useEffect(() => {
         !listing && fetchListingData(slug)
         listing && handleSetListing()
-    }, [listing]);
+    }, [fetchListingData, handleSetListing, listing, slug]);
 
     useEffect(() => {
         setIsLoading(loading)
-    }, [loading])
+    }, [loading, setIsLoading])
 
     useEffect(() => {
         error && history.push('/my-listings')
-    }, [error])
-
-    const handleSetListing = () => {
-        setListingItem(listing.listing)
-    }
-
-    const fetchListingData = (slug) => {
-        dispatch(FetchSingleListing(agent.username, slug))
-    }
+    }, [error, history])
 
     return (
         <div className="wrapper dashboard-wrapper">

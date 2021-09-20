@@ -21,10 +21,13 @@ export const FavouriteListingButton = ({listing}) => {
 
     useEffect(() => {
         setIsFavourite(listing.isFavourite)
-    }, [listing.isFavourite])
+        console.log(isFavourite)
+    }, [listing])
 
     useEffect(() => {
-        favourite && setIsFavourite(favourite.status)
+        console.log("Fav", favourite)
+        
+        favourite && setIsFavourite(favourite)
     }, [favourite])
 
     return (

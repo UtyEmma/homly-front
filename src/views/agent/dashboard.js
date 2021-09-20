@@ -33,7 +33,7 @@ const AgentDashboard = ({agent, setIsLoading}) => {
             </Helmet>
             <div className="d-flex flex-wrap flex-xl-nowrap">
 
-                <Sidebar agent={agent} />
+                <Sidebar setIsLoading={setIsLoading} agent={agent} />
 
                 <div className="page-content">
                     <Header agent={agent}/>
@@ -126,11 +126,12 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                                     <div className="card-body row align-items-center px-6 py-7">
                                         <div className="col-5">
                                         <span className="w-83px h-83 d-flex align-items-center justify-content-center fs-36 badge badge-pink badge-circle">
-                                            <svg className="icon icon-heart"><use xlinkHref="#icon-heart" /></svg>
+                                            {/* <svg className="icon icon-heart"><use xlinkHref="#icon-heart" /></svg> */}
+                                            <i className="fal fa-star"></i>
                                         </span>
                                         </div>
                                         <div className="col-7 text-center">
-                                        <p className="fs-42 lh-12 mb-0 counterup" data-start={0} data-end={914} data-decimals={0} data-duration={0} data-separator>{agent.rating}/5</p>
+                                        <p className="fs-42 lh-12 mb-0">{agent.rating ? agent.rating : 1}/5</p>
                                         <p>Rating</p>
                                         </div>
                                     </div>

@@ -11,18 +11,25 @@ const {
     DELETE_REVIEW_REQUEST, DELETE_REVIEW_SUCCESS, DELETE_REVIEW_FAILURE
 } = _REVIEWS
 
-export const SubmitReview = (data, id) => (dispatch) => {
+export const SubmitReview = (token, data, id) => (dispatch) => {
     console.log("Submiting Reviews...")
 
     dispatch({ type: SUBMIT_REVIEW_REQUEST })
 
-    ReviewsService.submitReview(data, id)
+    ReviewsService.submitReview(token, data, id)
                     .then((response) => {
                         Response.success(response.data)
+                        dispatch({
+                            type: FETCH_REVIEWS_SUCCESS,
+                            payload: response.data.data
+                        })
+
                         dispatch({
                             type: SUBMIT_REVIEW_SUCCESS,
                             payload: response.data.data
                         })
+
+
                     })
                     .catch((error) => {
                         Response.error(error.response)
@@ -53,12 +60,12 @@ export const FetchAgentReview = (token) => (dispatch) => {
                     })
 } 
 
-export const FetchReview = (id) => (dispatch) => {
+export const FetchReview = (token, id) => (dispatch) => {
     
     console.log("Fetching Reviews...")
     dispatch({type: FETCH_REVIEWS_REQUEST})
 
-    ReviewsService.listingReviews(id)
+    ReviewsService.listingReviews(token, id)
                     .then((response) => {
                         dispatch({
                             type: FETCH_REVIEWS_SUCCESS,
@@ -74,11 +81,11 @@ export const FetchReview = (id) => (dispatch) => {
                     })
 } 
 
-export const ReportUser = (id, data) => (dispatch) => {
+export const ReportUser = (token, id, data) => (dispatch) => {
     console.log("Reporting User...")
     dispatch({type: REPORT_USER_REQUEST})
 
-    ReviewsService.reportUser(id, data)
+    ReviewsService.reportUser(token, id, data)
                     .then((response) => {
                         Response.success(response.data)
                         dispatch({
@@ -95,15 +102,20 @@ export const ReportUser = (id, data) => (dispatch) => {
                     })
 }
 
-export const EditReview = (data) => (dispatch) => {
+export const EditReview = (token, data) => (dispatch) => {
     console.log("Submitting Edited Review...")
 
     dispatch({type: EDIT_REVIEW_REQUEST})
-    ReviewsService.editReviews(data)
+    ReviewsService.editReviews(token, data)
                     .then((response) => {
                         Response.success(response.data)
                         dispatch({
                             type: EDIT_REVIEW_SUCCESS,
+                            payload: response.data.data
+                        })
+
+                        dispatch({
+                            type: FETCH_REVIEWS_SUCCESS,
                             payload: response.data.data
                         })
                     })
@@ -116,15 +128,20 @@ export const EditReview = (data) => (dispatch) => {
                     })
 }
 
-export const DeleteReview = (id, data) => (dispatch) => {
+export const DeleteReview = (token, id, data) => (dispatch) => {
     console.log("Deleting Review...")
     dispatch({type: DELETE_REVIEW_REQUEST})
 
-    ReviewsService.deleteReviews(id, data)
+    ReviewsService.deleteReviews(token, id, data)
                     .then((response) => {
                         Response.success(response.data)
                         dispatch({
                             type: DELETE_REVIEW_SUCCESS,
+                            payload: response.data.data
+                        })
+
+                        dispatch({
+                            type: FETCH_REVIEWS_SUCCESS,
                             payload: response.data.data
                         })
                     })
