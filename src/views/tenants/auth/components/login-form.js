@@ -31,7 +31,6 @@ const UserLoginForm = ({isLoading}) =>  {
         let validation = new Validator(values, rules)
         validation.setAttributeNames(attributes);
         validation.fails(() => {setFormErrors(MapFormErrors(validation.errors.errors))})
-        
         if (validation.passes()) {
             setFormErrors({}); 
             dispatch(Login(data, 'tenant'));
