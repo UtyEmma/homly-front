@@ -1,10 +1,12 @@
 import WishlistNotFound from 'components/404/404-wishlist'
 import { FetchAgentWishlists } from 'providers/redux/_actions/agent-actions'
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Header from '../layouts/shared/header'
 import Sidebar from '../layouts/shared/sidebar'
 import { Helmet } from 'react-helmet'
+import { AgentWishlistItem } from './agent-wishlist-item'
+import { AgentWishlistModal } from './agent-wishlist-modal'
 
 const AgentWishlist = ({agent, setIsLoading}) => {
     
@@ -14,18 +16,21 @@ const AgentWishlist = ({agent, setIsLoading}) => {
 
     const user_data = useSelector(state => (state.user_data))
     const {token} = user_data
+
+    const [show, setShow] = useState(false);
+    const [details, setDetails] = useState()
     
-    const FetchWishlist = () => {
+    const FetchWishlist = useCallback(() => {
         dispatch(FetchAgentWishlists(token))
-    }
+    }, [dispatch, token])
 
     useEffect(() => {
         !wishlists && FetchWishlist()
-    }, [wishlists]);
+    }, [FetchWishlist, wishlists]);
 
     useEffect(() => {
         setIsLoading(loading)
-    }, [loading])
+    }, [loading, setIsLoading])
 
     return (
         <div className="wrapper dashboard-wrapper">
@@ -47,14 +52,6 @@ const AgentWishlist = ({agent, setIsLoading}) => {
                                 </h2>
                                 <p>Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse suscipit</p>
                                 </div>
-                                <form className="form">
-                                <div className="input-group input-group-lg bg-white border">
-                                    <div className="input-group-prepend">
-                                    <button className="btn pr-0 shadow-none" type="button"><i className="far fa-search" /></button>
-                                    </div>
-                                    <input type="text" className="form-control bg-transparent border-0 shadow-none text-body" placeholder="Search listing" name="search" />
-                                </div>
-                                </form>
                             </div>
 
 
@@ -68,42 +65,7 @@ const AgentWishlist = ({agent, setIsLoading}) => {
 
                                         wishlists.map((wishlist, index) => {
                                             return (
-                                                <div className="col-md-4 col-xxl-3 mb-6" key={index}>
-                                                    <div className="card shadow-hover-1">
-                                                        <div className="card-body pt-3">
-                                                            <h2 className="card-title fs-16 lh-2 mb-0"><a href="single-property-1.html" className="text-dark hover-primary">{wishlist.category}</a>
-                                                        </h2>
-                                                            <p className="card-text font-weight-500 text-gray-light mb-2">{wishlist.state}, {wishlist.city}</p>
-                                                            <ul className="list-inline d-flex mb-0 flex-wrap">
-                                                                <li className="list-inline-item text-gray font-weight-500 fs-13 d-flex align-items-center mr-2 " data-toggle="tooltip" title="3 Br">
-                                                                <svg className="icon icon-bedroom fs-18 text-primary mr-1">
-                                                                    <use xlinkHref="#icon-bedroom" />
-                                                                </svg>
-                                                                {wishlist.no_bedrooms} Br
-                                                                </li>
-                                                                <li className="list-inline-item text-gray font-weight-500 fs-13 d-flex align-items-center mr-2" data-toggle="tooltip" title="3 Ba">
-                                                                <svg className="icon icon-shower fs-18 text-primary mr-1">
-                                                                    <use xlinkHref="#icon-shower" />
-                                                                </svg>
-                                                                {wishlist.no_bathrooms} Ba
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    <div className="card-footer bg-transparent d-flex justify-content-between align-items-center py-3">
-                                                        <div className="mr-auto">
-                                                            <span className="text-heading lh-15 font-weight-bold fs-17">&#8358; {wishlist.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
-                                                            <span className="text-gray-light">/year</span>
-                                                        </div>
-                                                        <ul className="list-inline mb-0">
-                                                            <li className="list-inline-item">
-                                                            <button  title="View" className="w-40px h-40 border rounded-circle d-inline-flex align-items-center justify-content-center text-secondary bg-accent border-accent"><i className="fas fa-eye" /></button>
-                                                            </li>
-                                                            <li className="list-inline-item">
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                <AgentWishlistItem wishlist={wishlist.wishlists} user={wishlist.user} setShow={setShow} setDetails={setDetails} key={wishlist.unique_id} />
                                             )
                                         })
 
@@ -116,6 +78,8 @@ const AgentWishlist = ({agent, setIsLoading}) => {
                                 </div>
                             </div>
                     </main>
+
+                    <AgentWishlistModal show={show} setShow={setShow} details={details} />
                 </div>
             </div>
         </div>

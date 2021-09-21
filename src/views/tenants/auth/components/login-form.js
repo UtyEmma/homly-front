@@ -3,8 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { __tenantlogin } from 'libraries/validation/schema/tenant-schema';
 import GoogleAuth from 'views/agent/auth/socialite/google-auth';
-import { useHistory } from 'react-router-dom';
-import { useQuery } from 'libraries/http/query';
+import { Link, useHistory } from 'react-router-dom';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import Validator from 'validatorjs';
 import { MapFormErrors } from 'libraries/validation';
@@ -12,17 +11,16 @@ import { Login } from 'providers/redux/_actions/auth-action';
 
 const UserLoginForm = ({isLoading}) =>  {    
     const dispatch = useDispatch()
-    const query = useQuery()
     const history = useHistory()
 
-    const {rules, messages, attributes} = __tenantlogin
+    const {rules, attributes} = __tenantlogin
     const [formErrors, setFormErrors] = useState({})
 
     const user_login = useSelector(state => state.login)
-    const {loading, formError, error} = user_login;
+    const {loading, formError} = user_login;
 
     const user_data = useSelector(state => state.user_data)
-    const {type, user} = user_data;
+    const {user} = user_data;
     
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -79,15 +77,9 @@ const UserLoginForm = ({isLoading}) =>  {
                         <p className="text-danger fs-12 mt-1">{formErrors.password?.message}</p>
                     </div>
                     <div className="d-flex mb-4">
-                    {/* <div className="form-check">
-                        <input className="form-check-input" type="checkbox" defaultValue id="remember-me-1" name="remember" />
-                        <label className="form-check-label" htmlFor="remember-me-1">
-                        Stay signed in
-                        </label>
-                    </div> */}
-                    <a href="/recover-password" className="d-inline-block ml-auto fs-13 lh-2 text-body">
-                        <u>Forgot your password?</u>
-                    </a>
+                        <Link to="/recover-password" className="d-inline-block ml-auto fs-13 lh-2 text-body">
+                            <u>Forgot your password?</u>
+                        </Link>
                     </div>
                     <button type="submit" className="btn btn-primary btn-lg btn-block rounded">
                             {loading ? 
@@ -104,7 +96,7 @@ const UserLoginForm = ({isLoading}) =>  {
                 <div className="row no-gutters mx-n2">
                     <div className="col-sm-6 px-2 mb-4">
                         <FacebookLogin
-                            appId="1003408093533632"
+                            appId={process.env.REACT_APP_FACEBOOK_APP_ID}
                             render={renderProps => (
                                 <button onClick={renderProps.onClick} className="btn btn-lg btn-block text-heading border px-0 bg-hover-accent">
                                     <img src="images/facebook.png" alt="Facebook" className="mr-2" />
@@ -121,9 +113,9 @@ const UserLoginForm = ({isLoading}) =>  {
                 </div>
                 <div className="text-center my-4">
                     <p className="mb-4">Don’t have an account yet?  
-                        <a href="./signup" className="text-heading hover-primary">
+                        <Link to="/signup" className="text-heading hover-primary">
                             <u> Sign up here</u>
-                        </a>
+                        </Link>
                     </p>
                 </div>
                 </div>

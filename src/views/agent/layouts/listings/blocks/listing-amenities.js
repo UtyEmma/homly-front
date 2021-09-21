@@ -39,7 +39,6 @@ export default function ListingAmenities({amenities, formErrors}) {
                                     )) 
                                     
                                     }
-
                                 </div>
                             </ul>
                             <p className="text-danger fs-12 mt-1">{formErrors.amenities?.message}</p>

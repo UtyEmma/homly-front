@@ -1,6 +1,6 @@
 import Response from 'libraries/response/response';
 import { userService } from '../../services';
-import { persistor, store } from '../store';
+import { history, persistor } from '../store';
 import { _TENANT } from '../_contants/user-constants';
 import { UnsetUser } from './auth-action';
 
@@ -27,23 +27,32 @@ export const signup = (data) => (dispatch) => {
             
 }
 
-export const UpdateTenantProfile = (data) => (dispatch) => {
+export const UpdateTenantProfile = (token, data) => (dispatch) => {
     dispatch({
         type: UPDATE_REQUEST
     })
 
-    userService.updateTenantData(data)
+    userService.updateTenantData(token, data)
                 .then((response) => {
+                    const res = response.data.data
                     Response.success(response.data)
-                    localStorage.removeItem('user')
-                    localStorage.setItem('user', JSON.stringify(response.data.user));
+
+                    dispatch({
+                        type: 'UPDATE_USER_DATA',
+                        payload: response.data.data.tenant
+                    }) 
+                    
                     dispatch({
                         type: UPDATE_SUCCESS,
                         payload: response.data.data
                     })
                 })
                 .catch((error) => {
-                    Response.error(error.response)
+                    const errors = Response.error(error.response)
+                    dispatch({
+                        type: UPDATE_FAILURE,
+                        payload: {error: error.response, formErrors: errors}
+                    })
                 })
 }
 

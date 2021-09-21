@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { FetchSingleListing } from 'providers/redux/_actions/listing/listing-actions'
 import ListingComponents from './components/listing-details'
@@ -15,16 +15,23 @@ import { Helmet } from 'react-helmet'
 
 
 const ListingDetails = ({isLoggedIn, user, status, adminMode, setIsLoading}) => {
+
     const {username, slug} = useParams();
+    
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const [listingData, setListingData] = useState()
 
     const details = useSelector((state) => state.listing);
-    const {loading, listing} = details;
+    const {loading, listing, error} = details;
 
     const suspend_listing = useSelector((state) => state.suspend_item);
     const {data} = suspend_listing;
+
+    useEffect(() => {
+        error && history.push('/listings')
+    }, [error])
 
     useEffect(() => {
         const fetchListingData = () => {
@@ -105,7 +112,7 @@ const ListingDetails = ({isLoggedIn, user, status, adminMode, setIsLoading}) => 
                         &&
 
                         <>
-                        <div className="d-flex  bottom-bar-action bottom-bar-action-01 py-2 px-4 bg-gray-01 align-items-center position-fixed fixed-bottom d-sm-none">
+                        <div className="d-flex d-md-none bottom-bar-action bottom-bar-action-01 py-2 px-4 bg-gray-01 align-items-center position-fixed fixed-bottom d-sm-none">
                                 <div className="media align-items-center">
                                     {   
                                         listingData.agent.avatar 

@@ -2,6 +2,7 @@ import React from 'react'
 import ScrollAnimation from 'react-animate-on-scroll';
 import '../css/listing.css'
 import { FavouriteListingButton } from 'views/tenants/favourites/components/favourite-listing-btn';
+import { Link } from 'react-router-dom';
 
 export default function ListingGrid({listing, status}) {
     
@@ -38,7 +39,7 @@ export default function ListingGrid({listing, status}) {
                 </div>
                 <div className="card-body pt-3 px-0 pb-1">
                     <h2 className="fs-16 mb-1">
-                        <a href={`/${listing.agent.username}/${listing.slug}`} className="d-inline-block text-dark hover-primary w-100 text-nowrap text-truncate">{listing.title}</a>
+                        <Link to={`/${listing.agent.username}/${listing.slug}`} className="d-inline-block text-dark hover-primary w-100 text-nowrap text-truncate">{listing.title}</Link>
                     </h2>
                     
                     <p className="font-weight-500 text-gray-light mb-0 d-inline-block text-nowrap text-truncate w-100">{listing.address}, {listing.city}, {listing.state}</p>

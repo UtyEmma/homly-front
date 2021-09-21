@@ -1,16 +1,18 @@
 import AgentListingsNotFound from 'components/404/404-agent_listings'
 import Preloader from 'components/preloader/preloader'
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetAgentListings } from '../../../providers/redux/_actions/listing/listing-actions'
 import Header from '../layouts/shared/header'
 import Sidebar from '../layouts/shared/sidebar'
 import AgentListingContainer from './components/agent_listing-container'
 import { Helmet } from 'react-helmet'
+import { ConfirmActionDialog } from 'views/layouts/components/modals/confirm-action-dialog'
 
 const AgentsListings = ({agent, setIsLoading}) => {
     
     const dispatch = useDispatch();
+    const [show, setShow] = useState(false)
 
     const {loading, listings} = useSelector((state) => state.agents_listings);
 

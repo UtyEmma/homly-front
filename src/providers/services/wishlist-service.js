@@ -2,7 +2,7 @@ import { Request } from "./api/http";
 
 
 export const WishlistService = {
-    create,  fetchTenantWishlist, fetchWishlistForAgent, fetchSingleWishlist
+    create,  fetchTenantWishlist, fetchWishlistForAgent, fetchSingleWishlist, deleteWishlist
 }
 
 
@@ -26,6 +26,11 @@ async function create(token, data){
 async function fetchTenantWishlist(token){
     const config = { headers : options(token) }
     return await Request.get('tenant/wishlist/get-wishlist', config);
+}
+
+async function deleteWishlist(id, token){
+    const config = { headers : options(token) }
+    return await Request.get(`tenant/wishlist/delete/${id}`, config);
 }
 
 async function fetchSingleWishlist($id){

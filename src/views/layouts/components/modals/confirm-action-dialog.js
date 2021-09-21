@@ -13,16 +13,20 @@ export const ConfirmActionDialog = ({show, setShow, callback, message, title}) =
 
     return (
         <>
-           <Modal show={show} onHide={handleClose}>
+           <Modal centered show={show} onHide={handleClose}>
                 <Modal.Header closeButton className="border-0">
                     <Modal.Title>{title ? title : "Confirm Action"}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>{message ? message : "Are you sure you wish to procced with this action?"}</Modal.Body>
+                <Modal.Body>
+                    <p>
+                        {message ? message : "This action cannot be reversed. Are you sure you want to proceed?"}
+                    </p>
+                </Modal.Body>
                 <Modal.Footer className="border-0">
-                <button className="btn btn-link" onClick={handleClose}>
+                <button className="btn btn-link text-dark " onClick={handleClose}>
                     Close
                 </button>
-                <button className="btn btn-secondary" onClick={handleCallback} >
+                <button className="btn btn-primary" onClick={handleCallback} >
                     Proceed
                 </button>
                 </Modal.Footer>

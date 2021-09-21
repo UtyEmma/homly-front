@@ -1,4 +1,3 @@
-
 export const __tenantsignup = {
     rules: {
         firstname: 'required|string',
@@ -33,5 +32,21 @@ export const __tenantlogin = {
     attributes: {
         email: 'Email Address',
         password: 'Password'
+    }
+}
+
+export const __update_tenant_profile = {
+    rules: {
+        firstname: 'required|string',
+        lastname: 'required|string',
+        email: 'required|email',
+        phone: 'numeric'
+    },
+
+    attributes: {
+        firstname: 'First Name',
+        lastname: 'Last Name',
+        email: 'Email Address',
+        phone: 'Phone Number'
     }
 }

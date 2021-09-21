@@ -1,5 +1,6 @@
 import React from 'react'
 import ScrollAnimation from 'react-animate-on-scroll';
+import { Link } from 'react-router-dom';
 import { FavouriteListingButton } from 'views/tenants/favourites/components/favourite-listing-btn';
 
 export default function ListingList({listing, status}) {
@@ -41,7 +42,8 @@ export default function ListingList({listing, status}) {
                         </div>
                         <div className="col-md-6 ">
                         <div className="card-body p-0">
-                            <h2 className="card-title my-0"><a href={`/${listing.agent.username}/${listing.slug}`} className="fs-16 lh-2 text-dark hover-primary d-block">{listing.title}</a>
+                            <h2 className="card-title my-0">
+                                <Link to={`/${listing.agent.username}/${listing.slug}`} className="fs-16 lh-2 text-dark hover-primary d-block">{listing.title}</Link>
                             </h2>
                             <p className="card-text mb-1 font-weight-500 text-gray-light">{listing.address}, {listing.city}, {listing.state}</p>
                             <p className="card-text mb-2 ml-0" style={{textOverflow: 'ellipsis'}}>{listing.description.split(" ").splice(0,15).join(" ")}</p>

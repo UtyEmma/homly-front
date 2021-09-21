@@ -137,22 +137,34 @@ export const PasswordReset = (data) => (dispatch) => {
 
 
 
-export const GetLoggedInUser = (type) => (dispatch) => {
+export const GetLoggedInUser = (token, type) => (dispatch) => {
     dispatch({type: 'GET_USER_REQUEST'})
 
-    AuthService.getLoggedInUser(type)
+    AuthService.getLoggedInUser(token, type)
             .then((response) => {
                 let user = response.data.data.user;
+                
                 if(user.isVerified){
-                    return dispatch({
+                    dispatch({
                         type: 'GET_USER_SUCCESS',
                         payload: {user: {...user, type: type}}
                     })
+
+                    dispatch({
+                        type: 'GET_USER_VERIFY_EMAIL',
+                        payload: {}
+                    })
+                }else{
+                    dispatch({
+                        type: 'GET_USER_VERIFY_EMAIL',
+                        payload: {user: {...user, type: type}}
+                    })
                 }
+
                 return dispatch({
-                    type: 'GET_USER_VERIFY_EMAIL',
-                    payload: {user: {...user, type: type}}
-                })
+                    type: 'UPDATE_USER_DATA',
+                    payload: user
+                }) 
 
             })
             .catch((error) => {
@@ -164,11 +176,11 @@ export const GetLoggedInUser = (type) => (dispatch) => {
             })
 }
 
-export const ResendVerificationEmail = (type, id) => (dispatch) => {
+export const ResendVerificationEmail = (token, type, id) => (dispatch) => {
 
     dispatch({type: 'RESEND_EMAIL_REQUEST'})
 
-    AuthService.resendVerificationEmail(type, id)
+    AuthService.resendVerificationEmail(token, type, id)
             .then((response) => {
                 Response.success(response.data)
                 dispatch({
@@ -197,6 +209,13 @@ export const VerifyEmailAddress = (code) => (dispatch) => {
                     type: 'VERIFY_EMAIL_SUCCESS',
                     payload: response.data.data
                 })
+
+                if(localStorage.getItem('persist:root')){
+                    dispatch({
+                        type: 'UPDATE_USER_DATA',
+                        payload: response.data.data.user
+                    })
+                }
             })
             .catch((error) => {
                 Response.error(error.response)

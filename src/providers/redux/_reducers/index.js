@@ -1,7 +1,7 @@
 import { connectRouter } from "connected-react-router";
 import { combineReducers } from "redux";
 
-import {signupReducer} from "../_reducers/user.reducer";
+import {signupReducer, UpdateTenantProfileReducer} from "../_reducers/user.reducer";
 import { SetAdminModeReducer, SuspendItemReducer, verifyAgentReducer } from "./admin-reducer";
 import { AgentLoginReducer, AgentSignupReducer,
         UpdateAgentProfileReducer, ShowAvailableAgentsReducer, DeleteListingReducer, RemoveListingReducer, FetchSingleAgentReducer, FetchAgentWishlistsReducer } from "./agent-reducer";
@@ -18,12 +18,13 @@ import { DeleteReviewReducer, EditReviewReducer, FetchAgentReviewsReducer, Fetch
 import { SearchListingsReducer } from "./search-reducer";
 import { DeleteTicketReducer, FetchMessagesReducer, FetchTicketsReducer, NewTicketReducer, SendMessageReducer } from "./support-reducer";
 
-import { CreateWishlistReducer, FetchWishlistReducer } from "./wishlist-reducer";
+import { CreateWishlistReducer, DeleteWishlistReducer, FetchWishlistReducer } from "./wishlist-reducer";
 
 const rootReducer = (history) => combineReducers({
     router: connectRouter(history),
     user_data: SetUserReducer,
     signup: signupReducer,
+    update_tenant: UpdateTenantProfileReducer,
     login: LoginReducer,
     user: GetLoggedInUserReducer,
     resend_mail: ResendEmailReducer,
@@ -31,6 +32,7 @@ const rootReducer = (history) => combineReducers({
 
     wishlist : CreateWishlistReducer,
     wishlists: FetchWishlistReducer,
+    delete_wishlist: DeleteWishlistReducer,
 
     agent_signup: AgentSignupReducer,
     agents_listings: AgentsListingsReducer,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { SelectAmenities } from 'views/layouts/components/details/amenities';
 
 export const UpdateListingDetails = ({listing, formErrors}) => {
@@ -6,13 +6,13 @@ export const UpdateListingDetails = ({listing, formErrors}) => {
     let [amenities, setAmenities] = useState([]);
     let items = JSON.parse(listing.amenities);
     
-    const parseAmenities = () => {
+    const parseAmenities = useCallback(() => {
         let array = []
         for(let amenity in items){
             array.push(amenity)
         }
         setAmenities(array)
-    }
+    }, [listing]) 
 
     useEffect(() => {
         parseAmenities()
@@ -31,7 +31,7 @@ export const UpdateListingDetails = ({listing, formErrors}) => {
                                 <div className="col-lg-4">
                                     <div className="form-group">
                                         <label htmlFor="bedrooms" className="text-heading">Number of Bedrooms</label>
-                                            <input type="number" defaultValue={listing.no_bedrooms} className="form-control form-control-lg border-0" id="bedrooms" min="1" name="no_bedrooms"></input>
+                                            <input type="number" defaultValue={listing?.no_bedrooms} className="form-control form-control-lg border-0" id="bedrooms" min="1" name="no_bedrooms"></input>
                                             <p className="text-danger fs-12">{formErrors.no_bedrooms?.message}</p>
                                     </div>
                                 </div>
@@ -39,7 +39,7 @@ export const UpdateListingDetails = ({listing, formErrors}) => {
                                 <div className="col-lg-4">
                                     <div className="form-group">
                                         <label htmlFor="bedrooms" className="text-heading">Number of Bathrooms</label>
-                                            <input type="number" defaultValue={listing.no_bathrooms} className="form-control form-control-lg border-0" id="bathrooms" min="1" name="no_bathrooms"></input>
+                                            <input type="number" defaultValue={listing?.no_bathrooms} className="form-control form-control-lg border-0" id="bathrooms" min="1" name="no_bathrooms"></input>
                                             <p className="text-danger fs-12">{formErrors.no_bathrooms?.message}</p>
                                     </div>
                                 </div>
@@ -47,7 +47,7 @@ export const UpdateListingDetails = ({listing, formErrors}) => {
                                 <div className="col-lg-4">
                                     <div className="form-group">
                                         <label htmlFor="bedrooms" className="text-heading">Floor Number</label>
-                                            <input type="number" defaultValue={listing.no_floors} className="form-control form-control-lg border-0" id="floors" name="no_floors" min="1"></input>
+                                            <input type="number" defaultValue={listing?.no_floors} className="form-control form-control-lg border-0" id="floors" name="no_floors" min="1"></input>
                                             <p className="text-danger fs-12">{formErrors.no_floors?.message}</p>
                                     </div>
                                 </div>
@@ -56,7 +56,7 @@ export const UpdateListingDetails = ({listing, formErrors}) => {
                             <div className="col-lg-12">
                                 <div className="form-group">
                                 <label htmlFor="extra-details" className="text-heading">Extra details</label>
-                                    <textarea className="form-control border-0" defaultValue={listing.extra_info} rows={5} id="extra_info" name="extra_info" />
+                                    <textarea className="form-control border-0" defaultValue={listing?.extra_info} rows={5} id="extra_info" name="extra_info" />
                                     <p className="text-danger fs-12">{formErrors.extra_info?.message}</p>
                                 </div>
                             </div>

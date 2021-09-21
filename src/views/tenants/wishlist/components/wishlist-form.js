@@ -16,11 +16,11 @@ const WishlistForm = ({setIsLoading}) => {
     const [amenity, setAmenity] = useState([]);
     const [stepper, setStepper] = useState();
 
-    const {rules, messages, attributes} = __createwishlist
+    const {rules, attributes} = __createwishlist
     const [formErrors, setFormErrors] = useState({})
 
-    const wishlist = useSelector(state => state.wishlist);
-    const {loading} = wishlist;
+    const {loading, wishlist} = useSelector(state => state.wishlist);
+    const {token} = useSelector(state => state.user_data)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -35,22 +35,25 @@ const WishlistForm = ({setIsLoading}) => {
         
         if (validation.passes()) {
             setFormErrors({}); 
-            dispatch(CreateWishlist(data))
+            dispatch(CreateWishlist(token, data))
         }
     }  
 
     useEffect(() => {
-        setStepper(new Stepper(document.getElementById('wishlist-stepper'), {
-            linear: false,
-            animation: true
-        }));
+        wishlist && window.location.reload()
+        wishlist && document.getElementById('create_wishlist_form').reset()
+        // wishlist && setStepper(new Stepper(document.getElementById('wishlist-stepper'), { linear: false, animation: true }));
+    }, [wishlist])    
+
+    useEffect(() => {
+        setStepper(new Stepper(document.getElementById('wishlist-stepper'), { linear: false, animation: true }));
         setIsLoading(loading)
-    }, [loading])
+    }, [loading, setIsLoading])
 
     
     return (
-        <div className="card border-0">
-            <div className="card-body px-3 pt-0 px-md-4 py-md-4">
+        <div className="card border-0 mb-4">
+            <div className="card-body px-3 pt-0 px-md-4 py-md-4 pb-5">
             <div className="bs-stepper" id='wishlist-stepper'>
                 <div className="bs-stepper-header mb-3 d-block d-md-flex" role="tablist">
                     <div className="step" data-target="#property-info">
@@ -84,7 +87,7 @@ const WishlistForm = ({setIsLoading}) => {
                                 <div className="col-sm-12 px-2">
                                     <div className="form-group">
                                         <label htmlFor="desc">I am looking for...</label>
-                                        <input className="form-control border-0" name="desc" id="desc" type="text" placeholder="What you are looking for?" />
+                                        <input className="form-control border-0" name="desc" id="desc" type="text" placeholder="I am looking for..." />
                                         <p className="text-danger fs-12 mt-1">{formErrors.desc?.message}</p>
                                     </div>
                                 </div>
@@ -148,7 +151,7 @@ const WishlistForm = ({setIsLoading}) => {
                                 <div className="col-sm-12 px-2">
                                     <div className="form-group">
                                         <label htmlFor="area" className="text-heading">Area</label>
-                                        <input type="text" name="area" className="form-control  border-0" id="area" placeholder="Independence Layout" name="area"/>
+                                        <input type="text" name="area" className="form-control  border-0" id="area" placeholder="Which locality would you prefer"/>
                                         <p className="text-danger fs-12 mt-1">{formErrors.area?.message}</p>
                                     </div>
                                 </div>
@@ -173,7 +176,7 @@ const WishlistForm = ({setIsLoading}) => {
                                 <div className="col-md-12 px-2">
                                     <div className="form-group">
                                         <label htmlFor="amenities" className="text-heading">Select Amenities</label>
-                                        <TagifyAmenities message="Type Amenities" name="amenities[]" val={amenity} setValue={setAmenity} label="Amenities" />   
+                                        <TagifyAmenities message="Amenities" name="amenities[]" val={amenity} setValue={setAmenity} label="Amenities" />   
                                         <p className="text-danger fs-12 mt-1">{formErrors.amenities?.message}</p>
                                     </div>
                                 </div>
@@ -181,7 +184,7 @@ const WishlistForm = ({setIsLoading}) => {
                                 <div className="col-sm-12 px-2">
                                     <div className="form-group">
                                         <label htmlFor="area" className="text-heading">Additional Instructions</label>
-                                        <textarea type="text" name="custom" rows="3" className="form-control form-control-lg border-0" id="area" placeholder="University of Nigeria"></textarea>
+                                        <textarea type="text" name="additional" rows="3" className="form-control form-control-lg border-0" id="additional" placeholder="Please provide any extra details here"></textarea>
                                         <p className="text-danger fs-12 mt-1">{formErrors.additional?.message}</p>
                                     </div>
                                 </div>

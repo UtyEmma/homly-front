@@ -55,7 +55,7 @@ export function DeleteListingReducer(state={}, action){
         case DELETE_LISTING_REQUEST:
             return {...state, loading: true}
         case DELETE_LISTING_SUCCESS:
-            return {state, loading: false, listing: action.payload}
+            return {state, loading: false, success: action.payload}
         case DELETE_LISTING_FAILURE:
             return {...state, loading: false, error: action.payload}
         default:

@@ -19,12 +19,19 @@ export const AddListingToFavourites = (token, listing_id) => (dispatch) => {
                     .then((response) => {
                         const res = response.data
                         Response.success(res)
-                        
-                        dispatch(UpdateUser(res.data.user))
+                        dispatch({
+                            type: 'UPDATE_USER_DATA',
+                            payload: res.data.user
+                        })
+
+                        dispatch({
+                            type: FETCH_FAVOURTIES_SUCCESS,
+                            payload: response.data.data
+                        })
 
                         dispatch({
                             type: ADD_FAVOURITES_SUCCESS,
-                            payload: response.data
+                            payload: response.data.data
                         })
                     })
                     .catch((error) => {
@@ -44,7 +51,10 @@ export const RemoveListingFromFavourites = (token, listing_id) => (dispatch) => 
     FavouriteService.removeFavourites(token, listing_id)
                     .then((response) => {
                         Response.success(response.data)
-                        localStorage.setItem('user', response.data.data.user)
+                        dispatch({
+                            type: FETCH_FAVOURTIES_SUCCESS,
+                            payload: response.data.data
+                        })
                         dispatch({
                             type: REMOVE_FAVOURITES_SUCCESS,
                             payload: response.data

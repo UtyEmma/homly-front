@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import ModalOne from 'views/layouts/components/modals/modal-one'
 import Searchbar from 'views/layouts/components/search/searchbar'
 import Footer from 'components/shared/footer'
@@ -11,27 +11,36 @@ import './css/wishlist.css'
 import { FetchWishlist } from 'providers/redux/_actions/wishlist-actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { Helmet } from 'react-helmet'
+import { WishlistModal } from './components/wishlist-modal'
 
 const Wishlist = ({isLoggedIn, user, setIsLoading, status}) => {
 
     const dispatch = useDispatch();
+
+    const [show, setShow] = useState()
+    const [details, setDetails] = useState()
+
     const fetchWishlist = useSelector((state) => state.wishlists)
     const {loading, wishlists} = fetchWishlist
 
     const user_data = useSelector(state => (state.user_data))
     const {token} = user_data
 
-    const loadWishlists = () => {
+    const loadWishlists = useCallback(() => {
         dispatch(FetchWishlist(token))
-    }
-
-    useEffect(() => {
-        !wishlists && loadWishlists()
-    }, [wishlists])
+    }, [dispatch, token])
 
     useEffect(() => {
         setIsLoading(loading)
-    }, [loading])
+    }, [loading, setIsLoading])
+
+    useEffect(() => {
+        
+    }, [wishlists])
+
+    useEffect(() => {
+        !wishlists && loadWishlists()
+    }, [loadWishlists, wishlists])
 
     return (
         <div>
@@ -82,7 +91,7 @@ const Wishlist = ({isLoggedIn, user, setIsLoading, status}) => {
                                 &&
 
                                 wishlists.wishlists.map((wishlist, index) => (
-                                    <WishlistItem item={wishlist} key={index} />
+                                    <WishlistItem setDetails={setDetails} setShow={setShow} item={wishlist} key={wishlist.unique_id} />
                                 ))
                             }       
                         </div>
@@ -94,19 +103,21 @@ const Wishlist = ({isLoggedIn, user, setIsLoading, status}) => {
 
             <ModalOne id="modal-one" height="100%">
                 <div className="row">
-                    <div className="col-md-6 d-md-block d-none p-0 rounded-lg-top-left bg-overlay" style={wishListStyle}></div>
-                    <div className="col-md-6 pt-5">
+                    <div className="col-md-6 d-md-block d-none p-0 rounded-lg-top-left">
+                        <div className="col-8 offset-2 h-100 position-relative" >
+                            <img src="/images/svg/wishlist-item.svg" style={{position: 'absolute', bottom: '10%'}} alt="wishlist" />
+                        </div>
+                    </div>
+                    <div className="col-md-6 pt-5 bg-gray-03">
                         <WishlistForm setIsLoading={setIsLoading} />
                     </div>
                 </div>
             </ModalOne>
+
+
+            <WishlistModal show={show} setShow={setShow} details={details} token={token} />
         </div>
     )
 }
-
-const wishListStyle = {
-    backgroundImage: `url( 'images/bg-slider-05.jpg')`,
-    marginLeft: '-1px'
-};
 
 export default Wishlist;

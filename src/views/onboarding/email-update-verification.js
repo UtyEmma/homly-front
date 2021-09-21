@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-export default function VerifyEmail({user, setIsLoading}) {
+export const EmailUpdateVerification = ({user, setIsLoading}) => {
 
     const dispatch = useDispatch()
     const history = useHistory()
@@ -30,13 +30,15 @@ export default function VerifyEmail({user, setIsLoading}) {
     }, [loading, setIsLoading])
 
     const handleSetUser = useCallback(() => {
-        successToast("Email Verified")
-        type === 'tenant' ?  history.push('/') : history.push('/dashboard')
-    }, [type, history])
+        if (user && user.isVerified) {
+            successToast("Email Verified")
+            type === 'tenant' ?  history.push('/') : history.push('/dashboard')   
+        }
+    }, [type, history, user])
 
     useEffect(() => {
-        verify_email && history.push('/verify')
-        verify_email  && errorToast("Email is Not Verified")
+        verify_email && history.push('/email/verify')
+        verify_email && errorToast("Email is Not Verified")
     }, [history, verify_email])
 
     useEffect(() => {
@@ -58,8 +60,8 @@ export default function VerifyEmail({user, setIsLoading}) {
                     </div>
 
                     <div className="col-12">
-                        <h3 className="text-heading mt-5 mb-3 font-weight-bold">Please Verify your Email Address</h3>
-                        <p>Hi, {user.firstname}! We have sent a verification link to <span className="font-weight-bold">{user.email}</span> with instructions</p>
+                        <h3 className="text-heading mt-5 mb-3 font-weight-bold">You have updated your Email Address </h3>
+                        <p>We have sent a link to your new email Address, <span className="font-weight-bold">{user.email}</span>. <br/> Please verify your Email Address to Proceed!</p>
                         <p>If the email doesn’t show up soon, check your spam folder.</p>
 
                         <div className="col-10 offset-1">

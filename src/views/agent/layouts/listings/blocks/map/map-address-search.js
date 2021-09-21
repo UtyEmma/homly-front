@@ -7,12 +7,11 @@ export default function InputAddress({setLandmark, setLatLong, name, defaultValu
 
     const [isLoading, setIsLoading] = useState(false)
     const [options, setOptions] = useState([])
-    const { ready, value, suggestions, setValue, clearSuggestions, } = usePlacesAutocomplete();
+    const { value, suggestions, setValue, clearSuggestions, } = usePlacesAutocomplete();
     
     const handleSelection = (query) => {
         setLatLong(query)
         setLandmark(query)
-        console.log("Selected ", query)
         clearSuggestions();
     }
 
@@ -31,7 +30,7 @@ export default function InputAddress({setLandmark, setLatLong, name, defaultValu
 
     useEffect(() => {
         suggestions && updateSuggestions(suggestions)
-    }, [value])
+    }, [suggestions, value])
 
     return (
         <div>

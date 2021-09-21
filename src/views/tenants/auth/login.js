@@ -1,6 +1,4 @@
-import React, { Component, useEffect } from 'react';
-
-
+import React, { useEffect } from 'react';
 import NavBar from 'components/shared/nav-bar';
 import Footer from 'components/shared/footer';
 import UserLoginForm from './components/login-form';
