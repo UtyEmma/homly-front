@@ -4,8 +4,8 @@ const {
     SUSPEND_ITEM_REQUEST, SUSPEND_ITEM_SUCCESS, SUSPEND_ITEM_FAILURE,
     VERIFY_AGENT_REQUEST, VERIFY_AGENT_SUCCESS, VERIFY_AGENT_FAILURE
 } = _ADMIN
-const adminMode = localStorage.getItem('adminMode')
-export function SetAdminModeReducer(state={adminMode: adminMode}, action){
+
+export function SetAdminModeReducer(state= {}, action){
     switch (action.type) {
         case 'ADMIN_MODE_ON':
             return {...state, adminMode: action.payload}

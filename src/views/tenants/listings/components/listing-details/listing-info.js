@@ -12,7 +12,7 @@ export default function ListingInfo({listing}) {
                 </ul>
                 <div className="d-sm-flex justify-content-sm-between">
                 <div>
-                    <h2 className="fs-35 font-weight-600 lh-15 text-heading">{listing.title}</h2>
+                    <h2 className="fs-24 fs-md-32 font-weight-600 lh-15 text-heading">{listing.title}</h2>
                     <p className="mb-0"><i className="fal fa-map-marker-alt mr-2" />
                             {listing.address}, {listing.city}, {listing.state}</p>
                 </div>

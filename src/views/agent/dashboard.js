@@ -315,7 +315,7 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                 </div>
             </div>
 
-            <AddUsernameModal agent={agent} />
+            <AddUsernameModal setIsLoading={setIsLoading} agent={agent} />
         </div>
     )
  }

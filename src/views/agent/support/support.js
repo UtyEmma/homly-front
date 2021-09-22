@@ -10,6 +10,7 @@ export const Support = ({agent, isLoading, setIsLoading}) => {
 
     const [titles, setTitles] = useState()
     const [chat, setChat] = useState()
+    const [show, setShow] = useState(false)
 
     return (
         <div className="wrapper dashboard-wrapper">
@@ -31,14 +32,14 @@ export const Support = ({agent, isLoading, setIsLoading}) => {
                             
                             <div className="col-12 card" >
                                 <div className="row" style={{height: '600px'}}>
-                                    <SupportCenterSidebar titles={titles} setTitles={setTitles} setIsLoading={setIsLoading} chat={chat} setChat={setChat} />
+                                    <SupportCenterSidebar setShow={setShow} titles={titles} setTitles={setTitles} setIsLoading={setIsLoading} chat={chat} setChat={setChat} />
                                     <SupportCenterContent titles={titles} setTitles={setTitles} setIsLoading={setIsLoading} chat={chat} setChat={setChat} />
                                 </div>
                             </div>
                         </div>
                     </main>
                 </div>
-                <NewTicketModal setTitles={setTitles} setIsLoading={setIsLoading} />
+                <NewTicketModal show={show} setShow={setShow} setTitles={setTitles} setIsLoading={setIsLoading} />
             </div>
         </div>
     )

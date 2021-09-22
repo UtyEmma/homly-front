@@ -8,7 +8,7 @@ export const ConfirmActionDialog = ({show, setShow, callback, message, title}) =
     }
 
     const handleCallback = () => {
-        return callback.action()
+        return callback()
     }
 
     return (

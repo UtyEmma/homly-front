@@ -9,20 +9,27 @@ export default function ListingAction({agent, listing}) {
     
     const dispatch = useDispatch()
     const [show, setShow] = useState(false)
+    const [action, setAction] = useState()
+
     const {adminMode} = useSelector((state) => state.admin_mode)
+    const {token} = useSelector((state) => state.user_data)
 
     const suspendListing = () => {
         setShow(true)
+        setAction('suspend')
     }
 
     const callback = () => {
-        dispatch(SuspendItem('listing', listing.unique_id))
+        if (action === 'suspend') {
+            dispatch(SuspendItem(token, 'listing', listing.unique_id))
+        }else if(action === 'delete'){
+            dispatch(DeleteItem(token, 'listing', listing.unique_id, `/listings`))
+        }
     }
 
     const deleteListing = () => {
-        return (
-            <ConfirmActionDialog callback={dispatch(DeleteItem('listing', listing.unique_id, `/listings`))} />
-        )
+        setShow(true)
+        setAction('delete')
     }
     
     return (
@@ -139,7 +146,7 @@ export default function ListingAction({agent, listing}) {
 
 
                 {
-                    adminMode
+                    adminMode === true
 
                     &&
 

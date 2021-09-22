@@ -81,13 +81,12 @@ export const SocialAuth = (data) => (dispatch) => {
                 let res = response.data.data;
                 let token = res.token
                 let user = res.user
-                let type = data.type
-
+                let type = res.type
                 dispatch({
                     type: 'SET_USER_DATA',
                     payload: {user: user, token: token, type: type}
                 })
-                window.location.href = '/'
+                window.location.href = type === 'tenant' ? '/' : '/dashboard'
             })
             .catch((error) => {
                 Response.error(error.response)
