@@ -28,7 +28,6 @@ export default function AgentListingItem({listing_item}) {
                 {listing_item.status}
             </span>
             </td>
-            <td className="align-middle"><p className="text-center">{listing_item.views}</p></td>
             <td className="align-middle">
                 <Link to={`my-listings/${listing_item.slug}`} data-toggle="tooltip" title="Edit" className="btn btn-sm btn-primary d-inline-block fs-14">
                     View Details

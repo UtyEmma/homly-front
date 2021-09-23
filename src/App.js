@@ -49,6 +49,7 @@ import { EmailVerified } from 'views/onboarding/email-verified';
 import toast, { ToastBar, Toaster } from 'react-hot-toast';
 import { EmailUpdateVerification } from 'views/onboarding/email-update-verification';
 import { Chat } from 'views/agent/support/chat';
+import { AgentActivity } from 'views/agent/activity/activity';
 
 function App() {
 
@@ -138,6 +139,7 @@ function App() {
         <AgentRoute path="/support" isLoading={isLoading} setIsLoading={setIsLoading} type={type} token={token} user={user} component={Support} exact />
         <AgentRoute path="/support/:id" isLoading={isLoading} setIsLoading={setIsLoading} type={type} token={token} user={user} component={Chat} exact />
         <AgentRoute path="/agent-wishlists" isLoading={isLoading} setIsLoading={setIsLoading} type={type} token={token} user={user} component={AgentWishlist} exact />
+        <AgentRoute path="/activity" isLoading={isLoading} setIsLoading={setIsLoading} type={type} token={token} user={user} component={AgentActivity} exact />
 
         <Route path="/server-error" render={(props) => (<ServerError {...props} setIsLoading={setIsLoading}  token={token} user={user} />)} exact/>
 

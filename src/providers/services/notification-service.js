@@ -13,5 +13,9 @@ const config = (token) =>  {
 export const NotificationService = {
     fetchNotification : async (token, type) => {
         return await Request.get(`${type}/notifications`, config(token))
-    }
+    },
+    
+    markAsRead : async (token, type) => {
+        return await Request.get(`${type}/notifications/markasread`, config(token))
+    },
 }

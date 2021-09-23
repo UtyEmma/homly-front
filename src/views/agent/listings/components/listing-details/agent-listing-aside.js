@@ -58,20 +58,6 @@ export const AgentListingAside = ({agent, listingItem, setIsLoading, setListingI
                         <div className="mb-3">
                             <div className="media">
                                 <div className="p-2 shadow-xxs-1 rounded-lg mr-2 lh-1">
-                                    <i className="fs-18 text-primary fa fa-eye"></i>
-                                </div>
-                                <div className="media-body">
-                                    <h5 className="fs-13 font-weight-normal mb-0">Views</h5>
-                                    <p className="mb-0 fs-13 font-weight-bold text-dark">{listingItem.views}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div className="col-auto">
-                        <div className="mb-3">
-                            <div className="media">
-                                <div className="p-2 shadow-xxs-1 rounded-lg mr-2 lh-1">
                                     <i className="fs-18 text-primary fa fa-star"></i>
                                 </div>
                                 <div className="media-body">

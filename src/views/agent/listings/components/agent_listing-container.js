@@ -30,7 +30,6 @@ export default function AgentListingContainer({listings}) {
                             <th scope="col" className="border-top-0 px-6 pt-5 pb-4">Listing title</th>
                             <th scope="col" className="border-top-0 pt-5 pb-4">Date Published</th>
                             <th scope="col" className="border-top-0 pt-5 pb-4">Status</th>
-                            <th scope="col" className="border-top-0 pt-5 pb-4">Views</th>
                             <th scope="col" className="border-top-0 pt-5 pb-4">Action</th>
                         </tr>
                     </thead>

@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export const AgentListingDetails = ({listing}) => {
     let [amenities, setAmenities] = useState([]);
     let items = JSON.parse(listing.amenities);
     
-    const parseAmenities = () => {
+    const parseAmenities = useCallback(() => {
         let array = []
         for(let amenity in items){ array.push(amenity) }
         setAmenities(array)
-    }
+    }, [items])
 
     useEffect(() => {
         parseAmenities()
-    }, [listing])
+    }, [listing, parseAmenities])
 
     return (
         <>
@@ -48,7 +48,7 @@ export const AgentListingDetails = ({listing}) => {
             </section>
 
             <section className="mt-2 pb-7 px-6 pt-5 bg-white rounded-lg">
-                <h4 className="fs-22 text-heading">Offices Amenities</h4>
+                <h4 className="fs-22 text-heading">Property Amenities</h4>
                 <span className="heading-divider mb-4"></span>
                 
                 <ul className="list-unstyled mb-0 row no-gutters">

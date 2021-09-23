@@ -22,7 +22,7 @@ export default function FeaturedListings({listings}) {
                         return (
                             <div className="box px-0" key={index} >
                                 <div className="card border-0">
-                                    <img src={listing.images[0]} style={{minHeight: '100%'}} className="card-img" alt={listing.title} />
+                                    <img src={listing.images[0]} style={{maxHeight: '250px'}} className="card-img" alt={listing.title} />
                                     
                                     <div className="card-img-overlay d-flex flex-column bg-gradient-3 rounded-lg">
                                         <div className="d-flex mb-auto">

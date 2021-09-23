@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Footer() {
     return (
-        <footer className="bg-dark pt-8 pb-6 footer text-muted">
+        <footer className="bg-dark pt-8 pb-6 footer text-muted position-relative">
 
             <div className="container">
                 <div className="row">
