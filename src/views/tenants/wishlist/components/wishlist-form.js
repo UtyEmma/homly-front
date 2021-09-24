@@ -176,7 +176,7 @@ const WishlistForm = ({setIsLoading}) => {
                                 <div className="col-md-12 px-2">
                                     <div className="form-group">
                                         <label htmlFor="amenities" className="text-heading">Select Amenities</label>
-                                        <TagifyAmenities message="Amenities" name="amenities[]" val={amenity} setValue={setAmenity} label="Amenities" />   
+                                        {/* <TagifyAmenities message="Amenities" name="amenities[]" val={amenity} setValue={setAmenity} label="Amenities" />    */}
                                         <p className="text-danger fs-12 mt-1">{formErrors.amenities?.message}</p>
                                     </div>
                                 </div>

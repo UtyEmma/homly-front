@@ -1,6 +1,6 @@
 import Tagify from 'libraries/tagify/tagify';
 import { FetchDetails } from 'providers/redux/_actions/details-actions';
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 export function SelectAmenities({features, setFeatures, name, validate, message, color, selected, classes}) {
@@ -42,13 +42,14 @@ export function TagifyAmenities({val, setValue, name, validate, message}){
     const fetchDetails = useSelector(state => state.details)
     const {loading, amenities, error} = fetchDetails
 
-    const loadDetails = () => { dispatch(FetchDetails()) }
+    const loadDetails = useCallback(() => { dispatch(FetchDetails()) }, [dispatch])
 
     useEffect(() => {
         if(!amenities){
             loadDetails()
         }
-    }, [amenities])
+        amenities && console.log(amenities)
+    }, [amenities, loadDetails])
 
     return (
         <>

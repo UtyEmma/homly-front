@@ -10,7 +10,7 @@ export const __createwishlist = {
         city: 'required|string',
         area: 'required|string',
         budget: 'required|numeric',
-        amenities: 'required|string',
+        // amenities: 'required|string',
         additional: 'string'
     },
 
