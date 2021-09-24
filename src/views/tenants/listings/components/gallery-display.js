@@ -2,6 +2,8 @@ import React, { createRef, useEffect, useState } from 'react'
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { SRLWrapper } from 'simple-react-lightbox';
+import Listing from '../listings';
 
 
 export default function GalleryDisplay({images, title}) {    
@@ -22,22 +24,24 @@ export default function GalleryDisplay({images, title}) {
         arrows: false,
     }
     return(
-        <>
-            <Slider asNavFor={nav} ref={slider => (sliderCarousel = slider)} {...options} >
-                {
-                    images.map((image, index) => {
-                        return (
-                            <div className="box" key={index}>
-                                <div className="item item-size-3-2">
-                                    <div className="card p-0 hover-change-image">
-                                        <a href={image} className="card-img" data-gtf-mfp="true" data-gallery-id={index} style={{backgroundImage: `url(${image})`}}></a>
+        <>  
+            <SRLWrapper>
+                <Slider asNavFor={nav} ref={slider => (sliderCarousel = slider)} {...options} >
+                    {
+                        images.map((image, index) => {
+                            return (
+                                <div className="box" key={index}>
+                                    <div className="item item-size-3-2">
+                                        <div className="card p-0 hover-change-image">
+                                            <img src={image} className="card-img img-fluid " style={{objectFit: 'cover'}}  alt={title}  />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        )
-                    })
-                }
-            </Slider>
+                            )
+                        })
+                    }
+                </Slider>
+            </SRLWrapper>
             <Slider asNavFor={slider} ref={slider => (sliderNav = slider)} slidesToShow={3} swipeToSlide={true} focusOnSelect={true}>
                 {
                     images.map((image, index) => {
