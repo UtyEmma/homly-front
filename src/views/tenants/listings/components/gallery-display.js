@@ -49,7 +49,7 @@ export default function GalleryDisplay({images, title}) {
                     images.map((image, index) => {
                         return (
                             <div className="box pb-6 px-0" key={index} >
-                                <div  className="bg-white p-1 shadow-hover-xs-3 h-100 rounded-lg" >
+                                <div style={{maxHeight : '200px', overflow: 'hidden', objectFit: 'cover', objectPosition: 'center'}} className="bg-white p-1 shadow-hover-xs-3 h-100 rounded-lg" >
                                     <img src={image} alt={title} className="img-fluid  rounded-lg" />
                                 </div>
                             </div>
@@ -57,7 +57,7 @@ export default function GalleryDisplay({images, title}) {
                     })
                 }
             </Slider>
-            {/* style={{maxHeight : '200px', overflow: 'hidden', objectFit: 'cover', objectPosition: 'center'}} */}
+            
         </>
     )
 }
