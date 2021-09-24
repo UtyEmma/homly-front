@@ -73,6 +73,7 @@
     "redux-reset": "^0.3.0",
     "redux-thunk": "^2.3.0",
     "rsuite": "^4.10.2",
+    "simple-react-lightbox": "^3.6.9-0",
     "slick-carousel": "^1.8.1",
     "tagify": "^0.1.1",
     "use-places-autocomplete": "^1.9.4",
