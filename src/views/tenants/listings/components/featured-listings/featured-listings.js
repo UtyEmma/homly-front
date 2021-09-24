@@ -26,7 +26,7 @@ export default function FeaturedListings({listings}) {
                                     
                                     <div className="card-img-overlay d-flex flex-column bg-gradient-3 rounded-lg">
                                         <div className="d-flex mb-auto">
-                                            <a href="#" className="mr-1 badge badge-orange">featured</a>
+                                            <div className="mr-1 badge badge-orange">featured</div>
                                         </div>
                                         <div className="px-2 pb-2">
                                             <a href={`/listings/${listing.slug}`} className="text-white">

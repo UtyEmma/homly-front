@@ -25,7 +25,7 @@ export default function Sidebar({setIsLoading, agent}) {
                     <div className="sticky-area shadow-xs-1 py-3">
                             <div className="d-flex px-3 px-xl-6 w-100">
 
-                                <Link className="navbar-brand" to="/dashboard">
+                                <Link className="navbar-brand" to="/">
                                     <img src="/images/logo.png" alt="HomeID" />
                                 </Link>
 

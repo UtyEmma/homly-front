@@ -115,10 +115,17 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                         </div>
                         <div className="card-footer bg-white px-0 pt-1">
                             <ul className="list-group list-group-no-border mb-7">
-                            <li className="list-group-item d-flex align-items-sm-center lh-114 row m-0 px-0 pt-3 pb-0">
-                                <span className="col-3 p-0 fs-13">Phone Number</span>
-                                <span className="col-9 p-0 text-heading font-weight-500">{agent.phone_number}</span>
-                            </li>
+                            {
+                                agent.phone_number
+
+                                && 
+                                
+                                <li className="list-group-item d-flex align-items-sm-center lh-114 row m-0 px-0 pt-3 pb-0">
+                                    <span className="col-3 p-0 fs-13">Phone</span>
+                                    <span className="col-9 p-0 text-heading font-weight-500">{agent.phone_number}</span>
+                                </li>
+                            }
+
                             <li className="list-group-item d-flex align-items-sm-center row m-0 px-0 pt-2 pb-0">
                                 <span className="col-3 p-0 fs-13">Email</span>
                                 <span className="col-9 p-0">{agent.email}</span>

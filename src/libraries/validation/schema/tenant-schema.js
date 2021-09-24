@@ -3,7 +3,7 @@ export const __tenantsignup = {
         firstname: 'required|string',
         lastname: 'required|string',
         email: 'required|email',
-        password: 'required|confirmed|digits_between:6,12',
+        password: 'required|confirmed|min:6',
         phone: 'required|numeric'
     },
 
