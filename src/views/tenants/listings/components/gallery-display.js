@@ -44,7 +44,7 @@ export default function GalleryDisplay({images, title}) {
                     }
                 </Slider>
             </SRLWrapper>
-            <Slider asNavFor={slider} className="slider variable-width" ref={slider => (sliderNav = slider)} adaptiveHeight variableWidth slidesToShow={3} swipeToSlide={true} focusOnSelect={true}>
+            <Slider asNavFor={slider} className="slider variable-width" ref={slider => (sliderNav = slider)} adaptiveHeight slidesToShow={3} swipeToSlide={true} focusOnSelect={true}>
                 {
                     images.map((image, index) => {
                         return (
