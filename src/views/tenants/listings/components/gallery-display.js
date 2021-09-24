@@ -22,6 +22,8 @@ export default function GalleryDisplay({images, title}) {
         autoplay: true,
         dots: false,
         arrows: false,
+        adaptiveHeight: true,
+        // variableWidth: true
     }
     return(
         <>  
