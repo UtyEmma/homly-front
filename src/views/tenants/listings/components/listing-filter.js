@@ -16,18 +16,18 @@ export default function ListingFilter({params, setParams}) {
     useEffect(() => {
         selectedState && setParams({...params, city: ""})
         window.$('select').selectpicker('refresh')
-    }, [selectedState])
+    }, [params, selectedState, setParams])
 
     return (
         <nav aria-label="breadcrumb">
             <div className="form-search-01 px-0">
                 <div className="col-12 pl-1">
-                    <button class="btn btn-link w-100 text-left text-md-right pr-0 pl-0 float-md-right fs-14 text-decoration-none" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">
+                    <button className="btn btn-link w-100 text-left text-md-right pr-0 pl-0 float-md-right fs-14 text-decoration-none" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">
                         <i className="fa fa-filter mr-2"></i>
                         Fliter Properties
                     </button>
                 </div>
-                <div class="collapse w-100" id="multiCollapseExample2">
+                <div className="collapse w-100" id="multiCollapseExample2">
                     <form className="form-inline w-100">
                         <div className="form-group p-1">
                             <label htmlFor="state"  className="sr-only">State</label>

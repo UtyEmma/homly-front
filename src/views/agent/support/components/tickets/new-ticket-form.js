@@ -2,12 +2,13 @@ import { CreateNewTicket } from 'providers/redux/_actions/support-actions'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-export const NewTicketForm = ({close, setTitles, setIsLoading}) => {
+export const NewTicketForm = ({close, setShow, setIsLoading}) => {
 
     const dispatch = useDispatch()
+    
 
     const new_ticket = useSelector(state => state.new_ticket)
-    const {loading, tickets } = new_ticket
+    const {loading, tickets, ticket } = new_ticket
 
     const user_data = useSelector(state => (state.user_data))
     const {token} = user_data
@@ -16,12 +17,16 @@ export const NewTicketForm = ({close, setTitles, setIsLoading}) => {
         e.preventDefault()
         let formData = new FormData(e.target);
         dispatch(CreateNewTicket(token, formData));
+        hideNewTicketForm()
+    }
+
+    const hideNewTicketForm = () => {
+        setShow(false)
     }
 
     useEffect(() => {
-        tickets && setTitles(tickets)
         setIsLoading(loading)
-    }, [tickets, loading])
+    }, [loading, setIsLoading])
 
     return (
         <>
@@ -37,7 +42,7 @@ export const NewTicketForm = ({close, setTitles, setIsLoading}) => {
                     </div>
                 </div>
                 <div className="modal-footer">
-                    {close && <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>}
+                    {close && <button type="button" className="btn btn-default" onClick={hideNewTicketForm}>Close</button>}
                     <button type="submit" className="btn btn-primary">Create Ticket</button>
                 </div>
             </form>   

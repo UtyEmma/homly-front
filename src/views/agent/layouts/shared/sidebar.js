@@ -25,7 +25,7 @@ export default function Sidebar({setIsLoading, agent}) {
                     <div className="sticky-area shadow-xs-1 py-3">
                             <div className="d-flex px-3 px-xl-6 w-100">
 
-                                <Link className="navbar-brand" to="/dashboard">
+                                <Link className="navbar-brand" to="/">
                                     <img src="/images/logo.png" alt="HomeID" />
                                 </Link>
 
@@ -57,6 +57,11 @@ export default function Sidebar({setIsLoading, agent}) {
                                                 <Link className="dropdown-item rounded py-2 align-middle" to="/agent-profile">
                                                     <i className="fa fa-heart mr-3 text-primary"></i>
                                                     Profile
+                                                </Link>
+
+                                                <Link className="dropdown-item rounded py-2 align-middle" to="/activity">
+                                                    <i className="fal fa-bell mr-3 text-primary"></i>
+                                                    Activity
                                                 </Link>
 
 
@@ -150,6 +155,14 @@ export default function Sidebar({setIsLoading, agent}) {
                                                     <svg className="icon icon-my-profile"><use xlinkHref="#icon-my-profile" /></svg>
                                                     </span>
                                                     <span className="sidebar-item-text">My Profile</span>
+                                                </Link>
+                                            </li>
+                                            <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
+                                                <Link to="/activity" className="text-heading lh-1 sidebar-link">
+                                                    <span className="sidebar-item-icon d-inline-block mr-3 text-muted fs-20">
+                                                        <i className="fal fa-bell"></i>
+                                                    </span>
+                                                    <span className="sidebar-item-text">Activity</span>
                                                 </Link>
                                             </li>
                                             <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">

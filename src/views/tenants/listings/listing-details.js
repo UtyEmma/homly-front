@@ -30,7 +30,7 @@ const ListingDetails = ({isLoggedIn, user, status, adminMode, setIsLoading}) => 
     const {data} = suspend_listing;
 
     useEffect(() => {
-        error && history.push('/listings')
+        if(error){ window.location.href = '/listings'}
     }, [error])
 
     useEffect(() => {

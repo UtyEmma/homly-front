@@ -1,6 +1,7 @@
 import Response from "libraries/response/response";
 import { SupportService } from "providers/services/support-service";
 import { _SUPPORT } from "providers/redux/_contants/support-contants";
+import { history } from "../store";
 
 const { 
     CREATE_NEW_TICKET_REQUEST, CREATE_NEW_TICKET_SUCCESS, CREATE_NEW_TICKET_FAILURE,
@@ -17,9 +18,19 @@ export const CreateNewTicket = (token, data) => (dispatch) => {
     SupportService.createTicket(token, data)
                 .then((response) => {
                     Response.success(response.data)
+
+                    const res = response.data.data;
+
                     dispatch({
                         type : CREATE_NEW_TICKET_SUCCESS,
                         payload : response.data.data 
+                    })
+
+                    history.push(`/support/${res.new_ticket.unique_id}`)
+
+                    dispatch({
+                        type : FETCH_TICKETS_SUCCESS,
+                        payload : response.data.data.tickets 
                     })
                 })
                 .catch((error) => {
@@ -82,7 +93,14 @@ export const SendMessage = (token, data) => (dispatch) => {
 
     SupportService.sendMessage(token, data)
                 .then((response) => {
+                    const res = response.data.data
                     Response.success(response.data)
+                    
+                    dispatch({
+                        type: FETCH_MESSAGES_SUCCESS,
+                        payload: res
+                    })
+
                     dispatch({
                         type : SEND_MESSAGE_SUCCESS,
                         payload : response.data.data 
@@ -111,6 +129,7 @@ export const FetchMessages = (token, ticket_id) => (dispatch) => {
                 })
                 .catch((error) => {
                     Response.error(error.response)
+                    history.push('/support')
                     dispatch({
                         type : FETCH_MESSAGES_FAILURE,
                         payload : error.response 

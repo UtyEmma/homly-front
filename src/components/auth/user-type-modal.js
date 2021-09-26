@@ -33,7 +33,7 @@ export const SelectUserTypeModal = ({show, setShow, auth_data, setIsLoading}) =>
                                 <div role="button" className="card bg-white h-100 bg-hover-light py-2 px-3" onClick={() => {handleAuth('agent')}}>
                                     <div className="row d-flex align-items-center">
                                         <div className="col-4 px-4">
-                                            <img src="/images/svg/property-agent.svg" className="img-fluid" />
+                                            <img src="/images/svg/property-agent.svg" alt="" className="img-fluid" />
                                         </div>
                                         <div className="col-8 my-3">
                                             <h4 className="fs-22 font-weight-600">Agent</h4>
@@ -47,7 +47,7 @@ export const SelectUserTypeModal = ({show, setShow, auth_data, setIsLoading}) =>
                                 <div role="button" className="card bg-white h-100 bg-hover-light btn-focus-secondary py-2 px-3" onClick={() => {handleAuth('tenant')}} >
                                     <div className="row d-flex align-items-center">
                                         <div className="col-4">
-                                            <img src="/images/svg/tenant-user.svg" className="img-fluid" />
+                                            <img src="/images/svg/tenant-user.svg" alt="" className="img-fluid" />
                                         </div>
                                         <div className="col-8 my-3">
                                             <h4 className="fs-22 font-weight-600">Tenant</h4>
@@ -60,7 +60,7 @@ export const SelectUserTypeModal = ({show, setShow, auth_data, setIsLoading}) =>
                     </div>
 
                     <div className="col-12 text-center mt-5 mt-md-2">
-                        <a role="button" className="" onClick={() => {setShow(false)}}>Close</a>
+                        <button className="btn p-0" onClick={() => {setShow(false)}}>Close</button>
                     </div>
                 </div>
             </Modal.Body>

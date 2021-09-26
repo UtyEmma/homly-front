@@ -1,16 +1,16 @@
+import { AgentSuspensionNotificationItem } from 'components/notification/notification-items/agent-suspension-notification-item'
+import { ListingNotificationItem } from 'components/notification/notification-items/listing-notification'
+import { ListingRentedNotificationItem } from 'components/notification/notification-items/listing-rented-notification-item'
+import { ListingSuspensionNotificationItem } from 'components/notification/notification-items/listing-suspension-notification-item'
+import { MessageNotificationItem } from 'components/notification/notification-items/message-notification'
+import { ReviewNotificationItem } from 'components/notification/notification-items/review-notification'
+import { SupportNotificationItem } from 'components/notification/notification-items/support-notification-item'
 import { FetchNotifications, MarkAllAsRead } from 'providers/redux/_actions/notification.actions'
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ListingNotificationItem } from './notification-items/listing-notification'
-import { ReviewNotificationItem } from './notification-items/review-notification'
-import { MessageNotificationItem } from './notification-items/message-notification'
-import { SupportNotificationItem } from './notification-items/support-notification-item'
-import { AgentSuspensionNotificationItem } from './notification-items/agent-suspension-notification-item'
-import { ListingSuspensionNotificationItem } from './notification-items/listing-suspension-notification-item'
-import { ListingRentedNotificationItem } from './notification-items/listing-rented-notification-item'
-import { Link } from 'react-router-dom'
+import './notifications.css'
 
-export const NotificationBell = () => {
+export const NotificationContainer = () => {
 
     const dispatch = useDispatch()
     
@@ -54,49 +54,40 @@ export const NotificationBell = () => {
     }
 
     return (
-        <>
-            <div className="dropdown no-caret py-3 px-sm-6 d-flex align-items-center justify-content-end notice" role="button" onClick={markAllAsRead}>
-                <button className="bg-transparent border-0 dropdown-toggle text-heading fs-20 font-weight-500 lh-1"  data-toggle="dropdown">
-                    <i className="far fa-bell" />
-                    <span className="badge badge-primary badge-circle badge-absolute font-weight-bold fs-13">
-                        {
-                            count > 0 && count
-                        }
-                    </span>
-                </button>
-                <div className="dropdown-menu dropdown-menu-right dropdown-menu-md" style={{zIndex: '9999'}}>
+        <div className="mb-6">
+            <div className="card px-3 px-md-7 py-6 h-100" >
+                <div className="card-body p-0">
+                    <h2 className="mb-2 text-heading fs-22 lh-15">Recent Activity</h2>
+                    <div className="px-0 px-mb-2 mb-2 d-flex justify-content-end">
+                        <button onClick={markAllAsRead}  className="btn btn-link btn-sm">
+                            <i className="fal fa-envelope-open-text fs-16 mr-1"></i>
+                            Mark all as Read 
+                        </button>
+                    </div>
+                    <ul className="list-group list-group-no-border notification-container" style={{maxHeight: '80vh', overflowY: 'scroll'}} >
+                    
                     {
                         notifications 
 
                         ?
 
                         <>
-                            {/* <div className="px-2 mb-2 d-flex justify-content-end">
-                                <button  className="btn btn-link btn-sm">
-                                    <i className="fal fa-envelope-open-text fs-16 mr-1"></i>
-                                    Mark all as Read 
-                                </button>
-                            </div> */}
 
                         {
                             notifications.map((notification, index) => {
-                                return index <= 2 && notificationItem(notification, index)
+                                return notificationItem(notification, index)
                             })
                         }
-                            <hr/>
-                            <div className="text-center py-0">
-                                <Link to="/activity" >
-                                    View All Notifications 
-                                </Link>
-                            </div>
                         </>
 
                         :
 
                         <p className="dropdown-item">You have no notifications</p>
                     }
+                    </ul>
+                    
                 </div>
-            </div>   
-        </>
+            </div>
+        </div>
     )
 }

@@ -10,9 +10,9 @@ export const __agent_updateProfile = {
         bio : 'string',
         state : 'string',
         city : 'string',
-        // facebook : 'url',
-        // instagram : 'url',
-        // twitter : 'url',
+        facebook : 'url',
+        instagram : 'url',
+        twitter : 'url',
         website : 'url',
     },
 
@@ -43,8 +43,8 @@ export const __agent_signup = {
         firstname: 'required|string',
         lastname: 'required|string',
         email: 'required|email',
-        password: 'required|confirmed|digits_between:6,12',
-        username: 'required|string|between:4,8'
+        password: 'required|confirmed|min:6',
+        username: 'required|string|between:3,12'
     },
 
     messages: {

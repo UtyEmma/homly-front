@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { FacebookShareButton } from 'react-share'
+import { FacebookShareButton, InstapaperShareButton, TwitterShareButton } from 'react-share'
 import { FavouriteListingButton } from 'views/tenants/favourites/components/favourite-listing-btn'
 import GalleryDisplay from '../gallery-display'
+import { ListingShareBtn } from '../listing-share-btn'
 
 export default function ListingGallery({listing}) {
     return (
@@ -24,7 +25,7 @@ export default function ListingGallery({listing}) {
                         <ul className="list-inline pt-4 pr-5">
                             <li className="list-inline-item mr-2">
                                 {
-                                    listing.isFavourite
+                                     listing.hasOwnProperty('isFavourite')
 
                                     &&
 
@@ -32,16 +33,7 @@ export default function ListingGallery({listing}) {
                                 }
                             </li>
                             <li className="list-inline-item mr-2">
-                            <button type="button" className="btn btn-white p-0 d-flex align-items-center justify-content-center w-40px h-40 text-heading bg-hover-primary hover-white rounded-circle border-0 shadow-none" data-container="body" data-toggle="popover" data-placement="top" data-html="true">
-                                {/* <FacebookShareButton 
-                                    url={window.location}
-                                    quote={"CampersTribe - World is yours to explore"}
-                                    hashtag="#camperstribe"
-                                    className="">
-                                        <i className="fab fa-facebook fs-26 text-white" ></i>
-                                </FacebookShareButton> */}
-                                <i className="far fa-share-alt" />
-                            </button>
+                                <ListingShareBtn listing={listing} />
                             </li>
                         </ul>
                     </div>

@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 export const AgentListingAmenities = ({listing}) => {
 
     return (

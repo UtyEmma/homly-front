@@ -25,3 +25,18 @@ export const FetchNotifications = (token, type) => (dispatch) => {
                                 })
                             })  
 }
+
+export const MarkAllAsRead = (token, type) => (dispatch) => {
+    dispatch({ type: 'MARK_ALL_AS_READ' });
+
+    NotificationService.markAsRead(token, type)
+                            .then((response) => {
+                                dispatch({
+                                    type: FETCH_NOTIFICATION_SUCCESS,
+                                    payload: response.data.data
+                                })
+                            })
+                            .catch((error) => {
+                                Response.error(error.response)
+                            })
+}

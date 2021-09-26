@@ -1,10 +1,12 @@
 import { UpdateAgentProfile } from 'providers/redux/_actions/agent-actions'
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-export const AddUsernameModal = ({agent}) => {
+export const AddUsernameModal = ({agent, setIsLoading}) => {
 
     const dispatch = useDispatch()
+    const {token} = useSelector(state => state.user_data)
+    const {loading} = useSelector(state => state.update_agent_profile)
 
     const updateUsername = (e) => {
         e.preventDefault()
@@ -12,8 +14,13 @@ export const AddUsernameModal = ({agent}) => {
         data.append('firstname', agent.firstname)
         data.append('lastname', agent.lastname)
         data.append('email', agent.email)
-        dispatch(UpdateAgentProfile(data))
+        data.append('title', agent.title)
+        dispatch(UpdateAgentProfile(token, data))
     }
+
+    useEffect(() => {
+        setIsLoading(loading)
+    }, [loading])
 
     return (
         <div className="modal fade" id="exampleModal" tabIndex={-1} role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

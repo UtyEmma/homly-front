@@ -12,7 +12,7 @@ export const NewTicketReducer = (state = {}, { type, payload }) => {
         case CREATE_NEW_TICKET_REQUEST:
             return { ...state, loading: true }
         case CREATE_NEW_TICKET_SUCCESS:
-            return {...state, loading: false, tickets: payload.tickets, chats: payload.chats }
+            return {...state, loading: false, tickets: payload.tickets, ticket: payload.new_ticket }
         case CREATE_NEW_TICKET_FAILURE:
             return {...state, loading: false, error: payload}
         default:

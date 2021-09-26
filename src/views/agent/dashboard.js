@@ -214,108 +214,15 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                                     </div>
                                     </div>
                                 </div>
-                                <div className="col-xxl-4 mb-6">
-                                    <div className="card px-7 py-6 h-100">
-                                    <div className="card-body p-0">
-                                        <h2 className="mb-2 text-heading fs-22 lh-15">Recent Activities</h2>
-                                        <ul className="list-group list-group-no-border">
-                                        <li className="list-group-item px-0 py-2">
-                                            <div className="media align-items-center">
-                                            <div className="badge badge-blue w-40px h-40 d-flex align-items-center justify-content-center property fs-18 mr-3">
-                                                <svg className="icon icon-1">
-                                                <use xlinkHref="#icon-1" />
-                                                </svg>
-                                            </div>
-                                            <div className="media-body">
-                                                Your listing <a href="#" className="text-heading"> Villa Called Archangel</a> has been
-                                                approved
-                                            </div>
-                                            </div>
-                                        </li>
-                                        <li className="list-group-item px-0 py-2">
-                                            <div className="media align-items-center">
-                                            <div className="badge badge-yellow w-40px h-40 d-flex align-items-center justify-content-center fs-18 mr-3">
-                                                <svg className="icon icon-review">
-                                                <use xlinkHref="#icon-review" />
-                                                </svg>
-                                            </div>
-                                            <div className="media-body">
-                                                Dollie Horton left a review on
-                                                <a href="#" className="text-heading"> Villa
-                                                Called Archangel</a>
-                                            </div>
-                                            </div>
-                                        </li>
-                                        <li className="list-group-item px-0 py-2">
-                                            <div className="media align-items-center">
-                                            <div className="badge badge-pink w-40px h-40 d-flex align-items-center justify-content-center fs-18 mr-3">
-                                                <svg className="icon icon-heart">
-                                                <use xlinkHref="#icon-heart" />
-                                                </svg>
-                                            </div>
-                                            <div className="media-body">
-                                                Someone favorites your <a href="#" className="text-heading"> Adorable Garden Gingerbread
-                                                House</a>
-                                                listing
-                                            </div>
-                                            </div>
-                                        </li>
-                                        <li className="list-group-item px-0 py-2">
-                                            <div className="media align-items-center">
-                                            <div className="badge badge-pink w-40px h-40 d-flex align-items-center justify-content-center fs-18 mr-3">
-                                                <svg className="icon icon-heart">
-                                                <use xlinkHref="#icon-heart" />
-                                                </svg>
-                                            </div>
-                                            <div className="media-body">
-                                                Someone favorites your <a href="#" className="text-heading"> Adorable Garden Gingerbread
-                                                House</a>
-                                                listing
-                                            </div>
-                                            </div>
-                                        </li>
-                                        <li className="list-group-item px-0 py-2">
-                                            <div className="media align-items-center">
-                                            <div className="badge badge-blue w-40px h-40 d-flex align-items-center justify-content-center fs-18 mr-3">
-                                                <svg className="icon icon-1">
-                                                <use xlinkHref="#icon-1" />
-                                                </svg>
-                                            </div>
-                                            <div className="media-body">
-                                                Your listing <a href="#" className="text-heading"> Villa Called Archangel</a> has been
-                                                approved
-                                            </div>
-                                            </div>
-                                        </li>
-                                        <li className="list-group-item px-0 py-2">
-                                            <div className="media align-items-center">
-                                            <div className="badge badge-yellow w-40px h-40 d-flex align-items-center justify-content-center fs-18 mr-3">
-                                                <svg className="icon icon-review">
-                                                <use xlinkHref="#icon-review" />
-                                                </svg>
-                                            </div>
-                                            <div className="media-body">
-                                                Dollie Horton left a review on
-                                                <a href="#" className="text-heading"> Villa
-                                                Called Archangel</a>
-                                            </div>
-                                            </div>
-                                        </li>
-                                        </ul>
-                                        <a className="text-heading d-block text-center mt-4" role="button">
-                                        View more
-                                        <span className="text-primary d-inline-block ml-2"><i className="fal fa-angle-down" /></span>
-                                        </a>
-                                    </div>
-                                    </div>
-                                </div>
+                               
+                               
                             </div>
                         </div>
                     </main>
                 </div>
             </div>
 
-            <AddUsernameModal agent={agent} />
+            <AddUsernameModal setIsLoading={setIsLoading} agent={agent} />
         </div>
     )
  }

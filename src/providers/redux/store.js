@@ -16,7 +16,7 @@ const middleware = [thunk, routerMiddleware(history)];
 export const persitConfig = {
     key: 'root',
     storage,
-    whitelist: ['user_data']    
+    whitelist: ['user_data', 'admin_mode']    
 }
 
 const persistedReducer = persistReducer(persitConfig, rootReducer(history))

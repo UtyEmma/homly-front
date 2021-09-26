@@ -38,7 +38,7 @@ export default function GalleryDisplay({images, title}) {
                     })
                 }
             </Slider>
-            <Slider asNavFor={slider} ref={slider => (sliderNav = slider)} slidesToShow={4} swipeToSlide={true} focusOnSelect={true}>
+            <Slider asNavFor={slider} ref={slider => (sliderNav = slider)} slidesToShow={3} swipeToSlide={true} focusOnSelect={true}>
                 {
                     images.map((image, index) => {
                         return (

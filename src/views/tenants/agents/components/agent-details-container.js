@@ -11,46 +11,46 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
     const dispatch = useDispatch()
 
     const {adminMode} = useSelector((state) => state.admin_mode)
+    const {loading, data} = useSelector(state => state.suspend_item)
+    // const {loading, data} = useSelector(state => state.delete_item)
+    const {verifiedAgent} = useSelector(state => state.verify_agent)
+    const {token} = useSelector((state) => state.user_data)
+    
     const [show, setShow] = useState(false)
-
-    const suspend_agent = useSelector(state => state.suspend_item)
-    const {loading, data} = suspend_agent
-
-    const verify_agent = useSelector(state => state.verify_agent)
-    const {verifiedAgent} = verify_agent
+    const [action, setAction] = useState()
 
     const suspendAgent = () => {
+        setAction('suspend')
         setShow(true)
     }
 
     const callback = () => {
-        dispatch(SuspendItem('agent', agent.unique_id))
+        if (action === 'suspend') {
+            return dispatch(SuspendItem(token, 'agent', agent.unique_id))   
+        }else if(action === 'delete'){
+            return dispatch(DeleteItem(token, 'agent', agent.unique_id, `/agents`))
+        }
     }
 
     const verifyAgent = () => {
-        dispatch(VerifyAgent(agent.unique_id))
+        dispatch(VerifyAgent(token, agent.unique_id))
     } 
-
-    const handleSetAgentData = useCallback((data) => {
-            setAgentData(agent)
-    }, [agent, setAgentData])
 
     useEffect(() => {
         setIsLoading(loading)
     }, [loading, setIsLoading])
 
     useEffect(() => {
-        data && handleSetAgentData(data)
-    }, [data, handleSetAgentData])
+        data && setShow(false)
+    }, [data])
 
     useEffect(() => {
-        verifiedAgent && handleSetAgentData(verifiedAgent)
-    }, [verifiedAgent, handleSetAgentData])
+
+    }, [])
 
     const deleteAgent = () => {
-        return (
-            <ConfirmActionDialog callback={dispatch(DeleteItem('agent', agent.unique_id, `/agents`))} />
-        )
+        setAction('delete')
+        setShow(true)
     }
 
     return (
@@ -115,10 +115,17 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                         </div>
                         <div className="card-footer bg-white px-0 pt-1">
                             <ul className="list-group list-group-no-border mb-7">
-                            <li className="list-group-item d-flex align-items-sm-center lh-114 row m-0 px-0 pt-3 pb-0">
-                                <span className="col-3 p-0 fs-13">Phone Number</span>
-                                <span className="col-9 p-0 text-heading font-weight-500">{agent.phone_number}</span>
-                            </li>
+                            {
+                                agent.phone_number
+
+                                && 
+                                
+                                <li className="list-group-item d-flex align-items-sm-center lh-114 row m-0 px-0 pt-3 pb-0">
+                                    <span className="col-3 p-0 fs-13">Phone</span>
+                                    <span className="col-9 p-0 text-heading font-weight-500">{agent.phone_number}</span>
+                                </li>
+                            }
+
                             <li className="list-group-item d-flex align-items-sm-center row m-0 px-0 pt-2 pb-0">
                                 <span className="col-3 p-0 fs-13">Email</span>
                                 <span className="col-9 p-0">{agent.email}</span>
@@ -147,7 +154,7 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                             </a>
 
                             {
-                                adminMode === 'true'
+                                adminMode === true
 
                                 &&
 

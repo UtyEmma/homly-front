@@ -9,20 +9,27 @@ export default function ListingAction({agent, listing}) {
     
     const dispatch = useDispatch()
     const [show, setShow] = useState(false)
+    const [action, setAction] = useState()
+
     const {adminMode} = useSelector((state) => state.admin_mode)
+    const {token} = useSelector((state) => state.user_data)
 
     const suspendListing = () => {
         setShow(true)
+        setAction('suspend')
     }
 
     const callback = () => {
-        dispatch(SuspendItem('listing', listing.unique_id))
+        if (action === 'suspend') {
+            dispatch(SuspendItem(token, 'listing', listing.unique_id))
+        }else if(action === 'delete'){
+            dispatch(DeleteItem(token, 'listing', listing.unique_id, `/listings`))
+        }
     }
 
     const deleteListing = () => {
-        return (
-            <ConfirmActionDialog callback={dispatch(DeleteItem('listing', listing.unique_id, `/listings`))} />
-        )
+        setShow(true)
+        setAction('delete')
     }
     
     return (
@@ -48,7 +55,7 @@ export default function ListingAction({agent, listing}) {
                     
                     <p className="mb-0">{agent.title}</p>
                     <ul className="list-inline mb-0">
-                        <li className="list-inline-item fs-13 text-heading font-weight-500">{agent.rating}/5</li>
+                        <li className="list-inline-item fs-13 text-heading font-weight-500">{agent.rating ? agent.rating : 1}/5</li>
                         <li className="list-inline-item fs-13 text-heading font-weight-500 mr-1">
                             <ul className="list-inline mb-0">
                                 <RatingStar rating={agent.rating ? agent.rating : 1}/>
@@ -139,7 +146,7 @@ export default function ListingAction({agent, listing}) {
 
 
                 {
-                    adminMode
+                    adminMode === true
 
                     &&
 

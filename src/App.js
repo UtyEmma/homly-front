@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {  Switch, Route, useHistory } from 'react-router-dom';
+import {  Switch, Route } from 'react-router-dom';
 
 // Route Guards
 import AgentRoute from './providers/guards/agent-guard';
@@ -48,6 +48,8 @@ import ServerError from 'views/onboarding/sever-error';
 import { EmailVerified } from 'views/onboarding/email-verified';
 import toast, { ToastBar, Toaster } from 'react-hot-toast';
 import { EmailUpdateVerification } from 'views/onboarding/email-update-verification';
+import { Chat } from 'views/agent/support/chat';
+import { AgentActivity } from 'views/agent/activity/activity';
 
 function App() {
 
@@ -57,24 +59,25 @@ function App() {
 	const [isLoading, setIsLoading] = useState(true)
 
   const { type, user, token } = useSelector(state => state.user_data)
+  const { adminMode } = useSelector(state => state.admin_mode)
 
 	const auth = query.get("auth")
-	const user_type = localStorage.getItem('type') 
-
-  const {adminMode} = useSelector((state) => state.admin_mode)
-
+  const id = query.get("id")
   const {loading} = useSelector(state => state.user);
 
   useEffect(() => {
-    auth && user_type !== 'admin' && dispatch(VerifyAdmin(query.get("id"))) 
-  }, [auth, dispatch, query, user_type])
+    auth && id && type !== 'admin' && dispatch(VerifyAdmin(id)) 
+  }, [auth, dispatch, type, id])
 
   useEffect(() => {
     setIsLoading(loading)
   }, [loading])
-
+  
   return (
     <div className="App">
+
+      <AdminModeBadge type={type} adminMode={adminMode} />
+      
       <Preloader loading={isLoading}/>
 
       <Toaster position='top-right'> 
@@ -98,7 +101,6 @@ function App() {
 
       <GoogleOneTapAuth setIsLoading={setIsLoading} />
 
-      <AdminModeBadge adminMode={adminMode} />
 
       <Switch>                  
         {/* Common Routes */}
@@ -135,7 +137,9 @@ function App() {
         <AgentRoute path="/my-listings/:slug" isLoading={isLoading} setIsLoading={setIsLoading} type={type} token={token} user={user} component={AgentListingDetail} />
         <AgentRoute path="/reviews" isLoading={isLoading} setIsLoading={setIsLoading} type={type} token={token} user={user} component={Reviews} exact />
         <AgentRoute path="/support" isLoading={isLoading} setIsLoading={setIsLoading} type={type} token={token} user={user} component={Support} exact />
+        <AgentRoute path="/support/:id" isLoading={isLoading} setIsLoading={setIsLoading} type={type} token={token} user={user} component={Chat} exact />
         <AgentRoute path="/agent-wishlists" isLoading={isLoading} setIsLoading={setIsLoading} type={type} token={token} user={user} component={AgentWishlist} exact />
+        <AgentRoute path="/activity" isLoading={isLoading} setIsLoading={setIsLoading} type={type} token={token} user={user} component={AgentActivity} exact />
 
         <Route path="/server-error" render={(props) => (<ServerError {...props} setIsLoading={setIsLoading}  token={token} user={user} />)} exact/>
 

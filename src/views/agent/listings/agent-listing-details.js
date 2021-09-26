@@ -1,4 +1,3 @@
-import Preloader from "components/preloader/preloader"
 import { FetchSingleListing } from "providers/redux/_actions/listing/listing-actions"
 import { useCallback, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
