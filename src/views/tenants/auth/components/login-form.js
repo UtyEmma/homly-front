@@ -8,6 +8,7 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 import Validator from 'validatorjs';
 import { MapFormErrors } from 'libraries/validation';
 import { Login } from 'providers/redux/_actions/auth-action';
+import { FacebookAuth } from 'views/agent/auth/socialite/facebook-auth';
 
 const UserLoginForm = ({isLoading}) =>  {    
     const dispatch = useDispatch()
@@ -96,17 +97,7 @@ const UserLoginForm = ({isLoading}) =>  {
                 </div>
                 <div className="row no-gutters mx-n2">
                     <div className="col-sm-6 px-2 mb-4">
-                        <FacebookLogin
-                            appId={process.env.REACT_APP_FACEBOOK_APP_ID}
-                            render={renderProps => (
-                                <button onClick={renderProps.onClick} className="btn btn-lg btn-block text-heading border px-0 bg-hover-accent">
-                                    <img src="images/facebook.png" alt="Facebook" className="mr-2" />
-                                    Facebook
-                                </button> 
-                            )}
-                            fields="name,email,picture"
-                            callback={responseFacebook}
-                        />
+                        <FacebookAuth user="tenant" />
                     </div>
                     <div className="col-sm-6 px-2 mb-4">
                         <GoogleAuth user="tenant" />

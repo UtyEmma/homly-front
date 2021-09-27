@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 export default function ListingInfo({listing}) {
     
@@ -22,7 +22,7 @@ export default function ListingInfo({listing}) {
                 </div>
                 </div>
                 <h4 className="fs-22 text-heading mt-6 mb-2">Description</h4>
-                <p className="mb-0 lh-214">{listing.description}</p>
+                <p className="mb-0 lh-214" dangerouslySetInnerHTML={{__html: listing.description}}></p>
             </section>
         </>
     )

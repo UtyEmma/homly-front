@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 export default function ListingReviewForm({setUserHasReviewed, listing_id, status}) {
     const dispatch = useDispatch()
-    const {loading, reviews} = useSelector(state => state.submit_review)
+    const {reviews} = useSelector(state => state.submit_review)
     const {token} = useSelector((state) => state.user_data)
 
     const submitPropertyReview = (e) => {
@@ -64,10 +64,9 @@ export default function ListingReviewForm({setUserHasReviewed, listing_id, statu
 
                         <div className="card p-5">
                             <div className="text-center">
-                                <img src="/images/svg/reviews.svg" width="200" />
                                 <h4 className="text-heading mt-5">Only Tenants Can Review this Property!!!</h4>
-                                {/* <p className="fs-18">Please <a href="/login" className="btn btn-link fs-18 p-0">Login as a Tenant</a> to review this property</p> */}
-                                <a href="/login" className="btn fs-16 btn-outline-primary mt-5">Login as a Tenant</a>
+                                <p className="fs-18">Please <a href="/login" className="btn btn-link fs-18 p-0">Login as a Tenant</a> to review this property</p>
+                                {/* <a href="/login" className="btn fs-16 btn-outline-primary mt-5">Login as a Tenant</a> */}
                             </div>
                         </div>
 

@@ -59,32 +59,41 @@ export const NotificationContainer = () => {
                 <div className="card-body p-0">
                     <h2 className="mb-2 text-heading fs-22 lh-15">Recent Activity</h2>
                     <div className="px-0 px-mb-2 mb-2 d-flex justify-content-end">
-                        <button onClick={markAllAsRead}  className="btn btn-link btn-sm">
-                            <i className="fal fa-envelope-open-text fs-16 mr-1"></i>
-                            Mark all as Read 
-                        </button>
+                        {
+                            notifications && notifications.length > 0
+
+                            &&
+
+                            <button onClick={markAllAsRead}  className="btn btn-link btn-sm">
+                                <i className="fal fa-envelope-open-text fs-16 mr-1"></i>
+                                Mark all as Read 
+                            </button>
+                        }
                     </div>
-                    <ul className="list-group list-group-no-border notification-container" style={{maxHeight: '80vh', overflowY: 'scroll'}} >
                     
                     {
-                        notifications 
+                        notifications && notifications.length > 0 
 
                         ?
 
                         <>
-
-                        {
-                            notifications.map((notification, index) => {
-                                return notificationItem(notification, index)
-                            })
-                        }
+                            <ul className="list-group list-group-no-border notification-container" style={{maxHeight: '80vh', overflowY: 'scroll'}} >
+                                {
+                                    notifications.map((notification, index) => {
+                                        return notificationItem(notification, index)
+                                    })
+                                }
+                            </ul>
                         </>
 
                         :
+                        
+                        <div>
+                            <img src="" alt=""  className="" />
+                            <p className="">You have no notifications at the moment</p>
+                        </div>
 
-                        <p className="dropdown-item">You have no notifications</p>
                     }
-                    </ul>
                     
                 </div>
             </div>

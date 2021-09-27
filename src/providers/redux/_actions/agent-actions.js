@@ -1,6 +1,6 @@
 import Response from 'libraries/response/response';
 import { AgentService } from 'providers/services';
-import { persistor, store } from '../store';
+import { history, persistor, store } from '../store';
 import { AgentConstants } from '../_contants/agent-constants';
 import { UnsetUser } from './auth-action';
 
@@ -111,6 +111,7 @@ export const DeleteListing = (token, id) => (dispatch) => {
                         type: DELETE_LISTING_SUCCESS,
                         payload: true
                     })
+                    history.push('/my-listings')
                 })
                 .catch(error => {
                     Response.error(error.response)

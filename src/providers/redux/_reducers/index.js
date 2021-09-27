@@ -3,8 +3,8 @@ import { combineReducers } from "redux";
 
 import {signupReducer, UpdateTenantProfileReducer} from "../_reducers/user.reducer";
 import { SetAdminModeReducer, SuspendItemReducer, verifyAgentReducer } from "./admin-reducer";
-import { AgentLoginReducer, AgentSignupReducer,
-        UpdateAgentProfileReducer, ShowAvailableAgentsReducer, DeleteListingReducer, RemoveListingReducer, FetchSingleAgentReducer, FetchAgentWishlistsReducer } from "./agent-reducer";
+import { AgentSignupReducer, UpdateAgentProfileReducer, ShowAvailableAgentsReducer,
+         DeleteListingReducer, RemoveListingReducer, FetchSingleAgentReducer, FetchAgentWishlistsReducer } from "./agent-reducer";
 import { GetLoggedInUserReducer, LoginReducer, RecoverPasswordReducer, ResendEmailReducer, ResetPasswordReducer, SetUserReducer, VerifyEmailReducer } from "./auth-reducer";
 import { FetchCategoriesReducer } from "./category-reducer";
 import { FetchDetailsReducer } from "./details-reducer";

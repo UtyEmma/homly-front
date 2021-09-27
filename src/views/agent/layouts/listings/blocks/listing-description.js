@@ -1,7 +1,9 @@
+import { RichTextEditor } from 'components/rich-text/rich-text-editor';
 import React from 'react'
 import SelectListingCategory from 'views/layouts/components/details/categories';
 
 export default function ListingDescription({formErrors}) {
+    
 
     return (
         <div className="tab-pane tab-pane-parent bg-transparent fade show active px-0" id="description" role="tabpanel" aria-labelledby="description-tab">
@@ -34,7 +36,7 @@ export default function ListingDescription({formErrors}) {
                             </div>
                             <div className="form-group mb-0">
                                 <label htmlFor="description-01" className="text-heading">Description</label>
-                                <textarea className="form-control border-0" rows={5} name="description" id="description-01" />
+                                <RichTextEditor name="description" editorClassName="form-control border-0" />
                                 <p className="text-danger fs-12 mt-1">{formErrors.description?.message}</p>
                             </div>
                         </div>

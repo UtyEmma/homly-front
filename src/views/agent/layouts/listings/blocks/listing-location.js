@@ -122,7 +122,7 @@ export default function ListingLocation({formErrors}) {
                             <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
                                 <div className="form-group mb-md-0">
                                     <label htmlFor="longitude" className="text-heading">Longitude</label>
-                                    <input type="text" value={lat} className="form-control form-control-lg border-0" id="longitude" name="longitude" readOnly/>
+                                    <input type="text" value={long} className="form-control form-control-lg border-0" id="longitude" name="longitude" readOnly/>
                                 </div>
                             </div>
                             </div>

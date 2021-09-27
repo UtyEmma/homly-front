@@ -1,6 +1,6 @@
 import { AgentLogout } from 'providers/redux/_actions/agent-actions'
 import { TenantLogout } from 'providers/redux/_actions/user-actions'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 

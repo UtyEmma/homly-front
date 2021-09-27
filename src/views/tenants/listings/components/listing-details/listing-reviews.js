@@ -7,7 +7,7 @@ import ListingReviewItem from '../listing-reviews/listing-review-item'
 export default function ListingReviews({listing_id, status}) {
     const dispatch = useDispatch()
 
-    const {loading, reviews} = useSelector((state) => state.listing_reviews)
+    const {reviews} = useSelector((state) => state.listing_reviews)
     const {token} = useSelector((state) => state.user_data)
 
     const [userHasReviewed, setUserHasReviewed] = useState(false)

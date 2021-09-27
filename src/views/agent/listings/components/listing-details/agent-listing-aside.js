@@ -1,57 +1,38 @@
 import RatingStar from "components/rating/rating-star";
+import { badgeStatus } from "libraries/status-parser/status-parser";
 import { DeleteListing } from "providers/redux/_actions/agent-actions";
-import { SetAsRented } from "providers/redux/_actions/listing/listing-actions";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { ConfirmActionDialog } from "views/layouts/components/modals/confirm-action-dialog";
+import { ListingRentedComponent } from "../listing-rented-component";
 
 export const AgentListingAside = ({agent, listingItem, setIsLoading, setListingItem}) => {
     
     const dispatch = useDispatch()
-    const history = useHistory()
 
     const [show, setShow] = useState()
     const [callback, setCallback] = useState()
-    
-    const set_as_rented = useSelector(state => state.set_as_rented)
-    const {loading, listing} = set_as_rented;
 
     const user_data = useSelector(state => (state.user_data))
     const {token} = user_data
 
-    const delete_listing = useSelector(state => (state.delete_listing))
+    const {loading} = useSelector(state => (state.delete_listing))
 
     const deleteListing = () => {
         setShow(true)
-        setCallback({
-            action: () => { dispatch(DeleteListing(token, listingItem.unique_id))
-        }})
-    }
-
-    useEffect(() => {
-        delete_listing.success && history.push('/my-listings')
-    }, [delete_listing.success, history])
-
-    const markAsRented = () => {
-        dispatch(SetAsRented(token, listingItem.unique_id))    
+        setCallback(() => { dispatch(DeleteListing(token, listingItem.unique_id))})
     }
 
     useEffect(() => {
         setIsLoading(loading)
-        listing && setListingItem(listing)
-    }, [listing, loading, setIsLoading, setListingItem])
-
-    useEffect(() => {
-        setIsLoading(delete_listing.loading)
-    }, [delete_listing.loading, setIsLoading])
+    }, [loading, setIsLoading])
 
     return (
         <>
             <div className="bg-white rounded-lg py-lg-6 pl-lg-6 pr-lg-3 p-4 position-sticky sticky-top"  style={{top: '50px', zIndex: '9'}}>
                 <div className="d-flex justify-content-between align-items-center">
-                    <span className={`badge badge-pill ${listingItem.status === 'active' ? 'badge-success' : 'badge-warning'} rounded text-white fs-12 px-3`}>{listingItem.status}</span>
-                    <p className="mt-3"><i className="fal fa-clock mr-1" />{listingItem.period}</p>
+                    <span className={`badge badge-pill ${badgeStatus(listingItem.status)} rounded text-white fs-12 px-3`}>{listingItem.status}</span>
+                    <p className="mt-3 fs-13"><i className="fal fa-clock mr-1" />{listingItem.period}</p>
                 </div>
                 <div className="row mt-5">
                     <div className="col-auto">
@@ -88,26 +69,8 @@ export const AgentListingAside = ({agent, listingItem, setIsLoading, setListingI
                     </div>
                 </div>
                 <div className="mr-xl-2">
-                    {
-                        !listingItem.rented && listingItem.status !== 'rented'
-
-                        ?
-
-                        <>
-                            <button type="button" onClick={markAsRented} className="btn btn-outline-success btn-lg btn-block border-success rounded border bg-hover-success border-hover-0 hover-white">Mark As Rented <i className="ml-1 fa fa-sign"></i></button>
-
-                            <hr/>
-                        </>
-
-                        :
-
-                        <>
-                            <button type="button" onClick={markAsRented} className="btn btn-outline-success btn-lg btn-block border-success rounded border bg-hover-success border-hover-0 hover-white">Mark As Available <i className="ml-1 fal fa-home-alt"></i></button>
-
-                            <hr/>
-                        </>
-
-                    }
+                    
+                    <ListingRentedComponent listing={listingItem} />
 
                     <a href={`/${agent.username}/${listingItem.slug}`} target="_blank" className="btn btn btn-primary btn-lg btn-block rounded border-primary bg-hover-white border-hover-primary hover-primary" rel="noreferrer">Preview Property <i className="ml-1 fa fa-external-link-alt"></i></a>
                     <button type="button" className="btn btn-outline-primary btn-lg btn-block rounded border text-body border-hover-primary hover-white mt-4" data-toggle="modal" data-target="#exampleModal">Edit Property Info <i className="ml-1 far fa-edit"></i></button>

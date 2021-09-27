@@ -1,8 +1,6 @@
 import { DetailsConstants } from "../_contants/details-constants";
 
-const { FETCH_DETAILS_REQUEST, FETCH_DETAILS_SUCCESS, FETCH_DETAILS_FAILURE,
-        FETCH_CATEGORY_REQUEST, FETCH_CATEGORY_SUCCESS, FETCH_CATEGORY_FAILURE
-        } = DetailsConstants;
+const { FETCH_DETAILS_REQUEST, FETCH_DETAILS_SUCCESS, FETCH_DETAILS_FAILURE } = DetailsConstants;
 
 export function FetchDetailsReducer (state = {}, action) {
     switch (action.type) {
@@ -11,8 +9,7 @@ export function FetchDetailsReducer (state = {}, action) {
         case FETCH_DETAILS_SUCCESS:
             return {...state, 
                 loading: false, 
-                amenities: action.payload.amenities, 
-                // features: action.payload.features
+                amenities: Object.values(action.payload.amenities)
             }
         case FETCH_DETAILS_FAILURE:
             return {...state, loading: false, error: action.payload}

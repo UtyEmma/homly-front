@@ -12,7 +12,6 @@ import ListingNotFound from 'components/404/404-listing';
 import ListingContainer from './components/listing-container';
 import FeaturedListings from './components/featured-listings/featured-listings';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
 
 
 const Listing = ({isLoggedIn, user, setIsLoading, status}) => {
@@ -21,7 +20,7 @@ const Listing = ({isLoggedIn, user, setIsLoading, status}) => {
 
     const {loading, listings, featured} = useSelector((state) => state.active_listings);
 
-    const [params, setParams] = useState()
+    const [params, setParams] = useState({})
     const {token} = useSelector((state) => state.user_data)
     
     const fetchListings = useCallback(() => {
@@ -29,10 +28,8 @@ const Listing = ({isLoggedIn, user, setIsLoading, status}) => {
     }, [dispatch, params, token])
 
     useEffect(() => {
-        if(!listings || params){
-            fetchListings()
-        }
-    }, [fetchListings, listings, params])
+        if(!listings || params){ fetchListings() }
+    }, [params])
 
     useEffect(() => {
         setIsLoading(loading)

@@ -1,5 +1,5 @@
 import { LocalGovt, State } from 'components/city-state/city-state';
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { SelectTypes } from 'views/layouts/components/details/categories';
 
 export default function ListingFilter({params, setParams}) {
@@ -13,10 +13,11 @@ export default function ListingFilter({params, setParams}) {
 
     const [selectedState, setSelectedState] = useState();
 
+    
     useEffect(() => {
-        selectedState && setParams({...params, city: ""})
         window.$('select').selectpicker('refresh')
-    }, [params, selectedState, setParams])
+    }, [selectedState])
+
 
     return (
         <nav aria-label="breadcrumb">

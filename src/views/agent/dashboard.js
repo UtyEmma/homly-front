@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import Sidebar from './layouts/shared/sidebar'
 import Header from './layouts/shared/header'
-import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import { AddUsernameModal } from './layouts/dashboard/add-username-modal'
+import { NotificationContainer } from './layouts/notifications/notification-container'
 
 const AgentDashboard = ({agent, setIsLoading}) => {
     
@@ -138,6 +138,9 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                                     </div>
                                 </div>
                                 </div>
+
+                                   <NotificationContainer />
+
                                 <div className="row">
                                 <div className="col-xxl-8 mb-6">
                                     <div className="card px-7 py-6 h-100 chart">
@@ -214,7 +217,6 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                                     </div>
                                     </div>
                                 </div>
-                               
                                
                             </div>
                         </div>

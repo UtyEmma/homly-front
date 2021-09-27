@@ -21,13 +21,7 @@ function AddListingForm({setIsLoading}) {
     const {loading, listing_success, formError} = useSelector((state) => state.new_listing);
     const {token} = useSelector(state => state.user_data)
     
-    const {amenities} = useSelector(state => state.details)
-
     const {rules, attributes} = __createlisting
-
-    const loadAmenities = useCallback(() => {
-        dispatch(FetchDetails()) 
-    }, [dispatch]) 
 
     const resetFormData = () => {
         setFormErrors({})
@@ -53,10 +47,6 @@ function AddListingForm({setIsLoading}) {
             dispatch(CreateListing(token, formData))
         }
     }
-    
-    useEffect(() => {
-        !amenities && loadAmenities()
-    }, [amenities, loadAmenities])
 
     useEffect(() => {
         formError && setFormErrors(formError)
@@ -81,7 +71,7 @@ function AddListingForm({setIsLoading}) {
 
                 <ListingDetails formErrors={formErrors} />
 
-                <ListingAmenities amenities={amenities} formErrors={formErrors}/>
+                <ListingAmenities formErrors={formErrors}/>
             </div>
         </form>
     )

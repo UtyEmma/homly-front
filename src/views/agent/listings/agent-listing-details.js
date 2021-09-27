@@ -1,7 +1,7 @@
 import { FetchSingleListing } from "providers/redux/_actions/listing/listing-actions"
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import Header from "../layouts/shared/header"
 import Sidebar from "../layouts/shared/sidebar"
 import { AgentListingAmenities } from "./components/listing-details/agent-listing-amenities"
@@ -16,16 +16,9 @@ export const AgentListingDetail = ({agent, setIsLoading, isLoading}) => {
 
     const {slug} = useParams();
     const dispatch = useDispatch()
-    const [listingItem, setListingItem] = useState(null)
-
-    const history = useHistory()
 
     const details = useSelector((state) => state.listing);
-    const {loading, listing, error} = details;
-    
-    const handleSetListing = useCallback(() => {
-        setListingItem(listing.listing)
-    }, [listing]) 
+    const {loading, listing} = details;
 
     const fetchListingData = useCallback((slug) => {
         dispatch(FetchSingleListing(agent.username, slug))
@@ -33,16 +26,11 @@ export const AgentListingDetail = ({agent, setIsLoading, isLoading}) => {
 
     useEffect(() => {
         !listing && fetchListingData(slug)
-        listing && handleSetListing()
-    }, [fetchListingData, handleSetListing, listing, slug]);
+    }, [fetchListingData, listing, slug]);
 
     useEffect(() => {
         setIsLoading(loading)
     }, [loading, setIsLoading])
-
-    useEffect(() => {
-        error && history.push('/my-listings')
-    }, [error, history])
 
     return (
         <div className="wrapper dashboard-wrapper">
@@ -59,29 +47,29 @@ export const AgentListingDetail = ({agent, setIsLoading, isLoading}) => {
                             <ol className="breadcrumb">
                                 <li className="breadcrumb-item"><a href="/">Dashboard</a></li>
                                 <li className="breadcrumb-item"><a href="/my-listings">My Properties</a></li>
-                                <li className="breadcrumb-item active" aria-current="page">{listingItem && listingItem.title}</li>
+                                <li className="breadcrumb-item active" aria-current="page">{listing && listing.title}</li>
                             </ol>
                         </nav>
                     </div>
                     
                     <div className="row">
                         {
-                            listingItem
+                            listing
 
                             &&
 
                             <>
                                 <div className="col-md-8">
-                                    <AgentListingDescription listing={listingItem} />
-                                    <AgentListingGallery listing={listingItem} />
-                                    <AgentListingAmenities listing={listingItem} amenities={listingItem.amenities} />
-                                    <AgentListingDetails listing={listingItem} />
-                                    <AgentListingLocation listing={listingItem} />
+                                    <AgentListingDescription listing={listing} />
+                                    <AgentListingGallery listing={listing} />
+                                    <AgentListingAmenities listing={listing} amenities={listing.amenities} />
+                                    <AgentListingDetails listing={listing} />
+                                    <AgentListingLocation listing={listing} />
                                 </div>
 
 
                                 <div className="col-md-4">
-                                    <AgentListingAside listingItem={listingItem} agent={agent} setListingItem={setListingItem} setIsLoading={setIsLoading} />
+                                    <AgentListingAside listingItem={listing} agent={agent} setIsLoading={setIsLoading} />
                                 </div>
                             </>
                         }                            
@@ -91,11 +79,11 @@ export const AgentListingDetail = ({agent, setIsLoading, isLoading}) => {
                 </main>
                             
                 {
-                    listingItem
+                    listing
 
                     &&
 
-                    <UpdateListingModal listingItem={listingItem} setIsLoading={setIsLoading} setListingItem={setListingItem}/>
+                    <UpdateListingModal listingItem={listing} setIsLoading={setIsLoading}/>
                 }
                 </div>
 

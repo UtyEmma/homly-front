@@ -8,11 +8,11 @@ export const AgentListingDetails = ({listing}) => {
         let array = []
         for(let amenity in items){ array.push(amenity) }
         setAmenities(array)
-    }, [items])
+    }, [listing])
 
     useEffect(() => {
-        parseAmenities()
-    }, [listing, parseAmenities])
+       listing && parseAmenities()
+    }, [listing])
 
     return (
         <>
@@ -59,7 +59,7 @@ export const AgentListingDetails = ({listing}) => {
 
                         amenities.map((amenity, index) => {
                             return (
-                                <li className="col-sm-3 col-6 mb-2 text-capitalize" key={index}><i className="far fa-check mr-2 text-primary" />{amenity.replace(/_/g," ")}</li>
+                                <li className="col-sm-4 col-6 mb-2 text-capitalize" key={index}><i className="far fa-check mr-2 text-primary" />{amenity.replace(/_/g," ")}</li>
                             )
                         })
                         

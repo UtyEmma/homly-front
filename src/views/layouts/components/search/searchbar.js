@@ -1,8 +1,7 @@
 import { LocalGovt, State } from 'components/city-state/city-state'
+import { focusSearchBar } from 'libraries/events/keyboard-events'
 import React, { useEffect, useState } from 'react'
 import { SearchbarSelectListing } from '../details/categories'
-import { useHistory, useLocation } from 'react-router-dom';
-
 export default function Searchbar({parsed}) {
 
     const [selectedState, setSelectedState] = useState()
@@ -31,6 +30,10 @@ export default function Searchbar({parsed}) {
         window.$('select').selectpicker('refresh')
     })
 
+    useEffect(() => {
+        document.addEventListener('keypress', focusSearchBar, true)
+    })
+
     return (
         <>        
          <section className="bg-secondary">
@@ -42,8 +45,8 @@ export default function Searchbar({parsed}) {
                     <SearchbarSelectListing name="type" />
 
                     <div className="form-group mb-0 position-relative flex-md-3 mt-3 mt-md-0">
-                    <input type="text" defaultValue={parsed && parsed.keyword} className="form-control form-control-lg border-0 shadow-none rounded-left-md-0 pr-8 bg-white placeholder-muted" id="key-word-1" name="keyword" placeholder="Enter an address, neighbourhood..." />
-                    <button type="submit" className="btn position-absolute pos-fixed-right-center p-0 text-heading fs-20 mr-4 shadow-none">
+                    <input type="text" defaultValue={parsed && parsed.keyword} className="form-control form-control-lg border-0 shadow-none rounded-left-md-0 pr-8 bg-white placeholder-muted" id="search" name="keyword" placeholder="Enter an address, neighbourhood... (Press '/')" />
+                    <button type="submit"  className="btn position-absolute pos-fixed-right-center p-0 text-heading fs-20 mr-4 shadow-none">
                         <i className="far fa-search" />
                     </button>
                     </div>

@@ -9,6 +9,7 @@ import { AgentSuspensionNotificationItem } from './notification-items/agent-susp
 import { ListingSuspensionNotificationItem } from './notification-items/listing-suspension-notification-item'
 import { ListingRentedNotificationItem } from './notification-items/listing-rented-notification-item'
 import { Link } from 'react-router-dom'
+import { ListingApprovedNotificationItem } from './notification-items/listing-approved-notification-item'
 
 export const NotificationBell = () => {
 
@@ -48,6 +49,8 @@ export const NotificationBell = () => {
                 return <ListingSuspensionNotificationItem notification={notification} key={index} />
             case 'listing_rented':
                 return <ListingRentedNotificationItem notification={notification} key={index} />
+            case 'listing_approved':
+                return <ListingApprovedNotificationItem notification={notification} key={index} />
             default:
                 return null;
         }
@@ -71,12 +74,6 @@ export const NotificationBell = () => {
                         ?
 
                         <>
-                            {/* <div className="px-2 mb-2 d-flex justify-content-end">
-                                <button  className="btn btn-link btn-sm">
-                                    <i className="fal fa-envelope-open-text fs-16 mr-1"></i>
-                                    Mark all as Read 
-                                </button>
-                            </div> */}
 
                         {
                             notifications.map((notification, index) => {

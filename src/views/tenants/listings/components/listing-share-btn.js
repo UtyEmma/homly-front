@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useRef } from 'react'
-import { Overlay, OverlayTrigger, Popover, PopoverContent } from 'react-bootstrap'
-import { EmailShareButton, FacebookShareButton, InstapaperShareButton, TelegramShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share'
+import { Overlay, Popover, } from 'react-bootstrap'
+import { EmailShareButton, FacebookShareButton, TelegramShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share'
 
 export const ListingShareBtn = ({listing}) => {
 
@@ -20,7 +20,7 @@ export const ListingShareBtn = ({listing}) => {
                 <i className="far fa-share-alt" />
             </button>
             <Overlay show={show} target={target} transition placement="bottom" container={ref.current} >
-                <Popover id="popover-contained" style={{width: '200px', height: '60px'}}>
+                <Popover id="popover-contained" className="mt-3" style={{width: '200px', height: '60px'}}>
                     <Popover.Content as="div" >
                         <div className="d-flex justify-content-between">
                             <FacebookShareButton url={window.location} quote={`Check out ${listing.title} on Bayof Real Estate`} hashtag="#bayof" className="">

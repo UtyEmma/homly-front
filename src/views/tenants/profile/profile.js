@@ -18,7 +18,7 @@ const Profile = ({isLoggedIn, user, setIsLoading, status}) => {
     const profileImage = createRef()
     const history = useHistory()
 
-    const {loading, tenant, formError} = useSelector(state => state.update_tenant)
+    const {loading, formError} = useSelector(state => state.update_tenant)
 
     const {rules, attributes} = __update_tenant_profile
     const [formErrors, setFormErrors] = useState({})
