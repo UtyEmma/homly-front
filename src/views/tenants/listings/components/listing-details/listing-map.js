@@ -5,7 +5,7 @@ export const MapItem = ({listing}) => {
     return (
         <>
             <section>
-                <ListingMap longitude={Number(listing.longitude)} latitude={Number(listing.latitude)} />
+                <ListingMap longitude={parseFloat(listing.longitude)} latitude={parseFloat(listing.latitude)} />
             </section>   
         </>
     )

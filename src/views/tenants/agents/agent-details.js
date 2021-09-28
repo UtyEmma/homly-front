@@ -44,7 +44,13 @@ const AgentDetails = ({isLoggedIn, user, status, setIsLoading}) => {
     return (
         <div>
             <Helmet>
-                <title>Bayof Agent</title>
+                {
+                    agentData
+
+                    &&
+
+                    <title>{ `${agentData.agent.firstname} ${agentData.agent.lastname} - Bayof Agent`} </title>
+                }
                 <meta name="twitter:card" content="summary" />
                 <meta name="twitter:site" content="@" />
                 <meta name="twitter:creator" content="@" />

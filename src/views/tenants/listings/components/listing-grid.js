@@ -9,13 +9,13 @@ export default function ListingGrid({listing, status}) {
     return (
         <ScrollAnimation animateIn="fadeInUp" className='col-md-6 mb-6 listing-grid'>
             <div className="card border-0" >
-                <div className="position-relative hover-change-image bg-hover-overlay rounded-lg card-img listing-image-container">
+                <div className="position-relative bg-overlay-gradient-7 rounded-lg card-img listing-image-container">
                     <img className="listing-image" style={{minHeight: '100%'}} src={listing.images[0]} alt={listing.title} />
                     <div className="card-img-overlay d-flex flex-column">
                         <div>
                             <span className="badge badge-indigo">for Rent</span>
                         </div>
-                        <div className="mt-auto d-flex hover-image">
+                        <div className="mt-auto d-flex">
                             <ul className="list-inline mb-0 d-flex align-items-end mr-auto">
                                 <li className="list-inline-item mr-2" data-toggle="tooltip" title={`${listing.images.length} Images`}>
                                     <button className="btn p-0 text-white hover-primary">
@@ -44,7 +44,7 @@ export default function ListingGrid({listing, status}) {
                     
                     <p className="font-weight-500 text-gray-light mb-0 d-inline-block text-nowrap text-truncate w-100">{listing.address}, {listing.city}, {listing.state}</p>
                 
-                    <p className="card-text mb-2 ml-0">{listing.description.split(" ").splice(0,12).join(" ")}...</p>
+                    <p className="card-text mb-2 ml-0" dangerouslySetInnerHTML={{__html: listing.description.split(" ").splice(0,12).join(" ")+' ...'}} ></p>
                 
                     <p className="fs-17 font-weight-bold text-heading mb-0 lh-16">
                         &#8358; {listing.rent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}

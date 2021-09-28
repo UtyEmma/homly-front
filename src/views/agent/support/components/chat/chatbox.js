@@ -47,7 +47,7 @@ export const ChatBox = ({chat, setChat, setIsLoading}) => {
 
                 <div style={{height: "100%"}} className="mb-10 py-md-0">
                     <div className="col-12 d-flex flex-column border-top border-md-0  align-items-center pt-3 bg-white text-center" 
-                        style={{height: "10%", boxShadow: '0px 6px 10px -6px gray', zIndex: '9999'}}>
+                        style={{height: "10%", boxShadow: '0px 6px 10px -6px gray', zIndex: '1'}}>
                         <p className="lh-1 mb-1 fs-12">
                             Intiated on <span className="font-weight-600">{chat.ticket.date}</span>
                         </p>
