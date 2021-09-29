@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import './chat.css'
 
-export const ChatBox = ({chat, setChat, setIsLoading}) => {
+export const ChatBox = ({chat, setIsLoading}) => {
 
     const send_message = useSelector(state => state.send_message)
     const {loading, ticket} = send_message
@@ -33,9 +33,7 @@ export const ChatBox = ({chat, setChat, setIsLoading}) => {
 
     const setPosition = () => {
         chat_form.current && chat_form.current.reset()
-        if(chat_body.current){ 
-            chat_body.current.scrollTop = chat_body.current.scrollHeight;
-        }
+        if(chat_body.current){ chat_body.current.scrollTop = chat_body.current.scrollHeight; }
     }
 
     return (
@@ -54,7 +52,7 @@ export const ChatBox = ({chat, setChat, setIsLoading}) => {
                         <p className="fs-12">Status - <span className="text-capitalize font-weight-600">{chat.ticket.status}</span></p>
                     </div>
 
-                    <div className="col-12 chat-body rounded-right bg-gray-04 py-3" ref={chat_body} style={{height: "75%"}}>
+                    <div className="col-12 chat-body rounded-right bg-gray-04 py-3" ref={chat_body} style={{height: "78%"}}>
                         <div className="row">
                             
                             {
@@ -105,12 +103,12 @@ export const ChatBox = ({chat, setChat, setIsLoading}) => {
 
                             &&
 
-                            <div className="col-12 bg-white px-3 pt-3" style={{height: "15%"}}>
+                            <div className="col-12 bg-white px-3 pt-3" style={{height: "12%"}}>
                                 <form onSubmit={sendMessage} id="chat-form" ref={chat_form} >
                                     <div className="col-12 rounded-pill bg-white border">
                                         <div className="row">
                                             <div className="col-11 px-0 mx-0">
-                                                <textarea className="form-control bg-transparent border-0 shadow-none form-control-lg" rows={1} name="message" id="chat-message" placeholder="Your message here..." style={{resize: 'none'}} defaultValue={""} />
+                                                <textarea type="text" className="form-control bg-transparent border-0 shadow-none form-control-lg" rows={1} name="message" id="chat-message" placeholder="Your message here..." style={{resize: 'none'}} defaultValue={""} />
                                             </div>
                                             <div className="col-1 px-0 pr-2 d-flex align-items-center justify-content-center">
                                                 <button className="btn" type="submit">
