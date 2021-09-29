@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 
-import { useHistory, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { FetchSingleListing } from 'providers/redux/_actions/listing/listing-actions'
 import ListingComponents from './components/listing-details'
@@ -19,7 +19,6 @@ const ListingDetails = ({isLoggedIn, user, status, adminMode, setIsLoading}) => 
     const {username, slug} = useParams();
     
     const dispatch = useDispatch()
-    const history = useHistory()
 
     const [listingData, setListingData] = useState()
 

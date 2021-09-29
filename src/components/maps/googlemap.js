@@ -4,7 +4,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 export default function ListingMap({longitude, latitude}) {
     return (
         <Map 
-            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBYmJujloM3zNdxMpokW1G_Qo5Qo_05_A&libraries=geometry,drawing,places&v=weekly"
+            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_API_KEY}&libraries=geometry,drawing,places&v=weekly`}
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `500px` }} />}
             mapElement={<div style={{ height: `100%` }} />}
@@ -16,9 +16,11 @@ export default function ListingMap({longitude, latitude}) {
 
 const Map = withScriptjs(withGoogleMap(({longitude, latitude}) =>     
 
-    <GoogleMap  
-        zoom={11} 
-        defaultCenter={{ lat: latitude, lng: longitude }} >
+    <GoogleMap   
+        defaultZoom={16}
+        zoom={16}
+        center={{ lat: latitude, lng: longitude } } 
+        >
         <Marker 
             icon={{
                 url: '../images/googlle-market-02.png',

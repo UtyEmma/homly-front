@@ -9,12 +9,15 @@ import { store, persistor, history } from './providers/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import Preloader from 'components/preloader/preloader';
 import { ConnectedRouter } from 'connected-react-router'; 
+import SimpleReactLightbox from 'simple-react-lightbox';
 
 ReactDOM.render(
     <Provider store={store}>
       <PersistGate loading={<Preloader />} persistor={persistor}>
         <ConnectedRouter history={history}>
+          <SimpleReactLightbox>
             <App />
+          </SimpleReactLightbox>
         </ConnectedRouter>
       </PersistGate>
     </Provider>,

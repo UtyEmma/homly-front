@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import { RichTextEditor } from 'components/rich-text/rich-text-editor'
+import React from 'react'
 
 export default function ListingDetails({formErrors}) {
     return (
@@ -47,7 +48,8 @@ export default function ListingDetails({formErrors}) {
                         <div className="col-lg-12">
                             <div className="form-group">
                             <label htmlFor="extra-details" className="text-heading">Extra details</label>
-                                <textarea className="form-control border-0" rows={5} id="extra_info" name="extra_info" />
+                                {/* <textarea className="form-control border-0" rows={5} id="extra_info" name="extra_info" /> */}
+                                <RichTextEditor name="extra_info" editorClassName="form-control border-0" />
                                 <p className="text-danger fs-12 mt-1">{formErrors.extra_info?.message}</p>
                             </div>
                         </div>

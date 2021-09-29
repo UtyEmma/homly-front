@@ -1,6 +1,8 @@
 import Response from "libraries/response/response";
+import { history, store } from "providers/redux/store";
 import { ListingService } from "../../../services/listing-service";
 import { ListingConstants } from "../../_contants/listing-constants";
+import { GetLoggedInUser } from "../auth-action";
 
 const { NEW_LISTING_REQUEST, NEW_LISTING_SUCCESS, NEW_LISTING_FAILURE, 
         GETLISTINGS_SUCCESS, GETLISTINGS_FAILURE, GETLISTINGS_REQUEST,
@@ -26,6 +28,8 @@ export const CreateListing = (token, data) => (dispatch) =>{
                         type: NEW_LISTING_SUCCESS,
                         payload: response.data
                     })
+                    
+                    store.dispatch(GetLoggedInUser(token, 'agent'))
                 })
                 .catch(error => {
                     let errors = Response.error(error.response)
@@ -64,6 +68,10 @@ export const UpdateListing = (token, data, id) => (dispatch) => {
     ListingService.updateListing(token, data, id)
                     .then(response => {
                         Response.success(response.data)
+                        dispatch({
+                            type: FETCH_SINGLE_LISTING_SUCCESS,
+                            payload: response.data.data
+                        })
                         return dispatch({
                             type: UPDATE_LISTING_SUCCESS,
                             payload: response.data.data
@@ -161,6 +169,7 @@ export const FetchSingleListing = (username, slug) => (dispatch) => {
                     })
                     .catch(error => {
                         Response.error(error.response)
+                        history.push('/my-listings')
                         return dispatch({
                             type : FETCH_SINGLE_LISTING_FAILURE,
                             payload : error.response
@@ -201,9 +210,14 @@ export const SetAsRented = (token, id) => (dispatch) => {
                             type: SET_AS_RENTED_SUCCESS,
                             payload: response.data.data 
                         })
+                        dispatch({
+                            type: FETCH_SINGLE_LISTING_SUCCESS,
+                            payload: response.data.data
+                        })
                     })
                     .catch((error) => {
-                        Response.error(error.response)
+                        // Response.error(error.response)
+                        console.log(error.response)
                         dispatch({
                             type: SET_AS_RENTED_FAILURE,
                             payload: error.response

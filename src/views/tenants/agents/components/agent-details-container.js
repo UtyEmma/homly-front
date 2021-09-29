@@ -104,10 +104,10 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                             </p>
                             <p className="mb-0">{agent.title}</p>
                             <ul className="list-inline mb-2">
-                            <li className="list-inline-item fs-13 text-heading font-weight-500">{agent.rating}/5</li>
+                            <li className="list-inline-item fs-13 text-heading font-weight-500">{agent.rating ?? 1}/5</li>
                             <li className="list-inline-item fs-13 text-heading font-weight-500 mr-1">
                                 <ul className="list-inline mb-0">
-                                    <RatingStar rating={agent.rating} />
+                                    <RatingStar rating={agent.rating ?? 1} />
                                 </ul>
                             </li>
                             <li className="list-inline-item fs-13 text-gray-light">({agent.no_reviews} reviews)</li>

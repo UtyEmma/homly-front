@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { SelectAmenities } from 'views/layouts/components/details/amenities'
 
 export default function ListingAmenities({amenities, formErrors}) {
+
+    // useEffect(() => {
+    //     if(amenities) console.log(typeof(amenities))
+    // }, [amenities])
+
     return (
         <div className="tab-pane tab-pane-parent fade px-0" id="amenities" role="tabpanel" aria-labelledby="amenities-tab">
             <div className="card bg-transparent border-0">
@@ -21,24 +27,7 @@ export default function ListingAmenities({amenities, formErrors}) {
                         <div className="col-lg-12">
                             <ul className="list-group list-group-no-border">
                                 <div className="row">
-                                    {
-
-                                    Array.isArray(amenities) && amenities.length > 0 
-                                    
-                                    && 
-
-                                    amenities.map((item, index) => (
-                                        <div key={index} className="col-sm-6 col-lg-3">
-                                            <li className="list-group-item px-0 pt-0 pb-2">
-                                                <div className="custom-control custom-checkbox">
-                                                    <input type="checkbox" className="custom-control-input" name={`amenities[${item.toLowerCase().replace(/ /g,'_')}]`} id={item} />
-                                                    <label className="custom-control-label" htmlFor={item} >{item}</label>
-                                                </div>
-                                            </li>
-                                        </div>
-                                    )) 
-                                    
-                                    }
+                                    <SelectAmenities />
                                 </div>
                             </ul>
                             <p className="text-danger fs-12 mt-1">{formErrors.amenities?.message}</p>
@@ -47,7 +36,7 @@ export default function ListingAmenities({amenities, formErrors}) {
                 </div>
 
                 <div className="d-flex flex-wrap">
-                    <button className="btn btn-lg bg-hover-white border rounded-lg mb-3 mr-auto prev-button" type="button" role="button">
+                    <button className="btn btn-lg bg-hover-white border rounded-lg mb-3 mr-auto prev-button" type="button">
                         <span className="d-inline-block text-primary mr-2 fs-16"><i className="fal fa-long-arrow-left" /></span>Prev step
                     </button>
                     <button className="btn btn-lg btn-primary mb-3" type="submit">Create property

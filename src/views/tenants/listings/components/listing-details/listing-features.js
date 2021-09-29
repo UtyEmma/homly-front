@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 export const ListingFeatures = ({listing}) => {
     let [amenities, setAmenities] = useState([]);
     let items = JSON.parse(listing.amenities);
     
-    const parseAmenities = () => {
+    const parseAmenities = useCallback(() => {
         let array = []
         for(let amenity in items){
             array.push(amenity)
         }
         setAmenities(array)
-    }
+    }, [items])
 
     useEffect(() => {
         parseAmenities()
-    }, [listing])
+    }, [listing, parseAmenities])
 
     return (
         <>
@@ -115,6 +115,10 @@ export const ListingFeatures = ({listing}) => {
                         <div></div>
                     }
                 </ul>
+            </section>  
+            <section className="mt-2 pb-7 px-6 pt-5 bg-white rounded-lg">
+                <h4 className="fs-22 text-heading mt-6 mb-2">Extra Info</h4>
+                <p className="mb-0 lh-214" dangerouslySetInnerHTML={{__html: listing.extra_info}}></p>
             </section>  
         </>
     )

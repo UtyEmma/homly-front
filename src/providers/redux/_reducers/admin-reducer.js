@@ -5,7 +5,7 @@ const {
     VERIFY_AGENT_REQUEST, VERIFY_AGENT_SUCCESS, VERIFY_AGENT_FAILURE
 } = _ADMIN
 
-export function SetAdminModeReducer(state= {}, action){
+export function SetAdminModeReducer(state= false, action){
     switch (action.type) {
         case 'ADMIN_MODE_ON':
             return {...state, adminMode: action.payload}

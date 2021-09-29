@@ -96,7 +96,7 @@ export function FetchSingleListing(state={}, actions){
         case FETCH_SINGLE_LISTING_REQUEST: 
             return {...state, loading: true}
         case FETCH_SINGLE_LISTING_SUCCESS:
-            return {...state, loading: false, listing: actions.payload}
+            return {...state, loading: false, listing: actions.payload.listing, agent: actions.payload.agent}
         case FETCH_SINGLE_LISTING_FAILURE:
             return {...state, loading: false, error: actions.payload }
         default:

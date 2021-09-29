@@ -1,29 +1,10 @@
-import React, { useCallback, useEffect } from 'react'
+import React from 'react'
 import { Helmet } from 'react-helmet';
-import { useDispatch, useSelector } from 'react-redux';
 import { NotificationContainer } from '../layouts/notifications/notification-container';
 import Header from '../layouts/shared/header';
 import Sidebar from '../layouts/shared/sidebar';
 
 export const AgentActivity = ({agent}) => {
-    const dispatch = useDispatch();
-
-    const {loading, listings} = useSelector((state) => state.agents_listings);
-
-    const user_data = useSelector(state => (state.user_data))
-    const {token} = user_data
-
-    // const loadListings = useCallbackback(() => {
-    //     dispatch(GetAgentListings(token));
-    // }, [dispatch, token])
-
-    // useEffect(() => {
-    //     if(!listings){ loadListings() }
-    // }, [listings, loadListings])
-
-    // useEffect(() => {
-    //     setIsLoading(loading)
-    // }, [loading, setIsLoading])
 
     return (
         <div className="wrapper dashboard-wrapper">

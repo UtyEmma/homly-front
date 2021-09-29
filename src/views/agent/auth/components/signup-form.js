@@ -9,6 +9,7 @@ import { MapFormErrors } from 'libraries/validation/handlers/error-handlers';
 import { __agent_signup } from 'libraries/validation';
 import GoogleAuth from 'views/agent/auth/socialite/google-auth';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { FacebookAuth } from '../socialite/facebook-auth';
 
 
 const AgentSignUpForm = () => {
@@ -131,20 +132,10 @@ const AgentSignUpForm = () => {
                 </div>
                 <div className="row no-gutters mx-n2">
                     <div className="col-sm-6 px-2 mb-4">
-                        <FacebookLogin
-                            appId={process.env.REACT_APP_FACEBOOK_APP_ID}
-                            render={renderProps => (
-                                <button onClick={renderProps.onClick} className="btn btn-lg btn-block text-heading border px-0 bg-hover-accent">
-                                    <img src="images/facebook.png" alt="Facebook" className="mr-2" />
-                                    Facebook
-                                </button> 
-                            )}
-                            fields="name,email,picture"
-                            callback={responseFacebook}
-                        />
+                        <FacebookAuth user="agent" />
                     </div>
                     <div className="col-sm-6 px-2 mb-4">
-                        <GoogleAuth />
+                        <GoogleAuth user="agent" />
                     </div>
                 </div>
                 </div>

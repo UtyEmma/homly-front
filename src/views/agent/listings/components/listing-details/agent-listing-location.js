@@ -1,6 +1,14 @@
 import ListingMap from "components/maps/googlemap"
+import { useEffect, useState } from "react"
 
 export const AgentListingLocation = ({listing}) => {
+    const [long, setLong] = useState(6.4584)
+    const [lat, setLat] = useState(7.5464)
+
+    useEffect(() => {
+        setLong(parseFloat(listing.longitude))
+        setLat(parseFloat(listing.latitude))
+    }, [listing])
     return (
         <>
             <section className="pb-8 px-6 pt-6 bg-white rounded-lg my-3">
@@ -59,8 +67,7 @@ export const AgentListingLocation = ({listing}) => {
                     </div>
                 </div>
                 
-                <ListingMap longitude={Number(listing.longitude)} latitude={Number(listing.latitude)} />
-
+                <ListingMap longitude={long} latitude={lat} />
 
             </section>
         </>

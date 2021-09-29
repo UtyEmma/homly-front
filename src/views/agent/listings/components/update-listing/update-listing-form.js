@@ -11,7 +11,7 @@ import { MapFormErrors, __createlisting } from "libraries/validation";
 import Validator from "validatorjs";
 import { useHistory } from "react-router-dom";
 
-export const UpdateListingForm = ({listing, setListing, setIsLoading}) => {
+export const UpdateListingForm = ({listing, setIsLoading}) => {
 
     const dispatch = useDispatch()
     const history = useHistory()
@@ -49,9 +49,8 @@ export const UpdateListingForm = ({listing, setListing, setIsLoading}) => {
 
     const handleUpdateSuccess = useCallback(() => {
         setFormErrors({})
-        history.push(`/my-listings/${success.listing.slug}`)
-        setListing(success.listing)
-    }, [success])
+        history.push(`/my-listings/${listing.slug}`)
+    }, [history, listing.slug])
 
     useEffect(() => {
         !stepper && setStepper(new Stepper(document.getElementById('wishlist-stepper'), {

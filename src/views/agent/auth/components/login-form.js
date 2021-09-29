@@ -8,7 +8,7 @@ import Validator from 'validatorjs';
 import { MapFormErrors } from 'libraries/validation/handlers/error-handlers';
 import { __agent_login } from 'libraries/validation';
 import { Login } from 'providers/redux/_actions/auth-action';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { FacebookAuth } from '../socialite/facebook-auth';
 
 const AgentLoginForm = () =>  {
 
@@ -35,10 +35,6 @@ const AgentLoginForm = () =>  {
             dispatch(Login(values, 'agent'));
         } 
     } 
-
-    const responseFacebook = (response) => {
-        console.log(response)
-    }
 
     useEffect(() => {
        user && !user.isVerified && history.push('/verify')
@@ -95,17 +91,7 @@ const AgentLoginForm = () =>  {
                     </div>
                     <div className="row no-gutters mx-n2">
                         <div className="col-sm-6 px-2 mb-4">
-                            <FacebookLogin
-                                appId={process.env.REACT_APP_FACEBOOK_APP_ID}
-                                render={renderProps => (
-                                    <button onClick={renderProps.onClick} className="btn btn-lg btn-block text-heading border px-0 bg-hover-accent">
-                                        <img src="images/facebook.png" alt="Facebook" className="mr-2" />
-                                        Facebook
-                                    </button> 
-                                )}
-                                fields="name,email,picture"
-                                callback={responseFacebook}
-                            />
+                            <FacebookAuth user='agent' />
                         </div>
                         <div className="col-sm-6 px-2 mb-4">
                             <GoogleAuth user="agent"/>
