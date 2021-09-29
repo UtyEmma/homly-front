@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { CreateListing } from '../../../../providers/redux/_actions/listing/listing-actions';
 import ListingLocation from './blocks/listing-location'
@@ -6,8 +6,7 @@ import ListingDescription from './blocks/listing-description'
 import ListingMedia from './blocks/listing-media'
 import ListingAmenities from './blocks/listing-amenities'
 import ListingDetails from './blocks/listing-details'
-import { FetchDetails } from 'providers/redux/_actions/details-actions';
-import { MapFormErrors, __createlisting } from 'libraries/validation';
+import { MapFormErrors, ToastFormErrors, __createlisting } from 'libraries/validation';
 import Validator from 'validatorjs';
 import toast from 'react-hot-toast';
 
@@ -48,9 +47,14 @@ function AddListingForm({setIsLoading}) {
         }
     }
 
+
     useEffect(() => {
         formError && setFormErrors(formError)
     }, [formError])
+
+    useEffect(() => {
+        formErrors && ToastFormErrors(formErrors)
+    }, [formErrors])
 
     useEffect(() => {
         listing_success && resetFormData()

@@ -11,7 +11,7 @@ import { UpdateAgentProfile } from 'providers/redux/_actions/agent-actions';
 const AgentProfile = ({agent, setIsLoading}) => {
         const dispatch = useDispatch()
         const profileImage = createRef()
-        const [selectedState, setSelectedState] = useState()
+        const [selectedState, setSelectedState] = useState(agent.state && agent.state)
 
         const updateProfile = useSelector(state => (state.update_agent_profile))
         const {loading, error} = updateProfile
@@ -61,10 +61,14 @@ const AgentProfile = ({agent, setIsLoading}) => {
 
                         <main id="content" className="bg-gray-01">
                             <div className="px-3 px-lg-6 px-xxl-13 py-5 py-lg-10">
-                                <div className="mb-6">
-                                    <h2 className="mb-0 text-heading fs-22 lh-15">My Profile</h2>
-                                    <p className="mb-5">Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse suscipit</p>
-                                    <a href={`/${agent.username}`} target="_blank" className="btn btn-lg btn-outline-primary d-block d-md-inline my-3" rel="noreferrer">Preview Profile <i className="ml-1 fa fa-external-link-alt"></i></a>
+                                <div className="mb-6 d-flex justify-content-between">
+                                    <div className="d-flex flex-column justify-content-center">
+                                        <h2 className="mb-0 text-heading fs-22 lh-15">My Profile</h2>
+                                        <p className="mb-5">Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse suscipit</p>
+                                    </div>
+                                    <div className="d-flex align-items-center">
+                                        <a href={`/${agent.username}`} target="_blank" className="btn btn-lg btn-outline-primary d-block d-md-inline my-3" rel="noreferrer">Visit Profile <i className="ml-1 fa fa-external-link-alt"></i></a>
+                                    </div>
                                 </div>
                                 <form onSubmit={updateUserData} id="profile-form" encType="multipart/form-data">
                                     <div className="row mb-6">
@@ -78,10 +82,10 @@ const AgentProfile = ({agent, setIsLoading}) => {
                                                             <p className="card-text">Upload your profile photo.</p>
                                                         </div>
                                                         <div className="col-xl-12">
-                                                            <img src={agent.avatar ? agent.avatar : "images/my-profile.png"} alt="My Profile" id="profile-image" ref={profileImage} className="w-100" />
+                                                            <img src={agent.avatar ?? "images/my-profile.png"} alt="My Profile" id="profile-image" ref={profileImage} className="w-100" />
                                                             <p className="text-danger fs-12 mt-1">{formErrors.avatar?.message}</p>
                                                             <div className="custom-file mt-2 h-auto" >
-                                                                <input type="file" name="avatar" className="custom-file-input" onChange={changeProfileImagePreview} id="customFile" />
+                                                                <input type="file" name="avatar"  className="custom-file-input" onChange={changeProfileImagePreview} id="customFile" />
                                                                 <label className="btn btn-secondary btn-lg btn-block" htmlFor="customFile">
                                                                 <span className="d-inline-block mr-1"><i className="fal fa-cloud-upload" /></span>Select
                                                                 profile image</label>
@@ -150,12 +154,12 @@ const AgentProfile = ({agent, setIsLoading}) => {
                                                     <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
                                                     <div className="form-group">
                                                         <label htmlFor="state" className="text-heading">State</label>
-                                                        <State classes="form-control form-control-lg border-0" setSelectedState={setSelectedState} name="state" id="state"/>
+                                                        <State classes="form-control form-control-lg border-0" defaultValue={agent.state} setSelectedState={setSelectedState} name="state" id="state"/>
                                                         <p className="text-danger fs-12 mt-1">{formErrors.state?.message}</p>
                                                     </div>
                                                     <div className="form-group">
                                                         <label htmlFor="instagram" className="text-heading">City</label>
-                                                        <LocalGovt selectedState={selectedState} classes="form-control form-control-lg border-0" id="city" name="city"/>
+                                                        <LocalGovt defaultValue={agent.city} selectedState={selectedState} classes="form-control form-control-lg border-0" id="city" name="city"/>
                                                         <p className="text-danger fs-12 mt-1">{formErrors.city?.message}</p>
                                                     </div>
                                                 </div>

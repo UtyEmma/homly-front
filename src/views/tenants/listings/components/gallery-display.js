@@ -42,7 +42,7 @@ export default function GalleryDisplay({images, title}) {
                     }
                 </Slider>
             </SRLWrapper>
-            <Slider asNavFor={slider} ref={slider => (sliderNav = slider)} slidesToShow={images.length < 3 ? images.length : 3} touchMove dots swipeToSlide={true} focusOnSelect={true}>
+            <Slider asNavFor={slider} ref={slider => (sliderNav = slider)} slidesToShow={images.length < 3 ? images.length : 3} touchMove swipeToSlide={true} focusOnSelect={true}>
                 {
                     images.map((image, index) => {
                         return (

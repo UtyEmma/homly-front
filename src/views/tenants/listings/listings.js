@@ -12,6 +12,7 @@ import ListingNotFound from 'components/404/404-listing';
 import ListingContainer from './components/listing-container';
 import FeaturedListings from './components/featured-listings/featured-listings';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 
 
 const Listing = ({isLoggedIn, user, setIsLoading, status}) => {
@@ -69,7 +70,7 @@ const Listing = ({isLoggedIn, user, setIsLoading, status}) => {
                         <div className="row d-flex align-items-center">
                             <div className="col-md-4">
                                 <div className="agent-header">
-                                    <span><a href="/">Home</a> / Properties</span>
+                                    <span><Link to="/">Home</Link> / Properties</span>
                                     <h3 className="w-100">Available Properties</h3>
                                 </div>
                             </div>

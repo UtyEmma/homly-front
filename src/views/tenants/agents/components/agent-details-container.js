@@ -1,7 +1,9 @@
 import RatingStar from 'components/rating/rating-star'
+import { AgentSocialMediaLinks } from 'components/social-media/agent-social-media-links'
 import { DeleteItem, SuspendItem, VerifyAgent } from 'providers/redux/_actions/admin-actions'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { ConfirmActionDialog } from 'views/layouts/components/modals/confirm-action-dialog'
 import AgentsListings from './agent-listings/agent-listings'
 import AgentReviews from './agent-reviews/agent-reviews'
@@ -44,10 +46,6 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
         data && setShow(false)
     }, [data])
 
-    useEffect(() => {
-
-    }, [])
-
     const deleteAgent = () => {
         setAction('delete')
         setShow(true)
@@ -60,8 +58,8 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                 <h3>Agent</h3>
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb pt-6 pt-lg-0 pb-0">
-                        <li className="breadcrumb-item"><a href="../">Home</a></li>
-                        <li className="breadcrumb-item"><a href="/agents">Agents</a></li>
+                        <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+                        <li className="breadcrumb-item"><Link to="/agents">Agents</Link></li>
                         <li className="breadcrumb-item active" aria-current="page">
                             {agent.firstname} {agent.lastname} 
                         </li>
@@ -131,21 +129,7 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                                 <span className="col-9 p-0">{agent.email}</span>
                             </li>
                             <li className="list-group-item d-flex align-items-sm-center lh-114 row m-0 px-0 pt-3 pb-0">
-                                <span className="col-3 p-0 fs-13">Social</span>
-                                <ul className="col-9 list-inline text-gray-lighter m-0 p-0 z-index-2">
-                                <li className="list-inline-item m-0">
-                                    <a href={agent.twitter} className="w-32px h-32 rounded bg-hover-primary bg-white hover-white text-body d-flex align-items-center justify-content-center border border-hover-primary"><i className="fab fa-twitter" /></a>
-                                </li>
-                                <li className="list-inline-item mr-0 ml-2">
-                                    <a href={agent.facebook} className="w-32px h-32 rounded bg-hover-primary bg-white hover-white text-body d-flex align-items-center justify-content-center border border-hover-primary"><i className="fab fa-facebook-f" /></a>
-                                </li>
-                                <li className="list-inline-item mr-0 ml-2">
-                                    <a href={agent.instagram} className="w-32px h-32 rounded bg-hover-primary bg-white hover-white text-body d-flex align-items-center justify-content-center border border-hover-primary"><i className="fab fa-instagram" /></a>
-                                </li>
-                                <li className="list-inline-item mr-0 ml-2">
-                                    <a href={agent.website} className="w-32px h-32 rounded bg-hover-primary bg-white hover-white text-body d-flex align-items-center justify-content-center border border-hover-primary"><i className="fa fa-globe-africa" /></a>
-                                </li>
-                                </ul>
+                                <AgentSocialMediaLinks agent={agent} />
                             </li>
                             </ul>
                             <a href={`mailto:${agent.email}`} type="submit" className="btn btn-primary btn-lg btn-block shadow-none">

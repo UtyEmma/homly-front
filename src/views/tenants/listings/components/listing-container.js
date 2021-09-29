@@ -32,7 +32,7 @@ export default function ListingContainer({listings, setParams, params, status}) 
                             <label className="input-group-text bg-transparent border-0 text-uppercase letter-spacing-093 pr-1 pl-3" htmlFor="inputGroupSelect01"><i className="fas fa-align-left fs-16 pr-2" />Sortby:</label>
                             <select onChange={(e) => {setParams({...params, [e.target.name]: e.target.value})}} className="form-control border-0 bg-transparent shadow-none p-0 selectpicker sortby" data-style="bg-transparent border-0 font-weight-600 btn-lg pl-0 pr-3" id="inputGroupSelect01" name="sortby">
                                 <option defaultValue="" value="">Latest</option>
-                                <option value='views'>Most Viewed</option>
+                                {/* <option value='views'>Most Viewed</option> */}
                                 <option value='minprice'>Price(low to high)</option>
                                 <option value='maxprice'>Price(high to low)</option>
                             </select>

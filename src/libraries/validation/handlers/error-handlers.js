@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 export const MapFormErrors = (errors) =>  {
     let object = {}
     if (errors) {
@@ -6,4 +8,10 @@ export const MapFormErrors = (errors) =>  {
         }
     }
     return object;
+}
+
+export const ToastFormErrors = (errors) => {
+    for (const error in errors) {
+        toast.error(errors[error].message)
+    }
 }

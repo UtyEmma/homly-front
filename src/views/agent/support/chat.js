@@ -4,7 +4,7 @@ import Sidebar from 'views/agent/layouts/shared/sidebar'
 import { Helmet } from 'react-helmet'
 import { ChatBox } from './components/chat/chatbox'
 import { ChatSideBar } from './components/chat/chat-sidebar'
-import { Link, useParams } from 'react-router-dom'
+import {    useParams } from 'react-router-dom'
 import { FetchMessages } from 'providers/redux/_actions/support-actions'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -53,7 +53,7 @@ export const Chat = ({agent, setIsLoading}) => {
                             </div>
 
                             <div className="col-12 card" >
-                                <div className="row" style={{height: '600px'}}>
+                                <div className="row" style={{height: '700px'}}>
                                     {
                                         chat 
 
@@ -64,7 +64,7 @@ export const Chat = ({agent, setIsLoading}) => {
 
                                     <div className="col-md-8">
                                         <div className="row">
-                                            <div className="col-12 bg-white px-0" style={{height: "600px"}}>
+                                            <div className="col-12 bg-white px-0" style={{height: "700px"}}>
                                                 {
                                                     chat 
 

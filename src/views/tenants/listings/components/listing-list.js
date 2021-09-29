@@ -10,13 +10,13 @@ export default function ListingList({listing, status}) {
             <div className="card mb-8 mb-lg-6 border-0 listing-list">
                 <div className="row no-gutters">
                     <div className="col-md-6 mb-5 mb-md-0 pr-md-6">
-                        <div className="position-relative hover-change-image bg-hover-overlay rounded-lg card-img listing-image-container">
+                        <div className="position-relative bg-overlay-gradient-7 rounded-lg card-img listing-image-container">
                             <img className="listing-image" style={{minHeight: '100%'}} src={listing.images[0]} alt={listing.title} />
                             <div className="card-img-overlay p-2 d-flex flex-column">
                                 <div>
                                     <span className="badge badge-indigo">for Rent</span>
                                 </div>
-                                <div className="mt-auto d-flex hover-image">
+                                <div className="mt-auto d-flex">
                                     <ul className="list-inline mb-0 d-flex align-items-end mr-auto">
                                         <li className="list-inline-item mr-2" data-toggle="tooltip" title={`${listing.images.length} Images`}>
                                             <button className="btn p-0 text-white hover-primary">
@@ -46,7 +46,7 @@ export default function ListingList({listing, status}) {
                                 <Link to={`/${listing.agent.username}/${listing.slug}`} className="fs-16 lh-2 text-dark hover-primary d-block">{listing.title}</Link>
                             </h2>
                             <p className="card-text mb-1 font-weight-500 text-gray-light">{listing.address}, {listing.city}, {listing.state}</p>
-                            <p className="card-text mb-2 ml-0" style={{textOverflow: 'ellipsis'}}>{listing.description.split(" ").splice(0,15).join(" ")}</p>
+                            <p className="card-text mb-2 ml-0" dangerouslySetInnerHTML={{__html: listing.description.split(" ").splice(0,12).join(" ")+' ...'}}></p>
                             <p className="card-text fs-17 font-weight-bold text-heading mb-3">
                                 &#8358; {listing.rent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                             </p>
