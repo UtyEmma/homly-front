@@ -22,7 +22,7 @@ export const FacebookAuth = ({user}) => {
             }
 
             let data = {
-                payload: user_data
+                payload: {...user_data}
             }
 
             dispatch(SocialAuth(data))   

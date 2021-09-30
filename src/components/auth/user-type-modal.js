@@ -9,8 +9,8 @@ export const SelectUserTypeModal = ({show, setShow, auth_data, setIsLoading}) =>
     const handleAuth = (user) => {
         const data = {
             payload: {
-                driver: 'google',
-                data: auth_data,
+                ...auth_data, 
+                driver: 'google', 
                 type: user
             }
         }
