@@ -26,7 +26,7 @@ export default function Sidebar({setIsLoading, agent}) {
                             <div className="d-flex px-3 px-xl-6 w-100 pd-logo">
 
                                 <Link className="navbar-brand" to="/">
-                                    <img src="/images/logo/bayof-logo.png" width="102px" height="80px" alt="HomeID" />
+                                    <img src="/images/logo/bayof-logo.png" width="102px" height="80px" alt="Bayof Logo" />
                                 </Link>
 
                                 <div className="ml-auto d-flex align-items-center ">

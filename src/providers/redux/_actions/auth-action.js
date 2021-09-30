@@ -1,5 +1,6 @@
 import Response from "libraries/response/response";
 import { AuthService } from "providers/services/auth-service";
+import { history } from "../store";
 import _AUTH from "../_contants/auth-constants";
 
 const { 
@@ -86,7 +87,16 @@ export const SocialAuth = (data) => (dispatch) => {
                     type: 'SET_USER_DATA',
                     payload: {user: user, token: token, type: type}
                 })
-                window.location.href = type === 'tenant' ? '/' : '/dashboard'
+
+                if(type === 'agent' && !user.username){
+                    history.push('/onboarding')
+                }else{  
+                    history.push('/dashboard')
+                }
+
+                if(type === 'tenant'){
+                    history.push('/')
+                }
             })
             .catch((error) => {
                 Response.error(error.response)

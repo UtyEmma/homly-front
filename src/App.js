@@ -50,6 +50,7 @@ import toast, { ToastBar, Toaster } from 'react-hot-toast';
 import { EmailUpdateVerification } from 'views/onboarding/email-update-verification';
 import { Chat } from 'views/agent/support/chat';
 import { AgentActivity } from 'views/agent/activity/activity';
+import UpdateUsername from 'views/onboarding/update-username';
 
 function App() {
 
@@ -131,6 +132,7 @@ function App() {
         <Route path="/agent-login" render={(props) => (<AgentLogin {...props} setIsLoading={setIsLoading} user={user} isLoading={isLoading} type="agent" />)} exact/>
         <Route path="/agent-signup" render={(props) => (<AgentSignup {...props} setIsLoading={setIsLoading} user={user} isLoading={isLoading} type="agent" />)} exact/>
         <AgentRoute path="/dashboard" isLoading={isLoading} setIsLoading={setIsLoading} token={token} type={type} user={user} component={AgentDashboard} exact />
+        <AgentRoute path="/onboarding" isLoading={isLoading} setIsLoading={setIsLoading} token={token} type={type} user={user} component={UpdateUsername} exact />
         <AgentRoute path="/new-listing" isLoading={isLoading} setIsLoading={setIsLoading} token={token} type={type} user={user} component={NewListing} exact />
         <AgentRoute path="/agent-profile" isLoading={isLoading} setIsLoading={setIsLoading} token={token} type={type} user={user} component={AgentProfile} exact />
         <AgentRoute path="/my-listings" isLoading={isLoading} setIsLoading={setIsLoading} token={token} type={type} user={user} component={AgentsListings} exact />

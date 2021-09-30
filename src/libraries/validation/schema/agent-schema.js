@@ -68,3 +68,13 @@ export const __agent_login = {
         password: 'Password'
     }
 }
+
+export const __agent_updateUsername = {
+    rules: {
+        username: 'required',
+    },
+
+    attributes: {
+        username: 'Username'
+    }
+}

@@ -1,7 +1,14 @@
-import React from "react";
-import { Redirect, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Redirect, Route, useHistory } from "react-router-dom";
 
 function TenantRoute({user, token, type, isLoading, setIsLoading, component: Component, ...restOfProps }) {
+  const history = useHistory()
+  
+  useEffect(() => {
+    if(!user.isVerified && window.location.href !== '/verify'){
+      return history.push('/verify')
+    }
+  })
   return (
     <Route
       {...restOfProps}

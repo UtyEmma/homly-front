@@ -41,7 +41,13 @@ const AgentLoginForm = () =>  {
     }, [user, history])
 
     useEffect(() => {
-        user && user.isVerified && type === 'agent' && history.push('/dashboard', "Logout Successful")
+        if(user && user.isVerified && type === 'agent'){
+            if(user.username){
+                history.push('/dashboard', "Login Successful")
+            }else{
+                history.push('/onboarding')
+            }
+        }
     }, [user, type, history])
 
     useEffect(() => {

@@ -67,7 +67,7 @@ const AgentProfile = ({agent, setIsLoading}) => {
                                         <p className="mb-5">Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse suscipit</p>
                                     </div>
                                     <div className="d-flex align-items-center">
-                                        <a href={`/${agent.username}`} target="_blank" className="btn btn-lg btn-outline-primary d-block d-md-inline my-3" rel="noreferrer">Visit Profile <i className="ml-1 fa fa-external-link-alt"></i></a>
+                                        <a href={`/${agent.username}`} disabled={agent.username ? false : true} target="_blank" className="btn btn-lg btn-outline-primary d-block d-md-inline my-3" rel="noreferrer">Visit Profile <i className="ml-1 fa fa-external-link-alt"></i></a>
                                     </div>
                                 </div>
                                 <form onSubmit={updateUserData} id="profile-form" encType="multipart/form-data">
