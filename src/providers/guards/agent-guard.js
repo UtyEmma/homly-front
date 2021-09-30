@@ -1,4 +1,3 @@
-import Preloader from "components/preloader/preloader";
 import React, { useEffect } from "react";
 import { Redirect, Route, useHistory } from "react-router-dom";
 

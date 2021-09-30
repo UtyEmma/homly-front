@@ -5,7 +5,7 @@ function TenantRoute({user, token, type, isLoading, setIsLoading, component: Com
   const history = useHistory()
   
   useEffect(() => {
-    if(!user.isVerified && window.location.href !== '/verify'){
+    if(user && !user.isVerified && window.location.href !== '/verify'){
       return history.push('/verify')
     }
   })
