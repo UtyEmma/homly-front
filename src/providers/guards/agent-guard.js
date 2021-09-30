@@ -6,7 +6,7 @@ function AgentRoute({user, token, type, isLoading, setIsLoading, component: Comp
   const history = useHistory()
 
   useEffect(() => {
-    if(!user.isVerified && window.location.href !== '/verify'){
+    if(user && !user.isVerified && window.location.href !== '/verify'){
       return history.push('/verify')
     }else if(!user.username && window.location.href !== '/onboarding'){
       return history.push('/onboarding')

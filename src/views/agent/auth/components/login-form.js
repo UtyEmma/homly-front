@@ -37,7 +37,9 @@ const AgentLoginForm = () =>  {
     } 
 
     useEffect(() => {
-       user && !user.isVerified && history.push('/verify')
+        if(user && !user.isVerified){
+            history.push('/verify')
+        }
     }, [user, history])
 
     useEffect(() => {
@@ -69,7 +71,7 @@ const AgentLoginForm = () =>  {
                         <div className="form-group mb-4">
                         <label htmlFor="password-2">Password</label>
                         <div className="input-group input-group-lg">
-                        <input type="password" className="form-control border-0 shadow-none" id="password" name="password" placeholder="**********" />
+                        <input type="password" className="form-control border-0 shadow-none" id="password-2" name="password" placeholder="Password" />
                             <div className="input-group-append">
                             <button onClick={togglePassword} className="input-group-text bg-gray-01 border-0 text-body fs-18">
                                 <i className="far fa-eye-slash" />

@@ -36,7 +36,7 @@ export default function UpdateUsername({agent, setIsLoading}) {
 
     useEffect(() => {
         setIsLoading(loading)
-    }, [loading])
+    }, [loading, setIsLoading])
 
     useEffect(() => {
         success && history.push('/dashboard')
