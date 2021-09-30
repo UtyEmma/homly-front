@@ -9,7 +9,7 @@ export default function NavBar({token, user, isloggedIn, status}) {
                 <div className="container">
                     <nav className="navbar navbar-expand-lg px-0">
                         <Link className="navbar-brand w-25 w-140px" to="/" >
-                            <img src="/images/logo/main.png" alt="Bayof Logo" className="d-none d-lg-inline-block img-fluid" />
+                            <img src="/images/logo/bayof-logo.png"  width="102px" height="80px" alt="Bayof Logo" className="d-none d-lg-inline-block img-fluid" />
                             <img src="/images/logo/white.png" alt="Bayof Logo" className="d-inline-block d-lg-none img-fluid" />
                         </Link>
 
@@ -27,7 +27,7 @@ export default function NavBar({token, user, isloggedIn, status}) {
                         <div className="collapse navbar-collapse mt-3 mt-lg-0 mx-auto flex-grow-0" id="primaryMenu01">
                             <ul className="navbar-nav hover-menu main-menu px-0 mx-lg-n4">
                                 <li id="navbar-item-home" className="nav-item py-2 py-lg-5 px-0 px-lg-4">
-                                    <Link className="nav-link p-0" to="/">Homely</Link>
+                                    <Link className="nav-link p-0" to="/">Home</Link>
                                 </li>
                                 <li id="navbar-item-property" className="nav-item py-2 py-lg-5 px-0 px-lg-4">
                                 <Link className="nav-link p-0" to="/about">About</Link>

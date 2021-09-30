@@ -6,6 +6,11 @@ import { AddUsernameModal } from './layouts/dashboard/add-username-modal'
 import { NotificationContainer } from './layouts/notifications/notification-container'
 
 const AgentDashboard = ({agent, setIsLoading}) => {
+
+    function capitalize(str) {
+        const lower = str.toLowerCase();
+        return str.charAt(0).toUpperCase() + lower.slice(1);
+      }
     
     useEffect(() => {
         setIsLoading(false)
@@ -41,8 +46,8 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                             <div className="px-3 px-lg-6 px-xxl-13 py-5 py-lg-10">
                                 <div className="d-flex flex-wrap flex-md-nowrap mb-6">
                                     <div className="mr-0 mr-md-auto">
-                                        <h2 className="mb-0 text-heading fs-22 lh-15">Welcome back, {agent.firstname} {agent.lastname}!</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At iusto, laboriosam. Atque</p>
+                                        <h2 className="mb-0 text-heading fs-22 lh-15">Good morning, { capitalize(agent.firstname)} </h2>
+                                        <p>What would you like to do, today?</p>
                                     </div>
                                     <div>
                                         <a href="/new-listing" className="btn btn-primary btn-lg">
