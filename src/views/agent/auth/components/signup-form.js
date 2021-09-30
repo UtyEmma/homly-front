@@ -26,6 +26,7 @@ const AgentSignUpForm = () => {
     const handleSignup = (e) => {
         e.preventDefault()
         const data = new FormData(e.target);
+        // console.log(data)
         const values = Object.fromEntries(data.entries());
         let validation = new Validator(values, rules)
         validation.fails(() => {setFormErrors(MapFormErrors(validation.errors.errors))})

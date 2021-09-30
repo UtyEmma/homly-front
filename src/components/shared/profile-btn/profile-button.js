@@ -39,7 +39,7 @@ function LoggedIn({setIsLoading, user, status}) {
                             </div>
                         }
                         <span className="fs-13 ml-2 font-weight-500 d-none d-sm-inline ml-0">
-                            Hello {user.firstname}
+                            <b>Hi, {user.firstname}</b>
                         </span>
                     </button>
                     <div className="dropdown-menu mt-2 dropdown-menu-right" style={{width: "200px"}}>
