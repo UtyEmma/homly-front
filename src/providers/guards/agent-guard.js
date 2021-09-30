@@ -8,7 +8,7 @@ function AgentRoute({user, token, type, isLoading, setIsLoading, component: Comp
   useEffect(() => {
     if(user && !user.isVerified && window.location.href !== '/verify'){
       return history.push('/verify')
-    }else if(!user.username && window.location.href !== '/onboarding'){
+    }else if(user && !user.username && window.location.href !== '/onboarding'){
       return history.push('/onboarding')
     }
   })
