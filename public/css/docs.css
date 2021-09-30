@@ -588,7 +588,7 @@ button:focus{
 }
 
 .bd-footer a:hover, .bd-footer a:focus {
-  color: #0ec6d5;
+  color: #49a1ff;
 }
 
 .bd-footer p {
@@ -1624,7 +1624,7 @@ button:focus{
 }
 
 .anchorjs-link:hover {
-  color: #0ec6d5;
+  color: #49a1ff;
   text-decoration: none;
 }
 

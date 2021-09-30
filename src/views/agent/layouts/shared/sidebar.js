@@ -23,10 +23,10 @@ export default function Sidebar({setIsLoading, agent}) {
             <div className="db-sidebar bg-white">
                 <nav className={`navbar navbar-expand-xl navbar-light d-block px-0 header-sticky dashboard-nav py-0`}>
                     <div className="sticky-area shadow-xs-1 py-3">
-                            <div className="d-flex px-3 px-xl-6 w-100">
+                            <div className="d-flex px-3 px-xl-6 w-100 pd-logo">
 
                                 <Link className="navbar-brand" to="/">
-                                    <img src="/images/logo.png" alt="HomeID" />
+                                    <img src="/images/logo/bayof-logo.png" width="102px" height="80px" alt="HomeID" />
                                 </Link>
 
                                 <div className="ml-auto d-flex align-items-center ">

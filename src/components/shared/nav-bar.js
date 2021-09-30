@@ -9,7 +9,7 @@ export default function NavBar({token, user, isloggedIn, status}) {
                 <div className="container">
                     <nav className="navbar navbar-expand-lg px-0">
                         <Link className="navbar-brand w-25 w-140px" to="/" >
-                            <img src="/images/logo/main.png" alt="Bayof Logo" className="d-none d-lg-inline-block img-fluid" />
+                            <img src="/images/logo/bayof-logo.png"  width="102px" height="80px" alt="Bayof Logo" className="d-none d-lg-inline-block img-fluid" />
                             <img src="/images/logo/white.png" alt="Bayof Logo" className="d-inline-block d-lg-none img-fluid" />
                         </Link>
 
