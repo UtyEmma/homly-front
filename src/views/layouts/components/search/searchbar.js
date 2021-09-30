@@ -30,9 +30,9 @@ export default function Searchbar({parsed}) {
         window.$('select').selectpicker('refresh')
     })
 
-    useEffect(() => {
-        document.addEventListener('keypress', focusSearchBar, true)
-    })
+    // useEffect(() => {
+    //     document.addEventListener('keypress', focusSearchBar, true)
+    // })
 
     return (
         <>        

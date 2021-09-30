@@ -10,8 +10,7 @@ const options = {
 const auth_config = {
     config: {
         headers: {
-            ...options, 
-            'Authorization' : `Bearer ${localStorage.getItem('token')}` 
+            ...options 
         }
     }
 }

@@ -16,15 +16,13 @@ export const FacebookAuth = ({user}) => {
                 family_name : name[1],
                 email : response.email,
                 email_verified : true,
-                picture: response.picture.data.url
+                picture: response.picture.data.url,
+                driver: 'facebook',
+                type: user
             }
 
             let data = {
-                payload: {
-                    driver: 'facebook',
-                    data: user_data,
-                    type: user
-                }
+                payload: { user_data }
             }
 
             dispatch(SocialAuth(data))   

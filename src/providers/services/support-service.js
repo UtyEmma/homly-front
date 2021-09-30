@@ -22,7 +22,7 @@ export const SupportService =  {
     },
 
     fetchTickets : async (token) => {
-        return await Request.get('agent/support/', options(token).config);
+        return await Request.get('agent/support', options(token).config);
     },
 
     deleteTicket : async (token, id) => {

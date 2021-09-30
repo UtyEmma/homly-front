@@ -15,7 +15,9 @@ export default function VerifyEmail({user, setIsLoading}) {
     const {token, type} = user_data
 
     const logged_user = useSelector(state => state.user)
-    const {loading, auth_user, verify_email} = logged_user;
+    const {loading, auth_user, verify_email} = logged_user
+
+    const resend_mail = useSelector(state => state.resend_mail)
 
     const fetchLoggedInUser = () => {
         dispatch(GetLoggedInUser(token, type)) 
@@ -42,6 +44,10 @@ export default function VerifyEmail({user, setIsLoading}) {
     useEffect(() => {
         !!auth_user && handleSetUser()
     }, [auth_user, handleSetUser])
+
+    useEffect(() => {
+        setIsLoading(resend_mail.loading)
+    }, [resend_mail])
     
     return (
         <div className="bg-white" style={{height: '100vh'}}>

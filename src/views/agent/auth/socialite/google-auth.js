@@ -8,12 +8,11 @@ export default function GoogleAuth({user}) {
     const dispatch = useDispatch()
     
     const responseGoogle = (response) => {
-        const data = {
-            payload: {
-              driver: 'google',
-              data: response,
-              type: user
-            }
+        const data = { 
+            payload: { 
+                ...response, 
+                driver: 'google', 
+                type: user}
         }
         dispatch(SocialAuth(data));
     }

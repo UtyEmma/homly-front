@@ -25,7 +25,7 @@ export default function ListingTabItem({listing, status}) {
                     </div>
                     <div className="mt-auto px-2">
                         <p className="fs-17 font-weight-bold text-white mb-0 lh-13">&#8358; {listing.initial_fees.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
-                        <h4 className="mt-0 mb-2 lh-1"><a href={`${listing.agent}/${listing.slug}`} className="fs-16 text-white">{listing.title}</a></h4>
+                        <h4 className="mt-0 mb-2 lh-1"><a href={`${listing.agent.username}/${listing.slug}`} className="fs-16 text-white">{listing.title}</a></h4>
                         <div className="border-top border-white-opacity-03 pt-2">
                             <ul className="list-inline d-flex mb-0 flex-wrap mt-2 mt-lg-0 mr-n5">
                             <li className="list-inline-item text-white font-weight-500 fs-13 d-flex align-items-center mr-5" data-toggle="tooltip" title={`${listing.no_bedrooms} Bedroom`}>

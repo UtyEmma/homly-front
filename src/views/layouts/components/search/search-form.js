@@ -1,6 +1,5 @@
-import { event } from 'jquery'
 import { focusSearchBar } from 'libraries/events/keyboard-events'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
 export const SearchForm = ({classes}) => {
@@ -13,14 +12,8 @@ export const SearchForm = ({classes}) => {
         history.push(`/search?keyword=${formData.get('keyword')}`)
     }
 
-    useEffect(() => {
-        document.addEventListener('keypress', focusSearchBar, true)
-    })
-
     // useEffect(() => {
-    //     return () => {
-    //         document.removeEventListener('keypress', focusSearchBar(event, 'search'), false )
-    //     }
+    //     document.addEventListener('keypress', focusSearchBar, true)
     // })
 
     return (
