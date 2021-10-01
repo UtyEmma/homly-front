@@ -1,19 +1,19 @@
 import RatingStar from 'components/rating/rating-star'
-import { ReportUser } from 'providers/redux/_actions/review-actions'
+// import { ReportUser } from 'providers/redux/_actions/review-actions'
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+// import { useDispatch, useSelector } from 'react-redux'
 
 export function ReviewItem({reviews}) {
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
 
-    const {token} = useSelector(state => state.user_data)
+    // const {token} = useSelector(state => state.user_data)
 
-    const submitReport = (e) => {
-        e.preventDefault()
-        const formData = new FormData(e.target) 
-        dispatch(ReportUser(token, formData))
-    }
+    // const submitReport = (e) => {
+    //     e.preventDefault()
+    //     const formData = new FormData(e.target) 
+    //     dispatch(ReportUser(token, formData))
+    // }
 
     return (
         <>
@@ -34,7 +34,7 @@ export function ReviewItem({reviews}) {
                                 </div>
                             }
 
-                            <div className="media-body">
+                            <div className="media-body mr-2">
                                 <div className="row mb-1 align-items-center">
                                 <div className="col-sm-6 mb-2 mb-sm-0">
                                     <h4 className="mb-0 text-heading fs-14">{publisher.firstname} {publisher.lastname}</h4>
