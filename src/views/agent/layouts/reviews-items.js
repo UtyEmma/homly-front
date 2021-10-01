@@ -26,7 +26,7 @@ export function ReviewItem({reviews}) {
                                 publisher.avatar 
                             ? 
                                 <div className="rounded-circle overflow-hidden" style={{width: '100px', height: '100px'}}>
-                                    <img src={publisher.avatar} style={{width: '100px', height: '100px'}} style={{objectFit: 'cover'}} alt={`${publisher.firstname} ${publisher.lastname}`} />
+                                    <img src={publisher.avatar} style={{width: '100%', height: '100%', objectFit: 'cover'}} alt={`${publisher.firstname} ${publisher.lastname}`} />
                                 </div> 
                             : 
                                 <div className="d-inline-block mb-2 mr-2 bg-gray-01 rounded-circle fs-18 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto" style={{width: '100px', height: '100px'}}>

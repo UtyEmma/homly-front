@@ -16,7 +16,8 @@ function AgentRoute({user, token, type, isLoading, setIsLoading, component: Comp
     <Route
       {...props}
       render={(props) =>
-        { return !!user && type === 'agent' 
+        { 
+          return user && type === 'agent' 
           
           ? 
 

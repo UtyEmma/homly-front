@@ -18,7 +18,7 @@ export default function AgentListingContainer({listings}) {
                             <button className="btn pr-0 shadow-none" type="button"><i className="far fa-search" /></button>
                         </div>
                         
-                        <input type="text" onChange={(e) => {FilterResults(e, '.filter-row', '.filter-item')}} className="form-control bg-transparent border-0 shadow-none text-body" placeholder="Search listing" name="search" />
+                        <input type="text" onChange={(e) => {FilterResults(e, '.filter-row', '.filter-item')}} className="font-weight-normal form-control bg-transparent border-0 shadow-none text-body" placeholder="Search listing" name="search" />
                     </div>
                 </div>
             </div>

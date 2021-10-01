@@ -13,7 +13,7 @@ function TenantRoute({user, token, type, isLoading, setIsLoading, component: Com
     <Route
       {...restOfProps}
       render={(props) =>
-          type === 'tenant' 
+          user && type === 'tenant' 
                         ? <Component {...props} token={token} isLoading={isLoading} setIsLoading={setIsLoading} isLoggedIn={!!user}  status={type} user={user}/> : <Redirect to="/login"  />
       }
     />

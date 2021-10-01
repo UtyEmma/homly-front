@@ -1,5 +1,6 @@
 import RatingStar from 'components/rating/rating-star'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export const ReviewNotificationItem = ({notification}) => {
     return (
@@ -24,7 +25,7 @@ export const ReviewNotificationItem = ({notification}) => {
                             </ul>
                         </div>
                         <div className="p-0 d-flex justify-content-between">
-                            <small><a href={`/reviews`} className="pr-1 btn-link text-primary fs-12" >View Reviews</a></small>
+                            <small><Link to={`/reviews`} className="pr-1 btn-link text-primary fs-12" >View Reviews</Link></small>
                             <small className="text-right">{notification.created_at}</small>
                         </div>
                     </div>

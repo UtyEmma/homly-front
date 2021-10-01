@@ -36,7 +36,7 @@ export default function ListingReviewItem({userHasReviewed, setUserHasReviewed, 
                 <div className="w-82px h-82 mr-2 bg-gray-01 rounded-circle fs-25 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
                     {
                         publisher.avatar 
-                            ? <img src={publisher.avatar} className="rounded-circle img-fluid" alt={`${publisher.firstname.charAt(0).toUpperCase()}${publisher.lastname.charAt(0).toUpperCase()}`} /> : 
+                            ? <img src={publisher.avatar} className="rounded-circle img-fluid  w-46px h-46" style={{objectFit: 'cover', minHeight: '100%', minWidth: '100%'}} alt={`${publisher.firstname.charAt(0).toUpperCase()}${publisher.lastname.charAt(0).toUpperCase()}`} /> : 
                                 `${publisher.firstname.charAt(0).toUpperCase()}${publisher.lastname.charAt(0).toUpperCase()}`
                     }
                 </div>

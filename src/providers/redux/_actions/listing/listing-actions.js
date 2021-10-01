@@ -24,9 +24,15 @@ export const CreateListing = (token, data) => (dispatch) =>{
     ListingService.newListing(token, data)
                 .then(response => {
                     Response.success(response.data)
+                    const res = response.data;
                     dispatch({
                         type: NEW_LISTING_SUCCESS,
                         payload: response.data
+                    })
+
+                    dispatch({
+                        type: 'UPDATE_USER_DATA',
+                        payload: res.data.agent
                     })
                     
                     store.dispatch(GetLoggedInUser(token, 'agent'))

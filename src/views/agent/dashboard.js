@@ -96,7 +96,7 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                                     </div>
                                     </div>
                                 </div>
-                                <div className="col-sm-6 col-xxl-3 mb-6">
+                                {/* <div className="col-sm-6 col-xxl-3 mb-6">
                                     <div className="card">
                                     <div className="card-body row align-items-center px-6 py-7">
                                         <div className="col-5">
@@ -110,7 +110,7 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                                         </div>
                                     </div>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="col-sm-6 col-xxl-3 mb-6">
                                     <div className="card">
                                     <div className="card-body row align-items-center px-6 py-7">

@@ -16,7 +16,7 @@ export const NotificationBell = () => {
     const dispatch = useDispatch()
     
     const notification = useSelector((state) => state.notification)
-    const {loading, notifications, count} = notification
+    const {notifications, count} = notification
 
     const user_data = useSelector(state => (state.user_data))
     const {token} = user_data

@@ -48,7 +48,6 @@ export const FetchDataFromStorage = (key) => (dispatch) => {
 
 export const Login = (data, type) => (dispatch) => {
     dispatch({ type: LOGIN_REQUEST });
-    // console.log(data)
     AuthService.login(data, type)
             .then(response => {
                 let res = response.data.data;
