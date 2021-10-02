@@ -9,7 +9,7 @@ export const ReviewsService = {
             },
             payload: data
         }
-        return await Request.post(`tenant/reviews/create/${id}`, option);
+        return await Request.post(`reviews/create/${id}`, option);
     },
 
     agentReviews : async (token) => {
@@ -44,14 +44,14 @@ export const ReviewsService = {
             payload : data
         }
 
-        return await Request.post('tenant/reviews/edit', option)
+        return await Request.post('reviews/edit', option)
     },
 
-    deleteReviews: async (token, id) => {
+    deleteReviews: async (token, id, role) => {
         const config = {
             headers: authHeaders(token)
         }
-        return await Request.get(`tenant/reviews/delete/${id}`, config)
+        return await Request.get(`reviews/delete/${id}?role=${role}`, config)
     }
 
 }

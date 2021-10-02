@@ -1,21 +1,29 @@
-import { SocialAuth } from "providers/redux/_actions/auth-action";
-import { useDispatch } from "react-redux";
-import { Modal } from "react-bootstrap";
+import { Login, SocialAuth } from 'providers/redux/_actions/auth-action'
+import { Signup } from 'providers/redux/_actions/user-actions'
+import React from 'react'
+import { Modal } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
 
-export const SelectUserTypeModal = ({show, setShow, auth_data, setIsLoading}) => {
+export const SelectRoleModal = ({show, setShow,  setIsLoading, action}) => {
 
     const dispatch = useDispatch()
 
-    const handleAuth = (user) => {
-        const data = {
-            payload: {
-                ...auth_data, 
-                driver: 'google', 
-                type: user
-            }
+    const handleAuth = (type) => {
+        switch (action.type) {
+            case 'signup':
+                dispatch(Signup(action.data, type));
+                break;
+            case 'login' :
+                dispatch(Login(action.data, type));
+                break;
+            case 'social' :
+                dispatch(SocialAuth({payload: {...action.data, type: type} }))
+                break;   
+            default:
+                break;
         }
-        
-        dispatch(SocialAuth(data));
+
+        setShow(false)
     }
 
     return (

@@ -33,6 +33,7 @@ const AgentProfile = ({agent, setIsLoading}) => {
         const updateUserData = (e) => {
             e.preventDefault()
             const data = new FormData(e.target);
+            data.append('username', agent.username)
             const values = Object.fromEntries(data.entries());
             let validation = new Validator(values, rules)
             validation.setAttributeNames(attributes);

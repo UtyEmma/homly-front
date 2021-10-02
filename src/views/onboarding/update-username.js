@@ -1,18 +1,18 @@
 import { MapFormErrors, __agent_updateUsername } from 'libraries/validation'
-import { UpdateAgentProfile } from 'providers/redux/_actions/agent-actions'
+import { UpdateProfile } from 'providers/redux/_actions/auth-action'
 import React, { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import Validator from 'validatorjs'
 
-export default function UpdateUsername({agent, setIsLoading}) {
+export default function UpdateUsername({user, setIsLoading, status}) {
 
     const dispatch = useDispatch()
     const history = useHistory()
 
     const {token} = useSelector(state => state.user_data)
-    const {loading, success, error} = useSelector(state => state.update_agent_profile)
+    const {loading, error} = useSelector(state => state.update_agent_profile)
 
     const {rules, attributes} = __agent_updateUsername
     const [formErrors, setFormErrors] = useState({})
@@ -20,27 +20,26 @@ export default function UpdateUsername({agent, setIsLoading}) {
     const updateUsername = (e) => {
         e.preventDefault()
         let data = new FormData(e.target)
-        data.append('firstname', agent.firstname)
-        data.append('lastname', agent.lastname)
-        data.append('email', agent.email)
-        data.append('title', agent.title)
+        data.append('firstname', user.firstname)
+        data.append('lastname', user.lastname)
+        data.append('email', user.email)
+        data.append('phone', user.phone)
+        
+        status === "agent" && data.append('title', user.title)
+        
         const values = Object.fromEntries(data.entries());
         let validation = new Validator(values, rules)
         validation.setAttributeNames(attributes);
         validation.fails(() => {setFormErrors(MapFormErrors(validation.errors.errors))})
         if (validation.passes()) {
             setFormErrors({}); 
-            dispatch(UpdateAgentProfile(token, data));
+            dispatch(UpdateProfile(token, data, status));
         }
     }
 
     useEffect(() => {
         setIsLoading(loading)
     }, [loading, setIsLoading])
-
-    useEffect(() => {
-        success && history.push('/dashboard')
-    })
 
     useEffect(() => {
         error && error.formError && setFormErrors(error.formError)

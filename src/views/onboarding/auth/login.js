@@ -1,19 +1,35 @@
-import React, { useEffect } from 'react'
-import AgentSignUpForm from './components/signup-form';
-import Footer from 'components/shared/footer';
+import React, { useEffect } from 'react';
 import NavBar from 'components/shared/nav-bar';
+import Footer from 'components/shared/footer';
+import UserLoginForm from './components/login-form';
+import { useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
+import { useQuery } from 'libraries/http/query';
+import toast from 'react-hot-toast';
+import { useHistory } from 'react-router-dom';
 
-export default function AgentSignup ({setIsLoading}) {
-    
+const UserLogin = ({isLoading, setIsLoading}) => {
+
+    const {loading} = useSelector(state => state.login)
+    const history = useHistory()
+
+    let message = useQuery().get('msg')
+
     useEffect(() => {
-        setIsLoading(false)   
+        if (message) { 
+            toast.success(message)
+            history.push('/login')
+        }
     })
+
+    useEffect(() => {
+        setIsLoading(loading)
+    }, [loading, setIsLoading])
 
     return (
         <div>
             <Helmet>
-                <title>Sign up as an Agent - Bayof Real Estate</title>
+                <title>Tenant Login - Bayof Real Estate - Find Properties and agents around you</title>
                 <meta name="twitter:card" content="summary" />
                 <meta name="twitter:site" content="@" />
                 <meta name="twitter:creator" content="@" />
@@ -30,20 +46,22 @@ export default function AgentSignup ({setIsLoading}) {
                 <meta property="og:image:height" content="630" />
                 <meta name="description" content="Find Properties and agents around you." />
             </Helmet>
-            <NavBar />
+
+            <NavBar/>
 
             <main id="content">
                 <section className="py-7">
                     <div className="container">
                         <div className="row justify-content-center">
-                            <AgentSignUpForm />         
+                            <UserLoginForm isLoading={isLoading} />         
                         </div>
                     </div>
                 </section>
             </main>
 
-            <Footer />
+            <Footer/>
         </div>
     )
-
 }
+
+export default UserLogin;

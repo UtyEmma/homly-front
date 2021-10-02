@@ -37,7 +37,7 @@ export default function ListingReviews({listing_id, status}) {
 
                         reviews.map((review, index) => {
                             return (
-                                <ListingReviewItem userHasReviewed={userHasReviewed} setUserHasReviewed={setUserHasReviewed} key={review.unique_id} publisher={review.publisher} review={review.review} />
+                                <ListingReviewItem status={status} userHasReviewed={userHasReviewed} setUserHasReviewed={setUserHasReviewed} key={review.unique_id} publisher={review.publisher} review={review.review} />
                             )
                         })
 

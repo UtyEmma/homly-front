@@ -28,6 +28,7 @@ const Profile = ({isLoggedIn, user, setIsLoading, status}) => {
     const updateUserData = (e) => {
         e.preventDefault()
         let data = new FormData(e.target);
+        data.append('username', user.username)
         const values = Object.fromEntries(data.entries());
         let validation = new Validator(values, rules)
         validation.setAttributeNames(attributes);
@@ -99,11 +100,11 @@ const Profile = ({isLoggedIn, user, setIsLoading, status}) => {
                                 <div className="card mb-6">
                                     <div className="card-body px-6 pt-6 pb-5">
                                     <div className="row">
-                                        <div className="col-sm-4 col-xl-12 col-xxl-7 mb-3">
+                                        <div className="col-sm-4 col-xl-12 mb-3">
                                         <h3 className="card-title mb-0 text-heading fs-22 lh-15">Profile Image</h3>
                                         <p className="card-text">Upload your profile photo.</p>
                                         </div>
-                                        <div className="col-sm-8 col-xl-12 col-xxl-5">
+                                        <div className="col-sm-8 col-xl-12">
                                         <img src={user.avatar ? user.avatar : "images/my-profile.png"} alt="My Profile" ref={profileImage} id="profile-image" className="w-100" />
                                         <div className="custom-file mt-2 h-auto" >
                                             <input type="file" name="avatar" className="custom-file-input" onChange={changeProfileImagePreview} id="customFile" />

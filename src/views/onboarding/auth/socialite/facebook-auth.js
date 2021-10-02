@@ -1,31 +1,24 @@
-import { SocialAuth } from 'providers/redux/_actions/auth-action'
 import React from 'react'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
-import { useDispatch } from 'react-redux'
 
-export const FacebookAuth = ({user}) => {
+export const FacebookAuth = ({setShow, action, setAction}) => {
 
-    const dispatch = useDispatch()
     const responseFacebook = (response) => {
 
         if (response.status !== 'unknown') {
             let name = response.name.split(' ')
             
-            let user_data = {
+            let data = {
                 given_name : name[0],
                 family_name : name[1],
                 email : response.email,
                 email_verified : true,
                 picture: response.picture.data.url,
                 driver: 'facebook',
-                type: user
             }
-
-            let data = {
-                payload: {...user_data}
-            }
-
-            dispatch(SocialAuth(data))   
+            
+            setAction({type: 'social', data: data})
+            setShow(true)
         }
     }
 

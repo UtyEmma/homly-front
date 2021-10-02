@@ -20,8 +20,7 @@ const Wishlist = ({isLoggedIn, user, setIsLoading, status}) => {
     const [show, setShow] = useState()
     const [details, setDetails] = useState()
 
-    const fetchWishlist = useSelector((state) => state.wishlists)
-    const {loading, wishlists} = fetchWishlist
+    const {loading, wishlists} = useSelector((state) => state.wishlists)
 
     const user_data = useSelector(state => (state.user_data))
     const {token} = user_data
@@ -33,10 +32,6 @@ const Wishlist = ({isLoggedIn, user, setIsLoading, status}) => {
     useEffect(() => {
         setIsLoading(loading)
     }, [loading, setIsLoading])
-
-    useEffect(() => {
-        
-    }, [wishlists])
 
     useEffect(() => {
         !wishlists && loadWishlists()
@@ -90,7 +85,7 @@ const Wishlist = ({isLoggedIn, user, setIsLoading, status}) => {
                                 
                                 &&
 
-                                wishlists.wishlists.map((wishlist, index) => (
+                                wishlists.wishlists.map((wishlist) => (
                                     <WishlistItem setDetails={setDetails} setShow={setShow} item={wishlist} key={wishlist.unique_id} />
                                 ))
                             }       

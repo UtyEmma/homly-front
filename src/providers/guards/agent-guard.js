@@ -10,7 +10,7 @@ function AgentRoute({user, token, type, isLoading, setIsLoading, component: Comp
     }else if(user && !user.username && window.location.href !== '/onboarding'){
       return history.push('/onboarding')
     }
-  })
+  }, [history, user])
 
   return (
     <Route

@@ -1,33 +1,24 @@
-import React, { useEffect } from 'react';
-import AgentLoginForm from './components/login-form';
-import Footer from 'components/shared/footer';
+import React, { useEffect} from 'react'
+
+import SignUpForm from './components/signup-form';
 import NavBar from 'components/shared/nav-bar';
+import Footer from 'components/shared/footer';
+import Preloader from 'components/preloader/preloader';
+import { useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { useHistory } from 'react-router-dom';
-import { useQuery } from 'libraries/http/query';
-import toast from 'react-hot-toast';
 
-const AgentLogin  =  ({setIsLoading}) => {
+export default function UserSignup ({setIsLoading}) {
 
-    const history = useHistory()
-
-    let message = useQuery().get('msg')
+    const {loading} = useSelector((state) => state.signup);
 
     useEffect(() => {
-        if (message) { 
-            toast.success(message)
-            history.push('/agent-login')
-        }
-    })
-
-    useEffect(() => {
-        setIsLoading(false)   
-    })
+        setIsLoading(loading)
+    }, [loading, setIsLoading])
 
     return (
         <div>
             <Helmet>
-                <title>Agent Dashboard - Login</title>
+                <title>Tenant Signup - Bayof Real Estate - Find Properties and agents around you</title>
                 <meta name="twitter:card" content="summary" />
                 <meta name="twitter:site" content="@" />
                 <meta name="twitter:creator" content="@" />
@@ -45,22 +36,20 @@ const AgentLogin  =  ({setIsLoading}) => {
                 <meta name="description" content="Find Properties and agents around you." />
             </Helmet>
 
-            <NavBar />
-
+            <NavBar/>
+            
             <main id="content">
                 <section className="py-7">
                     <div className="container">
                         <div className="row justify-content-center">
-                            <AgentLoginForm />         
+                            <SignUpForm />         
                         </div>
                     </div>
                 </section>
             </main>
 
-            <Footer />
+            <Footer/>
         </div>
     )
 
 }
-
-export default AgentLogin;

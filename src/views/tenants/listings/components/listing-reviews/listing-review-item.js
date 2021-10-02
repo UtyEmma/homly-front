@@ -6,16 +6,17 @@ import { DeleteReview, EditReview } from 'providers/redux/_actions/review-action
 export default function ListingReviewItem({userHasReviewed, setUserHasReviewed, review, publisher}) {
     const dispatch = useDispatch()
 
-    const {token} = useSelector(state => state.user_data)
+    const {token, type} = useSelector(state => state.user_data)
     const {reviews} = useSelector(state => state.delete_review)
 
     const deleteReview = () => {
-        dispatch(DeleteReview(token, review.unique_id))
+        dispatch(DeleteReview(token, review.unique_id, type))
     }
 
     const editPropertyReview = (e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
+        formData.append('role', type)
         dispatch(EditReview(token, formData))
     }
 

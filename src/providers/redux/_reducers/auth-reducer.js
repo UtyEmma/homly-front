@@ -105,3 +105,16 @@ export function VerifyEmailReducer(state={}, action){
             return state;
     }
 }
+
+export function SocialAuthReducer(state={}, action){
+    switch (action.type) {
+        case SOCIAL_AUTH_REQUEST:
+            return {...state, loading: true}
+        case SOCIAL_AUTH_SUCCESS:
+            return {...state, loading: false}
+        case SOCIAL_AUTH_FAILURE:
+            return {...state, loading: false}    
+        default:
+            return state;
+    }
+}

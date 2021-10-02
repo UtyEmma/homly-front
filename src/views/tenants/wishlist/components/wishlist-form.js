@@ -40,8 +40,9 @@ const WishlistForm = ({setIsLoading}) => {
     }  
 
     useEffect(() => {
-        wishlist && window.location.reload()
+        // wishlist && window.location.reload()
         wishlist && document.getElementById('create_wishlist_form').reset()
+        setStepper(new Stepper(document.getElementById('wishlist-stepper'), { linear: false, animation: true }));
     }, [wishlist])    
 
     useEffect(() => {

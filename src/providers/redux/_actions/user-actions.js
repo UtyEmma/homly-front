@@ -7,10 +7,10 @@ import { UnsetUser } from './auth-action';
 const { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE, 
         UPDATE_REQUEST, UPDATE_SUCCESS, UPDATE_FAILURE } = _TENANT;
 
-export const signup = (data) => (dispatch) => {
+export const Signup = (data, type) => (dispatch) => {
     dispatch({ type: SIGNUP_REQUEST });
 
-    userService.signup(data)
+    userService.signup(data, type)
             .then(response => {
                 dispatch({
                     type: SIGNUP_SUCCESS,
@@ -28,9 +28,7 @@ export const signup = (data) => (dispatch) => {
 }
 
 export const UpdateTenantProfile = (token, data) => (dispatch) => {
-    dispatch({
-        type: UPDATE_REQUEST
-    })
+    dispatch({ type: UPDATE_REQUEST })
 
     userService.updateTenantData(token, data)
                 .then((response) => {
@@ -39,12 +37,12 @@ export const UpdateTenantProfile = (token, data) => (dispatch) => {
 
                     dispatch({
                         type: 'UPDATE_USER_DATA',
-                        payload: response.data.data.tenant
+                        payload: res.user
                     }) 
                     
                     dispatch({
                         type: UPDATE_SUCCESS,
-                        payload: response.data.data
+                        payload: res
                     })
                 })
                 .catch((error) => {
@@ -61,7 +59,7 @@ export const TenantLogout = (token) => (dispatch) => {
             .then((res) => {
                 dispatch(UnsetUser())
                 persistor.purge()
-                return window.location.href = '/login?msg=Logout Successful'
+                return history.push('/login?msg=Logout Successful') 
             })
             .catch((error) => {
                 return Response.error(error.response)

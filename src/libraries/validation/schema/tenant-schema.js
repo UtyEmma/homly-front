@@ -4,7 +4,7 @@ export const __tenantsignup = {
         lastname: 'required|string',
         email: 'required|email',
         password: 'required|confirmed|min:6',
-        phone: 'required|numeric'
+        username: 'required|string|between:3,12'
     },
 
     messages: {

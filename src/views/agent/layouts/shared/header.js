@@ -1,5 +1,5 @@
 import { NotificationBell } from 'components/notification/notification'
-import ProfileButton, { AgentNavItems } from 'components/shared/profile-btn/profile-button'
+import { AgentNavItems } from 'components/shared/profile-btn/profile-button'
 import { AgentLogout } from 'providers/redux/_actions/agent-actions'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'

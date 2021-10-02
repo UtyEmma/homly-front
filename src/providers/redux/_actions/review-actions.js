@@ -12,8 +12,6 @@ const {
 } = _REVIEWS
 
 export const SubmitReview = (token, data, id) => (dispatch) => {
-    console.log("Submiting Reviews...")
-
     dispatch({ type: SUBMIT_REVIEW_REQUEST })
 
     ReviewsService.submitReview(token, data, id)
@@ -41,7 +39,6 @@ export const SubmitReview = (token, data, id) => (dispatch) => {
 }
 
 export const FetchAgentReview = (token) => (dispatch) => {
-    console.log("Fetching Agents Reviews...")
     dispatch({type: FETCH_AGENT_REVIEWS_REQUEST})
 
     ReviewsService.agentReviews(token)
@@ -128,11 +125,11 @@ export const EditReview = (token, data) => (dispatch) => {
                     })
 }
 
-export const DeleteReview = (token, id, data) => (dispatch) => {
+export const DeleteReview = (token, id, data, role) => (dispatch) => {
     console.log("Deleting Review...")
     dispatch({type: DELETE_REVIEW_REQUEST})
 
-    ReviewsService.deleteReviews(token, id, data)
+    ReviewsService.deleteReviews(token, id, data, role)
                     .then((response) => {
                         Response.success(response.data)
                         dispatch({

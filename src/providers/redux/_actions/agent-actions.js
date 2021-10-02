@@ -44,7 +44,7 @@ export const UpdateAgentProfile = (token, data) => (dispatch) => {
                     let res = response.data;
 
                     Response.success(res)
-                    let agent = res.data.agent
+                    let agent = res.data.user
 
                     dispatch({
                         type: 'UPDATE_USER_DATA',
@@ -92,7 +92,7 @@ export const AgentLogout = (token) => (dispatch) => {
                 .then((response) => {
                     store.dispatch(UnsetUser())
                     persistor.purge()
-                    return window.location.href = '/agent-login?msg=Logout Successful'
+                    return history.push('/login?msg=Logout Successful')
                 })
                 .catch((error) => {
                     console.log(error.response)

@@ -43,7 +43,9 @@ export function TagifyAmenities({val, setValue, name, validate, message}){
     const fetchDetails = useSelector(state => state.details)
     const {amenities} = fetchDetails
 
-    const loadDetails = useCallback(() => { dispatch(FetchDetails()) }, [dispatch])
+    const loadDetails = useCallback(() => { 
+        dispatch(FetchDetails()) 
+    }, [dispatch])
 
     useEffect(() => {
         !amenities && loadDetails()

@@ -10,14 +10,14 @@ const authHeaders = {
     'Content-Type' : 'application/json',
 }
 
-async function signup(data) {
+async function signup(data, type) {
     const request = {
         config: {
             headers : authHeaders
         },
         payload: data
     }
-    return await Request.post('tenant/signup', request)
+    return await Request.post(`${type}/signup`, request)
 }
 
 async function getTenant(){

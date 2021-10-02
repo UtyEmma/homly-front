@@ -38,40 +38,10 @@ export const __agent_updateProfile = {
 } 
 
 
-export const __agent_signup = {
-    rules: {
-        firstname: 'required|string',
-        lastname: 'required|string',
-        email: 'required|email',
-        password: 'required|confirmed|min:6',
-        username: 'required|string|between:3,12'
-    },
-
-    messages: {
-        // "required.firstname" : "Your Firstname is Required",
-        // "string;firstname"
-    }
- 
-}
-
-
-export const __agent_login = {
-    rules: {
-        email: 'required|email',
-        password: 'required'
-    },
-
-    messages: {},
-
-    attributes: {
-        email: 'Email Address',
-        password: 'Password'
-    }
-}
 
 export const __agent_updateUsername = {
     rules: {
-        username: 'required',
+        username: 'required|string|between:3,12',
     },
 
     attributes: {

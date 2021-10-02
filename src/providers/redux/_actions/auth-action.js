@@ -5,7 +5,8 @@ import _AUTH from "../_contants/auth-constants";
 
 const { 
     SOCIAL_AUTH_REQUEST, SOCIAL_AUTH_SUCCESS, SOCIAL_AUTH_FAILURE,
-    LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_SUCCESS_VERIFY_EMAIL, LOGIN_FAILURE, 
+    LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, 
+    UPDATE_REQUEST, UPDATE_SUCCESS, UPDATE_FAILURE,
     PASSWORD_RECOVERY_REQUEST, PASSWORD_RECOVERY_SUCCESS, PASSWORD_RECOVERY_FAILURE,
     PASSWORD_RESET_REQUEST, PASSWORD_RESET_SUCCESS, PASSWORD_RESET_FAILURE 
 } = _AUTH;
@@ -32,7 +33,6 @@ export const UpdateUser = (data) => (dispatch) => {
 }
 
 export const FetchDataFromStorage = (key) => (dispatch) => {
-
     AuthService.getDataFromStorage(key)
                 .then((res) => {
                     dispatch({
@@ -51,17 +51,17 @@ export const Login = (data, type) => (dispatch) => {
     AuthService.login(data, type)
             .then(response => {
                 let res = response.data.data;
-                let token = res.token
-                let user = res.user
 
                 dispatch({
                     type: 'SET_USER_DATA',
-                    payload: {user: user, token: token, type: type}
+                    payload: {user: res.user, token: res.token, type: type}
                 })
 
+                history.push(type === 'tenant' ? '/' : '/dashboard')
+                
                 return dispatch({
                     type: LOGIN_SUCCESS,
-                    payload: {user: user, token: token, type: type, verified_email: res.user.isVerified}
+                    payload: {user: res.user, token: res.token, type: type, verified_email: res.user.isVerified}
                 })   
             })
             .catch(error => {
@@ -75,31 +75,67 @@ export const Login = (data, type) => (dispatch) => {
 
 export const SocialAuth = (data) => (dispatch) => {
     dispatch({type: SOCIAL_AUTH_REQUEST})
-
     AuthService.socialAuth(data)
             .then((response) => {
                 let res = response.data.data;
                 let token = res.token
                 let user = res.user
                 let type = res.type
+
+                dispatch({
+                    type: SOCIAL_AUTH_SUCCESS
+                })
+
                 dispatch({
                     type: 'SET_USER_DATA',
                     payload: {user: user, token: token, type: type}
                 })
 
-                if(type === 'agent' && !user.username){
-                    history.push('/onboarding')
-                }else{  
+                if(type === 'agent'){
                     history.push('/dashboard')
-                }
-
-                if(type === 'tenant'){
+                }else if(type === 'tenant'){
                     history.push('/')
                 }
+
             })
             .catch((error) => {
                 Response.error(error.response)
+                dispatch({
+                    type: SOCIAL_AUTH_FAILURE
+                })
             })
+}
+
+export const UpdateProfile = (token, data, type) => (dispatch) => {
+    dispatch({type: UPDATE_REQUEST })
+
+    AuthService.update(token, data, type)
+                .then((response) => {
+                    let res = response.data;
+                    let agent = res.data.user
+
+                    Response.success(res)
+
+                    dispatch({
+                        type: 'UPDATE_USER_DATA',
+                        payload: agent
+                    })
+
+                    dispatch({
+                        type: UPDATE_SUCCESS,
+                        payload: res
+                    })
+
+                    history.push(type === 'tenant' ? '/' : '/dashboard')
+
+                })
+                .catch((error) => {
+                    let errors = Response.error(error.response)
+                    dispatch({
+                        type: UPDATE_FAILURE,
+                        payload: {error: error.response, formError: errors}
+                    })
+                })
 }
 
 
