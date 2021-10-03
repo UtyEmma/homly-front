@@ -34,7 +34,7 @@ export function ReviewItem({reviews}) {
                                 </div>
                             }
 
-                            <div className="media-body mr-2">
+                            <div className="media-body ml-4">
                                 <div className="row mb-1 align-items-center">
                                 <div className="col-sm-6 mb-2 mb-sm-0">
                                     <h4 className="mb-0 text-heading fs-14">{publisher.firstname} {publisher.lastname}</h4>

@@ -176,9 +176,10 @@ const AgentProfile = ({agent, setIsLoading}) => {
                                                             <div className="input-group-prepend">
                                                                 <span className="input-group-text fs-14 font-weight-600" id="basic-addon3">
                                                                     <i className="fab fa-facebook-square fs-20"></i>
+                                                                    <span className="fs-13 ml-2 font-weight-600">https://facebook.com/</span>
                                                                 </span>
                                                             </div>
-                                                            <input type="text" name="facebook" id="facebook" className="form-control border-0" defaultValue={agent.facebook} aria-describedby="basic-addon3" />
+                                                            <input type="text" name="facebook" id="facebook" className="form-control border-0" defaultValue={agent.facebook && agent.facebook.split('/')[3]} aria-describedby="basic-addon3" placeholder="your.username" />
                                                         </div>
                                                         <p className="text-danger fs-12 mt-1">{formErrors.facebook?.message}</p>
                                                     </div>
@@ -186,9 +187,12 @@ const AgentProfile = ({agent, setIsLoading}) => {
                                                         <label htmlFor="instagram" className="text-heading">Instagram</label>
                                                         <div className="input-group mb-3">
                                                             <div className="input-group-prepend">
-                                                            <span className="input-group-text fs-14 font-weight-600" id="basic-addon3"><i className="fab fa-instagram fs-20"></i></span>
+                                                            <span className="input-group-text fs-14 font-weight-600" id="basic-addon3">
+                                                                <i className="fab fa-instagram fs-20"></i>
+                                                                <span className="fs-13 ml-2 font-weight-600">https://instagram.com/</span>
+                                                            </span>
                                                             </div>
-                                                            <input type="text" className="form-control border-0" defaultValue={agent.instagram} id="instagram" name="instagram" aria-describedby="basic-addon3"/>
+                                                            <input type="text" className="form-control border-0" defaultValue={agent.instagram && agent.instagram.split('/')[3]} id="instagram" name="instagram" aria-describedby="basic-addon3" placeholder="your.username"/>
                                                         </div>
                                                         <p className="text-danger fs-12 mt-1">{formErrors.instagram?.message}</p>
                                                     </div>
@@ -198,15 +202,16 @@ const AgentProfile = ({agent, setIsLoading}) => {
                                                             <div className="input-group-prepend">
                                                             <span className="input-group-text fs-14" id="basic-addon3">
                                                                 <i className="fab fa-twitter fs-20"></i>
+                                                                <span className="fs-13 ml-2 font-weight-600">https://twitter.com/</span>
                                                             </span>
                                                             </div>
-                                                            <input type="text" className="form-control border-0" defaultValue={agent.twitter} id="twitter" name="twitter" aria-describedby="basic-addon3"/>
+                                                            <input type="text" className="form-control border-0"  defaultValue={agent.twitter && agent.twitter.split('/')[3]} id="twitter" name="twitter" aria-describedby="basic-addon3" placeholder="your.username"/>
                                                         </div>
                                                         <p className="text-danger fs-12 mt-1">{formErrors.twitter?.message}</p>
                                                     </div>
                                                     <div className="form-group mb-7">
                                                         <label htmlFor="website" className="text-heading">Website Url <span className="text-muted">(without http)</span></label>
-                                                        <input type="url" className="form-control form-control-lg border-0" defaultValue={agent.website} id="website" name="website" />
+                                                        <input type="text" className="form-control form-control-lg border-0" defaultValue={agent.website} id="website" name="website" />
                                                         <p className="text-danger fs-12 mt-1">{formErrors.website?.message}</p>
                                                     </div>
                                                 </div>

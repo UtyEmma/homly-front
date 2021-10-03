@@ -14,13 +14,21 @@ const UserLogin = ({isLoading, setIsLoading}) => {
     const history = useHistory()
 
     let message = useQuery().get('msg')
+    let error = useQuery().get('err')
 
     useEffect(() => {
         if (message) { 
             toast.success(message)
             history.push('/login')
         }
-    })
+    }, [history, message])
+
+    useEffect(() => {
+        if (error) { 
+            toast.error(error)
+            history.push('/login')
+        }
+    }, [error, history])
 
     useEffect(() => {
         setIsLoading(loading)

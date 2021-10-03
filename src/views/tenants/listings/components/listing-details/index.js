@@ -21,7 +21,7 @@ export default function ListingComponents({ listing, status }) {
                 <ListingVideo video={listing.video_links} />
             </Tab>
             <Tab eventKey="reviews" title="Reviews">
-                <ListingReviews status={status} listing_id={listing.unique_id} />
+                <ListingReviews status={status} listing_id={listing.unique_id} listing={listing} />
             </Tab>
             {/* <Tab eventKey="more" title="More">
                 <SimilarListings />

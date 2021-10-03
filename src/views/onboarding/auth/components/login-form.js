@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
-import { __tenantlogin } from 'libraries/validation/schema/tenant-schema';
 import GoogleAuth from 'views/onboarding/auth/socialite/google-auth';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Validator from 'validatorjs';
 import { MapFormErrors, __login } from 'libraries/validation';
 import { FacebookAuth } from 'views/onboarding/auth/socialite/facebook-auth';
@@ -15,7 +14,7 @@ const UserLoginForm = ({setIsLoading}) =>  {
     const [formErrors, setFormErrors] = useState({})
 
     const user_login = useSelector(state => state.login)
-    const {loading, formError} = user_login;
+    const {formError} = user_login;
 
     const [show, setShow] = useState(false)
     const [action, setAction] = useState()
@@ -71,12 +70,7 @@ const UserLoginForm = ({setIsLoading}) =>  {
                             <u>Forgot your password?</u>
                         </Link>
                     </div>
-                    <button type="submit" className="btn btn-primary btn-lg btn-block rounded">
-                            {loading ? 
-                                    <div className="spinner-border text-white" role="status">
-                                        <span className="sr-only">Loading...</span>
-                                    </div> : "Log in" }
-                    </button>
+                    <button type="submit" className="btn btn-primary btn-lg btn-block rounded">Log in</button>
                 </form>
                 <div className="divider text-center my-2">
                     <span className="px-4 bg-white lh-17 text text-heading">

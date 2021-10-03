@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import AgentReviewForm from './agent-review-form'
 import AgentReviewItem from './agent-review-item'
 
 export default function AgentReviews({reviews, agent, status, setIsLoading}) {
@@ -46,6 +47,7 @@ export default function AgentReviews({reviews, agent, status, setIsLoading}) {
                         </div>
                     }                      
                         
+                    <AgentReviewForm />
                 </div>
             </div>
         </>

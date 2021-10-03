@@ -21,7 +21,7 @@ export const NewTicketForm = ({close, setShow, setIsLoading}) => {
     }
 
     const hideNewTicketForm = () => {
-        setShow(false)
+        setShow && setShow(false)
     }
 
     useEffect(() => {

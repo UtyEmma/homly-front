@@ -7,11 +7,11 @@ import NavBar from 'components/shared/nav-bar'
 import AddWishlistBtn from './components/add-wishlist-btn'
 import WishlistItem from './components/wishlist-item'
 import WishlistForm from './components/wishlist-form'
-import './css/wishlist.css'
 import { FetchWishlist } from 'providers/redux/_actions/wishlist-actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { Helmet } from 'react-helmet'
 import { WishlistModal } from './components/wishlist-modal'
+import './css/wishlist.css'
 
 const Wishlist = ({isLoggedIn, user, setIsLoading, status}) => {
 

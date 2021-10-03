@@ -57,12 +57,12 @@ export const FetchAgentReview = (token) => (dispatch) => {
                     })
 } 
 
-export const FetchReview = (token, id) => (dispatch) => {
+export const FetchReview = (token, id, type) => (dispatch) => {
     
     console.log("Fetching Reviews...")
     dispatch({type: FETCH_REVIEWS_REQUEST})
 
-    ReviewsService.listingReviews(token, id)
+    ReviewsService.listingReviews(token, id, type)
                     .then((response) => {
                         dispatch({
                             type: FETCH_REVIEWS_SUCCESS,

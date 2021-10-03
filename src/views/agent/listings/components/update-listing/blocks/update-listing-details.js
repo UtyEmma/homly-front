@@ -1,3 +1,4 @@
+import { RichTextEditor } from 'components/rich-text/rich-text-editor';
 import React, { useCallback, useEffect, useState } from 'react'
 import { SelectAmenities } from 'views/layouts/components/details/amenities';
 
@@ -56,7 +57,7 @@ export const UpdateListingDetails = ({listing, formErrors}) => {
                             <div className="col-lg-12">
                                 <div className="form-group">
                                 <label htmlFor="extra-details" className="text-heading">Extra details</label>
-                                    <textarea className="form-control border-0" defaultValue={listing?.extra_info} rows={5} id="extra_info" name="extra_info" />
+                                    <RichTextEditor editorClassName="form-control border-0" defaultContentState={listing?.extra_info} name={'extra_info'} />
                                     <p className="text-danger fs-12">{formErrors.extra_info?.message}</p>
                                 </div>
                             </div>

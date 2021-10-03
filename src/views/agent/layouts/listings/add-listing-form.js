@@ -16,6 +16,7 @@ function AddListingForm({setIsLoading}) {
 
     const [files, setFiles] = useState([])
     const [formErrors, setFormErrors] = useState({})
+    const [resetEditor, setResetEditor] = useState(false)
 
     const {loading, listing_success, formError} = useSelector((state) => state.new_listing);
     const {token} = useSelector(state => state.user_data)
@@ -25,6 +26,7 @@ function AddListingForm({setIsLoading}) {
     const resetFormData = () => {
         setFormErrors({})
         setFiles([])
+        setResetEditor(true)
         document.getElementById('listing-form').reset()
     }
 
@@ -67,13 +69,13 @@ function AddListingForm({setIsLoading}) {
     return (
         <form id="listing-form" onSubmit={handleFormData} encType="multipart/form-data" >
             <div id="collapse-tabs-accordion" className="bg-gray-01">
-                <ListingDescription formErrors={formErrors} />
+                <ListingDescription reset={resetEditor}  formErrors={formErrors} />
 
                 <ListingMedia files={files} setFiles={setFiles} formErrors={formErrors} />
 
                 <ListingLocation formErrors={formErrors} />
 
-                <ListingDetails formErrors={formErrors} />
+                <ListingDetails reset={resetEditor} formErrors={formErrors} />
 
                 <ListingAmenities formErrors={formErrors}/>
             </div>

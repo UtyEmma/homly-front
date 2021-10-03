@@ -10,9 +10,9 @@ export const __agent_updateProfile = {
         bio : 'string',
         state : 'string',
         city : 'string',
-        facebook : 'url',
-        instagram : 'url',
-        twitter : 'url',
+        facebook : 'string',
+        instagram : 'string',
+        twitter : 'string',
         website : 'url',
     },
 

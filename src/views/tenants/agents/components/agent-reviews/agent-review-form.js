@@ -23,9 +23,7 @@ export default function AgentReviewForm({agent, status, fetchAgent}) {
                 <div className="card border-0">
 
                     {
-                        status === 'tenant'
 
-                        ?
                         <div className="card-body p-0">
                             <h3 className="fs-16 lh-2 text-heading mb-4">Write A Review</h3>
                             <form onSubmit={submitPropertyReview}>
@@ -59,19 +57,6 @@ export default function AgentReviewForm({agent, status, fetchAgent}) {
                                 <button type="submit" className="btn btn-lg btn-primary px-10">Submit</button>
                             </form>
                         </div>
-
-                        :
-
-                        <div className="card p-5">
-                            <div className="text-center">
-                                <img src="/images/svg/reviews.svg" width="200" />
-                                <h4 className="text-heading mt-5">Only Tenants Can Review Agents!!!</h4>
-                                {/* <p className="fs-18">Please <a href="/login" className="btn btn-link fs-18 p-0">Login as a Tenant</a> to review this property</p> */}
-                                <a href="/login" className="btn fs-16 btn-outline-primary mt-5">Login as a Tenant</a>
-                            </div>
-                        </div>
-
-
                     }
                     
                 </div>

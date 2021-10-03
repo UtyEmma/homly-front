@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import draftToHtml from 'draftjs-to-html'
-import { convertToRaw, EditorState } from 'draft-js';
+import { ContentState, convertFromHTML, convertToRaw, EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
+import htmlToDraft from 'html-to-draftjs';
 
-export const RichTextEditor = ({name, editorClassName, placeholder, defaultContentState}) => {
+
+export const RichTextEditor = ({name, editorClassName, placeholder, defaultContentState, reset}) => {
     const [editorState, setEditorState] = useState(EditorState.createEmpty())
     const [content, setContent] = useState()
     const [show, setShow] = useState(true)
@@ -16,6 +18,23 @@ export const RichTextEditor = ({name, editorClassName, placeholder, defaultConte
     const handleSetShow = () => {
         setShow(!show)
     }
+
+    const resetEditor = () => {
+        setEditorState(EditorState.createEmpty())
+    }
+
+    useEffect(() => {
+        if(defaultContentState){
+            const blocksFromHtml = htmlToDraft(defaultContentState);
+            const { contentBlocks, entityMap } = blocksFromHtml;
+            const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
+            setEditorState(EditorState.createWithContent(contentState));
+        }
+    }, [defaultContentState])
+
+    useEffect(() => {
+        reset && resetEditor()
+    }, [reset])
 
     useEffect(() => {
         let state = editorState && editorState.getCurrentContent()
@@ -37,7 +56,6 @@ export const RichTextEditor = ({name, editorClassName, placeholder, defaultConte
                 toolbarHidden={show}
                 onFocus={handleSetShow}
                 onBlur={handleSetShow}
-                defaultContentState={defaultContentState}
                 toolbar={{
                     options: ['inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'colorPicker', 'link', 'emoji', 'history'],
                 }}

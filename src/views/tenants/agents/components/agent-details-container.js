@@ -14,7 +14,6 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
 
     const {adminMode} = useSelector((state) => state.admin_mode)
     const {loading, data} = useSelector(state => state.suspend_item)
-    // const {loading, data} = useSelector(state => state.delete_item)
     const {verifiedAgent} = useSelector(state => state.verify_agent)
     const {token} = useSelector((state) => state.user_data)
     

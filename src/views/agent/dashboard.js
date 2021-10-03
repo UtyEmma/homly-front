@@ -41,7 +41,7 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                 <Sidebar setIsLoading={setIsLoading} agent={agent} />
 
                 <div className="page-content">
-                    <Header agent={agent}/>
+                    <Header setIsLoading={setIsLoading} agent={agent}/>
                         <main id="content" className="bg-gray-01">
                             <div className="px-3 px-lg-6 px-xxl-13 py-5 py-lg-10">
                                 <div className="d-flex flex-wrap flex-md-nowrap mb-6">
@@ -90,7 +90,7 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                                         </span>
                                         </div>
                                         <div className="col-7 text-center">
-                                        <p className="fs-42 lh-12 mb-0 counterup" data-start={0} data-end={agent.no_of_listings} data-decimals={0} data-duration={0} data-separator>{agent.no_of_listings}</p>
+                                        <p className="fs-42 lh-12 mb-0">{agent.no_of_listings}</p>
                                         <p>Properties</p>
                                         </div>
                                     </div>
@@ -120,7 +120,7 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                                         </span>
                                         </div>
                                         <div className="col-8 text-center">
-                                        <p className="fs-42 lh-12 mb-0 counterup" data-start={0} data-end={329} data-decimals={0} data-duration={0} data-separator>{agent.no_reviews}</p>
+                                        <p className="fs-42 lh-12 mb-0">{agent.no_reviews}</p>
                                         <p>Total Reviews</p>
                                         </div>
                                     </div>
@@ -144,7 +144,7 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                                 </div>
                                 </div>
 
-                                   <NotificationContainer />
+                                <NotificationContainer />
 
                                 <div className="row">
                                 <div className="col-xxl-8 mb-6">

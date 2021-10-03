@@ -19,11 +19,11 @@ export const ReviewsService = {
         return await Request.get('agent/reviews', config);
     },
 
-    listingReviews: async (token, id) => {
+    listingReviews: async (token, id, type) => {
         const config = {
                 headers: authHeaders(token)
             }
-        return await Request.get(`reviews/fetch/${id}`, config)
+        return await Request.get(`reviews/fetch/${id}?role=${type}`, config)
     },
 
     reportUser: async (token, id, data) => {

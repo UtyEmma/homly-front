@@ -2,7 +2,7 @@ import { RichTextEditor } from 'components/rich-text/rich-text-editor';
 import React from 'react'
 import SelectListingCategory from 'views/layouts/components/details/categories';
 
-export default function ListingDescription({formErrors}) {
+export default function ListingDescription({formErrors, reset}) {
     
 
     return (
@@ -36,7 +36,7 @@ export default function ListingDescription({formErrors}) {
                             </div>
                             <div className="form-group mb-0">
                                 <label htmlFor="description-01" className="text-heading">Description</label>
-                                <RichTextEditor name="description" editorClassName="form-control border-0" />
+                                <RichTextEditor reset={reset} name="description" editorClassName="form-control border-0" />
                                 <p className="text-danger fs-12 mt-1">{formErrors.description?.message}</p>
                             </div>
                         </div>

@@ -4,7 +4,7 @@ import React from 'react'
 import { Modal } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 
-export const SelectRoleModal = ({show, setShow,  setIsLoading, action}) => {
+export const SelectRoleModal = ({show, setShow, action}) => {
 
     const dispatch = useDispatch()
 

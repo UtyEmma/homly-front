@@ -1,5 +1,6 @@
 import { MapFormErrors } from "libraries/validation/handlers/error-handlers";
-import { history } from "providers/redux/store";
+import { history, persistor, store } from "providers/redux/store";
+import { UnsetUser } from "providers/redux/_actions/auth-action";
 import toast from "react-hot-toast";
 
 
@@ -10,8 +11,6 @@ export const errorToast = (message) => {
 
 export default function Error(err) {
     if(!err){ return errorToast("Server Error: The Server is Down") }
-    // console.log(err);
-
     switch (err.status) {
         case 500: return handleServerError(err.data)
         case 422: return handleFormError(err.data)
@@ -27,6 +26,7 @@ function badRequestError(err){
 }
 
 function handleServerError(data){
+    // history.push('/500')
     return errorToast(data.message)
 }
 
@@ -36,12 +36,9 @@ function handleFormError(err){
 }
 
 function handleUnauthorizedError(){
-    return errorToast("Unauthorized Error")
-    // localStorage.removeItem('token');
-    // localStorage.removeItem('user');
-    // localStorage.removeItem('isAuthenticated');
-    // localStorage.removeItem('type');
-    // return window.location.href = '/login?msg=Session Expired! Please login.'
+    store.dispatch(UnsetUser())
+    persistor.purge()
+    history.push('/login?err=Your Session has Expired! Please Login')
 }
 
 function handleEmailVerificationError(){

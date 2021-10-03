@@ -16,6 +16,7 @@ export const Signup = (data, type) => (dispatch) => {
                     type: SIGNUP_SUCCESS,
                     payload: response.data
                 })
+                history.push('/login?msg=Sign up Successful! Please Login')
             })
             .catch(error => {
                 const errors = Response.error(error.response)
