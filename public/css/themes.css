@@ -2899,14 +2899,14 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary:hover {
-  color: #fff;
-  background-color: #0ca5b1;
+  color: #fff;#49a1ff
+  background-color: #49a1ff;
   border-color: #0b9aa5;
 }
 
 .btn-primary:focus, .btn-primary.focus {
-  color: #fff;
-  background-color: #0ca5b1;
+  color: #fff;#49a1ff
+  background-color: #49a1ff;
   border-color: #0b9aa5;
   box-shadow: 0 0 0 0.2rem rgba(50, 207, 219, 0.5);
 }
