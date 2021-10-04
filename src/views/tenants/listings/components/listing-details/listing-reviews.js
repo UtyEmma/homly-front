@@ -13,7 +13,7 @@ export default function ListingReviews({listing_id, status, listing}) {
     const [userHasReviewed, setUserHasReviewed] = useState(false)
 
     const loadReviews = useCallback(() => {
-        dispatch(FetchReview(token, listing_id, status))
+        dispatch(FetchReview(token, listing_id, status ?? ''))
     }, [dispatch, listing_id, status, token]) 
 
     useEffect(() => {
