@@ -12,6 +12,16 @@ export const ReviewsService = {
         return await Request.post(`reviews/create/${id}`, option);
     },
 
+    submitAgentReview : async (token, data, id) => {
+        const option = {
+            config: {
+                headers: authHeaders(token)
+            },
+            payload: data
+        }
+        return await Request.post(`reviews/agent/create/${id}`, option);
+    },
+
     agentReviews : async (token) => {
         const config = { 
             headers: authHeaders(token) 
@@ -52,6 +62,13 @@ export const ReviewsService = {
             headers: authHeaders(token)
         }
         return await Request.get(`reviews/delete/${id}?role=${role}`, config)
+    },
+
+    deleteAgentReviews : async (token, id, role) => {
+        const config = {
+            headers: authHeaders(token)
+        }
+        return await Request.get(`reviews/agent/delete/${id}?role=${role}`, config)
     }
 
 }

@@ -38,6 +38,31 @@ export const SubmitReview = (token, data, id) => (dispatch) => {
                     })
 }
 
+export const SubmitAgentReview = (token, data, id) => (dispatch) => {
+    dispatch({ type: SUBMIT_REVIEW_REQUEST })
+
+    ReviewsService.submitAgentReview(token, data, id)
+                    .then((response) => {
+                        Response.success(response.data)
+                        dispatch({
+                            type: 'FETCH_SINGLE_AGENT_SUCCESS',
+                            payload: response.data.data
+                        })
+
+                        dispatch({
+                            type: SUBMIT_REVIEW_SUCCESS,
+                            payload: response.data.data
+                        })
+                    })
+                    .catch((error) => {
+                        Response.error(error.response)
+                        dispatch({
+                            type: SUBMIT_REVIEW_FAILURE,
+                            payload: error.response.data
+                        })
+                    })
+}
+
 export const FetchAgentReview = (token) => (dispatch) => {
     dispatch({type: FETCH_AGENT_REVIEWS_REQUEST})
 
@@ -56,6 +81,7 @@ export const FetchAgentReview = (token) => (dispatch) => {
                         })
                     })
 } 
+
 
 export const FetchReview = (token, id, type) => (dispatch) => {
     
@@ -126,7 +152,6 @@ export const EditReview = (token, data) => (dispatch) => {
 }
 
 export const DeleteReview = (token, id, data, role) => (dispatch) => {
-    console.log("Deleting Review...")
     dispatch({type: DELETE_REVIEW_REQUEST})
 
     ReviewsService.deleteReviews(token, id, data, role)
@@ -139,6 +164,27 @@ export const DeleteReview = (token, id, data, role) => (dispatch) => {
 
                         dispatch({
                             type: FETCH_REVIEWS_SUCCESS,
+                            payload: response.data.data
+                        })
+                    })
+                    .catch((error) => {
+                        Response.error(error.response)
+                        dispatch({
+                            type: DELETE_REVIEW_FAILURE,
+                            payload: error.response
+                        })
+                    })
+}
+
+
+export const DeleteAgentReview = (token, id, data, role) => (dispatch) => {
+    dispatch({type: DELETE_REVIEW_REQUEST})
+
+    ReviewsService.deleteAgentReviews(token, id, data, role)
+                    .then((response) => {
+                        Response.success(response.data)
+                        dispatch({
+                            type: 'FETCH_SINGLE_AGENT_SUCCESS',
                             payload: response.data.data
                         })
                     })

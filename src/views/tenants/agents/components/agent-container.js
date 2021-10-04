@@ -15,7 +15,7 @@ export default function AgentContainer({agents}) {
                         {
                         
                         agents.map((agent, index) =>(        
-                            <AgentCard agent={agent} key={index}/> )) 
+                            <AgentCard agent={agent} key={agent.unique_id}/> )) 
                         
                         }
 

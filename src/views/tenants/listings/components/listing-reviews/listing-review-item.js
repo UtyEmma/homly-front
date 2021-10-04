@@ -26,9 +26,7 @@ export default function ListingReviewItem({userHasReviewed, setUserHasReviewed, 
 
     useEffect(() => {
         let status = !!reviews;
-        status && console.log(!!reviews)
         status && setUserHasReviewed(!userHasReviewed)
-        status && console.log(userHasReviewed)
     }, [reviews, setUserHasReviewed, userHasReviewed])
 
     return (

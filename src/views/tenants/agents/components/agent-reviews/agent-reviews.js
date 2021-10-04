@@ -1,8 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import AgentReviewForm from './agent-review-form'
 import AgentReviewItem from './agent-review-item'
 
 export default function AgentReviews({reviews, agent, status, setIsLoading}) {
+
+    const [userHasReviewed, setUserHasReviewed] = useState(false)
+
+    const {user} = useSelector((state) => state.user_data)
     
     useEffect(() => {
         setIsLoading(false)
@@ -23,7 +28,7 @@ export default function AgentReviews({reviews, agent, status, setIsLoading}) {
 
                             {
                                 reviews.map((review) => {
-                                    return <AgentReviewItem review={review.review} publisher={review.publisher} />
+                                    return <AgentReviewItem key={review.unique_id} userHasReviewed={userHasReviewed} setUserHasReviewed={setUserHasReviewed} review={review.review} publisher={review.publisher} />
                                 })
                             }
 
@@ -46,8 +51,26 @@ export default function AgentReviews({reviews, agent, status, setIsLoading}) {
                             </div>
                         </div>
                     }                      
-                        
-                    <AgentReviewForm />
+                    
+                    {
+                        user
+
+                        ?
+
+                            userHasReviewed ||  user.unique_id === agent.unique_id
+
+                            ?
+
+                            ""
+
+                            :
+        
+                            <AgentReviewForm agent={agent} status={status} />
+
+                        :
+
+                        ""
+                    }
                 </div>
             </div>
         </>

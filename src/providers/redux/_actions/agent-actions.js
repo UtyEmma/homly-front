@@ -144,12 +144,10 @@ export const RemoveListing = (id) => (dispatch) => {
                 })
 }
 
-export const FetchAgentDetails = (token, id) => (dispatch) => {
-    console.log("Fetching Details...")
-
+export const FetchAgentDetails = (token, id, status) => (dispatch) => {
     dispatch({type: FETCH_SINGLE_AGENT_REQUEST})
 
-    AgentService.fetchSingleAgent(token, id)
+    AgentService.fetchSingleAgent(token, id, status)
                 .then((response) => {
                     return dispatch({
                         type: FETCH_SINGLE_AGENT_SUCCESS,

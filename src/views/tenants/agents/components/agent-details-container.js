@@ -8,7 +8,7 @@ import { ConfirmActionDialog } from 'views/layouts/components/modals/confirm-act
 import AgentsListings from './agent-listings/agent-listings'
 import AgentReviews from './agent-reviews/agent-reviews'
 
-export default function AgentDetailsContainer({agent, listings, reviews, fetchAgent, status, setAgentData, setIsLoading}) {
+export default function AgentDetailsContainer({agent, listings, reviews, status, setIsLoading}) {
     
     const dispatch = useDispatch()
 
@@ -147,7 +147,7 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                                 <> 
                                     <hr/>
                                 
-                                    <div className="">
+                                    <div>
                                         {
                                             
                                             !agent.verified

@@ -29,7 +29,7 @@ const AgentDetails = ({isLoggedIn, user, status, setIsLoading}) => {
     }, [loading, setIsLoading])
     
     const loadAgent = () => {
-        dispatch(FetchAgentDetails(token, id))
+        dispatch(FetchAgentDetails(token, id, status ?? ''))
     }
     
     useEffect(() => {

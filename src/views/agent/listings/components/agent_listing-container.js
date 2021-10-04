@@ -17,8 +17,8 @@ export default function AgentListingContainer({listings}) {
                     </thead>
                     <tbody>
                         {               
-                            listings.map((listing, index) => (        
-                                <AgentListingItem listing_item={listing} key={index}/>
+                            listings.map((listing) => (        
+                                <AgentListingItem listing_item={listing} key={listing.unique_id}/>
                             ))
                         }
                     </tbody>

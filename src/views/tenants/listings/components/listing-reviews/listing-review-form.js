@@ -1,17 +1,37 @@
+import { MapFormErrors } from 'libraries/validation'
+import { __reviews } from 'libraries/validation/schema/reviews-schema'
 import { SubmitReview } from 'providers/redux/_actions/review-actions'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import Validator from 'validatorjs'
 
 export default function ListingReviewForm({setUserHasReviewed, listing_id, status}) {
+    
     const dispatch = useDispatch()
     const {reviews} = useSelector(state => state.submit_review)
     const {token} = useSelector((state) => state.user_data)
 
+    const [formErrors, setFormErrors] = useState({})
+
+    const {rules, attributes} = __reviews
+
     const submitPropertyReview = (e) => {
         e.preventDefault()
-        let formData = new FormData(e.target)
-        formData.append('role', status)
-        dispatch(SubmitReview(token, formData, listing_id))    
+        let data = new FormData(e.target)
+        data.append('role', status)
+
+        const values = Object.fromEntries(data.entries());
+        
+        let validation = new Validator(values, rules)
+
+        validation.setAttributeNames(attributes);
+        
+        validation.fails(() => {setFormErrors(MapFormErrors(validation.errors.errors))})
+
+        if (validation.passes()) {
+            setFormErrors({}); 
+            dispatch(SubmitReview(token, data, listing_id))
+        }    
     }
 
     useEffect(() => {
@@ -50,8 +70,11 @@ export default function ListingReviewForm({setUserHasReviewed, listing_id, statu
                                 </label>
                                 </div>
                             </div>
+                            <p className="text-danger fs-12 mt-1">{formErrors.rating?.message}</p>
+
                             <div className="form-group mb-6">
                                 <textarea className="form-control form-control-lg border-0" placeholder="Your Review" name="review" rows={5} defaultValue={""} />
+                                <p className="text-danger fs-12 mt-1">{formErrors.review?.message}</p>
                             </div>
                             <button type="submit" className="btn btn-lg btn-primary px-10">Submit</button>
                         </form>
