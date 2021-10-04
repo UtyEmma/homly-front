@@ -12,8 +12,6 @@ import Home from './views/home';
 import NotFound from './views/not-found';
 
 // Tenant Pages
-import UserLogin from './views/tenants/auth/login';
-import UserSignup from './views/tenants/auth/signup';
 import Listing from './views/tenants/listings/listings';
 import ListingDetails from './views/tenants/listings/listing-details';
 import Agents from './views/tenants/agents/agents';
@@ -21,13 +19,11 @@ import AgentDetails from './views/tenants/agents/agent-details';
 import Profile from 'views/tenants/profile/profile';
 
 // Agent Imports
-import AgentLogin from './views/agent/auth/agent-login';
-import AgentSignup from './views/agent/auth/agent-signup';
 import AgentDashboard from './views/agent/dashboard';
 import NewListing from './views/agent/listings/add-listing';
 import AgentsListings from './views/agent/listings/agents-listings';
 import AgentProfile from './views/agent/profile';
-import PasswordRecovery from './views/agent/auth/password-recovery';
+import PasswordRecovery from './views/onboarding/auth/password-recovery';
 import Wishlist from './views/tenants/wishlist/wishlist';
 import Search from './views/search';
 import Preloader from './components/preloader/preloader';
@@ -43,13 +39,16 @@ import { useQuery } from './libraries/http/query';
 import { useDispatch, useSelector } from 'react-redux';
 import { VerifyAdmin } from './providers/redux/_actions/admin-actions';
 import { AdminModeBadge } from './libraries/admin/admin-mode';
-import ResetPassword from 'views/agent/auth/reset-password';
+import ResetPassword from 'views/onboarding/auth/reset-password';
 import ServerError from 'views/onboarding/sever-error';
 import { EmailVerified } from 'views/onboarding/email-verified';
 import toast, { ToastBar, Toaster } from 'react-hot-toast';
 import { EmailUpdateVerification } from 'views/onboarding/email-update-verification';
 import { Chat } from 'views/agent/support/chat';
 import { AgentActivity } from 'views/agent/activity/activity';
+import UpdateUsername from 'views/onboarding/update-username';
+import UserLogin from 'views/onboarding/auth/login';
+import UserSignup from 'views/onboarding/auth/signup';
 
 function App() {
 
@@ -98,17 +97,24 @@ function App() {
         )}
       </Toaster>
       
+      {
 
-      <GoogleOneTapAuth setIsLoading={setIsLoading} />
+        !user
+
+        &&
+
+        <GoogleOneTapAuth setIsLoading={setIsLoading} />
+
+      }
 
 
       <Switch>                  
         {/* Common Routes */}
         <Route path="/recover-password" render={(props) => (<PasswordRecovery {...props} user={user} isLoading={isLoading} setIsLoading={setIsLoading} />)} exact/>
         <Route path="/reset-password" render={(props) => (<ResetPassword {...props} user={user} isLoading={isLoading} setIsLoading={setIsLoading} />)} exact/>
-        <Route path="/login" render={(props) => (<UserLogin {...props} isLoading={isLoading} user={user} setIsLoading={setIsLoading} />)} exact/>
-        <Route path="/signup" isLoading={isLoading} setIsLoading={setIsLoading} render={(props) => (<UserSignup user={user} {...props} setIsLoading={setIsLoading} isLoading={setIsLoading} />)} exact/>
 
+        <Route path="/login" render={(props) => (<UserLogin {...props} isLoading={isLoading} user={user} setIsLoading={setIsLoading} />)} exact/>
+        <Route path="/signup" render={(props) => (<UserSignup user={user} {...props} setIsLoading={setIsLoading} />)} exact/>
         <Route path="/email/verify/:code" render={(props) => (<EmailVerified {...props} user={user} isLoading={isLoading} setIsLoading={setIsLoading} />)} exact/>
         
         {/* User Routes */}
@@ -119,17 +125,14 @@ function App() {
         <UserRoute path="/search" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={Search} exact/>
         <UserRoute path="/listings" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={Listing} exact/>
         <UserRoute path="/agents" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={Agents} exact/>
-        
+        <UserRoute path="/onboarding" isLoading={isLoading} setIsLoading={setIsLoading} token={token} type={type} user={user} component={UpdateUsername} exact />
+
         {/* Tenant Routes */}
         <TenantRoute path="/profile" isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} type={type} component={Profile} exact/>
         <TenantRoute path="/wishlist" isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} type={type} component={Wishlist} exact/>
-        <TenantRoute path="/wishlist/:slug" isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} type={type} component={Wishlist} exact/>
         <TenantRoute path="/favourites" isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} type={type} component={Favourites} exact/>
 
 
-        {/* Agent Routes */}
-        <Route path="/agent-login" render={(props) => (<AgentLogin {...props} setIsLoading={setIsLoading} user={user} isLoading={isLoading} type="agent" />)} exact/>
-        <Route path="/agent-signup" render={(props) => (<AgentSignup {...props} setIsLoading={setIsLoading} user={user} isLoading={isLoading} type="agent" />)} exact/>
         <AgentRoute path="/dashboard" isLoading={isLoading} setIsLoading={setIsLoading} token={token} type={type} user={user} component={AgentDashboard} exact />
         <AgentRoute path="/new-listing" isLoading={isLoading} setIsLoading={setIsLoading} token={token} type={type} user={user} component={NewListing} exact />
         <AgentRoute path="/agent-profile" isLoading={isLoading} setIsLoading={setIsLoading} token={token} type={type} user={user} component={AgentProfile} exact />
@@ -141,7 +144,7 @@ function App() {
         <AgentRoute path="/agent-wishlists" isLoading={isLoading} setIsLoading={setIsLoading} type={type} token={token} user={user} component={AgentWishlist} exact />
         <AgentRoute path="/activity" isLoading={isLoading} setIsLoading={setIsLoading} type={type} token={token} user={user} component={AgentActivity} exact />
 
-        <Route path="/server-error" render={(props) => (<ServerError {...props} setIsLoading={setIsLoading}  token={token} user={user} />)} exact/>
+        <Route path="/500" render={(props) => (<ServerError {...props} setIsLoading={setIsLoading}  token={token} user={user} />)} exact/>
 
         <UserRoute path="/:username/:slug" type={type} isLoading={isLoading} setIsLoading={setIsLoading} user={user} token={token} component={ListingDetails} exact/>
         <UserRoute path="/:id" isLoading={isLoading} setIsLoading={setIsLoading} user={user} type={type} token={token} component={AgentDetails} exact/>

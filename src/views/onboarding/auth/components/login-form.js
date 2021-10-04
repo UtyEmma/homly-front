@@ -1,39 +1,38 @@
 import React, { useEffect, useState } from 'react'
 import 'react-toastify/dist/ReactToastify.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { __tenantlogin } from 'libraries/validation/schema/tenant-schema';
-import GoogleAuth from 'views/agent/auth/socialite/google-auth';
-import { Link, useHistory } from 'react-router-dom';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { useSelector } from 'react-redux';
+import GoogleAuth from 'views/onboarding/auth/socialite/google-auth';
+import { Link } from 'react-router-dom';
 import Validator from 'validatorjs';
-import { MapFormErrors } from 'libraries/validation';
-import { Login } from 'providers/redux/_actions/auth-action';
-import { FacebookAuth } from 'views/agent/auth/socialite/facebook-auth';
+import { MapFormErrors, __login } from 'libraries/validation';
+import { FacebookAuth } from 'views/onboarding/auth/socialite/facebook-auth';
+import { SelectRoleModal } from './select-role-modal';
 
-const UserLoginForm = ({isLoading}) =>  {    
-    const dispatch = useDispatch()
-    const history = useHistory()
+const UserLoginForm = ({setIsLoading}) =>  {    
 
-    const {rules, attributes} = __tenantlogin
+    const {rules, attributes} = __login
     const [formErrors, setFormErrors] = useState({})
 
     const user_login = useSelector(state => state.login)
-    const {loading, formError} = user_login;
+    const {formError} = user_login;
 
-    const user_data = useSelector(state => state.user_data)
-    const {user} = user_data;
+    const [show, setShow] = useState(false)
+    const [action, setAction] = useState()
     
     const handleSubmit = (e) => {
         e.preventDefault()
         const data = new FormData(e.target);
         const values = Object.fromEntries(data.entries());
         let validation = new Validator(values, rules)
+
         validation.setAttributeNames(attributes);
+        
         validation.fails(() => {setFormErrors(MapFormErrors(validation.errors.errors))})
         
         if (validation.passes()) {
             setFormErrors({}); 
-            dispatch(Login(data, 'tenant'));
+            setAction({type: 'login', data: data})
+            setShow(true)
         }
     }
 
@@ -41,23 +40,11 @@ const UserLoginForm = ({isLoading}) =>  {
         formError && setFormErrors(formError)
     }, [formError])
 
-    useEffect(() => {
-        if(user && user.isVerified){ history.push('/') }
-    }, [user, history])
-
-    useEffect(() => {
-        user && !user.isVerified && history.push('/verify')
-    }, [user, history])
-
-    const responseFacebook = (response) => {
-        console.log(response)
-    }
-
     return (
         <div className="col-lg-7">
             <div className="card border-0 shadow-xxs-2 mb-6">
                 <div className="card-body px-md-8">
-                <h2 className="card-title fs-30 font-weight-600 text-dark lh-16 mb-2">Log In</h2>
+                <h2 className="card-title fs-24 font-weight-600  text-heading text-dark lh-16 mb-2">Welcome back! Please Login</h2>
 
                 <form className="form" onSubmit={handleSubmit}>
                     <div className="form-group mb-4">
@@ -83,12 +70,7 @@ const UserLoginForm = ({isLoading}) =>  {
                             <u>Forgot your password?</u>
                         </Link>
                     </div>
-                    <button type="submit" className="btn btn-primary btn-lg btn-block rounded">
-                            {loading ? 
-                                    <div className="spinner-border text-white" role="status">
-                                        <span className="sr-only">Loading...</span>
-                                    </div> : "Log in" }
-                    </button>
+                    <button type="submit" className="btn btn-primary btn-lg btn-block rounded">Log in</button>
                 </form>
                 <div className="divider text-center my-2">
                     <span className="px-4 bg-white lh-17 text text-heading">
@@ -97,10 +79,10 @@ const UserLoginForm = ({isLoading}) =>  {
                 </div>
                 <div className="row no-gutters mx-n2">
                     <div className="col-sm-6 px-2 mb-4">
-                        <FacebookAuth user="tenant" />
+                        <FacebookAuth setShow={setShow} action={action} setAction={setAction} />
                     </div>
                     <div className="col-sm-6 px-2 mb-4">
-                        <GoogleAuth user="tenant" />
+                        <GoogleAuth setShow={setShow} action={action} setAction={setAction} />
                     </div>
                 </div>
                 <div className="text-center my-4">
@@ -112,6 +94,7 @@ const UserLoginForm = ({isLoading}) =>  {
                 </div>
                 </div>
             </div>
+            <SelectRoleModal show={show} setShow={setShow}  setIsLoading={setIsLoading} action={action}  />
         </div>
 
     )

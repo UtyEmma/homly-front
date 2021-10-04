@@ -44,7 +44,7 @@ export const UpdateAgentProfile = (token, data) => (dispatch) => {
                     let res = response.data;
 
                     Response.success(res)
-                    let agent = res.data.agent
+                    let agent = res.data.user
 
                     dispatch({
                         type: 'UPDATE_USER_DATA',
@@ -92,7 +92,7 @@ export const AgentLogout = (token) => (dispatch) => {
                 .then((response) => {
                     store.dispatch(UnsetUser())
                     persistor.purge()
-                    return window.location.href = '/agent-login?msg=Logout Successful'
+                    return history.push('/login?msg=Logout Successful')
                 })
                 .catch((error) => {
                     console.log(error.response)
@@ -144,12 +144,10 @@ export const RemoveListing = (id) => (dispatch) => {
                 })
 }
 
-export const FetchAgentDetails = (token, id) => (dispatch) => {
-    console.log("Fetching Details...")
-
+export const FetchAgentDetails = (token, id, status) => (dispatch) => {
     dispatch({type: FETCH_SINGLE_AGENT_REQUEST})
 
-    AgentService.fetchSingleAgent(token, id)
+    AgentService.fetchSingleAgent(token, id, status)
                 .then((response) => {
                     return dispatch({
                         type: FETCH_SINGLE_AGENT_SUCCESS,
@@ -157,6 +155,7 @@ export const FetchAgentDetails = (token, id) => (dispatch) => {
                     })
                 })
                 .catch((error) => {
+                    history.push('/agents')
                     return dispatch({
                         type: FETCH_SINGLE_AGENT_FAILURE,
                         payload: error.response

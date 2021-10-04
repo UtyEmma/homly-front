@@ -41,6 +41,16 @@ export const AuthService = {
         return Request.post('social/auth', data);
     },
 
+    update : async (token, data, type) => {
+        const request = {
+            config : {
+                ...auth(token)
+            },
+            payload: data
+        }
+        return await Request.post(`${type}/update`, request)
+    },
+
     recoverpassword: async (data) => {
         const request = {
             config : {

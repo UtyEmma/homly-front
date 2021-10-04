@@ -7,7 +7,13 @@ export default function InputAddress({setLandmark, setLatLong, name, defaultValu
 
     const [isLoading, setIsLoading] = useState(false)
     const [options, setOptions] = useState([])
-    const { value, suggestions, setValue, clearSuggestions, } = usePlacesAutocomplete();
+    const { value, suggestions, setValue, clearSuggestions} = usePlacesAutocomplete(
+        {
+            requestOptions: {
+                componentRestrictions: { country: 'ng' }
+            }
+        }
+    );
     
     const handleSelection = (query) => {
         setLatLong(query)
@@ -43,6 +49,7 @@ export default function InputAddress({setLandmark, setLatLong, name, defaultValu
                 onSearch={handleSearch}
                 onChange={handleSelection}
                 options={options}
+                
                 defaultInputValue={defaultValue}
                 name={name}
                 className="form-control form-control-lg border-0 p-0"

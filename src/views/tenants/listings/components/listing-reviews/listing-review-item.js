@@ -6,16 +6,17 @@ import { DeleteReview, EditReview } from 'providers/redux/_actions/review-action
 export default function ListingReviewItem({userHasReviewed, setUserHasReviewed, review, publisher}) {
     const dispatch = useDispatch()
 
-    const {token} = useSelector(state => state.user_data)
+    const {token, type} = useSelector(state => state.user_data)
     const {reviews} = useSelector(state => state.delete_review)
 
     const deleteReview = () => {
-        dispatch(DeleteReview(token, review.unique_id))
+        dispatch(DeleteReview(token, review.unique_id, type))
     }
 
     const editPropertyReview = (e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
+        formData.append('role', type)
         dispatch(EditReview(token, formData))
     }
 
@@ -25,9 +26,7 @@ export default function ListingReviewItem({userHasReviewed, setUserHasReviewed, 
 
     useEffect(() => {
         let status = !!reviews;
-        status && console.log(!!reviews)
         status && setUserHasReviewed(!userHasReviewed)
-        status && console.log(userHasReviewed)
     }, [reviews, setUserHasReviewed, userHasReviewed])
 
     return (
@@ -36,7 +35,7 @@ export default function ListingReviewItem({userHasReviewed, setUserHasReviewed, 
                 <div className="w-82px h-82 mr-2 bg-gray-01 rounded-circle fs-25 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
                     {
                         publisher.avatar 
-                            ? <img src={publisher.avatar} className="rounded-circle img-fluid" alt={`${publisher.firstname.charAt(0).toUpperCase()}${publisher.lastname.charAt(0).toUpperCase()}`} /> : 
+                            ? <img src={publisher.avatar} className="rounded-circle img-fluid  w-46px h-46" style={{objectFit: 'cover', minHeight: '100%', minWidth: '100%'}} alt={`${publisher.firstname.charAt(0).toUpperCase()}${publisher.lastname.charAt(0).toUpperCase()}`} /> : 
                                 `${publisher.firstname.charAt(0).toUpperCase()}${publisher.lastname.charAt(0).toUpperCase()}`
                     }
                 </div>

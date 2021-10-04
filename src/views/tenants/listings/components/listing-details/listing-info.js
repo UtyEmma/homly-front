@@ -11,12 +11,12 @@ export default function ListingInfo({listing}) {
                 {/* <li className="list-inline-item mt-2 mt-sm-0"><i className="fal fa-eye mr-1" />{listing.views} views</li> */}
                 </ul>
                 <div className="d-sm-flex justify-content-sm-between">
-                <div>
-                    <h2 className="fs-24 fs-md-32 font-weight-600 lh-15 text-heading">{listing.title}</h2>
+                <div className="col-md-9 px-0">
+                    <h2 className="fs-24 fs-md-28 font-weight-600 lh-15 text-heading">{listing.title}</h2>
                     <p className="mb-0"><i className="fal fa-map-marker-alt mr-2" />
                             {listing.address}, {listing.city}, {listing.state}</p>
                 </div>
-                <div className="mt-2 text-lg-right">
+                <div className="col-md-3 px-0 mt-2 mt-md-0 text-lg-right">
                     <p className="fs-22 text-heading font-weight-bold mb-0">&#8358; {listing.rent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
                     <p className="mb-0">{listing.tenure}</p>
                 </div>

@@ -46,7 +46,14 @@ export const AgentWishlistItem = ({wishlist, user, setShow, setDetails}) => {
                                     </div>
 
                                     <div className="col-auto h-100 pt-5">
-                                        <a href={`tel:${user.phone}`} ><i className="fa fa-phone-alt mr-4"></i></a>
+                                        {
+                                            user.phone
+
+                                            &&
+
+                                            <a href={`tel:${user.phone}`} ><i className="fa fa-phone-alt mr-4"></i></a>
+
+                                        }
                                         <a href={`mailto:${user.email}`} ><i className="fa fa-envelope"></i></a>
                                     </div>
                                 </div>

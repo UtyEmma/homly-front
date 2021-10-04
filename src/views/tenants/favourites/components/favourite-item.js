@@ -2,6 +2,7 @@ import { AddListingToFavourites } from 'providers/redux/_actions/favourites-acti
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import 'views/tenants/listings/css/listing.css'
+import { FavouriteListingButton } from './favourite-listing-btn'
 
 export default function FavouriteItem({listing, fetchFavourites}) {
     
@@ -30,13 +31,13 @@ export default function FavouriteItem({listing, fetchFavourites}) {
     return (
         <div className="col-md-4 mb-6 listing-grid">
             <div className="card border-0" >
-                <div className="position-relative hover-change-image bg-hover-overlay rounded-lg card-img listing-image-container">
+                <div className="position-relative bg-overlay-gradient-7 rounded-lg card-img listing-image-container">
                 <img className="listing-image" style={{minHeight: '100%'}} src={listing.images[0]} alt={listing.title} />
                 <div className="card-img-overlay d-flex flex-column">
                     <div>
                         <span className="badge badge-indigo">for Rent</span>
                     </div>
-                    <div className="mt-auto d-flex hover-image">
+                    <div className="mt-auto d-flex">
                     <ul className="list-inline mb-0 d-flex align-items-end mr-auto">
                         <li className="list-inline-item mr-2" data-toggle="tooltip" title={`${listing.images.length} Images`}>
                             <button className="bg-transparent border-0 text-white hover-primary">
@@ -46,9 +47,7 @@ export default function FavouriteItem({listing, fetchFavourites}) {
                     </ul>
                     <ul className="list-inline mb-0 d-flex align-items-end mr-n3">
                         <li className="list-inline-item mr-3 h-32" data-toggle="tooltip" title="Wishlist">
-                            <button style={{cursor: 'pointer'}} onClick={addToFavourites} className={`bg-transparent border-0 text-white fs-20 hover-primary`}>
-                                <i className={`${favourite ? "fas text-primary" : 'far'} fa-heart`} />
-                            </button>
+                            <FavouriteListingButton listing={listing}  />
                         </li>
                     </ul>
                     </div>
@@ -61,7 +60,7 @@ export default function FavouriteItem({listing, fetchFavourites}) {
                     
                     <p className="font-weight-500 text-gray-light mb-0 d-inline-block text-nowrap text-truncate w-100">{listing.address}, {listing.city}, {listing.state}</p>
                 
-                    <p className="card-text mb-2 ml-0">{listing.description.split(" ").splice(0,15).join(" ")}...</p>
+                    <p className="card-text mb-2 ml-0 text-truncate" dangerouslySetInnerHTML={{__html: listing.description.split(" ").splice(0,12).join(" ")+'...'}}></p>
                 
                     <p className="fs-17 font-weight-bold text-heading mb-0 lh-16">
                         &#8358; {listing.initial_fees.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
@@ -69,20 +68,20 @@ export default function FavouriteItem({listing, fetchFavourites}) {
 
                 </div>
                 <div className="card-footer bg-transparent px-0 pb-0 pt-2">
-                <ul className="list-inline mb-0">
-                    <li className="list-inline-item text-gray font-weight-500 fs-13 mr-sm-7" data-toggle="tooltip" title="3 Bedroom">
-                    <svg className="icon icon-bedroom fs-18 text-primary mr-1">
-                        <use xlinkHref="#icon-bedroom" />
-                    </svg>
-                    {listing.no_bedrooms} Br
-                    </li>
-                    <li className="list-inline-item text-gray font-weight-500 fs-13 mr-sm-7" data-toggle="tooltip" title="3 Bathrooms">
-                    <svg className="icon icon-shower fs-18 text-primary mr-1">
-                        <use xlinkHref="#icon-shower" />
-                    </svg>
-                    {listing.no_bathrooms} Ba
-                    </li>
-                </ul>
+                    <ul className="list-inline mb-0">
+                        <li className="list-inline-item text-gray font-weight-500 fs-13 mr-sm-7" data-toggle="tooltip" title="3 Bedroom">
+                        <svg className="icon icon-bedroom fs-18 text-primary mr-1">
+                            <use xlinkHref="#icon-bedroom" />
+                        </svg>
+                        {listing.no_bedrooms} Br
+                        </li>
+                        <li className="list-inline-item text-gray font-weight-500 fs-13 mr-sm-7" data-toggle="tooltip" title="3 Bathrooms">
+                        <svg className="icon icon-shower fs-18 text-primary mr-1">
+                            <use xlinkHref="#icon-shower" />
+                        </svg>
+                        {listing.no_bathrooms} Ba
+                        </li>
+                    </ul>
                 </div>
             </div>
             </div>

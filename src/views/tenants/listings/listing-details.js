@@ -23,24 +23,26 @@ const ListingDetails = ({isLoggedIn, user, status, adminMode, setIsLoading}) => 
     const [listingData, setListingData] = useState()
 
     const details = useSelector((state) => state.listing);
-    const {loading, listing, agent, error} = details;
+    const {loading, listing, agent } = details;
 
     const suspend_listing = useSelector((state) => state.suspend_item);
     const {data} = suspend_listing;
 
     useEffect(() => {
-        if(error){ window.location.href = '/listings'}
-    }, [error])
-
-    useEffect(() => {
         const fetchListingData = () => {
-            dispatch(FetchSingleListing(username, slug))
+            dispatch(FetchSingleListing(username, slug, '/listings'))
         }
         
         !listing && fetchListingData()
-        listing && setListingData(listing)
-        data && setListingData(data)
     }, [listing, data, username, slug, dispatch]);
+
+    useEffect(() => {
+        data && setListingData(data)
+    }, [data])
+
+    useEffect(() => {
+        listing && setListingData(listing)
+    }, [listing])
 
     useEffect(() => {
         setIsLoading(false)
@@ -115,8 +117,8 @@ const ListingDetails = ({isLoggedIn, user, status, adminMode, setIsLoading}) => 
                                         
                                         ? 
                                         
-                                        <div className="rounded-circle d-flex align-items-center justify-content-center overflow-hidden">
-                                            <img src={agent.avatar} className="w-70px h-70" style={{objectFit: 'cover'}} alt={`${agent.firstname} ${agent.lastname}`} />
+                                        <div className="rounded-circle w-70px h-70 d-flex align-items-center justify-content-center overflow-hidden">
+                                            <img src={agent.avatar} className="w-70px h-70 rounded-circle" style={{objectFit: 'cover'}} alt={`${agent.firstname} ${agent.lastname}`} />
                                         </div> 
                                         
                                         : 
@@ -125,45 +127,14 @@ const ListingDetails = ({isLoggedIn, user, status, adminMode, setIsLoading}) => 
                                         </div>
                                     }
 
-                                    <div className="media-body">
+                                    <div className="media-body ml-2">
                                         <a href={`/${agent.username}`} className="d-block text-dark fs-15 font-weight-500 lh-15">{agent.firstname} {agent.lastname} </a>
-                                        <span className="fs-13 lh-2">{listing.title}</span>
+                                        <p className="fs-13 mb-0 text-truncate">{listing.title}</p>
                                     </div>
                                 </div>
-                                <div className="ml-auto">
-                                    <button type="button" className="btn btn-primary fs-18 p-2 lh-1 mr-1 mb-1 shadow-none" data-toggle="modal" data-target="#modal-messenger"><i className="fal fa-comment" /></button>
+                                <div className="ml-auto pl-3">
+                                    <a href={`mailto:${agent.email}`} className="btn btn-primary fs-18 p-2 lh-1 mr-1 mb-1 shadow-none"><i className="fal fa-comment" /></a>
                                     <a href={`tel:${agent.phone_number}`} className="btn btn-primary fs-18 p-2 lh-1 mb-1 shadow-none" target="_blank" rel="noreferrer"><i className="fal fa-phone" /></a>
-                                </div>
-                            </div>
-                            <div className="modal fade" id="modal-messenger" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div className="modal-dialog">
-                                    <div className="modal-content">
-                                    <div className="modal-header border-0 pb-0">
-                                        <h4 className="modal-title text-heading" id="exampleModalLabel">Contact Form</h4>
-                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                        </button>
-                                    </div>
-                                    <div className="modal-body pb-6">
-                                        <div className="form-group mb-2">
-                                        <input type="text" className="form-control form-control-lg border-0" placeholder="First Name, Last Name" />
-                                        </div>
-                                        <div className="form-group mb-2">
-                                        <input type="email" className="form-control form-control-lg border-0" placeholder="Your Email" />
-                                        </div>
-                                        <div className="form-group mb-2">
-                                        <input type="tel" className="form-control form-control-lg border-0" placeholder="Your phone" />
-                                        </div>
-                                        <div className="form-group mb-2">
-                                        <textarea className="form-control border-0" rows={4} defaultValue={"Hello, I'm interested in Villa Called Archangel"} />
-                                        </div>
-                                        <div className="form-group form-check mb-4">
-                                        <input type="checkbox" className="form-check-input" id="exampleCheck3" />
-                                        <label className="form-check-label fs-13" htmlFor="exampleCheck3">Egestas fringilla phasellus faucibus scelerisque eleifend donec.</label>
-                                        </div>
-                                        <button type="submit" className="btn btn-primary btn-lg btn-block rounded">Request Info</button>
-                                    </div>
-                                    </div>
                                 </div>
                             </div>
                         </>

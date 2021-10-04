@@ -28,8 +28,8 @@ export default function ListingAction({agent, listing}) {
     }
 
     const deleteListing = () => {
-        setShow(true)
         setAction('delete')
+        setShow(true)
     }
     
     return (
@@ -159,7 +159,7 @@ export default function ListingAction({agent, listing}) {
 
                                 ?
 
-                                <button type="button" disabled className="btn btn-block btn-lg btn-success hover-white text-capitalize">Property Rented</button>
+                                <button type="button" disabled className="btn btn-block btn-lg btn-outline-success hover-white text-capitalize">Property Rented</button>
 
                                 :
                                 <button type="button" onClick={suspendListing} className="btn btn-block btn-lg btn-outline-warning hover-white text-capitalize">{listing.status === 'active' ? 'Suspend' : 'Unsuspend'} Listing</button>

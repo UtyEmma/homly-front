@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Route } from "react-router-dom";
 
 function UserRoute({user, type, token, isLoading, setIsLoading, component: Component, ...restOfProps}) {
+  
   return (
       <Route
         {...restOfProps}

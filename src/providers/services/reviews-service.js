@@ -9,7 +9,17 @@ export const ReviewsService = {
             },
             payload: data
         }
-        return await Request.post(`tenant/reviews/create/${id}`, option);
+        return await Request.post(`reviews/create/${id}`, option);
+    },
+
+    submitAgentReview : async (token, data, id) => {
+        const option = {
+            config: {
+                headers: authHeaders(token)
+            },
+            payload: data
+        }
+        return await Request.post(`reviews/agent/create/${id}`, option);
     },
 
     agentReviews : async (token) => {
@@ -19,11 +29,11 @@ export const ReviewsService = {
         return await Request.get('agent/reviews', config);
     },
 
-    listingReviews: async (token, id) => {
+    listingReviews: async (token, id, type) => {
         const config = {
                 headers: authHeaders(token)
             }
-        return await Request.get(`reviews/fetch/${id}`, config)
+        return await Request.get(`reviews/fetch/${id}?role=${type}`, config)
     },
 
     reportUser: async (token, id, data) => {
@@ -44,14 +54,21 @@ export const ReviewsService = {
             payload : data
         }
 
-        return await Request.post('tenant/reviews/edit', option)
+        return await Request.post('reviews/edit', option)
     },
 
-    deleteReviews: async (token, id) => {
+    deleteReviews: async (token, id, role) => {
         const config = {
             headers: authHeaders(token)
         }
-        return await Request.get(`tenant/reviews/delete/${id}`, config)
+        return await Request.get(`reviews/delete/${id}?role=${role}`, config)
+    },
+
+    deleteAgentReviews : async (token, id, role) => {
+        const config = {
+            headers: authHeaders(token)
+        }
+        return await Request.get(`reviews/agent/delete/${id}?role=${role}`, config)
     }
 
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export const ListingSuspensionNotificationItem = ({notification}) => {
     return (
@@ -13,7 +14,7 @@ export const ListingSuspensionNotificationItem = ({notification}) => {
                         <p className="fs-13 mb-1 lh-13">{notification.message}</p>
                     </div>
                     <div className="p-0 d-flex justify-content-between">
-                        <small><a href={`/support`} className="pr-1 btn-link text-primary fs-12">Support Center</a></small>
+                        <small><Link to={`/support`} className="pr-1 btn-link text-primary fs-12">Support Center</Link></small>
                         <small className="text-right">{notification.created_at}</small>
                     </div>
                 </div>

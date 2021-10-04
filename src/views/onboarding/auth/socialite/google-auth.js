@@ -3,19 +3,17 @@ import React from 'react'
 import GoogleLogin from 'react-google-login'
 import { useDispatch } from 'react-redux'
 
-export default function GoogleAuth({user}) {
+export default function GoogleAuth({setShow, setAction}) {
 
     const dispatch = useDispatch()
     
     const responseGoogle = (response) => {
-        const data = {
-            payload: {
-              driver: 'google',
-              data: response,
-              type: user
-            }
+        const data = {  
+            ...response, 
+            driver: 'google', 
         }
-        dispatch(SocialAuth(data));
+        setShow(true)
+        setAction({type: 'social', data: data})
     }
 
     return (

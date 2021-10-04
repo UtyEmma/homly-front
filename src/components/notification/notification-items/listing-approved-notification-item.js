@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export const ListingApprovedNotificationItem = ({notification}) => {
     return (    
@@ -11,7 +12,7 @@ export const ListingApprovedNotificationItem = ({notification}) => {
 
                     <div className="col text-wrap pe-2">
                         <p className="fs-13 mb-0 lh-13">
-                            <a className="fs-13 lh-13 btn-link text-primary" title="View Property" href={`my-listings/${notification.slug}`}>{notification.title}</a> has been approved.
+                            <Link className="fs-13 lh-13 btn-link text-primary" title="View Property" to={`my-listings/${notification.slug}`}>{notification.title}</Link> has been approved.
                         </p>
                         <div className="p-0 d-flex justify-content-end">
                             <small className="text-right">{notification.created_at}</small>

@@ -27,7 +27,7 @@ export default function SelectListingCategory({title, defaultValue, register, fo
                 
                 <select className={classes}  title="Category" defaultValue={defaultValue} data-style={styles} id={id} onChange={onChange} name={name}>
                     {categories.map((category, index) => (
-                        <option value={category.category_title} key={index}>{category.category_title}</option>
+                        <option className="text-capitalize" value={category.category_title} key={index}>{category.category_title}</option>
                     ))}
                 </select>
 
@@ -58,7 +58,7 @@ export function SelectTypes ({id, classes, styles, onChange, name}){
 
                 <select className={classes}  title="Category" data-style={styles} id={id} onChange={onChange} name={name}>
                     {categories.map((category, index) => (
-                        <option value={category.category_title} key={index}>{category.category_title}</option>
+                        <option className="text-capitalize" value={category.category_title} key={index}>{category.category_title}</option>
                     ))}
                 </select>
             }
@@ -91,7 +91,7 @@ export function SearchbarSelectListing ({onChange, name}) {
                 <select name={name} className="form-control shadow-none form-control-lg rounded-right-md-0  rounded flex-md-1 mt-3 mt-md-0 selectpicker" title="Select Category" data-style="btn-lg py-2 h-52 border-right bg-white" onChange={onChange} id="type" name="type">
                     <option defaultValue="" value="">All Categories</option>
                     {categories.map((category, index) => (
-                        <option value={category.category_title} key={index}>{category.category_title}</option>
+                        <option className="text-capitalize" value={category.category_title} key={index}>{category.category_title}</option>
                     ))}
                 </select>
             }

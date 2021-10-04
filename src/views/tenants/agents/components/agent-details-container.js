@@ -1,21 +1,19 @@
 import RatingStar from 'components/rating/rating-star'
 import { AgentSocialMediaLinks } from 'components/social-media/agent-social-media-links'
 import { DeleteItem, SuspendItem, VerifyAgent } from 'providers/redux/_actions/admin-actions'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { ConfirmActionDialog } from 'views/layouts/components/modals/confirm-action-dialog'
 import AgentsListings from './agent-listings/agent-listings'
 import AgentReviews from './agent-reviews/agent-reviews'
 
-export default function AgentDetailsContainer({agent, listings, reviews, fetchAgent, status, setAgentData, setIsLoading}) {
+export default function AgentDetailsContainer({agent, listings, reviews, status, setIsLoading}) {
     
     const dispatch = useDispatch()
 
     const {adminMode} = useSelector((state) => state.admin_mode)
     const {loading, data} = useSelector(state => state.suspend_item)
-    // const {loading, data} = useSelector(state => state.delete_item)
-    const {verifiedAgent} = useSelector(state => state.verify_agent)
     const {token} = useSelector((state) => state.user_data)
     
     const [show, setShow] = useState(false)
@@ -28,14 +26,22 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
 
     const callback = () => {
         if (action === 'suspend') {
-            return dispatch(SuspendItem(token, 'agent', agent.unique_id))   
+            dispatch(SuspendItem(token, 'agent', agent.unique_id))   
         }else if(action === 'delete'){
-            return dispatch(DeleteItem(token, 'agent', agent.unique_id, `/agents`))
+            dispatch(DeleteItem(token, 'agent', agent.unique_id, `/agents`))
+        }else if (action === 'verify'){
+            dispatch(VerifyAgent(token, agent.unique_id))
         }
+    }
+    
+    const deleteAgent = () => {
+        setAction('delete')
+        setShow(true)
     }
 
     const verifyAgent = () => {
-        dispatch(VerifyAgent(token, agent.unique_id))
+        setAction('verify')
+        setShow(true)
     } 
 
     useEffect(() => {
@@ -46,10 +52,6 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
         data && setShow(false)
     }, [data])
 
-    const deleteAgent = () => {
-        setAction('delete')
-        setShow(true)
-    }
 
     return (
         <>
@@ -145,7 +147,7 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                                 <> 
                                     <hr/>
                                 
-                                    <div className="">
+                                    <div>
                                         {
                                             
                                             !agent.verified
@@ -171,7 +173,7 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                                 <div className="text-lead fs-20 text-dark mb-6 mt-n2 font-weight-600">Boost your visibility as
                                 <p className="mb-0 fs-18">a Real Estate Agent?</p>
                                 </div>
-                                <a href="/agent-signup" className="btn btn-primary">Sign up Now</a>
+                                <a href="/signup" className="btn btn-primary">Sign up Now</a>
                             </div>
                         </div>
                     </div>
@@ -183,11 +185,26 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
                         <h3 className="card-title text-heading fs-16 lh-213">
                             About {agent.firstname} {agent.lastname}
                         </h3>
-                        <p className="lh-214 mb-6">{agent.bio}</p>
+                        {
+                            agent.bio
+                            
+                            ?
+
+                            <p className="lh-214 mb-6">{agent.bio}</p>
+
+                            :
+
+                            <div className="p-5 text-center rounded">
+                                <div className="col-8 offset-2 col-md-4 offset-md-4">
+                                    <img src="/images/svg/user.svg" alt="user-bio" className="img-fluid" />
+                                </div>
+                                <h3 className="fs-18 fs-md-24 text-heading font-weight-600 mt-3">No Available Data</h3>
+                            </div>
+                        }
                         </div>
                     </div>
                     
-                    <AgentsListings listings={listings} setIsLoading={setIsLoading} />
+                    <AgentsListings listings={listings} setIsLoading={setIsLoading} status={status} />
 
                     <AgentReviews status={status} reviews={reviews} agent={agent} setIsLoading={setIsLoading} />
                 </div>
@@ -196,6 +213,6 @@ export default function AgentDetailsContainer({agent, listings, reviews, fetchAg
             </section>
             
             <ConfirmActionDialog show={show} setShow={setShow} callback={callback} />
-                </>
+        </>
     )
 }

@@ -3,10 +3,6 @@ import { SelectAmenities } from 'views/layouts/components/details/amenities'
 
 export default function ListingAmenities({amenities, formErrors}) {
 
-    // useEffect(() => {
-    //     if(amenities) console.log(typeof(amenities))
-    // }, [amenities])
-
     return (
         <div className="tab-pane tab-pane-parent fade px-0" id="amenities" role="tabpanel" aria-labelledby="amenities-tab">
             <div className="card bg-transparent border-0">

@@ -17,6 +17,8 @@ const AgentWishlist = ({agent, setIsLoading}) => {
     const user_data = useSelector(state => (state.user_data))
     const {token} = user_data
 
+    const href = window.location.href
+
     const [show, setShow] = useState(false);
     const [details, setDetails] = useState()
     
@@ -25,8 +27,8 @@ const AgentWishlist = ({agent, setIsLoading}) => {
     }, [dispatch, token])
 
     useEffect(() => {
-        !wishlists && FetchWishlist()
-    }, [FetchWishlist, wishlists]);
+        FetchWishlist()
+    }, [href]);
 
     useEffect(() => {
         setIsLoading(loading)

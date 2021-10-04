@@ -1,3 +1,4 @@
+import { RichTextEditor } from "components/rich-text/rich-text-editor"
 import SelectListingCategory from "views/layouts/components/details/categories"
 
 export const UpdateListingDescription = ({listing, formErrors}) => {
@@ -22,7 +23,7 @@ export const UpdateListingDescription = ({listing, formErrors}) => {
                             </div>
                             <div className="form-group mb-0">
                             <label htmlFor="description-01" className="text-heading">Description</label>
-                            <textarea className="form-control border-0" rows={5} defaultValue={listing?.description} name="description" id="description-01" />
+                            <RichTextEditor name="description" defaultContentState={listing?.description} editorClassName="form-control border-0" />
                             <p className="text-danger fs-12">{formErrors.description?.message}</p>
                             </div>
                         </div>

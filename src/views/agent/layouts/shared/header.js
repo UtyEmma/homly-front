@@ -1,17 +1,8 @@
 import { NotificationBell } from 'components/notification/notification'
-import ProfileButton, { AgentNavItems } from 'components/shared/profile-btn/profile-button'
-import { AgentLogout } from 'providers/redux/_actions/agent-actions'
+import { AgentNavItems } from 'components/shared/profile-btn/profile-button'
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 
-export default function Header({agent}) {
-    const dispatch = useDispatch()
-    const {token} = useSelector(state => state.user_data)
-
-    const logout = () => {
-        dispatch(AgentLogout(token))
-    }
-
+export default function Header({agent, setIsLoading}) {
     return (
         <header className="main-header shadow-none shadow-lg-xs-1 bg-white position-relative d-none d-xl-block">
             <div className="container-fluid">
@@ -32,16 +23,12 @@ export default function Header({agent}) {
                                         </div>
                                     }
                                 </div>
-                                <div className="fs-13 font-weight-500 lh-1">
-                                    Hello {agent.firstname}
+                                <div className="fs-14 font-weight-500 lh-1">
+                                    <b>Hi, {agent.firstname}</b>
                                 </div>
                             </button>
                             <div className="dropdown-menu dropdown-menu-right w-100">
                                 <AgentNavItems />
-                                <button className="dropdown-item btn btn-secondary rounded py-2 align-middle" type="button" onClick={logout} >
-                                    <i className="fa fa-door-open mr-3 text-primary"></i>
-                                    Logout
-                                </button>
                             </div>
                         </div>
                         

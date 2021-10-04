@@ -41,11 +41,11 @@ export default function ListingFilter({params, setParams}) {
                         <div className="form-group p-1">
                             <label htmlFor="any-price" className="sr-only">Any Price</label>
                             <select className="form-control border-0 shadow-none shadow-xxs-1 bg-white font-weight-600" title="Price" onChange={parseQueryParams} name="price" data-style="bg-white" id="any-price">
-                                <option defaultValue="0">Under &#8358;200k</option>
-                                <option defaultValue="1">&#8358;200k - &#8358;400k</option>
-                                <option defaultValue="2">&#8358;400k - &#8358;800k</option>
-                                <option defaultValue="3">&#8358;800k - &#8358;2M</option>
-                                <option defaultValue="4">Over &#8358;2M</option>
+                                <option value="1">Under &#8358;200k</option>
+                                <option value="2">&#8358;200k - &#8358;400k</option>
+                                <option value="3">&#8358;400k - &#8358;800k</option>
+                                <option value="4">&#8358;800k - &#8358;2M</option>
+                                <option value="5">Over &#8358;2M</option>
                             </select>
                         </div>
                         <div className="form-group p-1">

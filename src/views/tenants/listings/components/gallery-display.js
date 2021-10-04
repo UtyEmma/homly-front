@@ -31,8 +31,8 @@ export default function GalleryDisplay({images, title}) {
                                 <div className="box" key={index}>
                                     <div className="item item-size-3-2">
                                         <div className="card p-0 hover-change-image">
-                                            <div className="card-img rounded">
-                                                <img src={image} className="rounded img-fluid" style={{objectFit: 'cover'}}  alt={title}  />
+                                            <div className="card-img rounded w-100">
+                                                <img src={image} className="rounded img-fluid"  style={{objectFit: 'cover', minWidth: '100%'}}  alt={title}  />
                                             </div>
                                         </div>
                                     </div>

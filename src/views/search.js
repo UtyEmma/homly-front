@@ -9,6 +9,8 @@ import ListingGrid from './tenants/listings/components/listing-grid';
 import { SearchListingsMap } from 'components/maps/multiple-markers';
 import { SearchListings } from 'providers/redux/_actions/search-actions';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
+import { SearchNotFound } from 'components/404/404-search';
 
 const QueryString =  require('query-string')
 
@@ -16,24 +18,24 @@ const Search = ({isLoggedIn, user, setIsLoading, status}) => {
 
     const location = useLocation()
     const dispatch = useDispatch()
+    const href = window.location.href
+
     const parsed = QueryString.parse(location.search);
 
-    const results = useSelector((state) => state.search)
-    const {loading, result} = results
+    const {loading, result} = useSelector((state) => state.search)
 
     const search = () => {
         dispatch(SearchListings(parsed));
     }
-
+    
     useEffect(() => {
-        !result && search()
-    }, [result])
-
-    useEffect(() => {
-        console.log(loading)
         setIsLoading(loading)
-    }, [loading])
-        
+    }, [loading, setIsLoading])
+    
+    useEffect(() => {
+        search()
+    }, [href])
+
     return (
         <div>
             <Helmet>
@@ -62,46 +64,42 @@ const Search = ({isLoggedIn, user, setIsLoading, status}) => {
 
             <section className="position-relative">
                 <div className="container-fluid px-0">
-                <div className="row no-gutters">
-                    <div className="col-xl-6 col-xxl-5 px-3 px-xxl-6 pt-7 order-2 order-xl-1 pb-11">
-                    <div className="row align-items-sm-center mb-6">
-                        <div className="col-md-6 col-xl-5 col-xxl-6">
-                            <h2 className="fs-15 text-dark mb-0">We found <span className="text-primary">{result && result.total}</span> properties
-                                available for you
-                            </h2>
+                    {
+                        result && result.length > 0
+
+                        ?
+
+                        <div className="row no-gutters">
+                            <div className="col-xl-6 col-xxl-5 px-3 px-xxl-6 pt-7 order-2 order-xl-1 pb-11">
+                                <div className="row align-items-sm-center mb-6">
+                                    <div className="col-12">
+                                        <h2 className="fs-15 text-dark mb-0">We found <span className="text-primary">{result ? result.length : 0 }</span> properties available for you
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                
+                                    {
+                                        result.map((listing, index) => {
+                                            return (
+                                                <ListingGrid listing={listing} key={index} status={status} />
+                                            )
+                                        })
+
+                                    }  
+                                </div>
+                            </div>
+                            <div className="col-xl-6 col-xxl-7 order-1 order-xl-2 primary-map map-sticky overflow-hidden" id="map-sticky">
+                                <div className="primary-map-inner"> 
+                                    <SearchListingsMap zoom={11} listings={result}/>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div className="row">
-                       
-                        {
-                            result
 
-                            &&
+                        :
 
-                            result.map((listing, index) => {
-                                return (
-                                    <ListingGrid listing={listing} key={index} />
-                                )
-                            })
-                        }
-
-                            
-                    </div>
-                    </div>
-                    <div className="col-xl-6 col-xxl-7 order-1 order-xl-2 primary-map map-sticky overflow-hidden" id="map-sticky">
-                    <div className="primary-map-inner">
-                        {
-                        
-                            result && result.length > 0
-
-                            && 
-
-                            <SearchListingsMap zoom={11} listings={result}/>
-                        
-                        }
-                    </div>
-                    </div>
-                </div>
+                        <SearchNotFound />
+                    }
                 </div>
             </section>
             

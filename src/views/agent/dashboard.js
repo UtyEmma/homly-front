@@ -6,6 +6,11 @@ import { AddUsernameModal } from './layouts/dashboard/add-username-modal'
 import { NotificationContainer } from './layouts/notifications/notification-container'
 
 const AgentDashboard = ({agent, setIsLoading}) => {
+
+    function capitalize(str) {
+        const lower = str.toLowerCase();
+        return str.charAt(0).toUpperCase() + lower.slice(1);
+      }
     
     useEffect(() => {
         setIsLoading(false)
@@ -36,13 +41,13 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                 <Sidebar setIsLoading={setIsLoading} agent={agent} />
 
                 <div className="page-content">
-                    <Header agent={agent}/>
+                    <Header setIsLoading={setIsLoading} agent={agent}/>
                         <main id="content" className="bg-gray-01">
                             <div className="px-3 px-lg-6 px-xxl-13 py-5 py-lg-10">
                                 <div className="d-flex flex-wrap flex-md-nowrap mb-6">
                                     <div className="mr-0 mr-md-auto">
-                                        <h2 className="mb-0 text-heading fs-22 lh-15">Welcome back, {agent.firstname} {agent.lastname}!</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At iusto, laboriosam. Atque</p>
+                                        <h2 className="mb-0 text-heading fs-22 lh-15">Good morning, { capitalize(agent.firstname)} </h2>
+                                        <p>What would you like to do, today?</p>
                                     </div>
                                     <div>
                                         <a href="/new-listing" className="btn btn-primary btn-lg">
@@ -85,13 +90,13 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                                         </span>
                                         </div>
                                         <div className="col-7 text-center">
-                                        <p className="fs-42 lh-12 mb-0 counterup" data-start={0} data-end={agent.no_of_listings} data-decimals={0} data-duration={0} data-separator>{agent.no_of_listings}</p>
+                                        <p className="fs-42 lh-12 mb-0">{agent.no_of_listings}</p>
                                         <p>Properties</p>
                                         </div>
                                     </div>
                                     </div>
                                 </div>
-                                <div className="col-sm-6 col-xxl-3 mb-6">
+                                {/* <div className="col-sm-6 col-xxl-3 mb-6">
                                     <div className="card">
                                     <div className="card-body row align-items-center px-6 py-7">
                                         <div className="col-5">
@@ -105,7 +110,7 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                                         </div>
                                     </div>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="col-sm-6 col-xxl-3 mb-6">
                                     <div className="card">
                                     <div className="card-body row align-items-center px-6 py-7">
@@ -115,7 +120,7 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                                         </span>
                                         </div>
                                         <div className="col-8 text-center">
-                                        <p className="fs-42 lh-12 mb-0 counterup" data-start={0} data-end={329} data-decimals={0} data-duration={0} data-separator>{agent.no_reviews}</p>
+                                        <p className="fs-42 lh-12 mb-0">{agent.no_reviews}</p>
                                         <p>Total Reviews</p>
                                         </div>
                                     </div>
@@ -139,7 +144,7 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                                 </div>
                                 </div>
 
-                                   <NotificationContainer />
+                                <NotificationContainer />
 
                                 <div className="row">
                                 <div className="col-xxl-8 mb-6">

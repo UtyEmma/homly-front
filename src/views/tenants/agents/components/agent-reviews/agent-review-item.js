@@ -1,20 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import RatingStar from 'components/rating/rating-star';
-import { useDispatch } from 'react-redux';
-import { DeleteReview, EditReview } from 'providers/redux/_actions/review-actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { DeleteAgentReview, EditReview } from 'providers/redux/_actions/review-actions';
 
-export default function AgentReviewItem({review, publisher}) {
+export default function AgentReviewItem({userHasReviewed, setUserHasReviewed, review, publisher}) {
     const dispatch = useDispatch()
 
+    const {token, type} = useSelector(state => state.user_data)
+    const {reviews} = useSelector(state => state.delete_review)
+
     const deleteReview = () => {
-        dispatch(DeleteReview(review.unique_id))
+        dispatch(DeleteAgentReview(token, review.unique_id, type))
     }
 
     const editPropertyReview = (e) => {
         e.preventDefault()
         const formData = new FormData(e.target)
-        dispatch(EditReview(formData))
+        formData.append('role', type)
+        dispatch(EditReview(token, formData))
     }
+
+    useEffect(() => {
+        review.owned_by_user && setUserHasReviewed(true)   
+    })
+
+    useEffect(() => {
+        let status = !!reviews;
+        status && setUserHasReviewed(!userHasReviewed)
+    }, [reviews, setUserHasReviewed, userHasReviewed])
 
     return (
         <>
@@ -22,7 +35,7 @@ export default function AgentReviewItem({review, publisher}) {
                 <div className="w-82px h-82 mr-2 bg-gray-01 rounded-circle fs-25 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
                     {
                         publisher.avatar 
-                            ? <img src={publisher.avatar} alt={`${publisher.firstname} ${publisher.lastname}`} /> : 
+                            ? <img src={publisher.avatar} className="rounded-circle" style={{objectFit: "cover", minHeight: '100%', minWidth: '100%'}} alt={`${publisher.firstname}`} /> : 
                                 `${publisher.firstname.charAt(0).toUpperCase()}${publisher.lastname.charAt(0).toUpperCase()}`
                     }
                 </div>
@@ -60,7 +73,7 @@ export default function AgentReviewItem({review, publisher}) {
                             <div className="btn-group ">
                                 <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn p-0 mb-0 text-muted border-left border-dark dropdown hover-primary lh-1 ml-2 pl-2"><i className="fa fa-edit"></i></button>
 
-                                <div className="dropdown-menu dropdown-menu-lg dropdown-menu-left mb-2">
+                                <div className="dropdown-menu dropdown-menu-md dropdown-menu-right mb-2">
                                     <div className="py-2 px-3">
                                         <h3 className="fs-16 lh-2 text-heading mb-2">Edit Review</h3>
     

@@ -10,9 +10,9 @@ export const __agent_updateProfile = {
         bio : 'string',
         state : 'string',
         city : 'string',
-        facebook : 'url',
-        instagram : 'url',
-        twitter : 'url',
+        facebook : 'string',
+        instagram : 'string',
+        twitter : 'string',
         website : 'url',
     },
 
@@ -38,33 +38,13 @@ export const __agent_updateProfile = {
 } 
 
 
-export const __agent_signup = {
+
+export const __agent_updateUsername = {
     rules: {
-        firstname: 'required|string',
-        lastname: 'required|string',
-        email: 'required|email',
-        password: 'required|confirmed|min:6',
-        username: 'required|string|between:3,12'
+        username: 'required|string|between:3,12',
     },
-
-    messages: {
-        // "required.firstname" : "Your Firstname is Required",
-        // "string;firstname"
-    }
- 
-}
-
-
-export const __agent_login = {
-    rules: {
-        email: 'required|email',
-        password: 'required'
-    },
-
-    messages: {},
 
     attributes: {
-        email: 'Email Address',
-        password: 'Password'
+        username: 'Username'
     }
 }

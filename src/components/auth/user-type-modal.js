@@ -1,21 +1,28 @@
 import { SocialAuth } from "providers/redux/_actions/auth-action";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
+import { useEffect } from "react";
 
 export const SelectUserTypeModal = ({show, setShow, auth_data, setIsLoading}) => {
 
     const dispatch = useDispatch()
+    const {loading} = useSelector((state) => state.social)
 
     const handleAuth = (user) => {
         const data = {
             payload: {
-                driver: 'google',
-                data: auth_data,
+                ...auth_data, 
+                driver: 'google', 
                 type: user
             }
         }
         dispatch(SocialAuth(data));
+        setShow(false)
     }
+
+    useEffect(() => {
+        setIsLoading(loading)
+    }, [loading, setIsLoading])
 
     return (
         <Modal show={show} size="lg" centered onHide={() => {setShow(false)}}>

@@ -3,20 +3,24 @@ import React from 'react'
 export default function WishlistNotFound() {
     return (
         <>
-          <div className="col-12">
+            <div className="col-12 p-5 py-15 px-md-10 bg-white">
                 <div className="row">
-                    <div className="mx-3 card border-0 text-center py-3">
-                        <div className="card-body px-md-15 py-6">
-                            <div className="px-md-10">
-                            <img src="images/svg/house-search.svg" alt="Wishlist Not Found" className="img-fluid mb-5"/>
-                            </div>
-                            <h3 className="text-lead">There are no Wishlist's at this time!!! Please check back later.</h3>
-                            {/* <p className="card-text fs-20">Want to become an agent?.</p> */}
-                            {/* <a href="/agent-signup" className="btn btn-primary">Register as an Agent</a> */}
+                    <div className="col-md-6  d-flex justify-content-center">
+                        <img src="/images/svg/neighboorhood.svg" alt="" />
+                    </div>
+                    <div className="col-md-6 rounded mt-3 mt-md-0 pl-5 bg-light py-7 text-center text-md-left d-flex justify-content-center flex-column">
+                        <h3 className="font-weight-bold mb-0 fs-22 fs-md-26">There are no results for you at this time!</h3>
+
+                        <p className="fs-16 mt-3 mb-0">Whenever someone creates a wishlist around your area, you will be the first to know</p>
+
+                        <div className="">
+                            <a href="/new-listing" className="btn btn-lg text-secondary btn-accent rounded-lg mt-6">
+                                My Properties <i className="far fa-long-arrow-right ml-1" />
+                            </a>
                         </div>
                     </div>
                 </div>
-            </div>  
+            </div>
         </>
     )
 }

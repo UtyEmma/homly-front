@@ -7,11 +7,11 @@ import NavBar from 'components/shared/nav-bar'
 import AddWishlistBtn from './components/add-wishlist-btn'
 import WishlistItem from './components/wishlist-item'
 import WishlistForm from './components/wishlist-form'
-import './css/wishlist.css'
 import { FetchWishlist } from 'providers/redux/_actions/wishlist-actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { Helmet } from 'react-helmet'
 import { WishlistModal } from './components/wishlist-modal'
+import './css/wishlist.css'
 
 const Wishlist = ({isLoggedIn, user, setIsLoading, status}) => {
 
@@ -20,8 +20,7 @@ const Wishlist = ({isLoggedIn, user, setIsLoading, status}) => {
     const [show, setShow] = useState()
     const [details, setDetails] = useState()
 
-    const fetchWishlist = useSelector((state) => state.wishlists)
-    const {loading, wishlists} = fetchWishlist
+    const {loading, wishlists} = useSelector((state) => state.wishlists)
 
     const user_data = useSelector(state => (state.user_data))
     const {token} = user_data
@@ -33,10 +32,6 @@ const Wishlist = ({isLoggedIn, user, setIsLoading, status}) => {
     useEffect(() => {
         setIsLoading(loading)
     }, [loading, setIsLoading])
-
-    useEffect(() => {
-        
-    }, [wishlists])
 
     useEffect(() => {
         !wishlists && loadWishlists()
@@ -90,7 +85,7 @@ const Wishlist = ({isLoggedIn, user, setIsLoading, status}) => {
                                 
                                 &&
 
-                                wishlists.wishlists.map((wishlist, index) => (
+                                wishlists.wishlists.map((wishlist) => (
                                     <WishlistItem setDetails={setDetails} setShow={setShow} item={wishlist} key={wishlist.unique_id} />
                                 ))
                             }       

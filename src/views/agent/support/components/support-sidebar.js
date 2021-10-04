@@ -14,7 +14,6 @@ export const SupportCenterSidebar = ({setShow, titles, setTitles, setIsLoading})
     const user_data = useSelector(state => (state.user_data))
     const {token} = user_data
 
-
     const fetchTicket = useCallback(() => {
         dispatch(FetchTickets(token));
     }, [dispatch, token])

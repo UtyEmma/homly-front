@@ -6,10 +6,12 @@ import { Helmet } from 'react-helmet';
 import GoogleAuth from './socialite/google-auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { RecoverPassword } from 'providers/redux/_actions/auth-action';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { __recover_password } from 'libraries/validation/schema/auth-schema';
 import { MapFormErrors } from 'libraries/validation';
 import Validator from 'validatorjs';
+import { FacebookAuth } from './socialite/facebook-auth';
+import { SelectRoleModal } from './components/select-role-modal';
 
 export default function PasswordRecovery ({setIsLoading}) {
     
@@ -18,24 +20,16 @@ export default function PasswordRecovery ({setIsLoading}) {
 
     const [formErrors, setFormErrors] = useState({})
 
-    useEffect(() => {
-        setIsLoading(false)
-    })
+    const [show, setShow] = useState(false)
+    const [action, setAction] = useState()
 
+    
     const recover_password = useSelector((state) => state.recover_password) 
     const {loading, success, error} = recover_password
-
-    const {rules, messages, attributes} = __recover_password
-
-
-    useEffect(() => {
-        setIsLoading(loading)
-    }, [loading])
-
-    useEffect(() => {
-        success && history.push('/reset-password')
-    }, [success])
-
+    
+    const {rules, attributes} = __recover_password
+    
+    
     const submitRecoveryRequest = (e) => {
         e.preventDefault()
         const data = new FormData(e.target)
@@ -49,6 +43,18 @@ export default function PasswordRecovery ({setIsLoading}) {
             dispatch(RecoverPassword(values))
         }
     }
+    
+    useEffect(() => {
+        setIsLoading(false)
+    })
+
+    useEffect(() => {
+        setIsLoading(loading)
+    }, [loading])
+
+    useEffect(() => {
+        success && history.push('/reset-password')
+    }, [success])
     
     return (
         <div>
@@ -66,8 +72,8 @@ export default function PasswordRecovery ({setIsLoading}) {
                         <div className="card border-0 shadow-xxs-2 login-register">
                             <div className="card-body p-6">
                             <h2 className="card-title fs-30 font-weight-600 text-dark lh-16 mb-2">Forgot your password?</h2>
-                            <p className="mb-4">Don’t have an account yet? <a href="signup/" className="text-heading hover-primary"><u>Sign
-                                    up for free</u></a></p>
+                            <p className="mb-4">Don’t have an account yet? <Link to="/signup" className="text-heading hover-primary"><u>Sign
+                                    up for free</u></Link></p>
                             <form className="form" onSubmit={submitRecoveryRequest}>
                                 <div className="form-group">
                                     <label htmlFor="email" className="text-heading">Enter your email address</label>
@@ -101,13 +107,10 @@ export default function PasswordRecovery ({setIsLoading}) {
                             </div>
                             <div className="row no-gutters mx-n2">
                                 <div className="col-sm-6 px-2 mb-4">
-                                    <a href="#" className="btn btn-lg btn-block text-heading border px-0 rounded bg-hover-accent">
-                                        <img src="images/facebook.png" alt="Google" className="mr-2" />
-                                        Facebook
-                                    </a>
+                                    <FacebookAuth setShow={setShow} action={action} setAction={setAction} />
                                 </div>
                                 <div className="col-sm-6 px-2 mb-4">
-                                    <GoogleAuth />
+                                    <GoogleAuth setShow={setShow} action={action} setAction={setAction} />
                                 </div>
                             </div>
                             </div>
@@ -119,6 +122,8 @@ export default function PasswordRecovery ({setIsLoading}) {
                 </main>
 
             <Footer />
+
+            <SelectRoleModal show={show} setShow={setShow}  setIsLoading={setIsLoading} action={action}  />
             
         </div>
     )

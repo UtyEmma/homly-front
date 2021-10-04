@@ -20,9 +20,8 @@ export const GoogleOneTapAuth = ({setIsLoading}) => {
                 !user
 
                 &&
-
-                <GoogleOneTapLogin onError={(error) => console.log(error)} onSuccess={(res) => handleSuccess(res)} googleAccountConfigs={{ client_id: process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}} ></GoogleOneTapLogin>
                 
+                <GoogleOneTapLogin onError={(error) => console.log(error)} onSuccess={(res) => handleSuccess(res)} googleAccountConfigs={{ client_id: process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}} />
             }
 
             <SelectUserTypeModal setIsLoading={setIsLoading} show={show} setShow={setShow} auth_data={data}/>

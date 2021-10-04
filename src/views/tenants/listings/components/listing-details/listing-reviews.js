@@ -4,17 +4,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import ListingReviewForm from '../listing-reviews/listing-review-form'
 import ListingReviewItem from '../listing-reviews/listing-review-item'
 
-export default function ListingReviews({listing_id, status}) {
+export default function ListingReviews({listing_id, status, listing}) {
     const dispatch = useDispatch()
 
     const {reviews} = useSelector((state) => state.listing_reviews)
-    const {token} = useSelector((state) => state.user_data)
+    const {token, user} = useSelector((state) => state.user_data)
 
     const [userHasReviewed, setUserHasReviewed] = useState(false)
 
     const loadReviews = useCallback(() => {
-        dispatch(FetchReview(token, listing_id))
-    }, [dispatch, listing_id, token]) 
+        dispatch(FetchReview(token, listing_id, status ?? ''))
+    }, [dispatch, listing_id, status, token]) 
 
     useEffect(() => {
         !reviews && loadReviews()
@@ -37,7 +37,7 @@ export default function ListingReviews({listing_id, status}) {
 
                         reviews.map((review, index) => {
                             return (
-                                <ListingReviewItem userHasReviewed={userHasReviewed} setUserHasReviewed={setUserHasReviewed} key={review.unique_id} publisher={review.publisher} review={review.review} />
+                                <ListingReviewItem status={status} userHasReviewed={userHasReviewed} setUserHasReviewed={setUserHasReviewed} key={review.unique_id} publisher={review.publisher} review={review.review} />
                             )
                         })
 
@@ -57,12 +57,26 @@ export default function ListingReviews({listing_id, status}) {
             </section>
 
             {
-                !userHasReviewed
+                user
 
-                &&
+                ?
 
-                <ListingReviewForm setUserHasReviewed={setUserHasReviewed} listing_id={listing_id} status={status} />
-            
+                <>
+                    {
+                        userHasReviewed || user.unique_id === listing.agent_id
+
+                        ?
+
+                        ""
+                        :
+
+                        <ListingReviewForm setUserHasReviewed={setUserHasReviewed} listing_id={listing_id} status={status} />
+                    }
+                </>
+                
+                :
+
+                ""
             }
         </>
     )

@@ -40,12 +40,17 @@ const WishlistForm = ({setIsLoading}) => {
     }  
 
     useEffect(() => {
-        wishlist && window.location.reload()
         wishlist && document.getElementById('create_wishlist_form').reset()
-    }, [wishlist])    
+    }, [wishlist])   
 
     useEffect(() => {
-        setStepper(new Stepper(document.getElementById('wishlist-stepper'), { linear: false, animation: true }));
+        !stepper && setStepper(new Stepper(document.getElementById('wishlist-stepper'), {
+            linear: false,
+            animation: true
+        }));
+    }, [stepper])
+
+    useEffect(() => {
         setIsLoading(loading)
     }, [loading, setIsLoading])
 
@@ -82,7 +87,6 @@ const WishlistForm = ({setIsLoading}) => {
                     <form className="form" onSubmit={handleSubmit} id="create_wishlist_form">
                         <div id="property-info" className="content p-0" role="tabpanel" aria-labelledby="property-info-trigger" >
                             <div className="row p-0">
-                                
                                 <div className="col-sm-12 px-2">
                                     <div className="form-group">
                                         <label htmlFor="desc">I am looking for...</label>
@@ -167,7 +171,7 @@ const WishlistForm = ({setIsLoading}) => {
                                 <div className="col-sm-12 px-2">
                                     <div className="form-group">
                                         <label htmlFor="budget" className="text-heading">Budget</label>
-                                        <input type="number" name="budget" className="form-control  border-0" id="budget" placeholder="10000" />
+                                        <input type="text" name="budget" className="form-control  border-0" id="budget" placeholder="10000" />
                                         <p className="text-danger fs-12 mt-1">{formErrors.budget?.message}</p>
                                     </div>
                                 </div>
@@ -175,7 +179,7 @@ const WishlistForm = ({setIsLoading}) => {
                                 <div className="col-md-12 px-2">
                                     <div className="form-group">
                                         <label htmlFor="amenities" className="text-heading">Select Amenities</label>
-                                        <TagifyAmenities message="Amenities" name="amenities[]" val={amenity} setValue={setAmenity} label="Amenities" />   
+                                        <TagifyAmenities message="Amenities"  name="amenities[]" val={amenity} setValue={setAmenity} label="Amenities" />   
                                         <p className="text-danger fs-12 mt-1">{formErrors.amenities?.message}</p>
                                     </div>
                                 </div>

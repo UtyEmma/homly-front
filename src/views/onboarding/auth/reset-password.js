@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react'
 import Footer from 'components/shared/footer';
 import NavBar from 'components/shared/nav-bar';
 import { useEffect } from 'react';
@@ -10,6 +10,8 @@ import GoogleAuth from './socialite/google-auth';
 import { __reset_password } from 'libraries/validation/schema/auth-schema';
 import Validator from 'validatorjs';
 import { MapFormErrors } from 'libraries/validation';
+import { FacebookAuth } from './socialite/facebook-auth';
+import { SelectRoleModal } from './components/select-role-modal';
 
 export default function ResetPassword ({setIsLoading}) {
     
@@ -18,24 +20,16 @@ export default function ResetPassword ({setIsLoading}) {
 
     const [formErrors, setFormErrors] = useState({})
 
-    useEffect(() => {
-        setIsLoading(false)
-    })
+    const [show, setShow] = useState(false)
+    const [action, setAction] = useState()
 
+    
     const reset_password = useSelector((state) => state.reset_password) 
-    const {loading, success, error} = reset_password
-
-    useEffect(() => {
-        success === 'tenant' && history.push('/login')
-        success === 'agent' && history.push('/agent-login')
-    }, success)
-
-    useEffect(() => {
-        setIsLoading(loading)
-    }, [loading])
-
-    const {rules, messages, attributes} = __reset_password
-
+    const {loading, success} = reset_password
+    
+    
+    const {rules, attributes} = __reset_password
+    
     const submitPasswordReset = (e) => {
         e.preventDefault()
         const data = new FormData(e.target)
@@ -50,6 +44,18 @@ export default function ResetPassword ({setIsLoading}) {
         }
     }
     
+    useEffect(() => {
+        success && history.push('/login?msg=Password Reset Successful')
+    }, [success])
+    
+    useEffect(() => {
+        setIsLoading(false)
+    })
+
+    useEffect(() => {
+        setIsLoading(loading)
+    }, [loading])
+
     return (
         <div>
             <Helmet>
@@ -114,13 +120,10 @@ export default function ResetPassword ({setIsLoading}) {
                             </div>
                             <div className="row no-gutters mx-n2">
                                 <div className="col-sm-6 px-2 mb-4">
-                                <a href="#" className="btn btn-lg btn-block text-heading border px-0 rounded bg-hover-accent">
-                                    <img src="images/facebook.png" alt="Google" className="mr-2" />
-                                    Facebook
-                                </a>
+                                <FacebookAuth setShow={setShow} action={action} setAction={setAction} />
                                 </div>
                                 <div className="col-sm-6 px-2 mb-4">
-                                    <GoogleAuth />
+                                    <GoogleAuth setShow={setShow} action={action} setAction={setAction} />
                                 </div>
                             </div>
                             </div>
@@ -132,7 +135,7 @@ export default function ResetPassword ({setIsLoading}) {
                 </main>
 
             <Footer />
-            
+            <SelectRoleModal show={show} setShow={setShow}  setIsLoading={setIsLoading} action={action}  />            
         </div>
     )
 }

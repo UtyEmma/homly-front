@@ -34,7 +34,6 @@ export const CreateWishlist = (token, data) => (dispatch) => {
 }
 
 export const FetchWishlist = (token) => (dispatch) => {
-    console.log('Fetching Wishlists...')
     dispatch({ type: FETCH_WISHLIST_REQUEST })
 
     WishlistService.fetchTenantWishlist(token)

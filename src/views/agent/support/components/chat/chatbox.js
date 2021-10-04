@@ -1,6 +1,8 @@
 import { SendMessage } from 'providers/redux/_actions/support-actions'
 import React, { useEffect, useRef } from 'react'
+import toast from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import './chat.css'
 
 export const ChatBox = ({chat, setIsLoading}) => {
@@ -27,6 +29,11 @@ export const ChatBox = ({chat, setIsLoading}) => {
     const sendMessage = (e) => {
         e.preventDefault();
         let formData = new FormData(e.target);
+        
+        if(formData.get('message') === ""){
+            return toast.error('Chat Message Cannot be empty');
+        }
+
         formData.append('issue_id', chat.ticket.unique_id)
         dispatch(SendMessage(token, formData));
     } 
@@ -99,9 +106,9 @@ export const ChatBox = ({chat, setIsLoading}) => {
 
                         {
 
-                            chat && chat.ticket && chat.ticket.status
+                            chat && chat.ticket && chat.ticket.status === 'pending'
 
-                            &&
+                            ?
 
                             <div className="col-12 bg-white px-3 pt-3" style={{height: "12%"}}>
                                 <form onSubmit={sendMessage} id="chat-form" ref={chat_form} >
@@ -118,6 +125,17 @@ export const ChatBox = ({chat, setIsLoading}) => {
                                         </div>
                                     </div>
                                 </form>
+                            </div>
+
+                            :
+
+                            chat && chat.ticket
+
+                            &&
+
+
+                            <div className="p-5 text-center">
+                                <p className="fs-16">This Ticket has been marked as <span className="text-capitalize font-weight-600">{chat.ticket.status}</span>! Create a <Link to="/support" className="font-weight-bold">New Ticket</Link></p>
                             </div>
 
                         }

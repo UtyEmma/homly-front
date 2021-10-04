@@ -68,8 +68,8 @@ export const AgentService = {
        return await Request.get(`agent/listing/remove/${id}`, authHeader(token));
     },
 
-    fetchSingleAgent : async (token, id) => {
-        return await Request.get(`agent/${id}`, authHeader(token))
+    fetchSingleAgent : async (token, id, status) => {
+        return await Request.get(`agent/${id}?role=${status}`, authHeader(token))
     },
 
     fetchAgentsWishlists : async (token) => {

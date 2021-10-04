@@ -20,12 +20,14 @@ export const AgentListingDetail = ({agent, setIsLoading, isLoading}) => {
     const details = useSelector((state) => state.listing);
     const {loading, listing} = details;
 
+    const href = window.location.href
+
     const fetchListingData = useCallback((slug) => {
-        dispatch(FetchSingleListing(agent.username, slug))
+        dispatch(FetchSingleListing(agent.username, slug, '/my-listings'))
     }, [agent.username, dispatch]) 
 
     useEffect(() => {
-        !listing && fetchListingData(slug)
+        fetchListingData(slug)
     }, [fetchListingData, listing, slug]);
 
     useEffect(() => {

@@ -1,11 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { FacebookShareButton, InstapaperShareButton, TwitterShareButton } from 'react-share'
-import { FavouriteListingButton } from 'views/tenants/favourites/components/favourite-listing-btn'
+import { FavouriteListingButton, GalleryFavouriteListingButton } from 'views/tenants/favourites/components/favourite-listing-btn'
 import GalleryDisplay from '../gallery-display'
 import { ListingShareBtn } from '../listing-share-btn'
 
-export default function ListingGallery({listing}) {
+export default function ListingGallery({listing, status}) {
     return (
         <section className="bg-white shadow-5 pb-1">
             <div className="container">
@@ -25,11 +24,11 @@ export default function ListingGallery({listing}) {
                         <ul className="list-inline pt-4 pr-5">
                             <li className="list-inline-item mr-2">
                                 {
-                                     listing.hasOwnProperty('isFavourite')
+                                    status === 'tenant'
 
                                     &&
 
-                                    <FavouriteListingButton listing={listing} />   
+                                    <GalleryFavouriteListingButton listing={listing} />   
                                 }
                             </li>
                             <li className="list-inline-item mr-2">

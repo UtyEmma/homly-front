@@ -18,14 +18,15 @@ const Reviews = ({agent, setIsLoading}) => {
     const user_data = useSelector(state => (state.user_data))
     const {token} = user_data
 
+    const href = window.location.href
+
     const fetchReviews = useCallback(() => {
         dispatch(FetchAgentReview(token))
     }, [dispatch, token])
 
     useEffect(() => {
-        !reviews && fetchReviews()
-        reviews && setIsLoading(false)
-    }, [fetchReviews, reviews, setIsLoading])
+        fetchReviews()
+    }, [href])
 
     useEffect(() => {
         setIsLoading(loading)   
@@ -37,7 +38,6 @@ const Reviews = ({agent, setIsLoading}) => {
                 <title>My Reviews</title>
             </Helmet>
 
-            <Preloader loading={loading} />
             <div className="d-flex flex-wrap flex-xl-nowrap">
                 <Sidebar agent={agent} />
 
@@ -57,7 +57,7 @@ const Reviews = ({agent, setIsLoading}) => {
                             <div className="card border-0 mb-4">
                                 <div className="card-body p-0 p-sm-8 p-4">
                                         {
-                                            reviews && reviews.length > 0
+                                            reviews && reviews.length > 5
 
                                             ? 
                                                 <>
