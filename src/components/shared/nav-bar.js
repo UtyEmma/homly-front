@@ -29,7 +29,7 @@ export default function NavBar({token, user, isloggedIn, status}) {
                                 <li id="navbar-item-home" className="nav-item py-2 py-lg-5 px-0 px-lg-4">
                                     <Link className="nav-link p-0" to="/">Home</Link>
                                 </li>
-                                <li id="navbar-item-property" className="nav-item py-2 py-lg-5 px-0 px-lg-4">
+                                <li id="navbar-item-property" className="active nav-item py-2 py-lg-5 px-0 px-lg-4">
                                 <Link className="nav-link p-0" to="/about">About</Link>
                                 </li>
                                 <li id="navbar-item-property" className="nav-item py-2 py-lg-5 px-0 px-lg-4">

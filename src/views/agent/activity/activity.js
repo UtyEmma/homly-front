@@ -4,7 +4,7 @@ import { NotificationContainer } from '../layouts/notifications/notification-con
 import Header from '../layouts/shared/header';
 import Sidebar from '../layouts/shared/sidebar';
 
-export const AgentActivity = ({agent}) => {
+export const AgentActivity = ({agent, setIsLoading}) => {
 
     return (
         <div className="wrapper dashboard-wrapper">

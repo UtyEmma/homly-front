@@ -1,4 +1,4 @@
-import React, {Component, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import NavBar from 'components/shared/nav-bar'
 import Footer from 'components/shared/footer'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,6 +8,7 @@ import Preloader from 'components/preloader/preloader'
 import AgentContainer from './components/agent-container'
 import AgentNotFound from 'components/404/404-agents'
 import { Helmet } from 'react-helmet'
+import { Link } from 'react-router-dom'
 
 const Agents = ({isLoggedIn, user, setIsLoading, status}) => {
 
@@ -15,15 +16,15 @@ const Agents = ({isLoggedIn, user, setIsLoading, status}) => {
     const agents_listing = useSelector((state) => state.available_agents)
     const {loading, agents} = agents_listing;
 
+    const href = window.location.href
+
     const loadAgents = () => {
         dispatch(ShowAllAgents())
     }
 
     useEffect(() => {
-        if(!agents){
-            loadAgents()
-        }
-    }, [agents])
+        loadAgents()
+    }, [href])
 
     useEffect(() => {
         setIsLoading(loading)
@@ -59,7 +60,7 @@ const Agents = ({isLoggedIn, user, setIsLoading, status}) => {
                 <div className="row bg-gray-03 py-5">
                     <div className="container px-6 px-lg-0">
                         <div className="agent-header">
-                            <span>Home / Agents</span>
+                            <span><Link to="/">Home</Link> / Agents</span>
                             <h3>Available Agents</h3>
                         </div>
                     </div>

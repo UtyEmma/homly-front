@@ -34,10 +34,10 @@ export const CreateNewTicket = (token, data) => (dispatch) => {
                     })
                 })
                 .catch((error) => {
-                    Response.error(error.response)
+                    const errors = Response.error(error.response)
                     dispatch({
                         type : CREATE_NEW_TICKET_FAILURE,
-                        payload : error.response 
+                        payload : {error: error.response, formError: errors} 
                     })
                 })
 }

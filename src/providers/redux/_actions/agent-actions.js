@@ -157,6 +157,7 @@ export const FetchAgentDetails = (token, id) => (dispatch) => {
                     })
                 })
                 .catch((error) => {
+                    history.push('/agents')
                     return dispatch({
                         type: FETCH_SINGLE_AGENT_FAILURE,
                         payload: error.response

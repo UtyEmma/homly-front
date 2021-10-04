@@ -57,7 +57,7 @@ export const RichTextEditor = ({name, editorClassName, placeholder, defaultConte
                 onFocus={handleSetShow}
                 onBlur={handleSetShow}
                 toolbar={{
-                    options: ['inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'colorPicker', 'link', 'emoji', 'history'],
+                    options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'colorPicker', 'link', 'emoji', 'history'],
                 }}
                 placeholder={placeholder} 
             />

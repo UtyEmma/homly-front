@@ -1,22 +1,27 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function AgentNotFound() {
     return (
         <>
-          <div className="col-12">
+            <div className="col-12 p-5 pt-9">
                 <div className="row">
-                    <div className="col-12">
-                        <div className="card text-center py-5">
-                            <div className="card-body px-md-15 py-10">
-                                <img src="images/svg/homes.svg" alt="Agent Not Found" className="img-fluid" />
-                                <h3 className="card-title mt-5">Sorry! We cannot find any available agent at the moment</h3>
-                                <p className="card-text fs-20">Want to become an agent?.</p>
-                                <a href="/agent-signup" className="btn btn-primary">Register as an Agent</a>
-                            </div>
+                    <div className="col-md-6  d-flex justify-content-center">
+                        <img src="/images/svg/homes.svg" alt="" />
+                    </div>
+                    <div className="col-md-6 rounded mt-3 mt-md-0 pl-5 bg-light py-7 text-center text-md-left d-flex justify-content-center flex-column">
+                        <h3 className="font-weight-bold mb-0 fs-22 fs-md-26">Sorry! We cannot find any available agents at the moment</h3>
+
+                        <p className="fs-16 mt-3 mb-0">Are you an agent and want to boost your visibility? Join us!</p>
+
+                        <div className="">
+                            <Link to="/signup" className="btn btn-lg text-secondary btn-accent rounded-lg mt-6">
+                                Sign up here <i className="far fa-long-arrow-right ml-1" />
+                            </Link>
                         </div>
                     </div>
                 </div>
-            </div>  
+            </div>
         </>
     )
 }

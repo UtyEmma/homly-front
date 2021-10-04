@@ -20,17 +20,20 @@ export const NotificationContainer = () => {
     const user_data = useSelector(state => (state.user_data))
     const {token} = user_data
 
+    const {href} = window.location
+
     const getNotifications = useCallback(() => {
         dispatch(FetchNotifications(token, 'agent'))
     }, [dispatch, token])
 
     useEffect(() => {
-        !notifications && getNotifications()
-    }, [getNotifications, notifications])
+        getNotifications()
+    }, [href])
 
     const markAllAsRead = () => {
         dispatch(MarkAllAsRead(token, 'agent'))
     }
+
 
     const notificationItem = (notification, index) => {
         switch (notification.type) {

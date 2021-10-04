@@ -88,7 +88,7 @@ const Listing = ({isLoggedIn, user, setIsLoading, status}) => {
                         <div className="col-lg-8 mb-8 mb-lg-0">
                             {
                                 listings && listings.length > 0 
-                                    ? <ListingContainer listings={listings} status={status} params={params} setParams={setParams} /> : <ListingNotFound/>
+                                    ? <ListingContainer listings={listings} status={status} params={params} setParams={setParams} /> : <ListingNotFound status={status} />
                             }  
                         </div>
 

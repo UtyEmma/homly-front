@@ -1,5 +1,4 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
 import ScrollAnimation from 'react-animate-on-scroll'
 import { SearchForm } from '../components/search/search-form'
 

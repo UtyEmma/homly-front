@@ -23,7 +23,6 @@ export default function UpdateUsername({user, setIsLoading, status}) {
         data.append('firstname', user.firstname)
         data.append('lastname', user.lastname)
         data.append('email', user.email)
-        data.append('phone', user.phone)
         
         status === "agent" && data.append('title', user.title)
         

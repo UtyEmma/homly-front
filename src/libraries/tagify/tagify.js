@@ -1,13 +1,13 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import "@yaireo/tagify/dist/tagify.css"
 import Tags from '@yaireo/tagify/dist/react.tagify'
 
 
-const Tagify = ({value, suggestions, name, setValue, val, message}) => {
+const Tagify = ({value, suggestions, name, setValue, message}) => {
 	const baseTagifySettings = {
 		blacklist: [],
 		whitelist: suggestions,
-		maxTags: 6,
+		maxTags: 8,
 		backspace: "edit",
 		placeholder: message,
 		dropdown: {
@@ -15,7 +15,7 @@ const Tagify = ({value, suggestions, name, setValue, val, message}) => {
 		}
 	}
       
-  const onChange = useCallback(e => {
+  const onChange = (e) => {
 	const details = JSON.parse(e.detail.value);
 	let items = [];
 	for(let i = 0; i < details.length; i++) {
@@ -23,16 +23,16 @@ const Tagify = ({value, suggestions, name, setValue, val, message}) => {
 		items = [...items, detail.value]           
 	}
 	setValue([...items]);
-  }, [])
+  }
 
   return (
     <>
       <Tags
-		className="form-control border-0"
+		className="form-control border-0 text-capitalize"
         settings={baseTagifySettings}
         defaultValue={value}
         onChange={onChange}
-        name={name}
+        name={name}	
       />
     </>
   )

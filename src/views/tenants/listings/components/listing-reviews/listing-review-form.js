@@ -20,7 +20,7 @@ export default function ListingReviewForm({setUserHasReviewed, listing_id, statu
 
     return (
         <>
-          <section className="mt-2 pb-7 px-6 pt-6 bg-white rounded-lg">
+          <section className="mt-2 pb-7 px-md-6 pt-6 bg-white rounded-lg">
                 <div className="card border-0">
 
                     <div className="card-body p-0">

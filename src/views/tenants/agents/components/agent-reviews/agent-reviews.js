@@ -39,10 +39,10 @@ export default function AgentReviews({reviews, agent, status, setIsLoading}) {
 
                         <div className="card border-0 p-0 p-md-4 mb-0">
                             <div className="card-body d-flex justify-content-center flex-column">
-                                <div className="col-md-6 offset-md-3 mb-2">
+                                <div className="col-8 offset-2 col-md-4 offset-md-4 mb-2">
                                     <img src="/images/svg/review-property.svg" className="img-fluid" alt="property review" />
                                 </div>
-                                <h3 className="fs-md-18px fs-26 text-center">There are currently no reviews for this Agent</h3>
+                                <h3 className="fs-18 fs-md-24 text-heading font-weight-600 mt-3 text-center">There are currently no reviews for this Agent</h3>
                             </div>
                         </div>
                     }                      

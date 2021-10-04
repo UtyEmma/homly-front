@@ -2,15 +2,17 @@ import React from 'react'
 
 export default function ReviewsNotFound() {
     return (
-        <div className="col-10 offset-1">
+        <div className="col-12 p-5 py-15 px-md-3 bg-white">
             <div className="row">
-                <div className="card border-0 text-center py-2">
-                    <div className="card-body px-md-15 py-4">
-                        <img src="images/svg/homes.svg" alt="Reviews Not Found" className="img-fluid" />
-                        <h3 className="card-title mt-5 text-heading">You do not have any reviews yet</h3>
-                    </div>
+                <div className="col-md-6 d-flex justify-content-center">
+                    <img src="/images/svg/homes.svg" alt="" />
+                </div>
+                <div className="col-md-6 rounded mt-3 mt-md-0 pl-5 bg-light py-7 text-center text-md-left d-flex justify-content-center flex-column">
+                    <h3 className="font-weight-bold mb-0 fs-22 fs-md-26">You do not have any reviews yet!</h3>
+
+                    <p className="fs-16 mt-3 mb-0">Encourage your clients to leave reviews on your account to boost your visibility and credibility</p>
                 </div>
             </div>
-        </div> 
+        </div>
     )
 }

@@ -31,7 +31,10 @@ function LoggedIn({setIsLoading, user, status}) {
                                 {`${user.firstname.charAt(0).toUpperCase()}${user.lastname.charAt(0).toUpperCase()}`}
                             </div>
                         }
-                        <span className="fs-13 ml-2 font-weight-500 d-none d-sm-inline ml-0">
+                        <span className="fs-13 ml-2 d-none d-md-inline font-weight-500 ml-0">
+                            <b>Hi, {user.firstname}</b>
+                        </span>
+                        <span className="fs-13 ml-2 font-weight-500 d-none d-sm-block d-md-none text-white ml-0">
                             <b>Hi, {user.firstname}</b>
                         </span>
                     </button>

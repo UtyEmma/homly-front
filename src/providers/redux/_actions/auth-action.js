@@ -68,7 +68,7 @@ export const Login = (data, type) => (dispatch) => {
                 const errors = Response.error(error.response)
                 dispatch({
                     type: LOGIN_FAILURE,
-                    payload: {error: error.response, formErrors: errors}
+                    payload: {error: error.response, formError: errors}
                 })
             })
 }

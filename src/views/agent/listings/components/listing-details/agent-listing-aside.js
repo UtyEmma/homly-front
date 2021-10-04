@@ -11,7 +11,6 @@ export const AgentListingAside = ({agent, listingItem, setIsLoading, setListingI
     const dispatch = useDispatch()
 
     const [show, setShow] = useState()
-    const [callback, setCallback] = useState()
 
     const user_data = useSelector(state => (state.user_data))
     const {token} = user_data
@@ -20,7 +19,10 @@ export const AgentListingAside = ({agent, listingItem, setIsLoading, setListingI
 
     const deleteListing = () => {
         setShow(true)
-        setCallback(() => { dispatch(DeleteListing(token, listingItem.unique_id))})
+    }
+
+    const callBack = () => {
+        dispatch(DeleteListing(token, listingItem.unique_id))
     }
 
     useEffect(() => {
@@ -78,7 +80,7 @@ export const AgentListingAside = ({agent, listingItem, setIsLoading, setListingI
                 </div>
             </div>
 
-            <ConfirmActionDialog callback={callback} show={show} setShow={setShow} />
+            <ConfirmActionDialog callback={callBack} show={show} setShow={setShow} />
 
         </>
     )

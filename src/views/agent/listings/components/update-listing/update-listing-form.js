@@ -53,7 +53,7 @@ export const UpdateListingForm = ({listing, setIsLoading}) => {
     }, [history, listing.slug])
 
     useEffect(() => {
-        !stepper && setStepper(new Stepper(document.getElementById('wishlist-stepper'), {
+        !stepper && setStepper(new Stepper(document.getElementById('update-listing-stepper'), {
             linear: false,
             animation: true
         }));
@@ -73,7 +73,7 @@ export const UpdateListingForm = ({listing, setIsLoading}) => {
 
     return (
         <>
-         <div className="bs-stepper" id='wishlist-stepper'>
+         <div className="bs-stepper" id='update-listing-stepper'>
                 <div className="bs-stepper-header px-5 d-block d-md-flex" role="tablist">
                     <div className="step" data-target="#description">
                         <button type="button" className="step-trigger bs-stepper-trigger" role="tab" aria-controls="property-info" id="property-info-trigger">

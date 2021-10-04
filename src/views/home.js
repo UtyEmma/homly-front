@@ -1,5 +1,4 @@
 import React from 'react'
-
 import HeroSection from './layouts/home/hero-section'
 import PopularSection from './layouts/home/popular-section'
 import NavBar from 'components/shared/nav-bar'

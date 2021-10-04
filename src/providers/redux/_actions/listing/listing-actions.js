@@ -161,7 +161,7 @@ export const FetchListingDetails = () => (dispatch) => {
 }
 
 
-export const FetchSingleListing = (username, slug) => (dispatch) => {
+export const FetchSingleListing = (username, slug, redirect) => (dispatch) => {
     console.log('fetching...');
     
     dispatch({ type: FETCH_SINGLE_LISTING_REQUEST });
@@ -175,7 +175,7 @@ export const FetchSingleListing = (username, slug) => (dispatch) => {
                     })
                     .catch(error => {
                         Response.error(error.response)
-                        history.push('/my-listings')
+                        history.push(redirect)
                         return dispatch({
                             type : FETCH_SINGLE_LISTING_FAILURE,
                             payload : error.response

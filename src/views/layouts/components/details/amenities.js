@@ -26,7 +26,7 @@ export function SelectAmenities({features, setFeatures, name, validate, message,
                             <li className={`list-group-item px-0 pt-0 pb-2 ${classes}`}>
                                 <div className="custom-control custom-checkbox ">
                                     <input type="checkbox" className="custom-control-input" defaultChecked={selected?.includes(item.toLowerCase().replace(/ /g,'_'))} name={`amenities[${item.toLowerCase().replace(/ /g,'_')}]`} id={item} />
-                                    <label className="custom-control-label" htmlFor={item} >{item}</label>
+                                    <label className="custom-control-label text-capitalize" htmlFor={item} >{item}</label>
                                 </div>
                             </li>
                         </div>
@@ -59,7 +59,7 @@ export function TagifyAmenities({val, setValue, name, validate, message}){
             
             && 
             
-            <Tagify suggestions={[...amenities]} message={message} validate val={val} setValue={setValue}  id="features"  name={name} />}
+            <Tagify  suggestions={[...amenities]} message={message} validate val={val} setValue={setValue}  id="features"  name={name} />}
         </>
     )
 }

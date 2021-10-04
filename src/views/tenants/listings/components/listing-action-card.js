@@ -28,8 +28,8 @@ export default function ListingAction({agent, listing}) {
     }
 
     const deleteListing = () => {
-        setShow(true)
         setAction('delete')
+        setShow(true)
     }
     
     return (
