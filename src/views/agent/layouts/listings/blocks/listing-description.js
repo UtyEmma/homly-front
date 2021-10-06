@@ -21,21 +21,20 @@ export default function ListingDescription({formErrors, reset}) {
                     <div className="col-lg-6">
                         <div className="card mb-6">
                         <div className="card-body p-6">
-                            <h3 className="card-title mb-0 text-heading fs-22 lh-15">Property
-                            Description</h3>
-                            <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                            <h3 className="card-title mb-0 text-heading fs-22 lh-15"> Describe Property</h3>
+                            <p className="card-text mb-5">Basic details about the property to help tenants </p>
                             <div className="form-group">
-                                <label htmlFor="title" className="text-heading">Title <span className="text-muted">(mandatory)</span></label>
+                                <label htmlFor="title" className="text-heading">Title<span class="text-danger">*</span> </label>
                                 <input type="text" className="form-control form-control-lg border-0" id="title" name="title" />
                                 <p className="text-danger fs-12 mt-1">{formErrors.title?.message}</p>
                             </div>
                             <div className="form-group mb-0">
-                                <label htmlFor="category" className="text-heading">Type</label>
+                                <label htmlFor="category" className="text-heading">Type<span class="text-danger">*</span> <br/><span className="text-muted">What type of property is this?</span></label>
                                 <SelectListingCategory classes="form-control border-0 shadow-none form-control-lg" name="type" />
                                 <p className="text-danger fs-12">{formErrors.type?.message}</p>
                             </div>
                             <div className="form-group mb-0">
-                                <label htmlFor="description-01" className="text-heading">Description</label>
+                                <label htmlFor="description-01" className="text-heading">Description<span class="text-danger">*</span> <br/> <span className="text-muted">Explain in detail what your tenants should be expecting... this should be fun :)</span></label>
                                 <RichTextEditor reset={reset} name="description" editorClassName="form-control border-0" />
                                 <p className="text-danger fs-12 mt-1">{formErrors.description?.message}</p>
                             </div>

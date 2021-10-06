@@ -4,6 +4,12 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+
+function capitalize(str) {
+    const lower = str.toLowerCase();
+    return str.charAt(0).toUpperCase() + lower.slice(1);
+  }
+
 export default function ProfileButton({setIsLoading, isloggedIn, user, status}) {
     return (
         <>
@@ -32,10 +38,10 @@ function LoggedIn({setIsLoading, user, status}) {
                             </div>
                         }
                         <span className="fs-13 ml-2 d-none d-md-inline font-weight-500 ml-0">
-                            <b>Hi, {user.firstname}</b>
+                            <b>Hi, {capitalize(user.firstname)}</b>
                         </span>
                         <span className="fs-13 ml-2 font-weight-500 d-none d-sm-block d-md-none text-white ml-0">
-                            <b>Hi, {user.firstname}</b>
+                            <b>Hi, {capitalize(user.firstname)}</b>
                         </span>
                     </button>
                     <div className="dropdown-menu mt-2 dropdown-menu-right" style={{width: "200px"}}>

@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import ProfileButton from './profile-btn/profile-button'
 
+
+
 export default function NavBar({token, user, isloggedIn, status}) {
     return (
         <header className="main-header navbar-light header-sticky header-sticky-smart header-mobile-lg">
