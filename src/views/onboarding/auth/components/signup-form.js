@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react'
 import { useSelector } from 'react-redux'
-// import { toggleConPassword, togglePassword } from 'libraries/forms/toggle-password';
 import { MapFormErrors, __signup } from 'libraries/validation';
 import Validator from 'validatorjs';
 import { Link, useHistory } from 'react-router-dom';
