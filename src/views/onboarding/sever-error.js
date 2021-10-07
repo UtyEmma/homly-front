@@ -1,38 +1,36 @@
+import Footer from 'components/shared/footer'
+import NavBar from 'components/shared/nav-bar'
 import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
+import Searchbar from 'views/layouts/components/search/searchbar'
 
-export default function ServerError({user, setIsLoading}) {
+export default function ServerError({user, isLoggedIn, setIsLoading}) {
 
     useEffect(() =>{
         setIsLoading(false)
     })
     
     return (
-        <div className="bg-white" style={{height: '100vh'}}>
+        <div className="bg-white d-flex align-items-center justify-content-center" style={{height: '100vh'}}>
             <Helmet>
                 <title>Server Error</title>
                 <meta name="description" content="Find Properties and agents around you." />
             </Helmet>
 
-            <div className="row d-flex align-items-center justify-content-center" style={{height: '100%'}} >
-                {/* <div className="col-12 text-center pb-0">
-                    <a href="/">
-                        <img src="images/logo.png" alt="HomeID" className="d-none d-lg-inline-block" />
-                    </a>
-                </div> */}
+            <main id="content">
+                <div className="container shadow-0 p-5 border-0">
+                    <div className="row">
+                        <div className="col-md-6 p-10">
+                            <img src="images/svg/server_error.svg" alt='Server Error' className="img-fluid" />
+                        </div>
 
-                <div className="card shadow-0 col-md-7 p-5 py-9 border-0 text-center">
-
-                    <div className="col-md-4 offset-md-4 col-6 offset-3 mt-4">
-                        <img src="images/svg/server_error.svg" width="150" alt='Server Error' className="img-fluid" />
+                        <div className="col-md-6 bg-light">
+                            <h3 className="fs-40 font-weight-600 mt-5 mb-3 ">Server Error </h3>
+                            <p className="fs-24">We will get it fixed in not time</p>
+                        </div>
                     </div>
-
-                    <div className="col-12">
-                        <h3 className="text-heading mt-5 mb-3">Error Status 500</h3>
-                    </div>
-
                 </div>
-            </div>
+            </main>
         </div>
     )
 }

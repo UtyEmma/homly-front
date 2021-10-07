@@ -44,9 +44,9 @@ export function RecoverPasswordReducer(state={}, action){
         case PASSWORD_RECOVERY_REQUEST:
             return {...state, loading: true}
         case PASSWORD_RECOVERY_SUCCESS:
-            return {state, success: action.payload}
+            return {state, loading: false, success: action.payload}
         case PASSWORD_RECOVERY_FAILURE:
-            return {...state, error: action.payload}
+            return {...state, loading: false, error: action.payload}
         default:
             return state;
     }
@@ -57,9 +57,9 @@ export function ResetPasswordReducer(state={}, action){
         case PASSWORD_RESET_REQUEST:
             return {...state, loading: true}
         case PASSWORD_RESET_SUCCESS:
-            return {state, success: action.payload}
+            return {state, loading : false, success: action.payload}
         case PASSWORD_RESET_FAILURE:
-            return {...state, error: action.payload}
+            return {...state, loading : false, error: action.payload}
         default:
             return state;
     }

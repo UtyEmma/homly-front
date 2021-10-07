@@ -111,7 +111,7 @@ export default function ListingReviewItem({userHasReviewed, setUserHasReviewed, 
                                     </div>
                                 </div>
                             </div>
-                            <button onClick={deleteReview} class="btn p-0 mb-0 border-0 rounded-0 text-muted border-left border-dark hover-primary lh-1 ml-2 pl-2"><i className="fa fa-trash-alt"></i></button>
+                            <button onClick={deleteReview} className="btn p-0 mb-0 border-0 rounded-0 text-muted border-left border-dark hover-primary lh-1 ml-2 pl-2"><i className="fa fa-trash-alt"></i></button>
                         </>
                     }
                     </div>

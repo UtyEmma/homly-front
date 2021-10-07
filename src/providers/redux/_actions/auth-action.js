@@ -149,6 +149,8 @@ export const RecoverPassword = (data) => (dispatch) => {
                     type: PASSWORD_RECOVERY_SUCCESS,
                     payload: response.data.data
                 })
+
+                history.push('/reset-password')
             })
             .catch((error) => {
                 Response.error(error.response)

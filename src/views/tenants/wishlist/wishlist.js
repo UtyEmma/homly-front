@@ -12,12 +12,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Helmet } from 'react-helmet'
 import { WishlistModal } from './components/wishlist-modal'
 import './css/wishlist.css'
+import { AddWishlistModal } from './components/add-wishlist-modal'
 
 const Wishlist = ({isLoggedIn, user, setIsLoading, status}) => {
 
     const dispatch = useDispatch();
 
     const [show, setShow] = useState()
+    const [toggle, setToggle] = useState(false)
     const [details, setDetails] = useState()
 
     const {loading, wishlists} = useSelector((state) => state.wishlists)
@@ -95,15 +97,15 @@ const Wishlist = ({isLoggedIn, user, setIsLoading, status}) => {
             </main>
 
             <Footer />
-
+            
             <ModalOne id="modal-one" height="100%">
                 <div className="row">
-                    <div className="col-md-6 d-md-block d-none p-0 rounded-lg-top-left">
+                    <div className="col-md-6 bg-light d-md-block d-none p-0 rounded-lg-top-left">
                         <div className="col-8 offset-2 h-100 position-relative" >
                             <img src="/images/svg/wishlist-item.svg" style={{position: 'absolute', bottom: '10%'}} alt="wishlist" />
                         </div>
                     </div>
-                    <div className="col-md-6 pt-5 bg-gray-03">
+                    <div className="col-md-6 pt-5">
                         <WishlistForm setIsLoading={setIsLoading} />
                     </div>
                 </div>

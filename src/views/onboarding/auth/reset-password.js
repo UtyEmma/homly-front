@@ -16,7 +16,6 @@ import { SelectRoleModal } from './components/select-role-modal';
 export default function ResetPassword ({setIsLoading}) {
     
     const dispatch = useDispatch()
-    const history = useHistory()
 
     const [formErrors, setFormErrors] = useState({})
 
@@ -24,9 +23,7 @@ export default function ResetPassword ({setIsLoading}) {
     const [action, setAction] = useState()
 
     
-    const reset_password = useSelector((state) => state.reset_password) 
-    const {loading, success} = reset_password
-    
+    const {loading} = useSelector((state) => state.reset_password)    
     
     const {rules, attributes} = __reset_password
     
@@ -43,18 +40,10 @@ export default function ResetPassword ({setIsLoading}) {
             dispatch(PasswordReset(values))
         }
     }
-    
-    useEffect(() => {
-        success && history.push('/login?msg=Password Reset Successful')
-    }, [success])
-    
-    useEffect(() => {
-        setIsLoading(false)
-    })
 
     useEffect(() => {
         setIsLoading(loading)
-    }, [loading])
+    }, [loading, setIsLoading])
 
     return (
         <div>

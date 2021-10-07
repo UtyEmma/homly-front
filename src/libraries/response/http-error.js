@@ -10,7 +10,7 @@ export const errorToast = (message) => {
 
 
 export default function Error(err) {
-    if(!err){ return errorToast("Server Error: The Server is Down") }
+    if(!err){ return errorToast("There was a problem connecting to the server") }
     switch (err.status) {
         case 500: return handleServerError(err.data)
         case 422: return handleFormError(err.data)

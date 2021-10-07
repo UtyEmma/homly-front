@@ -45,7 +45,7 @@ const AgentWishlist = ({agent, setIsLoading}) => {
 
                 <div className="page-content">
                     <Header agent={agent}/>
-                    <main id="content" className="bg-gray-01">
+                    <main id="content" className="bg-gray-01 h-100">
 
                         <div className="px-3 px-lg-6 px-xxl-13 py-5 py-lg-10">
                             <div className="d-flex flex-wrap flex-md-nowrap mb-6">
@@ -67,7 +67,7 @@ const AgentWishlist = ({agent, setIsLoading}) => {
 
                                         wishlists.map((wishlist, index) => {
                                             return (
-                                                <AgentWishlistItem wishlist={wishlist.wishlists} user={wishlist.user} setShow={setShow} setDetails={setDetails} key={wishlist.unique_id} />
+                                                <AgentWishlistItem wishlist={wishlist.wishlists} user={wishlist.user} setShow={setShow} setDetails={setDetails} key={wishlist.wishlists.unique_id} />
                                             )
                                         })
 
