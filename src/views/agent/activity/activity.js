@@ -3,8 +3,11 @@ import { Helmet } from 'react-helmet';
 import { NotificationContainer } from '../layouts/notifications/notification-container';
 import Header from '../layouts/shared/header';
 import Sidebar from '../layouts/shared/sidebar';
+import { useSelector } from 'react-redux'
 
 export const AgentActivity = ({agent, setIsLoading}) => {
+    const notification = useSelector((state) => state.notification)
+    const {notifications} = notification
 
     return (
         <div className="wrapper dashboard-wrapper">
@@ -25,7 +28,8 @@ export const AgentActivity = ({agent, setIsLoading}) => {
 
                                 <div className="mr-0 mr-md-auto">
                                     <h2 className="mb-0 text-heading fs-22 lh-15">My Activity<span className="badge badge-white badge-pill text-primary fs-18 font-weight-bold ml-2"></span></h2>
-                                    <p>Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse suscipit</p>
+                                    <p>All notifications or activities on your account 
+                    {notifications && notifications.length > 0 ? " are all" : " will be"} displayed below</p>
                                 </div>  
 
                             </div>

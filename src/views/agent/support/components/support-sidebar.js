@@ -36,9 +36,9 @@ export const SupportCenterSidebar = ({setShow, titles, setTitles, setIsLoading})
     return (
         <div className="col-md-5 px-0 rounded-left text-dark h-100">
             
-            <div className="my-3 text-center px-5 pt-0 pt-md-6" >
+            {/* <div className="my-3 text-center px-5 pt-0 pt-md-6" >
                 <button type="button" className="btn btn-primary px-9 btn-lg " onClick={displayNewTicketForm} >Create a Ticket</button>
-            </div>
+            </div> */}
             
             <h5 className="fs-13 text-muted mb-0 text-uppercase px-3 mt-2">Support Tickets</h5>
 

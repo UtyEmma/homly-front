@@ -31,7 +31,9 @@ const NewListing = ({agent, setIsLoading, isLoading}) => {
                                 <div className="mb-6">
                                 <h2 className="mb-0 text-heading fs-22 lh-15">Add new property
                                 </h2>
-                                <p className="mb-1">Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse suscipit</p>
+                                <p className="mb-1">Lets get you started on creating your property  
+                                {/* <br/> Take Note: we refer to both property buyers and tenants as clients */}
+                                </p>
                                 </div>
                                 <div className="collapse-tabs new-property-step">
                                 <ul className="nav nav-pills border py-2 px-3 mb-6 d-none d-md-flex mb-6" role="tablist">

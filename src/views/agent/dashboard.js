@@ -46,8 +46,12 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                             <div className="px-3 px-lg-6 px-xxl-13 py-5 py-lg-10">
                                 <div className="d-flex flex-wrap flex-md-nowrap mb-6">
                                     <div className="mr-0 mr-md-auto">
-                                        <h2 className="mb-0 text-heading fs-22 lh-15">Good morning, { capitalize(agent.firstname)} </h2>
-                                        <p>What would you like to do, today?</p>
+                                        <h2 className="mb-0 text-heading fs-22 lh-15">How're you, { capitalize(agent.firstname)} </h2>
+                                        {/* <p>What would you like to do, today?</p> */}
+                                        {/* <p>How can i be of help, today?</p> */}
+                                        {/* <p>Hope you're feeling pumped for todays business?</p> */}
+                                        {/* <p>Are you ready to experience the future of real estate?</p> */}
+                                        <p>What mega deals will we be closing, today?</p>
                                     </div>
                                     <div>
                                         <a href="/new-listing" className="btn btn-primary btn-lg">

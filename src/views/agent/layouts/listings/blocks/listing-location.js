@@ -61,18 +61,18 @@ export default function ListingLocation({formErrors}) {
                         <div className="card mb-6">
                         <div className="card-body p-6">
                             <h3 className="card-title mb-0 text-heading fs-22 lh-15">Property Location</h3>
-                            <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                            <p className="card-text mb-5">Alright, lets see exactly where your property is located</p>
                             <div className="form-row mx-n2">
                                 <div className="col-12 px-2">
                                     <div className="form-group">
-                                        <label htmlFor="state"  className="text-heading">State</label>
+                                        <label htmlFor="state"  className="text-heading">State<span class="text-danger">*</span></label>
                                         <State setSelectedState={setState} classes="form-control form-control-lg border-0 selectpicker" id="state" name="state" />
                                         <p className="text-danger fs-12 mt-1">{formErrors.state?.message}</p>
                                     </div>
                                 </div>
                                 <div className="col-12 px-2">
                                     <div className="form-group">
-                                        <label htmlFor="city" className="text-heading">City</label>
+                                        <label htmlFor="city" className="text-heading">City<span class="text-danger">*</span></label>
                                         <LocalGovt selectedState={state} onChange={updateMapData} classes="form-control form-control-lg border-0" id="city" name="city" />
                                         <p className="text-danger fs-12 mt-1">{formErrors.city?.message}</p>
                                     </div>
@@ -81,14 +81,18 @@ export default function ListingLocation({formErrors}) {
                             <div className="form-row mx-n2">
                                 <div className="col-12 px-2">
                                     <div className="form-group">
-                                        <label htmlFor="address" className="text-heading">Address</label>
+                                        <label htmlFor="address" className="text-heading">Address<span class="text-danger">*</span></label>
                                         <input type="text" onChange={updateMapData} className="form-control form-control-lg border-0" id="address" name="address"/>
                                         <p className="text-danger fs-12 mt-1">{formErrors.address?.message}</p>
                                     </div>
                                 </div>
                                 <div className="col-12 px-2">
                                     <div className="form-group">
-                                        <label htmlFor="landmark" className="text-heading">Landmark / Nearest Bus Stop</label>
+                                        <label htmlFor="landmark" className="text-heading">Landmark / Nearest Bus Stop<span class="text-danger">*</span> <br/>
+                                        <span className="text-muted">
+                                        Enter the most popular location in that area, this could even be the closest market around.
+                                        </span>
+                                        </label>
                                         <InputAddress setLandmark={setLandmark} setLatLong={setLatLong} id="landmark"/>
                                         <input hidden name="landmark" value={landmark} type="text"/>
                                         <p className="text-danger fs-12 mt-1">{formErrors.landmark?.message}</p>    
@@ -101,8 +105,9 @@ export default function ListingLocation({formErrors}) {
                     <div className="col-lg-6">
                         <div className="card mb-6">
                         <div className="card-body p-6">
-                            <h3 className="card-title mb-6 text-heading fs-22 lh-15">Place the
+                            <h3 className="card-title  text-heading fs-22 lh-15">Place the
                             listing pin on the map</h3>
+                            <p className="card-text mb-5">If you cant find the property exact location, leave the pin at its current approx. location</p>
                             
                             <MapDisplay 
                                 latitude={lat}

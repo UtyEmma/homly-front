@@ -21,10 +21,9 @@ export default function ListingMedia({files, setFiles, formErrors}) {
                     <div className="col-lg-6">
                         <div className="card mb-6">
                         <div className="card-body p-6">
-                            <h3 className="card-title mb-0 text-heading fs-22 lh-15">Upload photos
+                            <h3 className="card-title mb-0 text-heading fs-22 lh-15">Photos
                             of your property</h3>
-                            <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit</p>
+                            <p className="card-text mb-5">Upload high quality images, this attracts even more clients</p>
                            <FileInput name="" files={files} setFiles={setFiles}/>
                         </div>
                         </div>
@@ -32,13 +31,15 @@ export default function ListingMedia({files, setFiles, formErrors}) {
                     <div className="col-lg-6">
                         <div className="card mb-6">
                         <div className="card-body p-6">
-                            <h3 className="card-title mb-0 text-heading fs-22 lh-15">Upload Video</h3>
-                            <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit</p>
+                            <h3 className="card-title mb-0 text-heading fs-22 lh-15">Property video tour</h3>
+                            <p className="card-text mb-5">
+                                Upload your short fun video to Youtube, copy the link and paste it in the box below.<br/> BTW, clients love this part.
+                                {/* Give your clients a fun video tour of your property. <br/> Trust us, they enjoy this. */}
+                            </p>
                             <div className="form-row mx-n2">
                                 <div className="col-md-6 col-lg-12 col-xxl-6 px-2">
                                     <div className="form-group mb-md-0">
-                                        <label htmlFor="embed-video-id"  className="text-heading">Upload Video File</label>
+                                        {/* <label htmlFor="embed-video-id"  className="text-heading">Upload Video File</label> */}
                                         <input type="text" name="video_links" className="form-control form-control-lg border-0" placeholder="Youtube, Vimeo or any link to your Video" id="embed-video-id" />
                                         <p className="text-danger fs-12 mt-1">{formErrors.video_links?.message}</p>
                                     </div>
