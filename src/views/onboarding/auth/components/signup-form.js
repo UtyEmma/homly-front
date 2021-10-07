@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react'
 import { useSelector } from 'react-redux'
-import { toggleConPassword, togglePassword } from 'libraries/forms/toggle-password';
+// import { toggleConPassword, togglePassword } from 'libraries/forms/toggle-password';
 import { MapFormErrors, __signup } from 'libraries/validation';
 import Validator from 'validatorjs';
 import { Link, useHistory } from 'react-router-dom';
@@ -20,6 +20,12 @@ const SignUpForm = ({setIsLoading}) =>  {
 
     const {rules, attributes} = __signup
     const [formErrors, setFormErrors] = useState({})
+
+    const [showPassword, setShowPassword] = useState(false)
+
+    const togglePassword = () => {
+        setShowPassword(!showPassword)
+    }
     
 
     const handleSignup = (e) => { 
@@ -87,10 +93,10 @@ const SignUpForm = ({setIsLoading}) =>  {
                             <label htmlFor="password-1" className="text-heading">Password</label>
     
                             <div className="input-group input-group-lg">
-                                <input type="password"  ref={confirm_password} className="form-control border-0 shadow-none" id="password" name="password" placeholder="**********" />
+                                <input type={showPassword ? "text" : "password"}  ref={confirm_password} className="form-control border-0 shadow-none" id="password" name="password" placeholder="**********" />
                                 <div className="input-group-append">
-                                    <button className="input-group-text bg-gray-01 border-0 text-body fs-18" onClick={togglePassword}>
-                                        <i className="far fa-eye-slash" />
+                                    <button type="button" className="input-group-text bg-gray-01 border-0 text-body fs-18" onClick={togglePassword}>
+                                        <i className={`far ${showPassword ? 'fa-eye' : 'fa-eye-slash' }`} />
                                     </button>
                                 </div>
                             </div>
@@ -102,12 +108,12 @@ const SignUpForm = ({setIsLoading}) =>  {
                         <div className="form-group">
                             <label htmlFor="confirm_password">Re-Enter Password</label>
                                 <div className="input-group input-group-lg">
-                                    <input type="password" ref={confirm_password} className="form-control border-0 shadow-none" id="confirm_password" name="password_confirmation" placeholder="Password" />
+                                    <input type={showPassword ? "text" : "password"} ref={confirm_password} className="form-control border-0 shadow-none" id="confirm_password" name="password_confirmation" placeholder="Password" />
                         
                                     <div className="input-group-append">
-                                        <button className="input-group-text bg-gray-01 border-0 text-body fs-18" 
-                                            onClick={toggleConPassword}>
-                                            <i className="far fa-eye-slash" />
+                                        <button type="button" className="input-group-text bg-gray-01 border-0 text-body fs-18" 
+                                            onClick={togglePassword}>
+                                            <i className={`far ${showPassword ? 'fa-eye' : 'fa-eye-slash' }`} />
                                         </button>
                                     </div>
                                 </div>

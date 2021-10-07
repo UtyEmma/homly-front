@@ -36,6 +36,12 @@ const UserLoginForm = ({setIsLoading}) =>  {
         }
     }
 
+    const [showPassword, setShowPassword] = useState(false)
+
+    const togglePassword = () => {
+        setShowPassword(!showPassword)
+    }
+
     useEffect(() => {
         formError && setFormErrors(formError)
     }, [formError])
@@ -56,11 +62,11 @@ const UserLoginForm = ({setIsLoading}) =>  {
                         <label htmlFor="password">Password</label>
 
                         <div className="input-group input-group-lg">
-                            <input type="password" className="form-control border-0 shadow-none" id="password" name="password" placeholder="**********" />
+                            <input type={showPassword ? "text" : "password"} className="form-control border-0 shadow-none" id="password" name="password" placeholder="**********" />
                             <div className="input-group-append">
-                                <span className="input-group-text bg-gray-01 border-0 text-body fs-18">
-                                    <i className="far fa-eye-slash" />
-                                </span>
+                                <button type="button" className="input-group-text bg-gray-01 border-0 text-body fs-18" onClick={togglePassword}>
+                                    <i className={`far ${showPassword ? 'fa-eye' : 'fa-eye-slash' }`} />
+                                </button>
                             </div>
                         </div>
                         <p className="text-danger fs-12 mt-1">{formErrors.password?.message}</p>
