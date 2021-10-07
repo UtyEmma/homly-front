@@ -9,8 +9,7 @@ import { SelectRoleModal } from './select-role-modal';
 
 const SignUpForm = ({setIsLoading}) =>  {
 
-    const confirm_password = useRef() 
-    const history = useHistory() 
+    const confirm_password = useRef()
 
     const [show, setShow] = useState(false)
     const [action, setAction] = useState()
