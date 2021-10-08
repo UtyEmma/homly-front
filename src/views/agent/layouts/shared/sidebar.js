@@ -124,9 +124,30 @@ export default function Sidebar({setIsLoading, agent}) {
                                                 <svg className="icon icon-my-properties"><use xlinkHref="#icon-my-properties" /></svg>
                                                 </span>
                                                 <span className="sidebar-item-text">My Properties</span>
-                                                <span className="sidebar-item-number ml-auto text-primary fs-15 font-weight-bold">{agent.no_of_listings ? agent.no_of_listings : ''}</span>
+                                                <span className="sidebar-item-number ml-auto text-primary fs-15 font-weight-bold">{agent.no_of_listings ? agent.no_of_listings : 0}</span>
                                             </Link>
                                         </li>
+                                            <Link to="/agent-wishlists" className="text-heading lh-1 sidebar-link">
+                                        <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
+                                                <span className="sidebar-item-icon d-inline-block mr-3 text-muted fs-20">
+                                                    <i className="far fa-heart"></i>
+                                                </span>
+                                                <span className="sidebar-item-text">Wishlists</span>
+                                        </li>
+                                            </Link>
+                                    </ul>
+                                    </li>
+                                    <li className="list-group-item pt-6 pb-4">
+                                        <h5 className="fs-13 letter-spacing-087 text-muted mb-3 text-uppercase px-3">Manage Acount</h5>
+                                        <ul className="list-group list-group-no-border rounded-lg">
+                                                <Link to="/agent-profile" className="text-heading lh-1 sidebar-link">
+                                            <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
+                                                    <span className="sidebar-item-icon d-inline-block mr-3 text-muted fs-20">
+                                                    <svg className="icon icon-my-profile"><use xlinkHref="#icon-my-profile" /></svg>
+                                                    </span>
+                                                    <span className="sidebar-item-text">My Profile</span>
+                                            </li>
+                                                </Link>
                                         <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
                                             <Link to="/reviews" className="text-heading lh-1 sidebar-link d-flex align-items-center">
                                                 <span className="sidebar-item-icon d-inline-block mr-3 text-muted fs-20">
@@ -136,45 +157,24 @@ export default function Sidebar({setIsLoading, agent}) {
                                                 <span className="sidebar-item-number ml-auto text-primary fs-15 font-weight-bold">{agent.no_reviews ? agent.no_reviews : ''}</span>
                                             </Link>
                                         </li>
-                                        <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
-                                            <Link to="/agent-wishlists" className="text-heading lh-1 sidebar-link">
-                                                <span className="sidebar-item-icon d-inline-block mr-3 text-muted fs-20">
-                                                    <i className="far fa-heart"></i>
-                                                </span>
-                                                <span className="sidebar-item-text">Wishlists</span>
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                    </li>
-                                    <li className="list-group-item pt-6 pb-4">
-                                        <h5 className="fs-13 letter-spacing-087 text-muted mb-3 text-uppercase px-3">Manage Acount</h5>
-                                        <ul className="list-group list-group-no-border rounded-lg">
-                                            <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
-                                                <Link to="/agent-profile" className="text-heading lh-1 sidebar-link">
-                                                    <span className="sidebar-item-icon d-inline-block mr-3 text-muted fs-20">
-                                                    <svg className="icon icon-my-profile"><use xlinkHref="#icon-my-profile" /></svg>
-                                                    </span>
-                                                    <span className="sidebar-item-text">My Profile</span>
-                                                </Link>
-                                            </li>
-                                            <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
                                                 <Link to="/activity" className="text-heading lh-1 sidebar-link">
+                                            <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
                                                     <span className="sidebar-item-icon d-inline-block mr-3 text-muted fs-20">
                                                         <i className="fal fa-bell"></i>
                                                     </span>
                                                     <span className="sidebar-item-text">Activity</span>
-                                                </Link>
                                             </li>
-                                            <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
+                                                </Link>
                                                 <Link to="/support" className="text-heading lh-1 sidebar-link">
+                                            <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
                                                     <span className="sidebar-item-icon d-inline-block mr-3 text-muted fs-20">
                                                         <i className="fal fa-headset"></i>
                                                     </span>
                                                     <span className="sidebar-item-text">Support</span>
-                                                </Link>
                                             </li>
-                                            <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
-                                                <button onClick={logout} className="btn p-0 text-heading lh-1 sidebar-link">
+                                                </Link>
+                                            <li onClick={logout} className="list-group-item px-3 px-xl-4 py-2 sidebar-item cursor-pointer">
+                                                <button className="btn p-0 text-heading lh-1 sidebar-link">
                                                     <span className="sidebar-item-icon d-inline-block mr-3 text-muted fs-20">
                                                     <svg className="icon icon-log-out"><use xlinkHref="#icon-log-out" /></svg>
                                                     </span>

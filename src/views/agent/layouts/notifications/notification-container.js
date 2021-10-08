@@ -93,7 +93,7 @@ export const NotificationContainer = () => {
                         
                         <div>
                             <img src="" alt=""  className="" />
-                            <p className="">You have no notifications at the moment</p>
+                            <p className="">You have none at the moment</p>
                         </div>
 
                     }

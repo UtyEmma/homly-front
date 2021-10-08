@@ -51,7 +51,7 @@ const Reviews = ({agent, setIsLoading}) => {
                                 Reviews
                                 <span className="badge badge-white badge-pill text-primary fs-18 font-weight-bold ml-2">{reviews && reviews.length}</span>
                             </h2>
-                            <p className="mb-1">Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse suscipit</p>
+                            <p className="mb-1">All reviews from clients on your account, will be displayed for you here</p>
                             </div>
 
                             <div className="card border-0 mb-4">

@@ -16,9 +16,8 @@ export default function ListingDetails({formErrors, reset}) {
                 <div className="card-body py-4 py-md-0 px-0">
                     <div className="card mb-6">
                     <div className="card-body p-6">
-                        <h3 className="card-title mb-0 text-heading fs-22 lh-15">Listing Detail</h3>
-                        <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit</p>
+                        <h3 className="card-title mb-0 text-heading fs-22 lh-15">Property Detail</h3>
+                        <p className="card-text mb-5">Well, lets get into more specific details about your property</p>
                         <div className="row">
                             <div className="col-lg-4">
                                 <div className="form-group">

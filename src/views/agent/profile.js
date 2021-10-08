@@ -64,8 +64,8 @@ const AgentProfile = ({agent, setIsLoading}) => {
                             <div className="px-3 px-lg-6 px-xxl-13 py-5 py-lg-10">
                                 <div className="mb-6 d-flex justify-content-between">
                                     <div className="d-flex flex-column justify-content-center">
-                                        <h2 className="mb-0 text-heading fs-22 lh-15">My Profile</h2>
-                                        <p className="mb-5">Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse suscipit</p>
+                                        <h2 className="mb-0 text-heading fs-22 lh-15">Personal Information</h2>
+                                        {/* <p className="mb-5">Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse suscipit</p> */}
                                     </div>
                                     <div className="d-flex align-items-center">
                                         <a href={`/${agent.username}`} disabled={agent.username ? false : true} target="_blank" className="btn btn-lg btn-outline-primary d-block d-md-inline my-3" rel="noreferrer">Visit Profile <i className="ml-1 fa fa-external-link-alt"></i></a>
@@ -80,7 +80,7 @@ const AgentProfile = ({agent, setIsLoading}) => {
                                                     <div className="row">
                                                         <div className="col-xl-12 mb-3">
                                                             <h3 className="card-title mb-0 text-heading fs-22 lh-15">Profile Image</h3>
-                                                            <p className="card-text">Upload your profile photo.</p>
+                                                            <p className="card-text">Upload an image, with a clear view of your face</p>
                                                         </div>
                                                         <div className="col-xl-12">
                                                             <img src={agent.avatar ?? "images/my-profile.png"} alt="My Profile" id="profile-image" ref={profileImage} className="w-100" />
@@ -98,33 +98,33 @@ const AgentProfile = ({agent, setIsLoading}) => {
                                             </div>
                                             <div className="card mb-6">
                                                 <div className="card-body px-6 pt-6 pb-5">
-                                                    <h3 className="card-title mb-0 text-heading fs-22 lh-15">Contact information</h3>
-                                                    <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                                    <h3 className="card-title mb-0 text-heading fs-22 lh-15">My Personal details</h3>
+                                                    <p className="card-text">Your contact information is also needed here</p>
                                                     <div className="form-row mx-n4">
                                                         <div className="form-group col-md-6 px-4">
-                                                            <label htmlFor="firstName" className="text-heading">First name</label>
+                                                            <label htmlFor="firstName" className="text-heading">First name<span class="text-danger">*</span></label>
                                                             <input type="text" className="form-control form-control-lg border-0" id="firstName" name="firstname" defaultValue={agent.firstname}/>
                                                             <p className="text-danger fs-12 mt-1">{formErrors.firstname?.message}</p>
                                                         </div>
                                                         <div className="form-group col-md-6 px-4">
-                                                            <label htmlFor="lastName" className="text-heading">Last name</label>
+                                                            <label htmlFor="lastName" className="text-heading">Last name<span class="text-danger">*</span></label>
                                                             <input type="text" className="form-control form-control-lg border-0" id="lastName" name="lastname" defaultValue={agent.lastname}/>
                                                             <p className="text-danger fs-12 mt-1">{formErrors.lastname?.message}</p>
                                                         </div>
                                                     </div>
                                                     <div className="form-row mx-n4">
                                                         <div className="form-group col-md-12 px-4">
-                                                            <label htmlFor="email" className="text-heading">Email</label>
+                                                            <label htmlFor="email" className="text-heading">Email<span class="text-danger">*</span></label>
                                                             <input type="email" className="form-control form-control-lg border-0" id="email" name="email" defaultValue={agent.email} />
                                                             <p className="text-danger fs-12 mt-1">{formErrors.email?.message}</p>
                                                         </div>
                                                         <div className="form-group col-md-6 px-4">
-                                                            <label htmlFor="phone" className="text-heading">Phone Number</label>
+                                                            <label htmlFor="phone" className="text-heading">Phone Number<span class="text-danger">*</span></label>
                                                             <input type="text" className="form-control form-control-lg border-0" defaultValue={agent.phone_number} id="phone" name="phone_number" />
                                                             <p className="text-danger fs-12 mt-1">{formErrors.phone_number?.message}</p>
                                                         </div>
                                                         <div className="form-group col-md-6 px-4">
-                                                            <label htmlFor="whatsapp_no" className="text-heading">WhatsApp Number</label>
+                                                            <label htmlFor="whatsapp_no" className="text-heading">WhatsApp Number<span class="text-danger">*</span></label>
                                                             <input type="text" className="form-control form-control-lg border-0" defaultValue={agent.whatsapp_no} id="whatsapp_no" name="whatsapp_no" />
                                                             <p className="text-danger fs-12 mt-1">{formErrors.whatsapp_no?.message}</p>
                                                         </div>
@@ -132,12 +132,12 @@ const AgentProfile = ({agent, setIsLoading}) => {
 
                                                     <div className="form-row mx-n4">
                                                         <div className="form-group col-md-12 px-4">
-                                                            <label htmlFor="title" className="text-heading">Title</label>
+                                                            <label htmlFor="title" className="text-heading">Title<span class="text-danger">*</span></label>
                                                             <input type="text" className="form-control form-control-lg border-0" id="title" name="title" defaultValue={agent.title} />
                                                             <p className="text-danger fs-12 mt-1">{formErrors.title?.message}</p>
                                                         </div>
                                                         <div className="form-group col-md-12 px-4">
-                                                            <label htmlFor="phone" className="text-heading">Bio</label>
+                                                            <label htmlFor="phone" className="text-heading">Bio<span class="text-danger">*</span></label>
                                                             <textarea rows="4" defaultValue={agent.bio} className="form-control form-control-lg border-0" id="bio" name="bio"></textarea>
                                                             <p className="text-danger fs-12 mt-1">{formErrors.bio?.message}</p>
                                                         </div>
@@ -152,7 +152,7 @@ const AgentProfile = ({agent, setIsLoading}) => {
                                             <div className="card mb-6">
                                                 <div className="card-body px-6 pt-6 pb-5">
                                                     <h3 className="card-title mb-0 text-heading fs-22 lh-15">Agent Location</h3>
-                                                    <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                                    <p className="card-text">Which area are you most active or based in?</p>
                                                     <div className="form-group">
                                                         <label htmlFor="state" className="text-heading">State</label>
                                                         <State classes="form-control form-control-lg border-0" defaultValue={agent.state} setSelectedState={setSelectedState} name="state" id="state"/>
@@ -169,7 +169,7 @@ const AgentProfile = ({agent, setIsLoading}) => {
                                             <div className="card mb-6">
                                                 <div className="card-body px-6 pt-6 pb-5">
                                                     <h3 className="card-title mb-0 text-heading fs-22 lh-15">Social Media Handles</h3>
-                                                    <p className="card-text">Make it easier for clients to reach you Social Media</p>
+                                                    <p className="card-text">Its easier for clients to reach you, through social media</p>
                                                     <div className="form-group">
                                                         <label htmlFor="facebook" className="text-heading">Facebook</label>
                                                         <div className="input-group mb-3">
@@ -179,7 +179,7 @@ const AgentProfile = ({agent, setIsLoading}) => {
                                                                     <span className="fs-13 ml-2 font-weight-600">https://facebook.com/</span>
                                                                 </span>
                                                             </div>
-                                                            <input type="text" name="facebook" id="facebook" className="form-control border-0" defaultValue={agent.facebook && agent.facebook.split('/')[3]} aria-describedby="basic-addon3" placeholder="your.username" />
+                                                            <input type="text" name="facebook" id="facebook" className="form-control border-0" defaultValue={agent.facebook && agent.facebook.split('/')[3]} aria-describedby="basic-addon3" placeholder="Your username" />
                                                         </div>
                                                         <p className="text-danger fs-12 mt-1">{formErrors.facebook?.message}</p>
                                                     </div>
@@ -192,7 +192,7 @@ const AgentProfile = ({agent, setIsLoading}) => {
                                                                 <span className="fs-13 ml-2 font-weight-600">https://instagram.com/</span>
                                                             </span>
                                                             </div>
-                                                            <input type="text" className="form-control border-0" defaultValue={agent.instagram && agent.instagram.split('/')[3]} id="instagram" name="instagram" aria-describedby="basic-addon3" placeholder="your.username"/>
+                                                            <input type="text" className="form-control border-0" defaultValue={agent.instagram && agent.instagram.split('/')[3]} id="instagram" name="instagram" aria-describedby="basic-addon3" placeholder="Your username"/>
                                                         </div>
                                                         <p className="text-danger fs-12 mt-1">{formErrors.instagram?.message}</p>
                                                     </div>
@@ -205,7 +205,7 @@ const AgentProfile = ({agent, setIsLoading}) => {
                                                                 <span className="fs-13 ml-2 font-weight-600">https://twitter.com/</span>
                                                             </span>
                                                             </div>
-                                                            <input type="text" className="form-control border-0"  defaultValue={agent.twitter && agent.twitter.split('/')[3]} id="twitter" name="twitter" aria-describedby="basic-addon3" placeholder="your.username"/>
+                                                            <input type="text" className="form-control border-0"  defaultValue={agent.twitter && agent.twitter.split('/')[3]} id="twitter" name="twitter" aria-describedby="basic-addon3" placeholder="Your username"/>
                                                         </div>
                                                         <p className="text-danger fs-12 mt-1">{formErrors.twitter?.message}</p>
                                                     </div>

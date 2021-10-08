@@ -8,9 +8,9 @@ export default function ReviewsNotFound() {
                     <img src="/images/svg/homes.svg" alt="" />
                 </div>
                 <div className="col-md-6 rounded mt-3 mt-md-0 pl-5 bg-light py-7 text-center text-md-left d-flex justify-content-center flex-column">
-                    <h3 className="font-weight-bold mb-0 fs-22 fs-md-26">You do not have any reviews yet!</h3>
+                    <h3 className="font-weight-bold mb-0 fs-22 fs-md-26">None of your clients have reviewed you... yet!</h3>
 
-                    <p className="fs-16 mt-3 mb-0">Encourage your clients to leave reviews on your account to boost your visibility and credibility</p>
+                    <p className="fs-16 mt-3 mb-0">Encourage your clients to leave reviews on your profile, this boosts your visibility and credibility</p>
                 </div>
             </div>
         </div>

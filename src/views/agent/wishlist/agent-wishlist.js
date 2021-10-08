@@ -52,7 +52,7 @@ const AgentWishlist = ({agent, setIsLoading}) => {
                                 <div className="mr-0 mr-md-auto">
                                     <h2 className="mb-0 text-heading fs-22 lh-15">Wishlists<span className="badge badge-white badge-pill text-primary fs-18 font-weight-bold ml-2">{wishlists && wishlists.length}</span>
                                 </h2>
-                                <p>Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse suscipit</p>
+                                <p>When users are looking for a property, you'll be notified... and they will all be listed here</p>
                                 </div>
                             </div>
 

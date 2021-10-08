@@ -17,9 +17,8 @@ export default function ListingAmenities({amenities, formErrors}) {
                 <div className="card-body py-4 py-md-0 px-0">
                     <div className="card mb-6">
                     <div className="card-body p-6">
-                        <h3 className="card-title mb-0 text-heading fs-22 lh-15">Select Amenities</h3>
-                        <p className="card-text mb-5">Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit</p>
+                        <h3 className="card-title mb-0 text-heading fs-22 lh-15">What amenities does your property offer?</h3>
+                        <p className="card-text mb-5">From basic amenities, to special ones that entice clients. This could be the difference between landing your next client or not.</p>
                         <div className="col-lg-12">
                             <ul className="list-group list-group-no-border">
                                 <div className="row">
