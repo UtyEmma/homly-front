@@ -8,13 +8,13 @@ export default function Footer() {
                 <div className="row">
                     <div className="col-md-6 col-lg-4 mb-6 mb-md-0">
                         <a className="d-block mb-2" href="/">
-                            <img src="images/logo-white-primary.png" alt="HomeID" />
+                            <img src="images/logo/white.png" alt="Bayof" width="156px" height="40px" />
                         </a>
                         <div className="lh-26 font-weight-500">
                             <p className="mb-0">58 Howard Street #2 San Francisco</p>
-                            <a className="d-block text-muted hover-white" href="mailto:contact@homeid.com">contact@homeid.com</a>
-                            <a className="d-block text-lighter font-weight-bold fs-15 hover-white" href="tel:(+68)122109876">(+68)122109876</a>
-                            <a className="d-block text-muted hover-white" href=".">www.homeid.com</a>
+                            <a className="d-block text-muted hover-white" href="mailto:info@bayof.co">info@bayof.co</a>
+                            <a className="d-block text-lighter font-weight-bold fs-15 hover-white" href="tel:+2348183175686">(+234)81 831 75 686</a>
+                            <a className="d-block text-muted hover-white" href="https://www.bayof.co">www.bayof.co</a>
                         </div>
                     </div>
                     <div className="col-md-6 col-lg-2 mb-6 mb-md-0">
@@ -100,7 +100,7 @@ export default function Footer() {
                     </ul>
 
                     <p className="col-md-auto mb-0 text-muted">
-                        © 2020 homeID. All Rights Reserved
+                        © 2021 Bayof. All Rights Reserved
                     </p>
                 </div>
             </div>
