@@ -2,6 +2,7 @@ import Tagify from 'libraries/tagify/tagify';
 import { FetchDetails } from 'providers/redux/_actions/details-actions';
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { AmenityItem } from './amenity-item';
 
 export function SelectAmenities({features, setFeatures, name, validate, message, color, selected, classes}) {
 
@@ -13,6 +14,8 @@ export function SelectAmenities({features, setFeatures, name, validate, message,
         !amenities && dispatch(FetchDetails())
     }, [amenities, dispatch])
 
+
+
     return (
         <>
             {
@@ -22,14 +25,7 @@ export function SelectAmenities({features, setFeatures, name, validate, message,
 
                 amenities.map((item, index) => {
                     return (
-                        <div key={index} className="col-sm-6 col-lg-3">
-                            <li className={`list-group-item px-0 pt-0 pb-2 ${classes}`}>
-                                <div className="custom-control custom-checkbox ">
-                                    <input type="checkbox" className="custom-control-input" checked={selected?.includes(item.toLowerCase().replace(/ /g,'_'))} defaultChecked={selected?.includes(item.toLowerCase().replace(/ /g,'_'))} name={`amenities[${item.toLowerCase().replace(/ /g,'_')}]`} id={item} />
-                                    <label className="custom-control-label text-capitalize" htmlFor={item} >{item}</label>
-                                </div>
-                            </li>
-                        </div>
+                        <AmenityItem selected={selected} amenity={item} key={item} classes={classes} />
                     )
                 }) 
             }

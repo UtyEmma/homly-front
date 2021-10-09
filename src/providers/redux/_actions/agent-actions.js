@@ -101,16 +101,22 @@ export const AgentLogout = (token) => (dispatch) => {
 
 
 export const DeleteListing = (token, id) => (dispatch) => {
-    console.log('Deleting Listing...')
     dispatch({type: DELETE_LISTING_REQUEST});
 
     AgentService.deleteListing(token, id)
                 .then(response => {
                     Response.success(response.data)
+                    const agent = response.data.data.agent
                     dispatch({
                         type: DELETE_LISTING_SUCCESS,
                         payload: true
                     })
+
+                    dispatch({
+                        type: 'UPDATE_USER_DATA',
+                        payload: agent
+                    })
+                    
                     history.push('/my-listings')
                 })
                 .catch(error => {

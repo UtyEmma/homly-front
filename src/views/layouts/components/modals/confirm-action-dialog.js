@@ -26,7 +26,7 @@ export const ConfirmActionDialog = ({show, setShow, callback, message, title}) =
                 <button className="btn btn-link text-dark " onClick={handleClose}>
                     Close
                 </button>
-                <button className="btn btn-primary" onClick={handleCallback} >
+                <button className="btn btn-outline-primary" onClick={handleCallback} >
                     Proceed
                 </button>
                 </Modal.Footer>

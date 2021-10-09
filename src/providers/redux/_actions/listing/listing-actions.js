@@ -222,8 +222,7 @@ export const SetAsRented = (token, id) => (dispatch) => {
                         })
                     })
                     .catch((error) => {
-                        // Response.error(error.response)
-                        console.log(error.response)
+                        Response.error(error.response)
                         dispatch({
                             type: SET_AS_RENTED_FAILURE,
                             payload: error.response
@@ -232,8 +231,6 @@ export const SetAsRented = (token, id) => (dispatch) => {
 }
 
 export const UpdateListingViews = (id) => (dispatch) => {
-    console.log("Updating Views...")
-
     dispatch({type: UPDATE_LISTING_VIEWS_REQUEST})
 
     ListingService.updateViews(id)
