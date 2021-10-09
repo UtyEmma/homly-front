@@ -49,6 +49,7 @@ import { AgentActivity } from 'views/agent/activity/activity';
 import UpdateUsername from 'views/onboarding/update-username';
 import UserLogin from 'views/onboarding/auth/login';
 import UserSignup from 'views/onboarding/auth/signup';
+import { AuthUserGuard } from 'providers/guards/auth-user-guard';
 
 function App() {
 
@@ -120,13 +121,14 @@ function App() {
         {/* User Routes */}
         <UserRoute path="/" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={Home} exact/>
         <UserRoute path="/about" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={About} exact />
-        <UserRoute path="/verify" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={VerifyEmail} exact />
-        <UserRoute path="/email/verify" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={EmailUpdateVerification} exact />
         <UserRoute path="/search" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={Search} exact/>
         <UserRoute path="/listings" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={Listing} exact/>
         <UserRoute path="/agents" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={Agents} exact/>
-        <UserRoute path="/onboarding" isLoading={isLoading} setIsLoading={setIsLoading} token={token} type={type} user={user} component={UpdateUsername} exact />
-
+        
+        <AuthUserGuard path="/email/verify" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={EmailUpdateVerification} exact />
+        <AuthUserGuard path="/onboarding" isLoading={isLoading} setIsLoading={setIsLoading} token={token} type={type} user={user} component={UpdateUsername} exact />
+        <AuthUserGuard path="/verify" type={type} isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} component={VerifyEmail} exact />
+        
         {/* Tenant Routes */}
         <TenantRoute path="/profile" isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} type={type} component={Profile} exact/>
         <TenantRoute path="/wishlist" isLoading={isLoading} token={token} setIsLoading={setIsLoading} user={user} type={type} component={Wishlist} exact/>
@@ -144,7 +146,7 @@ function App() {
         <AgentRoute path="/agent-wishlists" isLoading={isLoading} setIsLoading={setIsLoading} type={type} token={token} user={user} component={AgentWishlist} exact />
         <AgentRoute path="/activity" isLoading={isLoading} setIsLoading={setIsLoading} type={type} token={token} user={user} component={AgentActivity} exact />
 
-        <Route path="/500" render={(props) => (<ServerError {...props} setIsLoading={setIsLoading}  token={token} user={user} />)} exact/>
+        <UserRoute path="/500"  setIsLoading={setIsLoading}  token={token} user={user} component={ServerError} exact/>
 
         <UserRoute path="/:username/:slug" type={type} isLoading={isLoading} setIsLoading={setIsLoading} user={user} token={token} component={ListingDetails} exact/>
         <UserRoute path="/:id" isLoading={isLoading} setIsLoading={setIsLoading} user={user} type={type} token={token} component={AgentDetails} exact/>

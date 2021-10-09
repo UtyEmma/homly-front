@@ -7,6 +7,8 @@ export const GoogleOneTapAuth = ({setIsLoading}) => {
     const [show, setShow] = useState(false)
     const [data, setData] = useState({})
 
+    const [display, setDisplay] = useState(true)
+
     const {user} = useSelector((state) => state.user_data)
 
     const handleSuccess = (response) => {
@@ -14,13 +16,17 @@ export const GoogleOneTapAuth = ({setIsLoading}) => {
         setShow(true)
     }
 
+    useEffect(() => {
+        user && setDisplay(false)
+    }, [user])
+
     return (
         <>
             {
-                !user
+                display
 
                 &&
-                
+
                 <GoogleOneTapLogin onError={(error) => console.log(error)} onSuccess={(res) => handleSuccess(res)} googleAccountConfigs={{ client_id: process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}} />
             }
 

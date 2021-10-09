@@ -67,9 +67,11 @@ export const WishlistModal = ({show, setShow, details, token}) => {
 
                 }
             </Modal.Body>
-            <Modal.Footer className="px-5 border-0 d-flex justify-content-between">
-                <button className="btn btn-sm btn-outline-danger ml-2" onClick={deleteWishlist}>Remove from Wishlists</button>
-                <button className="btn btn-sm" onClick={handleClose}>Close</button> 
+            <Modal.Footer className="px-5 border-0">
+                <div className="d-flex justify-content-between">
+                    <button className="btn btn-sm btn-outline-danger ml-2" onClick={deleteWishlist}>Remove from Wishlists</button>
+                    <button className="btn btn-sm" onClick={handleClose}>Close</button> 
+                </div>
             </Modal.Footer>
         </Modal>   
         </>

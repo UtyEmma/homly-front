@@ -85,9 +85,20 @@ export default function ListingAction({agent, listing}) {
 
                         ?
 
-                        <li className="list-group-item d-flex align-items-sm-center lh-114 row m-0 px-0 pt-3 pb-0">
+                        <li className="list-group-item d-flex align-items-sm-center lh-114 pb-2 row m-0 px-0 pt-3 pb-md-0">
                             <span className="col-sm-4 p-0 fs-13 mb-1 mb-sm-0">Social</span>
                             <ul className={`list-inline mb-0 ${agent.twitter || agent.facebook || agent.instagram || agent.website ? "" : "h-30"}`}>
+                                {
+                                    agent.whatsapp_no 
+                                    
+                                    &&
+        
+                                    <li className="list-inline-item mr-6">
+                                        <a href={agent.whatsapp_no} target="_blank" className="text-muted hover-primary " rel="noreferrer">
+                                            <i className="fab fa-whatsapp" /></a>
+                                    </li>
+                                }
+
                                 {
                                     agent.twitter 
                                     

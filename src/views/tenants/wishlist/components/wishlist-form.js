@@ -37,27 +37,27 @@ const WishlistForm = ({setIsLoading}) => {
             setFormErrors({}); 
             dispatch(CreateWishlist(token, data))
         }
-    }  
-
-    useEffect(() => {
-        wishlist && document.getElementById('create_wishlist_form').reset()
-    }, [wishlist])   
-
+    } 
+   
+    
     useEffect(() => {
         !stepper && setStepper(new Stepper(document.getElementById('wishlist-stepper'), {
             linear: false,
             animation: true
         }));
     }, [stepper])
-
+    
     useEffect(() => {
         setIsLoading(loading)
     }, [loading, setIsLoading])
-
+    
+    useEffect(() => {
+        wishlist && document.getElementById('create_wishlist_form').reset()
+    }, [wishlist])   
     
     return (
         <div className="card border-0 mb-4">
-            <div className="card-body px-3 pt-0 px-md-4 py-md-4 pb-5">
+            <div className="card-body px-2 pt-0 px-md-4 py-md-4 pb-5">
             <div className="bs-stepper" id='wishlist-stepper'>
                 <div className="bs-stepper-header mb-3 d-block d-md-flex" role="tablist">
                     <div className="step" data-target="#property-info">
@@ -127,8 +127,11 @@ const WishlistForm = ({setIsLoading}) => {
                             </div>
 
 
-                            <div className='row d-flex justify-content-end'>
+                            <div className='row d-flex justify-content-between'>                        
+                                <button type="button" className="btn btn-text" data-dismiss="modal">Close</button>
+                                <div className="col-auto px-2">
                                     <button type="button" onClick={() => {stepper.next()}} className="btn btn-primary">Next</button>
+                                </div>
                             </div>
                         </div>
 
@@ -160,9 +163,15 @@ const WishlistForm = ({setIsLoading}) => {
                                 </div>
                                 </div>
 
-                                <div className='row d-flex justify-content-end'>
-                                    <button type="button" onClick={() => {stepper.previous()}} className="btn">Previous</button>
-                                    <button type="button" onClick={() => {stepper.next()}} className="btn btn-primary">Next</button>
+                                <div className='row d-flex justify-content-between'>
+                                    <div className="d-flex justify-content-start">
+                                        <button type="button" className="btn btn-text" data-dismiss="modal">Close</button>
+                                    </div>
+
+                                    <div className="col-auto px-2">
+                                        <button type="button" onClick={() => {stepper.previous()}} className="btn">Previous</button>
+                                        <button type="button" onClick={() => {stepper.next()}} className="btn btn-primary">Next</button>
+                                    </div>
                                 </div>
                         </div>
 
@@ -193,9 +202,14 @@ const WishlistForm = ({setIsLoading}) => {
                                 </div>
                             </div>
                             
-                            <div className='row d-flex justify-content-end'>
-                                <button type="button" onClick={() => {stepper.previous()}} className="btn">Previous</button>
-                                <button type="submit" className="btn btn-primary">Submit</button>
+                            <div className='row d-flex justify-content-between'>
+                                <div className="d-flex justify-content-start">
+                                    <button type="button" className="btn btn-text" data-dismiss="modal">Close</button>
+                                </div>
+                                <div className="d-flex">
+                                    <button type="button" className="btn" onClick={() => {stepper.previous()}} >Previous</button>
+                                    <button type="submit" className="btn btn-primary">Submit</button>
+                                </div>
                             </div>
                         </div>
                     </form>

@@ -130,11 +130,28 @@ const ListingDetails = ({isLoggedIn, user, status, adminMode, setIsLoading}) => 
                                     <div className="media-body ml-2">
                                         <a href={`/${agent.username}`} className="d-block text-dark fs-15 font-weight-500 lh-15">{agent.firstname} {agent.lastname} </a>
                                         <p className="fs-13 mb-0 text-truncate">{listing.title}</p>
+                                        
+                                        <div className="">
+                                            <a href={`mailto:${agent.email}`} className="btn btn-link mr-2 fs-20 px-0 btn-text lh-1 shadow-none"><i className="fal fa-envelope" /></a>
+
+                                            {
+                                                agent.phone_number
+
+                                                &&
+
+                                                <a href={`tel:${agent.phone_number}`} className="btn btn-link fs-20 mx-2 px-0 lh-1 shadow-none" target="_blank" rel="noreferrer"><i className="fal fa-phone" /></a>
+
+                                            }
+
+                                            {
+                                                agent.whatsapp_no 
+                                    
+                                                &&
+                        
+                                                <a href={` https://wa.me/${agent.whatsapp_no}`} className="btn btn-link mx-2 fs-20 px-0 lh-1 shadow-none" target="_blank" rel="noreferrer"><i className="fab fa-whatsapp" /></a>
+                                            }
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="ml-auto pl-3">
-                                    <a href={`mailto:${agent.email}`} className="btn btn-primary fs-18 p-2 lh-1 mr-1 mb-1 shadow-none"><i className="fal fa-comment" /></a>
-                                    <a href={`tel:${agent.phone_number}`} className="btn btn-primary fs-18 p-2 lh-1 mb-1 shadow-none" target="_blank" rel="noreferrer"><i className="fal fa-phone" /></a>
                                 </div>
                             </div>
                         </>

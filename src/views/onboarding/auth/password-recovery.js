@@ -45,16 +45,8 @@ export default function PasswordRecovery ({setIsLoading}) {
     }
     
     useEffect(() => {
-        setIsLoading(false)
-    })
-
-    useEffect(() => {
         setIsLoading(loading)
-    }, [loading])
-
-    useEffect(() => {
-        success && history.push('/reset-password')
-    }, [success])
+    }, [loading, setIsLoading])
     
     return (
         <div>

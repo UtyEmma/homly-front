@@ -28,7 +28,7 @@ export const AgentListingDetail = ({agent, setIsLoading, isLoading}) => {
 
     useEffect(() => {
         fetchListingData(slug)
-    }, [fetchListingData, listing, slug]);
+    }, [slug]);
 
     useEffect(() => {
         setIsLoading(loading)
