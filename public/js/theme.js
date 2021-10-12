@@ -157,10 +157,10 @@
 					$next_item.each(function () {
 						var number = $(this).find('.nav-link').data('number');
 						$(this).find('.number').html(number);
-
 					});
 				}
 			});
+			
 			$('.prev-button').on('click', function (e) {
 				e.preventDefault();
 				var $parent = $(this).parents('.tab-pane');
@@ -177,6 +177,7 @@
 				var number = $parent.find('.collapse-parent').data('number');
 				$parent.find('.number').html(number);
 			});
+
 			$('.next-button').on('click', function (e) {
 				e.preventDefault();
 				var $parent = $(this).parents('.tab-pane');
@@ -193,6 +194,7 @@
 				$nav_link.find('.number').html('<i class="fal fa-check text-primary"></i>');
 				$parent.find('.number').html('<i class="fal fa-check text-primary"></i>');
 			});
+			
 			$step.find('.collapsible').on('show.bs.collapse', function () {
 				$(this).find('.number').html($(this).data('number'));
 				var $parent = $(this).parents('.tab-pane');

@@ -4,6 +4,7 @@ import Header from './layouts/shared/header'
 import { Helmet } from 'react-helmet'
 import { AddUsernameModal } from './layouts/dashboard/add-username-modal'
 import { NotificationContainer } from './layouts/notifications/notification-container'
+import { Link } from 'react-router-dom'
 
 const AgentDashboard = ({agent, setIsLoading}) => {
 
@@ -54,10 +55,10 @@ const AgentDashboard = ({agent, setIsLoading}) => {
                                         <p>What mega deals will we be closing, today?</p>
                                     </div>
                                     <div>
-                                        <a href="/new-listing" className="btn btn-primary btn-lg">
+                                        <Link to="/new-listing" className="btn btn-primary btn-lg">
                                         <span>Add New Property</span>
                                         <span className="d-inline-block ml-1 fs-20 lh-1"><svg className="icon icon-add-new"><use xlinkHref="#icon-add-new" /></svg></span>
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                                 {

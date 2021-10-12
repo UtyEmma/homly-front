@@ -1,7 +1,15 @@
 import React, { useEffect } from 'react'
 import { SelectAmenities } from 'views/layouts/components/details/amenities'
+import * as $ from 'jquery'
 
 export default function ListingAmenities({amenities, formErrors}) {
+
+    useEffect(() => {
+        $('#amenities-tab').on('click', function(){
+          const $ = window.jQuery
+          $('#amenities-collapse').collapse('show')
+        });
+    }, [])
 
     return (
         <div className="tab-pane tab-pane-parent fade px-0" id="amenities" role="tabpanel" aria-labelledby="amenities-tab">

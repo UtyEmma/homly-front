@@ -9,8 +9,10 @@ import ListingDetails from './blocks/listing-details'
 import { MapFormErrors, ToastFormErrors, __createlisting } from 'libraries/validation';
 import Validator from 'validatorjs';
 import toast from 'react-hot-toast';
+import { processingStepAddProperty } from './handleFormStepper';
 
 function AddListingForm({setIsLoading}) {
+
 
     const dispatch = useDispatch();
 
@@ -63,15 +65,19 @@ function AddListingForm({setIsLoading}) {
     }, [listing_success])
 
     useEffect(() => {
+        processingStepAddProperty()
+    }, [])
+
+    useEffect(() => {
         setIsLoading(loading)
     }, [loading, setIsLoading])
 
     return (
         <form id="listing-form" onSubmit={handleFormData} encType="multipart/form-data" >
             <div id="collapse-tabs-accordion" className="bg-gray-01">
-                <ListingDescription reset={resetEditor}  formErrors={formErrors} />
+                <ListingDescription collapse={processingStepAddProperty} reset={resetEditor}  formErrors={formErrors} />
 
-                <ListingMedia files={files} setFiles={setFiles} formErrors={formErrors} />
+                <ListingMedia collapse={processingStepAddProperty} files={files} setFiles={setFiles} formErrors={formErrors} />
 
                 <ListingLocation formErrors={formErrors} />
 

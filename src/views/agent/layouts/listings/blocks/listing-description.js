@@ -1,39 +1,33 @@
 import { RichTextEditor } from "components/rich-text/rich-text-editor";
-import React from "react";
+import React, { useEffect } from "react";
 import SelectListingCategory from "views/layouts/components/details/categories";
+import * as $ from 'jquery'
 
-export default function ListingDescription({ formErrors, reset }) {
+export default function ListingDescription({collapse, formErrors, reset }) {
+  
+  useEffect(() => {
+    $('#description-tab').on('click', function(){
+      const $ = window.jQuery
+      $('#description-collapse').collapse('show')
+    });
+  }, [])
+
   return (
-    <div
-      className="tab-pane tab-pane-parent bg-transparent fade show active px-0"
-      id="description"
-      role="tabpanel"
-      aria-labelledby="description-tab"
-    >
+    <div className="tab-pane tab-pane-parent bg-transparent fade show active px-0" id="description" role="tabpanel" aria-labelledby="description-tab" >
       <div className="card bg-transparent border-0">
         <div
           className="card-header d-block d-md-none bg-transparent px-0 py-1 border-bottom-0"
           id="heading-description"
         >
           <h5 className="mb-0">
-            <button
-              className="btn btn-lg collapse-parent btn-block border shadow-none"
-              data-toggle="collapse"
-              data-number={1}
-              data-target="#description-collapse"
-              aria-expanded="true"
+            <button className="btn btn-lg collapse-parent btn-block border shadow-none" data-toggle="collapse" data-number={1} data-target="#description-collapse" aria-expanded="true"
               aria-controls="description-collapse"
             >
               <span className="number">1.</span> Description
             </button>
           </h5>
         </div>
-        <div
-          id="description-collapse"
-          className="collapse show collapsible"
-          aria-labelledby="heading-description"
-          data-parent="#collapse-tabs-accordion"
-        >
+        <div id="description-collapse" className="collapse show collapsible" aria-labelledby="heading-description" data-parent="#collapse-tabs-accordion" >
           <div className="card-body py-4 py-md-0 px-0">
             <div className="row">
               <div className="col-lg-6">

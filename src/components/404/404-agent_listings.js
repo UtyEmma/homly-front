@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function AgentListingsNotFound() {
     return (
@@ -14,9 +15,9 @@ export default function AgentListingsNotFound() {
                         <p className="fs-16 mt-3 mb-0">Dont panic, just click the button below let me get you started on making major deals</p>
 
                         <div className="">
-                            <a href="/new-listing" className="btn btn-lg btn-primary rounded-lg mt-6">
+                            <Link to="/new-listing" className="btn btn-lg btn-primary rounded-lg mt-6">
                                 Add New Property <i className="far fa-long-arrow-right ml-1" />
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

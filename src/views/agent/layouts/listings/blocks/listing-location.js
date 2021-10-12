@@ -3,6 +3,7 @@ import Geocode from 'react-geocode'
 import InputAddress from './map/map-address-search';
 import { LocalGovt, State } from 'components/city-state/city-state';
 import { MapDisplay } from './map/map-display';
+import * as $ from 'jquery'
 
 export default function ListingLocation({formErrors}) {
 
@@ -43,6 +44,13 @@ export default function ListingLocation({formErrors}) {
     useEffect(() => {
         mapViewUpdate()
     }, [state, city, landmark, mapViewUpdate])
+
+    useEffect(() => {
+        $('#location-tab').on('click', function(){
+          const $ = window.jQuery
+          $('#location-collapse').collapse('show')
+        });
+      }, [])
 
     return (
         <div className="tab-pane tab-pane-parent fade px-0" id="location" role="tabpanel" aria-labelledby="location-tab">

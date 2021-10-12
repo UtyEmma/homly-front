@@ -1,9 +1,18 @@
 import { FileInput } from 'libraries/forms/files/custom-file-input';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreListing } from 'providers/redux/_actions/listing/listing-actions';
+import * as $ from 'jquery'
 
-export default function ListingMedia({files, setFiles, formErrors}) {
+
+export default function ListingMedia({collapse, files, setFiles, formErrors}) {
+    
+    useEffect(() => {
+        $('#media-tab').on('click', function(){
+          const $ = window.jQuery
+          $('#media-collapse').collapse('show')
+        });
+    }, [])
 
     return (
         <div className="tab-pane tab-pane-parent fade px-0" id="media" role="tabpanel" aria-labelledby="media-tab">
@@ -15,6 +24,7 @@ export default function ListingMedia({files, setFiles, formErrors}) {
                     </button>
                 </h5>
                 </div>
+
                 <div id="media-collapse" className="collapse collapsible" aria-labelledby="heading-media" data-parent="#collapse-tabs-accordion">
                 <div className="card-body py-4 py-md-0 px-0">
                     <div className="row">

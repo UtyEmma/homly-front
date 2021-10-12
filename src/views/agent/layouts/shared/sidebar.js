@@ -112,11 +112,11 @@ export default function Sidebar({setIsLoading, agent}) {
                                     <h5 className="fs-13 letter-spacing-087 text-muted mb-3 text-uppercase px-3">Manage Properties</h5>
                                     <ul className="list-group list-group-no-border rounded-lg">
                                         <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
-                                            <a href="/new-listing" className="text-heading lh-1 sidebar-link">
+                                            <Link to="/new-listing" className="text-heading lh-1 sidebar-link">
                                                 <span className="sidebar-item-icon d-inline-block mr-3 text-muted fs-20 fs-20">
                                                 <svg className="icon icon-add-new"><use xlinkHref="#icon-add-new" /></svg></span>
                                                 <span className="sidebar-item-text">Add new</span>
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li className="list-group-item px-3 px-xl-4 py-2 sidebar-item">
                                             <Link to="/my-listings" className="text-heading lh-1 sidebar-link d-flex align-items-center">

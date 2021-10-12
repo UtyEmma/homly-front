@@ -1,7 +1,17 @@
 import { RichTextEditor } from 'components/rich-text/rich-text-editor'
-import React from 'react'
+import React, { useEffect } from 'react'
+import * as $ from 'jquery'
+
 
 export default function ListingDetails({formErrors, reset}) {
+    
+    useEffect(() => {
+        $('#detail-tab').on('click', function(){
+          const $ = window.jQuery
+          $('#detail-collapse').collapse('show')
+        });
+    }, [])
+
     return (
         <div className="tab-pane tab-pane-parent fade px-0" id="detail" role="tabpanel" aria-labelledby="detail-tab">
             <div className="card bg-transparent border-0">
