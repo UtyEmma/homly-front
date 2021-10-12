@@ -1,0 +1,23 @@
+.pd-logo{
+    padding-left: 80px !important;
+
+}
+
+body{
+    /* font-family: 'Montserrat', sans-serif; */
+    font-family: "Poppins", sans-serif;
+}
+
+.dropright .dropdown-toggle::after, .dropdown-toggle::after {
+    font-weight: bold;
+}
+.filepond--root{
+    /* font-family: 'Montserrat', sans-serif; */
+    font-family: "Poppins", sans-serif;
+}
+.form-control:focus {
+    border-color: #49a1ff !important;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
