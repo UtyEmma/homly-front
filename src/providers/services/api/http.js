@@ -1,15 +1,16 @@
 import axios from "axios"
 
-// const baseUrl = 'http://localhost:8000';
 const baseUrl = process.env.REACT_APP_API_URL
 
 export const Request = {
     post : async (url, data) => {
-        console.log(baseUrl)
-        return await axios.post(`${baseUrl}/${url}`, data.payload, data.config)
+        const config = data?.config
+        const headers = data?.config?.headers
+        return await axios.post(`${baseUrl}/${url}`, data.payload, {...config, headers: {...headers, 'Access-Control-Allow-Origin': process.env.REACT_APP_APP_URL }})
     },
 
     get : async (url, config = {}) => {
-        return await axios.get(`${baseUrl}/${url}`, config)
+        const headers = config?.headers
+        return await axios.get(`${baseUrl}/${url}`, {...config, headers: {...headers, 'Access-Control-Allow-Origin': process.env.REACT_APP_APP_URL }})
     }
 }
