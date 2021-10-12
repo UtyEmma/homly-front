@@ -1,10 +1,10 @@
-import { GetLoggedInUser, VerifyEmailAddress } from 'providers/redux/_actions/auth-action'
+import { VerifyEmailAddress } from 'providers/redux/_actions/auth-action'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 
-export const EmailVerified = ({setIsLoading, user}) => {
+const EmailVerified = ({setIsLoading, user}) => {
 
     const {code} = useParams()
     const dispatch = useDispatch()
@@ -104,3 +104,5 @@ export function EmailVerificationSuccess ({url}) {
         </>
     )
 }
+
+export default EmailVerified;

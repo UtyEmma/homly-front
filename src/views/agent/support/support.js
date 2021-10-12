@@ -7,7 +7,7 @@ import { NewTicketModal } from './components/tickets/new-ticket'
 import { Helmet } from 'react-helmet'
 import { useSelector } from 'react-redux'
 
-export const Support = ({agent, isLoading, setIsLoading}) => {
+const Support = ({agent, isLoading, setIsLoading}) => {
 
     const [titles, setTitles] = useState()
     const [chat, setChat] = useState()
@@ -52,3 +52,5 @@ function capitalize(str) {
         </div>
     )
 }  
+
+export default Support;

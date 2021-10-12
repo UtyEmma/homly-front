@@ -12,7 +12,7 @@ import { AgentListingGallery } from "./components/listing-details/agent-listing-
 import { AgentListingLocation } from "./components/listing-details/agent-listing-location"
 import { UpdateListingModal } from "./components/update-listing/update-listing-form-modal"
 
-export const AgentListingDetail = ({agent, setIsLoading, isLoading}) => {
+const AgentListingDetail = ({agent, setIsLoading, isLoading}) => {
 
     const {slug} = useParams();
     const dispatch = useDispatch()
@@ -93,3 +93,5 @@ export const AgentListingDetail = ({agent, setIsLoading, isLoading}) => {
         </div>
     )
 }
+
+export default AgentListingDetail

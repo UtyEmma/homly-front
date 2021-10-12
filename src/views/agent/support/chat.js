@@ -8,7 +8,7 @@ import {    useParams } from 'react-router-dom'
 import { FetchMessages } from 'providers/redux/_actions/support-actions'
 import { useDispatch, useSelector } from 'react-redux'
 
-export const Chat = ({agent, setIsLoading}) => {
+const Chat = ({agent, setIsLoading}) => {
 
     const dispatch = useDispatch()
     const [chat, setChat] = useState()
@@ -84,3 +84,5 @@ export const Chat = ({agent, setIsLoading}) => {
         </div>
     )
 }  
+
+export default Chat;

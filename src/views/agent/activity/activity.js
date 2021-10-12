@@ -5,7 +5,7 @@ import Header from '../layouts/shared/header';
 import Sidebar from '../layouts/shared/sidebar';
 import { useSelector } from 'react-redux'
 
-export const AgentActivity = ({agent, setIsLoading}) => {
+const AgentActivity = ({agent, setIsLoading}) => {
     const notification = useSelector((state) => state.notification)
     const {notifications} = notification
 
@@ -45,3 +45,5 @@ export const AgentActivity = ({agent, setIsLoading}) => {
         </div>
     )
 }
+
+export default AgentActivity;

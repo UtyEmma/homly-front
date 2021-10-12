@@ -8,7 +8,7 @@ import FavouriteItem from './components/favourite-item'
 import FavouritesNotFound from 'components/404/404-favourites'
 import { Helmet } from 'react-helmet'
 
-export const Favourites = ({user, isLoggedIn, setIsLoading, status}) => {
+const Favourites = ({user, isLoggedIn, setIsLoading, status}) => {
 
     const dispatch = useDispatch()
     const favourites = useSelector(state => state.favourites)
@@ -108,3 +108,5 @@ export const Favourites = ({user, isLoggedIn, setIsLoading, status}) => {
         </>   
     )         
 }
+
+export default Favourites;

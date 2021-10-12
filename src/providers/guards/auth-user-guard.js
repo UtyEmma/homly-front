@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
 
-export function AuthUserGuard({user, type, token, isLoading, setIsLoading, component: Component, ...restOfProps}) {
+export default function AuthUserGuard({user, type, token, isLoading, setIsLoading, component: Component, ...restOfProps}) {
   
   return (
       <Route

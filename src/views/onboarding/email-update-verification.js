@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-export const EmailUpdateVerification = ({user, setIsLoading}) => {
+const EmailUpdateVerification = ({user, setIsLoading}) => {
 
     const dispatch = useDispatch()
     const history = useHistory()
@@ -75,3 +75,5 @@ export const EmailUpdateVerification = ({user, setIsLoading}) => {
         </div>
     )
 }
+
+export default EmailUpdateVerification;

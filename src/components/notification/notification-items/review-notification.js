@@ -16,10 +16,10 @@ export const ReviewNotificationItem = ({notification}) => {
                         <div className="fs-13 mb-0 lh-13">
                             <p className="fs-13 mb-1 lh-13">{notification.message}</p>
                             <ul className="list-inline mb-0">
-                                <li className="list-inline-item fs-13 text-heading font-weight-600">{notification.rating}/5</li>
+                                <li className="list-inline-item fs-13 text-heading font-weight-600">{notification.rating ?? 1}/5</li>
                                     <li className="list-inline-item fs-13 text-heading font-weight-500 mr-1">
                                         <ul className="list-inline mb-0">
-                                            <RatingStar rating={notification.rating}/>
+                                            <RatingStar rating={notification.rating ?? 1}/>
                                         </ul>
                                     </li>
                             </ul>
