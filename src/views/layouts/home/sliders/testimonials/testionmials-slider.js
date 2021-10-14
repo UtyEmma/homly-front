@@ -14,6 +14,13 @@ export const TestimonialSlider = () => {
     }
 
     return (
+
+        
+
+        
+
+
+
         <div className="bg-accent px-3 pl-md-11 pr-md-10 pt-6 pb-7">
             <Slider className="custom-slider-1 mx-0" {...settings}  >
                 <div className="box px-0">

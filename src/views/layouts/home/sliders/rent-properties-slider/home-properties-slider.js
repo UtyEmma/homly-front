@@ -9,9 +9,9 @@ export const HomePropertiesSlider = () => {
             <div className="container container-xxl">
                 <div className="row">
                 <div className="col-md-6">
-                    <h2 className="text-heading">Properties For Sale</h2>
+                    <h2 className="text-heading c-title">Properties For Sale</h2>
                     <span className="heading-divider" />
-                    <p className="mb-7">Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse suscipit</p>
+                    <p className="mb-7">Take on full ownership of these properties</p>
                 </div>
                 <div className="col-md-6 text-md-right">
                     <Link to="/listings" className="btn btn-lg text-secondary btn-accent rounded-lg mb-8">

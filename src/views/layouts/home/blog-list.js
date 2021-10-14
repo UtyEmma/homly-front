@@ -4,7 +4,15 @@ import ScrollAnimation from 'react-animate-on-scroll'
 export const BlogList = () => {
     return (
         <>
-         <h2 className="text-heading mb-6">From Our Blog</h2>
+        
+        <h2 class="text-heading lh-163 c-title">Why Do People Love Us?</h2>
+              <span class="heading-divider"></span>
+              <p class="mb-6">Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse suscipit</p>
+              <a href="#" class="btn btn-lg text-secondary btn-accent rounded-lg mb-8 mb-lg-0">View all reviews
+                <i class="far fa-long-arrow-right ml-1"></i>
+              </a>
+
+         {/* <h2 className="text-heading mb-6">From Our Blog</h2>
             <ScrollAnimation className="card border-0 mb-7" animateIn="fadeInLeft">
                 <div className="row no-gutters align-items-lg-center h-100">
                     <div className="d-flex align-items-end p-0 col-sm-4">
@@ -48,7 +56,7 @@ export const BlogList = () => {
                     </div>
                     </div>
                 </div>
-            </ScrollAnimation>   
+            </ScrollAnimation>    */}
         </>
     )
 }
