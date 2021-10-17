@@ -29,7 +29,7 @@ a.text-secondary:hover, a.text-secondary:focus {
 }
 
 .c-title{
-    font-size: 3rem !important;
+    font-size: 3rem;
     line-height: 1.15 !important;
     font-weight: 900;
     color: #49a1ff !important;

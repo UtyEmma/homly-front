@@ -109,7 +109,7 @@ export function FetchPopularListingsReducer(state={}, action){
         case FETCH_POPULAR_LISTINGS_REQUEST:
             return {...state, loading: true}
         case FETCH_POPULAR_LISTINGS_SUCCESS:
-            return {...state, loading: false, listings: action.payload}
+            return {...state, loading: false, popular: action.payload.popular, rented: action.payload.for_rent, onsale: action.payload.for_sale}
         case FETCH_POPULAR_LISTINGS_FAILURE:
             return {...state, loading: false, error: action.payload}
         default:

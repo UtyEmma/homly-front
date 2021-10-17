@@ -13,7 +13,7 @@ export default function ListingGrid({listing, status}) {
                     <img className="listing-image" style={{minHeight: '100%'}} src={listing.images[0]} alt={listing.title} />
                     <div className="card-img-overlay d-flex flex-column">
                         <div>
-                            <span className="badge badge-indigo">for Rent</span>
+                            <span className="badge badge-indigo">{listing.tenure === 'sale' ? "For Sale" : "For Rent"}</span>
                         </div>
                         <div className="mt-auto d-flex">
                             <ul className="list-inline mb-0 d-flex align-items-end mr-auto">

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import HeroSection from './layouts/home/hero-section'
 import PopularSection from './layouts/home/popular-section'
 import NavBar from 'components/shared/nav-bar'
@@ -11,8 +11,27 @@ import { TestimonialSlider } from './layouts/home/sliders/testimonials/testionmi
 import { DestinationsSlider } from './layouts/home/sliders/destinations/destinations-slider'
 import { BlogList } from './layouts/home/blog-list'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { FetchPopularListings } from 'providers/redux/_actions/listing/listing-actions'
 
 const Home = ({isLoggedIn, user, isLoading, setIsLoading, status, token}) => {
+
+    const dispatch = useDispatch()
+
+    const popular_listings = useSelector((state) => state.popular_listings)
+    const {loading, popular, rented, onsale} = popular_listings
+
+    const loadPopularListings = useCallback(() => {
+        dispatch(FetchPopularListings())
+    }, [dispatch])
+
+    useEffect(() => {
+      loadPopularListings()
+    }, [])
+
+    useEffect(() => {
+        setIsLoading(loading)
+    }, [loading, setIsLoading])
 
     return (
         <div>           
@@ -40,11 +59,19 @@ const Home = ({isLoggedIn, user, isLoading, setIsLoading, status, token}) => {
             <main id="content">
                 <HeroSection/>
 
-                <PopularSection isLoading={isLoading} setIsLoading={setIsLoading} status={status} />
+                {
+            
+                  popular && popular.length > 0
+
+                  &&
+                  
+                  <PopularSection popular={popular} isLoading={isLoading} setIsLoading={setIsLoading} status={status} />
+                
+                }
 
                 <section className="bg-gray-02 pt-10 pb-11">
                     <div className="container container-xxl">
-                        <h2 className="text-dark lh-1625 text-center c-title">Wondering why we built, Bayof?</h2>
+                        <h2 className="text-dark lh-1625 text-center c-title fs-26 fs-md-48">Wondering why we built, Bayof?</h2>
                         <span className="heading-divider mx-auto" />
                         <div className="row justify-content-between mt-10">
                         <ScrollAnimation animateIn="fadeInUp" className="col-lg-4 mb-6 mb-lg-0">
@@ -89,14 +116,25 @@ const Home = ({isLoggedIn, user, isLoading, setIsLoading, status, token}) => {
                         </div>
                     </div>
                     </section>
-                    
-                    <HomePropertiesSlider />
 
-                    <SalePropertiesSlider />
-                    
+                    {
+                      rented && rented.length > 0
+
+                      &&
+
+                      <HomePropertiesSlider listings={rented} />
+                    }
+
+                    {
+                      onsale && onsale.length > 0
+
+                      &&
+
+                      <SalePropertiesSlider listings={onsale} />
+                    }
       <section class="bg-accent pt-10 pb-lg-11 pb-8 bg-patten-04">
         <div class="container container-xxl">
-          <h2 class="text-dark text-center mxw-751 fs-26 lh-184 px-md-8 c-title">
+          <h2 class="text-dark text-center mxw-751 fs-26 lh-184 px-md-8 c-title fs-26 fs-md-48">
             Make property deals in days, seriously.</h2>
           <span class="heading-divider mx-auto"></span>
           <div class="row mt-8">
@@ -173,323 +211,10 @@ const Home = ({isLoggedIn, user, isLoading, setIsLoading, status, token}) => {
         </div>
       </section>
       
-      {/* <section class="pt-lg-13 pb-lg-10 py-11 bg-gray-02">
-        <div class="container">
-          <p class="text-primary font-weight-500 letter-spacing-263 text-center text-uppercase mb-5">Meet our agents</p>
-          <h2 class="text-dark text-center mb-9 lh-16">Need A Cozy Place? Contact Us!</h2>
-          <div class="slick-slider mx-0 custom-arrow-spacing-30"
-		     data-slick-options='{"slidesToShow": 4,"dots":true,"arrows":false,"responsive":[{"breakpoint": 1200,"settings": {"slidesToShow":3,"arrows":false}},{"breakpoint": 992,"settings": {"slidesToShow":3,"arrows":false}},{"breakpoint": 768,"settings": {"slidesToShow": 2,"arrows":false,"dots":true,"autoplay":true}},{"breakpoint": 576,"settings": {"slidesToShow": 1,"arrows":false,"dots":true}}]}'>
-            <div class="box" data-animate="fadeInUp">
-              <div class="card border-0 shadow-hover-3 px-4">
-                <div class="card-body text-center pt-6 pb-3 px-0">
-                  <a href="agent-details-1.html" class="d-inline-block mb-2">
-                    <img src="images/agent-1.jpg" alt="{ agent.name }}" />
-                  </a>
-                  <a href="agent-details-1.html"
-							   class="d-block fs-16 text-dark mb-0 font-weight-500 hover-primary lh-15">Oliver Beddows</a>
-                  <p class="mb-0">Sales Excutive</p>
-                  <ul class="list-inline mb-0">
-                    <li class="list-inline-item fs-13 text-heading font-weight-500">4.8/5</li>
-                    <li class="list-inline-item fs-13 text-heading font-weight-500 mr-1">
-                      <ul class="list-inline mb-0">
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="list-inline-item fs-13 text-gray-light">(67 reviews)</li>
-                  </ul>
-                </div>
-                <div class="card-footer bg-white px-0 text-center pt-3 pb-1">
-                  <ul class="list-inline mb-0">
-                    <li class="list-inline-item mb-2">
-                      <a href="#"
-									   class="w-40px h-40 rounded-circle border text-body bg-hover-primary hover-white border-hover-primary d-flex align-items-center justify-content-center"><i
-											class="fab fa-twitter"></i></a>
-                    </li>
-                    <li class="list-inline-item mb-2">
-                      <a href="#"
-									   class="w-40px h-40 rounded-circle border text-body bg-hover-primary hover-white border-hover-primary d-flex align-items-center justify-content-center"><i
-											class="fab fa-facebook-f"></i></a>
-                    </li>
-                    <li class="list-inline-item mb-2">
-                      <a href="#"
-									   class="w-40px h-40 rounded-circle border text-body bg-hover-primary hover-white border-hover-primary d-flex align-items-center justify-content-center">
-                        <i class="fab fa-instagram"></i></a>
-                    </li>
-                    <li class="list-inline-item mb-2">
-                      <a href="#"
-									   class="w-40px h-40 rounded-circle border text-body bg-hover-primary hover-white border-hover-primary d-flex align-items-center justify-content-center"><i
-											class="fab fa-linkedin-in"></i></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="box" data-animate="fadeInUp">
-              <div class="card border-0 shadow-hover-3 px-4">
-                <div class="card-body text-center pt-6 pb-3 px-0">
-                  <a href="agent-details-1.html" class="d-inline-block mb-2">
-                    <img src="images/agent-2-lg.jpg" alt="{ agent.name }}" />
-                  </a>
-                  <a href="agent-details-1.html"
-							   class="d-block fs-16 text-dark mb-0 font-weight-500 hover-primary lh-15">Max Kordek</a>
-                  <p class="mb-0">Real estate broker</p>
-                  <ul class="list-inline mb-0">
-                    <li class="list-inline-item fs-13 text-heading font-weight-500">4.8/5</li>
-                    <li class="list-inline-item fs-13 text-heading font-weight-500 mr-1">
-                      <ul class="list-inline mb-0">
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="list-inline-item fs-13 text-gray-light">(67 reviews)</li>
-                  </ul>
-                </div>
-                <div class="card-footer bg-white px-0 text-center pt-3 pb-1">
-                  <ul class="list-inline mb-0">
-                    <li class="list-inline-item mb-2">
-                      <a href="#"
-									   class="w-40px h-40 rounded-circle border text-body bg-hover-primary hover-white border-hover-primary d-flex align-items-center justify-content-center"><i
-											class="fab fa-twitter"></i></a>
-                    </li>
-                    <li class="list-inline-item mb-2">
-                      <a href="#"
-									   class="w-40px h-40 rounded-circle border text-body bg-hover-primary hover-white border-hover-primary d-flex align-items-center justify-content-center"><i
-											class="fab fa-facebook-f"></i></a>
-                    </li>
-                    <li class="list-inline-item mb-2">
-                      <a href="#"
-									   class="w-40px h-40 rounded-circle border text-body bg-hover-primary hover-white border-hover-primary d-flex align-items-center justify-content-center">
-                        <i class="fab fa-instagram"></i></a>
-                    </li>
-                    <li class="list-inline-item mb-2">
-                      <a href="#"
-									   class="w-40px h-40 rounded-circle border text-body bg-hover-primary hover-white border-hover-primary d-flex align-items-center justify-content-center"><i
-											class="fab fa-linkedin-in"></i></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="box" data-animate="fadeInUp">
-              <div class="card border-0 shadow-hover-3 px-4">
-                <div class="card-body text-center pt-6 pb-3 px-0">
-                  <a href="agent-details-1.html" class="d-inline-block mb-2">
-                    <img src="images/agent-4-lg.jpg" alt="{ agent.name }}" />
-                  </a>
-                  <a href="agent-details-1.html"
-							   class="d-block fs-16 text-dark mb-0 font-weight-500 hover-primary lh-15">Ted Stokes</a>
-                  <p class="mb-0">Sales Excutive</p>
-                  <ul class="list-inline mb-0">
-                    <li class="list-inline-item fs-13 text-heading font-weight-500">4.8/5</li>
-                    <li class="list-inline-item fs-13 text-heading font-weight-500 mr-1">
-                      <ul class="list-inline mb-0">
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="list-inline-item fs-13 text-gray-light">(67 reviews)</li>
-                  </ul>
-                </div>
-                <div class="card-footer bg-white px-0 text-center pt-3 pb-1">
-                  <ul class="list-inline mb-0">
-                    <li class="list-inline-item mb-2">
-                      <a href="#"
-									   class="w-40px h-40 rounded-circle border text-body bg-hover-primary hover-white border-hover-primary d-flex align-items-center justify-content-center"><i
-											class="fab fa-twitter"></i></a>
-                    </li>
-                    <li class="list-inline-item mb-2">
-                      <a href="#"
-									   class="w-40px h-40 rounded-circle border text-body bg-hover-primary hover-white border-hover-primary d-flex align-items-center justify-content-center"><i
-											class="fab fa-facebook-f"></i></a>
-                    </li>
-                    <li class="list-inline-item mb-2">
-                      <a href="#"
-									   class="w-40px h-40 rounded-circle border text-body bg-hover-primary hover-white border-hover-primary d-flex align-items-center justify-content-center">
-                        <i class="fab fa-instagram"></i></a>
-                    </li>
-                    <li class="list-inline-item mb-2">
-                      <a href="#"
-									   class="w-40px h-40 rounded-circle border text-body bg-hover-primary hover-white border-hover-primary d-flex align-items-center justify-content-center"><i
-											class="fab fa-linkedin-in"></i></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="box" data-animate="fadeInUp">
-              <div class="card border-0 shadow-hover-3 px-4">
-                <div class="card-body text-center pt-6 pb-3 px-0">
-                  <a href="agent-details-1.html" class="d-inline-block mb-2">
-                    <img src="images/agent-3-lg.jpg" alt="{ agent.name }}" />
-                  </a>
-                  <a href="agent-details-1.html"
-							   class="d-block fs-16 text-dark mb-0 font-weight-500 hover-primary lh-15">David James</a>
-                  <p class="mb-0">Real estate broker</p>
-                  <ul class="list-inline mb-0">
-                    <li class="list-inline-item fs-13 text-heading font-weight-500">4.8/5</li>
-                    <li class="list-inline-item fs-13 text-heading font-weight-500 mr-1">
-                      <ul class="list-inline mb-0">
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="list-inline-item fs-13 text-gray-light">(67 reviews)</li>
-                  </ul>
-                </div>
-                <div class="card-footer bg-white px-0 text-center pt-3 pb-1">
-                  <ul class="list-inline mb-0">
-                    <li class="list-inline-item mb-2">
-                      <a href="#"
-									   class="w-40px h-40 rounded-circle border text-body bg-hover-primary hover-white border-hover-primary d-flex align-items-center justify-content-center"><i
-											class="fab fa-twitter"></i></a>
-                    </li>
-                    <li class="list-inline-item mb-2">
-                      <a href="#"
-									   class="w-40px h-40 rounded-circle border text-body bg-hover-primary hover-white border-hover-primary d-flex align-items-center justify-content-center"><i
-											class="fab fa-facebook-f"></i></a>
-                    </li>
-                    <li class="list-inline-item mb-2">
-                      <a href="#"
-									   class="w-40px h-40 rounded-circle border text-body bg-hover-primary hover-white border-hover-primary d-flex align-items-center justify-content-center">
-                        <i class="fab fa-instagram"></i></a>
-                    </li>
-                    <li class="list-inline-item mb-2">
-                      <a href="#"
-									   class="w-40px h-40 rounded-circle border text-body bg-hover-primary hover-white border-hover-primary d-flex align-items-center justify-content-center"><i
-											class="fab fa-linkedin-in"></i></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="box" data-animate="fadeInUp">
-              <div class="card border-0 shadow-hover-3 px-4">
-                <div class="card-body text-center pt-6 pb-3 px-0">
-                  <a href="agent-details-1.html" class="d-inline-block mb-2">
-                    <img src="images/agent-1.jpg" alt="{ agent.name }}" />
-                  </a>
-                  <a href="agent-details-1.html"
-							   class="d-block fs-16 text-dark mb-0 font-weight-500 hover-primary lh-15">Oliver Beddows</a>
-                  <p class="mb-0">Sales Excutive</p>
-                  <ul class="list-inline mb-0">
-                    <li class="list-inline-item fs-13 text-heading font-weight-500">4.8/5</li>
-                    <li class="list-inline-item fs-13 text-heading font-weight-500 mr-1">
-                      <ul class="list-inline mb-0">
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                        <li class="list-inline-item mr-0">
-                          <span class="text-warning fs-12 lh-2"><i class="fas fa-star"></i></span>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="list-inline-item fs-13 text-gray-light">(67 reviews)</li>
-                  </ul>
-                </div>
-                <div class="card-footer bg-white px-0 text-center pt-3 pb-1">
-                  <ul class="list-inline mb-0">
-                    <li class="list-inline-item mb-2">
-                      <a href="#"
-									   class="w-40px h-40 rounded-circle border text-body bg-hover-primary hover-white border-hover-primary d-flex align-items-center justify-content-center"><i
-											class="fab fa-twitter"></i></a>
-                    </li>
-                    <li class="list-inline-item mb-2">
-                      <a href="#"
-									   class="w-40px h-40 rounded-circle border text-body bg-hover-primary hover-white border-hover-primary d-flex align-items-center justify-content-center"><i
-											class="fab fa-facebook-f"></i></a>
-                    </li>
-                    <li class="list-inline-item mb-2">
-                      <a href="#"
-									   class="w-40px h-40 rounded-circle border text-body bg-hover-primary hover-white border-hover-primary d-flex align-items-center justify-content-center">
-                        <i class="fab fa-instagram"></i></a>
-                    </li>
-                    <li class="list-inline-item mb-2">
-                      <a href="#"
-									   class="w-40px h-40 rounded-circle border text-body bg-hover-primary hover-white border-hover-primary d-flex align-items-center justify-content-center"><i
-											class="fab fa-linkedin-in"></i></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="p-6 mxw-670 pl-md-9 d-sm-flex align-items-sm-center position-relative mt-10 rounded-lg" style="background-color: #eaeff7" data-animate="fadeInUp">
-            <div class="mt-md-0 mt-6">
-              <h4 class="text-secondary fs-20 font-weight-normal">Become a<span class="font-weight-600"> Real Estate Agent</span></h4>
-              <p class="mb-0">Lorem ipsum dolor sit amet, consec tetur cing elit</p>
-            </div>
-            <div class="ml-auto">
-              <a href="#" class="btn btn-lg btn-primary rounded-lg mt-sm-0 mt-6">Register now</a>
-            </div>
-            <i class="far fa-users h-64 w-64px bg-indigo d-flex justify-content-center align-items-center text-white rounded-circle fs-24 position-absolute custom-pos-icon"></i>
-          </div>
-        </div>
-      </section> */}
+
                   
-                    <section className="pt-lg-13 pb-lg-9 mt-lg-1 py-11">
-                    <div className="container container-xxl">
+          <section className="pt-lg-13 pb-lg-9 mt-lg-1 py-11">
+            <div className="container container-xxl">
           <div class="row align-items-center">
             <div class="col-lg-5 pr-xl-17" data-animate="fadeInLeft">
                             <BlogList />

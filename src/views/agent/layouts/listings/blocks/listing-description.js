@@ -113,6 +113,7 @@ export default function ListingDescription({collapse, formErrors, reset }) {
                             name="tenure"
                           >
                             <option value="">Select Rent Tenure</option>
+                            <option value="sale">For Sale</option>
                             <option>Monthly Tenancy</option>
                             <option>Quaterly Tenancy</option>
                             <option>Yearly Tenancy</option>

@@ -2,7 +2,7 @@ import React from 'react'
 import Slider from 'react-slick';
 import { PropertiesSliderItem } from './rent-properties-slider/properties-slider-item';
 
-export const SliderProperties = () => {
+export const SliderProperties = ({listings}) => {
     const settings = {
         dots: false,
         infinite: true,
@@ -52,12 +52,13 @@ export const SliderProperties = () => {
 
     return (
         <Slider {...settings} className="mx-n2 custom-arrow-spacing-30">
-            <PropertiesSliderItem />
-            <PropertiesSliderItem />
-            <PropertiesSliderItem />
-            <PropertiesSliderItem />
-            <PropertiesSliderItem />
-            <PropertiesSliderItem />
+            {
+                listings.map(function(listing){
+                    return (
+                        <PropertiesSliderItem  listing={listing} />
+                    )
+                })
+            }
         </Slider>
     )
 }
