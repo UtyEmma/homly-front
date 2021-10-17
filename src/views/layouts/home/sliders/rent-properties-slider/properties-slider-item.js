@@ -1,6 +1,5 @@
 import React from 'react'
 import ScrollAnimation from 'react-animate-on-scroll'
-import FavouriteItem from 'views/tenants/favourites/components/favourite-item'
 import { FavouriteListingButton } from 'views/tenants/favourites/components/favourite-listing-btn'
 
 export const PropertiesSliderItem = ({listing}) => {
@@ -10,7 +9,7 @@ export const PropertiesSliderItem = ({listing}) => {
         <ScrollAnimation className="box px-0" animateIn="fadeInUp">
             <div className="card border-0 hover-change-image">
                 <div className="bg-overlay-gradient-1 bg-hover-overlay-gradient-3 rounded-lg card-img">
-                    <img src="images/properties-grid-16.jpg" alt="Garden Gingerbread House" />
+                    <img src={listing.images[0]} alt={listing.title} />
                     <div className="card-img-overlay d-flex flex-column justify-content-between">
                     <div>
                         <span className="badge mr-2 badge-primary">{listing.tenure === 'sale' ? "For Sale" : "For Rent"}</span>
