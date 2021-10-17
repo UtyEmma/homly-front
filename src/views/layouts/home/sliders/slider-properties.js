@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Slider from 'react-slick';
 import { PropertiesSliderItem } from './rent-properties-slider/properties-slider-item';
 
@@ -7,8 +7,8 @@ export const SliderProperties = ({listings}) => {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 5,
-        slidesToScroll: 3,
+        slidesToShow: 4,
+        slidesToScroll: 1,
         autoplay: true,
         arrows: false,
         prevArrow: <i className="fa fa-chevron-left"></i>,
@@ -49,8 +49,14 @@ export const SliderProperties = ({listings}) => {
         ]
       };
 
+      useEffect(() => {
+
+      }, [listings])
+
 
     return (
+        listings &&
+
         <Slider {...settings} className="mx-n2 custom-arrow-spacing-30">
             {
                 listings.map(function(listing){
