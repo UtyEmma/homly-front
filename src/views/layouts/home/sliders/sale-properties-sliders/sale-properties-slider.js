@@ -19,7 +19,7 @@ export const SalePropertiesSlider = ({listings}) => {
                     </div>
                 </div>
                     
-                <SliderProperties  />
+                <SliderProperties  listings={listings} />
             </div>
         </section>
     )
