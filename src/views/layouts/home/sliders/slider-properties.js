@@ -7,7 +7,7 @@ export const SliderProperties = ({listings}) => {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 4,
+        slidesToShow: listings && listings.count < 4 ? listings.count : 4,
         slidesToScroll: 1,
         autoplay: true,
         arrows: false,
