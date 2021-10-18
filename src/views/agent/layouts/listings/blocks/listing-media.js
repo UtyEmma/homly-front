@@ -19,7 +19,7 @@ export default function ListingMedia({collapse, files, setFiles, formErrors}) {
             <div className="card bg-transparent border-0">
                 <div className="card-header d-block d-md-none bg-transparent px-0 py-1 border-bottom-0" id="heading-media">
                 <h5 className="mb-0">
-                    <button className="btn btn-lg collapse-parent btn-block border shadow-none" data-toggle="collapse" data-number={2.} data-target="#media-collapse" aria-expanded="true" aria-controls="media-collapse">
+                    <button className="btn btn-lg collapse-parent btn-block border shadow-none" type="button" data-toggle="collapse" data-number={2.} data-target="#media-collapse" aria-expanded="true" aria-controls="media-collapse">
                     <span className="number">2.</span> Media
                     </button>
                 </h5>

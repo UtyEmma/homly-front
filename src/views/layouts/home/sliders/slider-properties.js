@@ -11,9 +11,7 @@ export const SliderProperties = ({listings}) => {
         slidesToShow: listings && listings.length < 4 ? listings.length : 4,
         slidesToScroll: 1,
         autoplay: true,
-        arrows: false,
-        prevArrow: <i className="fa fa-chevron-left"></i>,
-        nextArrow: <i className="fa fa-chevron-right"></i>
+        arrows: false
       };
 
       useEffect(() => {

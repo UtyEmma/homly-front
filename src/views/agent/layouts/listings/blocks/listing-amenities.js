@@ -16,7 +16,7 @@ export default function ListingAmenities({amenities, formErrors}) {
             <div className="card bg-transparent border-0">
                 <div className="card-header d-block d-md-none bg-transparent px-0 py-1 border-bottom-0" id="heading-amenities">
                 <h5 className="mb-0">
-                    <button className="btn btn-block collapse-parent collapsed border shadow-none" data-toggle="collapse" data-number={5.} data-target="#amenities-collapse" aria-expanded="true" aria-controls="amenities-collapse">
+                    <button className="btn btn-block collapse-parent collapsed border shadow-none" type="button" data-toggle="collapse" data-number={5.} data-target="#amenities-collapse" aria-expanded="true" aria-controls="amenities-collapse">
                     <span className="number">5.</span> Amenities
                     </button>
                 </h5>
