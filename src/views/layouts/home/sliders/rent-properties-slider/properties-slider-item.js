@@ -1,11 +1,9 @@
 import React from 'react'
 import ScrollAnimation from 'react-animate-on-scroll'
-// import listing
 
-export const PropertiesSliderItem = () => {
+export const PropertiesSliderItem = ({listing}) => {
     
     return (
-        
         <ScrollAnimation className="box px-0" animateIn="fadeInUp">
             <div className="card border-0 hover-change-image">
                 <div className="bg-overlay-gradient-1 bg-hover-overlay-gradient-3 rounded-lg card-img h-120">
@@ -33,10 +31,10 @@ export const PropertiesSliderItem = () => {
                     </div>
                 </div>
                 <div className="card-body p-0">
-                    <h2 className="my-0 mt-1"><a href="single-property-1.html" className="fs-16 text-dark hover-primary lh-2">Garden Gingerbread House</a>
+                    <h2 className="my-0 mt-1"><a href="single-property-1.html" className="fs-16 text-dark hover-primary lh-2">{listing.title}</a>
                     </h2>
-                    <p className="text-gray-light font-weight-500 mb-1">1421 San Pedro St, Los Angeles</p>
-                    <p className="fs-17 font-weight-bold text-heading mb-0">$1.250.000</p>
+                    <p className="text-gray-light font-weight-500 mb-1">{listing.address}, {listing.city}, {listing.state} </p>
+                    <p className="fs-17 font-weight-bold text-heading mb-0">$ {listing.rent}</p>
                 </div>
             </div>
         </ScrollAnimation>
