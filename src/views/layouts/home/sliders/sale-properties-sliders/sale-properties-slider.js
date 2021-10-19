@@ -7,7 +7,7 @@ export const SalePropertiesSlider = () => {
             <div className="container container-xxl">
                 <div className="row">
                     <div className="col-md-6">
-                        <h2 className="text-heading c-title">Properties For Rent</h2>
+                        <h2 className="text-heading c-title fs-26 fs-md-48">Properties For Sale</h2>
                         <span className="heading-divider" />
                         <p className="mb-7">Lease these properties for a set time frame</p>
                     </div>
