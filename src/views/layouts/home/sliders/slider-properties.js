@@ -10,43 +10,7 @@ export const SliderProperties = () => {
         slidesToShow: 5,
         slidesToScroll: 3,
         autoplay: true,
-        arrows: false,
-        prevArrow: <i className="fa fa-chevron-left"></i>,
-        nextArrow: <i className="fa fa-chevron-right"></i>,
-        responsive: [
-            {
-                breakpoint: 1600,
-                settings: {
-                    slidesToShow: 3,
-                    arrows: false,
-                }
-            },
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 3,
-                    arrows: false
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 2,
-                    arrows: false,
-                    dors: true,
-                    autoplay: true
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 1,
-                    arrows: false,
-                    dors: true,
-                    autoplay: true
-                }
-            }
-        ]
+        arrows: false
       };
 
 

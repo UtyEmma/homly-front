@@ -17,7 +17,7 @@ export default function ListingDetails({formErrors, reset}) {
             <div className="card bg-transparent border-0">
                 <div className="card-header d-block d-md-none bg-transparent px-0 py-1 border-bottom-0" id="heading-detail">
                 <h5 className="mb-0">
-                    <button className="btn btn-block collapse-parent collapsed border shadow-none" data-toggle="collapse" data-number={4.} data-target="#detail-collapse" aria-expanded="true" aria-controls="detail-collapse">
+                    <button className="btn btn-block collapse-parent collapsed border shadow-none" type="button" data-toggle="collapse" data-number={4.} data-target="#detail-collapse" aria-expanded="true" aria-controls="detail-collapse">
                     <span className="number">4.</span> Detail
                     </button>
                 </h5>

@@ -20,7 +20,7 @@ export default function ListingDescription({collapse, formErrors, reset }) {
           id="heading-description"
         >
           <h5 className="mb-0">
-            <button className="btn btn-lg collapse-parent btn-block border shadow-none" data-toggle="collapse" data-number={1} data-target="#description-collapse" aria-expanded="true"
+            <button className="btn btn-lg collapse-parent btn-block border shadow-none" type="button" data-toggle="collapse" data-number={1} data-target="#description-collapse" aria-expanded="true"
               aria-controls="description-collapse"
             >
               <span className="number">1.</span> Description

@@ -57,7 +57,7 @@ export default function ListingLocation({formErrors}) {
         <div className="card bg-transparent border-0">
             <div className="card-header d-block d-md-none bg-transparent px-0 py-1 border-bottom-0" id="heading-location">
             <h5 className="mb-0">
-                <button className="btn btn-block collapse-parent collapsed border shadow-none" data-toggle="collapse" data-number={3.} data-target="#location-collapse" aria-expanded="true" aria-controls="location-collapse">
+                <button className="btn btn-block collapse-parent collapsed border shadow-none" type="button" data-toggle="collapse" data-number={3.} data-target="#location-collapse" aria-expanded="true" aria-controls="location-collapse">
                 <span className="number">3.</span> Location
                 </button>
             </h5>
