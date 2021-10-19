@@ -1,13 +1,14 @@
 import React from 'react'
 import { SliderProperties } from '../slider-properties'
 
-export const SalePropertiesSlider = () => {
+export const SalePropertiesSlider = ({listings}) => {
+
     return (
         <section className="pb-lg-13 pb-11">
             <div className="container container-xxl">
                 <div className="row">
                     <div className="col-md-6">
-                        <h2 className="text-heading c-title">Properties For Rent</h2>
+                        <h2 className="text-heading c-title fs-26 fs-md-48">Properties For Rent</h2>
                         <span className="heading-divider" />
                         <p className="mb-7">Lease these properties for a set time frame</p>
                     </div>
@@ -18,7 +19,7 @@ export const SalePropertiesSlider = () => {
                     </div>
                 </div>
                     
-                <SliderProperties />
+                <SliderProperties  listings={listings} />
             </div>
         </section>
     )

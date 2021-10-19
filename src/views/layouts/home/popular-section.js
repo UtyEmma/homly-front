@@ -1,35 +1,13 @@
-import React, { useCallback, useEffect } from 'react'
+import React from 'react'
 import { Nav, Row, Tab, TabContent, TabPane } from 'react-bootstrap'
 import ListingTabItem from './components/listing-tab-item'
-import { FetchPopularListings } from 'providers/redux/_actions/listing/listing-actions'
-import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-export default function PopularSection({isLoading, setIsLoading, status}) {
-    const dispatch = useDispatch()
-
-    const popular_listings = useSelector((state) => state.popular_listings)
-    const {loading, listings} = popular_listings
-
-    const loadPopularListings = useCallback(() => {
-        dispatch(FetchPopularListings())
-    }, [dispatch])
-
-    useEffect(() => {
-        !listings && loadPopularListings()
-    }, [listings, loadPopularListings])
-
-    useEffect(() => {
-        setIsLoading(loading)
-    }, [loading, setIsLoading])
+export default function PopularSection({popular, status}) {
+    
 
     return (
         <>
-        {
-            
-            listings && listings.length > 0
-
-            &&
             <section className="pt-lg-12 pt-11 pb-11">
                 <div className="container container-xxl">
 
@@ -40,12 +18,12 @@ export default function PopularSection({isLoading, setIsLoading, status}) {
                             <p className="mb-7">Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse suscipit</p>
                         </div>
 
-                            <Tab.Container id="controlled-tab-example" defaultActiveKey={listings[0].category.slug} >
+                            <Tab.Container id="controlled-tab-example" defaultActiveKey={popular[0].category.slug} >
                                 <div className="col-lg-7 col-xxl-6 ">
                                     <Row className="mt-lg-4 d-flex justify-content-lg-end mb-lg-0">
                                         <Nav variant="pills">
                                             {
-                                                listings.map((listing, index) => {
+                                                popular.map((listing, index) => {
                                                     return (
                                                         <Nav.Item key={index}>
                                                             <Nav.Link className="pointer fs-13 ml-2 letter-spacing-087 text-secondary text-uppercase px-4 bg-gray-01 text-active-white bg-active-primary rounded" eventKey={listing.category.slug}>
@@ -61,7 +39,7 @@ export default function PopularSection({isLoading, setIsLoading, status}) {
 
                                 <TabContent className="col-12 p-md-0 p-2 shadow-none">
                                     {
-                                        listings.map((listing, index) => {
+                                        popular.map((listing, index) => {
                                             return (
                                                 <TabPane className="pl-lg-3 pr-3 pr-lg-0 mb-3" key={index} eventKey={listing.category.slug}>
                                                     <Row>
@@ -89,7 +67,6 @@ export default function PopularSection({isLoading, setIsLoading, status}) {
                     </div>
                 </div>
             </section>
-        }
         </>
     )
 }

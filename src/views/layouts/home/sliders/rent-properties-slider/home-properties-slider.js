@@ -2,14 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { SliderProperties } from '../slider-properties';
 
-export const HomePropertiesSlider = () => {
+export const HomePropertiesSlider = ({listings}) => {
 
     return (
         <section className="py-lg-12 my-lg-1 py-11">
             <div className="container container-xxl">
                 <div className="row">
                 <div className="col-md-6">
-                    <h2 className="text-heading c-title">Properties For Sale</h2>
+                    <h2 className="text-heading c-title fs-26 fs-md-48">Properties For Rent</h2>
                     <span className="heading-divider" />
                     <p className="mb-7">Take on full ownership of these properties</p>
                 </div>
@@ -22,7 +22,7 @@ export const HomePropertiesSlider = () => {
             </div>
 
 
-            <SliderProperties />
+            <SliderProperties listings={listings} />
 
         </div>
     </section>
