@@ -70,6 +70,8 @@ function App() {
   const id = query.get("id")
   const {loading} = useSelector(state => state.user);
 
+  const page = window.location.href
+
   useEffect(() => {
     auth && id && type !== 'admin' && dispatch(VerifyAdmin(id)) 
   }, [auth, dispatch, type, id])
