@@ -49,7 +49,7 @@ export const DestinationsSlider = () => {
     return (
         <section className="bg-gray-02 pt-9 pb-lg-13 pb-11">
             <div className="container container-xxl">
-                <h2 className="text-heading c-title fs-26 fs-md-48">Destinations We Love The Most</h2>
+                <h2 className="text-heading">Destinations We Love The Most</h2>
                 <span className="heading-divider" />
                 <p className="mb-7">Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse suscipit</p>
 

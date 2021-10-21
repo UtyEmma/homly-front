@@ -9,7 +9,7 @@ export const FavouriteListingButton = ({listing}) => {
     const {favourite} = item
 
     const user_data = useSelector(state => (state.user_data))
-    const {token, user, type} = user_data
+    const {token} = user_data
 
     const [isFavourite, setIsFavourite] = useState()
 
@@ -28,10 +28,6 @@ export const FavouriteListingButton = ({listing}) => {
     }, [favourite])
 
     return (
-        type && type === "tenant"
-
-        &&
-
         <button style={{cursor: 'pointer'}} onClick={addToFavourites} className={`btn text-white fs-20 hover-primary p-0`}>
             <i className={`${isFavourite ? "fas text-primary" : 'far'} fa-heart`} />
         </button>

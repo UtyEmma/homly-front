@@ -23,7 +23,9 @@ export const ListingService = {
             },
             payload: data
         }
-        return await Request.post('agent/listing/create', params)
+        let response = await Request.post('agent/listing/create', params);
+        // console.log(response)
+        return response
     },
 
     getAgentListings : async (token) => {

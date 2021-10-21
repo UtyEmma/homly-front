@@ -1,8 +1,7 @@
 import React from 'react'
 import { SliderProperties } from '../slider-properties'
 
-export const SalePropertiesSlider = ({listings}) => {
-
+export const SalePropertiesSlider = () => {
     return (
         <section className="pb-lg-13 pb-11">
             <div className="container container-xxl">
@@ -19,7 +18,7 @@ export const SalePropertiesSlider = ({listings}) => {
                     </div>
                 </div>
                     
-                <SliderProperties  listings={listings} />
+                <SliderProperties />
             </div>
         </section>
     )

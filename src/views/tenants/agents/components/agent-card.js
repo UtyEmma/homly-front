@@ -2,6 +2,7 @@ import React from 'react'
 import RatingStar from 'components/rating/rating-star';
 import ScrollAnimation from 'react-animate-on-scroll';
 import { Link } from 'react-router-dom';
+import {capitalize} from "../../../../libraries/general/helper-functions";
 
 export default function AgentCard({agent}) {
 
@@ -19,7 +20,7 @@ export default function AgentCard({agent}) {
                 </Link>
 
                 <Link to={`/${agent.username}`} className="d-block fs-16 lh-2 text-dark mb-0 font-weight-500 hover-primary">
-                    {agent.firstname} {agent.lastname}
+                    {capitalize(agent.firstname)} {capitalize(agent.lastname)}
                     {
                         agent.verified
 

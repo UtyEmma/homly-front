@@ -1,5 +1,6 @@
 import { NotificationBell } from 'components/notification/notification'
 import { AgentNavItems } from 'components/shared/profile-btn/profile-button'
+import {capitalize} from "../../../../libraries/general/helper-functions";
 import React from 'react'
 
 export default function Header({agent, setIsLoading}) {
@@ -24,7 +25,7 @@ export default function Header({agent, setIsLoading}) {
                                     }
                                 </div>
                                 <div className="fs-14 font-weight-500 lh-1">
-                                    <b>Hi, {agent.firstname}</b>
+                                    <b>Hi, {capitalize(agent.firstname)}</b>
                                 </div>
                             </button>
                             <div className="dropdown-menu dropdown-menu-right w-100">

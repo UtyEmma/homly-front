@@ -18,7 +18,7 @@ export default function ListingInfo({listing}) {
                 </div>
                 <div className="col-md-3 px-0 mt-2 mt-md-0 text-lg-right">
                     <p className="fs-22 text-heading font-weight-bold mb-0">&#8358; {listing.rent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
-                    <p className="mb-0 text-capitalize">{listing.tenure === 'sale' ? "On Sale" : listing.tenure}</p>
+                    <p className="mb-0">{listing.tenure}</p>
                 </div>
                 </div>
                 <h4 className="fs-22 text-heading mt-6 mb-2">Description</h4>
