@@ -151,15 +151,15 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
                     <div class="card-body p-0 pl-0 pl-sm-5 pt-5 pt-sm-0">
                       <a href="single-property-1.html"
 								   class="d-flex align-items-center text-dark hover-secondary"><h4
-										class="fs-20 lh-1625 mb-1">Own properties with ease</h4>
+										class="fs-20 lh-1625 mb-1">Own a property </h4>
                         <span class="ml-2 text-primary fs-42 lh-1 hover-image d-inline-flex align-items-center">
                           <svg class="icon icon-long-arrow"><use
 		                                    xlinkHref="#icon-long-arrow"></use></svg>
                         </span>
                       </a>
-                      <p class="mb-0">Taking ownership of a landed property does not have to
-                      take months to process. We've set out to make purchasing a
-                      property as easy as clicking a button.</p>
+                      <p class="mb-0">
+                            Who does not want to become a proud property owner?
+                            Join this highly estemeed rank with ease.</p>
                     </div>
                   </div>
                 </div>
@@ -178,15 +178,14 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
                     <div class="card-body p-0 pl-0 pl-sm-5 pt-5 pt-sm-0">
                       <a href="single-property-1.html"
 								   class="d-flex align-items-center text-dark hover-secondary"><h4
-										class="fs-20 lh-1625 mb-1"> Easy access to Agents</h4>
+										class="fs-20 lh-1625 mb-1">Sell a property </h4>
                         <span class="ml-2 text-primary fs-42 lh-1 hover-image d-inline-flex align-items-center">
                           <svg class="icon icon-long-arrow"><use
 		                                    xlinkHref="#icon-long-arrow"></use></svg>
                         </span>
                       </a>
-                      <p class="mb-0">Looking to purchase a property? <br /> The current owners
-                    or agents incharge of the property can easily be reached
-                    out to on the platform.</p>
+                      <p class="mb-0">Trusted by many - we'll expose your property to a wide
+                            range of clients for awesome deals.</p>
                     </div>
                   </div>
                 </div>
@@ -204,14 +203,14 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
                     <div class="card-body p-0 pl-0 pl-sm-5 pt-5 pt-sm-0">
                       <a href="single-property-1.html"
 								   class="d-flex align-items-center text-dark hover-secondary"><h4
-										class="fs-20 lh-1625 mb-1">Global range of properties </h4>
+										class="fs-20 lh-1625 mb-1">Rent a property  </h4>
                         <span class="ml-2 text-primary fs-42 lh-1 hover-image d-inline-flex align-items-center">
                           <svg class="icon icon-long-arrow"><use
 		                                    xlinkHref="#icon-long-arrow"></use></svg>
                         </span>
                       </a>
-                      <p class="mb-0">Our sights are set on a global scale. <br /> Users will be
-                      able to own properties anywhere in the universe.</p>
+                      <p class="mb-0"> Looking to purchase property for a period of time? We
+                            still got you covered.</p>
                     </div>
                   </div>
                 </div>

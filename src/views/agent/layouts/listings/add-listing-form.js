@@ -60,9 +60,9 @@ function AddListingForm({setIsLoading}) {
         formErrors && ToastFormErrors(formErrors)
     }, [formErrors])
 
-    useEffect(() => {
-        listing_success && resetFormData()
-    }, [listing_success])
+    // useEffect(() => {
+    //     listing_success && resetFormData()
+    // }, [listing_success])
 
     useEffect(() => {
         processingStepAddProperty()

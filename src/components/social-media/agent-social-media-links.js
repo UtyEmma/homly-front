@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export const AgentSocialMediaLinks = ({agent}) => {
+    // console.log(agent.twitter)
     return (
 
         agent.twitter || agent.facebook || agent.instagram || agent.website
