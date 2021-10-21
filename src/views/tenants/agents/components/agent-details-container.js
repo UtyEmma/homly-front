@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { ConfirmActionDialog } from 'views/layouts/components/modals/confirm-action-dialog'
 import AgentsListings from './agent-listings/agent-listings'
 import AgentReviews from './agent-reviews/agent-reviews'
+import {capitalize} from "../../../../libraries/general/helper-functions";
 
 export default function AgentDetailsContainer({agent, listings, reviews, status, setIsLoading}) {
     
@@ -89,7 +90,7 @@ export default function AgentDetailsContainer({agent, listings, reviews, status,
                                 }
                             </div>
                             <p className="d-block fs-16 lh-214 text-dark mb-0 font-weight-500">
-                                {agent.firstname} {agent.lastname}
+                                {capitalize(agent.firstname)} {capitalize(agent.lastname)}
                                 {   
                                     agent.verified 
                                     
@@ -183,7 +184,7 @@ export default function AgentDetailsContainer({agent, listings, reviews, status,
                     <div className="card border-0 mb-10">
                         <div className="card-body py-5 px-6">
                         <h3 className="card-title text-heading fs-16 lh-213">
-                            About {agent.firstname} {agent.lastname}
+                            About {capitalize(agent.firstname)} {capitalize(agent.lastname)}
                         </h3>
                         {
                             agent.bio

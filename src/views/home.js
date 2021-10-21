@@ -133,72 +133,92 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
           <SalePropertiesSlider listings={onsale} />
         }
 
-      <section className="bg-accent pt-10 pb-lg-11 pb-8 bg-patten-04">
-        <div className="container container-xxl">
-          <h2 className="text-dark text-center mxw-751 fs-26 lh-184 px-md-8 c-title fs-26 fs-md-48">
-            Make property deals in days, seriously.</h2>
-          <span className="heading-divider mx-auto" />
-          <div className="row mt-8">
+<section class="bg-accent pt-10 pb-lg-11 pb-8 bg-patten-04">
+        <div class="container container-xxl">
+          <h2 class="text-dark text-center mxw-751 fs-26 lh-184 px-md-8 c-title">
+          Make property deals in days, seriously.</h2>
+          <span class="heading-divider mx-auto"></span>
+          <div class="row mt-8">
             <ScrollAnimation className="col-lg-4 mb-6 mb-lg-0" animateIn="fadeInUp">
-              <div className="card border-hover shadow-2 shadow-hover-lg-1 pl-5 pr-6 py-6 h-100 hover-change-image">
-                <div className="row no-gutters">
-                  <div className="col-sm-3">
-                    <img src="images/group-16.png" alt="Buy a new home" />
+            {/* <div class="col-lg-4 mb-6 mb-lg-0" data-animate="zoomIn"> */}
+              <div class="card border-hover shadow-2 shadow-hover-lg-1 pl-5 pr-6 py-6 h-100 hover-change-image">
+                <div class="row no-gutters">
+                  <div class="col-sm-3">
+                    <img src="images/group-16.png"
+							     alt="Buy a new home" />
                   </div>
-                  <div classname="card-body px-0 px-xxl-10 pt-7 pb-0 text-center">
-                    <h4 classname="card-title fs-18 lh-17 text-dark mb-2 text-capitalize">
-                      Own properties with ease
-                    </h4>
-                    <p classname="card-text px-sm-2">
-                      Taking ownership of a landed property does not have to
+                  <div class="col-sm-9">
+                    <div class="card-body p-0 pl-0 pl-sm-5 pt-5 pt-sm-0">
+                      <a href="single-property-1.html"
+								   class="d-flex align-items-center text-dark hover-secondary"><h4
+										class="fs-20 lh-1625 mb-1">Own properties with ease</h4>
+                        <span class="ml-2 text-primary fs-42 lh-1 hover-image d-inline-flex align-items-center">
+                          <svg class="icon icon-long-arrow"><use
+		                                    xlinkHref="#icon-long-arrow"></use></svg>
+                        </span>
+                      </a>
+                      <p class="mb-0">Taking ownership of a landed property does not have to
                       take months to process. We've set out to make purchasing a
-                      property as easy as clicking a button.
-                    </p>
+                      property as easy as clicking a button.</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </ScrollAnimation>
-            
+              </ScrollAnimation>
+            {/* </div> */}
+            {/* <div class="col-lg-4 mb-6 mb-lg-0" data-animate="zoomIn"> */}
             <ScrollAnimation className="col-lg-4 mb-6 mb-lg-0" animateIn="fadeInUp">
-              <div className="card border-hover shadow-2 shadow-hover-lg-1 pl-5 pr-6 py-6 h-100 hover-change-image">
-                <div className="row no-gutters">
-                  <div className="col-sm-3">
-                    <img src="images/bank.png" alt="Financing made easy" />
+              <div class="card border-hover shadow-2 shadow-hover-lg-1 pl-5 pr-6 py-6 h-100 hover-change-image">
+                <div class="row no-gutters">
+                  <div class="col-sm-3">
+                    <img src="images/group-17.png"
+							     alt="Sell a home" />
                   </div>
-                  <div classname="card-body px-0 px-xxl-10 pt-7 pb-0 text-center">
-                    <h4 classname="card-title fs-18 lh-17 text-dark mb-2 text-capitalize">
-                      Easy access to Agents
-                    </h4>
-                    <p classname="card-text px-sm-2">
-                    Looking to purchase a property? <br /> The current owners
+                  <div class="col-sm-9">
+                    <div class="card-body p-0 pl-0 pl-sm-5 pt-5 pt-sm-0">
+                      <a href="single-property-1.html"
+								   class="d-flex align-items-center text-dark hover-secondary"><h4
+										class="fs-20 lh-1625 mb-1"> Easy access to Agents</h4>
+                        <span class="ml-2 text-primary fs-42 lh-1 hover-image d-inline-flex align-items-center">
+                          <svg class="icon icon-long-arrow"><use
+		                                    xlinkHref="#icon-long-arrow"></use></svg>
+                        </span>
+                      </a>
+                      <p class="mb-0">Looking to purchase a property? <br /> The current owners
                     or agents incharge of the property can easily be reached
-                    out to on the platform.
-                    </p>
+                    out to on the platform.</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </ScrollAnimation>
-            
+              </ScrollAnimation>
+            {/* </div> */}
             <ScrollAnimation className="col-lg-4 mb-6 mb-lg-0" animateIn="fadeInUp">
-              <div className="card border-hover shadow-2 shadow-hover-lg-1 pl-5 pr-6 py-6 h-100 hover-change-image">
-                <div className="row no-gutters">
-                  <div className="col-sm-3">
-                    <img src="images/buy.png" alt="Transparentcy" />
+              <div class="card border-hover shadow-2 shadow-hover-lg-1 pl-5 pr-6 py-6 h-100 hover-change-image">
+                <div class="row no-gutters">
+                  <div class="col-sm-3">
+                    <img src="images/group-21.png"
+							     alt="Rent a home" />
                   </div>
-                  <div classname="card-body px-0 px-xxl-10 pt-7 pb-0 text-center">
-                    <h4 classname="card-title fs-18 lh-17 text-dark mb-2 text-capitalize">
-                    Global range of properties
-                    </h4>
-                    <p classname="card-text px-sm-2">
-                      Our sights are set on a global scale. <br /> Users will be
-                      able to own properties anywhere in the universe.
-                    </p>
+                  <div class="col-sm-9">
+                    <div class="card-body p-0 pl-0 pl-sm-5 pt-5 pt-sm-0">
+                      <a href="single-property-1.html"
+								   class="d-flex align-items-center text-dark hover-secondary"><h4
+										class="fs-20 lh-1625 mb-1">Global range of properties </h4>
+                        <span class="ml-2 text-primary fs-42 lh-1 hover-image d-inline-flex align-items-center">
+                          <svg class="icon icon-long-arrow"><use
+		                                    xlinkHref="#icon-long-arrow"></use></svg>
+                        </span>
+                      </a>
+                      <p class="mb-0">Our sights are set on a global scale. <br /> Users will be
+                      able to own properties anywhere in the universe.</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </ScrollAnimation>
           </div>
-          </div>
+        </div>
       </section>
 
 
