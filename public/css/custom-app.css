@@ -41,3 +41,7 @@ body{
 footer{
     font-size: 14px !important;
 }
+
+.bg-secondary{
+    background-color: #252525 !important;
+}

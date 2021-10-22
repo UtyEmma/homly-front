@@ -11,13 +11,13 @@ export default function Footer() {
                             <img src="./images/logo/white.png" alt="Bayof" width="156px" height="40px" />
                         </a>
                         <div className="lh-26 font-weight-500">
-                            <p className="mb-0">58 Howard Street #2 San Francisco</p>
-                            <a className="d-block text-muted hover-white" href="mailto:info@bayof.co">info@bayof.co</a>
-                            <a className="d-block text-lighter font-weight-bold fs-15 hover-white" href="tel:+2348183175686">(+234)81 831 75 686</a>
-                            <a className="d-block text-muted hover-white" href="https://www.bayof.co">www.bayof.co</a>
+                            <p className="mb-0 lh-184 mb-5">We believe property deals shouldn't take <br/> months to be processed.</p>
+                            <a className="d-block text-lighter hover-white" href="mailto:info@bayof.co">info@bayof.co</a>
+                            <a className="d-block text-lighter  hover-white" href="tel:+2348183175686">+234 818 3175 686</a>
+                            <a className="d-block text-lighter hover-white" href="https://www.bayof.co">www.bayof.co</a>
                         </div>
                     </div>
-                    <div className="col-md-6 col-lg-2 mb-6 mb-md-0">
+                    <div className="col-md-6 col-lg-4 mb-6 mb-md-0">
                         <h4 className="text-white fs-16 my-4 font-weight-500">Popular Searches</h4>
                         
                         <ul className="list-group list-group-flush list-group-no-border">
@@ -37,7 +37,7 @@ export default function Footer() {
                         </ul>
                     </div>
                     
-                    <div className="col-md-6 col-lg-2 mb-6 mb-md-0">
+                    {/* <div className="col-md-6 col-lg-2 mb-6 mb-md-0">
                         <h4 className="text-white fs-16 my-4 font-weight-500">Quick links</h4>
                         
                         <ul className="list-group list-group-flush list-group-no-border">
@@ -54,7 +54,7 @@ export default function Footer() {
                                 <a href="#" className="text-muted lh-26 hover-white font-weight-500">Careers</a>
                             </li>
                         </ul>
-                    </div>
+                    </div> */}
 
                     <div className="col-md-6 col-lg-4 mb-6 mb-md-0">
                         <h4 className="text-white fs-16 my-4 font-weight-500">Sign Up for Our Newsletter</h4>
@@ -74,17 +74,20 @@ export default function Footer() {
                         
                         <ul className="list-inline mb-0">
                             <li className="list-inline-item mr-0">
-                                <a href="#" className="text-white opacity-3 fs-25 px-4 opacity-hover-10"><i className="fab fa-twitter" /></a>
+                                <a href="https://twitter.com/BayofC" className="text-white opacity-3 fs-25 px-4 opacity-hover-10"><i className="fab fa-twitter" /></a>
                             </li>
                             <li className="list-inline-item mr-0">
                                 <a href="#" className="text-white opacity-3 fs-25 px-4 opacity-hover-10"><i className="fab fa-facebook-f" /></a>
                             </li>
                             <li className="list-inline-item mr-0">
+                                <a href="https://instagram.com/bayofhq" className="text-white opacity-3 fs-25 px-4 opacity-hover-10"><i className="fab fa-instagram" /></a>
+                            </li>
+                            {/* <li className="list-inline-item mr-0">
                                 <a href="#" className="text-white opacity-3 fs-25 px-4 opacity-hover-10"><i className="fab fa-skype" /></a>
-                            </li>
-                            <li className="list-inline-item mr-0">
+                            </li> */}
+                            {/* <li className="list-inline-item mr-0">
                                 <a href="#" className="text-white opacity-3 fs-25 px-4 opacity-hover-10"><i className="fab fa-linkedin-in" /></a>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </div>
@@ -100,7 +103,7 @@ export default function Footer() {
                     </ul>
 
                     <p className="col-md-auto mb-0 text-muted">
-                        © 2021 Bayof. All Rights Reserved
+                        © 2021 BAYOF. All Rights Reserved
                     </p>
                 </div>
             </div>
