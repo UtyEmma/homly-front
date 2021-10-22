@@ -92,7 +92,7 @@ export default function AgentDetailsContainer({agent, listings, reviews, status,
                             <p className="d-block fs-16 lh-214 text-dark mb-0 font-weight-500">
                                 {capitalize(agent.firstname)} {capitalize(agent.lastname)}
                                 {   
-                                    agent.verified 
+                                    agent.verified
                                     
                                     ? 
                                     

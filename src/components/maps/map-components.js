@@ -1,6 +1,7 @@
 import { useState } from "react";
 import InfoBox from "react-google-maps/lib/components/addons/InfoBox";
 import Marker from "react-google-maps/lib/components/Marker"
+import { Link } from "react-router-dom";
 
 export const MapMarker = ({latitude, longitude, listing}) => {
 
@@ -50,7 +51,7 @@ export const ListingMapInfo = ({listing}) => {
                         <img src={listing.images[0]} className="card-img" alt={listing.title} />
                     </div>
                         <div className="media-body col-9">
-                            <h2 className="my-0"><a href={`listings/${listing.slug}`} className="fs-13 lh-2 text-dark hover-primary d-block">{listing.title}</a></h2>
+                            <h2 className="my-0"><Link to={`/${listing.agent.username}/${listing.slug}`} className="fs-13 lh-2 text-dark hover-primary d-block">{listing.title}</Link></h2>
                             <p className="mb-0 font-weight-500 text-gray-light">{listing.address}</p>
                             <p className="fs-17 font-weight-bold text-heading mb-0">&#8358; {listing.rent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </p>
                         </div>

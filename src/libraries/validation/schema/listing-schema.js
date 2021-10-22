@@ -13,8 +13,7 @@ export const __createlisting = {
         latitude: "required|numeric",
         longitude: "required|numeric",
         no_bedrooms: "required|numeric", 
-        no_bathrooms: "required|numeric", 
-        extra_info: "required|string"
+        no_bathrooms: "required|numeric"
     },
 
     messages : {
@@ -36,8 +35,7 @@ export const __createlisting = {
         latitude: "Latitude",
         longitude: "Longitude",
         no_bedrooms: "Number of Bedrooms", 
-        no_bathrooms: "Number of Bathrooms", 
-        extra_info: "Extra Info"
+        no_bathrooms: "Number of Bathrooms"
     }
 }
 

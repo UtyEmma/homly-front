@@ -8,7 +8,7 @@ export default function Footer() {
                 <div className="row">
                     <div className="col-md-6 col-lg-4 mb-6 mb-md-0">
                         <a className="d-block mb-2" href="/">
-                            <img src="./images/logo/white.png" alt="Bayof" width="156px" height="40px" />
+                            <img src="/images/logo/white.png" alt="Bayof" width="156px" height="40px" />
                         </a>
                         <div className="lh-26 font-weight-500">
                             <p className="mb-0 lh-184 mb-5">We believe property deals shouldn't take <br/> months to be processed.</p>

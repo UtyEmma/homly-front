@@ -169,14 +169,13 @@ const AgentProfile = ({agent, setIsLoading}) => {
                                             <div className="card mb-6">
                                                 <div className="card-body px-6 pt-6 pb-5">
                                                     <h3 className="card-title mb-0 text-heading fs-22 lh-15">Social Media Handles</h3>
-                                                    <p className="card-text">Its easier for clients to reach you, through social media</p>
+                                                    <p className="card-text">Its easier for clients to reach you, through social media (Please provide only your Username)</p>
                                                     <div className="form-group">
                                                         <label htmlFor="facebook" className="text-heading">Facebook</label>
                                                         <div className="input-group mb-3">
                                                             <div className="input-group-prepend">
                                                                 <span className="input-group-text fs-14 font-weight-600" id="basic-addon3">
                                                                     <i className="fab fa-facebook-square fs-20"></i>
-                                                                    <span className="fs-13 ml-2 font-weight-600">https://facebook.com/</span>
                                                                 </span>
                                                             </div>
                                                             <input type="text" name="facebook" id="facebook" className="form-control border-0" defaultValue={agent.facebook && agent.facebook.split('/')[3]} aria-describedby="basic-addon3" placeholder="Your username" />
@@ -189,7 +188,6 @@ const AgentProfile = ({agent, setIsLoading}) => {
                                                             <div className="input-group-prepend">
                                                             <span className="input-group-text fs-14 font-weight-600" id="basic-addon3">
                                                                 <i className="fab fa-instagram fs-20"></i>
-                                                                <span className="fs-13 ml-2 font-weight-600">https://instagram.com/</span>
                                                             </span>
                                                             </div>
                                                             <input type="text" className="form-control border-0" defaultValue={agent.instagram && agent.instagram.split('/')[3]} id="instagram" name="instagram" aria-describedby="basic-addon3" placeholder="Your username"/>
@@ -202,7 +200,6 @@ const AgentProfile = ({agent, setIsLoading}) => {
                                                             <div className="input-group-prepend">
                                                             <span className="input-group-text fs-14" id="basic-addon3">
                                                                 <i className="fab fa-twitter fs-20"></i>
-                                                                <span className="fs-13 ml-2 font-weight-600">https://twitter.com/</span>
                                                             </span>
                                                             </div>
                                                             <input type="text" className="form-control border-0"  defaultValue={agent.twitter && agent.twitter.split('/')[3]} id="twitter" name="twitter" aria-describedby="basic-addon3" placeholder="Your username"/>
