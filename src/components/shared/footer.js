@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Footer() {
     return (
@@ -22,17 +23,19 @@ export default function Footer() {
                         
                         <ul className="list-group list-group-flush list-group-no-border">
                             <li className="list-group-item bg-transparent p-0">
-                                <a href="/listings" className="text-muted lh-26 font-weight-500 hover-white">Apartment for Rent</a>
+                                <a href="/listings" className="text-muted lh-26 font-weight-500 hover-white">Property for Rent</a>
                             </li>
                             <li className="list-group-item bg-transparent p-0">
-                                <a href="/listings" className="text-muted lh-26 font-weight-500 hover-white">Apartment Low to
-                                hide</a>
+                                <a href="/listings" className="text-muted lh-26 font-weight-500 hover-white">Property for Sale</a>
                             </li>
                             <li className="list-group-item bg-transparent p-0">
-                                <a href="/listings" className="text-muted lh-26 font-weight-500 hover-white">Offices for Buy</a>
+                                <a href="/agents" className="text-muted lh-26 font-weight-500 hover-white">Available Agents</a>
                             </li>
                             <li className="list-group-item bg-transparent p-0">
-                                <a href="/listings" className="text-muted lh-26 font-weight-500 hover-white">Offices for Rent</a>
+                                <a href="/signup" className="text-muted lh-26 font-weight-500 hover-white">Join our community</a>
+                            </li>
+                            <li className="list-group-item bg-transparent p-0">
+                                <a href="/login" className="text-muted lh-26 font-weight-500 hover-white">Sign In</a>
                             </li>
                         </ul>
                     </div>
@@ -64,10 +67,12 @@ export default function Footer() {
 
                         <form id="">
                             <div className="input-group input-group-lg mb-6">
-                                <input type="text" name="email" required className="form-control bg-white shadow-none border-0 z-index-1" placeholder="Your email" />
+                                {/* <input type="text" name="email" required className="form-control bg-white shadow-none border-0 z-index-1" placeholder="Your email" /> */}
                                 
                                 <div className="input-group-append">
-                                    <button className="btn btn-primary" type="submit">Subscribe</button>
+                                    <Link to="https://bayof.substack.com/p/coming-soon">
+                                    <button className="btn btn-primary btn-lg btn-block" type="submit">Subscribe now</button>
+                                    </Link>
                                 </div>
                             </div>
                         </form>
