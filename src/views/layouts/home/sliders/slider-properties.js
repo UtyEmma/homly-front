@@ -7,7 +7,7 @@ export const SliderProperties = ({listings}) => {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 3,
+        slidesToShow: listings.length >= 3 ? 3 : listings.length,
         slidesToScroll: 3,
         autoplay: true,
         arrows: true,
@@ -15,21 +15,21 @@ export const SliderProperties = ({listings}) => {
             {
                 breakpoint: 1600,
                 settings: {
-                    slidesToShow: 3,
+                    slidesToShow: listings.length >= 3 ? 3 : listings.length,
                     arrows: false,
                 }
             },
             {
                 breakpoint: 992,
                 settings: {
-                    slidesToShow: 3,
+                    slidesToShow: listings.length >= 3 ? 3 : listings.length,
                     arrows: false
                 }
             },
             {
                 breakpoint: 768,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: listings.length >= 2 ? 2 : listings.length,
                     arrows: false,
                     dors: true,
                     autoplay: true
