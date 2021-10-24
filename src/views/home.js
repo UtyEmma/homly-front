@@ -56,8 +56,7 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
             <meta name="description" content="We're using technology to take the real estate industry into the future" />
         </Helmet>
             
-        {/* <NavBar isloggedIn={isLoggedIn} token={token} user={user} status={status} /> */}
-            <HomePageHeader isloggedIn={isLoggedIn} token={token} user={user} status={status}/>
+        <HomePageHeader isloggedIn={isLoggedIn} token={token} user={user} status={status}/>
 <main id="content">
     <HeroSection/>
 

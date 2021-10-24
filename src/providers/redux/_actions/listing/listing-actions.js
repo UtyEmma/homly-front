@@ -191,9 +191,10 @@ export const FetchPopularListings = () => (dispatch) => {
 
     ListingService.fetchPopularListings()
                 .then((response) => {
+                    let res = response.data.data
                     dispatch({
                         type: FETCH_POPULAR_LISTINGS_SUCCESS,
-                        payload: response.data.data 
+                        payload: res.listings
                     })
                 })
                 .catch((error) => {

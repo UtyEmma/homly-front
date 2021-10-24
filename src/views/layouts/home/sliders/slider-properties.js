@@ -50,12 +50,10 @@ export const SliderProperties = ({listings}) => {
 
     return (
         <Slider {...settings} className="mx-n2 custom-arrow-spacing-30">
-            <PropertiesSliderItem />
-            <PropertiesSliderItem />
-            <PropertiesSliderItem />
-            <PropertiesSliderItem />
-            <PropertiesSliderItem />
-            <PropertiesSliderItem />
+            {
+                listings.map(listing => <PropertiesSliderItem key={listing.unique_id} listing={listing} />)
+            }
+
         </Slider>
     )
 }
