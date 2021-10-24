@@ -32,6 +32,9 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
     }, [])
 
     useEffect(() => {
+    }, [popular])
+
+    useEffect(() => {
         setIsLoading(loading)
     }, [loading, setIsLoading])
 
