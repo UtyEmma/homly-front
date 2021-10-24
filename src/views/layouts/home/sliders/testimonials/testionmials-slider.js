@@ -27,13 +27,13 @@ export const TestimonialSlider = () => {
                 <div className="card border-0 bg-transparent">
                     <div className="card-body p-0">
                     <div className="d-flex mb-6 align-items-end">
-                        <h5 className="card-title fs-24 text-secondary mb-0">Great quality!</h5>
+                        <h5 className="card-title fs-24 text-secondary mb-0">Great Job!</h5>
                         <div className="ml-auto opacity-2">
                         <img src="images/quote.png" alt="quote" />
                         </div>
                     </div>
                     <p className="card-text fs-18 lh-2 text-heading mb-5">
-                        We have chosen to work extensively with HomeID because of their quality services, including their On-the-Job Training program and other employer.
+                        I must say that, i'm impressed with the platform. <br/> Most especially, the feature where Housing Agents can update their social media handles; so clients can easily reach them.<br/> I just love it!
                     </p>
                     <div className="media align-items-center">
                         <div className="rounded-circle mr-4 bg-white w-70px h-70 d-flex align-items-end justify-content-center">
@@ -52,13 +52,13 @@ export const TestimonialSlider = () => {
                 <div className="card border-0 bg-transparent">
                     <div className="card-body p-0">
                     <div className="d-flex mb-6 align-items-end">
-                        <h5 className="card-title fs-24 text-secondary mb-0">Great quality!</h5>
+                        <h5 className="card-title fs-24 text-secondary mb-0">This platform is lit... literally!</h5>
                         <div className="ml-auto opacity-2">
                         <img src="images/quote.png" alt="quote" />
                         </div>
                     </div>
                     <p className="card-text fs-18 lh-2 text-heading mb-5">
-                        We have chosen to work extensively with HomeID because of their quality services, including their On-the-Job Training program and other employer.
+                        Amongst other features, the speed at which the whole platform operates and responds is just WOW!<br/> Thumbs up guys.
                     </p>
                     <div className="media align-items-center">
                         <div className="rounded-circle mr-4 bg-white w-70px h-70 d-flex align-items-end justify-content-center">
@@ -77,13 +77,13 @@ export const TestimonialSlider = () => {
                 <div className="card border-0 bg-transparent">
                     <div className="card-body p-0">
                     <div className="d-flex mb-6 align-items-end">
-                        <h5 className="card-title fs-24 text-secondary mb-0">Great quality!</h5>
+                        <h5 className="card-title fs-24 text-secondary mb-0">Its very okay!</h5>
                         <div className="ml-auto opacity-2">
                         <img src="images/quote.png" alt="quote" />
                         </div>
                     </div>
                     <p className="card-text fs-18 lh-2 text-heading mb-5">
-                        We have chosen to work extensively with HomeID because of their quality services, including their On-the-Job Training program and other employer.
+                        Based on the features in the Agents dashboard, i'd say the user experience is clear and very intuitive... allowing Agents to operate as smoothly as possible.
                     </p>
                     <div className="media align-items-center">
                         <div className="rounded-circle mr-4 bg-white w-70px h-70 d-flex align-items-end justify-content-center">

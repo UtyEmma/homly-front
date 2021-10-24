@@ -6,6 +6,7 @@ export const BlogList = () => {
     return (
         <>
         
+<<<<<<< HEAD
             <h2 class="text-heading lh-163 c-title">Why Do People Love Us?</h2>
             <span class="heading-divider"></span>
             <p class="mb-6">It's simple. Because like them, we believe property deals shouldn't take months.</p>
@@ -13,6 +14,14 @@ export const BlogList = () => {
                 View Properties
                 <i class="far fa-long-arrow-right ml-1"></i>
             </Link>
+=======
+        <h2 class="text-heading lh-163 c-title">Why Do People Love Us?</h2>
+              <span class="heading-divider"></span>
+              <p class="mb-6">It's simple. Because like them, we believe property deals shouldn't take months.</p>
+              <Link to="signup" class="btn btn-lg text-secondary btn-accent rounded-lg mb-8 mb-lg-0">Join our community
+                <i class="far fa-long-arrow-right ml-1"></i>
+              </Link>
+>>>>>>> f3955b65ce6289b17a09fd8ee674a007b4a79827
 
          {/* <h2 className="text-heading mb-6">From Our Blog</h2>
             <ScrollAnimation className="card border-0 mb-7" animateIn="fadeInLeft">

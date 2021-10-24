@@ -4,8 +4,10 @@
 }
 
 body{
-    /* font-family: 'Montserrat', sans-serif; */
     font-family: "Poppins", sans-serif;
+    /* font-family: 'Montserrat', sans-serif; */
+    /* font-family: 'Rubik', sans-serif; */
+    /* font-family: 'Ubuntu', sans-serif; */
 }
 
 .dropright .dropdown-toggle::after, .dropdown-toggle::after {
@@ -40,4 +42,8 @@ body{
 }
 footer{
     font-size: 14px !important;
+}
+
+.bg-secondary{
+    background-color: #252525 !important;
 }
