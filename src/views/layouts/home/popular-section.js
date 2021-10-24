@@ -1,27 +1,9 @@
-import React, { useCallback, useEffect } from 'react'
+import React from 'react'
 import { Nav, Row, Tab, TabContent, TabPane } from 'react-bootstrap'
 import ListingTabItem from './components/listing-tab-item'
-import { FetchPopularListings } from 'providers/redux/_actions/listing/listing-actions'
-import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-export default function PopularSection({isLoading, setIsLoading, status}) {
-    const dispatch = useDispatch()
-
-    const popular_listings = useSelector((state) => state.popular_listings)
-    const {loading, listings} = popular_listings
-
-    const loadPopularListings = useCallback(() => {
-        dispatch(FetchPopularListings())
-    }, [dispatch])
-
-    useEffect(() => {
-        !listings && loadPopularListings()
-    }, [listings, loadPopularListings])
-
-    useEffect(() => {
-        setIsLoading(loading)
-    }, [loading, setIsLoading])
+export default function PopularSection({isLoading, listings, setIsLoading, status}) {
 
     return (
         <>

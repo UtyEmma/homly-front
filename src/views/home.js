@@ -66,7 +66,7 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
 
       &&
       
-      <PopularSection popular={popular} isLoading={isLoading} setIsLoading={setIsLoading} status={status} />
+      <PopularSection listings={popular} isLoading={isLoading} setIsLoading={setIsLoading} status={status} />
     
     }
 
