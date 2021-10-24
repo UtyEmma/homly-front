@@ -1,16 +1,18 @@
 import React from 'react'
 import ScrollAnimation from 'react-animate-on-scroll'
+import { Link } from 'react-router-dom'
 
 export const BlogList = () => {
     return (
         <>
         
-        <h2 class="text-heading lh-163 c-title">Why Do People Love Us?</h2>
-              <span class="heading-divider"></span>
-              <p class="mb-6">It's simple. Because like them, we believe property deals shouldn't take months.</p>
-              <a href="#" class="btn btn-lg text-secondary btn-accent rounded-lg mb-8 mb-lg-0">View all reviews
+            <h2 class="text-heading lh-163 c-title">Why Do People Love Us?</h2>
+            <span class="heading-divider"></span>
+            <p class="mb-6">It's simple. Because like them, we believe property deals shouldn't take months.</p>
+            <Link to="/listings" class="btn btn-lg text-secondary btn-accent rounded-lg mb-8 mb-lg-0">
+                View Properties
                 <i class="far fa-long-arrow-right ml-1"></i>
-              </a>
+            </Link>
 
          {/* <h2 className="text-heading mb-6">From Our Blog</h2>
             <ScrollAnimation className="card border-0 mb-7" animateIn="fadeInLeft">

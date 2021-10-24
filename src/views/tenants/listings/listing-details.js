@@ -28,13 +28,13 @@ const ListingDetails = ({isLoggedIn, user, status, adminMode, setIsLoading}) => 
     const suspend_listing = useSelector((state) => state.suspend_item);
     const {data} = suspend_listing;
 
+    const fetchListingData = () => {
+        dispatch(FetchSingleListing(username, slug, '/listings'))
+    }
+
     useEffect(() => {
-        const fetchListingData = () => {
-            dispatch(FetchSingleListing(username, slug, '/listings'))
-        }
-        
-        !listing && fetchListingData()
-    }, [listing, data, username, slug, dispatch]);
+        fetchListingData()
+    }, [slug])
 
     useEffect(() => {
         data && setListingData(data)

@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { SliderProperties } from '../slider-properties';
 
-export const HomePropertiesSlider = () => {
+export const HomePropertiesSlider = ({listings}) => {
 
     return (
         <section className="py-lg-12 my-lg-1 py-11">
@@ -22,7 +22,7 @@ export const HomePropertiesSlider = () => {
             </div>
 
 
-            <SliderProperties />
+            <SliderProperties listings={listings} />
 
         </div>
     </section>
