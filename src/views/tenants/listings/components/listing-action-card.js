@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { ConfirmActionDialog } from 'views/layouts/components/modals/confirm-action-dialog'
+import {capitalize} from './../../../../libraries/general/helper-functions';
 
 export default function ListingAction({agent, listing}) {
     
@@ -51,7 +52,7 @@ export default function ListingAction({agent, listing}) {
                         }
                     </Link>
 
-                    <Link to={`/${agent.username}`} className="d-block fs-16 lh-214 text-dark mb-0 font-weight-500 hover-primary">{agent.firstname} {agent.lastname}</Link>
+                    <Link to={`/${agent.username}`} className="d-block fs-16 lh-214 text-dark mb-0 font-weight-500 hover-primary">{capitalize(agent.firstname)} {capitalize(agent.lastname)}</Link>
                     
                     <p className="mb-0">{agent.title}</p>
                     <ul className="list-inline mb-0">

@@ -28,6 +28,8 @@ const Listing = ({ isLoggedIn, user, setIsLoading, status }) => {
     dispatch(ShowAllListings(token, params));
   }, [dispatch, params, token]);
 
+console.log(listings)
+
   useEffect(() => {
     if (!listings || params) {
       fetchListings();
@@ -45,30 +47,35 @@ const Listing = ({ isLoggedIn, user, setIsLoading, status }) => {
           Find Properties - Bayof Real Estate - Find Properties and agents
           around you
         </title>
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:site" content="@" />
-        <meta name="twitter:creator" content="@" />
-        <meta name="twitter:title" content="Bayof Real Estate" />
-        <meta
-          name="twitter:description"
-          content="Find the best accomodation around you"
-        />
-        <meta name="twitter:image" content="/images/homeid-social-logo.png" />
-        <meta property="og:url" content="home-01.html" />
-        <meta property="og:title" content="Home 01" />
-        <meta
-          property="og:description"
-          content="Find the best accomodation around you"
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="/images/homeid-social.png" />
-        <meta property="og:image:type" content="image/png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta
-          name="description"
-          content="Find Properties and agents around you."
-        />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@" />
+    <meta name="twitter:creator" content="@" />
+    <meta
+      name="twitter:title"
+      content="Bayof - Take ownership of landed property, globally"
+    />
+    <meta
+      name="twitter:description"
+      content="We're using technology to take the housing and real estate industry into the modern age"
+    />
+    <meta property="og:url" content="{process.env.REACT_APP_API_URL}" />
+    <meta
+      property="og:title"
+      content="Bayof - Take ownership of landed property, globally"
+    />
+    <meta
+      property="og:description"
+      content="We're using technology to take the real estate industry into the future"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/images/homeid-social.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      name="description"
+      content="We're using technology to take the real estate industry into the future"
+    />
       </Helmet>
 
       <NavBar isloggedIn={isLoggedIn} user={user} status={status} />
