@@ -10,7 +10,7 @@ export default function NavBar({token, user, isloggedIn, status}) {
             <div className="sticky-area">
                 <div className="container">
                     <nav className="navbar navbar-expand-lg px-0">
-                        <Link className="navbar-brand w-25 w-140px" to="/" >
+                        <Link className="navbar-brand w-25 w-100px" to="/" >
                             <img src="/images/logo/bayof-logo.png"  width="102px" height="80px" alt="Bayof Logo" className="d-none d-lg-inline-block img-fluid" />
                             <img src="/images/logo/white.png" alt="Bayof Logo" className="d-inline-block d-lg-none img-fluid" />
                         </Link>
@@ -61,7 +61,7 @@ export default function NavBar({token, user, isloggedIn, status}) {
                                 }                    
                             </ul>
                         </div>
-                        <div className="d-none d-lg-block ">
+                        <div className="d-none d-lg-block">
                             <ProfileButton isloggedIn={isloggedIn} user={user} status={status} />
                         </div>
                     </nav>

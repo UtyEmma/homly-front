@@ -10,10 +10,10 @@ function capitalize(str) {
     return str.charAt(0).toUpperCase() + lower.slice(1);
   }
 
-export default function ProfileButton({setIsLoading, isloggedIn, user, status}) {
+export default function ProfileButton({setIsLoading, isloggedIn, user, status, home}) {
     return (
         <>
-            {isloggedIn ? <LoggedIn user={user} status={status} setIsLoading={setIsLoading} /> : loggedOut()}
+            {isloggedIn ? <LoggedIn user={user} status={status} setIsLoading={setIsLoading} /> : loggedOut(home)}
         </>
     )
 }
@@ -134,18 +134,39 @@ export function AgentNavItems () {
     )
 }
 
-function loggedOut(params) {
+function loggedOut(home) {
     return (           
         <ul className="navbar-nav flex-row justify-content-lg-end align-items-center d-flex flex-wrap text-body py-2">
             <li className="nav-item d-none d-md-inline">
                 <Link className="nav-link pl-md-3 pr-md-2 mr-1 mr-md-4" to="/login">Login</Link>                
             </li>
+
+                
             <li className="nav-item ml-md-auto w-auto w-sm-auto mr-2 mr-md-auto">
-                <Link className="btn btn-primary d-none btn-lg d-md-flex align-items-center" to="/signup">
-                    Get Started
-                    <img src="/images/add-listing-icon.png" alt="Add listing" className="ml-2" />
-                </Link>
+                {
+                    home 
+
+                    ?
+
+                    <Link className="btn btn-outline-light d-none btn-lg d-md-flex align-items-center" to="/signup">
+                        Get Started
+                        <img src="/images/add-listing-icon.png" alt="Add listing"
+                        class="ml-1 normal-button-icon" />
+                            <img src="/images/add-listing-icon-primary.png" alt="Add listing"
+                        class="ml-1 sticky-button-icon" />
+                    </Link>
+
+                    :
+
+                    <Link className="btn btn-primary d-none btn-lg d-md-flex align-items-center" to="/signup">
+                        Get Started
+                        <img src="/images/add-listing-icon.png" alt="Add listing" className="ml-2" />
+                    </Link>
+                }
+
             </li>
+                
+
         </ul>
     )
 }

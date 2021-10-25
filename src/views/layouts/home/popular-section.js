@@ -30,6 +30,7 @@ export default function PopularSection({isLoading, setIsLoading, status}) {
             listings && listings.length > 0
 
             &&
+
             <section className="pt-lg-12 pt-11 pb-11">
                 <div className="container container-xxl">
 
@@ -78,7 +79,6 @@ export default function PopularSection({isLoading, setIsLoading, status}) {
                                         })
                                     }
                                 </TabContent>
-                                    
                             </Tab.Container>
                     </div>
 

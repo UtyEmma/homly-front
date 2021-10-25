@@ -185,15 +185,15 @@ export const FetchSingleListing = (username, slug, redirect) => (dispatch) => {
 }
 
 export const FetchPopularListings = () => (dispatch) => {
-    console.log('Fetching Popular Listings');
-
     dispatch({type: FETCH_POPULAR_LISTINGS_REQUEST});
 
     ListingService.fetchPopularListings()
                 .then((response) => {
+                    let res = response.data.data
+                    console.log(res)
                     dispatch({
                         type: FETCH_POPULAR_LISTINGS_SUCCESS,
-                        payload: response.data.data 
+                        payload: res
                     })
                 })
                 .catch((error) => {

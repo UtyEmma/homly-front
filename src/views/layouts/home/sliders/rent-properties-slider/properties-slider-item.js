@@ -31,7 +31,7 @@ export const PropertiesSliderItem = ({listing}) => {
                     </div>
                 </div>
                 <div className="card-body p-0">
-                    <h2 className="my-0 mt-1"><a href="single-property-1.html" className="fs-16 text-dark hover-primary lh-2">{listing.title}</a>
+                    <h2 className="my-0 mt-1"><a href="single-property-1.html" className="fs-16 text-dark hover-primary">{listing.title}</a>
                     </h2>
                     <p className="text-gray-light font-weight-500 mb-1">{listing.address}, {listing.city}, {listing.state} </p>
                     <p className="fs-17 font-weight-bold text-heading mb-0">$ {listing.rent}</p>

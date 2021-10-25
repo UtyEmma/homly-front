@@ -13,6 +13,8 @@ import { BlogList } from './layouts/home/blog-list'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { FetchPopularListings } from 'providers/redux/_actions/listing/listing-actions'
+import { AgentsList } from './layouts/home/agents-list'
+import { HomePageHeader } from './layouts/home/components/header'
 
 const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
 
@@ -54,8 +56,7 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
             <meta name="description" content="We're using technology to take the real estate industry into the future" />
         </Helmet>
             
-        <NavBar isloggedIn={isLoggedIn} token={token} user={user} status={status} />
-            
+        <HomePageHeader isloggedIn={isLoggedIn} token={token} user={user} status={status}/>
 <main id="content">
     <HeroSection/>
 
@@ -220,12 +221,13 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
         </div>
       </section>
 
+      <AgentsList />
 
                   
       <section className="pt-lg-13 pb-lg-9 mt-lg-1 py-11">
         <div className="container container-xxl">
           <div class="row align-items-center">
-            <div class="col-lg-5 pr-xl-17" data-animate="fadeInLeft">
+            <div class="col-lg-5 pr-xl-17" >
               <BlogList />
             </div>
             <div className="col-lg-7">
@@ -235,6 +237,16 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
         </div>
       </section>
                     
+      <div className="p-6 mxw-670 pl-md-9 d-sm-flex align-items-sm-center position-relative mt-10 rounded-lg mb-3" style={{backgroundColor: '#eaeff7'}}>
+        <div className="mt-md-0 mt-6">
+          <h4 className="text-secondary fs-20 font-weight-normal">Become a<span className="font-weight-600"> Real Estate Agent</span></h4>
+          <p className="mb-0">Lorem ipsum dolor sit amet, consec tetur cing elit</p>
+        </div>
+        <div className="ml-auto">
+          <Link to="/signup" className="btn btn-lg btn-primary rounded-lg mt-sm-0 mt-6">Register now</Link>
+        </div>
+        <i className="far fa-users h-64 w-64px bg-indigo d-flex justify-content-center align-items-center text-white rounded-circle fs-24 position-absolute custom-pos-icon" />
+      </div>
       <DestinationsSlider />
 
       </main>

@@ -23,8 +23,10 @@ export default function Searchbar({parsed}) {
         const features = formData.get('features') ? `&features=${formData.get('features')}` : "";
         const minprice = formData.get('minprice') && `&minprice=${formData.get('minprice')}`
         const maxprice = formData.get('maxprice') && `&maxprice=${formData.get('maxprice')}`
+        const state = formData.get('state') && `&state=${formData.get('state')}`
+        const city = formData.get('city') && `&city=${formData.get('city')}`
 
-        return `/search?${keyword}${type}${price}${bedrooms}${bathrooms}${features}${minprice}${maxprice}`;
+        return `/search?${keyword}${type}${price}${bedrooms}${bathrooms}${features}${minprice}${maxprice}${state}${city}`;
     }
 
     useEffect(() => {
