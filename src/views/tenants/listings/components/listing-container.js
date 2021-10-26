@@ -54,7 +54,7 @@ export default function ListingContainer({listings, setParams, params, status}) 
             </div>
             <div className="row">
                 {
-                     listings.map((listing, index) => (    
+                     listings.data.map((listing, index) => (    
                             grid ? <ListingGrid status={status} listing={listing} key={index}/> : 
                                         <ListingList status={status} listing={listing} key={index}/>
                     ))
