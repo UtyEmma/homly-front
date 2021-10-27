@@ -69,71 +69,7 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
       <PopularSection popular={popular} isLoading={isLoading} setIsLoading={setIsLoading} status={status} />
     
     }
-
-    <section className="bg-gray-02 pt-10 pb-11">
-        <div className="container container-xxl">
-            <h2 className="text-dark lh-1625 text-center c-title fs-26 fs-md-48">Wondering why we built, Bayof?</h2>
-            <span className="heading-divider mx-auto" />
-            <div className="row justify-content-between mt-10">
-            <ScrollAnimation animateIn="fadeInUp" className="col-lg-4 mb-6 mb-lg-0">
-                <div className="card border-0 bg-transparent">
-                <div className="card-img-top d-flex align-items-end justify-content-center">
-                    <img src="images/urban.png" alt="Wider range of properties" />
-                </div>
-                <div className="card-body px-0 px-xxl-10 pt-7 pb-0 text-center">
-                    <h4 className="card-title fs-18 lh-17 text-dark mb-2 text-capitalize">Own properties with ease</h4>
-                    <p className="card-text px-sm-2">
-                    Taking ownership of a landed property does not have to take months to process. We've set out to make purchasing a property as easy as clicking a button.
-                    </p>
-                </div>
-                </div>
-            </ScrollAnimation>
-            <ScrollAnimation animateIn="fadeInUp" className="col-lg-4 mb-6 mb-lg-0">
-                <div className="card border-0 bg-transparent">
-                <div className="card-img-top d-flex align-items-end justify-content-center">
-                    <img src="images/bank.png" alt="Financing made easy" />
-                </div>
-                <div className="card-body px-0 px-xxl-10 pt-7 pb-0 text-center">
-                    <h4 className="card-title fs-18 lh-17 text-dark mb-2 text-capitalize">Easy access to Agents</h4>
-                    <p className="card-text px-sm-2">
-                    Looking to purchase a property? <br/> The current owners or agents incharge of the property can easily be reached out to on the platform.
-                    </p>
-                </div>
-                </div>
-            </ScrollAnimation>
-            <ScrollAnimation animateIn="fadeInUp" className="col-lg-4 mb-6 mb-lg-0" >
-                <div className="card border-0 bg-transparent">
-                <div className="card-img-top d-flex align-items-end justify-content-center">
-                    <img src="images/buy.png" alt="Transparentcy" />
-                </div>
-                <div className="card-body px-0 px-xxl-10 pt-7 pb-0 text-center">
-                    <h4 className="card-title fs-18 lh-17 text-dark mb-2 text-capitalize">Global range of properties</h4>
-                    <p className="card-text px-sm-2">
-                    Our sights are set on a global scale. <br/> Users will be able to own properties anywhere in the universe.
-                    </p>
-                </div>
-                </div>
-            </ScrollAnimation>
-            </div>
-        </div>
-      </section>
-
-        {
-          rented && rented.length > 0
-
-          &&
-
-          <HomePropertiesSlider listings={rented} />
-        }
-
-        {
-          onsale && onsale.length > 0
-
-          &&
-
-          <SalePropertiesSlider listings={onsale} />
-        }
-
+    
 <section class="bg-accent pt-10 pb-lg-11 pb-8 bg-patten-04">
         <div class="container container-xxl">
           <h2 class="text-dark text-center mxw-751 fs-26 lh-184 px-md-8 c-title">
@@ -221,6 +157,71 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
         </div>
       </section>
 
+    {/* <section className="bg-gray-02 pt-10 pb-11">
+        <div className="container container-xxl">
+            <h2 className="text-dark lh-1625 text-center c-title fs-26 fs-md-48">Wondering why we built, Bayof?</h2>
+            <span className="heading-divider mx-auto" />
+            <div className="row justify-content-between mt-10">
+            <ScrollAnimation animateIn="fadeInUp" className="col-lg-4 mb-6 mb-lg-0">
+                <div className="card border-0 bg-transparent">
+                <div className="card-img-top d-flex align-items-end justify-content-center">
+                    <img src="images/urban.png" alt="Wider range of properties" />
+                </div>
+                <div className="card-body px-0 px-xxl-10 pt-7 pb-0 text-center">
+                    <h4 className="card-title fs-18 lh-17 text-dark mb-2 text-capitalize">Own properties with ease</h4>
+                    <p className="card-text px-sm-2">
+                    Taking ownership of a landed property does not have to take months to process. We've set out to make purchasing a property as easy as clicking a button.
+                    </p>
+                </div>
+                </div>
+            </ScrollAnimation>
+            <ScrollAnimation animateIn="fadeInUp" className="col-lg-4 mb-6 mb-lg-0">
+                <div className="card border-0 bg-transparent">
+                <div className="card-img-top d-flex align-items-end justify-content-center">
+                    <img src="images/bank.png" alt="Financing made easy" />
+                </div>
+                <div className="card-body px-0 px-xxl-10 pt-7 pb-0 text-center">
+                    <h4 className="card-title fs-18 lh-17 text-dark mb-2 text-capitalize">Easy access to Agents</h4>
+                    <p className="card-text px-sm-2">
+                    Looking to purchase a property? <br/> The current owners or agents incharge of the property can easily be reached out to on the platform.
+                    </p>
+                </div>
+                </div>
+            </ScrollAnimation>
+            <ScrollAnimation animateIn="fadeInUp" className="col-lg-4 mb-6 mb-lg-0" >
+                <div className="card border-0 bg-transparent">
+                <div className="card-img-top d-flex align-items-end justify-content-center">
+                    <img src="images/buy.png" alt="Transparentcy" />
+                </div>
+                <div className="card-body px-0 px-xxl-10 pt-7 pb-0 text-center">
+                    <h4 className="card-title fs-18 lh-17 text-dark mb-2 text-capitalize">Global range of properties</h4>
+                    <p className="card-text px-sm-2">
+                    Our sights are set on a global scale. <br/> Users will be able to own properties anywhere in the universe.
+                    </p>
+                </div>
+                </div>
+            </ScrollAnimation>
+            </div>
+        </div>
+      </section> */}
+
+        {
+          rented && rented.length > 0
+
+          &&
+
+          <HomePropertiesSlider listings={rented} />
+        }
+
+        {
+          onsale && onsale.length > 0
+
+          &&
+
+          <SalePropertiesSlider listings={onsale} />
+        }
+
+
       <AgentsList />
 
                   
@@ -240,10 +241,10 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
       <div className="p-6 mxw-670 pl-md-9 d-sm-flex align-items-sm-center position-relative mt-10 rounded-lg mb-3" style={{backgroundColor: '#eaeff7'}}>
         <div className="mt-md-0 mt-6">
           <h4 className="text-secondary fs-20 font-weight-normal">Become a<span className="font-weight-600"> Real Estate Agent</span></h4>
-          <p className="mb-0">Lorem ipsum dolor sit amet, consec tetur cing elit</p>
+          <p className="mb-0">Join the future of real estate</p>
         </div>
         <div className="ml-auto">
-          <Link to="/signup" className="btn btn-lg btn-primary rounded-lg mt-sm-0 mt-6">Register now</Link>
+          <Link to="/signup" className="btn btn-lg btn-primary rounded-lg mt-sm-0 mt-6">Start now</Link>
         </div>
         <i className="far fa-users h-64 w-64px bg-indigo d-flex justify-content-center align-items-center text-white rounded-circle fs-24 position-absolute custom-pos-icon" />
       </div>

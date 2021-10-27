@@ -99,6 +99,7 @@ export const ShowAllListings = (token, params) => (dispatch) => {
 
     ListingService.fetchAllListings(token, params)
                     .then(response => {
+                        // console.log(response)
                         return dispatch({
                             type: ACTIVE_LISTINGS_SUCCESS,
                             payload: response.data.data

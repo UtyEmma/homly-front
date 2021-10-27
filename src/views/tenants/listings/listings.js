@@ -28,7 +28,6 @@ const Listing = ({ isLoggedIn, user, setIsLoading, status }) => {
     dispatch(ShowAllListings(token, params));
   }, [dispatch, params, token]);
 
-console.log(listings)
 
   useEffect(() => {
     if (!listings || params) {
@@ -40,6 +39,11 @@ console.log(listings)
     setIsLoading(loading);
   }, [loading, setIsLoading]);
 
+  
+  // useEffect(() => {
+  // console.log(listings.length);
+  //   }, [listings]);
+
   return (
     <div>
       <Helmet>
@@ -47,35 +51,35 @@ console.log(listings)
           Find Properties - Bayof Real Estate - Find Properties and agents
           around you
         </title>
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@" />
-    <meta name="twitter:creator" content="@" />
-    <meta
-      name="twitter:title"
-      content="Bayof - Take ownership of landed property, globally"
-    />
-    <meta
-      name="twitter:description"
-      content="We're using technology to take the housing and real estate industry into the modern age"
-    />
-    <meta property="og:url" content="{process.env.REACT_APP_API_URL}" />
-    <meta
-      property="og:title"
-      content="Bayof - Take ownership of landed property, globally"
-    />
-    <meta
-      property="og:description"
-      content="We're using technology to take the real estate industry into the future"
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/images/homeid-social.png" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta
-      name="description"
-      content="We're using technology to take the real estate industry into the future"
-    />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@" />
+        <meta name="twitter:creator" content="@" />
+        <meta
+          name="twitter:title"
+          content="Bayof - Take ownership of landed property, globally"
+        />
+        <meta
+          name="twitter:description"
+          content="We're using technology to take the housing and real estate industry into the modern age"
+        />
+        <meta property="og:url" content="{process.env.REACT_APP_API_URL}" />
+        <meta
+          property="og:title"
+          content="Bayof - Take ownership of landed property, globally"
+        />
+        <meta
+          property="og:description"
+          content="We're using technology to take the real estate industry into the future"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="/images/homeid-social.png" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta
+          name="description"
+          content="We're using technology to take the real estate industry into the future"
+        />
       </Helmet>
 
       <NavBar isloggedIn={isLoggedIn} user={user} status={status} />
@@ -137,16 +141,22 @@ console.log(listings)
                       )}
                     </div>
                   </div>
-                  
+
                   <div className="card d-none d-md-block">
-                            <div className="card-body text-center pt-7 pb-6 px-0">
-                                <img src="images/contact-widget.jpg" alt="Want to become an Estate Agent ?" />
-                                <div className="text-lead fs-20 text-dark mb-6 mt-n2 font-weight-600">Boost your visibility as
-                                <p className="mb-0 fs-18">a Real Estate Agent?</p>
-                                </div>
-                                <a href="/signup" className="btn btn-primary">Sign up Now</a>
-                            </div>
-                        </div>
+                    <div className="card-body text-center pt-7 pb-6 px-0">
+                      <img
+                        src="images/contact-widget.jpg"
+                        alt="Want to become an Estate Agent ?"
+                      />
+                      <div className="text-lead fs-20 text-dark mb-6 mt-n2 font-weight-600">
+                        Boost your visibility as
+                        <p className="mb-0 fs-18">a Real Estate Agent?</p>
+                      </div>
+                      <a href="/signup" className="btn btn-primary">
+                        Sign up Now
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

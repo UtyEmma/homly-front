@@ -62,20 +62,19 @@ export default function Footer() {
                     <div className="col-md-6 col-lg-4 mb-6 mb-md-0">
                         <h4 className="text-white fs-16 my-4 font-weight-500">Sign Up for Our Newsletter</h4>
                         
-                        <p className="font-weight-500 text-muted lh-184">Lorem ipsum dolor sit amet, consecte tur cing elit.
-                        Suspe ndisse suscipit sagittis </p>
+                        <p className="font-weight-500 text-muted lh-184">Don't miss out on any updates from our journey. Trust us, its will be exciting.  </p>
 
-                        <form id="">
+                        {/* <form id=""> */}
                             <div className="input-group input-group-lg mb-6">
                                 {/* <input type="text" name="email" required className="form-control bg-white shadow-none border-0 z-index-1" placeholder="Your email" /> */}
                                 
                                 <div className="input-group-append">
-                                    <Link to="https://bayof.substack.com/p/coming-soon">
+                                    <a href="https://bayof.substack.com/p/coming-soon">
                                     <button className="btn btn-primary btn-lg btn-block" type="submit">Subscribe now</button>
-                                    </Link>
+                                    </a>
                                 </div>
                             </div>
-                        </form>
+                        {/* </form> */}
                         
                         <ul className="list-inline mb-0">
                             <li className="list-inline-item mr-0">

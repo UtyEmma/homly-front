@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ListingGrid from './listing-grid'
 import ListingList from './listing-list'
 
@@ -20,6 +20,8 @@ export default function ListingContainer({listings, setParams, params, status}) 
     const sort = (e) => {
         setParams({...params, [e.target.name]: e.target.value})
     }
+
+    
 
     return (
         <>

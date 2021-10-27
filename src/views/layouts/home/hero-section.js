@@ -6,10 +6,10 @@ export default function HeroSection() {
 
     return (
         <section>
-            <div style={{ backgroundImage: `url('images/bg-slider-01.jpg')`, }} className="py-lg-17 py-11 bg-cover hero-cover">
+            <div style={{ backgroundImage: `url('images/bg-slider-9.jpg')`, }} className="py-lg-17 py-11 bg-cover hero-cover">
             <ScrollAnimation animateIn="zoomIn" className="container mt-lg-9" >
-                <p className="mb-5 text-white text-center fs-md-22 fs-18 font-weight-600">Find Your Dream Home</p>
-                <h2 className="text-white text-center display-2 font-weight-light mb-10">Searching for the Best Places</h2>
+                <p className="mb-5 text-white text-center fs-md-22 fs-18 font-weight-600">Global range of properties</p>
+                <h2 className="text-white text-center display-2 font-weight-light mb-10 text-capitalize">Complete property deals in days</h2>
                 <div className="mxw-670 position-relative z-index-2">
                     <SearchForm />
                 </div>

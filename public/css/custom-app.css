@@ -47,3 +47,6 @@ footer{
 .bg-secondary{
     background-color: #252525 !important;
 }
+.main-header.navbar-dark .btn {
+    border-color: transparent;
+}
