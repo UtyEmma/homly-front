@@ -32,6 +32,9 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
     }, [])
 
     useEffect(() => {
+    }, [popular])
+
+    useEffect(() => {
         setIsLoading(loading)
     }, [loading, setIsLoading])
 
@@ -66,7 +69,7 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
 
       &&
       
-      <PopularSection popular={popular} isLoading={isLoading} setIsLoading={setIsLoading} status={status} />
+      <PopularSection listings={popular} isLoading={isLoading} setIsLoading={setIsLoading} status={status} />
     
     }
     
