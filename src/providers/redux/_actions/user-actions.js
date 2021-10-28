@@ -1,6 +1,6 @@
 import Response from 'libraries/response/response';
 import { userService } from '../../services';
-import { history, persistor } from '../store';
+import { history, persistor, store } from '../store';
 import { _TENANT } from '../_contants/user-constants';
 import { UnsetUser } from './auth-action';
 
@@ -39,8 +39,8 @@ export const UpdateTenantProfile = (token, data) => (dispatch) => {
                     dispatch({
                         type: 'UPDATE_USER_DATA',
                         payload: res.user
-                    }) 
-                    
+                    })
+
                     dispatch({
                         type: UPDATE_SUCCESS,
                         payload: res

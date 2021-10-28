@@ -1,3 +1,4 @@
+import { store } from "../store";
 import _AUTH from "../_contants/auth-constants";
 
 const { 

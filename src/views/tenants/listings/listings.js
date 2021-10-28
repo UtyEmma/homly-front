@@ -140,7 +140,7 @@ const Listing = ({ isLoggedIn, user, setIsLoading, status }) => {
                                 <div className="text-lead fs-20 text-dark mb-6 mt-n2 font-weight-600">Boost your visibility as
                                 <p className="mb-0 fs-18">a Real Estate Agent?</p>
                                 </div>
-                                <a href="/signup" className="btn btn-primary">Sign up Now</a>
+                                <Link to="/signup" className="btn btn-primary">Sign up Now</Link>
                             </div>
                         </div>
                 </div>
