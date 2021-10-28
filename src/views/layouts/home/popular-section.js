@@ -18,9 +18,9 @@ export default function PopularSection({isLoading, listings, setIsLoading, statu
 
                     <div className="row flex-lg-row flex-cloumn">
                         <div className="col-lg-5 col-xxl-6">
-                            <h2 className="text-heading">Popular Properties</h2>
+                            <h2 className="text-heading c-title">Popular Properties</h2>
                             <span className="heading-divider" />
-                            <p className="mb-7">Lorem ipsum dolor sit amet, consec tetur cing elit. Suspe ndisse suscipit</p>
+                            <p className="mb-7 text-capitalize">These properties are currently on our trending list.</p>
                         </div>
 
                             <Tab.Container id="controlled-tab-example" defaultActiveKey={listings[0].category.slug} >

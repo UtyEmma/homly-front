@@ -4,7 +4,7 @@ import NavBar from "components/shared/nav-bar";
 import Footer from "components/shared/footer";
 
 import { useDispatch, useSelector } from "react-redux";
-import { ShowAllListings } from "providers/redux/_actions/listing/listing-actions";
+import { ShowAllListings, showPaginationListing } from "providers/redux/_actions/listing/listing-actions";
 import ListingFilter from "./components/listing-filter";
 import Preloader from "components/preloader/preloader";
 import Searchbar from "views/layouts/components/search/searchbar";
@@ -16,16 +16,19 @@ import { Link } from "react-router-dom";
 
 const Listing = ({ isLoggedIn, user, setIsLoading, status }) => {
   const dispatch = useDispatch();
+  // let all_listings = [];
 
-  const { loading, listings, featured } = useSelector(
+  const { loading, listings, featured, pagination } = useSelector(
     (state) => state.active_listings
   );
 
   const [params, setParams] = useState({});
   const { token } = useSelector((state) => state.user_data);
 
-  const fetchListings = useCallback(() => {
-    dispatch(ShowAllListings(token, params));
+  const fetchListings = useCallback((pageNumber) => {
+    console.log("pagination", pagination);
+    // dispatch(ShowAllListings(token, params));
+    dispatch(showPaginationListing(token, params,pageNumber));
   }, [dispatch, params, token]);
 
 
@@ -40,9 +43,6 @@ const Listing = ({ isLoggedIn, user, setIsLoading, status }) => {
   }, [loading, setIsLoading]);
 
   
-  // useEffect(() => {
-  // console.log(listings.length);
-  //   }, [listings]);
 
   return (
     <div>
@@ -116,6 +116,8 @@ const Listing = ({ isLoggedIn, user, setIsLoading, status }) => {
                   <ListingContainer
                     listings={listings}
                     status={status}
+                    pagination={pagination}
+                    token={token}
                     params={params}
                     setParams={setParams}
                   />

@@ -62,7 +62,7 @@ export default function Footer() {
                     <div className="col-md-6 col-lg-4 mb-6 mb-md-0">
                         <h4 className="text-white fs-16 my-4 font-weight-500">Sign Up for Our Newsletter</h4>
                         
-                        <p className="font-weight-500 text-muted lh-184">Don't miss out on any updates from our journey. Trust us, its will be exciting.  </p>
+                        <p className="font-weight-500 text-muted lh-184">Don't miss out on any updates from our journey. Trust us, it will be exciting.  </p>
 
                         {/* <form id=""> */}
                             <div className="input-group input-group-lg mb-6">

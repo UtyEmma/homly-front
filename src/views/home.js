@@ -13,6 +13,7 @@ import { BlogList } from './layouts/home/blog-list'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { FetchPopularListings } from 'providers/redux/_actions/listing/listing-actions'
+import {showHomePagePioneerAgents} from 'providers/redux/_actions/agent-actions'
 import { AgentsList } from './layouts/home/agents-list'
 import { HomePageHeader } from './layouts/home/components/header'
 
@@ -23,12 +24,20 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
     const popular_listings = useSelector((state) => state.popular_listings)
     const {loading, popular, rented, onsale} = popular_listings
 
+    
+    const pioneer_agents = useSelector((state) => state.pioneer_agents)
+    
+
     const loadPopularListings = useCallback(() => {
         dispatch(FetchPopularListings())
+    }, [dispatch])
+    const loadPioneerAgents = useCallback(() => {
+        dispatch(showHomePagePioneerAgents())
     }, [dispatch])
 
     useEffect(() => {
       loadPopularListings()
+      loadPioneerAgents()
     }, [])
 
     useEffect(() => {
@@ -62,16 +71,6 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
         <HomePageHeader isloggedIn={isLoggedIn} token={token} user={user} status={status}/>
 <main id="content">
     <HeroSection/>
-
-    {
-
-      popular && popular.length > 0
-
-      &&
-      
-      <PopularSection listings={popular} isLoading={isLoading} setIsLoading={setIsLoading} status={status} />
-    
-    }
     
 <section class="bg-accent pt-10 pb-lg-11 pb-8 bg-patten-04">
         <div class="container container-xxl">
@@ -160,6 +159,17 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
         </div>
       </section>
 
+    {
+
+      popular && popular.length > 0
+
+      &&
+      
+      <PopularSection listings={popular} isLoading={isLoading} setIsLoading={setIsLoading} status={status} />
+    
+    }
+    
+
     {/* <section className="bg-gray-02 pt-10 pb-11">
         <div className="container container-xxl">
             <h2 className="text-dark lh-1625 text-center c-title fs-26 fs-md-48">Wondering why we built, Bayof?</h2>
@@ -225,7 +235,7 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
         }
 
 
-      <AgentsList />
+      <AgentsList pioneer_agents={pioneer_agents} />
 
                   
       <section className="pt-lg-13 pb-lg-9 mt-lg-1 py-11">

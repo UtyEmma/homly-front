@@ -1,5 +1,6 @@
 import Response from 'libraries/response/response';
 import { AgentService } from 'providers/services';
+// import { dispatch } from 'react-hot-toast/dist/core/store';
 import { history, persistor, store } from '../store';
 import { AgentConstants } from '../_contants/agent-constants';
 import { UnsetUser } from './auth-action';
@@ -11,7 +12,8 @@ const {
     DELETE_LISTING_REQUEST, DELETE_LISTING_SUCCESS, DELETE_LISTING_FAILURE,
     REMOVE_LISTING_REQUEST, REMOVE_LISTING_SUCCESS, REMOVE_LISTING_FAILURE,
     FETCH_SINGLE_AGENT_REQUEST, FETCH_SINGLE_AGENT_SUCCESS, FETCH_SINGLE_AGENT_FAILURE,
-    FETCH_AGENT_WISHLIST_REQUEST, FETCH_AGENT_WISHLIST_SUCCESS, FETCH_AGENT_WISHLIST_FAILURE
+    FETCH_AGENT_WISHLIST_REQUEST, FETCH_AGENT_WISHLIST_SUCCESS, FETCH_AGENT_WISHLIST_FAILURE,
+    FETCH_PIONEER_AGENTS_REQUEST,FETCH_PIONEER_AGENTS_SUCCESS, FETCH_PIONEER_AGENTS_FAILURE
 } = AgentConstants;
 
 
@@ -81,6 +83,29 @@ export const ShowAllAgents = () => (dispatch) => {
                 Response.error(error.response)
                 dispatch({
                     type: SHOW_AGENTS_FAILURE,
+                    payload: error.response
+                })
+            })
+}
+
+export const showHomePagePioneerAgents = () => (dispatch) => {
+
+    console.log('Fetching pioneer Agents...')
+
+    dispatch({ type: FETCH_PIONEER_AGENTS_REQUEST })
+
+    AgentService.fetchHomePagePioneerAgent()
+            .then((response) => {
+                // console.log(response.data.data)
+                dispatch({
+                    type: FETCH_PIONEER_AGENTS_SUCCESS,
+                    payload: response.data.data
+                })
+            })
+            .catch((error) => {
+                Response.error(error.response)
+                dispatch({
+                    type: FETCH_PIONEER_AGENTS_FAILURE,
                     payload: error.response
                 })
             })

@@ -10,9 +10,9 @@ export default function ListingNotFound({status}) {
                     <img src="/images/svg/notfound.svg" alt="" />
                 </div>
                 <div className="rounded mt-6 p-5 text-center bg-light py-7">
-                    <h3 className="font-weight-bold mb-0 fs-22 fs-md-26">There are no available properties at the moment!</h3>
+                    <h3 className="font-weight-bold mb-0 fs-22 fs-md-26 text-capitalize">Heyy there, dont panic. This might be an error.</h3>
 
-                    <p className="fs-16 mt-3 mb-0">Please check back later or register as an agent to list a property.</p>
+                    <p className="fs-16 mt-3 mb-0">Please contact our support and report this or check back later.</p>
 
                     <div className="">
                         {

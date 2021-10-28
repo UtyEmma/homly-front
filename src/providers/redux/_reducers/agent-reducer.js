@@ -8,6 +8,7 @@ const { SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE,
         REMOVE_LISTING_REQUEST, REMOVE_LISTING_SUCCESS, REMOVE_LISTING_FAILURE,
         FETCH_SINGLE_AGENT_REQUEST, FETCH_SINGLE_AGENT_SUCCESS, FETCH_SINGLE_AGENT_FAILURE,
         FETCH_AGENT_WISHLIST_REQUEST, FETCH_AGENT_WISHLIST_SUCCESS, FETCH_AGENT_WISHLIST_FAILURE,
+        FETCH_PIONEER_AGENTS_REQUEST,FETCH_PIONEER_AGENTS_SUCCESS, FETCH_PIONEER_AGENTS_FAILURE
 } = AgentConstants;
 
 
@@ -44,6 +45,18 @@ export function ShowAvailableAgentsReducer(state={}, action){
         case SHOW_AGENTS_SUCCESS:
             return {...state, agents: action.payload.agents, loading: false}
         case SHOW_AGENTS_FAILURE:
+            return {...state, error: action.payload, loading: false}
+        default:
+            return state;
+    }
+}
+export function ShowPioneerAgentsReducer(state={}, action){
+    switch (action.type) {
+        case FETCH_PIONEER_AGENTS_REQUEST:
+            return {...state, loading: true}
+        case FETCH_PIONEER_AGENTS_SUCCESS:
+            return {...state, agents: action.payload.pioneer_agents, loading: false}
+        case FETCH_PIONEER_AGENTS_FAILURE:
             return {...state, error: action.payload, loading: false}
         default:
             return state;

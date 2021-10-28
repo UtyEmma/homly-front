@@ -10,9 +10,9 @@ export default function AgentNotFound() {
                         <img src="/images/svg/homes.svg" alt="" />
                     </div>
                     <div className="col-md-6 rounded mt-3 mt-md-0 pl-5 bg-light py-7 text-center text-md-left d-flex justify-content-center flex-column">
-                        <h3 className="font-weight-bold mb-0 fs-22 fs-md-26">Sorry! We cannot find any available agents at the moment</h3>
+                    <h3 className="font-weight-bold mb-0 fs-22 fs-md-26 text-capitalize">Heyy there, dont panic. This might be an error.</h3>
 
-                        <p className="fs-16 mt-3 mb-0">Are you an agent and want to boost your visibility? Join us!</p>
+                    <p className="fs-16 mt-3 mb-0">Please contact our support and report this or check back later.</p>
 
                         <div className="">
                             <Link to="/signup" className="btn btn-lg text-secondary btn-accent rounded-lg mt-6">

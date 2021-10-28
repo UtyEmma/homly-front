@@ -74,5 +74,10 @@ export const AgentService = {
 
     fetchAgentsWishlists : async (token) => {
         return await Request.get('agent/wishlists', authHeader(token));
+    },
+
+    fetchHomePagePioneerAgent: async () => {
+        return await Request.get('agents/pioneer', options);
+
     }
 }

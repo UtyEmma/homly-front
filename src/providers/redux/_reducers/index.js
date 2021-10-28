@@ -4,7 +4,8 @@ import { combineReducers } from "redux";
 import {signupReducer, UpdateTenantProfileReducer} from "../_reducers/user.reducer";
 import { SetAdminModeReducer, SuspendItemReducer, verifyAgentReducer } from "./admin-reducer";
 import { AgentSignupReducer, UpdateAgentProfileReducer, ShowAvailableAgentsReducer,
-         DeleteListingReducer, RemoveListingReducer, FetchSingleAgentReducer, FetchAgentWishlistsReducer } from "./agent-reducer";
+         DeleteListingReducer, RemoveListingReducer, FetchSingleAgentReducer, FetchAgentWishlistsReducer, 
+         ShowPioneerAgentsReducer } from "./agent-reducer";
 import { GetLoggedInUserReducer, LoginReducer, RecoverPasswordReducer, ResendEmailReducer, ResetPasswordReducer, SetUserReducer, SocialAuthReducer, VerifyEmailReducer } from "./auth-reducer";
 import { FetchCategoriesReducer } from "./category-reducer";
 import { FetchDetailsReducer } from "./details-reducer";
@@ -41,6 +42,7 @@ const rootReducer = (history) => combineReducers({
     available_agents: ShowAvailableAgentsReducer,
     agent: FetchSingleAgentReducer,
     agent_wishlist: FetchAgentWishlistsReducer,
+    pioneer_agents: ShowPioneerAgentsReducer,
 
     store_listing: StoreListingReducer,
     new_listing: NewListingReducer,
