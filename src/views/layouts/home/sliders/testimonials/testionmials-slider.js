@@ -62,11 +62,11 @@ export const TestimonialSlider = () => {
                     </p>
                     <div className="media align-items-center">
                         <div className="rounded-circle mr-4 bg-white w-70px h-70 d-flex align-items-end justify-content-center">
-                        <img src="images/testimonial-1.png" alt="Oliver Beddows" />
+                        <img src="images/testimonials/igbinoghene-miracle-project-manager.jpg" alt="Oliver Beddows" />
                         </div>
                         <div className="media-body">
-                        <p className="fs-17 lh-1 text-heading font-weight-600 mb-2">Oliver Beddows</p>
-                        <p className="fs-15 lh-12 mb-0">/ Reporter, Insights</p>
+                        <p className="fs-17 lh-1 text-heading font-weight-600 mb-2">Miracle, Igbinoghene</p>
+                        <p className="fs-15 lh-12 mb-0">/ Project Manager</p>
                         </div>
                     </div>
                     </div>
@@ -87,11 +87,11 @@ export const TestimonialSlider = () => {
                     </p>
                     <div className="media align-items-center">
                         <div className="rounded-circle mr-4 bg-white w-70px h-70 d-flex align-items-end justify-content-center">
-                        <img src="images/testimonial-1.png" alt="Oliver Beddows" />
+                        <img src="images/testimonials/aneke-michael-software-developer.jpg" alt="Oliver Beddows" />
                         </div>
                         <div className="media-body">
-                        <p className="fs-17 lh-1 text-heading font-weight-600 mb-2">Oliver Beddows</p>
-                        <p className="fs-15 lh-12 mb-0">/ Reporter, Insights</p>
+                        <p className="fs-17 lh-1 text-heading font-weight-600 mb-2">Aneke, Michael</p>
+                        <p className="fs-15 lh-12 mb-0">/ Software Developer</p>
                         </div>
                     </div>
                     </div>

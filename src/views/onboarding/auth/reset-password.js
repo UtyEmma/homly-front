@@ -70,8 +70,8 @@ export default function ResetPassword ({setIsLoading}) {
                                     <p className="text-danger fs-12 mt-1">{formErrors.email?.message}</p>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="email" className="text-heading">Enter Password Reset Token</label>
-                                        <input type="text" name="token" className="form-control form-control-lg border-0" id="token" placeholder="Token" />
+                                    <label htmlFor="email" className="text-heading">Enter Password Reset Pin</label>
+                                        <input type="text" name="token" className="form-control form-control-lg border-0" id="token" placeholder="Pin" />
                                         <p className="text-danger fs-12 mt-1">{formErrors.token?.message}</p>
                                 </div>
                                 

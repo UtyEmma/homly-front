@@ -13,6 +13,7 @@ export default function FeaturedListings({listings}) {
         dots: true,
         arrows: true,
     }
+    // console.log('page',listings)
     return (
         <ScrollAnimation animateIn="fadeInRight">
         <div>

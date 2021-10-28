@@ -55,6 +55,14 @@ export const ListingService = {
         return await Request.get('listings', {...config})
     },
 
+    fetchPaginationListings : async (token, query, pageNumber) => {
+        const config = {
+            headers: options(token),
+            params: query
+        }
+        return await Request.get(`listings?page=${pageNumber}`, {...config})
+    },
+
     fetchListingDetails : async () => {
         return await Request.get('tenant/listings/details', params);
     },

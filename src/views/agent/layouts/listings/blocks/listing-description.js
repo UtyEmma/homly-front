@@ -142,7 +142,7 @@ export default function ListingDescription({collapse, formErrors, reset }) {
                             <span class="text-danger">*</span>{" "}
                           </label>
                           <input
-                            type="text"
+                            type="number"
                             className="form-control form-control-lg border-0"
                             id="rent"
                             name="rent"
@@ -161,7 +161,7 @@ export default function ListingDescription({collapse, formErrors, reset }) {
                             <span class="text-danger">*</span>{" "}
                           </label>
                           <input
-                            type="text"
+                            type="number"
                             className="form-control form-control-lg border-0"
                             id="extra_fees"
                             name="extra_fees"

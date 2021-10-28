@@ -9,9 +9,10 @@ export const HomePageHeader = ({isloggedIn, user, status}) => {
             <div className="container container-xxl">
             <div className="d-flex align-items-center">
                 <div className="navbar navbar-expand-xl bg-transparent px-0 w-100">
-                <Link className="navbar-brand mr-7 w-25 w-100px" to="/">
-                    <img src="/images/logo/bayof-logo.png" alt="bayof-logo"  width="102px" height="80px" alt="Bayof Logo" className=" d-lg-inline-block img-fluid normal-logo" />
-                    <img src="/images/logo/bayof-logo.png" alt="bayof-logo" className="d-inline-block d-lg-none img-fluid sticky-logo" />
+                <Link className="navbar-brand mr-7 w-25 w-100px" href="/">
+                {/* width="102px" height="80px" */}
+                    <img src="/images/logo/white.png" alt="bayof-logo" alt="Bayof Logo" className=" normal-logo" /> 
+                    <img src="/images/logo/bayof-logo.png" alt="bayof-logo" className="sticky-logo" />
                 </Link>
                 
                 <div className="d-lg-none ml-auto">
@@ -19,7 +20,7 @@ export const HomePageHeader = ({isloggedIn, user, status}) => {
                 </div>
                 
                 <button className="navbar-toggler border-0 px-0" type="button" data-toggle="collapse" data-target="#primaryMenu02" aria-controls="primaryMenu02" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="text-white fs-24"><i className="fal fa-bars" /></span>
+                    <span className="text-white fs-10"><i className="fal fa-bars" /></span>
                 </button>
 
 
@@ -29,8 +30,11 @@ export const HomePageHeader = ({isloggedIn, user, status}) => {
                         <li id="navbar-item-home" className="nav-item py-2 py-lg-5 px-0 px-lg-4">
                             <Link className="nav-link p-0" to="/">Home</Link>
                         </li>
+                        {/* <li id="navbar-item-property" className="active nav-item py-2 py-lg-5 px-0 px-lg-4">
+                            <Link className="nav-link p-0" to="/about">About</Link>
+                        </li> */}
                         <li id="navbar-item-property" className="nav-item py-2 py-lg-5 px-0 px-lg-4">
-                            <Link className="nav-link p-0" to="/listings">Rent a Property</Link>
+                            <Link className="nav-link p-0" to="/listings">Find a Property</Link>
                         </li>
                         <li id="navbar-item-dashboard" className="nav-item py-2 py-lg-5 px-0 px-lg-4">
                             <Link className="nav-link p-0" to="/agents">Find an Agent</Link>

@@ -15,7 +15,7 @@ export const SearchForm = ({classes}) => {
         <form className="d-flex" onSubmit={handleSearch}>
         <div className="position-relative w-100">
             <i className="far fa-search text-dark fs-18 position-absolute pl-4 pos-fixed-left-center" />
-            <input id="search" type="text" name="keyword" className={`rounded-bottom-right-lg w-100 pl-8 py-4 bg-white border-0 fs-13 font-weight-500 text-gray-light rounded-0 lh-17 ${classes}`} placeholder="Enter an address, neighborhood..." />
+            <input id="search" type="text" name="keyword" className={`rounded-bottom-right-lg w-100 pl-8 py-4 bg-white border-0 fs-13 font-weight-500 text-gray-light rounded-0 lh-17 ${classes}`} placeholder="Enter a state, city or address..." />
         </div>
             <button  type="submit" className="btn btn-primary fs-16 font-weight-600 rounded-left-0 rounded-lg">
                 Search

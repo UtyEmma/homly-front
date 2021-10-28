@@ -13,6 +13,7 @@ import { BlogList } from './layouts/home/blog-list'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { FetchPopularListings } from 'providers/redux/_actions/listing/listing-actions'
+import {showHomePagePioneerAgents} from 'providers/redux/_actions/agent-actions'
 import { AgentsList } from './layouts/home/agents-list'
 import { HomePageHeader } from './layouts/home/components/header'
 
@@ -23,12 +24,20 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
     const popular_listings = useSelector((state) => state.popular_listings)
     const {loading, popular, rented, onsale} = popular_listings
 
+    
+    const pioneer_agents = useSelector((state) => state.pioneer_agents)
+    
+
     const loadPopularListings = useCallback(() => {
         dispatch(FetchPopularListings())
+    }, [dispatch])
+    const loadPioneerAgents = useCallback(() => {
+        dispatch(showHomePagePioneerAgents())
     }, [dispatch])
 
     useEffect(() => {
       loadPopularListings()
+      loadPioneerAgents()
     }, [])
 
     useEffect(() => {
@@ -62,6 +71,93 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
         <HomePageHeader isloggedIn={isLoggedIn} token={token} user={user} status={status}/>
 <main id="content">
     <HeroSection/>
+    
+<section class="bg-accent pt-10 pb-lg-11 pb-8 bg-patten-04">
+        <div class="container container-xxl">
+          <h2 class="text-dark text-center mxw-751 fs-26 lh-184 px-md-8 c-title">
+          Make property deals in days, seriously.</h2>
+          <span class="heading-divider mx-auto"></span>
+          <div class="row mt-8">
+            <ScrollAnimation className="col-lg-4 mb-6 mb-lg-0" animateIn="fadeInUp">
+            {/* <div class="col-lg-4 mb-6 mb-lg-0" data-animate="zoomIn"> */}
+              <div class="card border-hover shadow-2 shadow-hover-lg-1 pl-5 pr-6 py-6 h-100 hover-change-image">
+                <div class="row no-gutters">
+                  <div class="col-sm-3">
+                    <img src="images/group-16.png"
+							     alt="Buy a new home" />
+                  </div>
+                  <div class="col-sm-9">
+                    <div class="card-body p-0 pl-0 pl-sm-5 pt-5 pt-sm-0">
+                      <a href="single-property-1.html"
+								   class="d-flex align-items-center text-dark hover-secondary"><h4
+										class="fs-20 lh-1625 mb-1">Own a property </h4>
+                        <span class="ml-2 text-primary fs-42 lh-1 hover-image d-inline-flex align-items-center">
+                          <svg class="icon icon-long-arrow"><use
+		                                    xlinkHref="#icon-long-arrow"></use></svg>
+                        </span>
+                      </a>
+                      <p class="mb-0">
+                            Who does not want to become a proud property owner?
+                            Join this highly estemeed rank with ease.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </ScrollAnimation>
+            {/* </div> */}
+            {/* <div class="col-lg-4 mb-6 mb-lg-0" data-animate="zoomIn"> */}
+            <ScrollAnimation className="col-lg-4 mb-6 mb-lg-0" animateIn="fadeInUp">
+              <div class="card border-hover shadow-2 shadow-hover-lg-1 pl-5 pr-6 py-6 h-100 hover-change-image">
+                <div class="row no-gutters">
+                  <div class="col-sm-3">
+                    <img src="images/group-17.png"
+							     alt="Sell a home" />
+                  </div>
+                  <div class="col-sm-9">
+                    <div class="card-body p-0 pl-0 pl-sm-5 pt-5 pt-sm-0">
+                      <a href="single-property-1.html"
+								   class="d-flex align-items-center text-dark hover-secondary"><h4
+										class="fs-20 lh-1625 mb-1">Sell a property </h4>
+                        <span class="ml-2 text-primary fs-42 lh-1 hover-image d-inline-flex align-items-center">
+                          <svg class="icon icon-long-arrow"><use
+		                                    xlinkHref="#icon-long-arrow"></use></svg>
+                        </span>
+                      </a>
+                      <p class="mb-0">Trusted by many - we'll expose your property to a wide
+                            range of clients for awesome deals.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </ScrollAnimation>
+            {/* </div> */}
+            <ScrollAnimation className="col-lg-4 mb-6 mb-lg-0" animateIn="fadeInUp">
+              <div class="card border-hover shadow-2 shadow-hover-lg-1 pl-5 pr-6 py-6 h-100 hover-change-image">
+                <div class="row no-gutters">
+                  <div class="col-sm-3">
+                    <img src="images/group-21.png"
+							     alt="Rent a home" />
+                  </div>
+                  <div class="col-sm-9">
+                    <div class="card-body p-0 pl-0 pl-sm-5 pt-5 pt-sm-0">
+                      <a href="single-property-1.html"
+								   class="d-flex align-items-center text-dark hover-secondary"><h4
+										class="fs-20 lh-1625 mb-1">Rent a property  </h4>
+                        <span class="ml-2 text-primary fs-42 lh-1 hover-image d-inline-flex align-items-center">
+                          <svg class="icon icon-long-arrow"><use
+		                                    xlinkHref="#icon-long-arrow"></use></svg>
+                        </span>
+                      </a>
+                      <p class="mb-0"> Looking to purchase property for a period of time? We
+                            still got you covered.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ScrollAnimation>
+          </div>
+        </div>
+      </section>
 
     {
 
@@ -72,8 +168,9 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
       <PopularSection listings={popular} isLoading={isLoading} setIsLoading={setIsLoading} status={status} />
     
     }
+    
 
-    <section className="bg-gray-02 pt-10 pb-11">
+    {/* <section className="bg-gray-02 pt-10 pb-11">
         <div className="container container-xxl">
             <h2 className="text-dark lh-1625 text-center c-title fs-26 fs-md-48">Wondering why we built, Bayof?</h2>
             <span className="heading-divider mx-auto" />
@@ -119,7 +216,7 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
             </ScrollAnimation>
             </div>
         </div>
-      </section>
+      </section> */}
 
         {
           rented && rented.length > 0
@@ -137,93 +234,8 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
           <SalePropertiesSlider listings={onsale} />
         }
 
-<section class="bg-accent pt-10 pb-lg-11 pb-8 bg-patten-04">
-        <div class="container container-xxl">
-          <h2 class="text-dark text-center mxw-751 fs-26 lh-184 px-md-8 c-title">
-          Make property deals in days, seriously.</h2>
-          <span class="heading-divider mx-auto"></span>
-          <div class="row mt-8">
-            <ScrollAnimation className="col-lg-4 mb-6 mb-lg-0" animateIn="fadeInUp">
-            {/* <div class="col-lg-4 mb-6 mb-lg-0" data-animate="zoomIn"> */}
-              <div class="card border-hover shadow-2 shadow-hover-lg-1 pl-5 pr-6 py-6 h-100 hover-change-image">
-                <div class="row no-gutters">
-                  <div class="col-sm-3">
-                    <img src="images/group-16.png"
-							     alt="Buy a new home" />
-                  </div>
-                  <div class="col-sm-9">
-                    <div class="card-body p-0 pl-0 pl-sm-5 pt-5 pt-sm-0">
-                      <a href="single-property-1.html"
-								   class="d-flex align-items-center text-dark hover-secondary"><h4
-										class="fs-20 lh-1625 mb-1">Own a property </h4>
-                        <span class="ml-2 text-primary fs-42 lh-1 hover-image d-inline-flex align-items-center">
-                          <svg class="icon icon-long-arrow"><use
-		                                    xlinkHref="#icon-long-arrow"></use></svg>
-                        </span>
-                      </a>
-                      <p class="mb-0">
-                            Who does not want to become a proud property owner?
-                            Join this highly estemeed rank with ease.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              </ScrollAnimation>
 
-            <ScrollAnimation className="col-lg-4 mb-6 mb-lg-0" animateIn="fadeInUp">
-              <div class="card border-hover shadow-2 shadow-hover-lg-1 pl-5 pr-6 py-6 h-100 hover-change-image">
-                <div class="row no-gutters">
-                  <div class="col-sm-3">
-                    <img src="images/group-17.png"
-							     alt="Sell a home" />
-                  </div>
-                  <div class="col-sm-9">
-                    <div class="card-body p-0 pl-0 pl-sm-5 pt-5 pt-sm-0">
-                      <a href="single-property-1.html"
-								   class="d-flex align-items-center text-dark hover-secondary"><h4
-										class="fs-20 lh-1625 mb-1">Sell a property </h4>
-                        <span class="ml-2 text-primary fs-42 lh-1 hover-image d-inline-flex align-items-center">
-                          <svg class="icon icon-long-arrow">
-                            <use xlinkHref="#icon-long-arrow"></use>
-                          </svg>
-                        </span>
-                      </a>
-                      <p class="mb-0">Trusted by many - we'll expose your property to a wide range of clients for awesome deals.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              </ScrollAnimation>
-              
-            <ScrollAnimation className="col-lg-4 mb-6 mb-lg-0" animateIn="fadeInUp">
-              <div class="card border-hover shadow-2 shadow-hover-lg-1 pl-5 pr-6 py-6 h-100 hover-change-image">
-                <div class="row no-gutters">
-                  <div class="col-sm-3">
-                    <img src="images/group-21.png"
-							     alt="Rent a home" />
-                  </div>
-                  <div class="col-sm-9">
-                    <div class="card-body p-0 pl-0 pl-sm-5 pt-5 pt-sm-0">
-                      <a href="single-property-1.html"
-								   class="d-flex align-items-center text-dark hover-secondary"><h4
-										class="fs-20 lh-1625 mb-1">Rent a property  </h4>
-                        <span class="ml-2 text-primary fs-42 lh-1 hover-image d-inline-flex align-items-center">
-                          <svg class="icon icon-long-arrow"><use
-		                                    xlinkHref="#icon-long-arrow"></use></svg>
-                        </span>
-                      </a>
-                      <p class="mb-0"> Looking to purchase property for a period of time? We
-                            still got you covered.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ScrollAnimation>
-          </div>
-        </div>
-      </section>
-
-      <AgentsList />
+      <AgentsList pioneer_agents={pioneer_agents} />
 
                   
       <section className="pt-lg-13 pb-lg-9 mt-lg-1 py-11">
@@ -242,10 +254,10 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
       <div className="p-6 mxw-670 pl-md-9 d-sm-flex align-items-sm-center position-relative mt-10 rounded-lg mb-3" style={{backgroundColor: '#eaeff7'}}>
         <div className="mt-md-0 mt-6">
           <h4 className="text-secondary fs-20 font-weight-normal">Become a<span className="font-weight-600"> Real Estate Agent</span></h4>
-          <p className="mb-0">Lorem ipsum dolor sit amet, consec tetur cing elit</p>
+          <p className="mb-0">Join the future of real estate</p>
         </div>
         <div className="ml-auto">
-          <Link to="/signup" className="btn btn-lg btn-primary rounded-lg mt-sm-0 mt-6">Register now</Link>
+          <Link to="/signup" className="btn btn-lg btn-primary rounded-lg mt-sm-0 mt-6">Start now</Link>
         </div>
         <i className="far fa-users h-64 w-64px bg-indigo d-flex justify-content-center align-items-center text-white rounded-circle fs-24 position-absolute custom-pos-icon" />
       </div>

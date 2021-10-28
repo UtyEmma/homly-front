@@ -67,7 +67,7 @@ export function ActiveListingsReducer(state={}, actions){
         case ACTIVE_LISTINGS_REQUEST: 
             return {...state, loading: true }
         case ACTIVE_LISTINGS_SUCCESS:
-            return {...state, loading: false, listings: actions.payload.listings, featured: actions.payload.featured}
+            return {...state, loading: false, listings: actions.payload.listings.data, featured: actions.payload.featured, pagination:actions.payload.listings}
         case ACTIVE_LISTINGS_FAILURE:
             return {...state, loading: false, error: actions.payload }
         default:
