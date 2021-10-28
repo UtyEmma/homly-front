@@ -21,11 +21,11 @@ export default function ProfileButton({setIsLoading, isloggedIn, user, status, h
 function LoggedIn({setIsLoading, user, status}) {
 
     return (           
-        <ul className="navbar-nav flex-row justify-content-lg-end align-items-center d-flex flex-wrap text-body py-2">            
+        <ul className="navbar-nav flex-row justify-content-lg-end align-items-center d-flex flex-wrap text-body py-md-2">            
             <li className="nav-item mr-md-2 d-flex align-items-center hover bg-hover-overlay-gradient-2 hover-primary rounded p-1 " >
 
                 <div className="dropdown px-md-3">
-                    <button className="btn px-0 py-0 dropdown-toggle d-flex align-items-center justify-content-end text-heading" data-toggle="dropdown">
+                    <button className="btn border-0 px-0 py-0 dropdown-toggle d-flex align-items-center justify-content-end text-heading" data-toggle="dropdown">
                         {    
                             user.avatar 
                         ? 
@@ -151,9 +151,9 @@ function loggedOut(home) {
                     <Link className="btn btn-outline-light d-none btn-lg d-md-flex align-items-center" to="/signup">
                         Get Started
                         <img src="/images/add-listing-icon.png" alt="Add listing"
-                        class="ml-1 normal-button-icon" />
+                        className="ml-1 normal-button-icon" />
                             <img src="/images/add-listing-icon-primary.png" alt="Add listing"
-                        class="ml-1 sticky-button-icon" />
+                        className="ml-1 sticky-button-icon" />
                     </Link>
 
                     :

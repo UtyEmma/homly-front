@@ -76,23 +76,13 @@ export default function ListingContainer({
                 <option value="maxprice">Price (High to Low)</option>
               </select>
             </div>
-            <div className="d-none d-md-flex">
-              <button
-                className={`btn fs-sm-18 px-1 py-0 text-dark ${
-                  grid ? "opacity-2" : ""
-                }`}
-                onClick={toggleList}
-              >
-                <i className="fas fa-list" />
-              </button>
-              <button
-                className={`btn fs-sm-18 px-1 py-0 text-dark ml-2 ${
-                  !grid ? "opacity-2" : ""
-                }`}
-                onClick={toggleGrid}
-              >
-                <i className="fa fa-th-large" />
-              </button>
+            <div className="row">
+                {
+                     listings.data.map((listing, index) => (    
+                            grid ? <ListingGrid status={status} listing={listing} key={index}/> : 
+                                        <ListingList status={status} listing={listing} key={index}/>
+                    ))
+                 }
             </div>
           </div>
         </div>

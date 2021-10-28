@@ -104,8 +104,7 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
                 </div>
               </div>
               </ScrollAnimation>
-            {/* </div> */}
-            {/* <div class="col-lg-4 mb-6 mb-lg-0" data-animate="zoomIn"> */}
+
             <ScrollAnimation className="col-lg-4 mb-6 mb-lg-0" animateIn="fadeInUp">
               <div class="card border-hover shadow-2 shadow-hover-lg-1 pl-5 pr-6 py-6 h-100 hover-change-image">
                 <div class="row no-gutters">
@@ -119,18 +118,18 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
 								   class="d-flex align-items-center text-dark hover-secondary"><h4
 										class="fs-20 lh-1625 mb-1">Sell a property </h4>
                         <span class="ml-2 text-primary fs-42 lh-1 hover-image d-inline-flex align-items-center">
-                          <svg class="icon icon-long-arrow"><use
-		                                    xlinkHref="#icon-long-arrow"></use></svg>
+                          <svg class="icon icon-long-arrow">
+                            <use xlinkHref="#icon-long-arrow"></use>
+                          </svg>
                         </span>
                       </a>
-                      <p class="mb-0">Trusted by many - we'll expose your property to a wide
-                            range of clients for awesome deals.</p>
+                      <p class="mb-0">Trusted by many - we'll expose your property to a wide range of clients for awesome deals.</p>
                     </div>
                   </div>
                 </div>
               </div>
               </ScrollAnimation>
-            {/* </div> */}
+              
             <ScrollAnimation className="col-lg-4 mb-6 mb-lg-0" animateIn="fadeInUp">
               <div class="card border-hover shadow-2 shadow-hover-lg-1 pl-5 pr-6 py-6 h-100 hover-change-image">
                 <div class="row no-gutters">
