@@ -87,7 +87,6 @@ const Listing = ({ isLoggedIn, user, setIsLoading, status }) => {
       <Preloader loading={loading} />
 
       <main id="content">
-        
         <Searchbar />
 
         <div className="bg-gray-03 py-3">
@@ -113,7 +112,7 @@ const Listing = ({ isLoggedIn, user, setIsLoading, status }) => {
           <div className="container">
             <div className="row gx-4">
               <div className="col-lg-8 mb-8 mb-lg-0">
-                {listings && listings?.data.length > 0 ? (
+                {listings && listings.length > 0 ? (
                   <ListingContainer
                     listings={listings}
                     status={status}
@@ -134,13 +133,11 @@ const Listing = ({ isLoggedIn, user, setIsLoading, status }) => {
                 <div className="primary-sidebar-inner">
                   <div className="card border-0 property-widget mb-6">
                     <div className="card-body px-0 pl-lg-6 py-0">
+                      <h4 className="card-title fs-16 lh-2 text-dark mb-3">
+                        Featured Properties
+                      </h4>
                       {featured && featured.length > 0 ? (
-                        <>
-                        <h4 className="card-title fs-16 lh-2 text-dark mb-3">
-                          Featured Properties
-                        </h4>
                         <FeaturedListings listings={featured} />
-                        </>
                       ) : (
                         <div></div>
                       )}
