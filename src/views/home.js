@@ -79,7 +79,6 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
           <span class="heading-divider mx-auto"></span>
           <div class="row mt-8">
             <ScrollAnimation className="col-lg-4 mb-6 mb-lg-0" animateIn="fadeInUp">
-            {/* <div class="col-lg-4 mb-6 mb-lg-0" data-animate="zoomIn"> */}
               <div class="card border-hover shadow-2 shadow-hover-lg-1 pl-5 pr-6 py-6 h-100 hover-change-image">
                 <div class="row no-gutters">
                   <div class="col-sm-3">
@@ -104,8 +103,7 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
                 </div>
               </div>
               </ScrollAnimation>
-            {/* </div> */}
-            {/* <div class="col-lg-4 mb-6 mb-lg-0" data-animate="zoomIn"> */}
+
             <ScrollAnimation className="col-lg-4 mb-6 mb-lg-0" animateIn="fadeInUp">
               <div class="card border-hover shadow-2 shadow-hover-lg-1 pl-5 pr-6 py-6 h-100 hover-change-image">
                 <div class="row no-gutters">
@@ -130,7 +128,7 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
                 </div>
               </div>
               </ScrollAnimation>
-            {/* </div> */}
+
             <ScrollAnimation className="col-lg-4 mb-6 mb-lg-0" animateIn="fadeInUp">
               <div class="card border-hover shadow-2 shadow-hover-lg-1 pl-5 pr-6 py-6 h-100 hover-change-image">
                 <div class="row no-gutters">

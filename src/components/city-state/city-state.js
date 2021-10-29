@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import naijaStateLocalGovernment from 'naija-state-local-government'
 
 export function State({name, title, setSelectedState, dataStyle, classes, defaultValue, onChange}){
@@ -28,11 +28,11 @@ export function State({name, title, setSelectedState, dataStyle, classes, defaul
 }
 
 export function LocalGovt({selectedState, name, onChange, dataStyle, classes, defaultValue}){
-    const stateData = selectedState && naijaStateLocalGovernment.lgas(selectedState);
-    const lgas = stateData ? stateData.lgas : null;
+    
     const select_city = useRef()
     let picker = window.$(select_city.current)
-    
+
+    const [lgas, setLgas] = useState();
     const handlePicker = () => {
         picker.selectpicker('refresh')
     }
@@ -40,6 +40,11 @@ export function LocalGovt({selectedState, name, onChange, dataStyle, classes, de
     useEffect(() => {
         handlePicker()
     }, [lgas])
+
+    useEffect(() => {
+        const stateData = selectedState && naijaStateLocalGovernment.lgas(selectedState);
+        setLgas(stateData.lgas)
+    }, [selectedState])
 
     return (
         <>
