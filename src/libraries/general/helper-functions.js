@@ -8,3 +8,7 @@ export function capitalize(str) {
 export function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
+
+export function parseCommasPerThousand(str){
+  return str.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}

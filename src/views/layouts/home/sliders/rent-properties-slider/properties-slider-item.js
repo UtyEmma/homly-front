@@ -31,11 +31,11 @@ export const PropertiesSliderItem = ({listing}) => {
                         </ul>
                     </div>
                 </div>
-                <div className="card-body p-0">
+                <div className="card-body p-0 mt-2">
                     <h2 className="my-0 mt-1"><Link to={`/${listing.agent.username}/${listing.slug}`} className="fs-16 text-dark hover-primary">{listing.title}</Link>
                     </h2>
                     <p className="text-gray-light font-weight-500 mb-1">{listing.address}, {listing.city}, {listing.state} </p>
-                    <p className="fs-17 font-weight-bold text-heading mb-0">$ {listing.rent}</p>
+                    <p className="fs-17 font-weight-bold text-heading mb-0">&#8358; {listing.rent}</p>
                 </div>
             </div>
         </ScrollAnimation>
