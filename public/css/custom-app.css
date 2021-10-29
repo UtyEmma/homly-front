@@ -89,15 +89,15 @@ footer {
     padding-left: 30px !important;
   }
 
-  .navbar-white .dropright .dropdown-toggle::after,
-  .dropdown-toggle::after {
-    font-weight: bold;
-    color: #333;
-  }
   .navbar-dark .dropright .dropdown-toggle::after,
   .dropdown-toggle::after {
     font-weight: bold;
-    color: white;
+    color: white !important;
+  }
+  .navbar-light .dropright .dropdown-toggle::after,
+  .dropdown-toggle::after {
+    font-weight: bold;
+    color: #333 !important;
   }
 
   .w-35px {

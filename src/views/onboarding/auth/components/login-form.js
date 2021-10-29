@@ -92,9 +92,9 @@ const UserLoginForm = ({setIsLoading}) =>  {
                     </div>
                 </div>
                 <div className="text-center my-4">
-                    <p className="mb-4">Don’t have an account yet?  
+                    <p className="mb-4">New to Bayof?  
                         <Link to="/signup" className="text-heading hover-primary">
-                            <u> Sign up here</u>
+                            <u> Join us</u>
                         </Link>
                     </p>
                 </div>
