@@ -186,7 +186,7 @@ const AgentDashboard = ({ agent, setIsLoading }) => {
 
               <NotificationContainer />
 
-              <div className="row">
+              {/* <div className="row">
                 <div className="col-xxl-8 mb-6">
                   <div className="card px-7 py-6 h-100 chart">
                     <div className="card-body p-0 collapse-tabs">
@@ -366,7 +366,7 @@ const AgentDashboard = ({ agent, setIsLoading }) => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </main>
         </div>

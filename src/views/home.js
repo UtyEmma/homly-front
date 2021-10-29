@@ -233,7 +233,7 @@ const Home = ({ isLoggedIn, user, isLoading, setIsLoading, status, token }) => {
         }
 
 
-      <AgentsList pioneer_agents={pioneer_agents} />
+      {/* <AgentsList pioneer_agents={pioneer_agents} /> */}
 
                   
       <section className="pt-lg-13 pb-lg-9 mt-lg-1 py-11">

@@ -135,7 +135,7 @@ const SignUpForm = ({setIsLoading}) =>  {
                     </div>
                 </div>
                     <div className="col-12 text-center">
-                        <p className="mb-4">Already have an account? <Link to="/login" className="text-heading hover-primary text-center"><u>Log in</u></Link></p>
+                        <p className="mb-4">Already have an account? <Link to="/login" className="text-heading hover-primary text-center"><u>Sign in</u></Link></p>
                     </div>
                 </div>
             </div>
