@@ -145,20 +145,14 @@ const Listing = ({ isLoggedIn, user, setIsLoading, status }) => {
                   </div>
 
                   <div className="card d-none d-md-block">
-                    <div className="card-body text-center pt-7 pb-6 px-0">
-                      <img
-                        src="images/contact-widget.jpg"
-                        alt="Want to become an Estate Agent ?"
-                      />
-                      <div className="text-lead fs-20 text-dark mb-6 mt-n2 font-weight-600">
-                        Boost your visibility as
-                        <p className="mb-0 fs-18">a Real Estate Agent?</p>
-                      </div>
-                      <a href="/signup" className="btn btn-primary">
-                        Sign up Now
-                      </a>
-                    </div>
-                  </div>
+                            <div className="card-body text-center pt-7 pb-6 px-0">
+                                <img src="images/contact-widget.jpg" alt="Want to become an Estate Agent ?" />
+                                <div className="text-lead fs-20 text-dark mb-6 mt-n2 font-weight-600">Boost your visibility as
+                                <p className="mb-0 fs-18">a Real Estate Agent?</p>
+                                </div>
+                                <Link to="/signup" className="btn btn-primary">Sign up Now</Link>
+                            </div>
+                        </div>
                 </div>
               </div>
             </div>
