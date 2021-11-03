@@ -1,8 +1,8 @@
 {
-  "name": "homly",
+  "name": "Bayof",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://test.bayof.co",
+  "homepage": "https://www.bayof.co",
   "dependencies": {
     "@babel/preset-env": "^7.15.4",
     "@babel/preset-react": "^7.14.5",

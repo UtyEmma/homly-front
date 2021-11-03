@@ -18,7 +18,7 @@ export const AgentSocialMediaLinks = ({agent}) => {
                         
                         &&
 
-                        <Link to={agent.twitter} target="_blank" className="w-32px h-32 rounded bg-hover-primary bg-white hover-white text-body d-flex align-items-center justify-content-center border border-hover-primary"><i className="fab fa-twitter" /></Link>}
+                        <a href={agent.twitter} target="_blank" className="w-32px h-32 rounded bg-hover-primary bg-white hover-white text-body d-flex align-items-center justify-content-center border border-hover-primary"><i className="fab fa-twitter" /></a>}
                 </li>
                 <li className="list-inline-item mr-0 ml-2">
                     {
@@ -26,7 +26,7 @@ export const AgentSocialMediaLinks = ({agent}) => {
 
                         &&
 
-                        <Link to={agent.facebook} target="_blank" className="w-32px h-32 rounded bg-hover-primary bg-white hover-white text-body d-flex align-items-center justify-content-center border border-hover-primary"><i className="fab fa-facebook-f" /></Link>
+                        <a href={agent.facebook} target="_blank" className="w-32px h-32 rounded bg-hover-primary bg-white hover-white text-body d-flex align-items-center justify-content-center border border-hover-primary"><i className="fab fa-facebook-f" /></a>
                     }
                 </li>
                 <li className="list-inline-item mr-0 ml-2">
@@ -35,11 +35,11 @@ export const AgentSocialMediaLinks = ({agent}) => {
 
                         &&
 
-                        <Link to={agent.instagram} target="_blank"  className="w-32px h-32 rounded bg-hover-primary bg-white hover-white text-body d-flex align-items-center justify-content-center border border-hover-primary"><i className="fab fa-instagram" /></Link>
+                        <a href={agent.instagram} target="_blank"  className="w-32px h-32 rounded bg-hover-primary bg-white hover-white text-body d-flex align-items-center justify-content-center border border-hover-primary"><i className="fab fa-instagram" /></a>
                     }
                 </li>
                 <li className="list-inline-item mr-0 ml-2">
-                    <Link to={agent.website} target="_blank" className="w-32px h-32 rounded bg-hover-primary bg-white hover-white text-body d-flex align-items-center justify-content-center border border-hover-primary"><i className="fa fa-globe-africa" /></Link>
+                    <a href={agent.website} target="_blank" className="w-32px h-32 rounded bg-hover-primary bg-white hover-white text-body d-flex align-items-center justify-content-center border border-hover-primary"><i className="fa fa-globe-africa" /></a>
                 </li>
             </ul>
         </>

@@ -52,7 +52,20 @@ export default function ListingAction({agent, listing}) {
                         }
                     </Link>
 
-                    <Link to={`/${agent.username}`} className="d-block fs-16 lh-214 text-dark mb-0 font-weight-500 hover-primary">{capitalize(agent.firstname)} {capitalize(agent.lastname)}</Link>
+                    <Link to={`/${agent.username}`} className="d-block fs-16 lh-214 text-dark mb-0 font-weight-500 hover-primary">{capitalize(agent.firstname)} {capitalize(agent.lastname)}
+                              
+                    {
+                        agent.verified == 1
+
+                        ?
+
+                        <i className="fs-12 pb-1 fa fa-badge-check text-primary ml-1"></i>
+
+                        :
+
+                        ""
+                    }
+                    </Link>
                     
                     <p className="mb-0">{agent.title}</p>
                     <ul className="list-inline mb-0">

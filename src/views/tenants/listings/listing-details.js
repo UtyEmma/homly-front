@@ -7,6 +7,8 @@ import ListingComponents from './components/listing-details'
 import ListingAction from './components/listing-action-card'
 import Searchbar from 'views/layouts/components/search/searchbar'
 import Preloader from 'components/preloader/preloader'
+import {capitalize} from "../../../libraries/general/helper-functions";
+import { Link } from 'react-router-dom';
 
 import NavBar from 'components/shared/nav-bar'
 import Footer from 'components/shared/footer'
@@ -126,7 +128,9 @@ const ListingDetails = ({isLoggedIn, user, status, adminMode, setIsLoading}) => 
                                         : 
                                         <div className="d-inline-block mb-2 w-70px h-70 mr-2 bg-gray-01 rounded-circle fs-25 font-weight-500 text-muted d-flex align-items-center justify-content-center text-uppercase mr-sm-8 mb-4 mb-sm-0 mx-auto">
                                             {`${agent.firstname.charAt(0).toUpperCase()}${agent.lastname.charAt(0).toUpperCase()}`}
+                                  
                                         </div>
+                                        
                                     }
 
                                     <div className="media-body ml-2">

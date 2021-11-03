@@ -43,7 +43,7 @@ export function LocalGovt({selectedState, name, onChange, dataStyle, classes, de
 
     useEffect(() => {
         const stateData = selectedState && naijaStateLocalGovernment.lgas(selectedState);
-        setLgas(stateData.lgas)
+        setLgas(stateData?.lgas)
     }, [selectedState])
 
     return (

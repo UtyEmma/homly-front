@@ -184,7 +184,7 @@ export default function AgentDetailsContainer({agent, listings, reviews, status,
                     <div className="card border-0 mb-10">
                         <div className="card-body py-5 px-6">
                         <h3 className="card-title text-heading fs-16 lh-213">
-                            About {capitalize(agent.firstname)} {capitalize(agent.lastname)}
+                            Bio
                         </h3>
                         {
                             agent.bio

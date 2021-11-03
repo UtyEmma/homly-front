@@ -22,7 +22,7 @@ export default function AgentCard({agent}) {
                 <Link to={`/${agent.username}`} className="d-block fs-16 lh-2 text-dark mb-0 font-weight-500 hover-primary">
                     {capitalize(agent.firstname)} {capitalize(agent.lastname)}
                     {
-                        agent.verified
+                        agent.verified == "1"
 
                         ?
 
